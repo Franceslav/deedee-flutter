@@ -7,17 +7,17 @@ environment:
 
 dependencies:
   shared_preferences: 2.0.15
-  firebase_core: 1.24.0
-  firebase_auth: 3.11.0
-  firebase_auth_platform_interface: 6.10.0
-  cloud_firestore: ^3.2.0
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.1
+  firebase_auth_platform_interface: ^6.11.6
+  cloud_firestore: ^4.3.0
   progress_dialog:
     git:
       url: https://github.com/mostafaAbdelazim/progress_dialog.git
-  flutter_facebook_auth: ^3.5.3
+  flutter_facebook_auth: ^5.0.6
   http: ^0.13.4
   image_picker: ^0.8.4+3
-  firebase_storage: ^10.3.0
+  firebase_storage: ^11.0.9
   cached_network_image: ^3.2.1
   smooth_page_indicator: ^1.0.0+2
   the_apple_sign_in: ^1.1.1
@@ -27,14 +27,14 @@ dependencies:
   fixnum: ^1.0.0
   async: ^2.2.0
   protobuf: ^2.0.0
-  grpc: 3.0.2
+  grpc: ^3.1.0
   location: 4.4.0
   geolocator: ^9.0.2
-  flutter_map: 3.0.0
-  flutter_map_marker_cluster: 1.0.0
+  flutter_map: ^3.1.0
+  flutter_map_marker_cluster: ^1.0.1
   settings_ui: 2.0.2
   masked_text_field: 1.0.1
-  event_bloc: 4.1.0
+  event_bloc: ^4.2.0
   #  geocode: ^2.0.5
   get_it: ^7.1.4
 
@@ -45,12 +45,12 @@ dependencies:
   provider: ^6.0.0
   intl: ^0.17.0
 
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: ^0.11.0
 
   cupertino_icons: ^1.0.3
 
 dev_dependencies:
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
 
 flutter_icons:
   android: true
