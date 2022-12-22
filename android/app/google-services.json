@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "710195196594",
+    "project_id": "deedee-x",
+    "storage_bucket": "deedee-x.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710195196594:android:28379f51791a1f0bda4fab",
+        "android_client_info": {
+          "package_name": "com.dinobitsoft.deedee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710195196594-q85k7mt6s2rifc5dop3t6v7tpb4jnfdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsMdUfx6uqbvAwnrtQLi14JKo2WC1vhwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710195196594-q85k7mt6s2rifc5dop3t6v7tpb4jnfdm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
