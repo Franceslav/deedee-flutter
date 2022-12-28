@@ -23,7 +23,7 @@ void main() {
   // serviceLocator.get<SharedUtils>().clearAll();
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => AccountCubit()),
+    ChangeNotifierProvider<AccountCubit>(create: (_) => AccountCubit()),
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),

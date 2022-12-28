@@ -29,10 +29,7 @@ class _AccountState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AccountCubit>(
-        create: (context) => AccountCubit(),
-        child: Builder(builder: (context) {
-          return WillPopScope(
+    return  WillPopScope(
             onWillPop: () async {
               return pushReplacement(context, HomeScreen(user: widget.user!));
             },
@@ -129,6 +126,5 @@ class _AccountState extends State<AccountScreen> {
               ),
             ),
           );
-        }));
+        }
   }
-}
