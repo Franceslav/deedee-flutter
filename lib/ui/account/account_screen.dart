@@ -110,12 +110,12 @@ class _AccountState extends State<AccountScreen> {
                         children: <Widget>[
                           IconButton(
                               onPressed: () {
-                                context.read<AccountCubit>().changeLocal('en');
+                                context.read<LocaleCubit>().changeLocal('en');
                               },
                               icon: Image.asset('assets/images/en.png')),
                           IconButton(
                               onPressed: () {
-                                context.read<AccountCubit>().changeLocal('ru');
+                                context.read<LocaleCubit>().changeLocal('ru');
                               },
                               icon: Image.asset('assets/images/ru.png'))
                         ],

@@ -1,14 +1,13 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
+import 'dart:ui';
+import 'package:get/get.dart';
 part 'account_state.dart';
 
-class AccountCubit extends ChangeNotifier {
+class LocaleCubit extends ChangeNotifier {
 
-  Locale _appLocale = const Locale('en');
-
-  Locale get appLocal => _appLocale;
+  Locale? _appLocale = Get.deviceLocale;
+  Locale get appLocal => _appLocale ?? Locale('en');
 
   void changeLocal(String s) {
     _appLocale = Locale(s);

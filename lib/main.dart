@@ -23,7 +23,7 @@ void main() {
   // serviceLocator.get<SharedUtils>().clearAll();
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<AccountCubit>(create: (_) => AccountCubit()),
+    ChangeNotifierProvider<LocaleCubit>(create: (_) => LocaleCubit()),
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),
@@ -70,7 +70,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     // Show error message if initialization failed
     if (_error) {
       return MaterialApp(
-          locale: context.watch<AccountCubit>().appLocal,
+          locale: context.watch<LocaleCubit>().appLocal,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -111,7 +111,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
 
     return MaterialApp(
-        locale: context.watch<AccountCubit>().appLocal,
+        locale: context.watch<LocaleCubit>().appLocal,
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
