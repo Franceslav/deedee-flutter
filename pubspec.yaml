@@ -37,6 +37,7 @@ dependencies:
   event_bloc: ^4.2.0
   #  geocode: ^2.0.5
   get_it: ^7.1.4
+  get: ^4.6.5
 
   flutter:
     sdk: flutter

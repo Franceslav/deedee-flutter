@@ -29,10 +29,7 @@ class _AccountState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AccountCubit>(
-        create: (context) => AccountCubit(),
-        child: Builder(builder: (context) {
-          return WillPopScope(
+    return  WillPopScope(
             onWillPop: () async {
               return pushReplacement(context, HomeScreen(user: widget.user!));
             },
@@ -113,12 +110,12 @@ class _AccountState extends State<AccountScreen> {
                         children: <Widget>[
                           IconButton(
                               onPressed: () {
-                                context.read<AccountCubit>().changeLocal('en');
+                                context.read<LocaleCubit>().changeLocal('en');
                               },
                               icon: Image.asset('assets/images/en.png')),
                           IconButton(
                               onPressed: () {
-                                context.read<AccountCubit>().changeLocal('ru');
+                                context.read<LocaleCubit>().changeLocal('ru');
                               },
                               icon: Image.asset('assets/images/ru.png'))
                         ],
@@ -129,6 +126,5 @@ class _AccountState extends State<AccountScreen> {
               ),
             ),
           );
-        }));
+        }
   }
-}
