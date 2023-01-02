@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
@@ -11,6 +10,8 @@ import 'package:deedee/ui/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../auth/login/login_screen.dart';
+
 
 class DeeDeeDrawer extends StatefulWidget {
   final User user;
@@ -148,6 +149,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                               color: Colors.black)),
                       onTap: () {
                         context.read<AuthenticationBloc>().add(LogoutEvent());
+                        pushReplacement(context,
+                            LoginScreen());
                       },
                     ),
                   ],
