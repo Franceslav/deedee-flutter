@@ -12,6 +12,8 @@ import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../signUp/sign_up_screen.dart';
+import '../welcome/welcome_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -151,7 +153,6 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(
                             right: 40.0, left: 40.0, top: 40),
@@ -177,6 +178,36 @@ class _LoginScreen extends State<LoginScreen> {
                           onPressed: () => context
                               .read<LoginBloc>()
                               .add(ValidateLoginFieldsEvent(_key)),
+                        ),
+                      ),Padding(
+                        padding: const EdgeInsets.only(
+                            right: 40.0, left: 40.0, top: 20, bottom: 20),
+                        child: TextButton(
+                          child: Text(
+                            AppLocalizations.of(context)!.signUpTitle,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Color(COLOR_PRIMARY)),
+                          ),
+                          onPressed: () {
+                            pushReplacement(context,
+                                SignUpScreen());
+                            // context.read<WelcomeBloc>().add(SignupPressed());
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                              const EdgeInsets.only(top: 12, bottom: 12),
+                            ),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                                side: const BorderSide(
+                                  color: Color(COLOR_PRIMARY),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
