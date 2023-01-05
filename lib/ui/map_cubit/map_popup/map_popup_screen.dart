@@ -79,8 +79,9 @@ class _MapPopupState extends State<MapPopup> {
   }
 
   _launchInstagram() async {
-    const nativeUrl = "instagram://user?username=lorem_ipsum_crlf";
-    const webUrl = "https://www.instagram.com/lorem_ipsum_crlf/";
+    final instagramUser = widget.marker.tagMessengerId;
+    final nativeUrl = "instagram://user?username=$instagramUser";
+    final webUrl = "https://www.instagram.com/$instagramUser";
     try {
       await launchUrlString(nativeUrl, mode: LaunchMode.externalApplication);
     } catch (e) {
