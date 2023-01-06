@@ -9,6 +9,8 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../services/locator.dart';
+
 part 'authentication_event.dart';
 
 part 'authentication_state.dart';
@@ -40,7 +42,8 @@ class AuthenticationBloc
       emit(const AuthenticationState.unauthenticated());
     });
     on<LoginWithEmailAndPasswordEvent>((event, emit) async {
-      if (true /*GRCPUtils.verifyAuthCode(SHAUtils.generateShaHash(SHA_PHRASE))*/) { // TODO: extract check
+      if (true /*GRCPUtils.verifyAuthCode(SHAUtils.generateShaHash(SHA_PHRASE))*/) {
+        // TODO: extract check
         dynamic result = await FireStoreUtils.loginWithEmailAndPassword(
             event.email, event.password);
         if (result != null && result is User) {
@@ -61,6 +64,8 @@ class AuthenticationBloc
       dynamic result = await FireStoreUtils.loginWithFacebook();
       if (result != null && result is User) {
         user = result;
+        //Optional: adding a checking method for new users on backend
+        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -73,6 +78,8 @@ class AuthenticationBloc
       dynamic result = await FireStoreUtils.loginWithApple();
       if (result != null && result is User) {
         user = result;
+        //Optional: adding a checking method for new users on backend
+        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -106,6 +113,7 @@ class AuthenticationBloc
           lastName: event.lastName);
       if (result != null && result is User) {
         user = result;
+        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
