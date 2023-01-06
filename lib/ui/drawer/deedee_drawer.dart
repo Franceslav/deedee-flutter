@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../auth/login/login_screen.dart';
-
+import '../referral/referral_screen.dart';
 
 class DeeDeeDrawer extends StatefulWidget {
   final User user;
@@ -36,12 +36,21 @@ class _DrawerState extends State<DeeDeeDrawer> {
                   padding: EdgeInsets.zero,
                   children: [
                     DrawerHeader(
-                      child: Text(
-                        widget.user.accountType.stringType(context),
-                        style: const TextStyle(color: Colors.white),
-                      ),
                       decoration: const BoxDecoration(
                         color: Color(COLOR_PRIMARY),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.user.accountType.stringType(context),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          IconButton(onPressed: (){
+                            print('Буфер ссылка!');
+                          }, icon: Icon(Icons.insert_link_sharp, color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
                     ListTile(
@@ -118,6 +127,21 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                         context, HomeScreen(user: widget.user));
                                   },
                                 ),
+                                ListTile(
+                                  title: Text(
+                                    AppLocalizations.of(context)!
+                                        .accountReferralTitle,
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                  leading: Transform.rotate(
+                                      angle: pi * 2,
+                                      child: const Icon(Icons.link_sharp,
+                                          color: Colors.black)),
+                                  onTap: () {
+                                    pushReplacement(context,
+                                        ReferralScreen(user: widget.user));
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -149,8 +173,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                               color: Colors.black)),
                       onTap: () {
                         context.read<AuthenticationBloc>().add(LogoutEvent());
-                        pushReplacement(context,
-                            LoginScreen());
+                        pushReplacement(context, LoginScreen());
                       },
                     ),
                   ],
