@@ -46,9 +46,9 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             widget.user.accountType.stringType(context),
                             style: const TextStyle(color: Colors.white),
                           ),
-                          IconButton(onPressed: (){
-                            print('Буфер ссылка!');
-                          }, icon: Icon(Icons.insert_link_sharp, color: Colors.white),
+                          IconButton(
+                            onPressed: () => context.read<DeedeeDrawerCubit>().showToast(context),
+                            icon: Icon(Icons.insert_link_sharp, color: Colors.white),
                           ),
                         ],
                       ),

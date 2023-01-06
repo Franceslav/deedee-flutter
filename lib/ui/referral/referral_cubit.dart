@@ -3,5 +3,4 @@ part 'referral_state.dart';
 
 class ReferralCubit extends ChangeNotifier {
 
-
 }

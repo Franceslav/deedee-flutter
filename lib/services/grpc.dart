@@ -9,6 +9,8 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
+import '../generated/ReferralService.pbgrpc.dart';
+
 class GRCPUtils {
   late BucketServiceClient stub;
 
@@ -159,5 +161,21 @@ class GRCPUtils {
       ..email = email
       ..ipAddress = ipAddress);
     return response.processed;
+  }
+
+  Future<List<UserReferral>> getUserReferrals(String email, ) async {
+    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
+    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
+    final channel = ClientChannel(
+      url!,
+      port: int.parse(port!),
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
+    final stub = ReferralServiceClient(channel);
+    var response =
+        await stub.getUserReferrals(GetUserReferralsRequest()
+          ..email = email
+        );
+    return response.userReferral;
   }
 }

@@ -81,7 +81,7 @@ class _AccountState extends State<AccountScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        IconButton(splashColor: Colors.indigo, splashRadius: 20, onPressed: (){print('Буфер ссылка!');}, icon: const Icon(Icons.link_sharp,)),
+                        IconButton(splashColor: Colors.indigo, splashRadius: 20, onPressed: () => context.read<LocaleCubit>().showToast(context), icon: const Icon(Icons.link_sharp,)),
                       ],
                     ),
                     Padding(
