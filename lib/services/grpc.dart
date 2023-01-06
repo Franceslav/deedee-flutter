@@ -1,9 +1,12 @@
 import 'package:deedee/generated/BucketService.pbgrpc.dart';
+import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
+import 'package:deedee/generated/VerificationService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
+import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class GRCPUtils {
@@ -139,5 +142,22 @@ class GRCPUtils {
         await stub.verifyAuthCode(VerifyAuthCodeRequest()..code = code);
 
     return response.authenticated;
+  }
+
+  Future<bool> sendVerificationEmail(String email) async {
+    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
+    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
+    String? ipAddress =
+        await serviceLocator.get<SharedUtils>().getPublicIpAddress();
+    final channel = ClientChannel(
+      url!,
+      port: int.parse(port!),
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
+    final stub = VerificationServiceClient(channel);
+    final response = await stub.verifyEmail(VerifyEmailRequest()
+      ..email = email
+      ..ipAddress = ipAddress);
+    return response.processed;
   }
 }
