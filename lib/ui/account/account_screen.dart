@@ -78,6 +78,12 @@ class _AccountState extends State<AccountScreen> {
                       padding: EdgeInsets.all(8.0),
                       child: Text('0.00'),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(splashColor: Colors.indigo, splashRadius: 20, onPressed: () => context.read<LocaleCubit>().showToast(context), icon: const Icon(Icons.link_sharp,)),
+                      ],
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                           right: 40.0, left: 40.0, top: 40),

@@ -13,4 +13,13 @@ class LocaleCubit extends ChangeNotifier {
     _appLocale = Locale(s);
     notifyListeners();
   }
+
+  void showToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Link copied'),
+      ),
+    );
+  }
 }
