@@ -31,7 +31,7 @@ class SharedUtils {
 
   Future<String> getPublicIpAddress() async {
     try {
-      final url = Uri.parse(IPIFLY);
+      final url = Uri.parse(IP_DETECTOR_SERVICE_URL);
       final response = await http.get(url);
       if (response.statusCode == 200) {
         return response.body;
