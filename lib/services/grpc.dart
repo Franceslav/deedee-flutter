@@ -144,7 +144,7 @@ class GRCPUtils {
     return response.authenticated;
   }
 
-  Future<void> sendVerificationEmail(String email) async {
+  Future<bool> sendVerificationEmail(String email) async {
     String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
     String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
     String? ipAddress =
@@ -155,13 +155,9 @@ class GRCPUtils {
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
     final stub = VerificationServiceClient(channel);
-    try {
-      stub.verifyEmail(VerifyEmailRequest()
-        ..email = email
-        ..ipAddress = ipAddress);
-    } catch (e) {
-      debugPrint('Caught error: $e');
-    }
-    await channel.shutdown();
+    final response = await stub.verifyEmail(VerifyEmailRequest()
+      ..email = email
+      ..ipAddress = ipAddress);
+    return response.processed;
   }
 }

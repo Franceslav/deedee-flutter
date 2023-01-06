@@ -1,3 +1,4 @@
+import 'package:deedee/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,8 +31,8 @@ class SharedUtils {
 
   Future<String> getPublicIpAddress() async {
     try {
-      final url = Uri.parse('https://api.ipify.org');
-      var response = await http.get(url);
+      final url = Uri.parse(IPIFLY);
+      final response = await http.get(url);
       if (response.statusCode == 200) {
         return response.body;
       } else {
