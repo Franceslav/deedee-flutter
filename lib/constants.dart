@@ -7,3 +7,4 @@ const SHA_PHRASE = 'deedee';
 const IP_DETECTOR_SERVICE_URL = 'https://api.ipify.org';
 const NGROK_IP_ADDRESS = '5.tcp.eu.ngrok.io';
 const NGROK_PORT = 17580;
+const HTTPS_REF_DOMAIN = 'https://deedeeapp.com/ref/';
