@@ -1,11 +1,14 @@
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/ReferralService.pb.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/services/locator.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../generated/ReferralService.pb.dart';
+
 
 class ReferralScreen extends StatefulWidget {
   final User user;
@@ -17,10 +20,18 @@ class ReferralScreen extends StatefulWidget {
 }
 
 class _ReferralState extends State<ReferralScreen> {
-  late User user;
-  late List<UserReferral> _emails = [];
+  late List<UserReferral> _userReferrals = [];
 
   final ScrollController _scrollController = ScrollController();
+
+
+  @override
+  Future<void> initState() async {
+    super.initState();
+    _userReferrals = await serviceLocator.get<GRCPUtils>()
+        .getUserReferrals(widget.user.email);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +63,11 @@ class _ReferralState extends State<ReferralScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(25.0),
-                    child: Text("Total referrals: ${_emails.length}", style: TextStyle(fontSize: 20),),
+                    child: Text("Total referrals: ${_userReferrals.length}", style: TextStyle(fontSize: 20),),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(25.0),
-                    child: Text("Credits: ${_emails.length}", style: TextStyle(fontSize: 20),),
+                    child: Text("Credits: ${_userReferrals.length}", style: TextStyle(fontSize: 20),),
                   ),
                 ],
               ),
@@ -71,7 +82,7 @@ class _ReferralState extends State<ReferralScreen> {
                 color: Colors.white,
                 child: ListView.builder(
                   controller: _scrollController,
-                  itemCount: _emails.length, // количество email для отрисовки
+                  itemCount: _userReferrals.length, // количество email для отрисовки
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       shape: RoundedRectangleBorder(
@@ -91,7 +102,7 @@ class _ReferralState extends State<ReferralScreen> {
                             leading: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Text(
-                                "${_emails[index]}",
+                                "${_userReferrals[index]}",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

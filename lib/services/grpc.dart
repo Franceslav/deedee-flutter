@@ -163,7 +163,7 @@ class GRCPUtils {
     return response.processed;
   }
 
-  Future<List<UserReferral>> getUserReferrals(String email, ) async {
+  Future<List<UserReferral>> getUserReferrals(String email) async {
     String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
     String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
     final channel = ClientChannel(
