@@ -55,7 +55,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                var uuidValue = uuid.v5(
                                   Uuid.NAMESPACE_URL,
                                   "${HTTPS_REF_DOMAIN}${widget.user.email}");
-                              await Clipboard.setData(ClipboardData(text: "$uuidValue"));
+                               var ValueURL = "${HTTPS_REF_DOMAIN}${uuidValue}";
+                              await Clipboard.setData(ClipboardData(text: "$ValueURL"));
                                context.read<DeedeeDrawerCubit>().showToast(context);
                               },
                             icon: Icon(Icons.insert_link_sharp, color: Colors.white),

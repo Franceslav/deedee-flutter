@@ -91,9 +91,9 @@ class _AccountState extends State<AccountScreen> {
                         var uuidValue = uuid.v5(
                             Uuid.NAMESPACE_URL,
                             "${HTTPS_REF_DOMAIN}${widget.user.email}");
-                        await Clipboard.setData(ClipboardData(text: "$uuidValue"));
+                        var ValueURL = "${HTTPS_REF_DOMAIN}${uuidValue}";
+                        await Clipboard.setData(ClipboardData(text: "$ValueURL"));
                         context.read<LocaleCubit>().showToast(context);
-                        // copied successfully
                       },
                       icon: const Icon(
                         Icons.link_sharp,
