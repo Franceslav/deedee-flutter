@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/account/account_screen.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
@@ -27,13 +26,17 @@ class DeeDeeDrawer extends StatefulWidget {
 
 class _DrawerState extends State<DeeDeeDrawer> {
   final uuid = Uuid();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DeedeeDrawerCubit>(
         create: (context) => DeedeeDrawerCubit(),
         child: Builder(builder: (context) {
           return SizedBox(
-              width: MediaQuery.of(context).size.width *
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width *
                   0.60, // 15% of screen will be occupied
               child: Drawer(
                 child: ListView(
@@ -51,15 +54,13 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             style: const TextStyle(color: Colors.white),
                           ),
                           IconButton(
-                            onPressed: () async {
-                               var uuidValue = uuid.v5(
-                                  Uuid.NAMESPACE_URL,
-                                  "${HTTPS_REF_DOMAIN}${widget.user.email}");
-                               var ValueURL = "${HTTPS_REF_DOMAIN}${uuidValue}";
-                              await Clipboard.setData(ClipboardData(text: "$ValueURL"));
-                               context.read<DeedeeDrawerCubit>().showToast(context);
-                              },
-                            icon: Icon(Icons.insert_link_sharp, color: Colors.white),
+                            onPressed: () {
+                              context.read<DeedeeDrawerCubit>().uudiURL(widget.user.email);
+                              context.read<DeedeeDrawerCubit>().showToast(
+                                  context);
+                            },
+                            icon: Icon(
+                                Icons.insert_link_sharp, color: Colors.white),
                           ),
                         ],
                       ),
@@ -167,7 +168,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                       leading: Transform.rotate(
                           angle: pi / 1,
                           child:
-                              const Icon(Icons.settings, color: Colors.black)),
+                          const Icon(Icons.settings, color: Colors.black)),
                       onTap: () {
                         pushReplacement(
                             context, SettingsScreen(user: widget.user));

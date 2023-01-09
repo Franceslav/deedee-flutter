@@ -87,19 +87,15 @@ class _AccountState extends State<AccountScreen> {
                   IconButton(
                       splashColor: Colors.indigo,
                       splashRadius: 20,
-                      onPressed: () async {
-                        var uuidValue = uuid.v5(
-                            Uuid.NAMESPACE_URL,
-                            "${HTTPS_REF_DOMAIN}${widget.user.email}");
-                        var ValueURL = "${HTTPS_REF_DOMAIN}${uuidValue}";
-                        await Clipboard.setData(ClipboardData(text: "$ValueURL"));
+                      onPressed: () {
+                        context.read<LocaleCubit>().uudiURL(widget.user.email);
                         context.read<LocaleCubit>().showToast(context);
                       },
                       icon: const Icon(
                         Icons.link_sharp,
                       )),
                 ],
-              ),
+              ), 
               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
