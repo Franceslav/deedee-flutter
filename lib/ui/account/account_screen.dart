@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class AccountScreen extends StatefulWidget {
   final User user;
@@ -20,6 +22,7 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountState extends State<AccountScreen> {
   late User user;
+  final uuid = Uuid();
 
   @override
   void initState() {
@@ -29,108 +32,117 @@ class _AccountState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
-            onWillPop: () async {
-              return pushReplacement(context, HomeScreen(user: widget.user!));
-            },
-            child: Scaffold(
-              drawer: DeeDeeDrawer(user: user),
-              appBar: AppBar(
-                title: Text(
-                  AppLocalizations.of(context)!.accountTitle,
-                  style: const TextStyle(color: Colors.black),
-                ),
-                iconTheme: const IconThemeData(color: Colors.black),
-                backgroundColor: Colors.white,
-                centerTitle: true,
+    return WillPopScope(
+      onWillPop: () async {
+        return pushReplacement(context, HomeScreen(user: widget.user!));
+      },
+      child: Scaffold(
+        drawer: DeeDeeDrawer(user: user),
+        appBar: AppBar(
+          title: Text(
+            AppLocalizations.of(context)!.accountTitle,
+            style: const TextStyle(color: Colors.black),
+          ),
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              user.profilePictureURL == ''
+                  ? CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Colors.grey.shade400,
+                      child: ClipOval(
+                        child: SizedBox(
+                          width: 70,
+                          height: 70,
+                          child: Image.asset(
+                            'assets/images/placeholder.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    )
+                  : displayCircleImage(user.profilePictureURL, 80, false),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(user.fullName()),
               ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    user.profilePictureURL == ''
-                        ? CircleAvatar(
-                            radius: 35,
-                            backgroundColor: Colors.grey.shade400,
-                            child: ClipOval(
-                              child: SizedBox(
-                                width: 70,
-                                height: 70,
-                                child: Image.asset(
-                                  'assets/images/placeholder.jpg',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          )
-                        : displayCircleImage(user.profilePictureURL, 80, false),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(user.fullName()),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(user.email),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('0.00'),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(splashColor: Colors.indigo, splashRadius: 20, onPressed: () => context.read<LocaleCubit>().showToast(context), icon: const Icon(Icons.link_sharp,)),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 40.0, left: 40.0, top: 40),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color(COLOR_PRIMARY),
-                            padding: const EdgeInsets.only(top: 12, bottom: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              side: const BorderSide(
-                                color: Color(COLOR_PRIMARY),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.accountTopUp,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {}),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 40.0, left: 40.0, top: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          IconButton(
-                              onPressed: () {
-                                context.read<LocaleCubit>().changeLocal('en');
-                              },
-                              icon: Image.asset('assets/images/en.png')),
-                          IconButton(
-                              onPressed: () {
-                                context.read<LocaleCubit>().changeLocal('ru');
-                              },
-                              icon: Image.asset('assets/images/ru.png'))
-                        ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(user.email),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('0.00'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                      splashColor: Colors.indigo,
+                      splashRadius: 20,
+                      onPressed: () {
+                        context.read<LocaleCubit>().uudiURL(widget.user.email);
+                        context.read<LocaleCubit>().showToast(context);
+                      },
+                      icon: const Icon(
+                        Icons.link_sharp,
+                      )),
+                ],
+              ), 
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(COLOR_PRIMARY),
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: const BorderSide(
+                          color: Color(COLOR_PRIMARY),
+                        ),
                       ),
                     ),
+                    child: Text(
+                      AppLocalizations.of(context)!.accountTopUp,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                        onPressed: () {
+                          context.read<LocaleCubit>().changeLocal('en');
+                        },
+                        icon: Image.asset('assets/images/en.png')),
+                    IconButton(
+                        onPressed: () {
+                          context.read<LocaleCubit>().changeLocal('ru');
+                        },
+                        icon: Image.asset('assets/images/ru.png'))
                   ],
                 ),
               ),
-            ),
-          );
-        }
+            ],
+          ),
+        ),
+      ),
+    );
   }
+}
