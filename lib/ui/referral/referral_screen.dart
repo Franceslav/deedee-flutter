@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class ReferralScreen extends StatefulWidget {
   final User user;
 
@@ -20,17 +19,11 @@ class ReferralScreen extends StatefulWidget {
 }
 
 class _ReferralState extends State<ReferralScreen> {
-  late List<UserReferral> _userReferrals = [];
-
   final ScrollController _scrollController = ScrollController();
 
-
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    _userReferrals = await serviceLocator.get<GRCPUtils>()
-        .getUserReferrals(widget.user.email);
-
   }
 
   @override
@@ -58,19 +51,26 @@ class _ReferralState extends State<ReferralScreen> {
           children: [
             Expanded(
               flex: 1,
-              child: Container(child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Text("Total referrals: ${_userReferrals.length}", style: TextStyle(fontSize: 20),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Text("Credits: ${_userReferrals.length}", style: TextStyle(fontSize: 20),),
-                  ),
-                ],
-              ),
+              child: Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Text(
+                        "Total referrals: 0",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Text(
+                        "Credits: 0",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ],
+                ),
                 color: Colors.white,
               ),
             ),
@@ -80,45 +80,54 @@ class _ReferralState extends State<ReferralScreen> {
                 constraints: BoxConstraints(
                     maxWidth: double.infinity, maxHeight: double.infinity),
                 color: Colors.white,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: _userReferrals.length, // количество email для отрисовки
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                      ),
-                      elevation: 12,
-                      color: Colors.indigo,
-                      shadowColor: Colors.blueAccent,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            leading: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                "${_userReferrals[index]}",
-                                style: TextStyle(color: Colors.white),
+                child: FutureBuilder(
+                    future: getUserReferrals(),
+                    builder:
+                        (context, AsyncSnapshot<List<UserReferral>> snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                ),
+                                borderRadius:
+                                BorderRadius.circular(20.0), //<-- SEE HERE
                               ),
-                            ),
-                            trailing: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                "1",
-                                style: TextStyle(color: Colors.white),
+                              elevation: 12,
+                              color: Colors.indigo,
+                              shadowColor: Colors.blueAccent,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Text(
+                                        snapshot.data![index].email,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Text(
+                                        '${snapshot.data![index].placedTagsAmount}',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                            );
+                          },
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }),
               ),
             ),
           ],
@@ -126,4 +135,14 @@ class _ReferralState extends State<ReferralScreen> {
       ),
     );
   }
+
+  Future<List<UserReferral>> getUserReferrals() async {
+    return serviceLocator
+        .get<GRCPUtils>()
+        .getUserReferrals(widget.user.email)
+        .then((referrals) {
+      return referrals;
+    });
+  }
 }
+
