@@ -95,7 +95,7 @@ class _AccountState extends State<AccountScreen> {
                         Icons.link_sharp,
                       )),
                 ],
-              ), 
+              ),
               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
@@ -135,7 +135,12 @@ class _AccountState extends State<AccountScreen> {
                         onPressed: () {
                           context.read<LocaleCubit>().changeLocal('ru');
                         },
-                        icon: Image.asset('assets/images/ru.png'))
+                        icon: Image.asset('assets/images/ru.png')),
+                    IconButton(
+                        onPressed: () {
+                          context.read<LocaleCubit>().changeLocal('pl');
+                        },
+                        icon: Image.asset('assets/images/pl.png')),
                   ],
                 ),
               ),
