@@ -3,6 +3,10 @@
 
 * * *
 
+### To generate localization
+* windows: <flutter_installation_dir>\bin\flutter gen-l10n
+* linux <flutter_installation_dir>/bin/flutter gen-l10n
+
 ### To set the GPS on the emulator:
 
 Go to the emulator settings, tab "Location"
