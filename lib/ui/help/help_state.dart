@@ -9,13 +9,6 @@ class GetMessageState {
 }
 
 
-// class Message {
-//   // final String name = User().firstName;
-//   final String message;
-//   // final DateTime time = DateTime.now();
-//
-//   Message({required this.message});
-// }
 
 
 

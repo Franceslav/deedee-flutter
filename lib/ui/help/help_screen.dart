@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/help/help_bloc.dart';
 import 'package:deedee/ui/help/help_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HelpScreen extends StatefulWidget {
   final User user;
@@ -20,6 +24,7 @@ class HelpScreen extends StatefulWidget {
 class _HelpState extends State<HelpScreen> {
   late User user;
   TextEditingController messageEditingController = TextEditingController();
+  File? image;
 
   @override
   void initState() {
@@ -100,6 +105,18 @@ class _HelpState extends State<HelpScreen> {
                     }
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      image != null
+                      ? Image.file(image!,
+                      width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                      ) :
+                          FlutterLogo(size: 0),
+                    ],
+                  ),
+                  Row(
                     children: [
                       BlocBuilder<HelpBloc, GetMessageState>(
                         bloc: HelpBloc(),
@@ -135,7 +152,6 @@ class _HelpState extends State<HelpScreen> {
                                 border: InputBorder.none,
                               ),
                             ),
-
                           );
                         },
                       ),
@@ -145,9 +161,7 @@ class _HelpState extends State<HelpScreen> {
                       IconButton(
                         icon: const Icon(Icons.attach_file),
                         color: Colors.black,
-                        onPressed: () {
-                          print('');
-                        },
+                        onPressed: () =>  pickImage(),
                       ),
                     ],
                   ),
@@ -156,5 +170,15 @@ class _HelpState extends State<HelpScreen> {
             )
           ])),
     );
+  }
+  Future pickImage() async{
+    try{
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(image == null) return;
+    final imageTemporary = File(image.path);
+    setState(() => this.image = imageTemporary);}
+      on PlatformException catch (e){
+      print('Failed to pick image: $e');
+      }
   }
 }
