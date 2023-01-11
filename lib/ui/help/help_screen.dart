@@ -29,6 +29,7 @@ class _HelpState extends State<HelpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
     return BlocProvider<HelpBloc>(
       create: (context) => HelpBloc(),
       child: Scaffold(
@@ -105,11 +106,12 @@ class _HelpState extends State<HelpScreen> {
                         builder: (context, state) {
                           return Expanded(
                             child: TextFormField(
+                              controller:_controller,
                               onFieldSubmitted: (value) {
                                 context.read<HelpBloc>().add(
                                     GetMessagesEvent(value));
+                                _controller.clear();
                               },
-                              controller: messageEditingController,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14.0,
