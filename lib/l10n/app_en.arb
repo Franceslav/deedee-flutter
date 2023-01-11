@@ -43,9 +43,8 @@
      "addProfilePictureTitle" : "Add Profile Picture",
      "chooseFromGalleryTitle" : "Choose from gallery",
      "takePictureTitle" : "Take a picture",
-     "cancelTitle" : "Cancel"
-
-
+     "cancelTitle" : "Cancel",
+     "helpTitle" : "Help"
 
 
 }

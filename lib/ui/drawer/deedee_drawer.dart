@@ -6,6 +6,7 @@ import 'package:deedee/ui/account/account_screen.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer_cubit.dart';
+import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
@@ -172,6 +173,17 @@ class _DrawerState extends State<DeeDeeDrawer> {
                       onTap: () {
                         pushReplacement(
                             context, SettingsScreen(user: widget.user));
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        AppLocalizations.of(context)!.helpTitle,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      leading: const Icon(Icons.help_outline, color: Colors.black),
+                      onTap: () {
+                        pushReplacement(
+                            context, HelpScreen(user: widget.user));
                       },
                     ),
                     ListTile(
