@@ -144,6 +144,12 @@ class _AccountState extends State<AccountScreen> {
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/pl.png')),
+                    IconButton(
+                        onPressed: () {
+                          context.read<LocaleCubit>().changeLocal('es');
+                        },
+                        iconSize: 50,
+                        icon: Image.asset('assets/images/es.png'))
                   ],
                 ),
               ),

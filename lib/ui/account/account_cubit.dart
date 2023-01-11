@@ -26,12 +26,11 @@ class LocaleCubit extends ChangeNotifier {
       ),
     );
   }
+
   String uudiURL(String email) {
-    var uuidValue = uuid.v5(
-        Uuid.NAMESPACE_URL,
-        "${HTTPS_REF_DOMAIN}${email}");
+    var uuidValue = uuid.v5(Uuid.NAMESPACE_URL, "${HTTPS_REF_DOMAIN}${email}");
     var ValueURL = "${HTTPS_REF_DOMAIN}${uuidValue}";
     Clipboard.setData(ClipboardData(text: "$ValueURL"));
-    return  ValueURL;
+    return ValueURL;
   }
 }
