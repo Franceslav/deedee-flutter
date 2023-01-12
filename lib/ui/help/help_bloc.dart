@@ -13,6 +13,7 @@ class HelpBloc extends Bloc<GetMessagesEvent, GetMessageState> {
   _onGetChat(GetMessagesEvent event, Emitter<GetMessageState> emit)  {
     String eventMessages = event.messages;
     List<String> stateMessages = state.messages;
+    if(event.messages == '') return;
     List<String> messages = stateMessages + [eventMessages];
     emit(
         GetMessageState(messages: messages)
