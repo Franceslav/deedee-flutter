@@ -8,4 +8,3 @@ class MessageReceivedEvent extends HelpEvent {
 
   MessageReceivedEvent(this.messages);
 }
-

@@ -14,7 +14,6 @@ import 'package:image_picker/image_picker.dart';
 class HelpScreen extends StatefulWidget {
   final User user;
 
-
   HelpScreen({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -57,63 +56,62 @@ class _HelpState extends State<HelpScreen> {
                 children: [
                   BlocBuilder<HelpBloc, GetMessageState>(
                       builder: (context, state) {
-                        final message = context.select((
-                            HelpBloc bloc) => bloc.state.messages);
-                        return
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: message.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                semanticContainer: false,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: Colors.black,
+                    final message =
+                        context.select((HelpBloc bloc) => bloc.state.messages);
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: message.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            semanticContainer: false,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Colors.black,
+                              ),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            elevation: 12,
+                            color: Colors.white,
+                            shadowColor: Colors.black,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    message[index],
+                                    maxLines: 10,
+                                    softWrap: true,
+                                    style: TextStyle(color: Colors.black),
                                   ),
-                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                elevation: 12,
-                                color: Colors.white,
-                                shadowColor: Colors.black,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        message[index],
-                                        maxLines: 10,
-                                        softWrap: true,
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '${user.firstName}  '
-                                            '${DateTime.now()}',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                  ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '${user.firstName}  '
+                                    '${DateTime.now()}',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                    }
-                  ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       image != null
-                      ? Image.file(image!,
-                      width: 60,
-                        height: 60,
-                        fit: BoxFit.cover,
-                      ) :
-                          FlutterLogo(size: 0),
+                          ? Image.file(
+                              image!,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            )
+                          : FlutterLogo(size: 0),
                     ],
                   ),
                   Row(
@@ -123,10 +121,11 @@ class _HelpState extends State<HelpScreen> {
                         builder: (context, state) {
                           return Expanded(
                             child: TextFormField(
-                              controller:_controller,
+                              controller: _controller,
                               onFieldSubmitted: (value) {
-                                context.read<HelpBloc>().add(
-                                    MessageReceivedEvent(value));
+                                context
+                                    .read<HelpBloc>()
+                                    .add(MessageReceivedEvent(value));
                                 _controller.clear();
                               },
                               style: TextStyle(
@@ -141,8 +140,8 @@ class _HelpState extends State<HelpScreen> {
                                 fillColor: Colors.black,
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40),
-                                    borderSide:
-                                    BorderSide(color: Colors.blue, width: 3)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 3)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40),
                                     borderSide: BorderSide(
@@ -161,7 +160,7 @@ class _HelpState extends State<HelpScreen> {
                       IconButton(
                         icon: const Icon(Icons.attach_file),
                         color: Colors.black,
-                        onPressed: () => pickImage(),
+                        onPressed: () => pickImage(), // TODO: Make a state management Block for adding a photo and implement a button to send a photo.
                       ),
                     ],
                   ),
@@ -171,14 +170,15 @@ class _HelpState extends State<HelpScreen> {
           ])),
     );
   }
-  Future pickImage() async{
-    try{
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(image == null) return;
-    final imageTemporary = File(image.path);
-    setState(() => this.image = imageTemporary);}
-      on PlatformException catch (e){
+
+  Future pickImage() async { // TODO: implement type not dynamic
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+    } on PlatformException catch (e) {
       print('Failed to pick image: $e');
-      }
+    }
   }
 }
