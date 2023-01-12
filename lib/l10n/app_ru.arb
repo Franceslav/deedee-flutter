@@ -40,8 +40,8 @@
      "addProfilePictureTitle" : "Создание фото профиля",
      "chooseFromGalleryTitle" : "Выбрать из галереи",
       "takePictureTitle" : "Сделать фото",
-      "cancelTitle" : "Выйти",
-      "helpTitle" : "Помощь"
+      "cancelTitle" : "выйти",
+      "helpTitle" : "помощь"
 
 
 }

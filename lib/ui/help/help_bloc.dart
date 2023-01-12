@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 part 'help_event.dart';
 
 
-class HelpBloc extends Bloc<GetMessagesEvent, GetMessageState> {
+class HelpBloc extends Bloc<MessageReceivedEvent, GetMessageState> {
   HelpBloc() : super(GetMessageState()) {
-    on<GetMessagesEvent>(
-        _onGetChat);
+    on<MessageReceivedEvent>(
+        _onMessageReceived);
   }
 
-  _onGetChat(GetMessagesEvent event, Emitter<GetMessageState> emit)  {
+  _onMessageReceived(MessageReceivedEvent event, Emitter<GetMessageState> emit)  {
     String eventMessages = event.messages;
     List<String> stateMessages = state.messages;
     if(event.messages == '') return;

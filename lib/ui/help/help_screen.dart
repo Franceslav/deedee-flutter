@@ -126,7 +126,7 @@ class _HelpState extends State<HelpScreen> {
                               controller:_controller,
                               onFieldSubmitted: (value) {
                                 context.read<HelpBloc>().add(
-                                    GetMessagesEvent(value));
+                                    MessageReceivedEvent(value));
                                 _controller.clear();
                               },
                               style: TextStyle(
@@ -161,7 +161,7 @@ class _HelpState extends State<HelpScreen> {
                       IconButton(
                         icon: const Icon(Icons.attach_file),
                         color: Colors.black,
-                        onPressed: () =>  pickImage(),
+                        onPressed: () => pickImage(),
                       ),
                     ],
                   ),
