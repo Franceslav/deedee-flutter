@@ -15,7 +15,11 @@ class FilterBox extends StatefulWidget {
   final User user;
   final String topic;
 
-  const FilterBox({Key? key, required this.user, required this.topic}) : super(key: key);
+  const FilterBox({
+    Key? key,
+    required this.user,
+    required this.topic,
+  }) : super(key: key);
 
   @override
   _FilterBoxState createState() => _FilterBoxState();
@@ -30,18 +34,24 @@ class _FilterBoxState extends State<FilterBox> {
   late LocationPermission permission;
   late Position position;
 
-  late Set<String> _titles;
+  Set<String>? titles;
 
   late StreamSubscription<Position> positionStream;
+
+  _FilterBoxState();
+
+  void _initializeTitles() async {
+    final filtersItems =
+        await serviceLocator.get<GRCPUtils>().getFilterItems(widget.topic);
+    setState(() {
+      titles = {for (var v in filtersItems) v.title};
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    serviceLocator.get<GRCPUtils>().getFilterItems(widget.topic).then((value) {
-      setState(() {
-        _titles = {for (var v in value) v.title};
-      });
-    });
+    _initializeTitles();
   }
 
   @override
@@ -68,13 +78,16 @@ class _FilterBoxState extends State<FilterBox> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(
-                        top: 32.0, right: 10.0, left: 10.0),
-                    child: Wrap(
-                        children: _titles
-                            .map((title) => PredefinedFilter(
-                                user: widget.user, title: title))
-                            .toList())),
+                  padding:
+                      const EdgeInsets.only(top: 32.0, right: 10.0, left: 10.0),
+                  child: titles != null && (titles?.isNotEmpty ?? false)
+                      ? Wrap(
+                          children: titles!
+                              .map((title) => PredefinedFilter(
+                                  user: widget.user, title: title))
+                              .toList())
+                      : Container(),
+                ),
               ],
             ),
           );
