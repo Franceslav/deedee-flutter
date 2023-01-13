@@ -2,13 +2,18 @@ import 'dart:async';
 
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
+import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/ui/home/filter_box/filter_box_bloc.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/predefined_filter/predefined_filter_screen.dart';
+import 'package:deedee/ui/loading_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+import 'package:deedee/constants.dart';
 
 import '../../../generated/TagService.pb.dart';
 
@@ -71,7 +76,14 @@ class _FilterBoxState extends State<FilterBox> {
                                   .toList()))
                     ]);
               } else {
-                return const CircularProgressIndicator();
+                return const SizedBox(
+                  width: 72,
+                  height: 72,
+                  child: CircularProgressIndicator.adaptive(
+                      backgroundColor: Colors.white,
+                      valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY))),
+                );
+                // return CupertinoActivityIndicator();
               }
             },
           ),
