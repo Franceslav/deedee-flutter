@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deedee/generated/BucketService.pb.dart';
+import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
@@ -28,7 +28,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   late Map<String, bool> _filterMap;
 
-  Bucket bucket = Bucket();
+  Topic topic = Topic();
   AutovalidateMode _validate = AutovalidateMode.disabled;
 
   late double _lat, _lon;
@@ -72,7 +72,7 @@ class _FilterPageState extends State<FilterPage> {
               } else if (state is FilterTagsDoneState) {
                 context.read<LoadingCubit>().hideLoading();
                 Map<LatLng, String> tagMap = {
-                  for (var tag in state.bucket.tags)
+                  for (var tag in state.topic.tags)
                     LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
                         tag.messengerId
                 };

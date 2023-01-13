@@ -1,4 +1,4 @@
-import 'package:deedee/generated/BucketService.pbgrpc.dart';
+import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/generated/VerificationService.pb.dart';
@@ -9,10 +9,11 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
+import '../generated/LocationService.pb.dart';
 import '../generated/ReferralService.pbgrpc.dart';
 
 class GRCPUtils {
-  late BucketServiceClient stub;
+  late TagServiceClient stub;
 
   Future<void> placeTag(
       AccountType accountType,
@@ -28,7 +29,7 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
     try {
       var timestamp = Timestamp()
@@ -39,7 +40,7 @@ class GRCPUtils {
         ..longitude = lon
         ..title = "";
       var tag = Tag()
-        ..bucketId = topic
+        ..topicId = topic
         ..messengerId = messengerId
         ..geoLocation = geo
         ..dueDate = timestamp
@@ -54,7 +55,7 @@ class GRCPUtils {
     await channel.shutdown();
   }
 
-  Future<Bucket> getBucket(String bucketId, AccountType accountType) async {
+  Future<Topic> getBucket(String topicId, AccountType accountType) async {
     String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
     String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
     final channel = ClientChannel(
@@ -62,20 +63,20 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
-    var response = await stub.getBucket(GetBucketRequest()
-      ..bucketId = bucketId
+    var response = await stub.getTopic(GetTopicRequest()
+      ..topicId = topicId
       ..tagType = Tag_TYPE.valueOf(accountType.index)!);
     // .then((p0) async {
     // await channel.shutdown();
     // },);
 
-    return response.bucket;
+    return response.topic;
     //
   }
 
-  Future<Bucket> getFilteredTags(String bucketId, List<String> activeFilters,
+  Future<Topic> getFilteredTags(String topicId, List<String> activeFilters,
       AccountType accountType) async {
     String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
     String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
@@ -84,14 +85,14 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
-    var response = await stub.getFilteredTags(GetBucketRequest()
-      ..bucketId = bucketId
+    var response = await stub.getFilteredTags(GetTopicRequest()
+      ..topicId = topicId
       ..filters.addAll(activeFilters)
       ..tagType = Tag_TYPE.valueOf(accountType.index)!);
 
-    return response.bucket;
+    return response.topic;
   }
 
   Future<List<String>> getTopics(double latitude, double longitude) async {
@@ -102,7 +103,7 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
     var geoLocation = GeoLocation()
       ..latitude = latitude
@@ -122,12 +123,12 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
     var response =
-        await stub.getFilterKeys(GetFilterKeysRequest()..topic = topic);
+        await stub.getFilterKeys(GetFilterKeysRequest()..topicId = topic);
 
-    return response.items;
+    return response.filterKeys;
   }
 
   Future<bool> verifyAuthCode(String code) async {
@@ -138,7 +139,7 @@ class GRCPUtils {
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
-    final stub = BucketServiceClient(channel);
+    final stub = TagServiceClient(channel);
 
     var response =
         await stub.verifyAuthCode(VerifyAuthCodeRequest()..code = code);

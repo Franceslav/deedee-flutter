@@ -12,15 +12,15 @@ class FilterBoxChangeState extends FilterBoxState {
 }
 
 class FilterBoxFilteredTagsReceivedState extends FilterBoxState {
-  final Bucket bucket;
+  final Topic topic;
 
-  FilterBoxFilteredTagsReceivedState({required this.bucket});
+  FilterBoxFilteredTagsReceivedState({required this.topic});
 }
 
 class FilterBoxDoneState extends FilterBoxState {
-  final Bucket bucket;
+  final Topic topic;
 
-  FilterBoxDoneState({required this.bucket});
+  FilterBoxDoneState({required this.topic});
 }
 
 class FilterBoxFailureState extends FilterBoxState {

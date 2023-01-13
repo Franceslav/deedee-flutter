@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deedee/generated/BucketService.pb.dart';
+import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/locator.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
-class FilterBox extends StatefulWidget {
+class FilterBox<T> extends StatefulWidget {
   final User user;
   final String topic;
 
@@ -27,7 +27,7 @@ class FilterBox extends StatefulWidget {
 
 class _FilterBoxState extends State<FilterBox> {
   final GlobalKey<FormState> _key = GlobalKey();
-  Bucket bucket = Bucket();
+  Topic topic = Topic();
 
   bool servicestatus = false;
   bool haspermission = false;

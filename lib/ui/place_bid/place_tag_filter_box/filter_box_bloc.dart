@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/BucketService.pb.dart';
+import 'package:deedee/generated/TagService.pb.dart';
+
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/locator.dart';
@@ -41,10 +42,10 @@ class FilterBoxBloc extends Bloc<FilterBoxEvent, FilterBoxState> {
             key: event.predefinedFilterActiveMap[key]
       }.keys.toList();
 
-      Bucket bucket = await serviceLocator.get<GRCPUtils>().getFilteredTags(
+      Topic topic = await serviceLocator.get<GRCPUtils>().getFilteredTags(
           event.topicTitle, activeFilters, event.accountType); //TODO: fix type
 
-      emit(FilterBoxFilteredTagsReceivedState(bucket: bucket));
+      emit(FilterBoxFilteredTagsReceivedState(topic: topic));
     });
   }
 

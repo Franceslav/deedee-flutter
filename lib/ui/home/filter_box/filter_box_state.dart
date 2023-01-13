@@ -12,9 +12,9 @@ class FilterBoxChangeState extends FilterBoxHomeState {
 }
 
 class FilterBoxDoneState extends FilterBoxHomeState {
-  final Bucket bucket;
+  final Topic topic;
 
-  FilterBoxDoneState(this.bucket);
+  FilterBoxDoneState(this.topic);
 }
 
 class FilterBoxGPSDoneState extends FilterBoxHomeState {
