@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/BucketService.pb.dart';
+import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/grpc.dart';
-import 'package:flutter/src/widgets/form.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:meta/meta.dart';
 
@@ -33,5 +31,4 @@ class FilterBoxBloc extends Bloc<FilterBoxEvent, FilterBoxState> {
       emit(FilterBoxChangeState(predefinedFilterActiveMap));
     });
   }
-
 }

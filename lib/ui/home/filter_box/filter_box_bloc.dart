@@ -1,20 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/BucketService.pb.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/grpc.dart';
-import 'package:flutter/src/widgets/form.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
+
+import '../../../generated/TagService.pb.dart';
 
 part 'filter_box_event.dart';
 
 part 'filter_box_state.dart';
 
 class FilterBoxHomeBloc extends Bloc<FilterBoxHomeEvent, FilterBoxHomeState> {
-
   FilterBoxHomeBloc() : super(FilterBoxInitialState()) {
     on<FilterBoxChangeEvent>((event, emit) async {
       emit(FilterBoxChangeState(event.title));
@@ -67,6 +65,5 @@ class FilterBoxHomeBloc extends Bloc<FilterBoxHomeEvent, FilterBoxHomeState> {
             .listen((Position position) {
       _position = position;
     });
-
   }
 }

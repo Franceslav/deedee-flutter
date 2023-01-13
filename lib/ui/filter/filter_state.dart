@@ -14,9 +14,9 @@ class FilterFailureState extends FilterState {
 }
 
 class FilterTagsDoneState extends FilterState {
-  final Bucket bucket;
+  final Topic topic;
 
-  FilterTagsDoneState(this.bucket);
+  FilterTagsDoneState(this.topic);
 }
 
 class FilterChangeState extends FilterState {

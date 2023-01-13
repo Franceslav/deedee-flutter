@@ -12,7 +12,7 @@ class FilterBoxChangeState extends FilterBoxState {
 }
 
 class FilterBoxDoneState extends FilterBoxState {
-  final Bucket bucket;
+  final Topic topic;
 
-  FilterBoxDoneState(this.bucket);
+  FilterBoxDoneState(this.topic);
 }
