@@ -94,7 +94,7 @@ class _ReferralState extends State<ReferralScreen> {
                                   color: Colors.black,
                                 ),
                                 borderRadius:
-                                BorderRadius.circular(20.0), //<-- SEE HERE
+                                    BorderRadius.circular(20.0), //<-- SEE HERE
                               ),
                               elevation: 12,
                               color: Colors.indigo,
@@ -125,7 +125,10 @@ class _ReferralState extends State<ReferralScreen> {
                           },
                         );
                       } else {
-                        return const CircularProgressIndicator();
+                        return const CircularProgressIndicator.adaptive(
+                            backgroundColor: Colors.white,
+                            valueColor:
+                                AlwaysStoppedAnimation(Color(COLOR_PRIMARY)));
                       }
                     }),
               ),
@@ -145,4 +148,3 @@ class _ReferralState extends State<ReferralScreen> {
     });
   }
 }
-

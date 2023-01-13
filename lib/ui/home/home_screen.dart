@@ -65,10 +65,12 @@ class _HomeState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 32.0, right: 10.0, left: 10.0),
-                    child: FilterBox(user: widget.user),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 32.0, right: 10.0, left: 10.0),
+                      child: FilterBox(user: widget.user),
+                    ),
                   ),
                   DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
                     pushReplacement(
