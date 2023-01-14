@@ -39,8 +39,7 @@ class _MapPopupState extends State<MapPopup> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
-                constraints:
-                const BoxConstraints(minWidth: 100, maxWidth: 200),
+                constraints: const BoxConstraints(minWidth: 100, maxWidth: 200),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -58,8 +57,7 @@ class _MapPopupState extends State<MapPopup> {
                       ),
                       onTap: _launchInstagram,
                     ),
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4.0)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
                     Text(
                       'Position: ${widget.marker.marker.point.latitude}, ${widget.marker.marker.point.longitude}',
                       style: const TextStyle(fontSize: 12.0),
@@ -80,13 +78,13 @@ class _MapPopupState extends State<MapPopup> {
 
   _launchInstagram() async {
     final instagramUser = widget.marker.tagMessengerId;
-    final nativeUrl = "instagram://user?username=$instagramUser";
-    final webUrl = "https://www.instagram.com/$instagramUser";
-    try {
-      await launchUrlString(nativeUrl, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      print(e);
-      await launchUrlString(webUrl, mode: LaunchMode.platformDefault);
+    final path = "https://www.instagram.com/$instagramUser";
+    final uri = Uri.parse(path);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(Uri.parse(path), mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch Instagram';
     }
   }
 }
