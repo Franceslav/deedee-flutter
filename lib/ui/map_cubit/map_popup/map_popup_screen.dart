@@ -55,7 +55,7 @@ class _MapPopupState extends State<MapPopup> {
                           fontSize: 14.0,
                         ),
                       ),
-                      onTap: _launchInstagram,
+                      onTap: () => _launchInstagram(widget.marker.tagMessengerId),
                     ),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
                     Text(
@@ -76,8 +76,7 @@ class _MapPopupState extends State<MapPopup> {
     );
   }
 
-  _launchInstagram() async {
-    final instagramUser = widget.marker.tagMessengerId;
+  void _launchInstagram(String instagramUser) async {
     final path = "https://www.instagram.com/$instagramUser";
     final uri = Uri.parse(path);
 
