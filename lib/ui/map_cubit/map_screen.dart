@@ -72,7 +72,7 @@ class _MapScreenState extends State<MapScreen> {
             return pushReplacement(
                 context,
                 FilterPage(
-                  user: widget.user!,
+                  user: widget.user,
                 ));
           },
           child: Scaffold(

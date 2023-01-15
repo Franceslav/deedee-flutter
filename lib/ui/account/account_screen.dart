@@ -34,7 +34,7 @@ class _AccountState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return pushReplacement(context, HomeScreen(user: widget.user!));
+        return pushReplacement(context, HomeScreen(user: widget.user));
       },
       child: Scaffold(
         drawer: DeeDeeDrawer(user: user),

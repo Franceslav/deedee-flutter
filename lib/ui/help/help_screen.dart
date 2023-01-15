@@ -41,11 +41,7 @@ class _HelpState extends State<HelpScreen> {
           appBar: AppBar(
             title: Text(
               AppLocalizations.of(context)!.helpTitle,
-              style: const TextStyle(color: Colors.black),
             ),
-            iconTheme: const IconThemeData(color: Colors.black),
-            backgroundColor: Colors.white,
-            centerTitle: true,
           ),
           body: Stack(children: [
             Container(
@@ -65,7 +61,7 @@ class _HelpState extends State<HelpScreen> {
                           return Card(
                             semanticContainer: false,
                             shape: RoundedRectangleBorder(
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.black,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
@@ -83,7 +79,7 @@ class _HelpState extends State<HelpScreen> {
                                     message[index],
                                     maxLines: 10,
                                     softWrap: true,
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
                                 ),
                                 Padding(
@@ -91,7 +87,7 @@ class _HelpState extends State<HelpScreen> {
                                   child: Text(
                                     '${user.firstName}  '
                                     '${DateTime.now()}',
-                                    style: TextStyle(color: Colors.red),
+                                    style: const TextStyle(color: Colors.red),
                                   ),
                                 ),
                               ],
@@ -111,7 +107,7 @@ class _HelpState extends State<HelpScreen> {
                               height: 60,
                               fit: BoxFit.cover,
                             )
-                          : FlutterLogo(size: 0),
+                          : const FlutterLogo(size: 0),
                     ],
                   ),
                   Row(
@@ -128,7 +124,7 @@ class _HelpState extends State<HelpScreen> {
                                     .add(MessageReceivedEvent(value));
                                 _controller.clear();
                               },
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.bold,
@@ -140,11 +136,11 @@ class _HelpState extends State<HelpScreen> {
                                 fillColor: Colors.black,
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         color: Colors.blue, width: 3)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.cyan,
                                       width: 3,
                                     )),
@@ -154,13 +150,14 @@ class _HelpState extends State<HelpScreen> {
                           );
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       IconButton(
                         icon: const Icon(Icons.attach_file),
                         color: Colors.black,
-                        onPressed: () => pickImage(), // TODO: Make a state management Block for adding a photo and implement a button to send a photo.
+                        onPressed: () =>
+                            pickImage(), // TODO: Make a state management Block for adding a photo and implement a button to send a photo.
                       ),
                     ],
                   ),
@@ -171,7 +168,8 @@ class _HelpState extends State<HelpScreen> {
     );
   }
 
-  Future pickImage() async { // TODO: implement type not dynamic
+  Future pickImage() async {
+    // TODO: implement type not dynamic
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;

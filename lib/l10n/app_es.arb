@@ -40,9 +40,8 @@
      "addProfilePictureTitle" : "anadir foto de perfil",
      "chooseFromGalleryTitle" : "elegir de la galeria",
      "takePictureTitle" : "tomar una foto",
-     "cancelTitle" : "cancelar"
-
-
-
-
+     "cancelTitle" : "cancelar",
+     "helpTitle" : "apoyo",
+     "chooseTopic" : "elegir tema",
+     "chooseFilterKeys" : "elige al menos 3 palabras clave"
 }

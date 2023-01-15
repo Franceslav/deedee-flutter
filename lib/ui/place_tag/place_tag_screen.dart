@@ -1,30 +1,30 @@
 import 'dart:async';
+import 'package:deedee/services/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import 'package:deedee/model/user.dart';
-import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import '../../model/user.dart';
+import '../deedee_button/deedee_button.dart';
+import '../drawer/deedee_drawer.dart';
+import '../selector/selector_list.dart';
+import '../selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
-import 'package:deedee/ui/map_cubit/map_screen.dart';
-import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
-import 'package:deedee/ui/selector/selector_list.dart';
 
-class FilterPage extends StatefulWidget {
+class PlaceTagScreen extends StatefulWidget {
   final User user;
 
-  const FilterPage({Key? key, required this.user}) : super(key: key);
+  const PlaceTagScreen({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<FilterPage> createState() => _FilterPageState();
+  State<PlaceTagScreen> createState() => _PlaceTagScreenState();
 }
 
-class _FilterPageState extends State<FilterPage> {
+class _PlaceTagScreenState extends State<PlaceTagScreen> {
   late LatLng _userLocation;
+  final String _messengerId = 'ronxbysu';
   bool _serviceStatus = false;
   bool _hasPermission = false;
   late LocationPermission _permission;
@@ -106,12 +106,14 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.filterTagsPageTitle),
+        title: Text(AppLocalizations.of(context)!.placeBidPageTitle),
       ),
-      drawer: DeeDeeDrawer(user: widget.user),
+      drawer: DeeDeeDrawer(
+        user: widget.user,
+      ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is LoadedTopicsState) {
             _topics = state.topics;
           }
@@ -138,33 +140,19 @@ class _FilterPageState extends State<FilterPage> {
           if (state is LoadingSelectorState) {
             context.read<LoadingCubit>().showLoading(
                   context,
-                  AppLocalizations.of(context)!.filteringTagsHistTitle,
+                  AppLocalizations.of(context)!.placingTag,
                   false,
                 );
           }
-          if (state is UserFiltersDoneState || state is ErrorState) {
+          if (state is UserTagPlacedState || state is ErrorState) {
             context.read<LoadingCubit>().hideLoading();
-            if (state is ErrorState) {
-              showSnackBar(context, state.errorMessage);
-            }
-            if (state is UserFiltersDoneState) {
-              Map<LatLng, String> tagMap = {
-                for (var tag in state.topic.tags)
-                  LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
-                      tag.messengerId
-              };
-              pushReplacement(
-                context,
-                MapScreen(
-                  tagDescriptionMap: tagMap,
-                  user: widget.user,
-                  topic: widget.user.selectedTopic,
-                ),
-              );
-            }
+            final message = state is ErrorState
+                ? state.errorMessage
+                : AppLocalizations.of(context)!.tagPlacedCheckTheMap;
+            showSnackBar(context, message);
           }
         },
-        builder: (context, state) {
+        builder: ((context, state) {
           return state is InitialState
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -210,20 +198,24 @@ class _FilterPageState extends State<FilterPage> {
                           ),
                         if (_selectedFilterKeys.length >= 3)
                           DeeDeeButton(
-                            AppLocalizations.of(context)!.filterTags,
+                            AppLocalizations.of(context)!.placeBid,
                             () {
-                              bloc.add(PushFiltersEvent(
-                                topic: _selectedTopic,
-                                filterKeys: _selectedFilterKeys,
-                                accountType: widget.user.accountType,
-                              ));
+                              bloc.add(
+                                PushTagEvent(
+                                  accountType: widget.user.accountType,
+                                  topic: _selectedTopic,
+                                  messengerId: _messengerId,
+                                  location: _userLocation,
+                                  filterKeys: _selectedFilterKeys,
+                                ),
+                              );
                             },
                           ),
                       ],
                     ),
                   ),
                 );
-        },
+        }),
       ),
     );
   }

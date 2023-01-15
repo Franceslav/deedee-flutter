@@ -28,8 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Builder(builder: (context) {
           return WillPopScope(
               onWillPop: () async {
-                return pushReplacement(
-                    context, HomeScreen(user: widget.user!));
+                return pushReplacement(context, HomeScreen(user: widget.user));
               },
               child: Scaffold(
                 drawer: DeeDeeDrawer(user: widget.user),

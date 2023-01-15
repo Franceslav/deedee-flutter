@@ -41,7 +41,7 @@
      "chooseFromGalleryTitle" : "выбрать из галереи",
       "takePictureTitle" : "сделать фото",
       "cancelTitle" : "выйти",
-      "helpTitle" : "помощь"
-
-
+      "helpTitle" : "помощь",
+      "chooseTopic" : "выберите необходимую тему",
+      "chooseFilterKeys" : "выберите не менее 3 ключевых слов"
 }

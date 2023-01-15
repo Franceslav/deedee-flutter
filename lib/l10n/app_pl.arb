@@ -40,9 +40,7 @@
       "chooseFromGalleryTitle": "wybierz z galerii",
       "takePictureTitle": "zrób zdjęcie",
       "cancelTitle": "anuluj",
-      "helpTitle": "pomoc"
-
-
-
-
+      "helpTitle": "pomoc",
+      "chooseTopic" : "wybierz temat",
+      "chooseFilterKeys" : "wybierz co najmniej 3 słowa kluczowe"
 }

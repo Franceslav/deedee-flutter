@@ -27,7 +27,8 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
 
   AutovalidateMode _validate = AutovalidateMode.disabled;
 
-  TextEditingController ipAddressController = TextEditingController(text: "127.0.0.1");
+  TextEditingController ipAddressController =
+      TextEditingController(text: "127.0.0.1");
   TextEditingController portController = TextEditingController(text: "1234");
 
   @override
@@ -43,7 +44,7 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
           return WillPopScope(
               onWillPop: () async {
                 return pushReplacement(
-                    context, SettingsScreen(user: widget.user!));
+                    context, SettingsScreen(user: widget.user));
               },
               child: Scaffold(
                 drawer: DeeDeeDrawer(user: widget.user),
@@ -98,8 +99,8 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                               builder:
                                   (context, AsyncSnapshot<String?> snapshot) {
                                 if (snapshot.hasData) {
-                                    // _ipAddress = ;
-                                    ipAddressController.text = snapshot.data!;
+                                  // _ipAddress = ;
+                                  ipAddressController.text = snapshot.data!;
                                 }
                                 return Column(
                                   crossAxisAlignment:
@@ -151,8 +152,8 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                               builder:
                                   (context, AsyncSnapshot<String?> snapshot) {
                                 if (snapshot.hasData) {
-                                    // _port = ;
-                                    portController.text = snapshot.data!;
+                                  // _port = ;
+                                  portController.text = snapshot.data!;
                                 }
                                 return Column(
                                   crossAxisAlignment:

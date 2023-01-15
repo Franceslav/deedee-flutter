@@ -34,10 +34,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
         create: (context) => DeedeeDrawerCubit(),
         child: Builder(builder: (context) {
           return SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width *
+              width: MediaQuery.of(context).size.width *
                   0.60, // 15% of screen will be occupied
               child: Drawer(
                 child: ListView(
@@ -56,12 +53,15 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           ),
                           IconButton(
                             onPressed: () {
-                              context.read<DeedeeDrawerCubit>().uudiURL(widget.user.email);
-                              context.read<DeedeeDrawerCubit>().showToast(
-                                  context);
+                              context
+                                  .read<DeedeeDrawerCubit>()
+                                  .uudiURL(widget.user.email);
+                              context
+                                  .read<DeedeeDrawerCubit>()
+                                  .showToast(context);
                             },
-                            icon: Icon(
-                                Icons.insert_link_sharp, color: Colors.white),
+                            icon: Icon(Icons.insert_link_sharp,
+                                color: Colors.white),
                           ),
                         ],
                       ),
@@ -169,7 +169,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                       leading: Transform.rotate(
                           angle: pi / 1,
                           child:
-                          const Icon(Icons.settings, color: Colors.black)),
+                              const Icon(Icons.settings, color: Colors.black)),
                       onTap: () {
                         pushReplacement(
                             context, SettingsScreen(user: widget.user));

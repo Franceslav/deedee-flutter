@@ -4,12 +4,9 @@ import 'package:deedee/services/shared.dart';
 import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
-import 'package:deedee/ui/filter/filter_bloc.dart';
-import 'package:deedee/ui/filter/filter_box/filter_box_bloc.dart';
-import 'package:deedee/ui/filter/predefined_filter/predefined_filter_bloc.dart';
-import 'package:deedee/ui/home/filter_box/filter_box_bloc.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,12 +25,9 @@ void main() {
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),
         RepositoryProvider(create: (_) => LoadingCubit()),
-        // RepositoryProvider(create: (_) => PredefinedFilterBloc()),
-        RepositoryProvider(create: (_) => FilterBoxHomeBloc()),
-        // RepositoryProvider(create: (_) => FilterBloc()),
       ],
       child: const MyApp(),
-    )
+    ),
   ]));
 }
 
@@ -119,11 +113,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        theme: ThemeData(
-            snackBarTheme: const SnackBarThemeData(
-                contentTextStyle: TextStyle(color: Colors.white)),
-            colorScheme: ColorScheme.fromSwatch()
-                .copyWith(secondary: const Color(COLOR_PRIMARY))),
+        theme: deeDeeTheme,
         debugShowCheckedModeBanner: false,
         color: const Color(COLOR_PRIMARY),
         home: const LauncherScreen());
