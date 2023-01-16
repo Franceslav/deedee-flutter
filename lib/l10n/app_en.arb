@@ -45,6 +45,7 @@
      "takePictureTitle" : "take a picture",
      "cancelTitle" : "cancel",
      "helpTitle" : "help",
+     "accountWasTopUpSuccessfully" : "account was top up successfully",
      "chooseTopic" : "choose a topic",
      "chooseFilterKeys" : "choose at least 3 key words"
 }

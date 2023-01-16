@@ -42,6 +42,8 @@
       "takePictureTitle" : "сделать фото",
       "cancelTitle" : "выйти",
       "helpTitle" : "помощь",
+      "accountWasTopUpSuccessfully": "учётка пополнена",
       "chooseTopic" : "выберите необходимую тему",
       "chooseFilterKeys" : "выберите не менее 3 ключевых слов"
+
 }

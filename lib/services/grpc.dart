@@ -1,12 +1,12 @@
+import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
+import 'package:deedee/generated/VerificationService.pb.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
-import 'package:deedee/generated/VerificationService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 import '../generated/LocationService.pb.dart';
@@ -174,9 +174,22 @@ class GRCPUtils {
     );
     final stub = ReferralServiceClient(channel);
     var response =
-        await stub.getUserReferrals(GetUserReferralsRequest()
-          ..email = email
-        );
+        await stub.getUserReferrals(GetUserReferralsRequest()..email = email);
     return response.userReferral;
+  }
+
+  Future<bool> topUpAccount(double amount) async {
+    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
+    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
+    String? ipAddress =
+        await serviceLocator.get<SharedUtils>().getPublicIpAddress();
+    final channel = ClientChannel(
+      url!,
+      port: int.parse(port!),
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
+    final stub = AccountServiceClient(channel);
+    final response = await stub.topUp(TopUpRequest()..amount = amount);
+    return response.succeed;
   }
 }

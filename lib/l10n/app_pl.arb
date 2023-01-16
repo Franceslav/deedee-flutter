@@ -41,6 +41,8 @@
       "takePictureTitle": "zrób zdjęcie",
       "cancelTitle": "anuluj",
       "helpTitle": "pomoc",
+      "accountWasTopUpSuccessfully": "konto zostało pomyślnie doładowane",
       "chooseTopic" : "wybierz temat",
       "chooseFilterKeys" : "wybierz co najmniej 3 słowa kluczowe"
+
 }

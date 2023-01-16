@@ -4,6 +4,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountState extends State<AccountScreen> {
   late User user;
-  final uuid = Uuid();
+  final Uuid uuid = const Uuid();
 
   @override
   void initState() {
@@ -118,7 +119,13 @@ class _AccountState extends State<AccountScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      pushReplacement(
+                          context,
+                          TopUpPage(
+                            user: user,
+                          ));
+                    }),
               ),
               Padding(
                 padding:
