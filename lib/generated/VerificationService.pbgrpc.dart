@@ -20,6 +20,12 @@ class VerificationServiceClient extends $grpc.Client {
           ($0.VerifyEmailRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.VerifyEmailResponse.fromBuffer(value));
+  static final _$verifyDocuments =
+      $grpc.ClientMethod<$0.VerifyDocumentsRequest, $0.VerifyDocumentsResponse>(
+          '/bucket.VerificationService/VerifyDocuments',
+          ($0.VerifyDocumentsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.VerifyDocumentsResponse.fromBuffer(value));
 
   VerificationServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -30,6 +36,12 @@ class VerificationServiceClient extends $grpc.Client {
       $0.VerifyEmailRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$verifyEmail, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.VerifyDocumentsResponse> verifyDocuments(
+      $0.VerifyDocumentsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$verifyDocuments, request, options: options);
   }
 }
 
@@ -46,6 +58,15 @@ abstract class VerificationServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $0.VerifyEmailRequest.fromBuffer(value),
             ($0.VerifyEmailResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.VerifyDocumentsRequest,
+            $0.VerifyDocumentsResponse>(
+        'VerifyDocuments',
+        verifyDocuments_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.VerifyDocumentsRequest.fromBuffer(value),
+        ($0.VerifyDocumentsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.VerifyEmailResponse> verifyEmail_Pre($grpc.ServiceCall call,
@@ -53,6 +74,14 @@ abstract class VerificationServiceBase extends $grpc.Service {
     return verifyEmail(call, await request);
   }
 
+  $async.Future<$0.VerifyDocumentsResponse> verifyDocuments_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.VerifyDocumentsRequest> request) async {
+    return verifyDocuments(call, await request);
+  }
+
   $async.Future<$0.VerifyEmailResponse> verifyEmail(
       $grpc.ServiceCall call, $0.VerifyEmailRequest request);
+  $async.Future<$0.VerifyDocumentsResponse> verifyDocuments(
+      $grpc.ServiceCall call, $0.VerifyDocumentsRequest request);
 }
