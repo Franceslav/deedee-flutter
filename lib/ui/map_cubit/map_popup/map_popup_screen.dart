@@ -1,6 +1,10 @@
+import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../services/helper.dart';
 
 class MapPopup extends StatefulWidget {
   final TagMarker marker;
@@ -73,6 +77,18 @@ class _MapPopupState extends State<MapPopup> {
                       '#маникюр #ногти',
                       style: TextStyle(fontSize: 12.0),
                     ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: DeeDeeButton(
+                        AppLocalizations.of(context)!.toSee,
+                        () {
+                          pushReplacement(
+                            context,
+                            Container(), // заглушка
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ],
               ),
