@@ -1,7 +1,6 @@
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class MapPopup extends StatefulWidget {
   final TagMarker marker;
@@ -20,6 +19,8 @@ class _MapPopupState extends State<MapPopup> {
   ];
   int _currentIcon = 0;
 
+  bool hidden = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,43 +37,80 @@ class _MapPopupState extends State<MapPopup> {
                 }),
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.all(10),
-              child: Container(
-                constraints: const BoxConstraints(minWidth: 100, maxWidth: 200),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    InkWell(
-                      child: Text(
-                        widget.marker.tagMessengerId,
-                        overflow: TextOverflow.fade,
-                        softWrap: false,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.0,
+              constraints: BoxConstraints(
+                minWidth: 100,
+                maxWidth: hidden ? 125 : 200,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      _MessengerLabelButton(
+                          instagramUser: widget.marker.tagMessengerId),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: _toggleHideButton,
+                        icon: Icon(
+                          hidden ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                         ),
+                      )
+                    ],
+                  ),
+                  if (!hidden) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        'Position: ${widget.marker.marker.point.latitude}, ${widget.marker.marker.point.longitude}',
+                        style: const TextStyle(fontSize: 12.0),
                       ),
-                      onTap: () => _launchInstagram(widget.marker.tagMessengerId),
                     ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-                    Text(
-                      'Position: ${widget.marker.marker.point.latitude}, ${widget.marker.marker.point.longitude}',
-                      style: const TextStyle(fontSize: 12.0),
-                    ),
-                    Text(
+                    const Text(
                       '#маникюр #ногти',
-                      style: const TextStyle(fontSize: 12.0),
+                      style: TextStyle(fontSize: 12.0),
                     ),
                   ],
-                ),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _toggleHideButton() {
+    setState(() {
+      hidden = !hidden;
+    });
+  }
+}
+
+class _MessengerLabelButton extends StatelessWidget {
+  const _MessengerLabelButton({
+    Key? key,
+    required this.instagramUser,
+  }) : super(key: key);
+
+  final String instagramUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Text(
+        instagramUser,
+        overflow: TextOverflow.fade,
+        softWrap: false,
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 14.0,
+        ),
+      ),
+      onTap: () => _launchInstagram(instagramUser),
     );
   }
 
