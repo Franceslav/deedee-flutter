@@ -5,7 +5,6 @@ import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
-import 'package:deedee/ui/place_bid/place_tag_bloc.dart';
 import 'package:deedee/ui/top_up/top_up_bloc.dart';
 import 'package:deedee/ui/top_up/top_up_event.dart';
 import 'package:flutter/material.dart';
@@ -68,12 +67,7 @@ class _TopUpPageState extends State<TopUpPage> {
                       showSnackBar(context, state.errorMessage);
                     }*/
                   },
-                  buildWhen: (old, current) =>
-                      current is PlaceTagFailureState && old != current,
                   builder: (context, state) {
-                    if (state is PlaceTagFailureState) {
-                      // _validate = AutovalidateMode.onUserInteraction;
-                    }
                     return SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
