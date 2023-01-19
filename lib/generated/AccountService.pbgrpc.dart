@@ -18,6 +18,12 @@ class AccountServiceClient extends $grpc.Client {
       '/topic.AccountService/TopUp',
       ($0.TopUpRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.TopUpResponse.fromBuffer(value));
+  static final _$getBalance =
+      $grpc.ClientMethod<$0.GetBalanceRequest, $0.GetBalanceResponse>(
+          '/topic.AccountService/GetBalance',
+          ($0.GetBalanceRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetBalanceResponse.fromBuffer(value));
 
   AccountServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -27,6 +33,12 @@ class AccountServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.TopUpResponse> topUp($0.TopUpRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$topUp, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetBalanceResponse> getBalance(
+      $0.GetBalanceRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getBalance, request, options: options);
   }
 }
 
@@ -41,6 +53,13 @@ abstract class AccountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.TopUpRequest.fromBuffer(value),
         ($0.TopUpResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetBalanceRequest, $0.GetBalanceResponse>(
+        'GetBalance',
+        getBalance_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetBalanceRequest.fromBuffer(value),
+        ($0.GetBalanceResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.TopUpResponse> topUp_Pre(
@@ -48,6 +67,13 @@ abstract class AccountServiceBase extends $grpc.Service {
     return topUp(call, await request);
   }
 
+  $async.Future<$0.GetBalanceResponse> getBalance_Pre($grpc.ServiceCall call,
+      $async.Future<$0.GetBalanceRequest> request) async {
+    return getBalance(call, await request);
+  }
+
   $async.Future<$0.TopUpResponse> topUp(
       $grpc.ServiceCall call, $0.TopUpRequest request);
+  $async.Future<$0.GetBalanceResponse> getBalance(
+      $grpc.ServiceCall call, $0.GetBalanceRequest request);
 }

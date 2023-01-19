@@ -28,3 +28,23 @@ const TopUpResponse$json = const {
 
 /// Descriptor for `TopUpResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List topUpResponseDescriptor = $convert.base64Decode('Cg1Ub3BVcFJlc3BvbnNlEhgKB3N1Y2NlZWQYASABKAhSB3N1Y2NlZWQ=');
+@$core.Deprecated('Use getBalanceRequestDescriptor instead')
+const GetBalanceRequest$json = const {
+  '1': 'GetBalanceRequest',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `GetBalanceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getBalanceRequestDescriptor = $convert.base64Decode('ChFHZXRCYWxhbmNlUmVxdWVzdBIWCgZ1c2VySWQYASABKAlSBnVzZXJJZA==');
+@$core.Deprecated('Use getBalanceResponseDescriptor instead')
+const GetBalanceResponse$json = const {
+  '1': 'GetBalanceResponse',
+  '2': const [
+    const {'1': 'balance', '3': 1, '4': 1, '5': 1, '10': 'balance'},
+  ],
+};
+
+/// Descriptor for `GetBalanceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getBalanceResponseDescriptor = $convert.base64Decode('ChJHZXRCYWxhbmNlUmVzcG9uc2USGAoHYmFsYW5jZRgBIAEoAVIHYmFsYW5jZQ==');
