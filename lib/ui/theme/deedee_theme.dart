@@ -19,6 +19,17 @@ ThemeData deeDeeTheme = ThemeData(
       color: Colors.black,
       fontWeight: FontWeight.bold,
     ),
+    //text style for DrawerHeader
+    headline2: TextStyle(
+      fontSize: 20,
+      color: Colors.white,
+      overflow: TextOverflow.ellipsis,
+    ),
+    //text style for DrawerHeader
+    subtitle2: TextStyle(
+      fontSize: 16,
+      color: Colors.white,
+    ),
   ),
   snackBarTheme:
       const SnackBarThemeData(contentTextStyle: TextStyle(color: Colors.white)),

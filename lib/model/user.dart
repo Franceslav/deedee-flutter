@@ -45,23 +45,36 @@ class User {
 
   AccountType accountType = AccountType.buy;
 
-  User(
-      {this.email = '',
-      this.firstName = '',
-      this.lastName = '',
-      this.userID = '',
-      this.profilePictureURL = ''})
-      : appIdentifier = 'DeeDee for ${Platform.operatingSystem}';
+  bool isVerified;
+
+  double balance;
+
+  int availableTags;
+
+  User({
+    this.email = '',
+    this.firstName = '',
+    this.lastName = '',
+    this.userID = '',
+    this.profilePictureURL = '',
+    this.isVerified = false,
+    this.balance = 0.0,
+    this.availableTags = 0,
+  }) : appIdentifier = 'DeeDee for ${Platform.operatingSystem}';
 
   String fullName() => '$firstName $lastName';
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
-        email: parsedJson['email'] ?? '',
-        firstName: parsedJson['firstName'] ?? '',
-        lastName: parsedJson['lastName'] ?? '',
-        userID: parsedJson['id'] ?? parsedJson['userID'] ?? '',
-        profilePictureURL: parsedJson['profilePictureURL'] ?? '');
+      email: parsedJson['email'] ?? '',
+      firstName: parsedJson['firstName'] ?? '',
+      lastName: parsedJson['lastName'] ?? '',
+      userID: parsedJson['id'] ?? parsedJson['userID'] ?? '',
+      profilePictureURL: parsedJson['profilePictureURL'] ?? '',
+      isVerified: parsedJson['isVerified'] ?? false,
+      balance: parsedJson['balance'] ?? 0.0,
+      availableTags: parsedJson['availableTags'] ?? 0,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -71,7 +84,10 @@ class User {
       'lastName': lastName,
       'id': userID,
       'profilePictureURL': profilePictureURL,
-      'appIdentifier': appIdentifier
+      'appIdentifier': appIdentifier,
+      'isVerified': isVerified,
+      'balance': balance,
+      'availableTags': availableTags,
     };
   }
 }

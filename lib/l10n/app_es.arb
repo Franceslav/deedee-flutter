@@ -44,5 +44,8 @@
      "accountWasTopUpSuccessfully" : "la cuenta se recargó con éxito",
      "helpTitle" : "apoyo",
      "chooseTopic" : "elegir tema",
-     "chooseFilterKeys" : "elige al menos 3 palabras clave"
+     "chooseFilterKeys" : "elige al menos 3 palabras clave",
+     "userNotVerifiedMessage": "no estás verificado. revisa tu bandeja de entrada de correo electrónico o reinicia la aplicación.",
+     "balanceTitle": "saldo",
+     "availableTagsTitle": "etiquetas disponibles"
 }

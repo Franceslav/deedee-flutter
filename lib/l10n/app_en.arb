@@ -47,5 +47,9 @@
      "helpTitle" : "help",
      "accountWasTopUpSuccessfully" : "account was top up successfully",
      "chooseTopic" : "choose a topic",
-     "chooseFilterKeys" : "choose at least 3 key words"
+     "chooseFilterKeys" : "choose at least 3 key words",
+     "userNotVerifiedMessage": "you're not verified. check your e-mail inbox or restart the application.",
+     "balanceTitle": "balance",
+     "availableTagsTitle": "available tags"
+
 }

@@ -192,4 +192,18 @@ class GRCPUtils {
     final response = await stub.topUp(TopUpRequest()..amount = amount);
     return response.succeed;
   }
+
+  Future<double> getUserBalance(String userId) async {
+    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
+    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
+    final channel = ClientChannel(
+      url!,
+      port: int.parse(port!),
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
+    final stub = AccountServiceClient(channel);
+    final response =
+        await stub.getBalance(GetBalanceRequest()..userId = userId);
+    return response.balance;
+  }
 }

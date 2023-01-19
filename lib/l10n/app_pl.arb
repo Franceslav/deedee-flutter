@@ -43,6 +43,9 @@
       "helpTitle": "pomoc",
       "accountWasTopUpSuccessfully": "konto zostało pomyślnie doładowane",
       "chooseTopic" : "wybierz temat",
-      "chooseFilterKeys" : "wybierz co najmniej 3 słowa kluczowe"
+      "chooseFilterKeys" : "wybierz co najmniej 3 słowa kluczowe",
+      "userNotVerifiedMessage": "nie jesteś zweryfikowany. sprawdź swoją skrzynkę e-mail lub uruchom ponownie aplikację.",
+     "balanceTitle": "saldo",
+     "availableTagsTitle": "dostępne tagi"
 
 }
