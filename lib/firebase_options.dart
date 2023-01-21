@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -30,17 +27,17 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
@@ -65,5 +62,14 @@ class DefaultFirebaseOptions {
     storageBucket: 'deedee.appspot.com',
     iosClientId: '32394661681-b5q19u1ujtsdnpb2s0h7fuhkb6edmgds.apps.googleusercontent.com',
     iosBundleId: 'io.instamobile.login.ios',
+  );
+
+  static const web = FirebaseOptions(
+      apiKey: "AIzaSyDiQd477ezdoQaJ-4HD0cbDIRZcH6p3BJo",
+      authDomain: "deedee-x.firebaseapp.com",
+      projectId: "deedee-x",
+      storageBucket: "deedee-x.appspot.com",
+      messagingSenderId: "710195196594",
+      appId: "1:710195196594:web:ef53b5cbd6e5038eda4fab"
   );
 }
