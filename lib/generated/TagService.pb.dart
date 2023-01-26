@@ -553,7 +553,8 @@ class Topic extends $pb.GeneratedMessage {
 
 class Tag extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Tag', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topicId', protoName: 'topicId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topicId', protoName: 'topicId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messengerId', protoName: 'messengerId')
     ..aOM<$0.GeoLocation>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geoLocation', protoName: 'geoLocation', subBuilder: $0.GeoLocation.create)
     ..e<Tag_TYPE>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagType', $pb.PbFieldType.OE, protoName: 'tagType', defaultOrMaker: Tag_TYPE.BUY, valueOf: Tag_TYPE.valueOf, enumValues: Tag_TYPE.values)
@@ -563,6 +564,7 @@ class Tag extends $pb.GeneratedMessage {
 
   Tag._() : super();
   factory Tag({
+    $core.String? tagId,
     $core.String? topicId,
     $core.String? messengerId,
     $0.GeoLocation? geoLocation,
@@ -570,6 +572,9 @@ class Tag extends $pb.GeneratedMessage {
     $2.Timestamp? dueDate,
   }) {
     final _result = create();
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
     if (topicId != null) {
       _result.topicId = topicId;
     }
@@ -609,53 +614,62 @@ class Tag extends $pb.GeneratedMessage {
   static Tag? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get topicId => $_getSZ(0);
+  $core.String get tagId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set topicId($core.String v) { $_setString(0, v); }
+  set tagId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasTopicId() => $_has(0);
+  $core.bool hasTagId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearTopicId() => clearField(1);
+  void clearTagId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get topicId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set topicId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTopicId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTopicId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get messengerId => $_getSZ(1);
+  $core.String get messengerId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set messengerId($core.String v) { $_setString(1, v); }
+  set messengerId($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasMessengerId() => $_has(1);
+  $core.bool hasMessengerId() => $_has(2);
   @$pb.TagNumber(3)
   void clearMessengerId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $0.GeoLocation get geoLocation => $_getN(2);
+  $0.GeoLocation get geoLocation => $_getN(3);
   @$pb.TagNumber(4)
   set geoLocation($0.GeoLocation v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGeoLocation() => $_has(2);
+  $core.bool hasGeoLocation() => $_has(3);
   @$pb.TagNumber(4)
   void clearGeoLocation() => clearField(4);
   @$pb.TagNumber(4)
-  $0.GeoLocation ensureGeoLocation() => $_ensure(2);
+  $0.GeoLocation ensureGeoLocation() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  Tag_TYPE get tagType => $_getN(3);
+  Tag_TYPE get tagType => $_getN(4);
   @$pb.TagNumber(5)
   set tagType(Tag_TYPE v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTagType() => $_has(3);
+  $core.bool hasTagType() => $_has(4);
   @$pb.TagNumber(5)
   void clearTagType() => clearField(5);
 
   @$pb.TagNumber(6)
-  $2.Timestamp get dueDate => $_getN(4);
+  $2.Timestamp get dueDate => $_getN(5);
   @$pb.TagNumber(6)
   set dueDate($2.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasDueDate() => $_has(4);
+  $core.bool hasDueDate() => $_has(5);
   @$pb.TagNumber(6)
   void clearDueDate() => clearField(6);
   @$pb.TagNumber(6)
-  $2.Timestamp ensureDueDate() => $_ensure(4);
+  $2.Timestamp ensureDueDate() => $_ensure(5);
 }
 
 class FilterKey extends $pb.GeneratedMessage {

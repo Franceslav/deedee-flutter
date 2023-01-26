@@ -125,7 +125,8 @@ final $typed_data.Uint8List topicDescriptor = $convert.base64Decode('CgVUb3BpYxI
 const Tag$json = const {
   '1': 'Tag',
   '2': const [
-    const {'1': 'topicId', '3': 1, '4': 1, '5': 9, '10': 'topicId'},
+    const {'1': 'tagId', '3': 1, '4': 1, '5': 9, '10': 'tagId'},
+    const {'1': 'topicId', '3': 2, '4': 1, '5': 9, '10': 'topicId'},
     const {'1': 'messengerId', '3': 3, '4': 1, '5': 9, '10': 'messengerId'},
     const {'1': 'geoLocation', '3': 4, '4': 1, '5': 11, '6': '.topic.GeoLocation', '10': 'geoLocation'},
     const {'1': 'tagType', '3': 5, '4': 1, '5': 14, '6': '.topic.Tag.TYPE', '10': 'tagType'},
@@ -144,7 +145,7 @@ const Tag_TYPE$json = const {
 };
 
 /// Descriptor for `Tag`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSGAoHdG9waWNJZBgBIAEoCVIHdG9waWNJZBIgCgttZXNzZW5nZXJJZBgDIAEoCVILbWVzc2VuZ2VySWQSNAoLZ2VvTG9jYXRpb24YBCABKAsyEi50b3BpYy5HZW9Mb2NhdGlvblILZ2VvTG9jYXRpb24SKQoHdGFnVHlwZRgFIAEoDjIPLnRvcGljLlRhZy5UWVBFUgd0YWdUeXBlEjQKB2R1ZURhdGUYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgdkdWVEYXRlIhkKBFRZUEUSBwoDQlVZEAASCAoEU0VMTBAB');
+final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEikKB3RhZ1R5cGUYBSABKA4yDy50b3BpYy5UYWcuVFlQRVIHdGFnVHlwZRI0CgdkdWVEYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIHZHVlRGF0ZSIZCgRUWVBFEgcKA0JVWRAAEggKBFNFTEwQAQ==');
 @$core.Deprecated('Use filterKeyDescriptor instead')
 const FilterKey$json = const {
   '1': 'FilterKey',
