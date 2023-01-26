@@ -44,12 +44,22 @@ class TagServiceClient extends $grpc.Client {
           ($1.GetTopicRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.GetTopicResponse.fromBuffer(value));
+  static final _$getBookmarkTags =
+      $grpc.ClientMethod<$1.GetBookmarkTagsRequest, $1.GetBookmarkTagsResponse>(
+          '/topic.TagService/GetBookmarkTags',
+          ($1.GetBookmarkTagsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.GetBookmarkTagsResponse.fromBuffer(value));
   static final _$getTopics =
       $grpc.ClientMethod<$1.GetTopicTitlesRequest, $1.GetTopicTitlesResponse>(
           '/topic.TagService/GetTopics',
           ($1.GetTopicTitlesRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.GetTopicTitlesResponse.fromBuffer(value));
+  static final _$topUp = $grpc.ClientMethod<$1.TopUpRequest, $1.TopUpResponse>(
+      '/topic.TagService/TopUp',
+      ($1.TopUpRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.TopUpResponse.fromBuffer(value));
 
   TagServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -84,10 +94,21 @@ class TagServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getFilteredTags, request, options: options);
   }
 
+  $grpc.ResponseFuture<$1.GetBookmarkTagsResponse> getBookmarkTags(
+      $1.GetBookmarkTagsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getBookmarkTags, request, options: options);
+  }
+
   $grpc.ResponseFuture<$1.GetTopicTitlesResponse> getTopics(
       $1.GetTopicTitlesRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTopics, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.TopUpResponse> topUp($1.TopUpRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$topUp, request, options: options);
   }
 }
 
@@ -134,6 +155,15 @@ abstract class TagServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.GetTopicRequest.fromBuffer(value),
         ($1.GetTopicResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetBookmarkTagsRequest,
+            $1.GetBookmarkTagsResponse>(
+        'GetBookmarkTags',
+        getBookmarkTags_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.GetBookmarkTagsRequest.fromBuffer(value),
+        ($1.GetBookmarkTagsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.GetTopicTitlesRequest,
             $1.GetTopicTitlesResponse>(
         'GetTopics',
@@ -143,6 +173,13 @@ abstract class TagServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $1.GetTopicTitlesRequest.fromBuffer(value),
         ($1.GetTopicTitlesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.TopUpRequest, $1.TopUpResponse>(
+        'TopUp',
+        topUp_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.TopUpRequest.fromBuffer(value),
+        ($1.TopUpResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.GetTopicResponse> getTopic_Pre(
@@ -172,9 +209,20 @@ abstract class TagServiceBase extends $grpc.Service {
     return getFilteredTags(call, await request);
   }
 
+  $async.Future<$1.GetBookmarkTagsResponse> getBookmarkTags_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$1.GetBookmarkTagsRequest> request) async {
+    return getBookmarkTags(call, await request);
+  }
+
   $async.Future<$1.GetTopicTitlesResponse> getTopics_Pre($grpc.ServiceCall call,
       $async.Future<$1.GetTopicTitlesRequest> request) async {
     return getTopics(call, await request);
+  }
+
+  $async.Future<$1.TopUpResponse> topUp_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.TopUpRequest> request) async {
+    return topUp(call, await request);
   }
 
   $async.Future<$1.GetTopicResponse> getTopic(
@@ -187,6 +235,10 @@ abstract class TagServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.VerifyAuthCodeRequest request);
   $async.Future<$1.GetTopicResponse> getFilteredTags(
       $grpc.ServiceCall call, $1.GetTopicRequest request);
+  $async.Future<$1.GetBookmarkTagsResponse> getBookmarkTags(
+      $grpc.ServiceCall call, $1.GetBookmarkTagsRequest request);
   $async.Future<$1.GetTopicTitlesResponse> getTopics(
       $grpc.ServiceCall call, $1.GetTopicTitlesRequest request);
+  $async.Future<$1.TopUpResponse> topUp(
+      $grpc.ServiceCall call, $1.TopUpRequest request);
 }

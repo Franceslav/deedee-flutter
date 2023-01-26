@@ -8,6 +8,46 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use getBookmarkTagsRequestDescriptor instead')
+const GetBookmarkTagsRequest$json = const {
+  '1': 'GetBookmarkTagsRequest',
+  '2': const [
+    const {'1': 'bookmarkId', '3': 1, '4': 1, '5': 9, '10': 'bookmarkId'},
+  ],
+};
+
+/// Descriptor for `GetBookmarkTagsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getBookmarkTagsRequestDescriptor = $convert.base64Decode('ChZHZXRCb29rbWFya1RhZ3NSZXF1ZXN0Eh4KCmJvb2ttYXJrSWQYASABKAlSCmJvb2ttYXJrSWQ=');
+@$core.Deprecated('Use getBookmarkTagsResponseDescriptor instead')
+const GetBookmarkTagsResponse$json = const {
+  '1': 'GetBookmarkTagsResponse',
+  '2': const [
+    const {'1': 'tags', '3': 1, '4': 3, '5': 11, '6': '.topic.Tag', '10': 'tags'},
+  ],
+};
+
+/// Descriptor for `GetBookmarkTagsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getBookmarkTagsResponseDescriptor = $convert.base64Decode('ChdHZXRCb29rbWFya1RhZ3NSZXNwb25zZRIeCgR0YWdzGAEgAygLMgoudG9waWMuVGFnUgR0YWdz');
+@$core.Deprecated('Use topUpRequestDescriptor instead')
+const TopUpRequest$json = const {
+  '1': 'TopUpRequest',
+  '2': const [
+    const {'1': 'amount', '3': 1, '4': 1, '5': 1, '10': 'amount'},
+  ],
+};
+
+/// Descriptor for `TopUpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List topUpRequestDescriptor = $convert.base64Decode('CgxUb3BVcFJlcXVlc3QSFgoGYW1vdW50GAEgASgBUgZhbW91bnQ=');
+@$core.Deprecated('Use topUpResponseDescriptor instead')
+const TopUpResponse$json = const {
+  '1': 'TopUpResponse',
+  '2': const [
+    const {'1': 'succeed', '3': 1, '4': 1, '5': 8, '10': 'succeed'},
+  ],
+};
+
+/// Descriptor for `TopUpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List topUpResponseDescriptor = $convert.base64Decode('Cg1Ub3BVcFJlc3BvbnNlEhgKB3N1Y2NlZWQYASABKAhSB3N1Y2NlZWQ=');
 @$core.Deprecated('Use getTopicRequestDescriptor instead')
 const GetTopicRequest$json = const {
   '1': 'GetTopicRequest',
