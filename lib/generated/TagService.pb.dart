@@ -16,19 +16,127 @@ import 'TagService.pbenum.dart';
 
 export 'TagService.pbenum.dart';
 
+class TagToBookmarkRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TagToBookmarkRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..hasRequiredFields = false
+  ;
+
+  TagToBookmarkRequest._() : super();
+  factory TagToBookmarkRequest({
+    $core.String? userId,
+    $core.String? tagId,
+  }) {
+    final _result = create();
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    return _result;
+  }
+  factory TagToBookmarkRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TagToBookmarkRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TagToBookmarkRequest clone() => TagToBookmarkRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TagToBookmarkRequest copyWith(void Function(TagToBookmarkRequest) updates) => super.copyWith((message) => updates(message as TagToBookmarkRequest)) as TagToBookmarkRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TagToBookmarkRequest create() => TagToBookmarkRequest._();
+  TagToBookmarkRequest createEmptyInstance() => create();
+  static $pb.PbList<TagToBookmarkRequest> createRepeated() => $pb.PbList<TagToBookmarkRequest>();
+  @$core.pragma('dart2js:noInline')
+  static TagToBookmarkRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TagToBookmarkRequest>(create);
+  static TagToBookmarkRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get userId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get tagId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set tagId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTagId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTagId() => clearField(2);
+}
+
+class TagToBookmarkResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TagToBookmarkResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'succeed')
+    ..hasRequiredFields = false
+  ;
+
+  TagToBookmarkResponse._() : super();
+  factory TagToBookmarkResponse({
+    $core.bool? succeed,
+  }) {
+    final _result = create();
+    if (succeed != null) {
+      _result.succeed = succeed;
+    }
+    return _result;
+  }
+  factory TagToBookmarkResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TagToBookmarkResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TagToBookmarkResponse clone() => TagToBookmarkResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TagToBookmarkResponse copyWith(void Function(TagToBookmarkResponse) updates) => super.copyWith((message) => updates(message as TagToBookmarkResponse)) as TagToBookmarkResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TagToBookmarkResponse create() => TagToBookmarkResponse._();
+  TagToBookmarkResponse createEmptyInstance() => create();
+  static $pb.PbList<TagToBookmarkResponse> createRepeated() => $pb.PbList<TagToBookmarkResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TagToBookmarkResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TagToBookmarkResponse>(create);
+  static TagToBookmarkResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get succeed => $_getBF(0);
+  @$pb.TagNumber(1)
+  set succeed($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSucceed() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSucceed() => clearField(1);
+}
+
 class GetBookmarkTagsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetBookmarkTagsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bookmarkId', protoName: 'bookmarkId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
     ..hasRequiredFields = false
   ;
 
   GetBookmarkTagsRequest._() : super();
   factory GetBookmarkTagsRequest({
-    $core.String? bookmarkId,
+    $core.String? userId,
   }) {
     final _result = create();
-    if (bookmarkId != null) {
-      _result.bookmarkId = bookmarkId;
+    if (userId != null) {
+      _result.userId = userId;
     }
     return _result;
   }
@@ -54,13 +162,13 @@ class GetBookmarkTagsRequest extends $pb.GeneratedMessage {
   static GetBookmarkTagsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get bookmarkId => $_getSZ(0);
+  $core.String get userId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set bookmarkId($core.String v) { $_setString(0, v); }
+  set userId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasBookmarkId() => $_has(0);
+  $core.bool hasUserId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearBookmarkId() => clearField(1);
+  void clearUserId() => clearField(1);
 }
 
 class GetBookmarkTagsResponse extends $pb.GeneratedMessage {

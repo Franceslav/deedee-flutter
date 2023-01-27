@@ -8,16 +8,37 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use tagToBookmarkRequestDescriptor instead')
+const TagToBookmarkRequest$json = const {
+  '1': 'TagToBookmarkRequest',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
+    const {'1': 'tagId', '3': 2, '4': 1, '5': 9, '10': 'tagId'},
+  ],
+};
+
+/// Descriptor for `TagToBookmarkRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tagToBookmarkRequestDescriptor = $convert.base64Decode('ChRUYWdUb0Jvb2ttYXJrUmVxdWVzdBIWCgZ1c2VySWQYASABKAlSBnVzZXJJZBIUCgV0YWdJZBgCIAEoCVIFdGFnSWQ=');
+@$core.Deprecated('Use tagToBookmarkResponseDescriptor instead')
+const TagToBookmarkResponse$json = const {
+  '1': 'TagToBookmarkResponse',
+  '2': const [
+    const {'1': 'succeed', '3': 1, '4': 1, '5': 8, '10': 'succeed'},
+  ],
+};
+
+/// Descriptor for `TagToBookmarkResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tagToBookmarkResponseDescriptor = $convert.base64Decode('ChVUYWdUb0Jvb2ttYXJrUmVzcG9uc2USGAoHc3VjY2VlZBgBIAEoCFIHc3VjY2VlZA==');
 @$core.Deprecated('Use getBookmarkTagsRequestDescriptor instead')
 const GetBookmarkTagsRequest$json = const {
   '1': 'GetBookmarkTagsRequest',
   '2': const [
-    const {'1': 'bookmarkId', '3': 1, '4': 1, '5': 9, '10': 'bookmarkId'},
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
   ],
 };
 
 /// Descriptor for `GetBookmarkTagsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getBookmarkTagsRequestDescriptor = $convert.base64Decode('ChZHZXRCb29rbWFya1RhZ3NSZXF1ZXN0Eh4KCmJvb2ttYXJrSWQYASABKAlSCmJvb2ttYXJrSWQ=');
+final $typed_data.Uint8List getBookmarkTagsRequestDescriptor = $convert.base64Decode('ChZHZXRCb29rbWFya1RhZ3NSZXF1ZXN0EhYKBnVzZXJJZBgBIAEoCVIGdXNlcklk');
 @$core.Deprecated('Use getBookmarkTagsResponseDescriptor instead')
 const GetBookmarkTagsResponse$json = const {
   '1': 'GetBookmarkTagsResponse',
