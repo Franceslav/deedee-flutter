@@ -48,5 +48,9 @@
       "chooseFilterKeys" : "выберите не менее 3 ключевых слов",
       "userNotVerifiedMessage": "вы не верифицированы. проверьте свою почту или перезапустите приложение.",
      "balanceTitle": "баланс",
-     "availableTagsTitle": "доступные тэги"
+     "availableTagsTitle": "доступные тэги",
+     "bookmarksTitle": "закладки",
+     "noBookamarks": "у вас нет закладок",
+     "bookmarkDeletedMessage": "закладка удалена",
+     "bookmarkNotDeletedMessage": "закладка не была удалена. что-то пошло не так"
 }

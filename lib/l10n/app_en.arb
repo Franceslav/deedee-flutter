@@ -51,6 +51,10 @@
      "chooseFilterKeys" : "choose at least 3 key words",
      "userNotVerifiedMessage": "you're not verified. check your e-mail inbox or restart the application.",
      "balanceTitle": "balance",
-     "availableTagsTitle": "available tags"
+     "availableTagsTitle": "available tags",
+     "bookmarksTitle": "bookmarks",
+     "noBookamarks": "you do not have bookmarks",
+     "bookmarkDeletedMessage": "bookmark was deleted",
+     "bookmarkNotDeletedMessage": "bookmark was not deleted. something went wrong"
 
 }

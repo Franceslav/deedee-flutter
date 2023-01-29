@@ -5,6 +5,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_screen.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
+import 'package:deedee/ui/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer_cubit.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
@@ -13,7 +14,6 @@ import 'package:deedee/ui/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 
 class DeeDeeDrawer extends StatefulWidget {
@@ -168,6 +168,23 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           onTap: () {
                             pushReplacement(
                                 context, HomeScreen(user: widget.user));
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            AppLocalizations.of(context)!.bookmarksTitle,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          leading: Transform.rotate(
+                            angle: 0,
+                            child:
+                                const Icon(Icons.bookmark, color: Colors.black),
+                          ),
+                          onTap: () {
+                            pushReplacement(
+                              context,
+                              BookmarksScreen(user: widget.user),
+                            );
                           },
                         ),
                         ExpansionTile(

@@ -46,6 +46,10 @@
       "chooseFilterKeys" : "wybierz co najmniej 3 słowa kluczowe",
       "userNotVerifiedMessage": "nie jesteś zweryfikowany. sprawdź swoją skrzynkę e-mail lub uruchom ponownie aplikację.",
      "balanceTitle": "saldo",
-     "availableTagsTitle": "dostępne tagi"
+     "availableTagsTitle": "dostępne tagi",
+     "bookmarksTitle": "zakładki",
+     "noBookamarks": "nie masz zakładek",
+     "bookmarkDeletedMessage": "zakładka została usunięta",
+     "bookmarkNotDeletedMessage": "zakładka nie została usunięta. coś poszło nie tak"
 
 }

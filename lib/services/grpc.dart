@@ -1,6 +1,5 @@
-import 'package:deedee/generated/AccountService.pbgrpc.dart';
+import 'package:deedee/generated/AccountService.pbgrpc.dart' as account_service;
 import 'package:deedee/generated/TagService.pbgrpc.dart';
-import 'package:deedee/generated/VerificationService.pb.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/model/user.dart';
@@ -15,6 +14,16 @@ import '../generated/ReferralService.pbgrpc.dart';
 class GRCPUtils {
   late TagServiceClient stub;
 
+  Future<ClientChannel> createChannel() async {
+    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
+    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
+    return ClientChannel(
+      url!,
+      port: int.parse(port!),
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
+  }
+
   Future<void> placeTag(
       AccountType accountType,
       String topic,
@@ -22,15 +31,8 @@ class GRCPUtils {
       double lat,
       double lon,
       List<String> filterKeys) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
-
     try {
       var timestamp = Timestamp()
         ..seconds = Int64.parseInt(
@@ -56,13 +58,7 @@ class GRCPUtils {
   }
 
   Future<Topic> getBucket(String topicId, AccountType accountType) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
 
     var response = await stub.getTopic(GetTopicRequest()
@@ -78,13 +74,7 @@ class GRCPUtils {
 
   Future<Topic> getFilteredTags(String topicId, List<String> activeFilters,
       AccountType accountType) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
 
     var response = await stub.getFilteredTags(GetTopicRequest()
@@ -96,13 +86,7 @@ class GRCPUtils {
   }
 
   Future<List<String>> getTopics(double latitude, double longitude) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
 
     var geoLocation = GeoLocation()
@@ -116,13 +100,7 @@ class GRCPUtils {
   }
 
   Future<List<FilterKey>> getFilterItems(String topic) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
 
     var response =
@@ -132,13 +110,7 @@ class GRCPUtils {
   }
 
   Future<bool> verifyAuthCode(String code) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = TagServiceClient(channel);
 
     var response =
@@ -148,15 +120,9 @@ class GRCPUtils {
   }
 
   Future<bool> sendVerificationEmail(String email) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
     String? ipAddress =
         await serviceLocator.get<SharedUtils>().getPublicIpAddress();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = VerificationServiceClient(channel);
     final response = await stub.verifyEmail(VerifyEmailRequest()
       ..email = email
@@ -165,13 +131,7 @@ class GRCPUtils {
   }
 
   Future<List<UserReferral>> getUserReferrals(String email) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
+    final channel = await createChannel();
     final stub = ReferralServiceClient(channel);
     var response =
         await stub.getUserReferrals(GetUserReferralsRequest()..email = email);
@@ -179,31 +139,44 @@ class GRCPUtils {
   }
 
   Future<bool> topUpAccount(double amount) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    String? ipAddress =
-        await serviceLocator.get<SharedUtils>().getPublicIpAddress();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
-    final stub = AccountServiceClient(channel);
-    final response = await stub.topUp(TopUpRequest()..amount = amount);
+    final channel = await createChannel();
+    final stub = account_service.AccountServiceClient(channel);
+    final response =
+        await stub.topUp(account_service.TopUpRequest()..amount = amount);
     return response.succeed;
   }
 
   Future<double> getUserBalance(String userId) async {
-    String? url = await serviceLocator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await serviceLocator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
-    final stub = AccountServiceClient(channel);
-    final response =
-        await stub.getBalance(GetBalanceRequest()..userId = userId);
+    final channel = await createChannel();
+    final stub = account_service.AccountServiceClient(channel);
+    final response = await stub
+        .getBalance(account_service.GetBalanceRequest()..userId = userId);
     return response.balance;
+  }
+
+  Future<List<Tag>> getUserBookmarks(String userId) async {
+    final channel = await createChannel();
+    final stub = TagServiceClient(channel);
+    final response =
+        await stub.getBookmarkTags(GetBookmarkTagsRequest()..userId = userId);
+    return response.tags;
+  }
+
+  Future<bool> removeUserBookmark(String userId, String tagId) async {
+    final channel = await createChannel();
+    final stub = TagServiceClient(channel);
+    final response = await stub.removeTagToBookmark(TagToBookmarkRequest()
+      ..userId = userId
+      ..tagId = tagId);
+    return response.succeed;
+  }
+
+  Future<bool> addUserBookmark(String userId, String tagId) async {
+    final channel = await createChannel();
+    final stub = TagServiceClient(channel);
+    final response = await stub.addTagToBookmark(TagToBookmarkRequest()
+      ..userId = userId
+      ..tagId = tagId);
+    return response.succeed;
   }
 }

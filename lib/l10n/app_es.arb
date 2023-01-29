@@ -47,5 +47,9 @@
      "chooseFilterKeys" : "elige al menos 3 palabras clave",
      "userNotVerifiedMessage": "no estás verificado. revisa tu bandeja de entrada de correo electrónico o reinicia la aplicación.",
      "balanceTitle": "saldo",
-     "availableTagsTitle": "etiquetas disponibles"
+     "availableTagsTitle": "etiquetas disponibles",
+     "bookmarksTitle": "marcadores",
+     "noBookamarks": "no tienes marcadores",
+     "bookmarkDeletedMessage": "marcador eliminado",
+     "bookmarkNotDeletedMessage": "el marcador no se eliminó. Algo salió mal"
 }
