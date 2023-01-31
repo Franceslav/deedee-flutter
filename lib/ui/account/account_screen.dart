@@ -129,7 +129,7 @@ class _AccountState extends State<AccountScreen> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+                    const EdgeInsets.only(right: 30.0, left: 40.0, top: 40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -156,7 +156,13 @@ class _AccountState extends State<AccountScreen> {
                           context.read<LocaleCubit>().changeLocal('es');
                         },
                         iconSize: 50,
-                        icon: Image.asset('assets/images/es.png'))
+                        icon: Image.asset('assets/images/es.png')),
+                    IconButton(
+                        onPressed: () {
+                          context.read<LocaleCubit>().changeLocal('ae');
+                        },
+                        iconSize: 50,
+                        icon: Image.asset('assets/images/ae.png'))
                   ],
                 ),
               ),
