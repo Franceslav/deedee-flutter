@@ -258,6 +258,56 @@ class _SignUpState extends State<SignUpScreen> {
                                   errorColor: Theme.of(context).errorColor),
                             ),
                           ),
+                          Padding(padding: const EdgeInsets.only(top:50.0, bottom: 20.0),
+                            child: ListTile(
+                            trailing: BlocBuilder<SignUpBloc, SignUpState>(
+                              buildWhen: (old, current) =>
+                              current is EulaToggleState && old != current,
+                              builder: (context, state) {
+                                if (state is EulaToggleState) {
+                                  acceptEULA = state.eulaAccepted;
+                                }
+                                return Checkbox(
+                                  onChanged: (value) =>
+                                      context.read<SignUpBloc>().add(
+                                        ToggleEulaCheckboxEvent(
+                                          eulaAccepted: value!,
+                                        ),
+                                      ),
+                                  activeColor: const Color(COLOR_PRIMARY),
+                                  value: acceptEULA,
+                                );
+                              },
+                            ),
+                            title: RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text:
+                                    AppLocalizations.of(context)!.byCreatingAnAccountYouAgreeTitle,
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  TextSpan(
+                                    style: const TextStyle(
+                                      color: Colors.blueAccent,
+                                    ),
+                                    text:  " ${AppLocalizations.of(context)!.termsOfUseTitle}",
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        if (await canLaunch(EULA)) {
+                                          await launch(
+                                            EULA,
+                                            forceSafariVC: false,
+                                          );
+                                        }
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(
                                 right: 40.0, left: 40.0, top: 40.0),
@@ -288,54 +338,7 @@ class _SignUpState extends State<SignUpScreen> {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          ListTile(
-                            trailing: BlocBuilder<SignUpBloc, SignUpState>(
-                              buildWhen: (old, current) =>
-                                  current is EulaToggleState && old != current,
-                              builder: (context, state) {
-                                if (state is EulaToggleState) {
-                                  acceptEULA = state.eulaAccepted;
-                                }
-                                return Checkbox(
-                                  onChanged: (value) =>
-                                      context.read<SignUpBloc>().add(
-                                            ToggleEulaCheckboxEvent(
-                                              eulaAccepted: value!,
-                                            ),
-                                          ),
-                                  activeColor: const Color(COLOR_PRIMARY),
-                                  value: acceptEULA,
-                                );
-                              },
-                            ),
-                            title: RichText(
-                              textAlign: TextAlign.left,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text:
-                                    AppLocalizations.of(context)!.byCreatingAnAccountYouAgreeTitle,
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                  TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.blueAccent,
-                                    ),
-                                    text:  AppLocalizations.of(context)!.termsOfUseTitle,
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () async {
-                                        if (await canLaunch(EULA)) {
-                                          await launch(
-                                            EULA,
-                                            forceSafariVC: false,
-                                          );
-                                        }
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+
                         ],
                       ),
                     );
