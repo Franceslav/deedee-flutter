@@ -13,6 +13,7 @@
     "logout": "cerrar sesion",
     "settings": "configuraciones",
     "seeMap": "ver mapa",
+    "toSee": "para ver",
     "topics": "temas",
     "filterTags": "etiquetas de filtro",
     "filterTagsPageTitle": "filtrar",
@@ -50,6 +51,13 @@
      "availableTagsTitle": "etiquetas disponibles",
      "bookmarksTitle": "marcadores",
      "noBookamarks": "no tienes marcadores",
-     "bookmarkDeletedMessage": "marcador eliminado",
-     "bookmarkNotDeletedMessage": "el marcador no se eliminó. Algo salió mal"
+     "bookmarkRemovedMessage": "marcador eliminado",
+     "bookmarkNotRemovedMessage": "el marcador no se eliminó. Algo salió mal",
+     "chooseLocation": "elegir ubicación",
+     "selectLocationOnMap": "seleccionar ubicación en el mapa",
+     "selectedLocation": "ubicación seleccionada",
+     "loading": "cargando...",
+     "searchByAddress": "buscar por dirección",
+     "setLocation": "establecer ubicación",
+     "enterAddress": "ingresar dirección"
 }

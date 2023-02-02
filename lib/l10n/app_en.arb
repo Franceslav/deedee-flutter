@@ -54,7 +54,13 @@
      "availableTagsTitle": "available tags",
      "bookmarksTitle": "bookmarks",
      "noBookamarks": "you do not have bookmarks",
-     "bookmarkDeletedMessage": "bookmark was deleted",
-     "bookmarkNotDeletedMessage": "bookmark was not deleted. something went wrong"
-
+     "bookmarkRemovedMessage": "bookmark was removed",
+     "bookmarkNotRemovedMessage": "bookmark was not removed. something went wrong",
+     "chooseLocation": "choose location",
+     "selectLocationOnMap": "select location on map",
+     "selectedLocation": "selected location",
+     "loading": "loading...",
+     "searchByAddress": "search by address",
+     "setLocation": "set location",
+     "enterAddress": "enter address"
 }

@@ -49,14 +49,14 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
           if (state is DeletedSuccessfulState) {
             showSnackBar(
               context,
-              AppLocalizations.of(context)!.bookmarkDeletedMessage,
+              AppLocalizations.of(context)!.bookmarkRemovedMessage,
             );
           }
           if (state is DeletedErrorState) {
             _bookmarks.insert(state.bookmarkIndex, state.bookmark);
             showSnackBar(
               context,
-              AppLocalizations.of(context)!.bookmarkNotDeletedMessage,
+              AppLocalizations.of(context)!.bookmarkNotRemovedMessage,
             );
           }
         },

@@ -1,4 +1,5 @@
 {
+     "helloWorld": "witaj świecie",
      "placeBid": "złóż ofertę",
      "placeBidPageTitle": "oferta",
      "accountTitle": "konto",
@@ -12,13 +13,14 @@
      "logout": "wyloguj",
      "settings": "ustawienia",
      "seeMap": "zobacz mapę",
+     "toSee": "zobaczyć",
      "topics": "tematy",
      "filterTags": "filtruj tagi",
      "filterTagsPageTitle": "filtr",
      "filteringTagsHistTitle": "filtrowanie tagów",
      "tagPlacedCheckTheMap":"tag umieszczony. sprawdź mapę",
      "placingTag": "umieszczanie tagu...",
-     "InstagramTitle" : "Instagram",
+     "instagramTitle" : "Instagram",
      "signInTitle": "zaloguj się",
      "signUpTitle": "zarejestruj się",
      "emailAddressTitle": "poczta elektroniczna",
@@ -49,7 +51,13 @@
      "availableTagsTitle": "dostępne tagi",
      "bookmarksTitle": "zakładki",
      "noBookamarks": "nie masz zakładek",
-     "bookmarkDeletedMessage": "zakładka została usunięta",
-     "bookmarkNotDeletedMessage": "zakładka nie została usunięta. coś poszło nie tak"
-
+     "bookmarkRemovedMessage": "zakładka została usunięta",
+     "bookmarkNotRemovedMessage": "zakładka nie została usunięta. coś poszło nie tak",
+     "chooseLocation": "wybierz lokalizację",
+     "selectLocationOnMap": "wybierz lokalizację na mapie",
+     "selectedLocation": "wybrana lokalizacja",
+     "loading": "ładowanie...",
+     "searchByAddress": "wyszukaj według adresu",
+     "setLocation": "ustaw lokalizację",
+     "enterAddress": "wprowadź adres"
 }

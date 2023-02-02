@@ -6,6 +6,7 @@ import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:search_address_repository/search_address_repository.dart';
 
 void main() {
   setUpServiceLocator();
@@ -25,8 +27,19 @@ void main() {
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),
         RepositoryProvider(create: (_) => LoadingCubit()),
+        RepositoryProvider(create: (_) => SearchAddressRepository()),
       ],
-      child: const MyApp(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SetLocationBloc(
+              searchAddressRepository:
+                  RepositoryProvider.of<SearchAddressRepository>(context),
+            ),
+          ),
+        ],
+        child: const MyApp(),
+      ),
     ),
   ]));
 }

@@ -39,6 +39,11 @@ dependencies:
   get_it: ^7.1.4
   get: ^4.6.5
   uuid: ^3.0.6
+  stream_transform: ^2.1.0
+  bloc_concurrency: ^0.2.0
+  latlong2:
+  search_address_repository:
+    path: packages/search_address_repository
 
   flutter:
     sdk: flutter

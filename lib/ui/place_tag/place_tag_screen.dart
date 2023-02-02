@@ -1,11 +1,13 @@
 import 'dart:async';
+import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-
+import 'package:search_address_repository/search_address_repository.dart';
 import '../../model/user.dart';
 import '../deedee_button/deedee_button.dart';
 import '../drawer/deedee_drawer.dart';
@@ -36,6 +38,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
   List<String> _topics = [];
   String _selectedTopic = '';
   List<String> _selectedFilterKeys = [];
+  LatLng _selectedLocation = DEFAULT_LOCATION;
+  String _selectedAddress = '';
   bool _isInit = true;
 
   @override
@@ -122,6 +126,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
               _selectedTopic = '';
               _selectedFilterKeys = [];
               _filterKeys = [];
+              _selectedLocation = DEFAULT_LOCATION;
             } else {
               _selectedTopic = state.topic;
               _filterKeys = [];
@@ -136,6 +141,13 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
             _selectedFilterKeys.contains(state.filterKey)
                 ? _selectedFilterKeys.remove(state.filterKey)
                 : _selectedFilterKeys.add(state.filterKey);
+            if (_selectedFilterKeys.length < 3) {
+              _selectedLocation = DEFAULT_LOCATION;
+            }
+          }
+          if (state is LocationSelectedState) {
+            _selectedAddress = state.data.address ?? '';
+            _selectedLocation = state.data.location ?? DEFAULT_LOCATION;
           }
           if (state is LoadingSelectorState) {
             context.read<LoadingCubit>().showLoading(
@@ -197,6 +209,70 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                             ],
                           ),
                         if (_selectedFilterKeys.length >= 3)
+                          Column(
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.chooseLocation,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  final data = await Navigator.of(context)
+                                      .push<AddressModel?>(
+                                    MaterialPageRoute(
+                                      builder: (_) => MapSetLocationScreen(
+                                          userLocation:
+                                              widget.user.lastGeoLocation),
+                                    ),
+                                  );
+                                  if (data == null) {
+                                    return;
+                                  }
+                                  bloc.add(SelectLocationEvent(data));
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(8),
+                                  height: 40.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                      color: Colors.black26,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                    color: _selectedLocation == DEFAULT_LOCATION
+                                        ? Colors.white
+                                        : const Color(COLOR_PRIMARY),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .selectLocationOnMap,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: _selectedLocation ==
+                                                DEFAULT_LOCATION
+                                            ? Colors.black
+                                            : Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (_selectedLocation != DEFAULT_LOCATION)
+                                Text(
+                                  '${AppLocalizations.of(context)!.selectedLocation}: $_selectedAddress',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                            ],
+                          ),
+                        if (_selectedLocation != DEFAULT_LOCATION)
                           DeeDeeButton(
                             AppLocalizations.of(context)!.placeBid,
                             () {
@@ -205,7 +281,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   accountType: widget.user.accountType,
                                   topic: _selectedTopic,
                                   messengerId: _messengerId,
-                                  location: _userLocation,
+                                  location: _selectedLocation,
                                   filterKeys: _selectedFilterKeys,
                                 ),
                               );

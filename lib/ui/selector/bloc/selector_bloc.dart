@@ -4,6 +4,7 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:search_address_repository/search_address_repository.dart';
 
 part 'selector_event.dart';
 part 'selector_state.dart';
@@ -16,6 +17,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<SelectFilterKeyEvent>(_onSelectFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
     on<PushTagEvent>(_onPushTag);
+    on<SelectLocationEvent>(_onSelectLocation);
   }
 
   _onLoadTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
@@ -99,6 +101,10 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onSelectFilterKey(SelectFilterKeyEvent event, Emitter<SelectorState> emit) {
     emit(FilterKeySelectedState(event.filterKey));
+  }
+
+  _onSelectLocation(SelectLocationEvent event, Emitter<SelectorState> emit) {
+    emit(LocationSelectedState(event.data));
   }
 
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {

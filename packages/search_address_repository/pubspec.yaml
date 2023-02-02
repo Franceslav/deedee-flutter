@@ -1,0 +1,19 @@
+name: search_address_repository
+description: search_address_repository
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.4 <3.0.0"
+
+dependencies:
+  latlong2:
+  http:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0

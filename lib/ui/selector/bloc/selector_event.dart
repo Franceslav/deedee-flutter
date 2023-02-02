@@ -24,6 +24,12 @@ class SelectFilterKeyEvent extends SelectorEvent {
   SelectFilterKeyEvent(this.filterKey);
 }
 
+class SelectLocationEvent extends SelectorEvent {
+  final AddressModel data;
+
+  SelectLocationEvent(this.data);
+}
+
 class PushFiltersEvent extends SelectorEvent {
   final String topic;
   final List<String> filterKeys;

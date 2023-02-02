@@ -30,6 +30,12 @@ class FilterKeySelectedState extends SelectorState {
   FilterKeySelectedState(this.filterKey);
 }
 
+class LocationSelectedState extends SelectorState {
+  final AddressModel data;
+
+  LocationSelectedState(this.data);
+}
+
 class UserFiltersDoneState extends SelectorState {
   final Topic topic;
 
