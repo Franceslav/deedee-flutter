@@ -154,166 +154,170 @@ class _DrawerState extends State<DeeDeeDrawer> {
                     ),
                   ),
                   Expanded(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.homeTitle,
-                            style: const TextStyle(color: Colors.black),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.homeTitle,
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                            leading: Transform.rotate(
+                                angle: 0,
+                                child: const Icon(Icons.home,
+                                    color: Colors.black)),
+                            onTap: () {
+                              pushReplacement(
+                                  context, HomeScreen(user: widget.user));
+                            },
                           ),
-                          leading: Transform.rotate(
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.bookmarksTitle,
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                            leading: Transform.rotate(
                               angle: 0,
-                              child:
-                                  const Icon(Icons.home, color: Colors.black)),
-                          onTap: () {
-                            pushReplacement(
-                                context, HomeScreen(user: widget.user));
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.bookmarksTitle,
-                            style: const TextStyle(color: Colors.black),
+                              child: const Icon(Icons.bookmark,
+                                  color: Colors.black),
+                            ),
+                            onTap: () {
+                              pushReplacement(
+                                context,
+                                BookmarksScreen(user: widget.user),
+                              );
+                            },
                           ),
-                          leading: Transform.rotate(
-                            angle: 0,
-                            child:
-                                const Icon(Icons.bookmark, color: Colors.black),
-                          ),
-                          onTap: () {
-                            pushReplacement(
-                              context,
-                              BookmarksScreen(user: widget.user),
-                            );
-                          },
-                        ),
-                        ExpansionTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.accountTitle,
-                          ),
-                          leading: Transform.rotate(
-                              angle: 0,
-                              child: const Icon(Icons.account_balance_wallet,
-                                  color: Colors.black)),
-                          /*                  onTap: () {
-                          pushReplacement(context, HomeScreen(user: widget.user));
-                        },*/
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Text(
-                                        AppLocalizations.of(context)!
-                                            .accountMoneyTitle,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                          ExpansionTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.accountTitle,
+                            ),
+                            leading: Transform.rotate(
+                                angle: 0,
+                                child: const Icon(Icons.account_balance_wallet,
+                                    color: Colors.black)),
+                            /*                  onTap: () {
+                            pushReplacement(context, HomeScreen(user: widget.user));
+                          },*/
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      ListTile(
+                                        title: Text(
+                                          AppLocalizations.of(context)!
+                                              .accountMoneyTitle,
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                        leading: Transform.rotate(
+                                            angle: pi * 2,
+                                            child: const Icon(Icons.account_box,
+                                                color: Colors.black)),
+                                        onTap: () {
+                                          pushReplacement(context,
+                                              AccountScreen(user: widget.user));
+                                        },
                                       ),
-                                      leading: Transform.rotate(
-                                          angle: pi * 2,
-                                          child: const Icon(Icons.account_box,
-                                              color: Colors.black)),
-                                      onTap: () {
-                                        pushReplacement(context,
-                                            AccountScreen(user: widget.user));
-                                      },
-                                    ),
-                                    ListTile(
-                                      title: Text(
-                                        '${AppLocalizations.of(context)!.switchTo} ${widget.user.accountType.switchAccountStringType(context)}',
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                      ListTile(
+                                        title: Text(
+                                          '${AppLocalizations.of(context)!.switchTo} ${widget.user.accountType.switchAccountStringType(context)}',
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                        leading: Transform.rotate(
+                                            angle: pi * 2,
+                                            child: const Icon(
+                                                Icons.rotate_left_rounded,
+                                                color: Colors.black)),
+                                        onTap: () {
+                                          switch (widget.user.accountType) {
+                                            case AccountType.buy:
+                                              widget.user.accountType =
+                                                  AccountType.sell;
+                                              break;
+                                            case AccountType.sell:
+                                              widget.user.accountType =
+                                                  AccountType.buy;
+                                          }
+                                          pushReplacement(context,
+                                              HomeScreen(user: widget.user));
+                                        },
                                       ),
-                                      leading: Transform.rotate(
-                                          angle: pi * 2,
-                                          child: const Icon(
-                                              Icons.rotate_left_rounded,
-                                              color: Colors.black)),
-                                      onTap: () {
-                                        switch (widget.user.accountType) {
-                                          case AccountType.buy:
-                                            widget.user.accountType =
-                                                AccountType.sell;
-                                            break;
-                                          case AccountType.sell:
-                                            widget.user.accountType =
-                                                AccountType.buy;
-                                        }
-                                        pushReplacement(context,
-                                            HomeScreen(user: widget.user));
-                                      },
-                                    ),
-                                    ListTile(
-                                      title: Text(
-                                        AppLocalizations.of(context)!
-                                            .accountReferralTitle,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                      ListTile(
+                                        title: Text(
+                                          AppLocalizations.of(context)!
+                                              .accountReferralTitle,
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                        leading: Transform.rotate(
+                                            angle: pi * 2,
+                                            child: const Icon(Icons.link_sharp,
+                                                color: Colors.black)),
+                                        onTap: () {
+                                          pushReplacement(
+                                              context,
+                                              ReferralScreen(
+                                                  user: widget.user));
+                                        },
                                       ),
-                                      leading: Transform.rotate(
-                                          angle: pi * 2,
-                                          child: const Icon(Icons.link_sharp,
-                                              color: Colors.black)),
-                                      onTap: () {
-                                        pushReplacement(context,
-                                            ReferralScreen(user: widget.user));
-                                      },
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.settings,
+                              style: const TextStyle(color: Colors.black),
                             ),
-                          ],
-                        ),
-                        ListTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.settings,
-                            style: const TextStyle(color: Colors.black),
+                            leading: Transform.rotate(
+                                angle: pi / 1,
+                                child: const Icon(Icons.settings,
+                                    color: Colors.black)),
+                            onTap: () {
+                              pushReplacement(
+                                  context, SettingsScreen(user: widget.user));
+                            },
                           ),
-                          leading: Transform.rotate(
-                              angle: pi / 1,
-                              child: const Icon(Icons.settings,
-                                  color: Colors.black)),
-                          onTap: () {
-                            pushReplacement(
-                                context, SettingsScreen(user: widget.user));
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.helpTitle,
-                            style: const TextStyle(color: Colors.black),
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.helpTitle,
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                            leading: const Icon(Icons.help_outline,
+                                color: Colors.black),
+                            onTap: () {
+                              pushReplacement(
+                                  context, HelpScreen(user: widget.user));
+                            },
                           ),
-                          leading: const Icon(Icons.help_outline,
-                              color: Colors.black),
-                          onTap: () {
-                            pushReplacement(
-                                context, HelpScreen(user: widget.user));
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            AppLocalizations.of(context)!.logout,
-                            style: const TextStyle(color: Colors.black),
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.logout,
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                            leading: Transform.rotate(
+                                angle: pi / 1,
+                                child: const Icon(Icons.exit_to_app,
+                                    color: Colors.black)),
+                            onTap: () {
+                              context
+                                  .read<AuthenticationBloc>()
+                                  .add(LogoutEvent());
+                              pushReplacement(context, const LoginScreen());
+                            },
                           ),
-                          leading: Transform.rotate(
-                              angle: pi / 1,
-                              child: const Icon(Icons.exit_to_app,
-                                  color: Colors.black)),
-                          onTap: () {
-                            context
-                                .read<AuthenticationBloc>()
-                                .add(LogoutEvent());
-                            pushReplacement(context, const LoginScreen());
-                          },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
