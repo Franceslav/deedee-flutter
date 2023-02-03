@@ -60,6 +60,7 @@ class AuthenticationBloc
             message: 'Auth failed, Please try again.'));
       }
     });
+    /*
     on<LoginWithFacebookEvent>((event, emit) async {
       dynamic result = await FireStoreUtils.loginWithFacebook();
       if (result != null && result is User) {
@@ -74,6 +75,7 @@ class AuthenticationBloc
             message: 'Facebook login failed, Please try again.'));
       }
     });
+    */
     on<LoginWithAppleEvent>((event, emit) async {
       dynamic result = await FireStoreUtils.loginWithApple();
       if (result != null && result is User) {
