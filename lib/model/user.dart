@@ -47,6 +47,8 @@ class User {
 
   bool isVerified;
 
+  bool isPremium;
+
   double balance;
 
   int availableTags;
@@ -58,6 +60,7 @@ class User {
     this.userID = '',
     this.profilePictureURL = '',
     this.isVerified = false,
+    this.isPremium = false,
     this.balance = 0.0,
     this.availableTags = 0,
   }) : appIdentifier = 'DeeDee for ${Platform.operatingSystem}';

@@ -50,6 +50,12 @@
      "bookmarksTitle": "إشارات مرجعية",
      "noBookamarks": "ليس لديك إشارات مرجعية",
      "bookmarkDeletedMessage": "تم حذف الإشارة المرجعية",
-     "bookmarkNotDeletedMessage": "لم يتم حذف الإشارة المرجعية. هناك خطأ ما"
+     "bookmarkNotDeletedMessage": "لم يتم حذف الإشارة المرجعية. هناك خطأ ما",
+     "accountPremium": "DeeDee الممتازة",
+     "accountNeedVerify":"التحقق من حسابك أولا",
+     "accountVerify":"يؤكد",
+     "accountGetPremium":"إحصل على DeeDee الأفضل",
+     "accountPremiumPrice":"احصل على قسط DeeDee مقابل 9.99 دولارًا"
+
 
 }

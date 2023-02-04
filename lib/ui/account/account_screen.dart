@@ -12,6 +12,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 
+import '../global widgets/profile_photo_with_badge.dart';
+import 'account_popover.dart';
+
 class AccountScreen extends StatefulWidget {
   final User user;
 
@@ -54,22 +57,9 @@ class _AccountState extends State<AccountScreen> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              user.profilePictureURL == ''
-                  ? CircleAvatar(
-                      radius: 35,
-                      backgroundColor: Colors.grey.shade400,
-                      child: ClipOval(
-                        child: SizedBox(
-                          width: 70,
-                          height: 70,
-                          child: Image.asset(
-                            'assets/images/placeholder.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    )
-                  : displayCircleImage(user.profilePictureURL, 80, false),
+              Center(
+                child: ProfilePhotoWithBadge(user: user),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(user.fullName()),
@@ -97,9 +87,44 @@ class _AccountState extends State<AccountScreen> {
                       )),
                 ],
               ),
-              Padding(
+              !user.isPremium?
+               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(COLOR_PRIMARY),
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: const BorderSide(
+                          color: Color(COLOR_PRIMARY),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.accountPremium,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return Popover(user: user);
+                        },
+                      ).then((value) {
+                        setState(() {});
+                      });
+                    }),
+              ): const SizedBox.shrink(),
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 20),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: const Color(COLOR_PRIMARY),

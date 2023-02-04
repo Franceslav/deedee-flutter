@@ -16,6 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
 
+import '../global widgets/profile_photo_with_badge.dart';
+
 class DeeDeeDrawer extends StatefulWidget {
   final User user;
 
@@ -52,24 +54,10 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              CircleAvatar(
-                                radius: 20,
-                                child: Image.network(
-                                  widget.user.profilePictureURL,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (ctx, error, _) {
-                                    return ClipOval(
-                                      child: Image.asset(
-                                        'assets/images/placeholder.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
+                              ProfilePhotoWithBadge(user: widget.user),
                               Expanded(
                                 child: Text(
-                                  '${widget.user.firstName} ${widget.user.lastName}',
+                                  widget.user.fullName(),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
@@ -110,9 +98,6 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           Text(
                             widget.user.accountType.stringType(context),
                             style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                          const SizedBox(
-                            height: 4,
                           ),
                           Row(
                             children: [
