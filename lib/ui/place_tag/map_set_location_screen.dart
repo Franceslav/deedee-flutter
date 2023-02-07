@@ -39,7 +39,6 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
           icon: const Icon(Icons.close),
           onPressed: () {
             Navigator.of(context).pop();
-            BlocProvider.of<SetLocationBloc>(context).add(CloseStream());
           },
         ),
       ),
@@ -192,8 +191,6 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                           snapshot.data ?? widget.userLocation,
                                     ),
                                   );
-                                  BlocProvider.of<SetLocationBloc>(context)
-                                      .add(CloseStream());
                                 },
                                 child: Text(
                                     AppLocalizations.of(context)!.setLocation),
@@ -228,6 +225,5 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
   @override
   void dispose() {
     super.dispose();
-    BlocProvider.of<SetLocationBloc>(context).add(CloseStream());
   }
 }

@@ -61,14 +61,14 @@ class _HomeState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                    pushReplacement(
+                    push(
                         context,
                         PlaceTagScreen(
                           user: user,
                         ));
                   }),
                   DeeDeeButton(AppLocalizations.of(context)!.seeMap, () {
-                    pushReplacement(
+                    push(
                         context,
                         FilterPage(
                           user: user,

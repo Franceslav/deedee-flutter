@@ -19,5 +19,3 @@ class CenterPositionChanged extends SetLocationEvent {
 
   CenterPositionChanged({required this.newPosition});
 }
-
-class CloseStream extends SetLocationEvent {}

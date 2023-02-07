@@ -108,7 +108,6 @@ class _FilterPageState extends State<FilterPage> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.filterTagsPageTitle),
       ),
-      drawer: DeeDeeDrawer(user: widget.user),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,
         listener: (context, state) {
@@ -153,7 +152,7 @@ class _FilterPageState extends State<FilterPage> {
                   LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
                       tag.messengerId
               };
-              pushReplacement(
+              push(
                 context,
                 MapScreen(
                   tagDescriptionMap: tagMap,

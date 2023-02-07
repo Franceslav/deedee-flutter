@@ -7,6 +7,7 @@ import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
 import 'package:deedee/ui/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer_cubit.dart';
+import 'package:deedee/ui/drawer/drawer_button.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
@@ -142,35 +143,12 @@ class _DrawerState extends State<DeeDeeDrawer> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          ListTile(
-                            title: Text(
-                              AppLocalizations.of(context)!.homeTitle,
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: Transform.rotate(
-                                angle: 0,
-                                child: const Icon(Icons.home,
-                                    color: Colors.black)),
+                          DrawerButton(
+                            text: AppLocalizations.of(context)!.homeTitle,
+                            iconData: Icons.home,
                             onTap: () {
                               pushReplacement(
                                   context, HomeScreen(user: widget.user));
-                            },
-                          ),
-                          ListTile(
-                            title: Text(
-                              AppLocalizations.of(context)!.bookmarksTitle,
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: Transform.rotate(
-                              angle: 0,
-                              child: const Icon(Icons.bookmark,
-                                  color: Colors.black),
-                            ),
-                            onTap: () {
-                              pushReplacement(
-                                context,
-                                BookmarksScreen(user: widget.user),
-                              );
                             },
                           ),
                           ExpansionTile(
@@ -194,33 +172,19 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
-                                      ListTile(
-                                        title: Text(
-                                          AppLocalizations.of(context)!
-                                              .accountMoneyTitle,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                        leading: Transform.rotate(
-                                            angle: pi * 2,
-                                            child: const Icon(Icons.account_box,
-                                                color: Colors.black)),
+                                      DrawerButton(
+                                        text: AppLocalizations.of(context)!
+                                            .accountMoneyTitle,
+                                        iconData: Icons.account_box,
                                         onTap: () {
                                           pushReplacement(context,
                                               AccountScreen(user: widget.user));
                                         },
                                       ),
-                                      ListTile(
-                                        title: Text(
-                                          '${AppLocalizations.of(context)!.switchTo} ${widget.user.accountType.switchAccountStringType(context)}',
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                        leading: Transform.rotate(
-                                            angle: pi * 2,
-                                            child: const Icon(
-                                                Icons.rotate_left_rounded,
-                                                color: Colors.black)),
+                                      DrawerButton(
+                                        text:
+                                            '${AppLocalizations.of(context)!.switchTo} ${widget.user.accountType.switchAccountStringType(context)}',
+                                        iconData: Icons.rotate_left_rounded,
                                         onTap: () {
                                           switch (widget.user.accountType) {
                                             case AccountType.buy:
@@ -235,17 +199,21 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                               HomeScreen(user: widget.user));
                                         },
                                       ),
-                                      ListTile(
-                                        title: Text(
-                                          AppLocalizations.of(context)!
-                                              .accountReferralTitle,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                        leading: Transform.rotate(
-                                            angle: pi * 2,
-                                            child: const Icon(Icons.link_sharp,
-                                                color: Colors.black)),
+                                      DrawerButton(
+                                        text: AppLocalizations.of(context)!
+                                            .bookmarksTitle,
+                                        iconData: Icons.bookmark,
+                                        onTap: () {
+                                          pushReplacement(
+                                            context,
+                                            BookmarksScreen(user: widget.user),
+                                          );
+                                        },
+                                      ),
+                                      DrawerButton(
+                                        text: AppLocalizations.of(context)!
+                                            .accountReferralTitle,
+                                        iconData: Icons.link_sharp,
                                         onTap: () {
                                           pushReplacement(
                                               context,
@@ -259,41 +227,25 @@ class _DrawerState extends State<DeeDeeDrawer> {
                               ),
                             ],
                           ),
-                          ListTile(
-                            title: Text(
-                              AppLocalizations.of(context)!.settings,
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: Transform.rotate(
-                                angle: pi / 1,
-                                child: const Icon(Icons.settings,
-                                    color: Colors.black)),
+                          DrawerButton(
+                            text: AppLocalizations.of(context)!.settings,
+                            iconData: Icons.settings,
                             onTap: () {
                               pushReplacement(
                                   context, SettingsScreen(user: widget.user));
                             },
                           ),
-                          ListTile(
-                            title: Text(
-                              AppLocalizations.of(context)!.helpTitle,
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: const Icon(Icons.help_outline,
-                                color: Colors.black),
+                          DrawerButton(
+                            text: AppLocalizations.of(context)!.helpTitle,
+                            iconData: Icons.help_outline,
                             onTap: () {
                               pushReplacement(
                                   context, HelpScreen(user: widget.user));
                             },
                           ),
-                          ListTile(
-                            title: Text(
-                              AppLocalizations.of(context)!.logout,
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: Transform.rotate(
-                                angle: pi / 1,
-                                child: const Icon(Icons.exit_to_app,
-                                    color: Colors.black)),
+                          DrawerButton(
+                            text: AppLocalizations.of(context)!.logout,
+                            iconData: Icons.exit_to_app,
                             onTap: () {
                               context
                                   .read<AuthenticationBloc>()

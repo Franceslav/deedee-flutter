@@ -112,9 +112,6 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.placeBidPageTitle),
       ),
-      drawer: DeeDeeDrawer(
-        user: widget.user,
-      ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,
         listener: (context, state) async {
@@ -156,12 +153,13 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                   false,
                 );
           }
-          if (state is UserTagPlacedState || state is ErrorState) {
+          if (state is ErrorState) {
             context.read<LoadingCubit>().hideLoading();
-            final message = state is ErrorState
-                ? state.errorMessage
-                : AppLocalizations.of(context)!.tagPlacedCheckTheMap;
+            final message = state.errorMessage;
             showSnackBar(context, message);
+          }
+          if (state is UserTagPlacedState) {
+            Navigator.of(context).popUntil((route) => route.isFirst);
           }
         },
         builder: ((context, state) {

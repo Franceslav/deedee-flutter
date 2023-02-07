@@ -23,7 +23,6 @@ class SetLocationBloc extends Bloc<SetLocationEvent, SetLocationState> {
     on<SearchAddressByLocation>(_onSearchAddressByLocation);
     on<SearchLocationByAddress>(_onSearchLocationByAddress);
     on<CenterPositionChanged>(_onCenterPositionChanged);
-    on<CloseStream>(_onDisposeScreen);
   }
 
   _onSearchAddressByLocation(
@@ -49,7 +48,9 @@ class SetLocationBloc extends Bloc<SetLocationEvent, SetLocationState> {
     state.addNewPosition(event.newPosition);
   }
 
-  _onDisposeScreen(CloseStream event, Emitter<SetLocationState> emit) {
+  @override
+  Future<void> close() {
     state.dispose();
+    return super.close();
   }
 }
