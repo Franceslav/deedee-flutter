@@ -1,4 +1,7 @@
+import 'package:deedee/ui/account/account_cubit.dart';
+import 'package:deedee/ui/account/bloc/account_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants.dart';
@@ -7,7 +10,9 @@ import '../../model/user.dart';
 class Popover extends StatelessWidget {
   final User user;
 
-  const Popover({super.key, required this.user});
+  Popover({super.key, required this.user});
+
+  final _bloc = AccountBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +108,7 @@ class Popover extends StatelessWidget {
                         ),
                         onPressed: () {
                           user.isPremium = true;
+                          _bloc.add(TogglePremiumEvent(user.userID));
                           Navigator.of(context).pop();
                         }),
                   ),

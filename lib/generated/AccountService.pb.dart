@@ -9,6 +9,10 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'AccountService.pbenum.dart';
+
+export 'AccountService.pbenum.dart';
+
 class TopUpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TopUpRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
     ..a<$core.double>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amount', $pb.PbFieldType.OD)
@@ -195,5 +199,113 @@ class GetBalanceResponse extends $pb.GeneratedMessage {
   $core.bool hasBalance() => $_has(0);
   @$pb.TagNumber(1)
   void clearBalance() => clearField(1);
+}
+
+class AccountStatusRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountStatusRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  AccountStatusRequest._() : super();
+  factory AccountStatusRequest({
+    $core.String? userId,
+  }) {
+    final _result = create();
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    return _result;
+  }
+  factory AccountStatusRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountStatusRequest clone() => AccountStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountStatusRequest copyWith(void Function(AccountStatusRequest) updates) => super.copyWith((message) => updates(message as AccountStatusRequest)) as AccountStatusRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountStatusRequest create() => AccountStatusRequest._();
+  AccountStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<AccountStatusRequest> createRepeated() => $pb.PbList<AccountStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AccountStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountStatusRequest>(create);
+  static AccountStatusRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get userId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+}
+
+class AccountStatusResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountStatusResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..e<AccountStatusResponse_VERIFICATION_TYPE>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: AccountStatusResponse_VERIFICATION_TYPE.UNVERIFIED, valueOf: AccountStatusResponse_VERIFICATION_TYPE.valueOf, enumValues: AccountStatusResponse_VERIFICATION_TYPE.values)
+    ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isPremium', protoName: 'isPremium')
+    ..hasRequiredFields = false
+  ;
+
+  AccountStatusResponse._() : super();
+  factory AccountStatusResponse({
+    AccountStatusResponse_VERIFICATION_TYPE? type,
+    $core.bool? isPremium,
+  }) {
+    final _result = create();
+    if (type != null) {
+      _result.type = type;
+    }
+    if (isPremium != null) {
+      _result.isPremium = isPremium;
+    }
+    return _result;
+  }
+  factory AccountStatusResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountStatusResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountStatusResponse clone() => AccountStatusResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountStatusResponse copyWith(void Function(AccountStatusResponse) updates) => super.copyWith((message) => updates(message as AccountStatusResponse)) as AccountStatusResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountStatusResponse create() => AccountStatusResponse._();
+  AccountStatusResponse createEmptyInstance() => create();
+  static $pb.PbList<AccountStatusResponse> createRepeated() => $pb.PbList<AccountStatusResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AccountStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountStatusResponse>(create);
+  static AccountStatusResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  AccountStatusResponse_VERIFICATION_TYPE get type => $_getN(0);
+  @$pb.TagNumber(1)
+  set type(AccountStatusResponse_VERIFICATION_TYPE v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get isPremium => $_getBF(1);
+  @$pb.TagNumber(2)
+  set isPremium($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsPremium() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsPremium() => clearField(2);
 }
 

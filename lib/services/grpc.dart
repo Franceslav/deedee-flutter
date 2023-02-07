@@ -8,6 +8,8 @@ import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../generated/AccountService.pb.dart';
+import '../generated/AccountService.pbgrpc.dart';
 import '../generated/LocationService.pb.dart';
 import '../generated/ReferralService.pbgrpc.dart';
 
@@ -178,5 +180,22 @@ class GRCPUtils {
       ..userId = userId
       ..tagId = tagId);
     return response.succeed;
+  }
+
+  Future<bool> getUserPremiumStatus(String userId) async {
+    final channel = await createChannel();
+    final stub = AccountServiceClient(channel);
+    final response =
+        await stub.getAccountStatus(AccountStatusRequest()..userId = userId);
+    return response.isPremium;
+  }
+
+  Future<bool> toggleUserPremiumStatus(String userId) async {
+    final channel = await createChannel();
+    final stub = AccountServiceClient(channel);
+    final response =
+        await stub.toggleAccountStatus(AccountStatusRequest()..userId = userId);
+    // return response.isPremium;
+    return true;
   }
 }

@@ -5,6 +5,10 @@ import 'package:meta/meta.dart';
 import 'dart:ui';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../model/user.dart';
+import '../../services/grpc.dart';
+import '../../services/locator.dart';
 part 'account_state.dart';
 
 class LocaleCubit extends ChangeNotifier {
