@@ -1,15 +1,13 @@
-import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../services/helper.dart';
 
 class MapPopup extends StatefulWidget {
   final TagMarker marker;
+  final DeeDeeSliderController _pc;
 
-  const MapPopup(this.marker, {Key? key}) : super(key: key);
+  const MapPopup(this.marker, this._pc, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MapPopupState();
@@ -27,75 +25,11 @@ class _MapPopupState extends State<MapPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 10),
-              child: InkWell(
-                child: Icon(_icons[_currentIcon]),
-                onTap: () => setState(() {
-                  _currentIcon = (_currentIcon + 1) % _icons.length;
-                }),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              constraints: BoxConstraints(
-                minWidth: 100,
-                maxWidth: hidden ? 125 : 200,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      _MessengerLabelButton(
-                          instagramUser: widget.marker.tagMessengerId),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: _toggleHideButton,
-                        icon: Icon(
-                          hidden ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                        ),
-                      )
-                    ],
-                  ),
-                  if (!hidden) ...[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        'Position: ${widget.marker.marker.point.latitude}, ${widget.marker.marker.point.longitude}',
-                        style: const TextStyle(fontSize: 12.0),
-                      ),
-                    ),
-                    const Text(
-                      '#маникюр #ногти',
-                      style: TextStyle(fontSize: 12.0),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: DeeDeeButton(
-                        AppLocalizations.of(context)!.toSee,
-                        () {
-                          pushReplacement(
-                            context,
-                            Container(), // заглушка
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+    return GestureDetector(
+      onTap: () {
+        widget._pc.open();
+      },
+      child: Icon(Icons.location_on, size: 50.0,),
     );
   }
 

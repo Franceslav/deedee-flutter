@@ -1,18 +1,16 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/sha.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
+import 'package:deedee/services/grpc.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/locator.dart';
 
 part 'authentication_event.dart';
-
 part 'authentication_state.dart';
 
 class AuthenticationBloc

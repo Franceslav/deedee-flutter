@@ -7,9 +7,9 @@ import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 
 import '../global widgets/profile_photo_with_badge.dart';

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:deedee/services/authenticate.dart';
+import 'package:flutter/material.dart';
 
 part 'reset_password_state.dart';
 

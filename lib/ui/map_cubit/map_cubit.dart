@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/grpc.dart';
 import 'package:flutter/material.dart';
-import 'package:deedee/services/authenticate.dart';
 
 part 'map_state.dart';
 

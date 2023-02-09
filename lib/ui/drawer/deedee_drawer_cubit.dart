@@ -5,6 +5,7 @@ import 'package:deedee/services/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
+
 part 'deedee_drawer_state.dart';
 
 class DeedeeDrawerCubit extends Cubit<DeedeeDrawerState> {

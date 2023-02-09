@@ -1,7 +1,8 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/model/user.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+
 import '../../services/helper.dart';
 
 class ProfilePhotoWithBadge extends StatelessWidget {
