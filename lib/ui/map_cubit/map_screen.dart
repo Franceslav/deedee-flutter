@@ -11,6 +11,7 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../constants.dart';
 import '../auth/welcome/welcome_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -38,14 +39,17 @@ class DeeDeeSliderController extends PanelController {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late DeeDeeSliderController _pc;
+
+  LatLng get geo => widget.user.lastGeoLocation;
+
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
-  final double _zoom = 12;
+  late DeeDeeSliderController _pc;
   bool click = true;
   bool click_bm = true;
 
   final List<TagMarker> _markers = [];
+
 
   late TagMarker _selectedMarker;
   String _selectedMessengerId = '';
@@ -115,12 +119,13 @@ class _MapScreenState extends State<MapScreen> {
             body: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                // swPanBoundary: LatLng(52, 24),
-                // nePanBoundary: LatLng(52.1, 23.8),
-                center: LatLng(widget.user.lastGeoLocation.latitude,
-                    widget.user.lastGeoLocation.longitude),
+                swPanBoundary: LatLng(
+                    geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
+                nePanBoundary: LatLng(
+                    geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
+                center: LatLng(geo.latitude, geo.longitude),
                 // bounds: LatLngBounds.fromPoints(_latLngList),
-                zoom: _zoom,
+                zoom: MAP_ZOOM,
                 onTap: (tapPosition, tapLatLon) {
                   _pc.close();
                 },
