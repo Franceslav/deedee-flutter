@@ -7,6 +7,7 @@ import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
+import 'package:deedee/ui/topic/topic_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +36,32 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map> topics = [
+      {
+        "color": Colors.red,
+        "title": "Рабочие"
+      },
+      {
+        "color": Colors.pink,
+        "title": "Авто",
+      },
+      {
+        "color": Colors.green,
+        "title": "Бьюти",
+      },
+      {
+        "color": Colors.orange,
+        "title": "Отделка",
+      },
+      {
+        "color": Colors.deepPurple,
+        "title": "Дети",
+      },
+      {
+        "color": Colors.blue,
+        "title": "Клининг",
+      },
+    ];
     return BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(),
       child: Scaffold(
@@ -56,26 +83,28 @@ class _HomeState extends State<HomeScreen> {
             if (state is HomeFailureState) {
               // _validate = AutovalidateMode.onUserInteraction;
             }
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                    push(
-                        context,
-                        PlaceTagScreen(
-                          user: user,
-                        ));
-                  }),
-                  DeeDeeButton(AppLocalizations.of(context)!.seeMap, () {
-                    push(
-                        context,
-                        FilterPage(
-                          user: user,
-                        ));
-                  }),
-                ],
-              ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
+                  push(
+                      context,
+                      PlaceTagScreen(
+                        user: user,
+                      ));
+                }),
+                DeeDeeButton(AppLocalizations.of(context)!.seeMap, () {
+                  push(
+                      context,
+                      FilterPage(
+                        user: user,
+                      ));
+                }),
+                Expanded(
+                    child: TopicWidget(
+                  topicTitle: topics,
+                )),
+              ],
             );
           },
         ),
