@@ -1,5 +1,5 @@
-import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/account/bloc/account_bloc.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,7 +74,7 @@ class Popover extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          user.isVerified = true;
+                          BlocProvider.of<UserBloc>(context).add(UserVerify());
                           Navigator.of(context).pop();
                         }),
                   ),
@@ -107,8 +107,8 @@ class Popover extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          user.isPremium = true;
-                          _bloc.add(TogglePremiumEvent(user.userID));
+                          BlocProvider.of<UserBloc>(context)
+                              .add(UserTogglePremium());
                           Navigator.of(context).pop();
                         }),
                   ),

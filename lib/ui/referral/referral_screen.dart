@@ -5,14 +5,13 @@ import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/ui/home/home_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReferralScreen extends StatefulWidget {
-  final User user;
-
-  const ReferralScreen({Key? key, required this.user}) : super(key: key);
+  const ReferralScreen({super.key});
 
   @override
   State createState() => _ReferralState();
@@ -30,14 +29,14 @@ class _ReferralState extends State<ReferralScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return pushReplacement(context, HomeScreen(user: widget.user!));
+        return pushReplacement(context, const HomeScreen());
       },
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_sharp),
+              icon: const Icon(Icons.arrow_back_ios_sharp),
               onPressed: () {
-                pushReplacement(context, HomeScreen(user: widget.user));
+                pushReplacement(context, const HomeScreen());
               }),
           title: Text(
             AppLocalizations.of(context)!.accountReferralTitle,
@@ -52,18 +51,19 @@ class _ReferralState extends State<ReferralScreen> {
             Expanded(
               flex: 1,
               child: Container(
+                color: Colors.white,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(25.0),
                       child: Text(
                         "Total referrals: 0",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(25.0),
                       child: Text(
                         "Credits: 0",
                         style: TextStyle(fontSize: 20),
@@ -71,13 +71,12 @@ class _ReferralState extends State<ReferralScreen> {
                     ),
                   ],
                 ),
-                color: Colors.white,
               ),
             ),
             Expanded(
               flex: 7,
               child: Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                     maxWidth: double.infinity, maxHeight: double.infinity),
                 color: Colors.white,
                 child: FutureBuilder(
@@ -90,7 +89,7 @@ class _ReferralState extends State<ReferralScreen> {
                           itemBuilder: (context, index) {
                             return Card(
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(
+                                side: const BorderSide(
                                   color: Colors.black,
                                 ),
                                 borderRadius:
@@ -108,14 +107,16 @@ class _ReferralState extends State<ReferralScreen> {
                                       padding: const EdgeInsets.all(20.0),
                                       child: Text(
                                         snapshot.data![index].email,
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     ),
                                     trailing: Padding(
                                       padding: const EdgeInsets.all(20.0),
                                       child: Text(
                                         '${snapshot.data![index].placedTagsAmount}',
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -142,7 +143,7 @@ class _ReferralState extends State<ReferralScreen> {
   Future<List<UserReferral>> getUserReferrals() async {
     return serviceLocator
         .get<GRCPUtils>()
-        .getUserReferrals(widget.user.email)
+        .getUserReferrals(BlocProvider.of<UserBloc>(context).state.user.email)
         .then((referrals) {
       return referrals;
     });

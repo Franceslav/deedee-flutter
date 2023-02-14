@@ -1,10 +1,8 @@
 import 'dart:io';
-
-import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/help/help_bloc.dart';
 import 'package:deedee/ui/help/help_state.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,32 +10,29 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HelpScreen extends StatefulWidget {
-  final User user;
-
-  HelpScreen({Key? key, required this.user}) : super(key: key);
+  const HelpScreen({super.key});
 
   @override
   State createState() => _HelpState();
 }
 
 class _HelpState extends State<HelpScreen> {
-  late User user;
   TextEditingController messageEditingController = TextEditingController();
   File? image;
 
   @override
   void initState() {
     super.initState();
-    user = widget.user;
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     final TextEditingController _controller = TextEditingController();
     return BlocProvider<HelpBloc>(
       create: (context) => HelpBloc(),
       child: Scaffold(
-          drawer: DeeDeeDrawer(user: user),
+          drawer: const DeeDeeDrawer(),
           appBar: AppBar(
             title: Text(
               AppLocalizations.of(context)!.helpTitle,
@@ -47,7 +42,7 @@ class _HelpState extends State<HelpScreen> {
             Container(
               alignment: Alignment.bottomCenter,
               color: Colors.indigo,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: Column(
                 children: [
                   BlocBuilder<HelpBloc, GetMessageState>(

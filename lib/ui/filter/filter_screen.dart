@@ -1,13 +1,11 @@
 import 'dart:async';
-
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_list.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,9 +13,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class FilterPage extends StatefulWidget {
-  final User user;
-
-  const FilterPage({Key? key, required this.user}) : super(key: key);
+  const FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -104,6 +100,7 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.filterTagsPageTitle),
@@ -156,8 +153,7 @@ class _FilterPageState extends State<FilterPage> {
                 context,
                 MapScreen(
                   tagDescriptionMap: tagMap,
-                  user: widget.user,
-                  topic: widget.user.selectedTopic,
+                  user: user,
                 ),
               );
             }
@@ -214,7 +210,7 @@ class _FilterPageState extends State<FilterPage> {
                               bloc.add(PushFiltersEvent(
                                 topic: _selectedTopic,
                                 filterKeys: _selectedFilterKeys,
-                                accountType: widget.user.accountType,
+                                accountType: user.accountType,
                               ));
                             },
                           ),

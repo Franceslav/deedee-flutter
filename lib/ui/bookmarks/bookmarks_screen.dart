@@ -1,24 +1,20 @@
 import 'package:deedee/generated/TagService.pb.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {
-  final User user;
-
-  const BookmarksScreen({super.key, required this.user});
+  const BookmarksScreen({super.key});
 
   @override
   State<BookmarksScreen> createState() => _BookmarksScreenState();
 }
 
 class _BookmarksScreenState extends State<BookmarksScreen> {
-  final _bloc = BookmarksBloc();
   List<Tag> _bookmarks = [];
   bool _isInit = true;
 
@@ -26,20 +22,26 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      _bloc.add(LoadBookmarksEvent(widget.user.userID));
+      final userId = BlocProvider.of<UserBloc>(context).state.user.userId;
+      BlocProvider.of<BookmarksBloc>(context).add(LoadBookmarksEvent(userId));
       _isInit = false;
     }
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.bookmarksTitle),
       ),
-      drawer: DeeDeeDrawer(user: widget.user),
+      drawer: const DeeDeeDrawer(),
       body: BlocConsumer<BookmarksBloc, BookmarksState>(
-        bloc: _bloc,
         listener: (context, state) {
           if (state is ErrorState) {
             showSnackBar(context, state.errorMessage);
@@ -94,9 +96,9 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                           setState(() {
                             _bookmarks.remove(bookmark);
                           });
-                          _bloc.add(
+                          BlocProvider.of<BookmarksBloc>(context).add(
                             DeleteBookmarkEvent(
-                              userId: widget.user.userID,
+                              userId: user.userId,
                               bookmark: bookmark,
                               bookmarkIndex: index,
                             ),
@@ -107,8 +109,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                           leading: Text(bookmark.messengerId),
                           title: Text(bookmark.topicId),
                           subtitle: Text(bookmark.geoLocation.toString()),
-                          onTap: () =>
-                              _bloc.add(TapBookmarkEvent(bookmark.tagId)),
+                          onTap: () => BlocProvider.of<BookmarksBloc>(context)
+                              .add(TapBookmarkEvent(bookmark.tagId)),
                         ),
                       );
                     }),

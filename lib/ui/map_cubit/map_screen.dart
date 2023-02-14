@@ -17,14 +17,12 @@ import '../auth/welcome/welcome_screen.dart';
 class MapScreen extends StatefulWidget {
   final User user;
   final Map<LatLng, String> tagDescriptionMap;
-  final String topic;
 
-  const MapScreen(
-      {Key? key,
-      required this.tagDescriptionMap,
-      required this.user,
-      required this.topic})
-      : super(key: key);
+  const MapScreen({
+    Key? key,
+    required this.tagDescriptionMap,
+    required this.user,
+  }) : super(key: key);
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -39,8 +37,7 @@ class DeeDeeSliderController extends PanelController {
 }
 
 class _MapScreenState extends State<MapScreen> {
-
-  LatLng get geo => widget.user.lastGeoLocation;
+  LatLng get geo => widget.user.lastGeoLocation ?? LatLng(0, 0);
 
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
@@ -49,7 +46,6 @@ class _MapScreenState extends State<MapScreen> {
   bool click_bm = true;
 
   final List<TagMarker> _markers = [];
-
 
   late TagMarker _selectedMarker;
   String _selectedMessengerId = '';
@@ -102,14 +98,10 @@ class _MapScreenState extends State<MapScreen> {
       },
       child: WillPopScope(
           onWillPop: () async {
-            return pushReplacement(
-                context,
-                FilterPage(
-                  user: widget.user,
-                ));
+            return pushReplacement(context, const FilterPage());
           },
           child: Scaffold(
-            drawer: DeeDeeDrawer(user: widget.user),
+            drawer: const DeeDeeDrawer(),
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               iconTheme: IconThemeData(
@@ -201,7 +193,6 @@ class _MapScreenState extends State<MapScreen> {
                             icon: const Icon(
                               Icons.calendar_month_rounded,
                               size: 26.0,
-
                             ),
                           ),
                           const Text('Записаться',
@@ -218,7 +209,8 @@ class _MapScreenState extends State<MapScreen> {
                                 color: Colors.black,
                                 fontSize: 16,
                               )),
-                          const Icon(Icons.phone, size: 26.0, color: Colors.black),
+                          const Icon(Icons.phone,
+                              size: 26.0, color: Colors.black),
                           const Text('пн-пт 9.00 - 21.00',
                               style: TextStyle(
                                 color: Colors.grey,

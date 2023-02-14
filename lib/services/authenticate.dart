@@ -27,7 +27,7 @@ class FireStoreUtils {
   static Future<User> updateCurrentUser(User user) async {
     return await firestore
         .collection(USERS)
-        .doc(user.userID)
+        .doc(user.userId)
         .set(user.toJson())
         .then((document) {
       return user;
@@ -141,7 +141,7 @@ class FireStoreUtils {
   /// returns an error message on failure or null on success
   static Future<String?> createNewUser(User user) async => await firestore
       .collection(USERS)
-      .doc(user.userID)
+      .doc(user.userId)
       .set(user.toJson())
       .then((value) => null, onError: (e) => e);
 
@@ -164,7 +164,7 @@ class FireStoreUtils {
       User user = User(
           email: emailAddress,
           firstName: firstName,
-          userID: result.user?.uid ?? '',
+          userId: result.user?.uid ?? '',
           lastName: lastName,
           profilePictureURL: profilePicUrl);
       String? errorMessage = await createNewUser(user);
@@ -238,7 +238,7 @@ class FireStoreUtils {
           lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
           email: '',
           profilePictureURL: profileImageUrl,
-          userID: userCredential.user?.uid ?? '');
+          userId: userCredential.user?.uid ?? '');
       String? errorMessage = await createNewUser(user);
       if (errorMessage == null) {
         return user;
@@ -285,7 +285,7 @@ class FireStoreUtils {
         email: appleIdCredential.email ?? '',
         firstName: appleIdCredential.fullName?.givenName ?? '',
         profilePictureURL: '',
-        userID: authResult.user?.uid ?? '',
+        userId: authResult.user?.uid ?? '',
         lastName: appleIdCredential.fullName?.familyName ?? '',
       );
       String? errorMessage = await createNewUser(user);

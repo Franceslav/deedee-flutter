@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
@@ -8,7 +6,7 @@ import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:deedee/ui/topic/topic_widget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,31 +14,24 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class HomeScreen extends StatefulWidget {
-  final User user;
-
-  const HomeScreen({Key? key, required this.user}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State createState() => _HomeState();
 }
 
 class _HomeState extends State<HomeScreen> {
-  late User user;
-
   @override
   void initState() {
     checkGps();
     super.initState();
-    user = widget.user;
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     final List<Map> topics = [
-      {
-        "color": Colors.red,
-        "title": "Рабочие"
-      },
+      {"color": Colors.red, "title": "Рабочие"},
       {
         "color": Colors.pink,
         "title": "Авто",
@@ -65,20 +56,14 @@ class _HomeState extends State<HomeScreen> {
     return BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(),
       child: Scaffold(
-        drawer: DeeDeeDrawer(user: user),
+        drawer: const DeeDeeDrawer(),
         appBar: AppBar(
           title: Text(
             AppLocalizations.of(context)!.homeTitle,
           ),
         ),
         body: BlocConsumer<HomeBloc, HomePageState>(
-          listener: (context, state) {
-            if (state is HomePageChangeState) {
-              setState(() {
-                user.selectedTopic = state.topic;
-              });
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is HomeFailureState) {
               // _validate = AutovalidateMode.onUserInteraction;
@@ -87,18 +72,13 @@ class _HomeState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                  push(
-                      context,
-                      PlaceTagScreen(
-                        user: user,
-                      ));
+                  push(context, const PlaceTagScreen());
                 }),
                 DeeDeeButton(AppLocalizations.of(context)!.seeMap, () {
                   push(
-                      context,
-                      FilterPage(
-                        user: user,
-                      ));
+                    context,
+                    const FilterPage(),
+                  );
                 }),
                 Expanded(
                     child: TopicWidget(
@@ -156,10 +136,8 @@ class _HomeState extends State<HomeScreen> {
     StreamSubscription<Position> positionStream =
         Geolocator.getPositionStream(locationSettings: locationSettings)
             .listen((Position position) {
-      widget.user.lastGeoLocation =
-          LatLng(position.latitude, position.longitude);
+      BlocProvider.of<UserBloc>(context).add(UserSetLastGeolocation(
+          LatLng(position.latitude, position.longitude)));
     });
-
-    widget.user.lastGeoLocation = LatLng(position.latitude, position.longitude);
   }
 }

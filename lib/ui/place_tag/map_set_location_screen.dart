@@ -43,7 +43,6 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
         ),
       ),
       body: BlocConsumer<SetLocationBloc, SetLocationState>(
-        // bloc: bloc,
         listener: (ctx, state) {
           if (state.address != null && state.address!.address != null) {
             _currentAddress = state.address!.address;
@@ -220,10 +219,5 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
         .add(CenterPositionChanged(newPosition: position));
     BlocProvider.of<SetLocationBloc>(context)
         .add(SearchAddressByLocation(position));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

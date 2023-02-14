@@ -5,6 +5,7 @@ import 'package:deedee/ui/auth/login/login_bloc.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -47,11 +48,15 @@ class _LoginScreen extends State<LoginScreen> {
                 listener: (context, state) {
                   context.read<LoadingCubit>().hideLoading();
                   if (state.authState == AuthState.authenticated) {
-                    pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user!), false);
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UserAuthenticated(state.user!));
+                    pushAndRemoveUntil(context, const HomeScreen(), false);
                   } else {
-                    showSnackBar(context,
-                        state.message ??  AppLocalizations.of(context)!.couldLoginPleaseTryAgain);
+                    showSnackBar(
+                        context,
+                        state.message ??
+                            AppLocalizations.of(context)!
+                                .couldLoginPleaseTryAgain);
                   }
                 },
               ),
@@ -59,7 +64,9 @@ class _LoginScreen extends State<LoginScreen> {
                 listener: (context, state) {
                   if (state is ValidLoginFields) {
                     context.read<LoadingCubit>().showLoading(
-                        context, AppLocalizations.of(context)!.loggingInPleaseWait, false);
+                        context,
+                        AppLocalizations.of(context)!.loggingInPleaseWait,
+                        false);
                     context.read<AuthenticationBloc>().add(
                           LoginWithEmailAndPasswordEvent(
                             email: email!,
@@ -82,9 +89,9 @@ class _LoginScreen extends State<LoginScreen> {
                   autovalidateMode: _validate,
                   child: ListView(
                     children: [
-                       Padding(
-                        padding: EdgeInsets.only(
-                            top: 32.0, right: 16.0, left: 16.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: 32.0, right: 16.0, left: 16.0),
                         child: Text(
                           AppLocalizations.of(context)!.signInTitle,
                           style: TextStyle(
@@ -107,7 +114,8 @@ class _LoginScreen extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                             cursorColor: const Color(COLOR_PRIMARY),
                             decoration: getInputDecoration(
-                                hint: AppLocalizations.of(context)!.emailAddressTitle,
+                                hint: AppLocalizations.of(context)!
+                                    .emailAddressTitle,
                                 darkMode: isDarkMode(context),
                                 errorColor: Theme.of(context).errorColor)),
                       ),
@@ -167,8 +175,8 @@ class _LoginScreen extends State<LoginScreen> {
                             ),
                             primary: const Color(COLOR_PRIMARY),
                           ),
-                          child:  Text(
-                            AppLocalizations.of(context)!.signInTitle                            ,
+                          child: Text(
+                            AppLocalizations.of(context)!.signInTitle,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -179,7 +187,8 @@ class _LoginScreen extends State<LoginScreen> {
                               .read<LoginBloc>()
                               .add(ValidateLoginFieldsEvent(_key)),
                         ),
-                      ),Padding(
+                      ),
+                      Padding(
                         padding: const EdgeInsets.only(
                             right: 40.0, left: 40.0, top: 20, bottom: 20),
                         child: TextButton(
@@ -191,12 +200,12 @@ class _LoginScreen extends State<LoginScreen> {
                                 color: Color(COLOR_PRIMARY)),
                           ),
                           onPressed: () {
-                            pushReplacement(context,
-                                SignUpScreen());
+                            pushReplacement(context, SignUpScreen());
                             // context.read<WelcomeBloc>().add(SignupPressed());
                           },
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            padding:
+                                MaterialStateProperty.all<EdgeInsetsGeometry>(
                               const EdgeInsets.only(top: 12, bottom: 12),
                             ),
                             shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -226,8 +235,8 @@ class _LoginScreen extends State<LoginScreen> {
                         padding: const EdgeInsets.only(
                             right: 40.0, left: 40.0, bottom: 20),
                         child: ElevatedButton.icon(
-                          label:  Text(
-                            AppLocalizations.of(context)!.facebookLoginTitle ,
+                          label: Text(
+                            AppLocalizations.of(context)!.facebookLoginTitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20,
@@ -252,7 +261,10 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                           onPressed: () {
                             context.read<LoadingCubit>().showLoading(
-                                context,AppLocalizations.of(context)!.loggingInPleaseWait, false);
+                                context,
+                                AppLocalizations.of(context)!
+                                    .loggingInPleaseWait,
+                                false);
                             context.read<AuthenticationBloc>().add(
                                   LoginWithFacebookEvent(),
                                 );
@@ -281,7 +293,8 @@ class _LoginScreen extends State<LoginScreen> {
                                   onPressed: () {
                                     context.read<LoadingCubit>().showLoading(
                                         context,
-                                        AppLocalizations.of(context)!.loggingInPleaseWait,
+                                        AppLocalizations.of(context)!
+                                            .loggingInPleaseWait,
                                         false);
                                     context.read<AuthenticationBloc>().add(
                                           LoginWithAppleEvent(),

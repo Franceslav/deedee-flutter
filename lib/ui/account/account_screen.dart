@@ -1,13 +1,11 @@
 import 'package:deedee/constants.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
@@ -16,32 +14,24 @@ import '../global widgets/profile_photo_with_badge.dart';
 import 'account_popover.dart';
 
 class AccountScreen extends StatefulWidget {
-  final User user;
-
-  const AccountScreen({Key? key, required this.user}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   State createState() => _AccountState();
 }
 
 class _AccountState extends State<AccountScreen> {
-  late User user;
   final Uuid uuid = const Uuid();
 
   @override
-  void initState() {
-    super.initState();
-    user = widget.user;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return WillPopScope(
       onWillPop: () async {
-        return pushReplacement(context, HomeScreen(user: widget.user));
+        return pushReplacement(context, const HomeScreen());
       },
       child: Scaffold(
-        drawer: DeeDeeDrawer(user: user),
+        drawer: const DeeDeeDrawer(),
         appBar: AppBar(
           title: Text(
             AppLocalizations.of(context)!.accountTitle,
@@ -79,7 +69,7 @@ class _AccountState extends State<AccountScreen> {
                       splashColor: Colors.indigo,
                       splashRadius: 20,
                       onPressed: () {
-                        context.read<LocaleCubit>().uudiURL(widget.user.email);
+                        context.read<LocaleCubit>().uudiURL(user.email);
                         context.read<LocaleCubit>().showToast(context);
                       },
                       icon: const Icon(
@@ -87,41 +77,42 @@ class _AccountState extends State<AccountScreen> {
                       )),
                 ],
               ),
-              !user.isPremium?
-               Padding(
-                padding:
-                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(COLOR_PRIMARY),
-                      padding: const EdgeInsets.only(top: 12, bottom: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(
-                          color: Color(COLOR_PRIMARY),
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.accountPremium,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Popover(user: user);
-                        },
-                      ).then((value) {
-                        setState(() {});
-                      });
-                    }),
-              ): const SizedBox.shrink(),
+              !user.isPremium
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          right: 40.0, left: 40.0, top: 40),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(COLOR_PRIMARY),
+                            padding: const EdgeInsets.only(top: 12, bottom: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              side: const BorderSide(
+                                color: Color(COLOR_PRIMARY),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)!.accountPremium,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) {
+                                return Popover(user: user);
+                              },
+                            ).then((value) {
+                              setState(() {});
+                            });
+                          }),
+                    )
+                  : const SizedBox.shrink(),
               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, left: 40.0, top: 20),
@@ -146,10 +137,9 @@ class _AccountState extends State<AccountScreen> {
                     ),
                     onPressed: () {
                       pushReplacement(
-                          context,
-                          TopUpPage(
-                            user: user,
-                          ));
+                        context,
+                        const TopUpPage(),
+                      );
                     }),
               ),
               Padding(

@@ -30,7 +30,7 @@ class ProfilePhotoWithBadge extends StatelessWidget {
       );
     } else {
       return addBadge(
-        displayCircleImage(user.profilePictureURL, 80, false),
+        displayCircleImage(user.profilePictureURL ?? '', 80, false),
       );
     }
   }

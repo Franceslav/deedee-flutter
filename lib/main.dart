@@ -1,13 +1,16 @@
 import 'package:deedee/constants.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:deedee/ui/account/account_cubit.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
+import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +39,12 @@ void main() {
               searchAddressRepository:
                   RepositoryProvider.of<SearchAddressRepository>(context),
             ),
+          ),
+          BlocProvider(
+            create: (_) => UserBloc(),
+          ),
+          BlocProvider(
+            create: (_) => BookmarksBloc(),
           ),
         ],
         child: const MyApp(),

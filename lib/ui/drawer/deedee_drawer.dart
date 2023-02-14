@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
@@ -13,27 +11,26 @@ import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
-
 import '../global widgets/profile_photo_with_badge.dart';
 
 class DeeDeeDrawer extends StatefulWidget {
-  final User user;
-
-  const DeeDeeDrawer({Key? key, required this.user}) : super(key: key);
+  const DeeDeeDrawer({super.key});
 
   @override
   State createState() => _DrawerState();
 }
 
 class _DrawerState extends State<DeeDeeDrawer> {
-  final uuid = Uuid();
+  final uuid = const Uuid();
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return BlocProvider<DeedeeDrawerCubit>(
       create: (context) => DeedeeDrawerCubit(),
       child: Builder(
@@ -56,10 +53,10 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ProfilePhotoWithBadge(user: widget.user),
+                              ProfilePhotoWithBadge(user: user),
                               Expanded(
                                 child: Text(
-                                  widget.user.fullName(),
+                                  user.fullName(),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
@@ -68,7 +65,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                 onPressed: () {
                                   context
                                       .read<DeedeeDrawerCubit>()
-                                      .uudiURL(widget.user.email);
+                                      .uudiURL(user.email);
                                   context
                                       .read<DeedeeDrawerCubit>()
                                       .showToast(context);
@@ -81,7 +78,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           const SizedBox(
                             height: 16,
                           ),
-                          if (!widget.user.isVerified)
+                          if (!user.isVerified)
                             Column(
                               children: [
                                 Text(
@@ -98,13 +95,13 @@ class _DrawerState extends State<DeeDeeDrawer> {
                               ],
                             ),
                           Text(
-                            widget.user.accountType.stringType(context),
+                            user.accountType.stringType(context),
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                           Row(
                             children: [
                               Text(
-                                '${AppLocalizations.of(context)!.balanceTitle}: ${widget.user.balance.toStringAsFixed(2)}\$',
+                                '${AppLocalizations.of(context)!.balanceTitle}: ${user.balance.toStringAsFixed(2)}\$',
                                 style: Theme.of(context).textTheme.subtitle2,
                               ),
                               const SizedBox(
@@ -114,12 +111,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(),
                                 onPressed: () async {
-                                  final currentBalance = await context
-                                      .read<DeedeeDrawerCubit>()
-                                      .getBalance(widget.user.userID);
-                                  setState(() {
-                                    widget.user.balance = currentBalance;
-                                  });
+                                  BlocProvider.of<UserBloc>(context)
+                                      .add(UserUpdateBalance());
                                 },
                                 icon: const Icon(
                                   Icons.refresh,
@@ -133,7 +126,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             height: 4,
                           ),
                           Text(
-                            '${AppLocalizations.of(context)!.availableTagsTitle}: ${widget.user.availableTags}',
+                            '${AppLocalizations.of(context)!.availableTagsTitle}: ${user.availableTags}',
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                         ],
@@ -148,8 +141,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             text: AppLocalizations.of(context)!.homeTitle,
                             iconData: Icons.home,
                             onTap: () {
-                              pushReplacement(
-                                  context, HomeScreen(user: widget.user));
+                              pushReplacement(context, const HomeScreen());
                             },
                           ),
                           ExpansionTile(
@@ -178,26 +170,31 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                             .accountMoneyTitle,
                                         iconData: Icons.account_box,
                                         onTap: () {
-                                          pushReplacement(context,
-                                              AccountScreen(user: widget.user));
+                                          pushReplacement(
+                                            context,
+                                            const AccountScreen(),
+                                          );
                                         },
                                       ),
                                       DrawerButton(
                                         text:
-                                            '${AppLocalizations.of(context)!.switchTo} ${widget.user.accountType.switchAccountStringType(context)}',
+                                            '${AppLocalizations.of(context)!.switchTo} ${user.accountType.switchAccountStringType(context)}',
                                         iconData: Icons.rotate_left_rounded,
                                         onTap: () {
-                                          switch (widget.user.accountType) {
+                                          switch (user.accountType) {
                                             case AccountType.buy:
-                                              widget.user.accountType =
-                                                  AccountType.sell;
+                                              BlocProvider.of<UserBloc>(context)
+                                                  .add(UserSwitchAccountType(
+                                                      AccountType.sell));
                                               break;
                                             case AccountType.sell:
-                                              widget.user.accountType =
-                                                  AccountType.buy;
+                                              BlocProvider.of<UserBloc>(context)
+                                                  .add(UserSwitchAccountType(
+                                                      AccountType.buy));
+                                              break;
                                           }
-                                          pushReplacement(context,
-                                              HomeScreen(user: widget.user));
+                                          pushReplacement(
+                                              context, const HomeScreen());
                                         },
                                       ),
                                       DrawerButton(
@@ -207,7 +204,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                         onTap: () {
                                           pushReplacement(
                                             context,
-                                            BookmarksScreen(user: widget.user),
+                                            const BookmarksScreen(),
                                           );
                                         },
                                       ),
@@ -217,9 +214,9 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                         iconData: Icons.link_sharp,
                                         onTap: () {
                                           pushReplacement(
-                                              context,
-                                              ReferralScreen(
-                                                  user: widget.user));
+                                            context,
+                                            const ReferralScreen(),
+                                          );
                                         },
                                       ),
                                     ],
@@ -232,16 +229,14 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             text: AppLocalizations.of(context)!.settings,
                             iconData: Icons.settings,
                             onTap: () {
-                              pushReplacement(
-                                  context, SettingsScreen(user: widget.user));
+                              pushReplacement(context, const SettingsScreen());
                             },
                           ),
                           DrawerButton(
                             text: AppLocalizations.of(context)!.helpTitle,
                             iconData: Icons.help_outline,
                             onTap: () {
-                              pushReplacement(
-                                  context, HelpScreen(user: widget.user));
+                              pushReplacement(context, const HelpScreen());
                             },
                           ),
                           DrawerButton(

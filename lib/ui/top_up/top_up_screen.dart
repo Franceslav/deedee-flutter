@@ -7,14 +7,13 @@ import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/top_up/top_up_bloc.dart';
 import 'package:deedee/ui/top_up/top_up_event.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TopUpPage extends StatefulWidget {
-  final User user;
-
-  const TopUpPage({Key? key, required this.user}) : super(key: key);
+  const TopUpPage({super.key});
 
   @override
   _TopUpPageState createState() => _TopUpPageState();
@@ -32,13 +31,14 @@ class _TopUpPageState extends State<TopUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return BlocProvider<TopUpBloc>(
-      create: (context) => TopUpBloc(widget.user),
+      create: (context) => TopUpBloc(user),
       child: Builder(
         builder: (context) {
           return WillPopScope(
               child: Scaffold(
-                drawer: DeeDeeDrawer(user: widget.user),
+                drawer: const DeeDeeDrawer(),
                 appBar: AppBar(
                   title: Text(
                     AppLocalizations.of(context)!.accountTopUp,
@@ -101,7 +101,10 @@ class _TopUpPageState extends State<TopUpPage> {
                 ),
               ),
               onWillPop: () async {
-                return pushReplacement(context, HomeScreen(user: widget.user!));
+                return pushReplacement(
+                  context,
+                  const HomeScreen(),
+                );
               });
         },
       ),

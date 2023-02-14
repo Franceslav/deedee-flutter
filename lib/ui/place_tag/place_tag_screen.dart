@@ -2,23 +2,20 @@ import 'dart:async';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
-import '../../model/user.dart';
 import '../deedee_button/deedee_button.dart';
-import '../drawer/deedee_drawer.dart';
 import '../selector/selector_list.dart';
 import '../selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 
 class PlaceTagScreen extends StatefulWidget {
-  final User user;
-
-  const PlaceTagScreen({Key? key, required this.user}) : super(key: key);
+  const PlaceTagScreen({super.key});
 
   @override
   State<PlaceTagScreen> createState() => _PlaceTagScreenState();
@@ -108,6 +105,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.placeBidPageTitle),
@@ -219,8 +217,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                       .push<AddressModel?>(
                                     MaterialPageRoute(
                                       builder: (_) => MapSetLocationScreen(
-                                          userLocation:
-                                              widget.user.lastGeoLocation),
+                                        userLocation: _userLocation,
+                                      ),
                                     ),
                                   );
                                   if (data == null) {
@@ -276,7 +274,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                             () {
                               bloc.add(
                                 PushTagEvent(
-                                  accountType: widget.user.accountType,
+                                  accountType: user.accountType,
                                   topic: _selectedTopic,
                                   messengerId: _messengerId,
                                   location: _selectedLocation,

@@ -1,5 +1,4 @@
 import 'package:deedee/constants.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/locator.dart';
 import 'package:deedee/services/shared.dart';
@@ -10,10 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConnectionSettingsScreen extends StatefulWidget {
-  final User user;
-
-  const ConnectionSettingsScreen({Key? key, required this.user})
-      : super(key: key);
+  const ConnectionSettingsScreen({super.key});
 
   @override
   _ConnectionSettingsScreenState createState() =>
@@ -43,11 +39,10 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
         child: Builder(builder: (context) {
           return WillPopScope(
               onWillPop: () async {
-                return pushReplacement(
-                    context, SettingsScreen(user: widget.user));
+                return pushReplacement(context, const SettingsScreen());
               },
               child: Scaffold(
-                drawer: DeeDeeDrawer(user: widget.user),
+                drawer: const DeeDeeDrawer(),
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
                   iconTheme: IconThemeData(

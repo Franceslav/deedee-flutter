@@ -4,6 +4,7 @@ import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,7 +33,12 @@ class _LauncherScreenState extends State<LauncherScreen> {
               pushReplacement(context, const OnBoardingScreen());
               break;
             case AuthState.authenticated:
-              pushReplacement(context, HomeScreen(user: state.user!));
+              BlocProvider.of<UserBloc>(context)
+                  .add(UserAuthenticated(state.user!));
+              pushReplacement(
+                context,
+                const HomeScreen(),
+              );
               break;
             case AuthState.unauthenticated:
               pushReplacement(context, const WelcomeScreen());

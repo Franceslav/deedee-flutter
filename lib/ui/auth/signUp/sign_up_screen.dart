@@ -1,15 +1,14 @@
 import 'dart:io';
-
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/signUp/sign_up_bloc.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,13 +43,19 @@ class _SignUpState extends State<SignUpScreen> {
                 listener: (context, state) {
                   context.read<LoadingCubit>().hideLoading();
                   if (state.authState == AuthState.authenticated) {
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UserAuthenticated(state.user!));
                     pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user!), false);
+                      context,
+                      const HomeScreen(),
+                      false,
+                    );
                   } else {
                     showSnackBar(
                         context,
                         state.message ??
-                            AppLocalizations.of(context)!.couldSignUpPleaseTryAgainTitle);
+                            AppLocalizations.of(context)!
+                                .couldSignUpPleaseTryAgainTitle);
                   }
                 },
               ),
@@ -58,7 +63,10 @@ class _SignUpState extends State<SignUpScreen> {
                 listener: (context, state) {
                   if (state is ValidFields) {
                     context.read<LoadingCubit>().showLoading(
-                        context,  AppLocalizations.of(context)!.creatingNewAccountPleaseWaitTitle, false);
+                        context,
+                        AppLocalizations.of(context)!
+                            .creatingNewAccountPleaseWaitTitle,
+                        false);
                     context.read<AuthenticationBloc>().add(
                         SignupWithEmailAndPasswordEvent(
                             emailAddress: email!,
@@ -97,10 +105,11 @@ class _SignUpState extends State<SignUpScreen> {
                         children: [
                           Text(
                             AppLocalizations.of(context)!.createNewAccountTitle,
-                            style: TextStyle(
-                                color: Color(COLOR_PRIMARY),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25.0),
+                            style: const TextStyle(
+                              color: Color(COLOR_PRIMARY),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25.0,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -152,14 +161,14 @@ class _SignUpState extends State<SignUpScreen> {
                                   right: 110,
                                   child: FloatingActionButton(
                                     backgroundColor: const Color(COLOR_PRIMARY),
+                                    mini: true,
+                                    onPressed: () => _onCameraClick(context),
                                     child: Icon(
                                       Icons.camera_alt,
                                       color: isDarkMode(context)
                                           ? Colors.black
                                           : Colors.white,
                                     ),
-                                    mini: true,
-                                    onPressed: () => _onCameraClick(context),
                                   ),
                                 )
                               ],
@@ -176,7 +185,8 @@ class _SignUpState extends State<SignUpScreen> {
                               },
                               textInputAction: TextInputAction.next,
                               decoration: getInputDecoration(
-                                  hint:  AppLocalizations.of(context)!.firstNameTitle,
+                                  hint: AppLocalizations.of(context)!
+                                      .firstNameTitle,
                                   darkMode: isDarkMode(context),
                                   errorColor: Theme.of(context).errorColor),
                             ),
@@ -192,7 +202,8 @@ class _SignUpState extends State<SignUpScreen> {
                               },
                               textInputAction: TextInputAction.next,
                               decoration: getInputDecoration(
-                                  hint: AppLocalizations.of(context)!.lastNameTitle,
+                                  hint: AppLocalizations.of(context)!
+                                      .lastNameTitle,
                                   darkMode: isDarkMode(context),
                                   errorColor: Theme.of(context).errorColor),
                             ),
@@ -228,7 +239,7 @@ class _SignUpState extends State<SignUpScreen> {
                                   const TextStyle(height: 0.8, fontSize: 18.0),
                               cursorColor: const Color(COLOR_PRIMARY),
                               decoration: getInputDecoration(
-                                  hint:  AppLocalizations.of(context)!.password,
+                                  hint: AppLocalizations.of(context)!.password,
                                   darkMode: isDarkMode(context),
                                   errorColor: Theme.of(context).errorColor),
                             ),
@@ -253,60 +264,65 @@ class _SignUpState extends State<SignUpScreen> {
                                   const TextStyle(height: 0.8, fontSize: 18.0),
                               cursorColor: const Color(COLOR_PRIMARY),
                               decoration: getInputDecoration(
-                                  hint: AppLocalizations.of(context)!.confirmPasswordTitle,
+                                  hint: AppLocalizations.of(context)!
+                                      .confirmPasswordTitle,
                                   darkMode: isDarkMode(context),
                                   errorColor: Theme.of(context).errorColor),
                             ),
                           ),
-                          Padding(padding: const EdgeInsets.only(top:50.0, bottom: 20.0),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 50.0, bottom: 20.0),
                             child: ListTile(
-                            trailing: BlocBuilder<SignUpBloc, SignUpState>(
-                              buildWhen: (old, current) =>
-                              current is EulaToggleState && old != current,
-                              builder: (context, state) {
-                                if (state is EulaToggleState) {
-                                  acceptEULA = state.eulaAccepted;
-                                }
-                                return Checkbox(
-                                  onChanged: (value) =>
-                                      context.read<SignUpBloc>().add(
-                                        ToggleEulaCheckboxEvent(
-                                          eulaAccepted: value!,
-                                        ),
-                                      ),
-                                  activeColor: const Color(COLOR_PRIMARY),
-                                  value: acceptEULA,
-                                );
-                              },
-                            ),
-                            title: RichText(
-                              textAlign: TextAlign.left,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text:
-                                    AppLocalizations.of(context)!.byCreatingAnAccountYouAgreeTitle,
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                  TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.blueAccent,
+                              trailing: BlocBuilder<SignUpBloc, SignUpState>(
+                                buildWhen: (old, current) =>
+                                    current is EulaToggleState &&
+                                    old != current,
+                                builder: (context, state) {
+                                  if (state is EulaToggleState) {
+                                    acceptEULA = state.eulaAccepted;
+                                  }
+                                  return Checkbox(
+                                    onChanged: (value) =>
+                                        context.read<SignUpBloc>().add(
+                                              ToggleEulaCheckboxEvent(
+                                                eulaAccepted: value!,
+                                              ),
+                                            ),
+                                    activeColor: const Color(COLOR_PRIMARY),
+                                    value: acceptEULA,
+                                  );
+                                },
+                              ),
+                              title: RichText(
+                                textAlign: TextAlign.left,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: AppLocalizations.of(context)!
+                                          .byCreatingAnAccountYouAgreeTitle,
+                                      style: TextStyle(color: Colors.grey),
                                     ),
-                                    text:  " ${AppLocalizations.of(context)!.termsOfUseTitle}",
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () async {
-                                        if (await canLaunch(EULA)) {
-                                          await launch(
-                                            EULA,
-                                            forceSafariVC: false,
-                                          );
-                                        }
-                                      },
-                                  ),
-                                ],
+                                    TextSpan(
+                                      style: const TextStyle(
+                                        color: Colors.blueAccent,
+                                      ),
+                                      text:
+                                          " ${AppLocalizations.of(context)!.termsOfUseTitle}",
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          if (await canLaunch(EULA)) {
+                                            await launch(
+                                              EULA,
+                                              forceSafariVC: false,
+                                            );
+                                          }
+                                        },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -323,9 +339,9 @@ class _SignUpState extends State<SignUpScreen> {
                                   ),
                                 ),
                               ),
-                              child:  Text(
+                              child: Text(
                                 AppLocalizations.of(context)!.signUpTitle,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
@@ -338,7 +354,6 @@ class _SignUpState extends State<SignUpScreen> {
                             ),
                           ),
                           const SizedBox(height: 24),
-
                         ],
                       ),
                     );
@@ -354,30 +369,31 @@ class _SignUpState extends State<SignUpScreen> {
 
   _onCameraClick(BuildContext context) {
     final action = CupertinoActionSheet(
-      title:  Text(
+      title: Text(
         AppLocalizations.of(context)!.addProfilePictureTitle,
-        style: TextStyle(fontSize: 15.0),
+        style: const TextStyle(fontSize: 15.0),
       ),
       actions: [
         CupertinoActionSheetAction(
-          child: Text(AppLocalizations.of(context)!.chooseFromGalleryTitle),
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
             context.read<SignUpBloc>().add(ChooseImageFromGalleryEvent());
           },
+          child: Text(AppLocalizations.of(context)!.chooseFromGalleryTitle),
         ),
         CupertinoActionSheetAction(
-          child: Text(AppLocalizations.of(context)!.takePictureTitle),
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
             context.read<SignUpBloc>().add(CaptureImageByCameraEvent());
           },
+          child: Text(AppLocalizations.of(context)!.takePictureTitle),
         )
       ],
       cancelButton: CupertinoActionSheetAction(
-          child:  Text(AppLocalizations.of(context)!.cancelTitle), onPressed: () => Navigator.pop(context)),
+          child: Text(AppLocalizations.of(context)!.cancelTitle),
+          onPressed: () => Navigator.pop(context)),
     );
     showCupertinoModalPopup(context: context, builder: (context) => action);
   }
