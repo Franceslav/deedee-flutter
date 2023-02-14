@@ -112,7 +112,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                 constraints: const BoxConstraints(),
                                 onPressed: () async {
                                   BlocProvider.of<UserBloc>(context)
-                                      .add(UserUpdateBalance());
+                                      .add(UserGetBalance());
                                 },
                                 icon: const Icon(
                                   Icons.refresh,
