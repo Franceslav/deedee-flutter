@@ -37,17 +37,25 @@ class ProfilePhotoWithBadge extends StatelessWidget {
 
   badges.Badge addBadge(Widget child) {
     return badges.Badge(
-        badgeContent: !user.isVerified && !user.isPremium
+        badgeContent: user.emailVerification ==
+                    EmailVerificationStatus.unverified &&
+                user.docVerification == DocVerificationStatus.unverified &&
+                user.premiumStatus == PremiumStatus.notPremium
             ? const Icon(
                 CommunityMaterialIcons.help_circle,
                 color: Colors.grey,
               )
-            : user.isVerified && !user.isPremium
+            : user.emailVerification == EmailVerificationStatus.verified &&
+                    user.docVerification == DocVerificationStatus.verified &&
+                    user.premiumStatus == PremiumStatus.notPremium
                 ? const Icon(
                     CommunityMaterialIcons.check_circle,
                     color: Colors.grey,
                   )
-                : user.isVerified && user.isPremium
+                : user.emailVerification == EmailVerificationStatus.verified &&
+                        user.docVerification ==
+                            DocVerificationStatus.verified &&
+                        user.premiumStatus == PremiumStatus.isPremium
                     ? const Icon(
                         CommunityMaterialIcons.star_circle_outline,
                         color: Colors.amber,

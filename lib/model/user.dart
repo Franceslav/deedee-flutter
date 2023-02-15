@@ -5,6 +5,24 @@ import 'package:latlong2/latlong.dart';
 
 enum AccountType { buy, sell }
 
+enum EmailVerificationStatus {
+  verified,
+  unverified,
+  sent,
+}
+
+enum DocVerificationStatus {
+  verified,
+  unverified,
+  verificationRequestSent,
+  verificationInProgress,
+}
+
+enum PremiumStatus {
+  isPremium,
+  notPremium,
+}
+
 extension AccountTypeExtension on AccountType {
   String stringType(BuildContext context) {
     switch (this) {
@@ -31,14 +49,13 @@ class User extends Equatable {
   final String firstName;
   final String lastName;
   final String? profilePictureURL;
-  final bool isVerified;
-  final bool isPremium;
+  final EmailVerificationStatus emailVerification;
+  final DocVerificationStatus docVerification;
+  final PremiumStatus premiumStatus;
   final double balance;
   final int availableTags;
   final AccountType accountType;
   final LatLng? lastGeoLocation;
-
-  // final String? appIdentifier;
 
   static const empty = User(
     userId: '',
@@ -58,8 +75,9 @@ class User extends Equatable {
     required this.firstName,
     required this.lastName,
     this.profilePictureURL,
-    this.isVerified = false,
-    this.isPremium = false,
+    this.emailVerification = EmailVerificationStatus.unverified,
+    this.docVerification = DocVerificationStatus.unverified,
+    this.premiumStatus = PremiumStatus.notPremium,
     this.balance = 0.0,
     this.availableTags = 3,
     this.accountType = AccountType.buy,
@@ -73,8 +91,6 @@ class User extends Equatable {
       firstName: parsedJson['firstName'] ?? '',
       lastName: parsedJson['lastName'] ?? '',
       profilePictureURL: parsedJson['profilePictureURL'] ?? '',
-      isVerified: parsedJson['isVerified'] ?? false,
-      isPremium: parsedJson['isPremium'] ?? false,
       balance: parsedJson['balance'] ?? 0.0,
       availableTags: parsedJson['availableTags'] ?? 0,
       lastGeoLocation: null,
@@ -88,8 +104,9 @@ class User extends Equatable {
       'firstName': firstName,
       'lastName': lastName,
       'profilePictureURL': profilePictureURL,
-      'isVerified': isVerified,
-      'isPremium': isPremium,
+      'emailVerification': emailVerification,
+      'docVerification': docVerification,
+      'premiumStatus': premiumStatus,
       'balance': balance,
       'availableTags': availableTags,
       'lastLat': lastGeoLocation?.latitude ?? 0.0,
@@ -99,8 +116,9 @@ class User extends Equatable {
 
   User copyWith({
     String? profilePictureURL,
-    bool? isVerified,
-    bool? isPremium,
+    EmailVerificationStatus? emailVerification,
+    DocVerificationStatus? docVerification,
+    PremiumStatus? premiumStatus,
     double? balance,
     int? availableTags,
     AccountType? accountType,
@@ -112,8 +130,9 @@ class User extends Equatable {
       firstName: firstName,
       lastName: lastName,
       profilePictureURL: profilePictureURL ?? this.profilePictureURL,
-      isVerified: isVerified ?? this.isVerified,
-      isPremium: isPremium ?? this.isPremium,
+      emailVerification: emailVerification ?? this.emailVerification,
+      docVerification: docVerification ?? this.docVerification,
+      premiumStatus: premiumStatus ?? this.premiumStatus,
       balance: balance ?? this.balance,
       availableTags: availableTags ?? this.availableTags,
       accountType: accountType ?? this.accountType,
@@ -128,8 +147,9 @@ class User extends Equatable {
         firstName,
         lastName,
         profilePictureURL,
-        isVerified,
-        isPremium,
+        emailVerification,
+        docVerification,
+        premiumStatus,
         balance,
         availableTags,
         accountType,

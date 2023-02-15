@@ -1,3 +1,4 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
@@ -37,9 +38,7 @@ class DeeDeeSliderController extends PanelController {
 }
 
 class _MapScreenState extends State<MapScreen> {
-
   LatLng get geo => widget.user.lastGeoLocation ?? LatLng(0, 0);
-
 
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
@@ -131,7 +130,8 @@ class _MapScreenState extends State<MapScreen> {
                   maxHeight: size.height * 0.5,
                   controller: _pc,
                   header: Container(
-                    margin: EdgeInsets.fromLTRB(size.width / 2 - 30, 10.0, 24.0, 0.0),
+                    margin: EdgeInsets.fromLTRB(
+                        size.width / 2 - 30, 10.0, 24.0, 0.0),
                     width: 60,
                     height: 7,
                     decoration: BoxDecoration(
@@ -177,8 +177,7 @@ class _MapScreenState extends State<MapScreen> {
                               )),
                           SizedBox(width: 210),
                           Icon(
-
-                            Icons.whatsapp_sharp,
+                            CommunityMaterialIcons.whatsapp,
 
                             size: 26.0,
                             // color: Colors.green,

@@ -71,6 +71,8 @@
      "searchByAddress": "search by address",
      "setLocation": "set location",
      "enterAddress": "enter address",
+     "verifyEmail":"Verify your email address",
+     "verifyIdentity":"Verify your identity",
      "applicationActivity": "The application will be active until ",
      "applicationDays": "Select the number of application days",
      "placeRequest": "Place a request",

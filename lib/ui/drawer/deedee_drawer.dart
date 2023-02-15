@@ -78,7 +78,10 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           const SizedBox(
                             height: 16,
                           ),
-                          if (!user.isVerified)
+                          if (user.emailVerification ==
+                                  EmailVerificationStatus.unverified &&
+                              user.docVerification ==
+                                  DocVerificationStatus.unverified)
                             Column(
                               children: [
                                 Text(

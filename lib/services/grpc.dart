@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:deedee/generated/AccountService.pbgrpc.dart' as account_service;
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
@@ -15,9 +18,10 @@ import '../generated/ReferralService.pbgrpc.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
 class GRCPUtils {
-
-  final LocationServiceClient _locationServiceClient = locator.get<LocationServiceClient>();
-  final AccountServiceClient _accountServiceClient = locator.get<AccountServiceClient>();
+  final LocationServiceClient _locationServiceClient =
+      locator.get<LocationServiceClient>();
+  final AccountServiceClient _accountServiceClient =
+      locator.get<AccountServiceClient>();
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
 
   Future<void> placeTag(
@@ -188,6 +192,24 @@ class GRCPUtils {
     final response = await _accountServiceClient
         .toggleAccountStatus(AccountStatusRequest()..userId = userId);
     // return response.isPremium;
+    return true;
+  }
+
+  Future<bool> verifyUserEmail(String email) async {
+    // final channel = await createChannel();
+    // final stub = VerificationServiceClient(channel);
+    // final response =
+    //     await stub.verifyEmail(VerifyEmailRequest()..email = email);
+    // return response.processed;
+    return true;
+  }
+
+  Future<bool> verifyUserIdentity(File files) async {
+    // final channel = await createChannel();
+    // final stub = VerificationServiceClient(channel);
+    // final response =
+    //     await stub.verifyDocuments(VerifyDocumentsRequest()..files = files);
+    // return response.processed;
     return true;
   }
 }

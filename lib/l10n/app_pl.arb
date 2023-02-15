@@ -67,6 +67,8 @@
     "searchByAddress": "wyszukaj według adresu",
     "setLocation": "ustaw lokalizację",
     "enterAddress": "wprowadź adres",
+    "verifyEmail":"Zweryfikuj swój adres email",
+    "verifyIdentity":"Zweryfikować Twoją tożsamość",
     "applicationActivity": "Zgłoszenie będzie aktywne do ",
     "applicationDays": "Wybierz liczbę dni zgłoszenia",
      "placeRequest": "Złóż wniosek",
@@ -76,4 +78,5 @@
      "resume": "Nadal Kontynuuj",
     "applicationBegin": "Wybierz datę rozpoczęcia aplikacji",
     "applicationStart": "Zgłoszenie rozpocznie się od"
+
 }

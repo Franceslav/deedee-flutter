@@ -24,4 +24,9 @@ class UserSetLastGeolocation extends UserEvent {
 
 class UserTogglePremium extends UserEvent {}
 
-class UserVerify extends UserEvent {}
+class UserEmailVerification extends UserEvent {}
+
+class UserDocVerification extends UserEvent {
+  // File files;
+  // UserDocVerification({required this.files});
+}

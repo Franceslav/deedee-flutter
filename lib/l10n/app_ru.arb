@@ -68,6 +68,8 @@
      "searchByAddress": "искать по адресу",
      "setLocation": "установить местоположение",
      "enterAddress": "введите адрес",
+     "verifyEmail":"Подтвердить свой адрес электронной почты",
+     "verifyIdentity":"Подтвердите Вашу личность",
      "applicationActivity": "Заявка будет активна до ",
      "applicationDays": "Выберете количество дней заявки",
      "placeRequest": "Разместить заявку",

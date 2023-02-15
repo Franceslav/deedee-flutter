@@ -67,6 +67,8 @@
      "searchByAddress": "buscar por dirección",
      "setLocation": "establecer ubicación",
      "enterAddress": "ingresar dirección",
+     "verifyEmail":"Verifique su dirección de correo electrónico",
+     "verifyIdentity":"Verifica tu identidad",
      "applicationActivity": "La solicitud estará activa hasta ",
      "applicationDays": "Seleccione el número de días de solicitud",
      "placeRequest": "Enviar una solicitud",

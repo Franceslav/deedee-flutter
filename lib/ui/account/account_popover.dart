@@ -1,4 +1,4 @@
-import 'package:deedee/ui/account/bloc/account_bloc.dart';
+import 'package:deedee/ui/account/account_verify_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,16 +6,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants.dart';
 import '../../model/user.dart';
+import '../../services/helper.dart';
 
 class Popover extends StatelessWidget {
-  final User user;
-
-  Popover({super.key, required this.user});
-
-  final _bloc = AccountBloc();
-
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
+
     return Container(
       margin: const EdgeInsets.all(16.0),
       clipBehavior: Clip.antiAlias,
@@ -46,7 +43,10 @@ class Popover extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (!user.isVerified) ...[
+                if (user.emailVerification ==
+                        EmailVerificationStatus.unverified &&
+                    user.docVerification ==
+                        DocVerificationStatus.unverified) ...[
                   Text(
                     AppLocalizations.of(context)!.accountNeedVerify,
                   ),
@@ -74,12 +74,14 @@ class Popover extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          BlocProvider.of<UserBloc>(context).add(UserVerify());
-                          Navigator.of(context).pop();
+                          push(context, VerifyScreen());
                         }),
                   ),
                 ],
-                if (user.isVerified && !user.isPremium) ...[
+                if (user.emailVerification ==
+                        EmailVerificationStatus.verified &&
+                    user.docVerification == DocVerificationStatus.verified &&
+                    user.premiumStatus == PremiumStatus.notPremium) ...[
                   Text(
                     AppLocalizations.of(context)!.accountPremiumPrice,
                   ),
@@ -107,8 +109,7 @@ class Popover extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          BlocProvider.of<UserBloc>(context)
-                              .add(UserTogglePremium());
+                          context.read<UserBloc>().add(UserTogglePremium());
                           Navigator.of(context).pop();
                         }),
                   ),

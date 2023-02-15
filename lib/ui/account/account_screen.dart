@@ -1,6 +1,7 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
+import 'package:deedee/ui/account/account_verify_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
@@ -29,22 +30,20 @@ class _AccountState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return WillPopScope(
-      onWillPop: () async {
-        return pushReplacement(context, const HomeScreen());
-      },
-      child: Scaffold(
-        drawer: const DeeDeeDrawer(),
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.accountTitle,
-            style: const TextStyle(color: Colors.black),
-          ),
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Column(
+        onWillPop: () async {
+          return pushReplacement(context, const HomeScreen());
+        },
+        child: Scaffold(
+          drawer: const DeeDeeDrawer(),
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.accountTitle,
+              style: const TextStyle(color: Colors.black),
+            ),
+            iconTheme: const IconThemeData(color: Colors.black),
+            backgroundColor: Colors.white,
+            centerTitle: true,
+          ),body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -79,42 +78,66 @@ class _AccountState extends State<AccountScreen> {
                       )),
                 ],
               ),
-              !user.isPremium
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                          right: 40.0, left: 40.0, top: 40),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color(COLOR_PRIMARY),
-                            padding: const EdgeInsets.only(top: 12, bottom: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              side: const BorderSide(
-                                color: Color(COLOR_PRIMARY),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.accountPremium,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              context: context,
-                              builder: (context) {
-                                return Popover(user: user);
-                              },
-                            ).then((value) {
-                              setState(() {});
-                            });
-                          }),
-                    )
-                  : const SizedBox.shrink(),
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 20),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(COLOR_PRIMARY),
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: const BorderSide(
+                          color: Color(COLOR_PRIMARY),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.accountVerify,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      push(context, VerifyScreen());
+                    }),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: 40.0, left: 40.0, top: 20),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(COLOR_PRIMARY),
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: const BorderSide(
+                          color: Color(COLOR_PRIMARY),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.accountPremium,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return Popover();
+                        },
+                      ).then((value) {
+                        setState(() {});
+                      });
+                    }),
+              ),
               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, left: 40.0, top: 20),
@@ -185,8 +208,6 @@ class _AccountState extends State<AccountScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

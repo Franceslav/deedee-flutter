@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
@@ -14,7 +16,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserGetBalance>(_onUserGetBalance);
     on<UserSwitchAccountType>(_onUserSwitchAccountType);
     on<UserTogglePremium>(_onUserTogglePremium);
-    on<UserVerify>(_onUserVerify);
+    on<UserEmailVerification>(_onUserEmailVerification);
+    on<UserDocVerification>(_onUserDocVerification);
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
   }
 
@@ -38,22 +41,36 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   _onUserTogglePremium(UserTogglePremium event, Emitter<UserState> emit) async {
+    emit(
+        UserState(state.user.copyWith(premiumStatus: PremiumStatus.isPremium)));
+
     try {
       final response = await locator
           .get<GRCPUtils>()
           .toggleUserPremiumStatus(state.user.userId);
-      if (response) {
-        emit(UserState(state.user.copyWith(isPremium: true)));
-      }
+
+      if (response) {}
     } catch (error) {
       print(error.toString());
     }
   }
 
-  _onUserVerify(UserVerify event, Emitter<UserState> emit) {
+  _onUserEmailVerification(
+      UserEmailVerification event, Emitter<UserState> emit) {
+    emit(UserState(state.user
+        .copyWith(emailVerification: EmailVerificationStatus.verified)));
     try {
-      //depends on verification system
-      emit(UserState(state.user.copyWith(isVerified: true)));
+      // serviceLocator.get<GRCPUtils>().verifyUserEmail(state.user.email);
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) {
+    try {
+      emit(UserState(state.user
+          .copyWith(docVerification: DocVerificationStatus.verified)));
+      // serviceLocator.get<GRCPUtils>().verifyUserIdentity(event.files);
     } catch (error) {
       print(error.toString());
     }

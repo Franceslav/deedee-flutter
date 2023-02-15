@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:deedee/constants.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
@@ -290,7 +291,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   ),
                                 ],
                               ),
-                            if (user.isPremium &&
+                            if (user.premiumStatus == PremiumStatus.isPremium &&
                                 _selectedFilterKeys.length >= 3)
                               Column(
                                 children: [
@@ -376,7 +377,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   const SizedBox(height: 15),
                                 ],
                               ),
-                            if (!user.isPremium &&
+                            if (user.premiumStatus ==
+                                    PremiumStatus.notPremium &&
                                 _selectedFilterKeys.length >= 3)
                               Column(
                                 children: [
