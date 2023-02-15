@@ -1,3 +1,5 @@
+import 'package:dartx/dartx.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
@@ -71,38 +73,43 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<GetTopicResponse> _getFilteredTags(GetTopicRequest request) async {
-    var geoLocation1 = GeoLocation()
-      ..latitude = 53.94
-      ..longitude = 27.56
-      ..title = 'маникюр 1';
+      var geoLocation1 = GeoLocation()
+        ..latitude = 51.51
+        ..longitude = -0.1165888
+        ..title = 'маникюр 1';
 
-    var geoLocation2 = GeoLocation()
-      ..latitude = 53.92
-      ..longitude = 27.56
-      ..title = 'маникюр 2';
+      var geoLocation2 = GeoLocation()
+        ..latitude = 51.521
+        ..longitude = -0.116
+        ..title = 'маникюр 2';
 
-    var geoLocation3 = GeoLocation()
-      ..latitude = 53.95
-      ..longitude = 27.566
-      ..title = 'маникюр 3';
+      var geoLocation3 = GeoLocation()
+        ..latitude = 51.53
+        ..longitude = 0.1167
+        ..title = 'маникюр 3';
 
-    var geoLocation4 = GeoLocation()
-      ..latitude = 53.89
-      ..longitude = 27.56
-      ..title = 'маникюр 4';
+      var geoLocation4 = GeoLocation()
+        ..latitude = 51.52134
+        ..longitude = -0.1169
+        ..title = 'маникюр 4';
 
-    var timestamp1 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp2 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp3 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp4 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+      var geoLocation5 = GeoLocation()
+        ..latitude = 51.522
+        ..longitude = 0.117
+        ..title = 'маникюр 5';
+
+      var timestamp1 = Timestamp()
+        ..seconds = Int64.parseInt(
+            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+      var timestamp2 = Timestamp()
+        ..seconds = Int64.parseInt(
+            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+      var timestamp3 = Timestamp()
+        ..seconds = Int64.parseInt(
+            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+      var timestamp4 = Timestamp()
+        ..seconds = Int64.parseInt(
+            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
 
     var ftags = [
       Tag()
@@ -132,6 +139,7 @@ class MockTagServiceClient implements TagServiceClient {
     ];
     var topic =  Topic()..tags.addAll(ftags);
     return GetTopicResponse()..topic = topic;
+
   }
 
   @override

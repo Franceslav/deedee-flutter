@@ -113,10 +113,10 @@ class _MapScreenState extends State<MapScreen> {
             body: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                swPanBoundary: LatLng(
-                    geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
-                nePanBoundary: LatLng(
-                    geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
+                // swPanBoundary: LatLng(
+                //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
+                // nePanBoundary: LatLng(
+                //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
                 center: LatLng(geo.latitude, geo.longitude),
                 // bounds: LatLngBounds.fromPoints(_latLngList),
                 zoom: MAP_ZOOM,
