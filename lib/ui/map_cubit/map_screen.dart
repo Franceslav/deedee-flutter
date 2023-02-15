@@ -128,6 +128,15 @@ class _MapScreenState extends State<MapScreen> {
                   minHeight: size.height * 0,
                   maxHeight: size.height * 0.5,
                   controller: _pc,
+                  header: Container(
+                    margin: EdgeInsets.fromLTRB(size.width / 2 - 30, 10.0, 24.0, 0.0),
+                    width: 60,
+                    height: 7,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.black,
+                    ),
+                  ),
                   panel: Column(
                     children: <Widget>[
                       const SizedBox(height: 30),
