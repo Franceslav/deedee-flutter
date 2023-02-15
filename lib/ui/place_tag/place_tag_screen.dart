@@ -270,8 +270,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   ),
                                 ],
                               ),
-                            
-                                           if (_filterKeys.isEmpty &&
+                            if (_filterKeys.isEmpty &&
                                 state is LoadingFiltersKeyState)
                               const Center(child: CircularProgressIndicator()),
                             if (_filterKeys.isNotEmpty)
@@ -290,124 +289,137 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                     selectedItems: _selectedFilterKeys,
                                   ),
                                 ],
-                                ),
-
-                        if (widget.user.isPremium &&
-                            _selectedFilterKeys.length >= 3)
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                              ),
+                            if (user.isPremium &&
+                                _selectedFilterKeys.length >= 3)
+                              Column(
                                 children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .applicationBegin,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1,
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          DateTime? newDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: _date,
+                                            firstDate: DateTime(2023, 1),
+                                            lastDate: DateTime(2024, 12),
+                                          );
+                                          if (newDate == null) {
+                                            return;
+                                          }
+                                          setState(() {
+                                            _date = newDate;
+                                          });
+                                        },
+                                        icon: const Icon(
+                                          Icons.calendar_month_rounded,
+                                          size: 42.0,
+                                          color: Color(COLOR_PRIMARY),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    AppLocalizations.of(context)!
-                                        .applicationBegin,
+                                    '${AppLocalizations.of(context)!.applicationStart} ${DateFormat.yMMMEd().format(_date)}',
                                     style:
                                         Theme.of(context).textTheme.headline1,
                                   ),
-                                  IconButton(
-                                    onPressed: () async {
-                                      DateTime? newDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: _date,
-                                        firstDate: DateTime(2023, 1),
-                                        lastDate: DateTime(2024, 12),
-                                      );
-                                      if (newDate == null) {
-                                        return;
-                                      }
-                                      setState(() {
-                                        _date = newDate;
-                                      });
-                                    },
-                                    icon: const Icon(
-                                      Icons.calendar_month_rounded,
-                                      size: 42.0,
-                                      color: Color(COLOR_PRIMARY),
-                                    ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .applicationDays,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
                                   ),
+                                  Slider(
+                                      value: _duration,
+                                      max: 15,
+                                      divisions: 15,
+                                      label: _duration.round().toString(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _duration = value;
+                                        });
+                                      }),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .applicationActivity,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  Text(
+                                    DateFormat.yMMMEd().format(_date.add(
+                                        Duration(days: _duration.toInt()))),
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                      onPressed: () => bloc.add(
+                                          DurationSelectedEvent(
+                                              duration: _duration)),
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .placeRequest,
+                                      )),
+                                  const SizedBox(height: 15),
                                 ],
                               ),
-                              const SizedBox(height: 10),
-                              Text(
-                                '${AppLocalizations.of(context)!.applicationStart} ${DateFormat.yMMMEd().format(_date)}',
-                                style: Theme.of(context).textTheme.headline1,
+                            if (!user.isPremium &&
+                                _selectedFilterKeys.length >= 3)
+                              Column(
+                                children: [
+                                  Text(
+                                    '${AppLocalizations.of(context)!.applicationAction} $DEFAULT_EXPECTATION_NUMBER_OF_DAYS',
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  Text(
+                                    DateFormat.yMMMEd().format(DateTime.now()
+                                        .add(const Duration(
+                                            days:
+                                                DEFAULT_EXPECTATION_NUMBER_OF_DAYS))),
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .upgradePremium,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text(AppLocalizations.of(context)!
+                                          .upgradeToPremium)),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                      onPressed: () => bloc.add(
+                                          DurationSelectedEvent(
+                                              duration: _duration)),
+                                      child: Text(
+                                          AppLocalizations.of(context)!.resume))
+                                ],
                               ),
-                              const SizedBox(height: 10),
-                              Text(
-                                AppLocalizations.of(context)!.applicationDays,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              Slider(
-                                  value: _duration,
-                                  max: 15,
-                                  divisions: 15,
-                                  label: _duration.round().toString(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _duration = value;
-                                    });
-                                  }),
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .applicationActivity,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              Text(
-                                DateFormat.yMMMEd().format(_date
-                                    .add(Duration(days: _duration.toInt()))),
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              const SizedBox(height: 10),
-                              ElevatedButton(
-                                  onPressed: () => bloc.add(
-                                      DurationSelectedEvent(
-                                          duration: _duration)),
-                                  child: Text(
-                                    AppLocalizations.of(context)!.placeRequest,
-                                  )),
-                              const SizedBox(height: 15),
-                            ],
-                          ),
-                        if (!widget.user.isPremium &&
-                            _selectedFilterKeys.length >= 3)
-                          Column(
-                            children: [
-                              Text(
-                                '${AppLocalizations.of(context)!.applicationAction} $DEFAULT_EXPECTATION_NUMBER_OF_DAYS',
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              Text(
-                                DateFormat.yMMMEd().format(DateTime.now().add(
-                                    const Duration(
-                                        days:
-                                            DEFAULT_EXPECTATION_NUMBER_OF_DAYS))),
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.upgradePremium,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text(AppLocalizations.of(context)!
-                                      .upgradeToPremium)),
-                              const SizedBox(height: 10),
-                              ElevatedButton(
-                                  onPressed: () => bloc.add(
-                                      DurationSelectedEvent(
-                                          duration: _duration)),
-                                  child: Text(
-                                      AppLocalizations.of(context)!.resume))
-                            ],
-                          ),
-                        if (state is DurationSelectedState)
-                          Column(
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.chooseLocation,
-                                style: Theme.of(context).textTheme.headline1,
+                            if (state is DurationSelectedState)
+                              Column(
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .chooseLocation,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
                                   ),
                                   InkWell(
                                     onTap: () async {
