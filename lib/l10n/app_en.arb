@@ -70,5 +70,14 @@
      "loading": "loading...",
      "searchByAddress": "search by address",
      "setLocation": "set location",
-     "enterAddress": "enter address"
+     "enterAddress": "enter address",
+     "applicationActivity": "The application will be active until ",
+     "applicationDays": "Select the number of application days",
+     "placeRequest": "Place a request",
+     "applicationAction": "Your application will be valid for days:",
+     "upgradePremium": "You can change this by switching to a premium subscription",
+     "upgradeToPremium": "Upgrade to Premium",
+     "resume": "Continue anyway",
+     "applicationBegin": "Select the start date of the application",
+     "applicationStart": "The application will start with"
 }

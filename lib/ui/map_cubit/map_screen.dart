@@ -37,7 +37,9 @@ class DeeDeeSliderController extends PanelController {
 }
 
 class _MapScreenState extends State<MapScreen> {
+
   LatLng get geo => widget.user.lastGeoLocation ?? LatLng(0, 0);
+
 
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
@@ -175,7 +177,9 @@ class _MapScreenState extends State<MapScreen> {
                               )),
                           SizedBox(width: 210),
                           Icon(
-                            Icons.abc,
+
+                            Icons.whatsapp_sharp,
+
                             size: 26.0,
                             // color: Colors.green,
                           ),

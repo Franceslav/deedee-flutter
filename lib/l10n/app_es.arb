@@ -66,5 +66,14 @@
      "loading": "cargando...",
      "searchByAddress": "buscar por dirección",
      "setLocation": "establecer ubicación",
-     "enterAddress": "ingresar dirección"
+     "enterAddress": "ingresar dirección",
+     "applicationActivity": "La solicitud estará activa hasta ",
+     "applicationDays": "Seleccione el número de días de solicitud",
+     "placeRequest": "Enviar una solicitud",
+     "applicationAction": "Su solicitud será válida días:",
+     "upgradePremium": "Puede cambiar esto cambiando a una suscripción Premium",
+     "upgradeToPremium": "Ir a Premium",
+     "resume": "Continuar de todos modos",
+    "applicationBegin": "Seleccione la fecha de Inicio de la solicitud",
+     "applicationStart": "La solicitud comenzará con"
 }

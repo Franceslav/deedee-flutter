@@ -18,7 +18,11 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<PushFiltersEvent>(_onPushFilters);
     on<PushTagEvent>(_onPushTag);
     on<SelectLocationEvent>(_onSelectLocation);
+
+    on<DurationSelectedEvent>(_userChoseDuration);
+
     on<SelectFirstLvlTopicEvent>(_onSelectFirstLvlTopic);
+
   }
 
   _onLoadTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
@@ -136,6 +140,17 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
             event.filterKeys,
           );
       emit(UserTagPlacedState());
+    } catch (error) {
+      ErrorState(error.toString());
+    }
+  }
+
+  _userChoseDuration(
+      DurationSelectedEvent event, Emitter<SelectorState> emit) async {
+    try {
+      // передача продолжительности заявки
+      print(event.duration);
+      emit(DurationSelectedState());
     } catch (error) {
       ErrorState(error.toString());
     }

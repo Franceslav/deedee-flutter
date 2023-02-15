@@ -67,5 +67,14 @@
      "loading": "загрузка...",
      "searchByAddress": "искать по адресу",
      "setLocation": "установить местоположение",
-     "enterAddress": "введите адрес"
+     "enterAddress": "введите адрес",
+     "applicationActivity": "Заявка будет активна до ",
+     "applicationDays": "Выберете количество дней заявки",
+     "placeRequest": "Разместить заявку",
+     "applicationAction": "Ваша заявка будет действовать дней:",
+     "upgradePremium": "Вы можете изменить это, перейдя на премиум подписку",
+     "upgradeToPremium": "Перейти на Премиум",
+     "resume": "Все равно продолжить",
+     "applicationBegin": "Выберете дату начала заявки",
+     "applicationStart": "Заявка начнется с "
 }

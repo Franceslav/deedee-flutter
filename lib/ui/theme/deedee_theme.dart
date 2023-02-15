@@ -38,8 +38,17 @@ ThemeData deeDeeTheme = ThemeData(
   ),
   snackBarTheme:
       const SnackBarThemeData(contentTextStyle: TextStyle(color: Colors.white)),
-  colorScheme:
-      ColorScheme.fromSwatch().copyWith(secondary: const Color(COLOR_PRIMARY)),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    primary: const Color(COLOR_PRIMARY),
+    secondary: const Color(COLOR_PRIMARY),
+    onPrimary: Colors.white,
+    onSurface: const Color(COLOR_PRIMARY).withOpacity(0.6),
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+      foregroundColor: const Color(COLOR_PRIMARY),
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
@@ -65,4 +74,17 @@ ThemeData deeDeeTheme = ThemeData(
       ),
     ),
   ),
+  sliderTheme: SliderThemeData(
+      thumbColor: const Color(COLOR_PRIMARY),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15),
+      trackHeight: 10,
+      activeTrackColor: const Color(COLOR_PRIMARY).withOpacity(0.8),
+      inactiveTrackColor: const Color(COLOR_PRIMARY).withOpacity(0.4),
+      inactiveTickMarkColor: Colors.black,
+      valueIndicatorColor: const Color(COLOR_PRIMARY),
+      valueIndicatorTextStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      )),
 );

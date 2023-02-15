@@ -4,12 +4,17 @@ import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
+
+import 'package:deedee/ui/theme/deedee_theme.dart';
+
 import 'package:deedee/ui/topic/topic_widget.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
@@ -25,13 +30,16 @@ class PlaceTagScreen extends StatefulWidget {
 }
 
 class _PlaceTagScreenState extends State<PlaceTagScreen> {
-  late LatLng _userLocation;
+  // TODO: [DEEMOB-68]
+  late LatLng _userLocation = DEFAULT_LOCATION;
   final String _messengerId = 'ronxbysu';
   bool _serviceStatus = false;
   bool _hasPermission = false;
   late LocationPermission _permission;
   late Position _position;
   late StreamSubscription<Position> _positionStream;
+  double _duration = 3;
+  DateTime _date = DateTime.now();
 
   final SelectorBloc bloc = SelectorBloc();
   List<String> _filterKeys = [];
@@ -193,6 +201,9 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
               _selectedLocation = DEFAULT_LOCATION;
             }
           }
+          // if (state is DurationSelectedState) {
+          //   _userChoseDuration = true;
+          // }
           if (state is LocationSelectedState) {
             _selectedAddress = state.data.address ?? '';
             _selectedLocation = state.data.location ?? DEFAULT_LOCATION;
@@ -259,7 +270,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   ),
                                 ],
                               ),
-                            if (_filterKeys.isEmpty &&
+                            
+                                           if (_filterKeys.isEmpty &&
                                 state is LoadingFiltersKeyState)
                               const Center(child: CircularProgressIndicator()),
                             if (_filterKeys.isNotEmpty)
@@ -278,15 +290,124 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                     selectedItems: _selectedFilterKeys,
                                   ),
                                 ],
-                              ),
-                            if (_selectedFilterKeys.length >= 3)
-                              Column(
+                                ),
+
+                        if (widget.user.isPremium &&
+                            _selectedFilterKeys.length >= 3)
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
                                     AppLocalizations.of(context)!
-                                        .chooseLocation,
+                                        .applicationBegin,
                                     style:
                                         Theme.of(context).textTheme.headline1,
+                                  ),
+                                  IconButton(
+                                    onPressed: () async {
+                                      DateTime? newDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: _date,
+                                        firstDate: DateTime(2023, 1),
+                                        lastDate: DateTime(2024, 12),
+                                      );
+                                      if (newDate == null) {
+                                        return;
+                                      }
+                                      setState(() {
+                                        _date = newDate;
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.calendar_month_rounded,
+                                      size: 42.0,
+                                      color: Color(COLOR_PRIMARY),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                '${AppLocalizations.of(context)!.applicationStart} ${DateFormat.yMMMEd().format(_date)}',
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                AppLocalizations.of(context)!.applicationDays,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              Slider(
+                                  value: _duration,
+                                  max: 15,
+                                  divisions: 15,
+                                  label: _duration.round().toString(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _duration = value;
+                                    });
+                                  }),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .applicationActivity,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              Text(
+                                DateFormat.yMMMEd().format(_date
+                                    .add(Duration(days: _duration.toInt()))),
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                  onPressed: () => bloc.add(
+                                      DurationSelectedEvent(
+                                          duration: _duration)),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.placeRequest,
+                                  )),
+                              const SizedBox(height: 15),
+                            ],
+                          ),
+                        if (!widget.user.isPremium &&
+                            _selectedFilterKeys.length >= 3)
+                          Column(
+                            children: [
+                              Text(
+                                '${AppLocalizations.of(context)!.applicationAction} $DEFAULT_EXPECTATION_NUMBER_OF_DAYS',
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              Text(
+                                DateFormat.yMMMEd().format(DateTime.now().add(
+                                    const Duration(
+                                        days:
+                                            DEFAULT_EXPECTATION_NUMBER_OF_DAYS))),
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              Text(
+                                AppLocalizations.of(context)!.upgradePremium,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text(AppLocalizations.of(context)!
+                                      .upgradeToPremium)),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                  onPressed: () => bloc.add(
+                                      DurationSelectedEvent(
+                                          duration: _duration)),
+                                  child: Text(
+                                      AppLocalizations.of(context)!.resume))
+                            ],
+                          ),
+                        if (state is DurationSelectedState)
+                          Column(
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.chooseLocation,
+                                style: Theme.of(context).textTheme.headline1,
                                   ),
                                   InkWell(
                                     onTap: () async {

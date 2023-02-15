@@ -16,3 +16,4 @@ const MAP_USER_AGENT_PACKAGE_NAME = 'com.dinobit.deedeeapp';
 const MAP_BOUNDS = 0.07;
 const MAP_ZOOM = 12.0;
 const MAP_SEARCH_AREA = 0.04; // for the future
+const DEFAULT_EXPECTATION_NUMBER_OF_DAYS = 3;

@@ -24,6 +24,11 @@ class SelectFilterKeyEvent extends SelectorEvent {
   SelectFilterKeyEvent(this.filterKey);
 }
 
+class SelectDurationEvent extends SelectorEvent {
+  final bool userChoseDuration;
+  SelectDurationEvent(this.userChoseDuration);
+}
+
 class SelectLocationEvent extends SelectorEvent {
   final AddressModel data;
 
@@ -58,7 +63,15 @@ class PushTagEvent extends SelectorEvent {
   });
 }
 
+
+class DurationSelectedEvent extends SelectorEvent {
+  final double duration;
+
+  DurationSelectedEvent({required this.duration});
+}
+
 class SelectFirstLvlTopicEvent extends SelectorEvent {
   final String topic;
   SelectFirstLvlTopicEvent(this.topic);
+
 }
