@@ -63,10 +63,6 @@ class TagServiceClient extends $grpc.Client {
           ($1.GetTopicTitlesRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.GetTopicTitlesResponse.fromBuffer(value));
-  static final _$topUp = $grpc.ClientMethod<$1.TopUpRequest, $1.TopUpResponse>(
-      '/topic.TagService/TopUp',
-      ($1.TopUpRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.TopUpResponse.fromBuffer(value));
 
   TagServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -123,11 +119,6 @@ class TagServiceClient extends $grpc.Client {
       $1.GetTopicTitlesRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTopics, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.TopUpResponse> topUp($1.TopUpRequest request,
-      {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$topUp, request, options: options);
   }
 }
 
@@ -210,13 +201,6 @@ abstract class TagServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $1.GetTopicTitlesRequest.fromBuffer(value),
         ($1.GetTopicTitlesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.TopUpRequest, $1.TopUpResponse>(
-        'TopUp',
-        topUp_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.TopUpRequest.fromBuffer(value),
-        ($1.TopUpResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.GetTopicResponse> getTopic_Pre(
@@ -269,11 +253,6 @@ abstract class TagServiceBase extends $grpc.Service {
     return getTopics(call, await request);
   }
 
-  $async.Future<$1.TopUpResponse> topUp_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.TopUpRequest> request) async {
-    return topUp(call, await request);
-  }
-
   $async.Future<$1.GetTopicResponse> getTopic(
       $grpc.ServiceCall call, $1.GetTopicRequest request);
   $async.Future<$1.PlaceTagResponse> placeTag(
@@ -292,6 +271,4 @@ abstract class TagServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.TagToBookmarkRequest request);
   $async.Future<$1.GetTopicTitlesResponse> getTopics(
       $grpc.ServiceCall call, $1.GetTopicTitlesRequest request);
-  $async.Future<$1.TopUpResponse> topUp(
-      $grpc.ServiceCall call, $1.TopUpRequest request);
 }

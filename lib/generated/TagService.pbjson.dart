@@ -43,26 +43,6 @@ const GetBookmarkTagsResponse$json = const {
 
 /// Descriptor for `GetBookmarkTagsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getBookmarkTagsResponseDescriptor = $convert.base64Decode('ChdHZXRCb29rbWFya1RhZ3NSZXNwb25zZRIeCgR0YWdzGAEgAygLMgoudG9waWMuVGFnUgR0YWdz');
-@$core.Deprecated('Use topUpRequestDescriptor instead')
-const TopUpRequest$json = const {
-  '1': 'TopUpRequest',
-  '2': const [
-    const {'1': 'amount', '3': 1, '4': 1, '5': 1, '10': 'amount'},
-  ],
-};
-
-/// Descriptor for `TopUpRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List topUpRequestDescriptor = $convert.base64Decode('CgxUb3BVcFJlcXVlc3QSFgoGYW1vdW50GAEgASgBUgZhbW91bnQ=');
-@$core.Deprecated('Use topUpResponseDescriptor instead')
-const TopUpResponse$json = const {
-  '1': 'TopUpResponse',
-  '2': const [
-    const {'1': 'succeed', '3': 1, '4': 1, '5': 8, '10': 'succeed'},
-  ],
-};
-
-/// Descriptor for `TopUpResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List topUpResponseDescriptor = $convert.base64Decode('Cg1Ub3BVcFJlc3BvbnNlEhgKB3N1Y2NlZWQYASABKAhSB3N1Y2NlZWQ=');
 @$core.Deprecated('Use getTopicRequestDescriptor instead')
 const GetTopicRequest$json = const {
   '1': 'GetTopicRequest',

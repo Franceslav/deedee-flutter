@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/locator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
@@ -22,7 +22,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onLoadTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
     try {
-      final response = await serviceLocator.get<GRCPUtils>().getTopics(
+      final response = await locator.get<GRCPUtils>().getTopics(
             event.location.latitude,
             event.location.longitude,
           );
@@ -50,7 +50,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(LoadingFiltersKeyState());
     try {
       final response =
-          await serviceLocator.get<GRCPUtils>().getFilterItems(event.topic);
+          await locator.get<GRCPUtils>().getFilterItems(event.topic);
       final List<String> filterKeysList = [
         for (var filterKey in response) filterKey.title
       ];
@@ -110,7 +110,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      Topic topic = await serviceLocator
+      Topic topic = await locator
           .get<GRCPUtils>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
@@ -122,7 +122,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushTag(PushTagEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      await serviceLocator.get<GRCPUtils>().placeTag(
+      await locator.get<GRCPUtils>().placeTag(
             event.accountType,
             event.topic,
             event.messengerId,

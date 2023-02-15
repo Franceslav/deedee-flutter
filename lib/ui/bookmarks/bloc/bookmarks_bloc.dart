@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/locator.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
+
 part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
@@ -18,7 +19,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       LoadBookmarksEvent event, Emitter<BookmarksState> emit) async {
     try {
       final bookmarks =
-          await serviceLocator.get<GRCPUtils>().getUserBookmarks(event.userId);
+          await locator.get<GRCPUtils>().getUserBookmarks(event.userId);
       emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       emit(ErrorState(error.toString()));
@@ -28,7 +29,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   _onDeleteBookmark(
       DeleteBookmarkEvent event, Emitter<BookmarksState> emit) async {
     try {
-      final response = await serviceLocator.get<GRCPUtils>().removeUserBookmark(
+      final response = await locator.get<GRCPUtils>().removeUserBookmark(
             event.userId,
             event.bookmark.tagId,
           );

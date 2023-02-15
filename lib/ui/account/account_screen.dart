@@ -1,6 +1,6 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/account/account_cubit.dart';
+import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
@@ -22,6 +22,8 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountState extends State<AccountScreen> {
   final Uuid uuid = const Uuid();
+  late String cityChoose;
+  late List<String> places;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +71,8 @@ class _AccountState extends State<AccountScreen> {
                       splashColor: Colors.indigo,
                       splashRadius: 20,
                       onPressed: () {
-                        context.read<LocaleCubit>().uudiURL(user.email);
-                        context.read<LocaleCubit>().showToast(context);
+                        context.read<AccountBloc>().uudiURL(user.email);
+                        context.read<AccountBloc>().showToast(context);
                       },
                       icon: const Icon(
                         Icons.link_sharp,
@@ -150,31 +152,31 @@ class _AccountState extends State<AccountScreen> {
                   children: <Widget>[
                     IconButton(
                         onPressed: () {
-                          context.read<LocaleCubit>().changeLocal('en');
+                          context.read<AccountBloc>().changeLocal('en');
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/en.png')),
                     IconButton(
                         onPressed: () {
-                          context.read<LocaleCubit>().changeLocal('ru');
+                          context.read<AccountBloc>().changeLocal('ru');
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/ru.png')),
                     IconButton(
                         onPressed: () {
-                          context.read<LocaleCubit>().changeLocal('pl');
+                          context.read<AccountBloc>().changeLocal('pl');
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/pl.png')),
                     IconButton(
                         onPressed: () {
-                          context.read<LocaleCubit>().changeLocal('es');
+                          context.read<AccountBloc>().changeLocal('es');
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/es.png')),
                     IconButton(
                         onPressed: () {
-                          context.read<LocaleCubit>().changeLocal('ar');
+                          context.read<AccountBloc>().changeLocal('ar');
                         },
                         iconSize: 50,
                         icon: Image.asset('assets/images/ar.png'))

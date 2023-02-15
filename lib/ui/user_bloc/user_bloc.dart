@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/locator.dart';
 import 'package:latlong2/latlong.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -23,9 +24,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserGetBalance(UserGetBalance event, Emitter<UserState> emit) async {
     try {
-      final balance = await serviceLocator
-          .get<GRCPUtils>()
-          .getUserBalance(state.user.userId);
+      final balance =
+          await locator.get<GRCPUtils>().getUserBalance(state.user.userId);
       emit(UserState(state.user.copyWith(balance: balance)));
     } catch (error) {
       print(error.toString());
@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserTogglePremium(UserTogglePremium event, Emitter<UserState> emit) async {
     try {
-      final response = await serviceLocator
+      final response = await locator
           .get<GRCPUtils>()
           .toggleUserPremiumStatus(state.user.userId);
       if (response) {

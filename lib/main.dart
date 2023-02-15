@@ -1,12 +1,9 @@
 import 'package:deedee/constants.dart';
-import 'package:deedee/model/user.dart';
-import 'package:deedee/services/locator.dart';
-import 'package:deedee/services/shared.dart';
-import 'package:deedee/ui/account/account_cubit.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
-import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
@@ -20,12 +17,12 @@ import 'package:provider/provider.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 void main() {
-  setUpServiceLocator();
-
-  // serviceLocator.get<SharedUtils>().clearAll();
+  configureDependencies('dev');
+  WidgetsFlutterBinding.ensureInitialized();
+  // locator.get<SharedUtils>().clearAll();
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<LocaleCubit>(create: (_) => LocaleCubit()),
+    ChangeNotifierProvider<AccountBloc>(create: (_) => AccountBloc()),
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),
@@ -86,7 +83,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     // Show error message if initialization failed
     if (_error) {
       return MaterialApp(
-          locale: context.watch<LocaleCubit>().appLocal,
+          locale: context.watch<AccountBloc>().appLocal,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -127,7 +124,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
 
     return MaterialApp(
-        locale: context.watch<LocaleCubit>().appLocal,
+        locale: context.watch<AccountBloc>().appLocal,
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,

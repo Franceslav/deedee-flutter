@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/grpc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
@@ -29,5 +31,9 @@ class DeedeeDrawerCubit extends Cubit<DeedeeDrawerState> {
       ClipboardData(text: valueURL),
     );
     return valueURL;
+  }
+
+  Future<double> getBalance(String userId) async {
+    return locator.get<GRCPUtils>().getUserBalance(userId);
   }
 }

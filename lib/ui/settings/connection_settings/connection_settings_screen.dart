@@ -1,6 +1,7 @@
 import 'package:deedee/constants.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/services/locator.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_cubit.dart';
@@ -54,10 +55,8 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                   listenWhen: (old, current) => old != current,
                   listener: (context, state) {
                     if (state is ValidConnectionSettingsField) {
-                      serviceLocator
-                          .get<SharedUtils>()
-                          .saveIpAddress(state.ipAddress);
-                      serviceLocator.get<SharedUtils>().savePort(state.port);
+                      locator.get<SharedUtils>().saveIpAddress(state.ipAddress);
+                      locator.get<SharedUtils>().savePort(state.port);
                     } else if (state is ConnectionSettingsFailureState) {
                       showSnackBar(context, state.errorMessage);
                     }
@@ -88,7 +87,7 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                               ),
                             ),
                             FutureBuilder(
-                              future: serviceLocator
+                              future: locator
                                   .get<SharedUtils>()
                                   .getPrefsIpAddress(),
                               builder:
@@ -141,9 +140,7 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                               ),
                             ),
                             FutureBuilder(
-                              future: serviceLocator
-                                  .get<SharedUtils>()
-                                  .getPrefsPort(),
+                              future: locator.get<SharedUtils>().getPrefsPort(),
                               builder:
                                   (context, AsyncSnapshot<String?> snapshot) {
                                 if (snapshot.hasData) {

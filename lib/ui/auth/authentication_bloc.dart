@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../services/locator.dart';
-
 part 'authentication_event.dart';
+
 part 'authentication_state.dart';
 
 class AuthenticationBloc
@@ -64,7 +64,7 @@ class AuthenticationBloc
       if (result != null && result is User) {
         user = result;
         //Optional: adding a checking method for new users on backend
-        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
+        locator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -79,7 +79,7 @@ class AuthenticationBloc
       if (result != null && result is User) {
         user = result;
         //Optional: adding a checking method for new users on backend
-        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
+        locator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -113,7 +113,7 @@ class AuthenticationBloc
           lastName: event.lastName);
       if (result != null && result is User) {
         user = result;
-        serviceLocator.get<GRCPUtils>().sendVerificationEmail(user!.email);
+        locator.get<GRCPUtils>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));

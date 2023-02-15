@@ -1,0 +1,25 @@
+import 'dart:async';
+
+import 'package:grpc/grpc.dart';
+import 'package:grpc/grpc_connection_interface.dart';
+
+class FakeClientCall<Q, R> extends ClientCall<Q, R> {
+  FakeClientCall(
+    this.result,
+  ) : super(ClientMethod('', (q) => [], (l) => Object() as R),
+            const Stream.empty(), CallOptions()) {
+    result.then((value) {
+      _responses.add(value);
+      _responses.close();
+    }).catchError((error) {
+      _responses.addError(error);
+      _responses.close();
+    });
+  }
+
+  final Future<R> result;
+  final StreamController<R> _responses = StreamController<R>();
+
+  @override
+  Stream<R> get response => _responses.stream;
+}

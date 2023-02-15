@@ -1,20 +1,30 @@
+import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/grpc.dart';
+import 'package:deedee/ui/account/account_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
-import 'dart:ui';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../model/user.dart';
-import '../../services/grpc.dart';
-import '../../services/locator.dart';
 part 'account_state.dart';
 
-class LocaleCubit extends ChangeNotifier {
-  final uuid = Uuid();
+class AccountBloc extends Bloc<AccountEvent, AccountState> with ChangeNotifier {
+  AccountBloc() : super(AccountInitial()) {
+    on<LoadPlacesEvent>((event, emit) async {
+      List<Place> places = await locator
+          .get<GRCPUtils>()
+          .getPlaces(event.geoLocation, event.radius);
+      emit(AccountPlacesLoadState(places));
+    });
+  }
+
+  final uuid = const Uuid();
 
   Locale? _appLocale = Get.deviceLocale;
+
   Locale get appLocal => _appLocale ?? Locale('en');
 
   void changeLocal(String s) {
@@ -37,4 +47,6 @@ class LocaleCubit extends ChangeNotifier {
     Clipboard.setData(ClipboardData(text: "$ValueURL"));
     return ValueURL;
   }
+
+  int index = 1;
 }

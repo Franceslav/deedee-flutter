@@ -1,9 +1,9 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/ReferralService.pb.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/services/locator.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +141,7 @@ class _ReferralState extends State<ReferralScreen> {
   }
 
   Future<List<UserReferral>> getUserReferrals() async {
-    return serviceLocator
+    return locator
         .get<GRCPUtils>()
         .getUserReferrals(BlocProvider.of<UserBloc>(context).state.user.email)
         .then((referrals) {
