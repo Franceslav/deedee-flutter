@@ -16,6 +16,7 @@
     "logout": "logout",
     "settings": "settings",
     "seeMap": "see map",
+    "seeTags": "see tags",
     "toSee": "to see",
     "topics": "topics",
     "filterTags": "filter tags",

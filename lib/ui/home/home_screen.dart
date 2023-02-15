@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
-import 'package:deedee/ui/topic/topic_widget.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,18 +72,17 @@ class _HomeState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                  push(context, const PlaceTagScreen());
-                }),
-                DeeDeeButton(AppLocalizations.of(context)!.seeMap, () {
                   push(
-                    context,
-                    const FilterPage(),
-                  );
+                      context,
+                      const PlaceTagScreen(
+                      ));
                 }),
-                Expanded(
-                    child: TopicWidget(
-                  topicTitle: topics,
-                )),
+                DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
+                  push(
+                      context,
+                      const FilterPage(
+                      ));
+                }),
               ],
             );
           },

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/loading_cubit.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+
+import '../topic/topic_widget.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -34,6 +37,56 @@ class _FilterPageState extends State<FilterPage> {
   List<String> _selectedFilterKeys = [];
   bool _isInit = true;
 
+  ScrollController scrollController = ScrollController();
+
+  final List<Map> topics = [
+    {"color": Colors.red, "title": "Рабочие"},
+    {
+      "color": Colors.pink,
+      "title": "Авто",
+    },
+    {
+      "color": Colors.green,
+      "title": "Бьюти",
+    },
+    {
+      "color": Colors.orange,
+      "title": "Отделка",
+    },
+    {
+      "color": Colors.deepPurple,
+      "title": "Дети",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+    {
+      "color": Colors.blue,
+      "title": "Клининг",
+    },
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -45,7 +98,7 @@ class _FilterPageState extends State<FilterPage> {
     super.didChangeDependencies();
     if (_isInit) {
       //without delay services fail to determine _userLocation
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       bloc.add(LoadTopicsEvent(_userLocation));
     }
     _isInit = false;
@@ -165,60 +218,94 @@ class _FilterPageState extends State<FilterPage> {
                   child: CircularProgressIndicator(),
                 )
               : SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        if (_topics.isNotEmpty)
-                          Column(
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.chooseTopic,
-                                style: Theme.of(context).textTheme.headline1,
+                  controller: scrollController,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        color: Colors.white70,
+                        child: TopicWidget(
+                          topicTitle: topics,
+                          onTap: () {
+                            scrollController.animateTo(
+                                MediaQuery.of(context).size.height - 20,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeIn);
+                            bloc.add(
+                                SelectFirstLvlTopicEvent(topics.toString()));
+                          },
+                        ),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height - 80,
+                        color: Colors.white60,
+                        child: Column(
+                          children: [
+                            if (_topics.isNotEmpty)
+                              Column(
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!.chooseTopic,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  SelectorList(
+                                    data: _topics,
+                                    onTap: (String topic) =>
+                                        bloc.add(SelectTopicEvent(topic)),
+                                    selectedItems: [_selectedTopic],
+                                  ),
+                                ],
                               ),
-                              SelectorList(
-                                data: _topics,
-                                onTap: (String topic) =>
-                                    bloc.add(SelectTopicEvent(topic)),
-                                selectedItems: [_selectedTopic],
+                            if (_filterKeys.isEmpty &&
+                                state is LoadingFiltersKeyState)
+                              const Center(child: CircularProgressIndicator()),
+                            if (_filterKeys.isNotEmpty)
+                              Column(
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .chooseFilterKeys,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  SelectorList(
+                                    data: _filterKeys,
+                                    onTap: (String filterKey) => bloc
+                                        .add(SelectFilterKeyEvent(filterKey)),
+                                    selectedItems: _selectedFilterKeys,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        if (_filterKeys.isEmpty &&
-                            state is LoadingFiltersKeyState)
-                          const Center(child: CircularProgressIndicator()),
-                        if (_filterKeys.isNotEmpty)
-                          Column(
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.chooseFilterKeys,
-                                style: Theme.of(context).textTheme.headline1,
+                            if (_selectedFilterKeys.length >= 3)
+                              DeeDeeButton(
+                                AppLocalizations.of(context)!.filterTags,
+                                () {
+                                  bloc.add(PushFiltersEvent(
+                                    topic: _selectedTopic,
+                                    filterKeys: _selectedFilterKeys,
+                                    accountType: user.accountType,
+                                  ));
+                                },
                               ),
-                              SelectorList(
-                                data: _filterKeys,
-                                onTap: (String filterKey) =>
-                                    bloc.add(SelectFilterKeyEvent(filterKey)),
-                                selectedItems: _selectedFilterKeys,
-                              ),
-                            ],
-                          ),
-                        if (_selectedFilterKeys.length >= 3)
-                          DeeDeeButton(
-                            AppLocalizations.of(context)!.filterTags,
-                            () {
-                              bloc.add(PushFiltersEvent(
-                                topic: _selectedTopic,
-                                filterKeys: _selectedFilterKeys,
-                                accountType: user.accountType,
-                              ));
-                            },
-                          ),
-                      ],
-                    ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 );
         },
+      ),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: ElevatedButton(
+            onPressed: () {
+              scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn);
+            },
+            child: const Icon(Icons.arrow_upward_outlined)),
       ),
     );
   }

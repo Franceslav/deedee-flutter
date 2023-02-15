@@ -175,7 +175,7 @@ class _MapScreenState extends State<MapScreen> {
                               )),
                           SizedBox(width: 210),
                           Icon(
-                            Icons.whatsapp_sharp,
+                            Icons.abc,
                             size: 26.0,
                             // color: Colors.green,
                           ),

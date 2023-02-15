@@ -18,6 +18,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<PushFiltersEvent>(_onPushFilters);
     on<PushTagEvent>(_onPushTag);
     on<SelectLocationEvent>(_onSelectLocation);
+    on<SelectFirstLvlTopicEvent>(_onSelectFirstLvlTopic);
   }
 
   _onLoadTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
@@ -43,6 +44,10 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onSelectTopic(SelectTopicEvent event, Emitter<SelectorState> emit) {
     emit(TopicSelectedState(event.topic));
+  }
+
+  _onSelectFirstLvlTopic(SelectFirstLvlTopicEvent event, Emitter<SelectorState> emit) {
+    emit(FirstLvlTopicSelectedState(event.topic));
   }
 
   _onLoadFilterKeys(

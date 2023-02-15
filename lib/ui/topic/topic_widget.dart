@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class TopicWidget extends StatelessWidget {
   final List<Map> topicTitle;
-  const TopicWidget({Key? key, required this.topicTitle}) : super(key: key);
+  final VoidCallback? onTap;
+
+  const TopicWidget({Key? key, required this.topicTitle, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +20,9 @@ class TopicWidget extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: (){
-
-            },
+            onTap: onTap,
+            highlightColor: Colors.blue.withOpacity(0.4),
+            splashColor: Colors.green.withOpacity(0.4),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               height: 150,
@@ -39,8 +42,7 @@ class TopicWidget extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                         color: topicTitle[index]["color"],
-                        shape: BoxShape.circle
-                    ),
+                        shape: BoxShape.circle),
                   ),
                   const Spacer(),
                   Text(

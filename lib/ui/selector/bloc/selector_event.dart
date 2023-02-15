@@ -57,3 +57,8 @@ class PushTagEvent extends SelectorEvent {
     required this.filterKeys,
   });
 }
+
+class SelectFirstLvlTopicEvent extends SelectorEvent {
+  final String topic;
+  SelectFirstLvlTopicEvent(this.topic);
+}

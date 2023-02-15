@@ -48,3 +48,8 @@ class ErrorState extends SelectorState {
   final String errorMessage;
   ErrorState(this.errorMessage);
 }
+
+class FirstLvlTopicSelectedState extends SelectorState {
+  final String topic;
+  FirstLvlTopicSelectedState(this.topic);
+}
