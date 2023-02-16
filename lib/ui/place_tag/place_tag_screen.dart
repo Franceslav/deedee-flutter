@@ -384,6 +384,61 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                 _selectedFilterKeys.length >= 3)
                               Column(
                                 children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .applicationBegin,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1,
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          DateTime? newDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: _date,
+                                            firstDate: DateTime(2023, 1),
+                                            lastDate: DateTime(2024, 12),
+                                          );
+                                          if (newDate == null) {
+                                            return;
+                                          }
+                                        },
+                                        icon: Icon(
+                                          Icons.calendar_month_rounded,
+                                          size: 42.0,
+                                          color: const Color(COLOR_PRIMARY)
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    '${AppLocalizations.of(context)!.applicationStart} ${DateFormat.yMMMEd().format(_date)}',
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .applicationDays,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  Slider(
+                                      thumbColor: const Color.fromARGB(
+                                          255, 116, 119, 199),
+                                      value: _duration,
+                                      max: 15,
+                                      divisions: 15,
+                                      label: _duration.round().toString(),
+                                      onChanged: (value) {}),
+                                  const SizedBox(height: 15),
                                   Text(
                                     '${AppLocalizations.of(context)!.applicationAction} $DEFAULT_EXPECTATION_NUMBER_OF_DAYS',
                                     style:
