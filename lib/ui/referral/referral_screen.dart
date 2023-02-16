@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/ReferralService.pb.dart';
 import 'package:deedee/injection.dart';
@@ -5,6 +6,7 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +38,7 @@ class _ReferralState extends State<ReferralScreen> {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_sharp),
               onPressed: () {
-                pushReplacement(context, const HomeScreen());
+                context.router.replace(const HomeScreenRoute());
               }),
           title: Text(
             AppLocalizations.of(context)!.accountReferralTitle,

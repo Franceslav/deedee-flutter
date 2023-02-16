@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/settings/settings_cubit.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +45,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           title: const Text('IP Address / Port'),
                           leading: const Icon(Icons.settings_ethernet),
                           onPressed: (BuildContext context) {
-                            pushReplacement(
-                                context, const ConnectionSettingsScreen());
+                            context.router
+                                .replace(const ConnectionSettingsScreenRoute());
                           },
                         ),
                       ],

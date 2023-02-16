@@ -4,6 +4,7 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_cubit.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
         child: Builder(builder: (context) {
           return WillPopScope(
               onWillPop: () async {
-                return pushReplacement(context, const SettingsScreen());
+                return pushReplacement(context, const HomeScreen());
               },
               child: Scaffold(
                 drawer: const DeeDeeDrawer(),

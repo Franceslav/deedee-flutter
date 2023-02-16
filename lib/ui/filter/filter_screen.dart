@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
+import 'package:deedee/constants.dart';
 
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_list.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -23,7 +26,7 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  late LatLng _userLocation;
+  late LatLng _userLocation = DEFAULT_LOCATION;
   bool _serviceStatus = false;
   bool _hasPermission = false;
   late LocationPermission _permission;
@@ -202,13 +205,10 @@ class _FilterPageState extends State<FilterPage> {
                   LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
                       tag.messengerId
               };
-              push(
-                context,
-                MapScreen(
-                  tagDescriptionMap: tagMap,
-                  user: user,
-                ),
-              );
+              context.router.replace(MapScreenRoute(
+                tagDescriptionMap: tagMap,
+                user: user,
+              ));
             }
           }
         },

@@ -31,3 +31,8 @@ Save the data, press "SAVE POINT" then press "SET LOCATION"
 * * *
 
 flutter pub run build_runner build --delete-conflicting-outputs
+
+### To generate navigation
+When adding a new screen to a file "app_router.dart"
+
+flutter pub run build_runner build --delete-conflicting-outputs

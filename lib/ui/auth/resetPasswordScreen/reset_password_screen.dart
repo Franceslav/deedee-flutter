@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_cubit.dart';
@@ -37,7 +38,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   context.read<LoadingCubit>().hideLoading();
                   showSnackBar(context,
                       'Reset password email has been sent, Please check your email.');
-                  Navigator.pop(context);
+                  context.router.pop();
                 } else if (state is ValidResetPasswordField) {
                   context
                       .read<LoadingCubit>()

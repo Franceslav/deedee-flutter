@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/signUp/sign_up_bloc.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -45,11 +47,7 @@ class _SignUpState extends State<SignUpScreen> {
                   if (state.authState == AuthState.authenticated) {
                     BlocProvider.of<UserBloc>(context)
                         .add(UserAuthenticated(state.user!));
-                    pushAndRemoveUntil(
-                      context,
-                      const HomeScreen(),
-                      false,
-                    );
+                    context.router.replace(const HomeScreenRoute());
                   } else {
                     showSnackBar(
                         context,
@@ -377,7 +375,7 @@ class _SignUpState extends State<SignUpScreen> {
         CupertinoActionSheetAction(
           isDefaultAction: false,
           onPressed: () async {
-            Navigator.pop(context);
+            context.router.pop();
             context.read<SignUpBloc>().add(ChooseImageFromGalleryEvent());
           },
           child: Text(AppLocalizations.of(context)!.chooseFromGalleryTitle),
@@ -385,7 +383,7 @@ class _SignUpState extends State<SignUpScreen> {
         CupertinoActionSheetAction(
           isDestructiveAction: false,
           onPressed: () async {
-            Navigator.pop(context);
+            context.router.pop();
             context.read<SignUpBloc>().add(CaptureImageByCameraEvent());
           },
           child: Text(AppLocalizations.of(context)!.takePictureTitle),
@@ -393,7 +391,7 @@ class _SignUpState extends State<SignUpScreen> {
       ],
       cancelButton: CupertinoActionSheetAction(
           child: Text(AppLocalizations.of(context)!.cancelTitle),
-          onPressed: () => Navigator.pop(context)),
+          onPressed: () => context.router.pop()),
     );
     showCupertinoModalPopup(context: context, builder: (context) => action);
   }

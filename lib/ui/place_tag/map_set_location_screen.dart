@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/place_tag/search_address_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            Navigator.of(context).pop();
+            context.router.pop();
           },
         ),
       ),
@@ -183,7 +184,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop(
+                                  context.router.pop(
                                     AddressModel(
                                       address: _currentAddress,
                                       location:

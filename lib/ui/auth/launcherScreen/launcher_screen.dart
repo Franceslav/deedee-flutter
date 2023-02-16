@@ -1,9 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
-import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
-import 'package:deedee/ui/home/home_screen.dart';
+
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,18 +30,16 @@ class _LauncherScreenState extends State<LauncherScreen> {
         listener: (context, state) {
           switch (state.authState) {
             case AuthState.firstRun:
-              pushReplacement(context, const OnBoardingScreen());
+              context.router.replace(const OnBoardingScreenRoute());
               break;
             case AuthState.authenticated:
               BlocProvider.of<UserBloc>(context)
                   .add(UserAuthenticated(state.user!));
-              pushReplacement(
-                context,
-                const HomeScreen(),
-              );
+              context.router.replace(const HomeScreenRoute());
+
               break;
             case AuthState.unauthenticated:
-              pushReplacement(context, const WelcomeScreen());
+              context.router.replace(const WelcomeScreenRoute());
               break;
           }
         },

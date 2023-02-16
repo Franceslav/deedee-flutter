@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/account_verify_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,7 +76,7 @@ class Popover extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          push(context, VerifyScreen());
+                          context.router.push(const VerifyScreenRoute());
                         }),
                   ),
                 ],
@@ -110,7 +112,7 @@ class Popover extends StatelessWidget {
                         ),
                         onPressed: () {
                           context.read<UserBloc>().add(UserTogglePremium());
-                          Navigator.of(context).pop();
+                          context.router.pop();
                         }),
                   ),
                 ],

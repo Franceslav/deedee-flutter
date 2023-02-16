@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:deedee/ui/auth/login/login_bloc.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,7 @@ class _LoginScreen extends State<LoginScreen> {
                   if (state.authState == AuthState.authenticated) {
                     BlocProvider.of<UserBloc>(context)
                         .add(UserAuthenticated(state.user!));
-                    pushAndRemoveUntil(context, const HomeScreen(), false);
+                    context.router.replace(const HomeScreenRoute());
                   } else {
                     showSnackBar(
                         context,
@@ -148,8 +150,8 @@ class _LoginScreen extends State<LoginScreen> {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
-                            onTap: () =>
-                                push(context, const ResetPasswordScreen()),
+                            onTap: () => context.router
+                                .replace(const ResetPasswordScreenRoute()),
                             child: Text(
                               AppLocalizations.of(context)!.forgotPassword,
                               style: TextStyle(
@@ -200,7 +202,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 color: Color(COLOR_PRIMARY)),
                           ),
                           onPressed: () {
-                            pushReplacement(context, SignUpScreen());
+                            context.router.push(const SignUpScreenRoute());
                             // context.read<WelcomeBloc>().add(SignupPressed());
                           },
                           style: ButtonStyle(

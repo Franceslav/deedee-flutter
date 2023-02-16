@@ -1,12 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/auth/login/login_screen.dart';
-import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_bloc.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -22,10 +21,10 @@ class WelcomeScreen extends StatelessWidget {
               listener: (context, state) {
                 switch (state.pressTarget) {
                   case WelcomePressTarget.login:
-                    push(context, const LoginScreen());
+                    context.router.replace(const LoginScreenRoute());
                     break;
                   case WelcomePressTarget.signup:
-                    push(context, const SignUpScreen());
+                    context.router.push(const SignUpScreenRoute());
                     break;
                   default:
                     break;
@@ -76,7 +75,7 @@ class WelcomeScreen extends StatelessWidget {
                             side:
                                 const BorderSide(color: Color(COLOR_PRIMARY))),
                       ),
-                      child:  Text(
+                      child: Text(
                         AppLocalizations.of(context)!.signInTitle,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),

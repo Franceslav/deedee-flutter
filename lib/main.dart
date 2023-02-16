@@ -6,6 +6,7 @@ import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,6 +62,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
+  final _appRouter = AppRouter();
 
   // Define an async function to initialize FlutterFire
   void initializeFlutterFire() async {
@@ -123,19 +125,21 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       );
     }
 
-    return MaterialApp(
-        locale: context.watch<AccountBloc>().appLocal,
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        theme: deeDeeTheme,
-        debugShowCheckedModeBanner: false,
-        color: const Color(COLOR_PRIMARY),
-        home: const LauncherScreen());
+    return MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      locale: context.watch<AccountBloc>().appLocal,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      theme: deeDeeTheme,
+      debugShowCheckedModeBanner: false,
+      color: const Color(COLOR_PRIMARY),
+    );
   }
 
   @override

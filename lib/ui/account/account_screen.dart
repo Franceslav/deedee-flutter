@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/account/account_verify_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,8 @@ class _AccountState extends State<AccountScreen> {
             iconTheme: const IconThemeData(color: Colors.black),
             backgroundColor: Colors.white,
             centerTitle: true,
-          ),body: Column(
+          ),
+          body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,7 +104,7 @@ class _AccountState extends State<AccountScreen> {
                       ),
                     ),
                     onPressed: () {
-                      push(context, VerifyScreen());
+                      context.router.push(const VerifyScreenRoute());
                     }),
               ),
               Padding(
@@ -161,10 +164,7 @@ class _AccountState extends State<AccountScreen> {
                       ),
                     ),
                     onPressed: () {
-                      pushReplacement(
-                        context,
-                        const TopUpPage(),
-                      );
+                      context.router.replace(const TopUpPageRoute());
                     }),
               ),
               Padding(

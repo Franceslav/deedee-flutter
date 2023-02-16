@@ -45,6 +45,9 @@ dependencies:
   latlong2:
   search_address_repository:
     path: packages/search_address_repository
+  auto_route: ^5.0.4
+  auto_route_generator: ^5.0.3
+
   sliding_up_panel: ^2.0.0+1
   dartx: ^1.1.0
 
@@ -53,7 +56,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider: ^6.0.0
-  intl: ^0.17.0
 
   flutter_launcher_icons: ^0.11.0
 

@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 
 import 'package:deedee/ui/theme/deedee_theme.dart';
 
@@ -222,7 +224,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
             showSnackBar(context, message);
           }
           if (state is UserTagPlacedState) {
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            context.router.popUntil((route) => route.isFirst);
           }
         },
         builder: ((context, state) {
@@ -425,14 +427,10 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      final data = await Navigator.of(context)
-                                          .push<AddressModel?>(
-                                        MaterialPageRoute(
-                                          builder: (_) => MapSetLocationScreen(
-                                            userLocation: _userLocation,
-                                          ),
-                                        ),
-                                      );
+                                      final data = await context.router.push(
+                                              MapSetLocationScreenRoute(
+                                                  userLocation: _userLocation))
+                                          as AddressModel?;
                                       if (data == null) {
                                         return;
                                       }

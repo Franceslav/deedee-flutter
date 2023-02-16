@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/onBoarding/on_boarding_cubit.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,8 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           BlocListener<AuthenticationBloc, AuthenticationState>(
                         listener: (context, state) {
                           if (state.authState == AuthState.unauthenticated) {
-                            pushAndRemoveUntil(
-                                context, const WelcomeScreen(), false);
+                            context.router.replace(const WelcomeScreenRoute());
                           }
                         },
                         child: OutlinedButton(

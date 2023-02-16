@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
@@ -10,6 +11,7 @@ import 'package:deedee/ui/drawer/drawer_button.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -144,7 +146,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             text: AppLocalizations.of(context)!.homeTitle,
                             iconData: Icons.home,
                             onTap: () {
-                              pushReplacement(context, const HomeScreen());
+                              context.router.push(const HomeScreenRoute());
                             },
                           ),
                           ExpansionTile(
@@ -173,10 +175,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                             .accountMoneyTitle,
                                         iconData: Icons.account_box,
                                         onTap: () {
-                                          pushReplacement(
-                                            context,
-                                            const AccountScreen(),
-                                          );
+                                          context.router.replace(
+                                              const AccountScreenRoute());
                                         },
                                       ),
                                       DrawerButton(
@@ -196,8 +196,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                                       AccountType.buy));
                                               break;
                                           }
-                                          pushReplacement(
-                                              context, const HomeScreen());
+                                          context.router
+                                              .replace(const HomeScreenRoute());
                                         },
                                       ),
                                       DrawerButton(
@@ -205,10 +205,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                             .bookmarksTitle,
                                         iconData: Icons.bookmark,
                                         onTap: () {
-                                          pushReplacement(
-                                            context,
-                                            const BookmarksScreen(),
-                                          );
+                                          context.router.replace(
+                                              const BookmarksScreenRoute());
                                         },
                                       ),
                                       DrawerButton(
@@ -216,10 +214,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                             .accountReferralTitle,
                                         iconData: Icons.link_sharp,
                                         onTap: () {
-                                          pushReplacement(
-                                            context,
-                                            const ReferralScreen(),
-                                          );
+                                          context.router.replace(
+                                              const ReferralScreenRoute());
                                         },
                                       ),
                                     ],
@@ -232,14 +228,15 @@ class _DrawerState extends State<DeeDeeDrawer> {
                             text: AppLocalizations.of(context)!.settings,
                             iconData: Icons.settings,
                             onTap: () {
-                              pushReplacement(context, const SettingsScreen());
+                              context.router
+                                  .replace(const SettingsScreenRoute());
                             },
                           ),
                           DrawerButton(
                             text: AppLocalizations.of(context)!.helpTitle,
                             iconData: Icons.help_outline,
                             onTap: () {
-                              pushReplacement(context, const HelpScreen());
+                              context.router.replace(const HelpScreenRoute());
                             },
                           ),
                           DrawerButton(
@@ -249,7 +246,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                               context
                                   .read<AuthenticationBloc>()
                                   .add(LogoutEvent());
-                              pushReplacement(context, const LoginScreen());
+
+                              context.router.replace(const LoginScreenRoute());
                             },
                           ),
                         ],
