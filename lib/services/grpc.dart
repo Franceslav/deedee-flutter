@@ -23,6 +23,8 @@ class GRCPUtils {
   final AccountServiceClient _accountServiceClient =
       locator.get<AccountServiceClient>();
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
+  final VerificationServiceClient _verificationServiceClient =
+      locator.get<VerificationServiceClient>();
 
   Future<void> placeTag(
       AccountType accountType,
@@ -196,19 +198,15 @@ class GRCPUtils {
   }
 
   Future<bool> verifyUserEmail(String email) async {
-    // final channel = await createChannel();
-    // final stub = VerificationServiceClient(channel);
-    // final response =
-    //     await stub.verifyEmail(VerifyEmailRequest()..email = email);
+    final response = await _verificationServiceClient
+        .verifyEmail(VerifyEmailRequest()..email = email);
     // return response.processed;
     return true;
   }
 
-  Future<bool> verifyUserIdentity(File files) async {
-    // final channel = await createChannel();
-    // final stub = VerificationServiceClient(channel);
-    // final response =
-    //     await stub.verifyDocuments(VerifyDocumentsRequest()..files = files);
+  Future<bool> verifyUserIdentity(FileChunk files) async {
+    final response = await _verificationServiceClient
+        .verifyDocuments(VerifyDocumentsRequest()..files.addAll([files]));
     // return response.processed;
     return true;
   }

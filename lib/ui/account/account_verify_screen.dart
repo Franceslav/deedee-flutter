@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     ElevatedButton(
                       onPressed: () {
                         //TODO: [DEEMOB-76]
-                        context.read<UserBloc>().add(UserDocVerification());
+                        context
+                            .read<UserBloc>()
+                            .add(UserDocVerification(files: FileChunk()));
                       },
                       child: SizedBox(
                         width: 80,

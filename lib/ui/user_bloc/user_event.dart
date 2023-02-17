@@ -27,6 +27,6 @@ class UserTogglePremium extends UserEvent {}
 class UserEmailVerification extends UserEvent {}
 
 class UserDocVerification extends UserEvent {
-  // File files;
-  // UserDocVerification({required this.files});
+  FileChunk files;
+  UserDocVerification({required this.files});
 }

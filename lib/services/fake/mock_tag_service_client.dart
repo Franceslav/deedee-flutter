@@ -43,8 +43,12 @@ class MockTagServiceClient implements TagServiceClient {
 
   @override
   ResponseFuture<GetBookmarkTagsResponse> getBookmarkTags(GetBookmarkTagsRequest request, {CallOptions? options}) {
-    // TODO: implement getBookmarkTags
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetBookmarkTagsResponse>(_getBookmarkTags(request)));
+  }
+
+  Future<GetBookmarkTagsResponse> _getBookmarkTags(GetBookmarkTagsRequest request) async {
+    return GetBookmarkTagsResponse()..tags.addAll([]);
   }
 
   @override
@@ -144,8 +148,12 @@ class MockTagServiceClient implements TagServiceClient {
 
   @override
   ResponseFuture<GetTopicResponse> getTopic(GetTopicRequest request, {CallOptions? options}) {
-    // TODO: implement getTopic
-    throw UnimplementedError();
+    return ResponseFuture(
+      FakeClientCall<dynamic, GetTopicResponse>(_getTopic(request)));
+
+  }
+  Future<GetTopicResponse> _getTopic(GetTopicRequest request) async {
+    return GetTopicResponse()..topic = Topic();
   }
 
   @override
@@ -159,14 +167,21 @@ class MockTagServiceClient implements TagServiceClient {
 
   @override
   ResponseFuture<PlaceTagResponse> placeTag(PlaceTagRequest request, {CallOptions? options}) {
-    // TODO: implement placeTag
-    throw UnimplementedError();
+    return ResponseFuture(
+      FakeClientCall<dynamic, PlaceTagResponse>(_placeTag(request)));
+  }
+
+  Future<PlaceTagResponse> _placeTag(PlaceTagRequest request) async {
+    return PlaceTagResponse()..tag =Tag();
   }
 
   @override
   ResponseFuture<TagToBookmarkResponse> removeTagToBookmark(TagToBookmarkRequest request, {CallOptions? options}) {
-    // TODO: implement removeTagToBookmark
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, TagToBookmarkResponse>(_removeTagToBookmark(request)));
+  }
+
+  Future<TagToBookmarkResponse> _removeTagToBookmark(TagToBookmarkRequest request, ) async {
+    return TagToBookmarkResponse()..succeed = true;
   }
 
   @override

@@ -55,8 +55,8 @@ class MockAccountServiceClient implements AccountServiceClient {
 
   @override
   ResponseFuture<AccountStatusResponse> toggleAccountStatus(AccountStatusRequest request, {CallOptions? options}) {
-    // TODO: implement toggleAccountStatus
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, AccountStatusResponse>(_toggleAccountStatus(request)));
   }
 
   Future<AccountStatusResponse> _toggleAccountStatus(AccountStatusRequest request) async {

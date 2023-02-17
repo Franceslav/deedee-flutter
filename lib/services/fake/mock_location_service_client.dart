@@ -5,6 +5,8 @@ import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
+import 'fake_client.dart';
+
 @LazySingleton(as: LocationServiceClient, env: [Environment.dev])
 class MockLocationServiceClient implements LocationServiceClient {
   @override
@@ -27,7 +29,11 @@ class MockLocationServiceClient implements LocationServiceClient {
 
   @override
   ResponseFuture<GetPlacesResponse> getPlaces(GetPlacesRequest request, {CallOptions? options}) {
-    // TODO: implement getPlaces
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetPlacesResponse>(_getPlaces(request)));
+  }
+
+  Future<GetPlacesResponse> _getPlaces(GetPlacesRequest request) async {
+    return GetPlacesResponse()..places.addAll([]);
   }
 }

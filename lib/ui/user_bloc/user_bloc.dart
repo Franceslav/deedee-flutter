@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
@@ -56,21 +57,23 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   _onUserEmailVerification(
-      UserEmailVerification event, Emitter<UserState> emit) {
+      UserEmailVerification event, Emitter<UserState> emit) async {
     emit(UserState(state.user
         .copyWith(emailVerification: EmailVerificationStatus.verified)));
     try {
-      // serviceLocator.get<GRCPUtils>().verifyUserEmail(state.user.email);
+      final response =
+          await locator.get<GRCPUtils>().verifyUserEmail(state.user.email);
     } catch (error) {
       print(error.toString());
     }
   }
 
-  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) {
+  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) async {
     try {
       emit(UserState(state.user
           .copyWith(docVerification: DocVerificationStatus.verified)));
-      // serviceLocator.get<GRCPUtils>().verifyUserIdentity(event.files);
+      final response =
+          await locator.get<GRCPUtils>().verifyUserIdentity(event.files);
     } catch (error) {
       print(error.toString());
     }
