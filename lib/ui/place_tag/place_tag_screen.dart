@@ -368,14 +368,18 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                         Theme.of(context).textTheme.headline1,
                                   ),
                                   const SizedBox(height: 10),
-                                  ElevatedButton(
-                                      onPressed: () => bloc.add(
-                                          DurationSelectedEvent(
-                                              duration: _duration)),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .placeRequest,
-                                      )),
+                                  state is! DurationSelectedState
+                                      ? ElevatedButton(
+                                          onPressed: () => bloc.add(
+                                              DurationSelectedEvent(
+                                                  duration: _duration)),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .placeRequest),
+                                        )
+                                      : const SizedBox(
+                                          height: 0.1,
+                                        ),
                                   const SizedBox(height: 15),
                                 ],
                               ),
@@ -463,12 +467,18 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                       child: Text(AppLocalizations.of(context)!
                                           .upgradeToPremium)),
                                   const SizedBox(height: 10),
-                                  ElevatedButton(
-                                      onPressed: () => bloc.add(
-                                          DurationSelectedEvent(
-                                              duration: _duration)),
-                                      child: Text(
-                                          AppLocalizations.of(context)!.resume))
+                                  state is! DurationSelectedState
+                                      ? ElevatedButton(
+                                          onPressed: () => bloc.add(
+                                              DurationSelectedEvent(
+                                                  duration: _duration)),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .resume),
+                                        )
+                                      : const SizedBox(
+                                          height: 0.1,
+                                        ),
                                 ],
                               ),
                             if (state is DurationSelectedState)
