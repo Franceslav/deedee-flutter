@@ -16,8 +16,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../topic/topic_widget.dart';
-
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
 
@@ -39,56 +37,6 @@ class _FilterPageState extends State<FilterPage> {
   String _selectedTopic = '';
   List<String> _selectedFilterKeys = [];
   bool _isInit = true;
-
-  ScrollController scrollController = ScrollController();
-
-  final List<Map> topics = [
-    {"color": Colors.red, "title": "Рабочие"},
-    {
-      "color": Colors.pink,
-      "title": "Авто",
-    },
-    {
-      "color": Colors.green,
-      "title": "Бьюти",
-    },
-    {
-      "color": Colors.orange,
-      "title": "Отделка",
-    },
-    {
-      "color": Colors.deepPurple,
-      "title": "Дети",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-  ];
 
   @override
   void initState() {
@@ -217,30 +165,13 @@ class _FilterPageState extends State<FilterPage> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
-                  controller: scrollController,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height,
-                        color: Colors.white70,
-                        child: TopicWidget(
-                          topicTitle: topics,
-                          onTap: () {
-                            scrollController.animateTo(
-                                MediaQuery.of(context).size.height - 20,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn);
-                            bloc.add(
-                                SelectFirstLvlTopicEvent(topics.toString()));
-                          },
-                        ),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height - 80,
-                        color: Colors.white60,
-                        child: Column(
+              : Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
                           children: [
                             if (_topics.isNotEmpty)
                               Column(
@@ -291,21 +222,11 @@ class _FilterPageState extends State<FilterPage> {
                               ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                );
+              );
         },
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomRight,
-        child: ElevatedButton(
-            onPressed: () {
-              scrollController.animateTo(0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeIn);
-            },
-            child: const Icon(Icons.arrow_upward_outlined)),
       ),
     );
   }

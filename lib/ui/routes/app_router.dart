@@ -11,6 +11,7 @@ import 'package:deedee/ui/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
@@ -40,6 +41,7 @@ import 'package:deedee/ui/top_up/top_up_screen.dart';
     MaterialRoute(page: LoginScreen, path: '/login'),
     MaterialRoute(page: SignUpScreen, path: '/sign-up'),
     MaterialRoute(page: ResetPasswordScreen, path: 'reset-password'),
+    MaterialRoute(page: MainTopicPage, path: 'main-topic'),
   ],
 )
 class $AppRouter {}

@@ -8,10 +8,13 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart' as _i3;
 import 'package:deedee/generated/LocationService.pbgrpc.dart' as _i8;
 import 'package:deedee/generated/TagService.pbgrpc.dart' as _i11;
+import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i11;
 import 'package:deedee/services/channel_service.dart' as _i7;
 import 'package:deedee/services/fake/mock_account_service_client.dart' as _i4;
 import 'package:deedee/services/fake/mock_location_service_client.dart' as _i9;
 import 'package:deedee/services/fake/mock_tag_service_client.dart' as _i12;
+import 'package:deedee/services/fake/mock_verification_service_clent.dart'
+    as _i12;
 import 'package:deedee/services/gps.dart' as _i5;
 import 'package:deedee/services/grpc.dart' as _i6;
 import 'package:deedee/services/shared.dart' as _i10;
@@ -63,6 +66,10 @@ _i1.GetIt $configureDependencies(
   );
   gh.lazySingleton<_i11.TagServiceClient>(
     () => _i12.MockTagServiceClient(),
+    registerFor: {_dev},
+  );
+  gh.lazySingleton<_i11.VerificationServiceClient>(
+    () => _i12.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
   return getIt;

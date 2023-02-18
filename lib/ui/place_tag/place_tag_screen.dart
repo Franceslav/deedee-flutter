@@ -53,56 +53,6 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
   String _selectedAddress = '';
   bool _isInit = true;
 
-  ScrollController scrollController = ScrollController();
-
-  final List<Map> topics = [
-    {"color": Colors.red, "title": "Рабочие"},
-    {
-      "color": Colors.pink,
-      "title": "Авто",
-    },
-    {
-      "color": Colors.green,
-      "title": "Бьюти",
-    },
-    {
-      "color": Colors.orange,
-      "title": "Отделка",
-    },
-    {
-      "color": Colors.deepPurple,
-      "title": "Дети",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-    {
-      "color": Colors.blue,
-      "title": "Клининг",
-    },
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -232,30 +182,13 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
-                  controller: scrollController,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height,
-                        color: Colors.white70,
-                        child: TopicWidget(
-                          topicTitle: topics,
-                          onTap: () {
-                            scrollController.animateTo(
-                                MediaQuery.of(context).size.height - 20,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn);
-                            bloc.add(
-                                SelectFirstLvlTopicEvent(topics.toString()));
-                          },
-                        ),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height - 80,
-                        color: Colors.white60,
-                        child: Column(
+              : Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
                           children: [
                             if (_topics.isNotEmpty)
                               Column(
@@ -561,21 +494,11 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                               ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                );
+              );
         }),
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomRight,
-        child: ElevatedButton(
-            onPressed: () {
-              scrollController.animateTo(0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeIn);
-            },
-            child: const Icon(Icons.arrow_upward_outlined)),
       ),
     );
   }
