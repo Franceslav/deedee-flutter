@@ -1,7 +1,9 @@
 import 'package:deedee/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@LazySingleton(env: [Environment.dev, Environment.prod])
 class SharedUtils {
   Future<String?> getPrefsIpAddress() async {
     final prefs = await SharedPreferences.getInstance();
