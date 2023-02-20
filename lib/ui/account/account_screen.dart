@@ -164,7 +164,7 @@ class _AccountState extends State<AccountScreen> {
                       ),
                     ),
                     onPressed: () {
-                      context.router.replace(const TopUpPageRoute());
+                      context.router.push(const TopUpPageRoute());
                     }),
               ),
               Padding(
