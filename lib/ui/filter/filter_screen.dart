@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/gps.dart';
 
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
@@ -41,7 +43,7 @@ class _FilterPageState extends State<FilterPage> {
   @override
   void initState() {
     super.initState();
-    checkGps();
+    locator.get<GPSUtils>().checkGps();
   }
 
   @override
@@ -53,53 +55,6 @@ class _FilterPageState extends State<FilterPage> {
       bloc.add(LoadTopicsEvent(_userLocation));
     }
     _isInit = false;
-  }
-
-  checkGps() async {
-    _serviceStatus = await Geolocator.isLocationServiceEnabled();
-    if (_serviceStatus) {
-      _permission = await Geolocator.checkPermission();
-      if (_permission == LocationPermission.denied) {
-        _permission = await Geolocator.requestPermission();
-        if (_permission == LocationPermission.denied) {
-          // showSnackBar(context, 'Location permissions are denied');
-        } else if (_permission == LocationPermission.deniedForever) {
-          // showSnackBar(context, 'Location permissions are permanently denied');
-        } else {
-          _hasPermission = true;
-        }
-      } else {
-        _hasPermission = true;
-      }
-      if (_hasPermission) {
-        setState(() {});
-        getLocation();
-      }
-    } else {
-      // showSnackBar(context, 'GPS Service is not enabled, turn on GPS location');
-    }
-    setState(() {});
-  }
-
-  getLocation() async {
-    _position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _userLocation = LatLng(_position.latitude, _position.longitude);
-    });
-    LocationSettings locationSettings = const LocationSettings(
-      accuracy: LocationAccuracy.bestForNavigation,
-      //accuracy of the location data
-      distanceFilter: 100, //minimum distance (measured in meters) a
-      //device must move horizontally before an update event is generated;
-    );
-    StreamSubscription<Position> _positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position position) {
-      setState(() {
-        _userLocation = LatLng(position.latitude, position.longitude);
-      });
-    });
   }
 
   @override
@@ -166,8 +121,8 @@ class _FilterPageState extends State<FilterPage> {
                   child: CircularProgressIndicator(),
                 )
               : Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -225,7 +180,7 @@ class _FilterPageState extends State<FilterPage> {
                       ],
                     ),
                   ),
-              );
+                );
         },
       ),
     );

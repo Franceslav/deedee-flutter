@@ -2,9 +2,10 @@ import 'dart:async';
 
 //TODO
 import 'package:geolocator/geolocator.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(env: [Environment.dev, Environment.prod])
 class GPSUtils {
-
   bool servicestatus = false;
   bool haspermission = false;
   late LocationPermission permission;
@@ -61,8 +62,8 @@ class GPSUtils {
     );
 
     StreamSubscription<Position> positionStream =
-    Geolocator.getPositionStream(locationSettings: locationSettings)
-        .listen((Position position) {
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
       // _lon = position.longitude;
       // _lat = position.latitude;
       //
@@ -70,5 +71,4 @@ class GPSUtils {
       // });
     });
   }
-
 }

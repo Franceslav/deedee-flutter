@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
@@ -25,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   @override
   void initState() {
-    checkGps();
+    locator.get<GPSUtils>().checkGps();
     super.initState();
   }
 
@@ -93,48 +95,4 @@ class _HomeState extends State<HomeScreen> {
   bool haspermission = false;
   late LocationPermission permission;
   late Position position;
-
-  checkGps() async {
-    servicestatus = await Geolocator.isLocationServiceEnabled();
-    if (servicestatus) {
-      permission = await Geolocator.checkPermission();
-
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          // showSnackBar(context, 'Location permissions are denied');
-        } else if (permission == LocationPermission.deniedForever) {
-          // showSnackBar(context, 'Location permissions are permanently denied');
-        } else {
-          haspermission = true;
-        }
-      } else {
-        haspermission = true;
-      }
-
-      if (haspermission) {
-        getLocation();
-      }
-    } else {
-      // showSnackBar(context, 'GPS Service is not enabled, turn on GPS location');
-    }
-  }
-
-  getLocation() async {
-    position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    LocationSettings locationSettings = const LocationSettings(
-      accuracy: LocationAccuracy.bestForNavigation,
-      //accuracy of the location data
-      distanceFilter: 100, //minimum distance (measured in meters) a
-      //device must move horizontally before an update event is generated;
-    );
-
-    StreamSubscription<Position> positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position position) {
-      BlocProvider.of<UserBloc>(context).add(UserSetLastGeolocation(
-          LatLng(position.latitude, position.longitude)));
-    });
-  }
 }
