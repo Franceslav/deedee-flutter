@@ -35,8 +35,7 @@ class PlaceTagScreen extends StatefulWidget {
 }
 
 class _PlaceTagScreenState extends State<PlaceTagScreen> {
-  // TODO: [DEEMOB-68]
-  late LatLng _userLocation = DEFAULT_LOCATION;
+  late LatLng _userLocation;
   final String _messengerId = 'ronxbysu';
   bool _serviceStatus = false;
   bool _hasPermission = false;
@@ -65,6 +64,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     if (_isInit) {
+      _position = await Geolocator.getCurrentPosition();
+      _userLocation = LatLng(_position.latitude, _position.longitude);
       //without delay services fail to determine _userLocation
       await Future.delayed(const Duration(seconds: 2));
       bloc.add(LoadTopicsEvent(_userLocation));
@@ -355,7 +356,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                       child: Text(AppLocalizations.of(context)!
                                           .upgradeToPremium)),
                                   const SizedBox(height: 10),
-                                  state is! DurationSelectedState
+                                  state is! DurationSelectedState && _selectedLocation == DEFAULT_LOCATION
                                       ? ElevatedButton(
                                           onPressed: () => bloc.add(
                                               DurationSelectedEvent(
@@ -369,7 +370,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                         ),
                                 ],
                               ),
-                            if (state is DurationSelectedState)
+                            if ((state is DurationSelectedState) || (_selectedLocation != DEFAULT_LOCATION))
                               Column(
                                 children: [
                                   Text(
