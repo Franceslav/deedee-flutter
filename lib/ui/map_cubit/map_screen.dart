@@ -1,4 +1,6 @@
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:deedee/constants.dart';
+
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
@@ -14,6 +16,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../constants.dart';
 import '../auth/welcome/welcome_screen.dart';
+import '../global widgets/map_sliding_panel_widget.dart';
 
 class MapScreen extends StatefulWidget {
   final User user;
@@ -43,8 +46,8 @@ class _MapScreenState extends State<MapScreen> {
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
   late DeeDeeSliderController _pc;
-  bool click = true;
-  bool click_bm = true;
+  // bool click = true;
+  // bool click_bm = true;
 
   final List<TagMarker> _markers = [];
 
@@ -124,161 +127,10 @@ class _MapScreenState extends State<MapScreen> {
                 },
               ),
               nonRotatedChildren: [
-                SlidingUpPanel(
-                  defaultPanelState: PanelState.CLOSED,
-                  minHeight: size.height * 0,
-                  maxHeight: size.height * 0.5,
-                  controller: _pc,
-                  header: Container(
-                    margin: EdgeInsets.fromLTRB(
-                        size.width / 2 - 30, 10.0, 24.0, 0.0),
-                    width: 60,
-                    height: 7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.black,
-                    ),
-                  ),
-                  panel: Column(
-                    children: <Widget>[
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          const SizedBox(width: 20),
-                          const Icon(
-                            Icons.account_box_sharp,
-                            size: 26.0,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(_selectedMessengerId,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold)),
-                          const SizedBox(width: 40),
-                          const Icon(Icons.star_rounded,
-                              size: 26.0, color: Colors.deepPurple),
-                          const Icon(Icons.star_rounded,
-                              size: 26.0, color: Colors.deepPurple),
-                          const Icon(Icons.star_rounded,
-                              size: 26.0, color: Colors.deepPurple),
-                          const Icon(Icons.star_rounded,
-                              size: 26.0, color: Colors.deepPurple),
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        children: const <Widget>[
-                          SizedBox(width: 13),
-                          Text('# lorem # ipsum',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                              )),
-                          SizedBox(width: 210),
-                          Icon(
-                            CommunityMaterialIcons.whatsapp,
-
-                            size: 26.0,
-                            // color: Colors.green,
-                          ),
-                          Icon(
-                            Icons.telegram_sharp,
-                            size: 26.0,
-                            // color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2023, 1),
-                                lastDate: DateTime(2024, 12),
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.calendar_month_rounded,
-                              size: 26.0,
-                            ),
-                          ),
-                          const Text('Записаться',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              )),
-                          const Icon(
-                            Icons.message,
-                            size: 26.0,
-                          ),
-                          const Text('Спросить',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              )),
-                          const Icon(Icons.phone,
-                              size: 26.0, color: Colors.black),
-                          const Text('пн-пт 9.00 - 21.00',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16,
-                              ))
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  click = !click;
-                                });
-                              },
-                              icon: Icon(
-                                  size: 26.0,
-                                  click
-                                      ? Icons.favorite_border
-                                      : Icons.favorite),
-                              color: click ? Colors.black : Colors.red,
-                              splashRadius: 50,
-                              splashColor: Colors.lightGreenAccent),
-                          const Text('В избранное',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              )),
-                          const SizedBox(width: 80),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                click_bm = !click_bm;
-                              });
-                            },
-                            icon: Icon(
-                                size: 26.0,
-                                click_bm
-                                    ? Icons.bookmark_add_outlined
-                                    : Icons.bookmark_add),
-                            color: click_bm ? Colors.black : Colors.red,
-                          ),
-                          const Text('В закладки',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              ))
-                        ],
-                      ),
-                    ],
-                  ),
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(25)),
-                ),
+                MapSlidingPanelWidget(
+                    size: size,
+                    pc: _pc,
+                    selectedMessengerId: _selectedMessengerId),
               ],
               children: [
                 TileLayer(
@@ -317,6 +169,216 @@ class _MapScreenState extends State<MapScreen> {
               ],
             ),
           )),
+    );
+  }
+}
+
+class CustomPanelWidget extends StatefulWidget {
+  const CustomPanelWidget({
+    super.key,
+    required String selectedMessengerId,
+  }) : _selectedMessengerId = selectedMessengerId;
+
+  final String _selectedMessengerId;
+
+  @override
+  State<CustomPanelWidget> createState() => _CustomPanelWidgetState();
+}
+
+class _CustomPanelWidgetState extends State<CustomPanelWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.account_box_sharp,
+                  size: 26.0,
+                ),
+                const Spacer(flex: 1),
+                Text(widget._selectedMessengerId,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold)),
+                const Spacer(flex: 6),
+                Row(
+                  children: const [
+                    Icon(Icons.star_rounded,
+                        size: 26.0, color: Color(COLOR_PRIMARY)),
+                    Icon(Icons.star_rounded,
+                        size: 26.0, color: Color(COLOR_PRIMARY)),
+                    Icon(Icons.star_rounded,
+                        size: 26.0, color: Color(COLOR_PRIMARY)),
+                    Icon(Icons.star_rounded,
+                        size: 26.0, color: Color(COLOR_PRIMARY)),
+                    Icon(Icons.star_border, size: 26.0, color: Colors.black),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: const <Widget>[
+                Text('# lorem # ipsum',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    )),
+                Spacer(flex: 10),
+                Icon(
+                  CommunityMaterialIcons.whatsapp,
+                  size: 26.0,
+                  // color: Colors.green,
+                ),
+                Spacer(flex: 1),
+                Icon(
+                  Icons.telegram_sharp,
+                  size: 26.0,
+                  // color: Colors.blue,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          Column(
+            children: <Widget>[
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2023, 1),
+                        lastDate: DateTime(2024, 12),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.calendar_month_rounded,
+                      size: 26.0,
+                    ),
+                  ),
+                  const Text('Записаться',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      )),
+                ],
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.message,
+                      size: 26.0,
+                    ),
+                  ),
+                  const Text('Спросить',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      )),
+                ],
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.phone,
+                        size: 26.0, color: Colors.black),
+                  ),
+                  const Text('пн-пт 9.00 - 21.00',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      ))
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      // setState(() {
+                      //   // bool click = false;
+                      //   click = !click;
+                      // });
+                    },
+                    // icon: Icon(
+                    //     size: 26.0,
+                    //     click
+                    //         ? Icons.favorite_border
+                    //         : Icons.favorite),
+                    icon: const Icon(
+                      size: 26.0,
+
+                      Icons.favorite_border,
+                      // color: click ? Colors.black : Colors.red,
+                      color: Colors.black,
+                    ),
+                    splashRadius: 50,
+                    splashColor: Colors.lightGreenAccent),
+                const Text('В избранное',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    )),
+                const Spacer(),
+                IconButton(
+                  onPressed: () {
+                    // setState(() {
+                    //   click_bm = !click_bm;
+                    // });
+                  },
+                  icon: const Icon(
+                      size: 26.0,
+                      // click_bm ? Icons.bookmark_add_outlined : Icons.bookmark),
+                      Icons.bookmark_add_outlined),
+                  // color: click_bm ? Colors.black : const Color(COLOR_PRIMARY),
+                  color: Colors.black,
+                ),
+                const Text('В закладки',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ))
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomCollapsedWidget extends StatelessWidget {
+  const CustomCollapsedWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.grey.shade400,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
+      child:
+          const Center(child: Text('Нажмите на маркер для просмотра заявки')),
     );
   }
 }
