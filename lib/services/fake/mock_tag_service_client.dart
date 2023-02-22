@@ -192,4 +192,28 @@ class MockTagServiceClient implements TagServiceClient {
   Future<VerifyAuthCodeResponse> _verifyAuthCode(VerifyAuthCodeRequest request) async {
     return VerifyAuthCodeResponse()..authenticated = true;
   }
+
+  @override
+  ResponseFuture<UserTagResponse> getUserTag(UserTagRequest request, {CallOptions? options}) {
+    // TODO: implement getUserTag
+    throw UnimplementedError();
+  }
+
+  @override
+  ResponseFuture<GetUserTagDetailsResponse> getUserTagDetails(GetUserTagDetailsRequest request, {CallOptions? options}) {
+    // TODO: implement getUserTagDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  ResponseFuture<GetUserTagsResponse> getUserTags(GetUserTagsRequest request, {CallOptions? options}) {
+    // TODO: implement getUserTags
+    throw UnimplementedError();
+  }
+
+  @override
+  ResponseFuture<UserTagResponse> removeUserTag(UserTagRequest request, {CallOptions? options}) {
+    // TODO: implement removeUserTag
+    throw UnimplementedError();
+  }
 }

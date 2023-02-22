@@ -1,13 +1,340 @@
 ///
+//  Generated code. Do not modify.
+//  source: TagService.proto
+//
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
+
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'LocationService.pb.dart' as $0;
-import 'TagService.pbenum.dart';
 import 'timestamp.pb.dart' as $2;
 
+import 'TagService.pbenum.dart';
+
 export 'TagService.pbenum.dart';
+
+class GetUserTagsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetUserTagsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  GetUserTagsRequest._() : super();
+  factory GetUserTagsRequest({
+    $core.String? userId,
+  }) {
+    final _result = create();
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    return _result;
+  }
+  factory GetUserTagsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTagsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserTagsRequest clone() => GetUserTagsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserTagsRequest copyWith(void Function(GetUserTagsRequest) updates) => super.copyWith((message) => updates(message as GetUserTagsRequest)) as GetUserTagsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagsRequest create() => GetUserTagsRequest._();
+  GetUserTagsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserTagsRequest> createRepeated() => $pb.PbList<GetUserTagsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTagsRequest>(create);
+  static GetUserTagsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get userId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+}
+
+class GetUserTagsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetUserTagsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..pc<Tag>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tags', $pb.PbFieldType.PM, subBuilder: Tag.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetUserTagsResponse._() : super();
+  factory GetUserTagsResponse({
+    $core.Iterable<Tag>? tags,
+  }) {
+    final _result = create();
+    if (tags != null) {
+      _result.tags.addAll(tags);
+    }
+    return _result;
+  }
+  factory GetUserTagsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTagsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserTagsResponse clone() => GetUserTagsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserTagsResponse copyWith(void Function(GetUserTagsResponse) updates) => super.copyWith((message) => updates(message as GetUserTagsResponse)) as GetUserTagsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagsResponse create() => GetUserTagsResponse._();
+  GetUserTagsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetUserTagsResponse> createRepeated() => $pb.PbList<GetUserTagsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTagsResponse>(create);
+  static GetUserTagsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Tag> get tags => $_getList(0);
+}
+
+class UserTagRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UserTagRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..hasRequiredFields = false
+  ;
+
+  UserTagRequest._() : super();
+  factory UserTagRequest({
+    $core.String? userId,
+    $core.String? tagId,
+  }) {
+    final _result = create();
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    return _result;
+  }
+  factory UserTagRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserTagRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserTagRequest clone() => UserTagRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserTagRequest copyWith(void Function(UserTagRequest) updates) => super.copyWith((message) => updates(message as UserTagRequest)) as UserTagRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserTagRequest create() => UserTagRequest._();
+  UserTagRequest createEmptyInstance() => create();
+  static $pb.PbList<UserTagRequest> createRepeated() => $pb.PbList<UserTagRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UserTagRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserTagRequest>(create);
+  static UserTagRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get userId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get tagId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set tagId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTagId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTagId() => clearField(2);
+}
+
+class UserTagResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UserTagResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOM<Tag>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tag', subBuilder: Tag.create)
+    ..hasRequiredFields = false
+  ;
+
+  UserTagResponse._() : super();
+  factory UserTagResponse({
+    Tag? tag,
+  }) {
+    final _result = create();
+    if (tag != null) {
+      _result.tag = tag;
+    }
+    return _result;
+  }
+  factory UserTagResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserTagResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserTagResponse clone() => UserTagResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserTagResponse copyWith(void Function(UserTagResponse) updates) => super.copyWith((message) => updates(message as UserTagResponse)) as UserTagResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserTagResponse create() => UserTagResponse._();
+  UserTagResponse createEmptyInstance() => create();
+  static $pb.PbList<UserTagResponse> createRepeated() => $pb.PbList<UserTagResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UserTagResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserTagResponse>(create);
+  static UserTagResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Tag get tag => $_getN(0);
+  @$pb.TagNumber(1)
+  set tag(Tag v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTag() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTag() => clearField(1);
+  @$pb.TagNumber(1)
+  Tag ensureTag() => $_ensure(0);
+}
+
+class GetUserTagDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetUserTagDetailsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  GetUserTagDetailsRequest._() : super();
+  factory GetUserTagDetailsRequest({
+    $core.String? tagId,
+    $core.String? userId,
+  }) {
+    final _result = create();
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    return _result;
+  }
+  factory GetUserTagDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTagDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserTagDetailsRequest clone() => GetUserTagDetailsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserTagDetailsRequest copyWith(void Function(GetUserTagDetailsRequest) updates) => super.copyWith((message) => updates(message as GetUserTagDetailsRequest)) as GetUserTagDetailsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagDetailsRequest create() => GetUserTagDetailsRequest._();
+  GetUserTagDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserTagDetailsRequest> createRepeated() => $pb.PbList<GetUserTagDetailsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTagDetailsRequest>(create);
+  static GetUserTagDetailsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tagId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tagId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTagId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTagId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+}
+
+class GetUserTagDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetUserTagDetailsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  GetUserTagDetailsResponse._() : super();
+  factory GetUserTagDetailsResponse({
+    $core.String? tagId,
+    $core.String? userId,
+  }) {
+    final _result = create();
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    return _result;
+  }
+  factory GetUserTagDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTagDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetUserTagDetailsResponse clone() => GetUserTagDetailsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetUserTagDetailsResponse copyWith(void Function(GetUserTagDetailsResponse) updates) => super.copyWith((message) => updates(message as GetUserTagDetailsResponse)) as GetUserTagDetailsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagDetailsResponse create() => GetUserTagDetailsResponse._();
+  GetUserTagDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetUserTagDetailsResponse> createRepeated() => $pb.PbList<GetUserTagDetailsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserTagDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTagDetailsResponse>(create);
+  static GetUserTagDetailsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tagId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tagId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTagId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTagId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+}
 
 class TagToBookmarkRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TagToBookmarkRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
@@ -677,6 +1004,109 @@ class Tag extends $pb.GeneratedMessage {
   void clearDueDate() => clearField(6);
   @$pb.TagNumber(6)
   $2.Timestamp ensureDueDate() => $_ensure(5);
+}
+
+class TagDetails extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TagDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'timetable')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..hasRequiredFields = false
+  ;
+
+  TagDetails._() : super();
+  factory TagDetails({
+    $core.String? tagId,
+    $core.String? userId,
+    $core.String? price,
+    $core.String? timetable,
+    $core.String? description,
+  }) {
+    final _result = create();
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    if (price != null) {
+      _result.price = price;
+    }
+    if (timetable != null) {
+      _result.timetable = timetable;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    return _result;
+  }
+  factory TagDetails.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TagDetails.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TagDetails clone() => TagDetails()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TagDetails copyWith(void Function(TagDetails) updates) => super.copyWith((message) => updates(message as TagDetails)) as TagDetails; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TagDetails create() => TagDetails._();
+  TagDetails createEmptyInstance() => create();
+  static $pb.PbList<TagDetails> createRepeated() => $pb.PbList<TagDetails>();
+  @$core.pragma('dart2js:noInline')
+  static TagDetails getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TagDetails>(create);
+  static TagDetails? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tagId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tagId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTagId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTagId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get price => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set price($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrice() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get timetable => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set timetable($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasTimetable() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTimetable() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get description => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set description($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDescription() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDescription() => clearField(5);
 }
 
 class FilterKey extends $pb.GeneratedMessage {

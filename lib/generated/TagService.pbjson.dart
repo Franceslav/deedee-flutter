@@ -1,7 +1,76 @@
 ///
-import 'dart:convert' as $convert;
+//  Generated code. Do not modify.
+//  source: TagService.proto
+//
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
+
 import 'dart:core' as $core;
+import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use getUserTagsRequestDescriptor instead')
+const GetUserTagsRequest$json = const {
+  '1': 'GetUserTagsRequest',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `GetUserTagsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserTagsRequestDescriptor = $convert.base64Decode('ChJHZXRVc2VyVGFnc1JlcXVlc3QSFgoGdXNlcklkGAEgASgJUgZ1c2VySWQ=');
+@$core.Deprecated('Use getUserTagsResponseDescriptor instead')
+const GetUserTagsResponse$json = const {
+  '1': 'GetUserTagsResponse',
+  '2': const [
+    const {'1': 'tags', '3': 1, '4': 3, '5': 11, '6': '.topic.Tag', '10': 'tags'},
+  ],
+};
+
+/// Descriptor for `GetUserTagsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserTagsResponseDescriptor = $convert.base64Decode('ChNHZXRVc2VyVGFnc1Jlc3BvbnNlEh4KBHRhZ3MYASADKAsyCi50b3BpYy5UYWdSBHRhZ3M=');
+@$core.Deprecated('Use userTagRequestDescriptor instead')
+const UserTagRequest$json = const {
+  '1': 'UserTagRequest',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
+    const {'1': 'tagId', '3': 2, '4': 1, '5': 9, '10': 'tagId'},
+  ],
+};
+
+/// Descriptor for `UserTagRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userTagRequestDescriptor = $convert.base64Decode('Cg5Vc2VyVGFnUmVxdWVzdBIWCgZ1c2VySWQYASABKAlSBnVzZXJJZBIUCgV0YWdJZBgCIAEoCVIFdGFnSWQ=');
+@$core.Deprecated('Use userTagResponseDescriptor instead')
+const UserTagResponse$json = const {
+  '1': 'UserTagResponse',
+  '2': const [
+    const {'1': 'tag', '3': 1, '4': 1, '5': 11, '6': '.topic.Tag', '10': 'tag'},
+  ],
+};
+
+/// Descriptor for `UserTagResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userTagResponseDescriptor = $convert.base64Decode('Cg9Vc2VyVGFnUmVzcG9uc2USHAoDdGFnGAEgASgLMgoudG9waWMuVGFnUgN0YWc=');
+@$core.Deprecated('Use getUserTagDetailsRequestDescriptor instead')
+const GetUserTagDetailsRequest$json = const {
+  '1': 'GetUserTagDetailsRequest',
+  '2': const [
+    const {'1': 'tagId', '3': 1, '4': 1, '5': 9, '10': 'tagId'},
+    const {'1': 'userId', '3': 2, '4': 1, '5': 9, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `GetUserTagDetailsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserTagDetailsRequestDescriptor = $convert.base64Decode('ChhHZXRVc2VyVGFnRGV0YWlsc1JlcXVlc3QSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhYKBnVzZXJJZBgCIAEoCVIGdXNlcklk');
+@$core.Deprecated('Use getUserTagDetailsResponseDescriptor instead')
+const GetUserTagDetailsResponse$json = const {
+  '1': 'GetUserTagDetailsResponse',
+  '2': const [
+    const {'1': 'tagId', '3': 1, '4': 1, '5': 9, '10': 'tagId'},
+    const {'1': 'userId', '3': 2, '4': 1, '5': 9, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `GetUserTagDetailsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUserTagDetailsResponseDescriptor = $convert.base64Decode('ChlHZXRVc2VyVGFnRGV0YWlsc1Jlc3BvbnNlEhQKBXRhZ0lkGAEgASgJUgV0YWdJZBIWCgZ1c2VySWQYAiABKAlSBnVzZXJJZA==');
 @$core.Deprecated('Use tagToBookmarkRequestDescriptor instead')
 const TagToBookmarkRequest$json = const {
   '1': 'TagToBookmarkRequest',
@@ -141,6 +210,20 @@ const Tag_TYPE$json = const {
 
 /// Descriptor for `Tag`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEikKB3RhZ1R5cGUYBSABKA4yDy50b3BpYy5UYWcuVFlQRVIHdGFnVHlwZRI0CgdkdWVEYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIHZHVlRGF0ZSIZCgRUWVBFEgcKA0JVWRAAEggKBFNFTEwQAQ==');
+@$core.Deprecated('Use tagDetailsDescriptor instead')
+const TagDetails$json = const {
+  '1': 'TagDetails',
+  '2': const [
+    const {'1': 'tagId', '3': 1, '4': 1, '5': 9, '10': 'tagId'},
+    const {'1': 'userId', '3': 2, '4': 1, '5': 9, '10': 'userId'},
+    const {'1': 'price', '3': 3, '4': 1, '5': 9, '10': 'price'},
+    const {'1': 'timetable', '3': 4, '4': 1, '5': 9, '10': 'timetable'},
+    const {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
+  ],
+};
+
+/// Descriptor for `TagDetails`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tagDetailsDescriptor = $convert.base64Decode('CgpUYWdEZXRhaWxzEhQKBXRhZ0lkGAEgASgJUgV0YWdJZBIWCgZ1c2VySWQYAiABKAlSBnVzZXJJZBIUCgVwcmljZRgDIAEoCVIFcHJpY2USHAoJdGltZXRhYmxlGAQgASgJUgl0aW1ldGFibGUSIAoLZGVzY3JpcHRpb24YBSABKAlSC2Rlc2NyaXB0aW9u');
 @$core.Deprecated('Use filterKeyDescriptor instead')
 const FilterKey$json = const {
   '1': 'FilterKey',

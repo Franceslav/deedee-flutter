@@ -78,9 +78,6 @@ _i1.GetIt $configureDependencies(
     () => _i14.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i11.VerificationServiceClient>(
-    () => _i12.MockVerificationServiceClient(),
-    registerFor: {_dev},
-  );
+
   return getIt;
 }

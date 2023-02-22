@@ -2,7 +2,6 @@ import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/main_topic_bloc.dart';
@@ -89,34 +88,35 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     // Show error message if initialization failed
     if (_error) {
       return MaterialApp(
-          locale: context.watch<AccountBloc>().appLocal,
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: Container(
-              color: Colors.white,
-              child: Center(
-                  child: Column(
-                children: const [
-                  Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                    size: 25,
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Failed to initialise firebase!',
-                    style: TextStyle(color: Colors.red, fontSize: 25),
-                  ),
-                ],
-              )),
-            ),
-          ));
+        locale: context.watch<AccountBloc>().appLocal,
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: Scaffold(
+          body: Container(
+            color: Colors.white,
+            child: Center(
+                child: Column(
+              children: const [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 25,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Failed to initialise firebase!',
+                  style: TextStyle(color: Colors.red, fontSize: 25),
+                ),
+              ],
+            )),
+          ),
+        ),
+      );
     }
 
     // Show a loader until FlutterFire is initialized

@@ -1,11 +1,16 @@
 ///
+//  Generated code. Do not modify.
+//  source: TagService.proto
+//
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
+
 import 'dart:async' as $async;
+
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-
 import 'TagService.pb.dart' as $1;
-
 export 'TagService.pb.dart';
 
 class TagServiceClient extends $grpc.Client {
@@ -39,6 +44,30 @@ class TagServiceClient extends $grpc.Client {
           ($1.GetTopicRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.GetTopicResponse.fromBuffer(value));
+  static final _$getUserTags =
+      $grpc.ClientMethod<$1.GetUserTagsRequest, $1.GetUserTagsResponse>(
+          '/topic.TagService/GetUserTags',
+          ($1.GetUserTagsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.GetUserTagsResponse.fromBuffer(value));
+  static final _$getUserTag =
+      $grpc.ClientMethod<$1.UserTagRequest, $1.UserTagResponse>(
+          '/topic.TagService/GetUserTag',
+          ($1.UserTagRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.UserTagResponse.fromBuffer(value));
+  static final _$removeUserTag =
+      $grpc.ClientMethod<$1.UserTagRequest, $1.UserTagResponse>(
+          '/topic.TagService/RemoveUserTag',
+          ($1.UserTagRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.UserTagResponse.fromBuffer(value));
+  static final _$getUserTagDetails = $grpc.ClientMethod<
+          $1.GetUserTagDetailsRequest, $1.GetUserTagDetailsResponse>(
+      '/topic.TagService/GetUserTagDetails',
+      ($1.GetUserTagDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $1.GetUserTagDetailsResponse.fromBuffer(value));
   static final _$addTagToBookmark =
       $grpc.ClientMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
           '/topic.TagService/AddTagToBookmark',
@@ -95,6 +124,29 @@ class TagServiceClient extends $grpc.Client {
       $1.GetTopicRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getFilteredTags, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.GetUserTagsResponse> getUserTags(
+      $1.GetUserTagsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getUserTags, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.UserTagResponse> getUserTag($1.UserTagRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getUserTag, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.UserTagResponse> removeUserTag(
+      $1.UserTagRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$removeUserTag, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.GetUserTagDetailsResponse> getUserTagDetails(
+      $1.GetUserTagDetailsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getUserTagDetails, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.TagToBookmarkResponse> addTagToBookmark(
@@ -166,6 +218,38 @@ abstract class TagServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $1.GetTopicRequest.fromBuffer(value),
         ($1.GetTopicResponse value) => value.writeToBuffer()));
     $addMethod(
+        $grpc.ServiceMethod<$1.GetUserTagsRequest, $1.GetUserTagsResponse>(
+            'GetUserTags',
+            getUserTags_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.GetUserTagsRequest.fromBuffer(value),
+            ($1.GetUserTagsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.UserTagRequest, $1.UserTagResponse>(
+        'GetUserTag',
+        getUserTag_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.UserTagRequest.fromBuffer(value),
+        ($1.UserTagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.UserTagRequest, $1.UserTagResponse>(
+        'RemoveUserTag',
+        removeUserTag_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.UserTagRequest.fromBuffer(value),
+        ($1.UserTagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetUserTagDetailsRequest,
+            $1.GetUserTagDetailsResponse>(
+        'GetUserTagDetails',
+        getUserTagDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.GetUserTagDetailsRequest.fromBuffer(value),
+        ($1.GetUserTagDetailsResponse value) => value.writeToBuffer()));
+    $addMethod(
         $grpc.ServiceMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
             'AddTagToBookmark',
             addTagToBookmark_Pre,
@@ -230,6 +314,27 @@ abstract class TagServiceBase extends $grpc.Service {
     return getFilteredTags(call, await request);
   }
 
+  $async.Future<$1.GetUserTagsResponse> getUserTags_Pre($grpc.ServiceCall call,
+      $async.Future<$1.GetUserTagsRequest> request) async {
+    return getUserTags(call, await request);
+  }
+
+  $async.Future<$1.UserTagResponse> getUserTag_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.UserTagRequest> request) async {
+    return getUserTag(call, await request);
+  }
+
+  $async.Future<$1.UserTagResponse> removeUserTag_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.UserTagRequest> request) async {
+    return removeUserTag(call, await request);
+  }
+
+  $async.Future<$1.GetUserTagDetailsResponse> getUserTagDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$1.GetUserTagDetailsRequest> request) async {
+    return getUserTagDetails(call, await request);
+  }
+
   $async.Future<$1.TagToBookmarkResponse> addTagToBookmark_Pre(
       $grpc.ServiceCall call,
       $async.Future<$1.TagToBookmarkRequest> request) async {
@@ -263,6 +368,14 @@ abstract class TagServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.VerifyAuthCodeRequest request);
   $async.Future<$1.GetTopicResponse> getFilteredTags(
       $grpc.ServiceCall call, $1.GetTopicRequest request);
+  $async.Future<$1.GetUserTagsResponse> getUserTags(
+      $grpc.ServiceCall call, $1.GetUserTagsRequest request);
+  $async.Future<$1.UserTagResponse> getUserTag(
+      $grpc.ServiceCall call, $1.UserTagRequest request);
+  $async.Future<$1.UserTagResponse> removeUserTag(
+      $grpc.ServiceCall call, $1.UserTagRequest request);
+  $async.Future<$1.GetUserTagDetailsResponse> getUserTagDetails(
+      $grpc.ServiceCall call, $1.GetUserTagDetailsRequest request);
   $async.Future<$1.TagToBookmarkResponse> addTagToBookmark(
       $grpc.ServiceCall call, $1.TagToBookmarkRequest request);
   $async.Future<$1.GetBookmarkTagsResponse> getBookmarkTags(
