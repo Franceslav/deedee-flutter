@@ -893,6 +893,7 @@ class Tag extends $pb.GeneratedMessage {
     ..aOM<$0.GeoLocation>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geoLocation', protoName: 'geoLocation', subBuilder: $0.GeoLocation.create)
     ..e<Tag_TYPE>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagType', $pb.PbFieldType.OE, protoName: 'tagType', defaultOrMaker: Tag_TYPE.BUY, valueOf: Tag_TYPE.valueOf, enumValues: Tag_TYPE.values)
     ..aOM<$2.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dueDate', protoName: 'dueDate', subBuilder: $2.Timestamp.create)
+    ..aOB(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isDeleted', protoName: 'isDeleted')
     ..hasRequiredFields = false
   ;
 
@@ -904,6 +905,7 @@ class Tag extends $pb.GeneratedMessage {
     $0.GeoLocation? geoLocation,
     Tag_TYPE? tagType,
     $2.Timestamp? dueDate,
+    $core.bool? isDeleted,
   }) {
     final _result = create();
     if (tagId != null) {
@@ -923,6 +925,9 @@ class Tag extends $pb.GeneratedMessage {
     }
     if (dueDate != null) {
       _result.dueDate = dueDate;
+    }
+    if (isDeleted != null) {
+      _result.isDeleted = isDeleted;
     }
     return _result;
   }
@@ -1004,6 +1009,118 @@ class Tag extends $pb.GeneratedMessage {
   void clearDueDate() => clearField(6);
   @$pb.TagNumber(6)
   $2.Timestamp ensureDueDate() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $core.bool get isDeleted => $_getBF(6);
+  @$pb.TagNumber(7)
+  set isDeleted($core.bool v) { $_setBool(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasIsDeleted() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearIsDeleted() => clearField(7);
+}
+
+class TagDetails extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TagDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'topic'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', protoName: 'tagId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'timetable')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..hasRequiredFields = false
+  ;
+
+  TagDetails._() : super();
+  factory TagDetails({
+    $core.String? tagId,
+    $core.String? userId,
+    $core.String? price,
+    $core.String? timetable,
+    $core.String? description,
+  }) {
+    final _result = create();
+    if (tagId != null) {
+      _result.tagId = tagId;
+    }
+    if (userId != null) {
+      _result.userId = userId;
+    }
+    if (price != null) {
+      _result.price = price;
+    }
+    if (timetable != null) {
+      _result.timetable = timetable;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    return _result;
+  }
+  factory TagDetails.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TagDetails.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TagDetails clone() => TagDetails()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TagDetails copyWith(void Function(TagDetails) updates) => super.copyWith((message) => updates(message as TagDetails)) as TagDetails; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TagDetails create() => TagDetails._();
+  TagDetails createEmptyInstance() => create();
+  static $pb.PbList<TagDetails> createRepeated() => $pb.PbList<TagDetails>();
+  @$core.pragma('dart2js:noInline')
+  static TagDetails getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TagDetails>(create);
+  static TagDetails? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tagId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tagId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTagId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTagId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get price => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set price($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrice() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get timetable => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set timetable($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasTimetable() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTimetable() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get description => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set description($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDescription() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDescription() => clearField(5);
 }
 
 class TagDetails extends $pb.GeneratedMessage {

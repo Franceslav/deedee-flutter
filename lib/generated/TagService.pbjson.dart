@@ -195,6 +195,7 @@ const Tag$json = const {
     const {'1': 'geoLocation', '3': 4, '4': 1, '5': 11, '6': '.topic.GeoLocation', '10': 'geoLocation'},
     const {'1': 'tagType', '3': 5, '4': 1, '5': 14, '6': '.topic.Tag.TYPE', '10': 'tagType'},
     const {'1': 'dueDate', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dueDate'},
+    const {'1': 'isDeleted', '3': 7, '4': 1, '5': 8, '10': 'isDeleted'},
   ],
   '4': const [Tag_TYPE$json],
 };
@@ -209,7 +210,7 @@ const Tag_TYPE$json = const {
 };
 
 /// Descriptor for `Tag`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEikKB3RhZ1R5cGUYBSABKA4yDy50b3BpYy5UYWcuVFlQRVIHdGFnVHlwZRI0CgdkdWVEYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIHZHVlRGF0ZSIZCgRUWVBFEgcKA0JVWRAAEggKBFNFTEwQAQ==');
+final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEikKB3RhZ1R5cGUYBSABKA4yDy50b3BpYy5UYWcuVFlQRVIHdGFnVHlwZRI0CgdkdWVEYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIHZHVlRGF0ZRIcCglpc0RlbGV0ZWQYByABKAhSCWlzRGVsZXRlZCIZCgRUWVBFEgcKA0JVWRAAEggKBFNFTEwQAQ==');
 @$core.Deprecated('Use tagDetailsDescriptor instead')
 const TagDetails$json = const {
   '1': 'TagDetails',
