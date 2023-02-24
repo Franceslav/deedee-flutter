@@ -64,13 +64,12 @@ final $typed_data.Uint8List getUserTagDetailsRequestDescriptor = $convert.base64
 const GetUserTagDetailsResponse$json = const {
   '1': 'GetUserTagDetailsResponse',
   '2': const [
-    const {'1': 'tagId', '3': 1, '4': 1, '5': 9, '10': 'tagId'},
-    const {'1': 'userId', '3': 2, '4': 1, '5': 9, '10': 'userId'},
+    const {'1': 'tagDetails', '3': 1, '4': 1, '5': 11, '6': '.topic.TagDetails', '10': 'tagDetails'},
   ],
 };
 
 /// Descriptor for `GetUserTagDetailsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getUserTagDetailsResponseDescriptor = $convert.base64Decode('ChlHZXRVc2VyVGFnRGV0YWlsc1Jlc3BvbnNlEhQKBXRhZ0lkGAEgASgJUgV0YWdJZBIWCgZ1c2VySWQYAiABKAlSBnVzZXJJZA==');
+final $typed_data.Uint8List getUserTagDetailsResponseDescriptor = $convert.base64Decode('ChlHZXRVc2VyVGFnRGV0YWlsc1Jlc3BvbnNlEjEKCnRhZ0RldGFpbHMYASABKAsyES50b3BpYy5UYWdEZXRhaWxzUgp0YWdEZXRhaWxz');
 @$core.Deprecated('Use tagToBookmarkRequestDescriptor instead')
 const TagToBookmarkRequest$json = const {
   '1': 'TagToBookmarkRequest',
