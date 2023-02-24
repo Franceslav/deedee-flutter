@@ -3,6 +3,7 @@
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     },
+    "safe": "safe",
     "placeBid": "place bid",
     "placeBidPageTitle": "bid",
     "accountTitle": "account",
@@ -81,5 +82,6 @@
      "upgradeToPremium": "Upgrade to Premium",
      "resume": "Continue anyway",
      "applicationBegin": "Select the start date of the application",
-     "applicationStart": "The application will start with"
+     "applicationStart": "The application will start with",
+     "homeChooseCity": "Choose your city"
 }

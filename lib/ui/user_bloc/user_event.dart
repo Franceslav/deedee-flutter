@@ -30,3 +30,5 @@ class UserDocVerification extends UserEvent {
   FileChunk files;
   UserDocVerification({required this.files});
 }
+
+class UserAvailablePlaces extends UserEvent {}

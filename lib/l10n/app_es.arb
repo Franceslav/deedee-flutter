@@ -1,4 +1,5 @@
 {
+    "safe": "asegurar",
     "helloWorld": "Hola Mundo!",
     "placeBid": "realizar oferta",
     "placeBidPageTitle": "oferta",
@@ -77,5 +78,6 @@
      "upgradeToPremium": "Ir a Premium",
      "resume": "Continuar de todos modos",
     "applicationBegin": "Seleccione la fecha de Inicio de la solicitud",
-     "applicationStart": "La solicitud comenzará con"
+     "applicationStart": "La solicitud comenzará con",
+     "homeChooseCity": "Elige tu ciudad"
 }

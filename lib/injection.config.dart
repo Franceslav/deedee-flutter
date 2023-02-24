@@ -8,14 +8,11 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart' as _i3;
 import 'package:deedee/generated/LocationService.pbgrpc.dart' as _i8;
 import 'package:deedee/generated/TagService.pbgrpc.dart' as _i11;
-import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i11;
 import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i13;
 import 'package:deedee/services/channel_service.dart' as _i7;
 import 'package:deedee/services/fake/mock_account_service_client.dart' as _i4;
 import 'package:deedee/services/fake/mock_location_service_client.dart' as _i9;
 import 'package:deedee/services/fake/mock_tag_service_client.dart' as _i12;
-import 'package:deedee/services/fake/mock_verification_service_clent.dart'
-    as _i12;
 import 'package:deedee/services/fake/mock_verification_service_clent.dart'
     as _i14;
 import 'package:deedee/services/gps.dart' as _i5;
@@ -78,6 +75,5 @@ _i1.GetIt $configureDependencies(
     () => _i14.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
-
   return getIt;
 }

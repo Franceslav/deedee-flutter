@@ -1,4 +1,5 @@
 {
+    "safe": "сохранить",
     "helloWorld": "Привет, Мир",
     "placeBid": "разместить заявку",
     "placeBidPageTitle": "заявка",
@@ -78,5 +79,6 @@
      "upgradeToPremium": "Перейти на Премиум",
      "resume": "Все равно продолжить",
      "applicationBegin": "Выберете дату начала заявки",
-     "applicationStart": "Заявка начнется с "
+     "applicationStart": "Заявка начнется с ",
+     "homeChooseCity": "Выберите свой город"
 }

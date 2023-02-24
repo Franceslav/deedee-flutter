@@ -6,6 +6,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:latlong2/latlong.dart';
+import '../../generated/LocationService.pb.dart';
 
 part 'user_event.dart';
 
@@ -20,6 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEmailVerification>(_onUserEmailVerification);
     on<UserDocVerification>(_onUserDocVerification);
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
+    on<UserAvailablePlaces>(_onUserAvailablePlaces);
   }
 
   _onUserAuthenticated(UserAuthenticated event, Emitter<UserState> emit) {
@@ -68,7 +70,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) async {
+  _onUserDocVerification(
+      UserDocVerification event, Emitter<UserState> emit) async {
     try {
       emit(UserState(state.user
           .copyWith(docVerification: DocVerificationStatus.verified)));
@@ -82,5 +85,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   _onUserSetLastGeolocation(
       UserSetLastGeolocation event, Emitter<UserState> emit) {
     emit(UserState(state.user.copyWith(lastGeolocation: event.location)));
+  }
+
+  _onUserAvailablePlaces(
+    UserAvailablePlaces event,
+    Emitter<UserState> emit,
+  ) async {
+    List<Place> places = await locator
+        .get<GRCPUtils>()
+        .getPlaces(GeoLocation(), 0.0);
+    emit(
+      UserState(
+        state.user.copyWith(availablePlaces: places
+            // [
+            //   Place(title: 'city 1'),
+            //   Place(title: 'city 2'),
+            //   Place(title: 'city 3'),
+            // ]
+            ),
+      ),
+    );
   }
 }

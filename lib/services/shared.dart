@@ -44,4 +44,14 @@ class SharedUtils {
       return 'Failed to get IP address';
     }
   }
+
+  Future saveUserPlace(String place) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return await sharedPreferences.setString('place', place);
+  }
+
+  Future<String?> getUserPlace() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('place');
+  }
 }

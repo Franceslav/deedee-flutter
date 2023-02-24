@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
+import '../generated/LocationService.pb.dart';
 
 enum AccountType { buy, sell }
 
@@ -56,6 +57,7 @@ class User extends Equatable {
   final int availableTags;
   final AccountType accountType;
   final LatLng? lastGeoLocation;
+  final List<Place>? availablePlaces;
 
   static const empty = User(
     userId: '',
@@ -82,6 +84,7 @@ class User extends Equatable {
     this.availableTags = 3,
     this.accountType = AccountType.buy,
     this.lastGeoLocation,
+    this.availablePlaces,
   });
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
@@ -94,6 +97,7 @@ class User extends Equatable {
       balance: parsedJson['balance'] ?? 0.0,
       availableTags: parsedJson['availableTags'] ?? 0,
       lastGeoLocation: null,
+      availablePlaces: null,
     );
   }
 
@@ -123,6 +127,7 @@ class User extends Equatable {
     int? availableTags,
     AccountType? accountType,
     LatLng? lastGeolocation,
+    List<Place>? availablePlaces,
   }) {
     return User(
       userId: userId,
@@ -137,6 +142,7 @@ class User extends Equatable {
       availableTags: availableTags ?? this.availableTags,
       accountType: accountType ?? this.accountType,
       lastGeoLocation: lastGeoLocation,
+      availablePlaces: availablePlaces,
     );
   }
 
@@ -153,5 +159,6 @@ class User extends Equatable {
         balance,
         availableTags,
         accountType,
+        availablePlaces,
       ];
 }

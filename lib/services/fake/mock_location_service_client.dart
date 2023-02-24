@@ -34,6 +34,11 @@ class MockLocationServiceClient implements LocationServiceClient {
   }
 
   Future<GetPlacesResponse> _getPlaces(GetPlacesRequest request) async {
-    return GetPlacesResponse()..places.addAll([]);
+    List<Place> places = [
+      Place(title: 'Одесса'),
+      Place(title: 'Киев'),
+      Place(title: 'Львов'),
+    ];
+    return GetPlacesResponse()..places.addAll(places);
   }
 }

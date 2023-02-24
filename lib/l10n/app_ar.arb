@@ -1,4 +1,5 @@
 {
+    "safe": "يحفظ",
     "placeBid": "محاولة مكان",
     "placeBidPageTitle": "المناقصة",
     "accountTitle": "الحساب",
@@ -67,6 +68,7 @@
      "upgradeToPremium": "الترقية إلى بريميوم",
      "resume": "استمر على أي حال",
      "applicationBegin": "حدد تاريخ بدء التطبيق",
-     "applicationStart": "سيبدأ التطبيق مع"
+     "applicationStart": "سيبدأ التطبيق مع",
+     "homeChooseCity": "اختر مدينتك"
 
 }
