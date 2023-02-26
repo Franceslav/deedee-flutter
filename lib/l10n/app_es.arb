@@ -79,5 +79,12 @@
      "resume": "Continuar de todos modos",
     "applicationBegin": "Seleccione la fecha de Inicio de la solicitud",
      "applicationStart": "La solicitud comenzará con",
-     "homeChooseCity": "Elige tu ciudad"
+     "homeChooseCity": "Elige tu ciudad",
+    "userTagsTitle": "mis etiquetas",
+     "tagRemovedMessage": "la etiqueta fue eliminada",
+     "tagNotRemovedMessage": "la etiqueta no se eliminó. Algo salió mal",
+     "actualTags": "real",
+     "archiveTags": "archivo",
+     "tagExpires": "caduca",
+     "noUserTags": "sin etiquetas"
 }

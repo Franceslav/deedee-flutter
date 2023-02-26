@@ -10,110 +10,126 @@ import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
-
 @LazySingleton(as: TagServiceClient, env: [Environment.dev])
 class MockTagServiceClient implements TagServiceClient {
-
   @override
-  ClientCall<Q, R> $createCall<Q, R>(ClientMethod<Q, R> method, Stream<Q> requests, {CallOptions? options}) {
+  ClientCall<Q, R> $createCall<Q, R>(
+      ClientMethod<Q, R> method, Stream<Q> requests,
+      {CallOptions? options}) {
     // TODO: implement $createCall
     throw UnimplementedError();
   }
 
   @override
-  ResponseStream<R> $createStreamingCall<Q, R>(ClientMethod<Q, R> method, Stream<Q> requests, {CallOptions? options}) {
+  ResponseStream<R> $createStreamingCall<Q, R>(
+      ClientMethod<Q, R> method, Stream<Q> requests,
+      {CallOptions? options}) {
     // TODO: implement $createStreamingCall
     throw UnimplementedError();
   }
 
   @override
-  ResponseFuture<R> $createUnaryCall<Q, R>(ClientMethod<Q, R> method, Q request, {CallOptions? options}) {
+  ResponseFuture<R> $createUnaryCall<Q, R>(ClientMethod<Q, R> method, Q request,
+      {CallOptions? options}) {
     // TODO: implement $createUnaryCall
     throw UnimplementedError();
   }
 
   @override
-  ResponseFuture<TagToBookmarkResponse> addTagToBookmark(TagToBookmarkRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, TagToBookmarkResponse>(_addTagToBookmark(request)));
+  ResponseFuture<TagToBookmarkResponse> addTagToBookmark(
+      TagToBookmarkRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, TagToBookmarkResponse>(
+        _addTagToBookmark(request)));
   }
 
-  Future<TagToBookmarkResponse> _addTagToBookmark(TagToBookmarkRequest request) async {
+  Future<TagToBookmarkResponse> _addTagToBookmark(
+      TagToBookmarkRequest request) async {
     return TagToBookmarkResponse()..succeed = true;
   }
 
   @override
-  ResponseFuture<GetBookmarkTagsResponse> getBookmarkTags(GetBookmarkTagsRequest request, {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, GetBookmarkTagsResponse>(_getBookmarkTags(request)));
+  ResponseFuture<GetBookmarkTagsResponse> getBookmarkTags(
+      GetBookmarkTagsRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, GetBookmarkTagsResponse>(
+        _getBookmarkTags(request)));
   }
 
-  Future<GetBookmarkTagsResponse> _getBookmarkTags(GetBookmarkTagsRequest request) async {
+  Future<GetBookmarkTagsResponse> _getBookmarkTags(
+      GetBookmarkTagsRequest request) async {
     return GetBookmarkTagsResponse()..tags.addAll([]);
   }
 
   @override
-  ResponseFuture<GetFilterKeysResponse> getFilterKeys(GetFilterKeysRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetFilterKeysResponse>(_getFilterKeys(request)));
+  ResponseFuture<GetFilterKeysResponse> getFilterKeys(
+      GetFilterKeysRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, GetFilterKeysResponse>(
+        _getFilterKeys(request)));
   }
 
-  Future<GetFilterKeysResponse> _getFilterKeys(GetFilterKeysRequest request) async {
-    return GetFilterKeysResponse()..filterKeys.addAll([
-      FilterKey()
-        ..topicId = "маникюр"
-        ..title = "японский",
-      FilterKey()
-        ..topicId = "маникюр"
-        ..title = "я",
-      FilterKey()
-        ..topicId = "маникюр"
-        ..title = "ф",
-    ]);
+  Future<GetFilterKeysResponse> _getFilterKeys(
+      GetFilterKeysRequest request) async {
+    return GetFilterKeysResponse()
+      ..filterKeys.addAll([
+        FilterKey()
+          ..topicId = "маникюр"
+          ..title = "японский",
+        FilterKey()
+          ..topicId = "маникюр"
+          ..title = "я",
+        FilterKey()
+          ..topicId = "маникюр"
+          ..title = "ф",
+      ]);
   }
 
   @override
-  ResponseFuture<GetTopicResponse> getFilteredTags(GetTopicRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetTopicResponse>(_getFilteredTags(request)));
-
+  ResponseFuture<GetTopicResponse> getFilteredTags(GetTopicRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetTopicResponse>(_getFilteredTags(request)));
   }
 
   Future<GetTopicResponse> _getFilteredTags(GetTopicRequest request) async {
-      var geoLocation1 = GeoLocation()
-        ..latitude = 51.51
-        ..longitude = -0.1165888
-        ..title = 'маникюр 1';
+    var geoLocation1 = GeoLocation()
+      ..latitude = 51.51
+      ..longitude = -0.1165888
+      ..title = 'маникюр 1';
 
-      var geoLocation2 = GeoLocation()
-        ..latitude = 51.521
-        ..longitude = -0.116
-        ..title = 'маникюр 2';
+    var geoLocation2 = GeoLocation()
+      ..latitude = 51.521
+      ..longitude = -0.116
+      ..title = 'маникюр 2';
 
-      var geoLocation3 = GeoLocation()
-        ..latitude = 51.53
-        ..longitude = 0.1167
-        ..title = 'маникюр 3';
+    var geoLocation3 = GeoLocation()
+      ..latitude = 51.53
+      ..longitude = 0.1167
+      ..title = 'маникюр 3';
 
-      var geoLocation4 = GeoLocation()
-        ..latitude = 51.52134
-        ..longitude = -0.1169
-        ..title = 'маникюр 4';
+    var geoLocation4 = GeoLocation()
+      ..latitude = 51.52134
+      ..longitude = -0.1169
+      ..title = 'маникюр 4';
 
-      var geoLocation5 = GeoLocation()
-        ..latitude = 51.522
-        ..longitude = 0.117
-        ..title = 'маникюр 5';
+    var geoLocation5 = GeoLocation()
+      ..latitude = 51.522
+      ..longitude = 0.117
+      ..title = 'маникюр 5';
 
-      var timestamp1 = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-      var timestamp2 = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-      var timestamp3 = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-      var timestamp4 = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp1 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp2 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp3 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp4 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
 
     var ftags = [
       Tag()
@@ -141,79 +157,206 @@ class MockTagServiceClient implements TagServiceClient {
         ..tagType = Tag_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp4,
     ];
-    var topic =  Topic()..tags.addAll(ftags);
+    var topic = Topic()..tags.addAll(ftags);
     return GetTopicResponse()..topic = topic;
-
   }
 
   @override
-  ResponseFuture<GetTopicResponse> getTopic(GetTopicRequest request, {CallOptions? options}) {
+  ResponseFuture<GetTopicResponse> getTopic(GetTopicRequest request,
+      {CallOptions? options}) {
     return ResponseFuture(
-      FakeClientCall<dynamic, GetTopicResponse>(_getTopic(request)));
-
+        FakeClientCall<dynamic, GetTopicResponse>(_getTopic(request)));
   }
+
   Future<GetTopicResponse> _getTopic(GetTopicRequest request) async {
     return GetTopicResponse()..topic = Topic();
   }
 
   @override
-  ResponseFuture<GetTopicTitlesResponse> getTopics(GetTopicTitlesRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetTopicTitlesResponse>(_getTopics(request)));
+  ResponseFuture<GetTopicTitlesResponse> getTopics(
+      GetTopicTitlesRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetTopicTitlesResponse>(_getTopics(request)));
   }
 
-  Future<GetTopicTitlesResponse> _getTopics(GetTopicTitlesRequest request) async {
-    return GetTopicTitlesResponse()..topicTitles.addAll(["строительство", "маникюр", "сто"]);
+  Future<GetTopicTitlesResponse> _getTopics(
+      GetTopicTitlesRequest request) async {
+    return GetTopicTitlesResponse()
+      ..topicTitles.addAll(["строительство", "маникюр", "сто"]);
   }
 
   @override
-  ResponseFuture<PlaceTagResponse> placeTag(PlaceTagRequest request, {CallOptions? options}) {
+  ResponseFuture<PlaceTagResponse> placeTag(PlaceTagRequest request,
+      {CallOptions? options}) {
     return ResponseFuture(
-      FakeClientCall<dynamic, PlaceTagResponse>(_placeTag(request)));
+        FakeClientCall<dynamic, PlaceTagResponse>(_placeTag(request)));
   }
 
   Future<PlaceTagResponse> _placeTag(PlaceTagRequest request) async {
-    return PlaceTagResponse()..tag =Tag();
+    return PlaceTagResponse()..tag = Tag();
   }
 
   @override
-  ResponseFuture<TagToBookmarkResponse> removeTagToBookmark(TagToBookmarkRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, TagToBookmarkResponse>(_removeTagToBookmark(request)));
+  ResponseFuture<TagToBookmarkResponse> removeTagToBookmark(
+      TagToBookmarkRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, TagToBookmarkResponse>(
+        _removeTagToBookmark(request)));
   }
 
-  Future<TagToBookmarkResponse> _removeTagToBookmark(TagToBookmarkRequest request, ) async {
+  Future<TagToBookmarkResponse> _removeTagToBookmark(
+    TagToBookmarkRequest request,
+  ) async {
     return TagToBookmarkResponse()..succeed = true;
   }
 
   @override
-  ResponseFuture<VerifyAuthCodeResponse> verifyAuthCode(VerifyAuthCodeRequest request, {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, VerifyAuthCodeResponse>(_verifyAuthCode(request)));
+  ResponseFuture<VerifyAuthCodeResponse> verifyAuthCode(
+      VerifyAuthCodeRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, VerifyAuthCodeResponse>(
+        _verifyAuthCode(request)));
   }
 
-  Future<VerifyAuthCodeResponse> _verifyAuthCode(VerifyAuthCodeRequest request) async {
+  Future<VerifyAuthCodeResponse> _verifyAuthCode(
+      VerifyAuthCodeRequest request) async {
     return VerifyAuthCodeResponse()..authenticated = true;
   }
 
   @override
-  ResponseFuture<UserTagResponse> getUserTag(UserTagRequest request, {CallOptions? options}) {
-    // TODO: implement getUserTag
-    throw UnimplementedError();
+  ResponseFuture<UserTagResponse> getUserTag(UserTagRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, UserTagResponse>(_getUserTag(request)));
+  }
+
+  Future<UserTagResponse> _getUserTag(UserTagRequest request) async {
+    var geoLocation2 = GeoLocation()
+      ..latitude = 51.521
+      ..longitude = -0.116
+      ..title = 'маникюр 2';
+    var timestamp2 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+              .round()
+              .toString());
+    final tag = Tag()
+      ..tagId = '2'
+      ..topicId = 'маникюр 2'
+      ..messengerId = 'selenagomez'
+      ..geoLocation = geoLocation2
+      ..tagType = Tag_TYPE.SELL
+      ..dueDate = timestamp2;
+    return UserTagResponse()..tag = tag;
   }
 
   @override
-  ResponseFuture<GetUserTagDetailsResponse> getUserTagDetails(GetUserTagDetailsRequest request, {CallOptions? options}) {
-    // TODO: implement getUserTagDetails
-    throw UnimplementedError();
+  ResponseFuture<GetUserTagDetailsResponse> getUserTagDetails(
+      GetUserTagDetailsRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, GetUserTagDetailsResponse>(
+        _getUserTagDetails(request)));
+  }
+
+  Future<GetUserTagDetailsResponse> _getUserTagDetails(
+      GetUserTagDetailsRequest request) async {
+    final tagDetails = TagDetails()
+      ..description = 'Ноготочки это для души, вообще у меня есть свой бизнес!'
+      ..price = '300\$'
+      ..timetable = 'Mon - Fri 08:00 am - 10:00 pm';
+    return GetUserTagDetailsResponse()..tagDetails = tagDetails;
   }
 
   @override
-  ResponseFuture<GetUserTagsResponse> getUserTags(GetUserTagsRequest request, {CallOptions? options}) {
-    // TODO: implement getUserTags
-    throw UnimplementedError();
+  ResponseFuture<GetUserTagsResponse> getUserTags(GetUserTagsRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetUserTagsResponse>(_getUserTags(request)));
+  }
+
+  Future<GetUserTagsResponse> _getUserTags(GetUserTagsRequest request) async {
+    var timestamp1 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+              .round()
+              .toString());
+    var timestamp2 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+              .round()
+              .toString());
+    var timestamp3 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+              .round()
+              .toString());
+    var timestamp4 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000 - 100000)
+              .round()
+              .toString());
+
+    var geoLocation1 = GeoLocation()
+      ..latitude = 51.51
+      ..longitude = -0.1165888
+      ..title = 'маникюр 1';
+
+    var geoLocation2 = GeoLocation()
+      ..latitude = 51.521
+      ..longitude = -0.116
+      ..title = 'маникюр 2';
+
+    var geoLocation3 = GeoLocation()
+      ..latitude = 51.53
+      ..longitude = 0.1167
+      ..title = 'маникюр 3';
+
+    var geoLocation4 = GeoLocation()
+      ..latitude = 51.52134
+      ..longitude = -0.1169
+      ..title = 'маникюр 4';
+
+    var ftags = [
+      Tag()
+        ..tagId = '1'
+        ..topicId = 'маникюр'
+        ..messengerId = 'beyonce'
+        ..geoLocation = geoLocation1
+        ..dueDate = timestamp1,
+      Tag()
+        ..tagId = '2'
+        ..topicId = 'маникюр 2'
+        ..messengerId = 'selenagomez'
+        ..geoLocation = geoLocation2
+        ..tagType = Tag_TYPE.SELL
+        ..dueDate = timestamp2,
+      Tag()
+        ..tagId = '3'
+        ..topicId = 'маникюр 3'
+        ..messengerId = 'arianagrande'
+        ..geoLocation = geoLocation3
+        ..tagType = Tag_TYPE.SELL
+        ..dueDate = timestamp3,
+      Tag()
+        ..tagId = '4'
+        ..topicId = 'маникюр 4'
+        ..messengerId = 'kyliejenner'
+        ..geoLocation = geoLocation4
+        ..tagType = Tag_TYPE.SELL
+        ..dueDate = timestamp4,
+    ];
+    return GetUserTagsResponse()..tags.addAll(ftags);
   }
 
   @override
-  ResponseFuture<UserTagResponse> removeUserTag(UserTagRequest request, {CallOptions? options}) {
-    // TODO: implement removeUserTag
-    throw UnimplementedError();
+  ResponseFuture<UserTagResponse> removeUserTag(UserTagRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, UserTagResponse>(_removeUserTag(request)));
+  }
+
+  Future<UserTagResponse> _removeUserTag(UserTagRequest request) async {
+    return UserTagResponse()..tag = Tag(isDeleted: false);
   }
 }

@@ -69,6 +69,12 @@
      "resume": "استمر على أي حال",
      "applicationBegin": "حدد تاريخ بدء التطبيق",
      "applicationStart": "سيبدأ التطبيق مع",
-     "homeChooseCity": "اختر مدينتك"
-
+     "homeChooseCity": "اختر مدينتك",
+     "userTagsTitle": "علاماتي",
+     "tagRemovedMessage": "تمت إزالة العلامة",
+     "tagNotRemovedMessage": "لم تتم إزالة العلامة. حدث خطأ ما",
+     "actualTags": "الفعلي",
+     "archiveTags": "أرشيف",
+     "tagExpires": "تنتهي صلاحيتها",
+     "noUserTags": "لا توجد علامات"
 }

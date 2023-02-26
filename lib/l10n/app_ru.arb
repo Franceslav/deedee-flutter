@@ -80,5 +80,12 @@
      "resume": "Все равно продолжить",
      "applicationBegin": "Выберете дату начала заявки",
      "applicationStart": "Заявка начнется с ",
+     "userTagsTitle": "мои теги",
+     "tagRemovedMessage": "тег удален",
+     "tagNotRemovedMessage": "тег не был удален. что-то пошло не так",
+     "actualTags": "актуальные",
+     "archiveTags": "архив",
+     "tagExpires": "истекает",
+     "noUserTags": "нет тегов",
      "homeChooseCity": "Выберите свой город"
 }
