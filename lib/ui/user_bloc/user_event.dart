@@ -31,4 +31,9 @@ class UserDocVerification extends UserEvent {
   UserDocVerification({required this.files});
 }
 
+class UserImagePicker extends UserEvent {
+  final ImageSource type;
+  UserImagePicker(this.type);
+}
+
 class UserAvailablePlaces extends UserEvent {}

@@ -5,6 +5,9 @@ import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
+import 'package:deedee/services/rest.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import '../../generated/LocationService.pb.dart';
 
@@ -21,6 +24,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEmailVerification>(_onUserEmailVerification);
     on<UserDocVerification>(_onUserDocVerification);
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
+    on<UserImagePicker>(_onUserImagePicker);
     on<UserAvailablePlaces>(_onUserAvailablePlaces);
   }
 
@@ -69,6 +73,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       print(error.toString());
     }
   }
+
+
+  _onUserImagePicker(UserImagePicker event, Emitter<UserState> emit) async {
+    final type = event.type;
+    final session = RestService.instance;
+    final image = await ImagePicker().pickImage(source: type);
+    if(image == null) return;
+    final imageTemp = File(image.path);
+    await session.onUploadImage(imageTemp);
+
+  }
+
+  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) async {
 
   _onUserDocVerification(
       UserDocVerification event, Emitter<UserState> emit) async {

@@ -98,6 +98,36 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SimpleDialog(
+                                title: const Text('Choose Photo'),
+                                children: [
+                                  SimpleDialogOption(
+                                    onPressed: () {
+                                      context.read<UserBloc>().add(UserImagePicker(ImageSource.gallery));
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('From gallery'),
+                                  ),
+                                  SimpleDialogOption(
+                                    onPressed: () {
+                                      context.read<UserBloc>().add(UserImagePicker(ImageSource.camera));
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('From camera'),
+                                  ),
+                                  SimpleDialogOption(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Close'),
+                                  )
+                                ],
+                              );
+                            }
+                        );
                         //TODO: [DEEMOB-76]
                         context
                             .read<UserBloc>()
