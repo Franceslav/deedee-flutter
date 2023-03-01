@@ -84,7 +84,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
         bloc: bloc,
         listener: (context, state) async {
           if (state is LoadedTopicsState) {
-            _topics = state.topics;
+            _topics = state.topics.map((e) => e.title).toList();
           }
           if (state is TopicSelectedState) {
             if (_selectedTopic == state.topic) {

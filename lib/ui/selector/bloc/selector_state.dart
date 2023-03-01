@@ -7,7 +7,7 @@ class InitialState extends SelectorState {}
 class LoadingSelectorState extends SelectorState {}
 
 class LoadedTopicsState extends SelectorState {
-  final List<String> topics;
+  final List<TopicDescription> topics;
 
   LoadedTopicsState(this.topics);
 }

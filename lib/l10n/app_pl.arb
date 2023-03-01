@@ -86,5 +86,6 @@
      "archiveTags": "archiwum",
      "tagExpires": "wygasa",
      "noUserTags": "brak tagów",
-     "homeChooseCity": "Wybierz swoje miasto"
+     "myFilters": "moje filtry",
+    "homeChooseCity": "Wybierz swoje miasto"
 }

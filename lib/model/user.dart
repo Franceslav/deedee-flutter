@@ -58,6 +58,7 @@ class User extends Equatable {
   final AccountType accountType;
   final LatLng? lastGeoLocation;
   final List<Place>? availablePlaces;
+  final List<String>? savedFilters;
 
   static const empty = User(
     userId: '',
@@ -85,6 +86,7 @@ class User extends Equatable {
     this.accountType = AccountType.buy,
     this.lastGeoLocation,
     this.availablePlaces,
+    this.savedFilters,
   });
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
@@ -98,6 +100,7 @@ class User extends Equatable {
       availableTags: parsedJson['availableTags'] ?? 0,
       lastGeoLocation: null,
       availablePlaces: null,
+      savedFilters: null,
     );
   }
 
@@ -128,6 +131,7 @@ class User extends Equatable {
     AccountType? accountType,
     LatLng? lastGeolocation,
     List<Place>? availablePlaces,
+    List<String>? savedFilters,
   }) {
     return User(
       userId: userId,
@@ -143,6 +147,7 @@ class User extends Equatable {
       accountType: accountType ?? this.accountType,
       lastGeoLocation: lastGeoLocation,
       availablePlaces: availablePlaces,
+      savedFilters: savedFilters,
     );
   }
 
@@ -160,5 +165,6 @@ class User extends Equatable {
         availableTags,
         accountType,
         availablePlaces,
+        savedFilters,
       ];
 }

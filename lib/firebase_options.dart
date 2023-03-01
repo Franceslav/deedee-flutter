@@ -27,17 +27,17 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
-              'you can reconfigure this by running the FlutterFire CLI again.',
+          'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
-              'you can reconfigure this by running the FlutterFire CLI again.',
+          'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
-              'you can reconfigure this by running the FlutterFire CLI again.',
+          'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
@@ -46,30 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDiQd477ezdoQaJ-4HD0cbDIRZcH6p3BJo',
+    appId: '1:710195196594:web:e0fc1d477b08a111da4fab',
+    messagingSenderId: '710195196594',
+    projectId: 'deedee-x',
+    authDomain: 'deedee-x.firebaseapp.com',
+    storageBucket: 'deedee-x.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCxJQcYNrcqs4Q-AEodtT6B0yuKBNtZGU4',
-    appId: '1:32394661681:android:ebef3e49f38ad2adf5aa10',
-    messagingSenderId: '32394661681',
-    projectId: 'deedee',
-    storageBucket: 'deedee.appspot.com',
+    apiKey: 'AIzaSyAsMdUfx6uqbvAwnrtQLi14JKo2WC1vhwo',
+    appId: '1:710195196594:android:28379f51791a1f0bda4fab',
+    messagingSenderId: '710195196594',
+    projectId: 'deedee-x',
+    storageBucket: 'deedee-x.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAdKozXm8jwp_q2Edg_Ai9TY22bsLCe_bc',
-    appId: '1:32394661681:ios:0157f36380f1b9baf5aa10',
-    messagingSenderId: '32394661681',
-    projectId: 'deedee',
-    storageBucket: 'deedee.appspot.com',
-    iosClientId: '32394661681-b5q19u1ujtsdnpb2s0h7fuhkb6edmgds.apps.googleusercontent.com',
+    apiKey: 'AIzaSyB58RlWBX47UKCl5VP3Yusy1CXMP7CRhyA',
+    appId: '1:710195196594:ios:a73c6ca7a7023a32da4fab',
+    messagingSenderId: '710195196594',
+    projectId: 'deedee-x',
+    storageBucket: 'deedee-x.appspot.com',
+    iosClientId: '710195196594-7blf70eldt1vn8eqbjvt5ggmaserraa3.apps.googleusercontent.com',
     iosBundleId: 'io.instamobile.login.ios',
-  );
-
-  static const web = FirebaseOptions(
-      apiKey: "AIzaSyDiQd477ezdoQaJ-4HD0cbDIRZcH6p3BJo",
-      authDomain: "deedee-x.firebaseapp.com",
-      projectId: "deedee-x",
-      storageBucket: "deedee-x.appspot.com",
-      messagingSenderId: "710195196594",
-      appId: "1:710195196594:web:ef53b5cbd6e5038eda4fab"
   );
 }

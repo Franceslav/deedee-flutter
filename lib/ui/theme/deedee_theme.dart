@@ -1,7 +1,10 @@
 import 'package:deedee/constants.dart';
+import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData deeDeeTheme = ThemeData(
+  fontFamily: 'Roboto',
+  scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
     color: Colors.white,
     iconTheme: IconThemeData(
@@ -9,15 +12,17 @@ ThemeData deeDeeTheme = ThemeData(
     ),
     centerTitle: true,
     titleTextStyle: TextStyle(
-      color: Colors.black,
-      fontSize: 20,
+      color: mainTextColor,
+      fontSize: 22,
+      fontWeight: FontWeight.w400,
     ),
+    elevation: 0,
   ),
   textTheme: const TextTheme(
     headline1: TextStyle(
       fontSize: 16,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
+      color: mainTextColor,
+      fontWeight: FontWeight.w500,
     ),
     //text style for DrawerHeader
     headline2: TextStyle(
@@ -34,6 +39,11 @@ ThemeData deeDeeTheme = ThemeData(
       fontSize: 16,
       color: Colors.white,
       overflow: TextOverflow.ellipsis,
+    ),
+    headline4: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      color: secondaryTextColor,
     ),
   ),
   snackBarTheme:

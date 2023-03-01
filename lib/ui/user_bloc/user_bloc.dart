@@ -6,9 +6,9 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/rest.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+
 import '../../generated/LocationService.pb.dart';
 
 part 'user_event.dart';
@@ -74,28 +74,27 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-
   _onUserImagePicker(UserImagePicker event, Emitter<UserState> emit) async {
     final type = event.type;
     final session = RestService.instance;
     final image = await ImagePicker().pickImage(source: type);
-    if(image == null) return;
+    if (image == null) return;
     final imageTemp = File(image.path);
     await session.onUploadImage(imageTemp);
-
   }
-
-  _onUserDocVerification(UserDocVerification event, Emitter<UserState> emit) async {
 
   _onUserDocVerification(
       UserDocVerification event, Emitter<UserState> emit) async {
-    try {
-      emit(UserState(state.user
-          .copyWith(docVerification: DocVerificationStatus.verified)));
-      final response =
-          await locator.get<GRCPUtils>().verifyUserIdentity(event.files);
-    } catch (error) {
-      print(error.toString());
+    _onUserDocVerification(
+        UserDocVerification event, Emitter<UserState> emit) async {
+      try {
+        emit(UserState(state.user
+            .copyWith(docVerification: DocVerificationStatus.verified)));
+        final response =
+            await locator.get<GRCPUtils>().verifyUserIdentity(event.files);
+      } catch (error) {
+        print(error.toString());
+      }
     }
   }
 
@@ -108,9 +107,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserAvailablePlaces event,
     Emitter<UserState> emit,
   ) async {
-    List<Place> places = await locator
-        .get<GRCPUtils>()
-        .getPlaces(GeoLocation(), 0.0);
+    List<Place> places =
+        await locator.get<GRCPUtils>().getPlaces(GeoLocation(), 0.0);
     emit(
       UserState(
         state.user.copyWith(availablePlaces: places

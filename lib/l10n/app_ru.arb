@@ -87,5 +87,6 @@
      "archiveTags": "архив",
      "tagExpires": "истекает",
      "noUserTags": "нет тегов",
+     "myFilters": "Мои фильтры",
      "homeChooseCity": "Выберите свой город"
 }

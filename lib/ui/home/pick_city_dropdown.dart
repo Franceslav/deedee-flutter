@@ -6,7 +6,6 @@ import '../../services/shared.dart';
 import '../user_bloc/user_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PickCityDropDown extends StatefulWidget {
   const PickCityDropDown({super.key});
 

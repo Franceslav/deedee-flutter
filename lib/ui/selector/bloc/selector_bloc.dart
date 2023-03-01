@@ -11,23 +11,23 @@ part 'selector_state.dart';
 
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   SelectorBloc() : super(InitialState()) {
-    on<LoadTopicsEvent>(_onLoadTopics);
+    on<LoadTopicsEvent>(_onLoadSubTopics);
     on<SelectTopicEvent>(_onSelectTopic);
     on<LoadFilterKeysEvent>(_onLoadFilterKeys);
     on<SelectFilterKeyEvent>(_onSelectFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
+    on<SaveFiltersEvent>(_onSaveFilters);
     on<PushTagEvent>(_onPushTag);
     on<SelectLocationEvent>(_onSelectLocation);
 
     on<DurationSelectedEvent>(_userChoseDuration);
 
     on<SelectFirstLvlTopicEvent>(_onSelectFirstLvlTopic);
-
   }
 
-  _onLoadTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
+  _onLoadSubTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
     try {
-      final response = await locator.get<GRCPUtils>().getTopics(
+      final response = await locator.get<GRCPUtils>().getSubTopics(
             event.location.latitude,
             event.location.longitude,
           );
@@ -50,7 +50,8 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(TopicSelectedState(event.topic));
   }
 
-  _onSelectFirstLvlTopic(SelectFirstLvlTopicEvent event, Emitter<SelectorState> emit) {
+  _onSelectFirstLvlTopic(
+      SelectFirstLvlTopicEvent event, Emitter<SelectorState> emit) {
     emit(FirstLvlTopicSelectedState(event.topic));
   }
 
@@ -119,6 +120,25 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
+      Topic topic = await locator
+          .get<GRCPUtils>()
+          .getFilteredTags(event.topic, event.filterKeys, event.accountType);
+      emit(UserFiltersDoneState(topic));
+
+      print('norm Topic start');
+      print(topic);
+      print('Topic fin');
+    } catch (error) {
+      ErrorState(error.toString());
+    }
+  }
+
+  _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
+    emit(LoadingSelectorState());
+    try {
+      print(
+        'Направить на бэк: topic:${event.topic} subtopic:${event.subtopic}, filterKeys:${event.filterKeys}, userId: ${event.userId}',
+      );
       Topic topic = await locator
           .get<GRCPUtils>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);

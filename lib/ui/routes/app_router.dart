@@ -16,6 +16,7 @@ import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
+import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
@@ -36,6 +37,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: VerifyScreen, path: '/verify'),
     MaterialRoute(page: TopUpPage, path: '/account/top-up'),
     MaterialRoute(page: BookmarksScreen, path: '/bookmarks'),
+    MaterialRoute(page: SavedFiltersScreen, path: '/saved-filters'),
     MaterialRoute(page: ReferralScreen, path: '/referral'),
     MaterialRoute(page: SettingsScreen, path: '/settings'),
     MaterialRoute(page: ConnectionSettingsScreen, path: '/connection-settings'),
@@ -43,7 +45,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: LoginScreen, path: '/login'),
     MaterialRoute(page: SignUpScreen, path: '/sign-up'),
     MaterialRoute(page: ResetPasswordScreen, path: 'reset-password'),
-    MaterialRoute(page: MainTopicPage, path: 'main-topic'),
+    MaterialRoute(page: MainTopicScreen, path: 'main-topic'),
     MaterialRoute(page: UserTagsScreen, path: ''),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
   ],

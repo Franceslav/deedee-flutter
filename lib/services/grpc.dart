@@ -1,7 +1,5 @@
-import 'dart:io';
-
-import 'package:deedee/generated/AccountService.pbgrpc.dart' as account_service;
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
+import 'package:deedee/generated/FilterService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
@@ -22,6 +20,8 @@ class GRCPUtils {
       locator.get<LocationServiceClient>();
   final AccountServiceClient _accountServiceClient =
       locator.get<AccountServiceClient>();
+  final FilterServiceClient _filterServiceClient =
+      locator.get<FilterServiceClient>();
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
   final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
@@ -49,7 +49,7 @@ class GRCPUtils {
         ..messengerId = messengerId
         ..geoLocation = geo
         ..dueDate = timestamp
-        ..tagType = Tag_TYPE.valueOf(accountType.index)!;
+        ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!;
 
       var response = await _tagServiceClient.placeTag(PlaceTagRequest()
         ..tag = tag
@@ -63,7 +63,7 @@ class GRCPUtils {
   Future<Topic> getTopic(String topicId, AccountType accountType) async {
     var response = await _tagServiceClient.getTopic(GetTopicRequest()
       ..topicId = topicId
-      ..tagType = Tag_TYPE.valueOf(accountType.index)!);
+      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
     // .then((p0) async {
     // await channel.shutdown();
     // },);
@@ -77,24 +77,35 @@ class GRCPUtils {
     var response = await _tagServiceClient.getFilteredTags(GetTopicRequest()
       ..topicId = topicId
       ..filters.addAll(activeFilters)
-      ..tagType = Tag_TYPE.valueOf(accountType.index)!);
+      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
 
     return response.topic;
   }
 
-  Future<List<String>> getTopics(double latitude, double longitude) async {
+  Future<List<TopicDescription>> getTopics(double latitude, double longitude) async {
     var geoLocation = GeoLocation()
       ..latitude = latitude
       ..longitude = longitude;
     // return [Topic()..title = "test0", Topic()..title = "test1"];
     var response = await _tagServiceClient
-        .getTopics(GetTopicTitlesRequest()..geoLocation = geoLocation);
+        .getTopics(GetAllTopicsDescriptionRequest()..geoLocation = geoLocation);
 
-    return response.topicTitles;
+    return response.topicDescriptions;
+  }
+
+  Future<List<TopicDescription>> getSubTopics(double latitude, double longitude) async {
+    var geoLocation = GeoLocation()
+      ..latitude = latitude
+      ..longitude = longitude;
+    // return [Topic()..title = "test0", Topic()..title = "test1"];
+    var response = await _tagServiceClient
+        .getSubTopics(GetTopicTitlesRequest()..geoLocation = geoLocation);
+
+    return response.topicDescriptions;
   }
 
   Future<List<FilterKey>> getFilterItems(String topic) async {
-    var response = await _tagServiceClient
+    var response = await _filterServiceClient
         .getFilterKeys(GetFilterKeysRequest()..topicId = topic);
 
     return response.filterKeys;
@@ -166,6 +177,12 @@ class GRCPUtils {
     final response = await _tagServiceClient
         .getBookmarkTags(GetBookmarkTagsRequest()..userId = userId);
     return response.tags;
+  }
+
+  Future<ResponseStream<Filter>> getUserSavedFilters(String userId) async {
+    final response = await _filterServiceClient
+        .getAllBookmarkedFilters(GetAllFiltersRequest()..userId = userId);
+    return response;
   }
 
   Future<bool> removeUserBookmark(String userId, String tagId) async {

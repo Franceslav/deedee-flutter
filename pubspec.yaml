@@ -47,6 +47,7 @@ dependencies:
     path: packages/search_address_repository
   auto_route: ^5.0.4
   auto_route_generator: ^5.0.3
+  flutter_slidable: ^2.0.0
 
   sliding_up_panel: ^2.0.0+1
   dartx: ^1.1.0
@@ -85,3 +86,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf

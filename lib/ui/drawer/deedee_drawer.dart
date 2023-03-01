@@ -220,6 +220,15 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                       ),
                                       DrawerButton(
                                         text: AppLocalizations.of(context)!
+                                            .myFilters,
+                                        iconData: Icons.filter_alt,
+                                        onTap: () {
+                                          context.router.replace(
+                                              const SavedFiltersScreenRoute());
+                                        },
+                                      ),
+                                      DrawerButton(
+                                        text: AppLocalizations.of(context)!
                                             .accountReferralTitle,
                                         iconData: Icons.link_sharp,
                                         onTap: () {

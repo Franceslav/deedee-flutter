@@ -1,5 +1,4 @@
-import 'package:dartx/dartx.dart';
-import 'package:deedee/constants.dart';
+import 'package:deedee/generated/AccountService.pb.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
@@ -62,30 +61,6 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   @override
-  ResponseFuture<GetFilterKeysResponse> getFilterKeys(
-      GetFilterKeysRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetFilterKeysResponse>(
-        _getFilterKeys(request)));
-  }
-
-  Future<GetFilterKeysResponse> _getFilterKeys(
-      GetFilterKeysRequest request) async {
-    return GetFilterKeysResponse()
-      ..filterKeys.addAll([
-        FilterKey()
-          ..topicId = "маникюр"
-          ..title = "японский",
-        FilterKey()
-          ..topicId = "маникюр"
-          ..title = "я",
-        FilterKey()
-          ..topicId = "маникюр"
-          ..title = "ф",
-      ]);
-  }
-
-  @override
   ResponseFuture<GetTopicResponse> getFilteredTags(GetTopicRequest request,
       {CallOptions? options}) {
     return ResponseFuture(
@@ -136,25 +111,25 @@ class MockTagServiceClient implements TagServiceClient {
         ..topicId = 'маникюр'
         ..messengerId = 'beyonce'
         ..geoLocation = geoLocation1
-        ..tagType = Tag_TYPE.valueOf(request.tagType.value)!
+        ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp1,
       Tag()
         ..topicId = 'маникюр 2'
         ..messengerId = 'selenagomez'
         ..geoLocation = geoLocation2
-        ..tagType = Tag_TYPE.valueOf(request.tagType.value)!
+        ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp2,
       Tag()
         ..topicId = 'маникюр 3'
         ..messengerId = 'arianagrande'
         ..geoLocation = geoLocation3
-        ..tagType = Tag_TYPE.valueOf(request.tagType.value)!
+        ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp3,
       Tag()
         ..topicId = 'маникюр 4'
         ..messengerId = 'kyliejenner'
         ..geoLocation = geoLocation4
-        ..tagType = Tag_TYPE.valueOf(request.tagType.value)!
+        ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp4,
     ];
     var topic = Topic()..tags.addAll(ftags);
@@ -172,19 +147,19 @@ class MockTagServiceClient implements TagServiceClient {
     return GetTopicResponse()..topic = Topic();
   }
 
-  @override
-  ResponseFuture<GetTopicTitlesResponse> getTopics(
-      GetTopicTitlesRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, GetTopicTitlesResponse>(_getTopics(request)));
-  }
-
-  Future<GetTopicTitlesResponse> _getTopics(
-      GetTopicTitlesRequest request) async {
-    return GetTopicTitlesResponse()
-      ..topicTitles.addAll(["строительство", "маникюр", "сто"]);
-  }
+  // @override
+  // ResponseFuture<GetTopicTitlesResponse> getTopics(
+  //     GetTopicTitlesRequest request,
+  //     {CallOptions? options}) {
+  //   return ResponseFuture(
+  //       FakeClientCall<dynamic, GetTopicTitlesResponse>(_getTopics(request)));
+  // }
+  //
+  // Future<GetTopicTitlesResponse> _getTopics(
+  //     GetTopicTitlesRequest request) async {
+  //   return GetTopicTitlesResponse()
+  //     ..topicTitles.addAll(["строительство", "маникюр", "сто"]);
+  // }
 
   @override
   ResponseFuture<PlaceTagResponse> placeTag(PlaceTagRequest request,
@@ -246,7 +221,7 @@ class MockTagServiceClient implements TagServiceClient {
       ..topicId = 'маникюр 2'
       ..messengerId = 'selenagomez'
       ..geoLocation = geoLocation2
-      ..tagType = Tag_TYPE.SELL
+      ..tagType = ACCOUNT_TYPE.SELL
       ..dueDate = timestamp2;
     return UserTagResponse()..tag = tag;
   }
@@ -329,21 +304,21 @@ class MockTagServiceClient implements TagServiceClient {
         ..topicId = 'маникюр 2'
         ..messengerId = 'selenagomez'
         ..geoLocation = geoLocation2
-        ..tagType = Tag_TYPE.SELL
+        ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp2,
       Tag()
         ..tagId = '3'
         ..topicId = 'маникюр 3'
         ..messengerId = 'arianagrande'
         ..geoLocation = geoLocation3
-        ..tagType = Tag_TYPE.SELL
+        ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp3,
       Tag()
         ..tagId = '4'
         ..topicId = 'маникюр 4'
         ..messengerId = 'kyliejenner'
         ..geoLocation = geoLocation4
-        ..tagType = Tag_TYPE.SELL
+        ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp4,
     ];
     return GetUserTagsResponse()..tags.addAll(ftags);
@@ -354,6 +329,83 @@ class MockTagServiceClient implements TagServiceClient {
       {CallOptions? options}) {
     return ResponseFuture(
         FakeClientCall<dynamic, UserTagResponse>(_removeUserTag(request)));
+  }
+
+  @override
+  ResponseFuture<GetAllTopicsDescriptionResponse> getSubTopics(
+      GetTopicTitlesRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetAllTopicsDescriptionResponse>(
+            _getSubTopics(request)));
+  }
+
+  Future<GetAllTopicsDescriptionResponse> _getSubTopics(
+      GetTopicTitlesRequest request) async {
+    final subTopics = [
+      TopicDescription(
+        id: 1,
+        title: 'СТО',
+        offerCount: 110,
+      ),
+      TopicDescription(
+        id: 2,
+        title: 'Маникюр',
+        offerCount: 12,
+      ),
+      TopicDescription(
+        id: 3,
+        title: 'Йога',
+        offerCount: 7,
+      ),
+    ];
+    return GetAllTopicsDescriptionResponse()..topicDescriptions.addAll(subTopics);
+  }
+
+  @override
+  ResponseFuture<GetAllTopicsDescriptionResponse> getTopics(
+      GetAllTopicsDescriptionRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, GetAllTopicsDescriptionResponse>(
+            _getTopics(request)));
+  }
+
+  Future<GetAllTopicsDescriptionResponse> _getTopics(
+      GetAllTopicsDescriptionRequest request) async {
+    final topics = [
+      TopicDescription(
+        id: 1,
+        title: 'Авто',
+        offerCount: 110,
+      ),
+      TopicDescription(
+        id: 2,
+        title: 'Бьюти',
+        offerCount: 12,
+      ),
+      TopicDescription(
+        id: 3,
+        title: 'Отделка',
+        offerCount: 7,
+      ),
+      TopicDescription(
+        id: 4,
+        title: 'Дети',
+        offerCount: 14,
+      ),
+      TopicDescription(
+        id: 5,
+        title: 'Рабочие',
+        offerCount: 5,
+      ),
+      TopicDescription(
+        id: 1,
+        title: 'Клининг',
+        offerCount: 10,
+      ),
+    ];
+    return GetAllTopicsDescriptionResponse()..topicDescriptions.addAll(topics);
   }
 
   Future<UserTagResponse> _removeUserTag(UserTagRequest request) async {

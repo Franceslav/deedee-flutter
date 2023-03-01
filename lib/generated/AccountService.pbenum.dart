@@ -9,6 +9,21 @@
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class ACCOUNT_TYPE extends $pb.ProtobufEnum {
+  static const ACCOUNT_TYPE BUY = ACCOUNT_TYPE._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'BUY');
+  static const ACCOUNT_TYPE SELL = ACCOUNT_TYPE._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'SELL');
+
+  static const $core.List<ACCOUNT_TYPE> values = <ACCOUNT_TYPE> [
+    BUY,
+    SELL,
+  ];
+
+  static final $core.Map<$core.int, ACCOUNT_TYPE> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ACCOUNT_TYPE? valueOf($core.int value) => _byValue[value];
+
+  const ACCOUNT_TYPE._($core.int v, $core.String n) : super(v, n);
+}
+
 class AccountStatusResponse_VERIFICATION_TYPE extends $pb.ProtobufEnum {
   static const AccountStatusResponse_VERIFICATION_TYPE UNVERIFIED = AccountStatusResponse_VERIFICATION_TYPE._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'UNVERIFIED');
   static const AccountStatusResponse_VERIFICATION_TYPE VERIFIED = AccountStatusResponse_VERIFICATION_TYPE._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'VERIFIED');

@@ -10,167 +10,168 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'TagService.pb.dart' as $1;
+import 'TagService.pb.dart' as $2;
 export 'TagService.pb.dart';
 
 class TagServiceClient extends $grpc.Client {
   static final _$getTopic =
-      $grpc.ClientMethod<$1.GetTopicRequest, $1.GetTopicResponse>(
+      $grpc.ClientMethod<$2.GetTopicRequest, $2.GetTopicResponse>(
           '/topic.TagService/GetTopic',
-          ($1.GetTopicRequest value) => value.writeToBuffer(),
+          ($2.GetTopicRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.GetTopicResponse.fromBuffer(value));
+              $2.GetTopicResponse.fromBuffer(value));
   static final _$placeTag =
-      $grpc.ClientMethod<$1.PlaceTagRequest, $1.PlaceTagResponse>(
+      $grpc.ClientMethod<$2.PlaceTagRequest, $2.PlaceTagResponse>(
           '/topic.TagService/PlaceTag',
-          ($1.PlaceTagRequest value) => value.writeToBuffer(),
+          ($2.PlaceTagRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.PlaceTagResponse.fromBuffer(value));
-  static final _$getFilterKeys =
-      $grpc.ClientMethod<$1.GetFilterKeysRequest, $1.GetFilterKeysResponse>(
-          '/topic.TagService/GetFilterKeys',
-          ($1.GetFilterKeysRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $1.GetFilterKeysResponse.fromBuffer(value));
+              $2.PlaceTagResponse.fromBuffer(value));
   static final _$verifyAuthCode =
-      $grpc.ClientMethod<$1.VerifyAuthCodeRequest, $1.VerifyAuthCodeResponse>(
+      $grpc.ClientMethod<$2.VerifyAuthCodeRequest, $2.VerifyAuthCodeResponse>(
           '/topic.TagService/VerifyAuthCode',
-          ($1.VerifyAuthCodeRequest value) => value.writeToBuffer(),
+          ($2.VerifyAuthCodeRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.VerifyAuthCodeResponse.fromBuffer(value));
+              $2.VerifyAuthCodeResponse.fromBuffer(value));
   static final _$getFilteredTags =
-      $grpc.ClientMethod<$1.GetTopicRequest, $1.GetTopicResponse>(
+      $grpc.ClientMethod<$2.GetTopicRequest, $2.GetTopicResponse>(
           '/topic.TagService/GetFilteredTags',
-          ($1.GetTopicRequest value) => value.writeToBuffer(),
+          ($2.GetTopicRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.GetTopicResponse.fromBuffer(value));
+              $2.GetTopicResponse.fromBuffer(value));
   static final _$getUserTags =
-      $grpc.ClientMethod<$1.GetUserTagsRequest, $1.GetUserTagsResponse>(
+      $grpc.ClientMethod<$2.GetUserTagsRequest, $2.GetUserTagsResponse>(
           '/topic.TagService/GetUserTags',
-          ($1.GetUserTagsRequest value) => value.writeToBuffer(),
+          ($2.GetUserTagsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.GetUserTagsResponse.fromBuffer(value));
+              $2.GetUserTagsResponse.fromBuffer(value));
   static final _$getUserTag =
-      $grpc.ClientMethod<$1.UserTagRequest, $1.UserTagResponse>(
+      $grpc.ClientMethod<$2.UserTagRequest, $2.UserTagResponse>(
           '/topic.TagService/GetUserTag',
-          ($1.UserTagRequest value) => value.writeToBuffer(),
+          ($2.UserTagRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.UserTagResponse.fromBuffer(value));
+              $2.UserTagResponse.fromBuffer(value));
   static final _$removeUserTag =
-      $grpc.ClientMethod<$1.UserTagRequest, $1.UserTagResponse>(
+      $grpc.ClientMethod<$2.UserTagRequest, $2.UserTagResponse>(
           '/topic.TagService/RemoveUserTag',
-          ($1.UserTagRequest value) => value.writeToBuffer(),
+          ($2.UserTagRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.UserTagResponse.fromBuffer(value));
+              $2.UserTagResponse.fromBuffer(value));
   static final _$getUserTagDetails = $grpc.ClientMethod<
-          $1.GetUserTagDetailsRequest, $1.GetUserTagDetailsResponse>(
+          $2.GetUserTagDetailsRequest, $2.GetUserTagDetailsResponse>(
       '/topic.TagService/GetUserTagDetails',
-      ($1.GetUserTagDetailsRequest value) => value.writeToBuffer(),
+      ($2.GetUserTagDetailsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $1.GetUserTagDetailsResponse.fromBuffer(value));
+          $2.GetUserTagDetailsResponse.fromBuffer(value));
   static final _$addTagToBookmark =
-      $grpc.ClientMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
+      $grpc.ClientMethod<$2.TagToBookmarkRequest, $2.TagToBookmarkResponse>(
           '/topic.TagService/AddTagToBookmark',
-          ($1.TagToBookmarkRequest value) => value.writeToBuffer(),
+          ($2.TagToBookmarkRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.TagToBookmarkResponse.fromBuffer(value));
+              $2.TagToBookmarkResponse.fromBuffer(value));
   static final _$getBookmarkTags =
-      $grpc.ClientMethod<$1.GetBookmarkTagsRequest, $1.GetBookmarkTagsResponse>(
+      $grpc.ClientMethod<$2.GetBookmarkTagsRequest, $2.GetBookmarkTagsResponse>(
           '/topic.TagService/GetBookmarkTags',
-          ($1.GetBookmarkTagsRequest value) => value.writeToBuffer(),
+          ($2.GetBookmarkTagsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.GetBookmarkTagsResponse.fromBuffer(value));
+              $2.GetBookmarkTagsResponse.fromBuffer(value));
   static final _$removeTagToBookmark =
-      $grpc.ClientMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
+      $grpc.ClientMethod<$2.TagToBookmarkRequest, $2.TagToBookmarkResponse>(
           '/topic.TagService/RemoveTagToBookmark',
-          ($1.TagToBookmarkRequest value) => value.writeToBuffer(),
+          ($2.TagToBookmarkRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $1.TagToBookmarkResponse.fromBuffer(value));
-  static final _$getTopics =
-      $grpc.ClientMethod<$1.GetTopicTitlesRequest, $1.GetTopicTitlesResponse>(
-          '/topic.TagService/GetTopics',
-          ($1.GetTopicTitlesRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $1.GetTopicTitlesResponse.fromBuffer(value));
+              $2.TagToBookmarkResponse.fromBuffer(value));
+  static final _$getTopics = $grpc.ClientMethod<
+          $2.GetAllTopicsDescriptionRequest,
+          $2.GetAllTopicsDescriptionResponse>(
+      '/topic.TagService/GetTopics',
+      ($2.GetAllTopicsDescriptionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.GetAllTopicsDescriptionResponse.fromBuffer(value));
+  static final _$getSubTopics = $grpc.ClientMethod<$2.GetTopicTitlesRequest,
+          $2.GetAllTopicsDescriptionResponse>(
+      '/topic.TagService/GetSubTopics',
+      ($2.GetTopicTitlesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.GetAllTopicsDescriptionResponse.fromBuffer(value));
 
   TagServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$1.GetTopicResponse> getTopic($1.GetTopicRequest request,
+  $grpc.ResponseFuture<$2.GetTopicResponse> getTopic($2.GetTopicRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTopic, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.PlaceTagResponse> placeTag($1.PlaceTagRequest request,
+  $grpc.ResponseFuture<$2.PlaceTagResponse> placeTag($2.PlaceTagRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$placeTag, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetFilterKeysResponse> getFilterKeys(
-      $1.GetFilterKeysRequest request,
-      {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getFilterKeys, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.VerifyAuthCodeResponse> verifyAuthCode(
-      $1.VerifyAuthCodeRequest request,
+  $grpc.ResponseFuture<$2.VerifyAuthCodeResponse> verifyAuthCode(
+      $2.VerifyAuthCodeRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$verifyAuthCode, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetTopicResponse> getFilteredTags(
-      $1.GetTopicRequest request,
+  $grpc.ResponseFuture<$2.GetTopicResponse> getFilteredTags(
+      $2.GetTopicRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getFilteredTags, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetUserTagsResponse> getUserTags(
-      $1.GetUserTagsRequest request,
+  $grpc.ResponseFuture<$2.GetUserTagsResponse> getUserTags(
+      $2.GetUserTagsRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserTags, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.UserTagResponse> getUserTag($1.UserTagRequest request,
+  $grpc.ResponseFuture<$2.UserTagResponse> getUserTag($2.UserTagRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserTag, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.UserTagResponse> removeUserTag(
-      $1.UserTagRequest request,
+  $grpc.ResponseFuture<$2.UserTagResponse> removeUserTag(
+      $2.UserTagRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$removeUserTag, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetUserTagDetailsResponse> getUserTagDetails(
-      $1.GetUserTagDetailsRequest request,
+  $grpc.ResponseFuture<$2.GetUserTagDetailsResponse> getUserTagDetails(
+      $2.GetUserTagDetailsRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserTagDetails, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.TagToBookmarkResponse> addTagToBookmark(
-      $1.TagToBookmarkRequest request,
+  $grpc.ResponseFuture<$2.TagToBookmarkResponse> addTagToBookmark(
+      $2.TagToBookmarkRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addTagToBookmark, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetBookmarkTagsResponse> getBookmarkTags(
-      $1.GetBookmarkTagsRequest request,
+  $grpc.ResponseFuture<$2.GetBookmarkTagsResponse> getBookmarkTags(
+      $2.GetBookmarkTagsRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getBookmarkTags, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.TagToBookmarkResponse> removeTagToBookmark(
-      $1.TagToBookmarkRequest request,
+  $grpc.ResponseFuture<$2.TagToBookmarkResponse> removeTagToBookmark(
+      $2.TagToBookmarkRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$removeTagToBookmark, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.GetTopicTitlesResponse> getTopics(
-      $1.GetTopicTitlesRequest request,
+  $grpc.ResponseFuture<$2.GetAllTopicsDescriptionResponse> getTopics(
+      $2.GetAllTopicsDescriptionRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTopics, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.GetAllTopicsDescriptionResponse> getSubTopics(
+      $2.GetTopicTitlesRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getSubTopics, request, options: options);
   }
 }
 
@@ -178,210 +179,211 @@ abstract class TagServiceBase extends $grpc.Service {
   $core.String get $name => 'topic.TagService';
 
   TagServiceBase() {
-    $addMethod($grpc.ServiceMethod<$1.GetTopicRequest, $1.GetTopicResponse>(
+    $addMethod($grpc.ServiceMethod<$2.GetTopicRequest, $2.GetTopicResponse>(
         'GetTopic',
         getTopic_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.GetTopicRequest.fromBuffer(value),
-        ($1.GetTopicResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.PlaceTagRequest, $1.PlaceTagResponse>(
+        ($core.List<$core.int> value) => $2.GetTopicRequest.fromBuffer(value),
+        ($2.GetTopicResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.PlaceTagRequest, $2.PlaceTagResponse>(
         'PlaceTag',
         placeTag_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.PlaceTagRequest.fromBuffer(value),
-        ($1.PlaceTagResponse value) => value.writeToBuffer()));
-    $addMethod(
-        $grpc.ServiceMethod<$1.GetFilterKeysRequest, $1.GetFilterKeysResponse>(
-            'GetFilterKeys',
-            getFilterKeys_Pre,
-            false,
-            false,
-            ($core.List<$core.int> value) =>
-                $1.GetFilterKeysRequest.fromBuffer(value),
-            ($1.GetFilterKeysResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.VerifyAuthCodeRequest,
-            $1.VerifyAuthCodeResponse>(
+        ($core.List<$core.int> value) => $2.PlaceTagRequest.fromBuffer(value),
+        ($2.PlaceTagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.VerifyAuthCodeRequest,
+            $2.VerifyAuthCodeResponse>(
         'VerifyAuthCode',
         verifyAuthCode_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $1.VerifyAuthCodeRequest.fromBuffer(value),
-        ($1.VerifyAuthCodeResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetTopicRequest, $1.GetTopicResponse>(
+            $2.VerifyAuthCodeRequest.fromBuffer(value),
+        ($2.VerifyAuthCodeResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetTopicRequest, $2.GetTopicResponse>(
         'GetFilteredTags',
         getFilteredTags_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.GetTopicRequest.fromBuffer(value),
-        ($1.GetTopicResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $2.GetTopicRequest.fromBuffer(value),
+        ($2.GetTopicResponse value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$1.GetUserTagsRequest, $1.GetUserTagsResponse>(
+        $grpc.ServiceMethod<$2.GetUserTagsRequest, $2.GetUserTagsResponse>(
             'GetUserTags',
             getUserTags_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $1.GetUserTagsRequest.fromBuffer(value),
-            ($1.GetUserTagsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.UserTagRequest, $1.UserTagResponse>(
+                $2.GetUserTagsRequest.fromBuffer(value),
+            ($2.GetUserTagsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UserTagRequest, $2.UserTagResponse>(
         'GetUserTag',
         getUserTag_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.UserTagRequest.fromBuffer(value),
-        ($1.UserTagResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.UserTagRequest, $1.UserTagResponse>(
+        ($core.List<$core.int> value) => $2.UserTagRequest.fromBuffer(value),
+        ($2.UserTagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UserTagRequest, $2.UserTagResponse>(
         'RemoveUserTag',
         removeUserTag_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.UserTagRequest.fromBuffer(value),
-        ($1.UserTagResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetUserTagDetailsRequest,
-            $1.GetUserTagDetailsResponse>(
+        ($core.List<$core.int> value) => $2.UserTagRequest.fromBuffer(value),
+        ($2.UserTagResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetUserTagDetailsRequest,
+            $2.GetUserTagDetailsResponse>(
         'GetUserTagDetails',
         getUserTagDetails_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $1.GetUserTagDetailsRequest.fromBuffer(value),
-        ($1.GetUserTagDetailsResponse value) => value.writeToBuffer()));
+            $2.GetUserTagDetailsRequest.fromBuffer(value),
+        ($2.GetUserTagDetailsResponse value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
+        $grpc.ServiceMethod<$2.TagToBookmarkRequest, $2.TagToBookmarkResponse>(
             'AddTagToBookmark',
             addTagToBookmark_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $1.TagToBookmarkRequest.fromBuffer(value),
-            ($1.TagToBookmarkResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetBookmarkTagsRequest,
-            $1.GetBookmarkTagsResponse>(
+                $2.TagToBookmarkRequest.fromBuffer(value),
+            ($2.TagToBookmarkResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetBookmarkTagsRequest,
+            $2.GetBookmarkTagsResponse>(
         'GetBookmarkTags',
         getBookmarkTags_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $1.GetBookmarkTagsRequest.fromBuffer(value),
-        ($1.GetBookmarkTagsResponse value) => value.writeToBuffer()));
+            $2.GetBookmarkTagsRequest.fromBuffer(value),
+        ($2.GetBookmarkTagsResponse value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$1.TagToBookmarkRequest, $1.TagToBookmarkResponse>(
+        $grpc.ServiceMethod<$2.TagToBookmarkRequest, $2.TagToBookmarkResponse>(
             'RemoveTagToBookmark',
             removeTagToBookmark_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $1.TagToBookmarkRequest.fromBuffer(value),
-            ($1.TagToBookmarkResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetTopicTitlesRequest,
-            $1.GetTopicTitlesResponse>(
+                $2.TagToBookmarkRequest.fromBuffer(value),
+            ($2.TagToBookmarkResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetAllTopicsDescriptionRequest,
+            $2.GetAllTopicsDescriptionResponse>(
         'GetTopics',
         getTopics_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $1.GetTopicTitlesRequest.fromBuffer(value),
-        ($1.GetTopicTitlesResponse value) => value.writeToBuffer()));
+            $2.GetAllTopicsDescriptionRequest.fromBuffer(value),
+        ($2.GetAllTopicsDescriptionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetTopicTitlesRequest,
+            $2.GetAllTopicsDescriptionResponse>(
+        'GetSubTopics',
+        getSubTopics_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.GetTopicTitlesRequest.fromBuffer(value),
+        ($2.GetAllTopicsDescriptionResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$1.GetTopicResponse> getTopic_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.GetTopicRequest> request) async {
+  $async.Future<$2.GetTopicResponse> getTopic_Pre(
+      $grpc.ServiceCall call, $async.Future<$2.GetTopicRequest> request) async {
     return getTopic(call, await request);
   }
 
-  $async.Future<$1.PlaceTagResponse> placeTag_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.PlaceTagRequest> request) async {
+  $async.Future<$2.PlaceTagResponse> placeTag_Pre(
+      $grpc.ServiceCall call, $async.Future<$2.PlaceTagRequest> request) async {
     return placeTag(call, await request);
   }
 
-  $async.Future<$1.GetFilterKeysResponse> getFilterKeys_Pre(
+  $async.Future<$2.VerifyAuthCodeResponse> verifyAuthCode_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$1.GetFilterKeysRequest> request) async {
-    return getFilterKeys(call, await request);
-  }
-
-  $async.Future<$1.VerifyAuthCodeResponse> verifyAuthCode_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$1.VerifyAuthCodeRequest> request) async {
+      $async.Future<$2.VerifyAuthCodeRequest> request) async {
     return verifyAuthCode(call, await request);
   }
 
-  $async.Future<$1.GetTopicResponse> getFilteredTags_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.GetTopicRequest> request) async {
+  $async.Future<$2.GetTopicResponse> getFilteredTags_Pre(
+      $grpc.ServiceCall call, $async.Future<$2.GetTopicRequest> request) async {
     return getFilteredTags(call, await request);
   }
 
-  $async.Future<$1.GetUserTagsResponse> getUserTags_Pre($grpc.ServiceCall call,
-      $async.Future<$1.GetUserTagsRequest> request) async {
+  $async.Future<$2.GetUserTagsResponse> getUserTags_Pre($grpc.ServiceCall call,
+      $async.Future<$2.GetUserTagsRequest> request) async {
     return getUserTags(call, await request);
   }
 
-  $async.Future<$1.UserTagResponse> getUserTag_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.UserTagRequest> request) async {
+  $async.Future<$2.UserTagResponse> getUserTag_Pre(
+      $grpc.ServiceCall call, $async.Future<$2.UserTagRequest> request) async {
     return getUserTag(call, await request);
   }
 
-  $async.Future<$1.UserTagResponse> removeUserTag_Pre(
-      $grpc.ServiceCall call, $async.Future<$1.UserTagRequest> request) async {
+  $async.Future<$2.UserTagResponse> removeUserTag_Pre(
+      $grpc.ServiceCall call, $async.Future<$2.UserTagRequest> request) async {
     return removeUserTag(call, await request);
   }
 
-  $async.Future<$1.GetUserTagDetailsResponse> getUserTagDetails_Pre(
+  $async.Future<$2.GetUserTagDetailsResponse> getUserTagDetails_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$1.GetUserTagDetailsRequest> request) async {
+      $async.Future<$2.GetUserTagDetailsRequest> request) async {
     return getUserTagDetails(call, await request);
   }
 
-  $async.Future<$1.TagToBookmarkResponse> addTagToBookmark_Pre(
+  $async.Future<$2.TagToBookmarkResponse> addTagToBookmark_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$1.TagToBookmarkRequest> request) async {
+      $async.Future<$2.TagToBookmarkRequest> request) async {
     return addTagToBookmark(call, await request);
   }
 
-  $async.Future<$1.GetBookmarkTagsResponse> getBookmarkTags_Pre(
+  $async.Future<$2.GetBookmarkTagsResponse> getBookmarkTags_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$1.GetBookmarkTagsRequest> request) async {
+      $async.Future<$2.GetBookmarkTagsRequest> request) async {
     return getBookmarkTags(call, await request);
   }
 
-  $async.Future<$1.TagToBookmarkResponse> removeTagToBookmark_Pre(
+  $async.Future<$2.TagToBookmarkResponse> removeTagToBookmark_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$1.TagToBookmarkRequest> request) async {
+      $async.Future<$2.TagToBookmarkRequest> request) async {
     return removeTagToBookmark(call, await request);
   }
 
-  $async.Future<$1.GetTopicTitlesResponse> getTopics_Pre($grpc.ServiceCall call,
-      $async.Future<$1.GetTopicTitlesRequest> request) async {
+  $async.Future<$2.GetAllTopicsDescriptionResponse> getTopics_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.GetAllTopicsDescriptionRequest> request) async {
     return getTopics(call, await request);
   }
 
-  $async.Future<$1.GetTopicResponse> getTopic(
-      $grpc.ServiceCall call, $1.GetTopicRequest request);
-  $async.Future<$1.PlaceTagResponse> placeTag(
-      $grpc.ServiceCall call, $1.PlaceTagRequest request);
-  $async.Future<$1.GetFilterKeysResponse> getFilterKeys(
-      $grpc.ServiceCall call, $1.GetFilterKeysRequest request);
-  $async.Future<$1.VerifyAuthCodeResponse> verifyAuthCode(
-      $grpc.ServiceCall call, $1.VerifyAuthCodeRequest request);
-  $async.Future<$1.GetTopicResponse> getFilteredTags(
-      $grpc.ServiceCall call, $1.GetTopicRequest request);
-  $async.Future<$1.GetUserTagsResponse> getUserTags(
-      $grpc.ServiceCall call, $1.GetUserTagsRequest request);
-  $async.Future<$1.UserTagResponse> getUserTag(
-      $grpc.ServiceCall call, $1.UserTagRequest request);
-  $async.Future<$1.UserTagResponse> removeUserTag(
-      $grpc.ServiceCall call, $1.UserTagRequest request);
-  $async.Future<$1.GetUserTagDetailsResponse> getUserTagDetails(
-      $grpc.ServiceCall call, $1.GetUserTagDetailsRequest request);
-  $async.Future<$1.TagToBookmarkResponse> addTagToBookmark(
-      $grpc.ServiceCall call, $1.TagToBookmarkRequest request);
-  $async.Future<$1.GetBookmarkTagsResponse> getBookmarkTags(
-      $grpc.ServiceCall call, $1.GetBookmarkTagsRequest request);
-  $async.Future<$1.TagToBookmarkResponse> removeTagToBookmark(
-      $grpc.ServiceCall call, $1.TagToBookmarkRequest request);
-  $async.Future<$1.GetTopicTitlesResponse> getTopics(
-      $grpc.ServiceCall call, $1.GetTopicTitlesRequest request);
+  $async.Future<$2.GetAllTopicsDescriptionResponse> getSubTopics_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.GetTopicTitlesRequest> request) async {
+    return getSubTopics(call, await request);
+  }
+
+  $async.Future<$2.GetTopicResponse> getTopic(
+      $grpc.ServiceCall call, $2.GetTopicRequest request);
+  $async.Future<$2.PlaceTagResponse> placeTag(
+      $grpc.ServiceCall call, $2.PlaceTagRequest request);
+  $async.Future<$2.VerifyAuthCodeResponse> verifyAuthCode(
+      $grpc.ServiceCall call, $2.VerifyAuthCodeRequest request);
+  $async.Future<$2.GetTopicResponse> getFilteredTags(
+      $grpc.ServiceCall call, $2.GetTopicRequest request);
+  $async.Future<$2.GetUserTagsResponse> getUserTags(
+      $grpc.ServiceCall call, $2.GetUserTagsRequest request);
+  $async.Future<$2.UserTagResponse> getUserTag(
+      $grpc.ServiceCall call, $2.UserTagRequest request);
+  $async.Future<$2.UserTagResponse> removeUserTag(
+      $grpc.ServiceCall call, $2.UserTagRequest request);
+  $async.Future<$2.GetUserTagDetailsResponse> getUserTagDetails(
+      $grpc.ServiceCall call, $2.GetUserTagDetailsRequest request);
+  $async.Future<$2.TagToBookmarkResponse> addTagToBookmark(
+      $grpc.ServiceCall call, $2.TagToBookmarkRequest request);
+  $async.Future<$2.GetBookmarkTagsResponse> getBookmarkTags(
+      $grpc.ServiceCall call, $2.GetBookmarkTagsRequest request);
+  $async.Future<$2.TagToBookmarkResponse> removeTagToBookmark(
+      $grpc.ServiceCall call, $2.TagToBookmarkRequest request);
+  $async.Future<$2.GetAllTopicsDescriptionResponse> getTopics(
+      $grpc.ServiceCall call, $2.GetAllTopicsDescriptionRequest request);
+  $async.Future<$2.GetAllTopicsDescriptionResponse> getSubTopics(
+      $grpc.ServiceCall call, $2.GetTopicTitlesRequest request);
 }

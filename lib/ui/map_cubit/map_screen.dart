@@ -100,75 +100,69 @@ class _MapScreenState extends State<MapScreen> {
           pushAndRemoveUntil(context, const WelcomeScreen(), false);
         }
       },
-      child: WillPopScope(
-          onWillPop: () async {
-            return pushReplacement(context, const FilterPage());
-          },
-          child: Scaffold(
-            drawer: const DeeDeeDrawer(),
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              iconTheme: IconThemeData(
-                  color: isDarkMode(context) ? Colors.white : Colors.black),
-              elevation: 0.0,
+      child: Scaffold(
+        drawer: const DeeDeeDrawer(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(
+              color: isDarkMode(context) ? Colors.white : Colors.black),
+          elevation: 0.0,
+        ),
+        body: FlutterMap(
+          mapController: _mapController,
+          options: MapOptions(
+            // swPanBoundary: LatLng(
+            //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
+            // nePanBoundary: LatLng(
+            //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
+            center: LatLng(geo.latitude, geo.longitude),
+            // bounds: LatLngBounds.fromPoints(_latLngList),
+            zoom: MAP_ZOOM,
+            onTap: (tapPosition, tapLatLon) {
+              _pc.close();
+            },
+          ),
+          nonRotatedChildren: [
+            MapSlidingPanelWidget(
+                size: size, pc: _pc, selectedMessengerId: _selectedMessengerId),
+          ],
+          children: [
+            TileLayer(
+              minZoom: 2,
+              maxZoom: 18,
+              backgroundColor: Colors.black,
+              subdomains: const ['a', 'b', 'c'],
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.dinobit.deedeeapp',
             ),
-            body: FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(
-                // swPanBoundary: LatLng(
-                //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
-                // nePanBoundary: LatLng(
-                //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
-                center: LatLng(geo.latitude, geo.longitude),
-                // bounds: LatLngBounds.fromPoints(_latLngList),
-                zoom: MAP_ZOOM,
-                onTap: (tapPosition, tapLatLon) {
-                  _pc.close();
+            MarkerLayer(
+              rotate: false,
+              markers: _markers.map((e) => e.marker).toList(),
+            ),
+            MarkerClusterLayerWidget(
+              options: MarkerClusterLayerOptions(
+                maxClusterRadius: 190,
+                disableClusteringAtZoom: 12,
+                size: const Size(50, 50),
+                // fitBoundsOptions: LatLngBounds.fromPoints(listOfPoints),
+                markers: _markers.map((e) => e.marker).toList(),
+                polygonOptions: const PolygonOptions(
+                    borderColor: Colors.blueAccent,
+                    color: Colors.black12,
+                    borderStrokeWidth: 3),
+                builder: (context, markers) {
+                  return Container(
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                        color: Colors.orange, shape: BoxShape.circle),
+                    child: Text('${markers.length}'),
+                  );
                 },
               ),
-              nonRotatedChildren: [
-                MapSlidingPanelWidget(
-                    size: size,
-                    pc: _pc,
-                    selectedMessengerId: _selectedMessengerId),
-              ],
-              children: [
-                TileLayer(
-                  minZoom: 2,
-                  maxZoom: 18,
-                  backgroundColor: Colors.black,
-                  subdomains: const ['a', 'b', 'c'],
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.dinobit.deedeeapp',
-                ),
-                MarkerLayer(
-                  rotate: false,
-                  markers: _markers.map((e) => e.marker).toList(),
-                ),
-                MarkerClusterLayerWidget(
-                  options: MarkerClusterLayerOptions(
-                    maxClusterRadius: 190,
-                    disableClusteringAtZoom: 12,
-                    size: const Size(50, 50),
-                    // fitBoundsOptions: LatLngBounds.fromPoints(listOfPoints),
-                    markers: _markers.map((e) => e.marker).toList(),
-                    polygonOptions: const PolygonOptions(
-                        borderColor: Colors.blueAccent,
-                        color: Colors.black12,
-                        borderStrokeWidth: 3),
-                    builder: (context, markers) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            color: Colors.orange, shape: BoxShape.circle),
-                        child: Text('${markers.length}'),
-                      );
-                    },
-                  ),
-                ),
-              ],
             ),
-          )),
+          ],
+        ),
+      ),
     );
   }
 }

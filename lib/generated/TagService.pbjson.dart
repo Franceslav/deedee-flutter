@@ -116,13 +116,13 @@ const GetTopicRequest$json = const {
   '1': 'GetTopicRequest',
   '2': const [
     const {'1': 'topicId', '3': 1, '4': 1, '5': 9, '10': 'topicId'},
-    const {'1': 'tagType', '3': 2, '4': 1, '5': 14, '6': '.topic.Tag.TYPE', '10': 'tagType'},
+    const {'1': 'tagType', '3': 2, '4': 1, '5': 14, '6': '.topic.ACCOUNT_TYPE', '10': 'tagType'},
     const {'1': 'filters', '3': 3, '4': 3, '5': 9, '10': 'filters'},
   ],
 };
 
 /// Descriptor for `GetTopicRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getTopicRequestDescriptor = $convert.base64Decode('Cg9HZXRUb3BpY1JlcXVlc3QSGAoHdG9waWNJZBgBIAEoCVIHdG9waWNJZBIpCgd0YWdUeXBlGAIgASgOMg8udG9waWMuVGFnLlRZUEVSB3RhZ1R5cGUSGAoHZmlsdGVycxgDIAMoCVIHZmlsdGVycw==');
+final $typed_data.Uint8List getTopicRequestDescriptor = $convert.base64Decode('Cg9HZXRUb3BpY1JlcXVlc3QSGAoHdG9waWNJZBgBIAEoCVIHdG9waWNJZBItCgd0YWdUeXBlGAIgASgOMhMudG9waWMuQUNDT1VOVF9UWVBFUgd0YWdUeXBlEhgKB2ZpbHRlcnMYAyADKAlSB2ZpbHRlcnM=');
 @$core.Deprecated('Use getTopicResponseDescriptor instead')
 const GetTopicResponse$json = const {
   '1': 'GetTopicResponse',
@@ -154,26 +154,6 @@ const PlaceTagResponse$json = const {
 
 /// Descriptor for `PlaceTagResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List placeTagResponseDescriptor = $convert.base64Decode('ChBQbGFjZVRhZ1Jlc3BvbnNlEhwKA3RhZxgBIAEoCzIKLnRvcGljLlRhZ1IDdGFn');
-@$core.Deprecated('Use getFilterKeysRequestDescriptor instead')
-const GetFilterKeysRequest$json = const {
-  '1': 'GetFilterKeysRequest',
-  '2': const [
-    const {'1': 'topicId', '3': 1, '4': 1, '5': 9, '10': 'topicId'},
-  ],
-};
-
-/// Descriptor for `GetFilterKeysRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getFilterKeysRequestDescriptor = $convert.base64Decode('ChRHZXRGaWx0ZXJLZXlzUmVxdWVzdBIYCgd0b3BpY0lkGAEgASgJUgd0b3BpY0lk');
-@$core.Deprecated('Use getFilterKeysResponseDescriptor instead')
-const GetFilterKeysResponse$json = const {
-  '1': 'GetFilterKeysResponse',
-  '2': const [
-    const {'1': 'filterKeys', '3': 1, '4': 3, '5': 11, '6': '.topic.FilterKey', '10': 'filterKeys'},
-  ],
-};
-
-/// Descriptor for `GetFilterKeysResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getFilterKeysResponseDescriptor = $convert.base64Decode('ChVHZXRGaWx0ZXJLZXlzUmVzcG9uc2USMAoKZmlsdGVyS2V5cxgBIAMoCzIQLnRvcGljLkZpbHRlcktleVIKZmlsdGVyS2V5cw==');
 @$core.Deprecated('Use topicDescriptor instead')
 const Topic$json = const {
   '1': 'Topic',
@@ -192,24 +172,14 @@ const Tag$json = const {
     const {'1': 'topicId', '3': 2, '4': 1, '5': 9, '10': 'topicId'},
     const {'1': 'messengerId', '3': 3, '4': 1, '5': 9, '10': 'messengerId'},
     const {'1': 'geoLocation', '3': 4, '4': 1, '5': 11, '6': '.topic.GeoLocation', '10': 'geoLocation'},
-    const {'1': 'tagType', '3': 5, '4': 1, '5': 14, '6': '.topic.Tag.TYPE', '10': 'tagType'},
+    const {'1': 'tagType', '3': 5, '4': 1, '5': 14, '6': '.topic.ACCOUNT_TYPE', '10': 'tagType'},
     const {'1': 'dueDate', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dueDate'},
     const {'1': 'isDeleted', '3': 7, '4': 1, '5': 8, '10': 'isDeleted'},
-  ],
-  '4': const [Tag_TYPE$json],
-};
-
-@$core.Deprecated('Use tagDescriptor instead')
-const Tag_TYPE$json = const {
-  '1': 'TYPE',
-  '2': const [
-    const {'1': 'BUY', '2': 0},
-    const {'1': 'SELL', '2': 1},
   ],
 };
 
 /// Descriptor for `Tag`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEikKB3RhZ1R5cGUYBSABKA4yDy50b3BpYy5UYWcuVFlQRVIHdGFnVHlwZRI0CgdkdWVEYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIHZHVlRGF0ZRIcCglpc0RlbGV0ZWQYByABKAhSCWlzRGVsZXRlZCIZCgRUWVBFEgcKA0JVWRAAEggKBFNFTEwQAQ==');
+final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKAlSBXRhZ0lkEhgKB3RvcGljSWQYAiABKAlSB3RvcGljSWQSIAoLbWVzc2VuZ2VySWQYAyABKAlSC21lc3NlbmdlcklkEjQKC2dlb0xvY2F0aW9uGAQgASgLMhIudG9waWMuR2VvTG9jYXRpb25SC2dlb0xvY2F0aW9uEi0KB3RhZ1R5cGUYBSABKA4yEy50b3BpYy5BQ0NPVU5UX1RZUEVSB3RhZ1R5cGUSNAoHZHVlRGF0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSB2R1ZURhdGUSHAoJaXNEZWxldGVkGAcgASgIUglpc0RlbGV0ZWQ=');
 @$core.Deprecated('Use tagDetailsDescriptor instead')
 const TagDetails$json = const {
   '1': 'TagDetails',
@@ -224,17 +194,6 @@ const TagDetails$json = const {
 
 /// Descriptor for `TagDetails`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tagDetailsDescriptor = $convert.base64Decode('CgpUYWdEZXRhaWxzEhQKBXRhZ0lkGAEgASgJUgV0YWdJZBIWCgZ1c2VySWQYAiABKAlSBnVzZXJJZBIUCgVwcmljZRgDIAEoCVIFcHJpY2USHAoJdGltZXRhYmxlGAQgASgJUgl0aW1ldGFibGUSIAoLZGVzY3JpcHRpb24YBSABKAlSC2Rlc2NyaXB0aW9u');
-@$core.Deprecated('Use filterKeyDescriptor instead')
-const FilterKey$json = const {
-  '1': 'FilterKey',
-  '2': const [
-    const {'1': 'topicId', '3': 1, '4': 1, '5': 9, '10': 'topicId'},
-    const {'1': 'title', '3': 3, '4': 1, '5': 9, '10': 'title'},
-  ],
-};
-
-/// Descriptor for `FilterKey`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List filterKeyDescriptor = $convert.base64Decode('CglGaWx0ZXJLZXkSGAoHdG9waWNJZBgBIAEoCVIHdG9waWNJZBIUCgV0aXRsZRgDIAEoCVIFdGl0bGU=');
 @$core.Deprecated('Use verifyAuthCodeRequestDescriptor instead')
 const VerifyAuthCodeRequest$json = const {
   '1': 'VerifyAuthCodeRequest',
@@ -275,3 +234,36 @@ const GetTopicTitlesResponse$json = const {
 
 /// Descriptor for `GetTopicTitlesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTopicTitlesResponseDescriptor = $convert.base64Decode('ChZHZXRUb3BpY1RpdGxlc1Jlc3BvbnNlEiAKC3RvcGljVGl0bGVzGAEgAygJUgt0b3BpY1RpdGxlcw==');
+@$core.Deprecated('Use getAllTopicsDescriptionRequestDescriptor instead')
+const GetAllTopicsDescriptionRequest$json = const {
+  '1': 'GetAllTopicsDescriptionRequest',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 9, '10': 'userId'},
+    const {'1': 'geoLocation', '3': 2, '4': 1, '5': 11, '6': '.topic.GeoLocation', '10': 'geoLocation'},
+  ],
+};
+
+/// Descriptor for `GetAllTopicsDescriptionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAllTopicsDescriptionRequestDescriptor = $convert.base64Decode('Ch5HZXRBbGxUb3BpY3NEZXNjcmlwdGlvblJlcXVlc3QSFgoGdXNlcklkGAEgASgJUgZ1c2VySWQSNAoLZ2VvTG9jYXRpb24YAiABKAsyEi50b3BpYy5HZW9Mb2NhdGlvblILZ2VvTG9jYXRpb24=');
+@$core.Deprecated('Use getAllTopicsDescriptionResponseDescriptor instead')
+const GetAllTopicsDescriptionResponse$json = const {
+  '1': 'GetAllTopicsDescriptionResponse',
+  '2': const [
+    const {'1': 'topicDescriptions', '3': 1, '4': 3, '5': 11, '6': '.topic.TopicDescription', '10': 'topicDescriptions'},
+  ],
+};
+
+/// Descriptor for `GetAllTopicsDescriptionResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAllTopicsDescriptionResponseDescriptor = $convert.base64Decode('Ch9HZXRBbGxUb3BpY3NEZXNjcmlwdGlvblJlc3BvbnNlEkUKEXRvcGljRGVzY3JpcHRpb25zGAEgAygLMhcudG9waWMuVG9waWNEZXNjcmlwdGlvblIRdG9waWNEZXNjcmlwdGlvbnM=');
+@$core.Deprecated('Use topicDescriptionDescriptor instead')
+const TopicDescription$json = const {
+  '1': 'TopicDescription',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    const {'1': 'offerCount', '3': 3, '4': 1, '5': 5, '10': 'offerCount'},
+  ],
+};
+
+/// Descriptor for `TopicDescription`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List topicDescriptionDescriptor = $convert.base64Decode('ChBUb3BpY0Rlc2NyaXB0aW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSHgoKb2ZmZXJDb3VudBgDIAEoBVIKb2ZmZXJDb3VudA==');

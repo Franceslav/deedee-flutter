@@ -4,9 +4,10 @@ import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
-import 'package:deedee/ui/main_topic/main_topic_bloc.dart';
+import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/saved_filters/bloc/saved_filters_bloc.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tag_details/bloc/user_tag_details_bloc.dart';
@@ -47,7 +48,10 @@ void main() {
             create: (_) => BookmarksBloc(),
           ),
           BlocProvider(
-            create: (_) => MainTopicBloc(),
+            create: (_) => SavedFiltersBloc(),
+          ),
+          BlocProvider(
+            create: (_) => MainTopicsBloc(),
           ),
           BlocProvider(
             create: (_) => UserTagsBloc(),

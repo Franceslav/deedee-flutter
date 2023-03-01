@@ -47,6 +47,24 @@ class PushFiltersEvent extends SelectorEvent {
   });
 }
 
+class SaveFiltersEvent extends SelectorEvent {
+  final String topic;
+  final String subtopic;
+  final List<String> filterKeys;
+  final bool isSubscribe;
+  final AccountType accountType;
+  final String userId;
+
+  SaveFiltersEvent({
+    required this.topic,
+    required this.subtopic,
+    required this.filterKeys,
+    required this.isSubscribe,
+    required this.accountType,
+    required this.userId,
+  });
+}
+
 class PushTagEvent extends SelectorEvent {
   final AccountType accountType;
   final String topic;
@@ -63,7 +81,6 @@ class PushTagEvent extends SelectorEvent {
   });
 }
 
-
 class DurationSelectedEvent extends SelectorEvent {
   final double duration;
 
@@ -73,5 +90,4 @@ class DurationSelectedEvent extends SelectorEvent {
 class SelectFirstLvlTopicEvent extends SelectorEvent {
   final String topic;
   SelectFirstLvlTopicEvent(this.topic);
-
 }

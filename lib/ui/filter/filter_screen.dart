@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/AccountService.pbjson.dart';
+import 'package:deedee/generated/TagService.pbjson.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 
@@ -19,7 +21,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
+  final String topicsName;
+  const FilterPage({super.key, required this.topicsName});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -68,7 +71,7 @@ class _FilterPageState extends State<FilterPage> {
         bloc: bloc,
         listener: (context, state) {
           if (state is LoadedTopicsState) {
-            _topics = state.topics;
+            _topics = state.topics.map((e) => e.title).toList();
           }
           if (state is TopicSelectedState) {
             if (_selectedTopic == state.topic) {
@@ -172,6 +175,20 @@ class _FilterPageState extends State<FilterPage> {
                                     topic: _selectedTopic,
                                     filterKeys: _selectedFilterKeys,
                                     accountType: user.accountType,
+                                  ));
+                                },
+                              ),
+                            if (_selectedFilterKeys.length >= 3)
+                              DeeDeeButton(
+                                'Сохранить фильтр и перейти на карту',
+                                () {
+                                  bloc.add(SaveFiltersEvent(
+                                    isSubscribe: false,
+                                    topic: widget.topicsName,
+                                    subtopic: _selectedTopic,
+                                    filterKeys: _selectedFilterKeys,
+                                    accountType: user.accountType,
+                                    userId: user.userId,
                                   ));
                                 },
                               ),
