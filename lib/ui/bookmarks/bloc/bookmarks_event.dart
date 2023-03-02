@@ -21,8 +21,12 @@ class DeleteBookmarkEvent extends BookmarksEvent {
   });
 }
 
-class TapBookmarkEvent extends BookmarksEvent {
+class AddBookmarkEvent extends BookmarksEvent {
+  final String userId;
   final String tagId;
 
-  TapBookmarkEvent(this.tagId);
+  AddBookmarkEvent({
+    required this.userId,
+    required this.tagId,
+  });
 }

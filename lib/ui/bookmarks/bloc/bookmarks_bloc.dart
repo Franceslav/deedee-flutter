@@ -12,7 +12,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   BookmarksBloc() : super(InitialState()) {
     on<LoadBookmarksEvent>(_onLoadBookmarks);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
-    on<TapBookmarkEvent>(_onTapBookmark);
+    on<AddBookmarkEvent>(_onAddBookmark);
   }
 
   _onLoadBookmarks(
@@ -46,7 +46,23 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     }
   }
 
-  _onTapBookmark(TapBookmarkEvent event, Emitter<BookmarksState> emit) async {
+  Future<void> _onAddBookmark(
+    AddBookmarkEvent event,
+    Emitter<BookmarksState> emit,
+  ) async {
     //do something
+    try {
+      final response = await locator.get<GRCPUtils>().addUserBookmark(
+            event.userId,
+            event.tagId,
+          );
+      if (response) {
+        emit(TapSuccessfulState());
+      }
+    } catch (error) {
+      emit(ErrorState(error.toString()));
+    }
+    // print(event.tagId);
+    // print(event.userId);
   }
 }

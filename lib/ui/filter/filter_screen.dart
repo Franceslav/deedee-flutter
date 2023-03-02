@@ -1,15 +1,12 @@
 import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/AccountService.pbjson.dart';
-import 'package:deedee/generated/TagService.pbjson.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
-
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/loading_cubit.dart';
-import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_list.dart';
@@ -19,6 +16,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+
+class TagDTO {
+  final String tagId;
+  final String messengerId;
+
+  TagDTO(this.tagId, this.messengerId);
+}
 
 class FilterPage extends StatefulWidget {
   final String topicsName;
@@ -106,10 +110,10 @@ class _FilterPageState extends State<FilterPage> {
               showSnackBar(context, state.errorMessage);
             }
             if (state is UserFiltersDoneState) {
-              Map<LatLng, String> tagMap = {
+              Map<LatLng, TagDTO> tagMap = {
                 for (var tag in state.topic.tags)
                   LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
-                      tag.messengerId
+                      TagDTO(tag.tagId, tag.messengerId)
               };
               context.router.replace(MapScreenRoute(
                 tagDescriptionMap: tagMap,

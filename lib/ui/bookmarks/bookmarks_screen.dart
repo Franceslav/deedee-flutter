@@ -5,6 +5,7 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {
@@ -110,7 +111,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                           title: Text(bookmark.topicId),
                           subtitle: Text(bookmark.geoLocation.toString()),
                           onTap: () => BlocProvider.of<BookmarksBloc>(context)
-                              .add(TapBookmarkEvent(bookmark.tagId)),
+                              .add(AddBookmarkEvent(
+                                  userId: user.userId, tagId: bookmark.tagId)),
                         ),
                       );
                     }),

@@ -1215,6 +1215,7 @@ class Tag extends $pb.GeneratedMessage {
     $1.ACCOUNT_TYPE? tagType,
     $3.Timestamp? dueDate,
     $core.bool? isDeleted,
+    $core.bool? bookmarked,
   }) {
     final _result = create();
     if (tagId != null) {
@@ -1237,6 +1238,9 @@ class Tag extends $pb.GeneratedMessage {
     }
     if (isDeleted != null) {
       _result.isDeleted = isDeleted;
+    }
+    if (bookmarked != null) {
+      _result.bookmarked = bookmarked;
     }
     return _result;
   }
@@ -1353,6 +1357,18 @@ class Tag extends $pb.GeneratedMessage {
   $core.bool hasIsDeleted() => $_has(6);
   @$pb.TagNumber(7)
   void clearIsDeleted() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.bool get bookmarked => $_getBF(7);
+  @$pb.TagNumber(8)
+  set bookmarked($core.bool v) {
+    $_setBool(7, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasBookmarked() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBookmarked() => clearField(8);
 }
 
 class TagDetails extends $pb.GeneratedMessage {

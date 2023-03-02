@@ -102,11 +102,11 @@ class _HomeState extends State<HomeScreen> {
                 ),
                 DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
                   context.router.push(
-                      MainTopicPageRoute(screenType: ScreenType.placeTags));
+                      MainTopicScreenRoute(screenType: ScreenType.placeTags));
                 }),
                 DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
                   context.router.push(
-                      MainTopicPageRoute(screenType: ScreenType.filterTags));
+                      MainTopicScreenRoute(screenType: ScreenType.filterTags));
                 }),
               ],
             );

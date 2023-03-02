@@ -1,9 +1,9 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
+import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
@@ -14,13 +14,12 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../constants.dart';
 import '../auth/welcome/welcome_screen.dart';
 import '../global widgets/map_sliding_panel_widget.dart';
 
 class MapScreen extends StatefulWidget {
   final User user;
-  final Map<LatLng, String> tagDescriptionMap;
+  final Map<LatLng, TagDTO> tagDescriptionMap;
 
   const MapScreen({
     Key? key,
@@ -46,6 +45,7 @@ class _MapScreenState extends State<MapScreen> {
   final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
   late DeeDeeSliderController _pc;
+
   // bool click = true;
   // bool click_bm = true;
 
@@ -53,13 +53,15 @@ class _MapScreenState extends State<MapScreen> {
 
   late TagMarker _selectedMarker;
   String _selectedMessengerId = '';
+  String _selectedTagId = '';
 
   @override
   void initState() {
     widget.tagDescriptionMap.forEach(
-      (point, messengerId) {
+      (point, dto) {
         TagMarker tagMarker = TagMarker(
-          tagMessengerId: messengerId,
+          tagId: dto.tagId,
+          tagMessengerId: dto.messengerId,
           marker: Marker(
             point: point,
             width: 30,
@@ -67,7 +69,8 @@ class _MapScreenState extends State<MapScreen> {
             builder: (context) => GestureDetector(
               onTap: () {
                 setState(() {
-                  _selectedMessengerId = messengerId;
+                  _selectedMessengerId = dto.messengerId;
+                  _selectedTagId = dto.tagId;
                 });
                 _pc.open();
               },
@@ -124,7 +127,12 @@ class _MapScreenState extends State<MapScreen> {
           ),
           nonRotatedChildren: [
             MapSlidingPanelWidget(
-                size: size, pc: _pc, selectedMessengerId: _selectedMessengerId),
+              size: size,
+              pc: _pc,
+              selectedMessengerId: _selectedMessengerId,
+              tagId: _selectedTagId,
+              userId: widget.user.userId,
+            ),
           ],
           children: [
             TileLayer(
@@ -168,9 +176,14 @@ class _MapScreenState extends State<MapScreen> {
 }
 
 class CustomPanelWidget extends StatefulWidget {
+  final String userId;
+  final String tagId;
+
   const CustomPanelWidget({
     super.key,
     required String selectedMessengerId,
+    required this.userId,
+    required this.tagId,
   }) : _selectedMessengerId = selectedMessengerId;
 
   final String _selectedMessengerId;
@@ -182,6 +195,14 @@ class CustomPanelWidget extends StatefulWidget {
 class _CustomPanelWidgetState extends State<CustomPanelWidget> {
   @override
   Widget build(BuildContext context) {
+    final bookmarksBloc = context.watch<BookmarksBloc>();
+    final bookmarksState = bookmarksBloc.state;
+    bool isBookmarkAdded = false;
+    if (bookmarksState is LoadedBookmarksState) {
+      isBookmarkAdded = bookmarksState.bookmarks
+          .where((tag) => tag.tagId == widget.tagId)
+          .isNotEmpty;
+    }
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -335,16 +356,19 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
                 const Spacer(),
                 IconButton(
                   onPressed: () {
-                    // setState(() {
-                    //   click_bm = !click_bm;
-                    // });
+                    context.read<BookmarksBloc>().add(AddBookmarkEvent(
+                        userId: widget.userId, tagId: widget.tagId));
                   },
-                  icon: const Icon(
+                  icon: Icon(
                       size: 26.0,
-                      // click_bm ? Icons.bookmark_add_outlined : Icons.bookmark),
-                      Icons.bookmark_add_outlined),
-                  // color: click_bm ? Colors.black : const Color(COLOR_PRIMARY),
-                  color: Colors.black,
+                      isBookmarkAdded
+                          ? Icons.bookmark
+                          : Icons.bookmark_add_outlined),
+                  //Icons.bookmark_add_outlined),
+                  color: isBookmarkAdded
+                      ? const Color(COLOR_PRIMARY)
+                      : Colors.black,
+                  //color: Colors.black,
                 ),
                 const Text('В закладки',
                     style: TextStyle(

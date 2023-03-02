@@ -27,3 +27,7 @@ class ErrorState extends BookmarksState {
 
   ErrorState(this.errorMessage);
 }
+
+class TapSuccessfulState extends BookmarksState {
+  TapSuccessfulState();
+}

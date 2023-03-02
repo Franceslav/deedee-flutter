@@ -181,8 +181,8 @@ class AppRouter extends _i24.RootStackRouter {
         child: const _i20.ResetPasswordScreen(),
       );
     },
-    MainTopicPageRoute.name: (routeData) {
-      final args = routeData.argsAs<MainTopicPageRouteArgs>();
+    MainTopicScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<MainTopicScreenRouteArgs>();
       return _i24.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i21.MainTopicScreen(
@@ -298,7 +298,7 @@ class AppRouter extends _i24.RootStackRouter {
           path: 'reset-password',
         ),
         _i24.RouteConfig(
-          MainTopicPageRoute.name,
+          MainTopicScreenRoute.name,
           path: 'main-topic',
         ),
         _i24.RouteConfig(
@@ -411,7 +411,7 @@ class FilterPageRouteArgs {
 class MapScreenRoute extends _i24.PageRouteInfo<MapScreenRouteArgs> {
   MapScreenRoute({
     _i25.Key? key,
-    required Map<_i26.LatLng, String> tagDescriptionMap,
+    required Map<_i26.LatLng, _i6.TagDTO> tagDescriptionMap,
     required _i27.User user,
   }) : super(
           MapScreenRoute.name,
@@ -435,7 +435,7 @@ class MapScreenRouteArgs {
 
   final _i25.Key? key;
 
-  final Map<_i26.LatLng, String> tagDescriptionMap;
+  final Map<_i26.LatLng, _i6.TagDTO> tagDescriptionMap;
 
   final _i27.User user;
 
@@ -625,25 +625,26 @@ class ResetPasswordScreenRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.MainTopicPage]
-class MainTopicPageRoute extends _i24.PageRouteInfo<MainTopicPageRouteArgs> {
-  MainTopicPageRoute({
+/// [_i21.MainTopicScreen]
+class MainTopicScreenRoute
+    extends _i24.PageRouteInfo<MainTopicScreenRouteArgs> {
+  MainTopicScreenRoute({
     _i25.Key? key,
     required _i28.ScreenType screenType,
   }) : super(
-          MainTopicPageRoute.name,
+          MainTopicScreenRoute.name,
           path: 'main-topic',
-          args: MainTopicPageRouteArgs(
+          args: MainTopicScreenRouteArgs(
             key: key,
             screenType: screenType,
           ),
         );
 
-  static const String name = 'MainTopicPageRoute';
+  static const String name = 'MainTopicScreenRoute';
 }
 
-class MainTopicPageRouteArgs {
-  const MainTopicPageRouteArgs({
+class MainTopicScreenRouteArgs {
+  const MainTopicScreenRouteArgs({
     this.key,
     required this.screenType,
   });
@@ -654,7 +655,7 @@ class MainTopicPageRouteArgs {
 
   @override
   String toString() {
-    return 'MainTopicPageRouteArgs{key: $key, screenType: $screenType}';
+    return 'MainTopicScreenRouteArgs{key: $key, screenType: $screenType}';
   }
 }
 

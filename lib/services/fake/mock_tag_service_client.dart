@@ -48,19 +48,6 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   @override
-  ResponseFuture<GetBookmarkTagsResponse> getBookmarkTags(
-      GetBookmarkTagsRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetBookmarkTagsResponse>(
-        _getBookmarkTags(request)));
-  }
-
-  Future<GetBookmarkTagsResponse> _getBookmarkTags(
-      GetBookmarkTagsRequest request) async {
-    return GetBookmarkTagsResponse()..tags.addAll([]);
-  }
-
-  @override
   ResponseFuture<GetTopicResponse> getFilteredTags(GetTopicRequest request,
       {CallOptions? options}) {
     return ResponseFuture(
@@ -111,24 +98,28 @@ class MockTagServiceClient implements TagServiceClient {
         ..topicId = 'маникюр'
         ..messengerId = 'beyonce'
         ..geoLocation = geoLocation1
+        ..bookmarked = true
         ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp1,
       Tag()
         ..topicId = 'маникюр 2'
         ..messengerId = 'selenagomez'
         ..geoLocation = geoLocation2
+        ..bookmarked = false
         ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp2,
       Tag()
         ..topicId = 'маникюр 3'
         ..messengerId = 'arianagrande'
         ..geoLocation = geoLocation3
+        ..bookmarked = true
         ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp3,
       Tag()
         ..topicId = 'маникюр 4'
         ..messengerId = 'kyliejenner'
         ..geoLocation = geoLocation4
+        ..bookmarked = true
         ..tagType = ACCOUNT_TYPE.valueOf(request.tagType.value)!
         ..dueDate = timestamp4,
     ];
@@ -359,7 +350,8 @@ class MockTagServiceClient implements TagServiceClient {
         offerCount: 7,
       ),
     ];
-    return GetAllTopicsDescriptionResponse()..topicDescriptions.addAll(subTopics);
+    return GetAllTopicsDescriptionResponse()
+      ..topicDescriptions.addAll(subTopics);
   }
 
   @override
@@ -410,5 +402,28 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<UserTagResponse> _removeUserTag(UserTagRequest request) async {
     return UserTagResponse()..tag = Tag(isDeleted: false);
+  }
+
+  @override
+  ResponseFuture<GetBookmarkTagsResponse> getBookmarkTags(
+      GetBookmarkTagsRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, GetBookmarkTagsResponse>(
+        _getBookmarkTags(request)));
+  }
+
+  Future<GetBookmarkTagsResponse> _getBookmarkTags(
+      GetBookmarkTagsRequest request) async {
+    return GetBookmarkTagsResponse()
+      ..tags.addAll([
+        Tag()
+          ..tagId = '1'
+          ..topicId = 'маникюр'
+          ..messengerId = 'beyonce',
+        Tag()
+          ..tagId = '1'
+          ..topicId = 'маникюр'
+          ..messengerId = 'selenagomez',
+      ]);
   }
 }
