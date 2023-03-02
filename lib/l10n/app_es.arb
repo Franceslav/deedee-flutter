@@ -6,6 +6,8 @@
     "accountTitle": "cuenta",
     "accountMoneyTitle": "dinero",
     "accountReferralTitle": "referencias",
+    "clientToggle": "Cliente",
+    "providerToggle": "Proveedor",
     "accountTypeBuyTitle": "comprar cuenta",
     "accountTypeSellTitle": "vender cuenta",
     "accountTopUp": "completar",

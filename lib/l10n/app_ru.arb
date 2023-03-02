@@ -8,6 +8,8 @@
     "accountTypeBuyTitle": "учётка покупателя",
     "accountTypeSellTitle": "учётка продавца",
     "accountReferralTitle": "рефералы",
+    "clientToggle": "Клиент",
+    "providerToggle": "Исполнитель",
     "accountTopUp": "пополнить",
     "switchTo": "сменить на",
     "homeTitle": "главная",

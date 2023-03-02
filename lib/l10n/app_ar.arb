@@ -5,6 +5,8 @@
     "accountTitle": "الحساب",
     "accountMoneyTitle": "مال",
     "accountReferralTitle": "الإحالات",
+    "clientToggle": "عميل",
+    "providerToggle": "مزود",
     "accountTypeBuyTitle": "شراء حساب",
     "accountTypeSellTitle": "حساب بيع",
     "accountTopUp": "فوق حتى",

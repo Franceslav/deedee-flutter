@@ -8,6 +8,8 @@
     "placeBidPageTitle": "bid",
     "accountTitle": "account",
     "accountMoneyTitle": "money",
+    "clientToggle": "Client",
+    "providerToggle": "Provider",
     "accountReferralTitle": "referrals",
     "accountTypeBuyTitle": "buy account",
     "accountTypeSellTitle": "sell account",

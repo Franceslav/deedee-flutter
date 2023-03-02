@@ -6,6 +6,8 @@
     "accountTitle": "konto",
     "accountMoneyTitle": "pieniądze",
     "accountReferralTitle": "polecenia",
+    "clientToggle": "Klient",
+    "providerToggle": "Wykonawca",
     "accountTypeBuyTitle": "konto kupującego",
     "accountTypeSellTitle": "konto sprzedawcy",
     "accountTopUp": "doładowanie",
