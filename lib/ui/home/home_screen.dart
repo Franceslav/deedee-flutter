@@ -45,29 +45,6 @@ class _HomeState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final List<Map> topics = [
-      {"color": Colors.red, "title": "Рабочие"},
-      {
-        "color": Colors.pink,
-        "title": "Авто",
-      },
-      {
-        "color": Colors.green,
-        "title": "Бьюти",
-      },
-      {
-        "color": Colors.orange,
-        "title": "Отделка",
-      },
-      {
-        "color": Colors.deepPurple,
-        "title": "Дети",
-      },
-      {
-        "color": Colors.blue,
-        "title": "Клининг",
-      },
-    ];
     if (!shownDialog) {
       Future.delayed(Duration.zero, () => pickCityDialog(context, user));
       shownDialog = true;

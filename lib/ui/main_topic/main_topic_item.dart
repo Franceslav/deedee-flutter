@@ -3,7 +3,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'enum/topic_screens_enum.dart';
 
 class MainTopicItem extends StatelessWidget {
@@ -20,8 +20,16 @@ class MainTopicItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    switch (topic.title) {
+      case 'Авто': topic.title = AppLocalizations.of(context)!.autoTag; break;
+      case 'Бьюти': topic.title = AppLocalizations.of(context)!.beautyTag; break;
+      case 'Отделка': topic.title = AppLocalizations.of(context)!.decoratingTag; break;
+      case 'Дети': topic.title = AppLocalizations.of(context)!.childrenTag; break;
+      case 'Рабочие': topic.title = AppLocalizations.of(context)!.workersTag; break;
+      case 'Клининг': topic.title = AppLocalizations.of(context)!.cleaningTag; break;
+    }
     return InkWell(
-      onTap: () {
+       onTap: () {
         switch (screenType) {
           case ScreenType.placeTags:
             push(context, const PlaceTagScreen());
@@ -59,7 +67,7 @@ class MainTopicItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   Text(
-                    '${topic.offerCount} Offers',
+                    '${topic.offerCount} ${AppLocalizations.of(context)!.offersTitle}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],

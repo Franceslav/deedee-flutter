@@ -1,5 +1,6 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
+import 'package:deedee/ui/main_topic/main_topic_custom_toggle.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -41,57 +42,51 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const double padding = 16;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.filterTagsPageTitle),
-      ),
-      body: BlocConsumer<MainTopicsBloc, MainTopicsState>(
-        listener: (context, state) {
-          if (state is LoadedMainTopicsState) {
-            _mainTopics = state.mainTopics;
-          }
-        },
-        builder: (context, state) {
-          if (state is InitialState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ErrorState) {
-            return Center(
-              child: Text(
-                state.errorMessage,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-            );
-          } else {
-            return Column(
-              children: [
-                MainTopicToggle(
-                    onPressed: (int newIndex) {
-                      setState(() {
-                        for (int i = 0; i < isSelected.length; i++) {
-                          if (i == newIndex) {
-                            isSelected[i] = true;
-                          } else {
-                            isSelected[i] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: isSelected
+      body: SafeArea(
+        child: BlocConsumer<MainTopicsBloc, MainTopicsState>(
+          listener: (context, state) {
+            if (state is LoadedMainTopicsState) {
+              _mainTopics = state.mainTopics;
+            }
+          },
+          builder: (context, state) {
+            if (state is InitialState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is ErrorState) {
+              return Center(
+                child: Text(
+                  state.errorMessage,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
-                Flexible(
-                  child: MainTopicGrid(
-                    mainTopics: _mainTopics,
-                    screenType: widget.screenType,
-                  ),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    const CustomToggleButton(
+                      padding: padding,
+                    ),
+                    const SizedBox(height: 30),
+                    Flexible(
+                      child: MainTopicGrid(
+                        mainTopics: _mainTopics,
+                        screenType: widget.screenType,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }
