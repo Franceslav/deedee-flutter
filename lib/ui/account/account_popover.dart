@@ -45,10 +45,18 @@ class Popover extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (user.emailVerification ==
-                        EmailVerificationStatus.unverified &&
-                    user.docVerification ==
-                        DocVerificationStatus.unverified) ...[
+                if ((user.emailVerification ==
+                            EmailVerificationStatus.unverified &&
+                        user.docVerification ==
+                            DocVerificationStatus.unverified) ||
+                    (user.emailVerification ==
+                            EmailVerificationStatus.verified &&
+                        user.docVerification ==
+                            DocVerificationStatus.unverified) ||
+                    (user.emailVerification ==
+                            EmailVerificationStatus.unverified &&
+                        user.docVerification ==
+                            DocVerificationStatus.verified)) ...[
                   Text(
                     AppLocalizations.of(context)!.accountNeedVerify,
                   ),
