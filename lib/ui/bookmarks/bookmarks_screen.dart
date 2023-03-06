@@ -72,58 +72,75 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                 ? Center(
                     child: Text(
                       AppLocalizations.of(context)!.noBookamarks,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   )
-                : ListView.separated(
+                : ListView.builder(
                     itemBuilder: ((context, index) {
                       final bookmark = _bookmarks[index];
-                      return Dismissible(
-                        key: ValueKey(bookmark.tagId),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          color: Theme.of(context).errorColor,
-                          alignment: Alignment.centerRight,
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 16),
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                              size: 30,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Dismissible(
+                          key: ValueKey(bookmark.tagId),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            alignment: Alignment.centerRight,
+                            decoration: BoxDecoration(
+                                //    color: Theme.of(context).colorScheme.error,
+                                borderRadius: BorderRadius.circular(16)),
+                            child: const Padding(
+                              padding: EdgeInsets.only(right: 16),
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                                size: 30,
+                              ),
                             ),
                           ),
-                        ),
-                        onDismissed: (direction) {
-                          setState(() {
-                            _bookmarks.remove(bookmark);
-                          });
-                          BlocProvider.of<BookmarksBloc>(context).add(
-                            DeleteBookmarkEvent(
-                              userId: user.userId,
-                              bookmark: bookmark,
-                              bookmarkIndex: index,
+                          onDismissed: (direction) {
+                            setState(() {
+                              _bookmarks.remove(bookmark);
+                            });
+                            BlocProvider.of<BookmarksBloc>(context).add(
+                              DeleteBookmarkEvent(
+                                userId: user.userId,
+                                bookmark: bookmark,
+                                bookmarkIndex: index,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 85,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: const Offset(0, 1),
+                                  blurRadius: 6,
+                                  color: Colors.black.withOpacity(0.3),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                        child: ListTile(
-                          //Should add more values to Tag model
-                          leading: Text(bookmark.messengerId),
-                          title: Text(bookmark.topicId),
-                          subtitle: Text(bookmark.geoLocation.toString()),
-                          onTap: () => BlocProvider.of<BookmarksBloc>(context)
-                              .add(AddBookmarkEvent(
-                                  userId: user.userId, tagId: bookmark.tagId)),
+                            child: ListTile(
+                              //Should add more values to Tag model
+                              leading: Text(
+                                bookmark.messengerId,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              title: Text(bookmark.topicId),
+                              subtitle: Text(bookmark.geoLocation.toString()),
+                            ),
+                          ),
                         ),
                       );
                     }),
                     itemCount: _bookmarks.length,
-                    separatorBuilder: (context, index) {
-                      return Container(
-                        width: double.infinity,
-                        height: 1,
-                        color: Colors.grey,
-                      );
-                    },
                   ),
       ),
     );
