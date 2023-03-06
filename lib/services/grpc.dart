@@ -1,10 +1,11 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
-import 'package:deedee/generated/FilterService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
+import 'package:deedee/generated/filter_service.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/filtrer_dto.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/client_channel.dart';
 import 'package:deedee/services/shared.dart';
@@ -82,7 +83,8 @@ class GRCPUtils {
     return response.topic;
   }
 
-  Future<List<TopicDescription>> getTopics(double latitude, double longitude) async {
+  Future<List<TopicDescription>> getTopics(
+      double latitude, double longitude) async {
     var geoLocation = GeoLocation()
       ..latitude = latitude
       ..longitude = longitude;
@@ -93,7 +95,8 @@ class GRCPUtils {
     return response.topicDescriptions;
   }
 
-  Future<List<TopicDescription>> getSubTopics(double latitude, double longitude) async {
+  Future<List<TopicDescription>> getSubTopics(
+      double latitude, double longitude) async {
     var geoLocation = GeoLocation()
       ..latitude = latitude
       ..longitude = longitude;
@@ -107,7 +110,6 @@ class GRCPUtils {
   Future<List<FilterKey>> getFilterItems(String topic) async {
     var response = await _filterServiceClient
         .getFilterKeys(GetFilterKeysRequest()..topicId = topic);
-
     return response.filterKeys;
   }
 
@@ -228,31 +230,33 @@ class GRCPUtils {
     return true;
   }
 
-  Future<List<Tag>> getUserTags(String userId) async {
-    final response = await _tagServiceClient
-        .getUserTags(GetUserTagsRequest()..userId = userId);
-    return response.tags;
+  Future<ResponseStream<Filter>> getFilterSubscriptions(String userId) async {
+    final response = await _filterServiceClient
+        .getAllSubscribedFilters(GetAllFiltersRequest()..userId = userId);
+    return response;
   }
 
-  Future<bool> removeUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.removeUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag.isDeleted;
+  Future<FilterDTO> addFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .addFilterToSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
   }
 
-  Future<Tag> getUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.getUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag;
+  Future<FilterDTO> removeFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
   }
 
-  Future<TagDetails> getUserTagDetails(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.getUserTagDetails(GetUserTagDetailsRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.tagDetails;
+  Future<FilterDTO> editFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
   }
 }

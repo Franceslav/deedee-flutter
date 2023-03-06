@@ -138,20 +138,6 @@ class MockTagServiceClient implements TagServiceClient {
     return GetTopicResponse()..topic = Topic();
   }
 
-  // @override
-  // ResponseFuture<GetTopicTitlesResponse> getTopics(
-  //     GetTopicTitlesRequest request,
-  //     {CallOptions? options}) {
-  //   return ResponseFuture(
-  //       FakeClientCall<dynamic, GetTopicTitlesResponse>(_getTopics(request)));
-  // }
-  //
-  // Future<GetTopicTitlesResponse> _getTopics(
-  //     GetTopicTitlesRequest request) async {
-  //   return GetTopicTitlesResponse()
-  //     ..topicTitles.addAll(["строительство", "маникюр", "сто"]);
-  // }
-
   @override
   ResponseFuture<PlaceTagResponse> placeTag(PlaceTagRequest request,
       {CallOptions? options}) {
@@ -193,6 +179,8 @@ class MockTagServiceClient implements TagServiceClient {
   @override
   ResponseFuture<UserTagResponse> getUserTag(UserTagRequest request,
       {CallOptions? options}) {
+    // TODO: implement getUserTag
+    throw UnimplementedError();
     return ResponseFuture(
         FakeClientCall<dynamic, UserTagResponse>(_getUserTag(request)));
   }
@@ -221,6 +209,8 @@ class MockTagServiceClient implements TagServiceClient {
   ResponseFuture<GetUserTagDetailsResponse> getUserTagDetails(
       GetUserTagDetailsRequest request,
       {CallOptions? options}) {
+    // TODO: implement getUserTagDetails
+    throw UnimplementedError();
     return ResponseFuture(FakeClientCall<dynamic, GetUserTagDetailsResponse>(
         _getUserTagDetails(request)));
   }
@@ -237,6 +227,8 @@ class MockTagServiceClient implements TagServiceClient {
   @override
   ResponseFuture<GetUserTagsResponse> getUserTags(GetUserTagsRequest request,
       {CallOptions? options}) {
+    // TODO: implement getUserTags
+    throw UnimplementedError();
     return ResponseFuture(
         FakeClientCall<dynamic, GetUserTagsResponse>(_getUserTags(request)));
   }
@@ -318,6 +310,8 @@ class MockTagServiceClient implements TagServiceClient {
   @override
   ResponseFuture<UserTagResponse> removeUserTag(UserTagRequest request,
       {CallOptions? options}) {
+    
+    throw UnimplementedError();
     return ResponseFuture(
         FakeClientCall<dynamic, UserTagResponse>(_removeUserTag(request)));
   }

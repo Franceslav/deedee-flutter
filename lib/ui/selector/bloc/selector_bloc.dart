@@ -32,15 +32,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
             event.location.longitude,
           );
       emit(LoadedTopicsState(response));
-      // await Future.delayed(const Duration(seconds: 2));
-      // final List<String> topicsList = [
-      //   'SPA',
-      //   'Education',
-      //   'Repair',
-      //   'Attorney',
-      //   'Relationship',
-      // ];
-      // emit(LoadedTopicsState(topicsList));
     } catch (error) {
       ErrorState(error.toString());
     }
@@ -61,49 +52,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     try {
       final response =
           await locator.get<GRCPUtils>().getFilterItems(event.topic);
-      final List<String> filterKeysList = [
-        for (var filterKey in response) filterKey.title
-      ];
-      emit(LoadedFilterKeysState(filterKeysList));
-      // await Future.delayed(const Duration(seconds: 2));
-      // final Map<String, List<String>> filterKeys = {
-      //   'SPA': [
-      //     'Massage',
-      //     'Manicure',
-      //     'Pedicure',
-      //     'Facial treatment',
-      //     'Sauna',
-      //   ],
-      //   'Education': [
-      //     'Online',
-      //     'Offline',
-      //     'English',
-      //     'Flutter',
-      //     'Spanish',
-      //   ],
-      //   'Repair': [
-      //     'House',
-      //     'TV',
-      //     'Cellphone',
-      //     'Laptop',
-      //     'PC',
-      //   ],
-      //   'Attorney': [
-      //     'Consultation',
-      //     'Offline',
-      //     'Online',
-      //     'Homicide',
-      //     'Law',
-      //   ],
-      //   'Relationship': [
-      //     'Love',
-      //     'Sex',
-      //     'Friend',
-      //     'Talking',
-      //     'Hanging out',
-      //   ]
-      // };
-      // emit(LoadedFilterKeysState(filterKeys[event.topic]!));
+      emit(LoadedFilterKeysState(response.map((fi) => fi.title).toList()));
     } catch (error) {
       ErrorState(error.toString());
     }
@@ -124,10 +73,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
           .get<GRCPUtils>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
-
-      print('norm Topic start');
-      print(topic);
-      print('Topic fin');
     } catch (error) {
       ErrorState(error.toString());
     }
@@ -136,9 +81,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      print(
-        'Направить на бэк: topic:${event.topic} subtopic:${event.subtopic}, filterKeys:${event.filterKeys}, userId: ${event.userId}',
-      );
       Topic topic = await locator
           .get<GRCPUtils>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
@@ -168,8 +110,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _userChoseDuration(
       DurationSelectedEvent event, Emitter<SelectorState> emit) async {
     try {
-      // передача продолжительности заявки
-      print(event.duration);
       emit(DurationSelectedState());
     } catch (error) {
       ErrorState(error.toString());

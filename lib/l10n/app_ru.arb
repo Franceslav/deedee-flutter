@@ -89,13 +89,14 @@
      "resume": "Все равно продолжить",
      "applicationBegin": "Выберете дату начала заявки",
      "applicationStart": "Заявка начнется с ",
+     "homeChooseCity": "Выберите свой город",
+     "myFilters": "Мои фильтры",
+     "subscription": "подписки",
      "userTagsTitle": "мои теги",
      "tagRemovedMessage": "тег удален",
      "tagNotRemovedMessage": "тег не был удален. что-то пошло не так",
      "actualTags": "актуальные",
      "archiveTags": "архив",
      "tagExpires": "истекает",
-     "noUserTags": "нет тегов",
-     "myFilters": "Мои фильтры",
-     "homeChooseCity": "Выберите свой город"
+     "noUserTags": "нет тегов"
 }

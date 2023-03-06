@@ -260,6 +260,7 @@ const Tag$json = const {
       '10': 'dueDate'
     },
     const {'1': 'isDeleted', '3': 7, '4': 1, '5': 8, '10': 'isDeleted'},
+    const {'1': 'bookmarked', '3': 8, '4': 1, '5': 8, '10': 'bookmarked'},
   ],
 };
 

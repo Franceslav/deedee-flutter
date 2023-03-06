@@ -1,4 +1,4 @@
-import 'package:deedee/generated/FilterService.pbgrpc.dart';
+import 'package:deedee/generated/filter_service.pbgrpc.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
@@ -102,17 +102,55 @@ class MockFilterServiceClient implements FilterServiceClient {
       ]);
   }
 
-  @override
-  ResponseStream<Filter> getAllBookmarkedFilters(GetAllFiltersRequest request,
-      {CallOptions? options}) {
-    // TODO: implement getAllBookmarkedFilters
-    throw UnimplementedError();
+  Future<Filter> _getBF(GetAllFiltersRequest request) async {
+    return Filter(
+      filterId: '1',
+      topic: 'Клининг',
+      filterKeys: [
+        FilterKey()
+          // ..topicId = "маникюр"
+          ..title = "японский",
+      ],
+      bookmarked: false,
+      subscribed: true,
+    );
   }
 
   @override
   ResponseStream<Filter> getAllSubscribedFilters(GetAllFiltersRequest request,
       {CallOptions? options}) {
-    // TODO: implement getAllSubscribedFilters
+    return ResponseStream(
+        FakeClientCall<dynamic, Filter>(_getAllSubscribedFilters(request)));
+  }
+
+  Future<Filter> _getAllSubscribedFilters(GetAllFiltersRequest request) async {
+/*    var fakeStream = Stream<Filter>.periodic(
+      const Duration(microseconds: 1),
+      (computationCount) => Filter(
+        topic: '$computationCount',
+        bookmarked: true,
+        subscribed: true,
+      ),
+    ).take(3) as ResponseStream<Filter>;
+    return fakeStream;*/
+    return Filter(
+      topic: '1',
+      bookmarked: true,
+      subscribed: true,
+    );
+  }
+
+  @override
+  ResponseFuture<FilterResponse> removeBookmarkedFilter(FilterRequest request,
+      {CallOptions? options}) {
+    // TODO: implement removeBookmarkedFilter
+    throw UnimplementedError();
+  }
+
+  @override
+  ResponseStream<Filter> getAllBookmarkedFilters(GetAllFiltersRequest request,
+      {CallOptions? options}) {
+    // TODO: implement getAllBookmarkedFilters
     throw UnimplementedError();
   }
 }

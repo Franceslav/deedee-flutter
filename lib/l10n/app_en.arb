@@ -92,6 +92,7 @@
      "resume": "Continue anyway",
      "applicationBegin": "Select the start date of the application",
      "applicationStart": "The application will start with",
+     "subscription": "subscription",
      "userTagsTitle": "my tags",
      "tagRemovedMessage": "tag was removed",
      "tagNotRemovedMessage": "tag was not removed. something went wrong",

@@ -172,15 +172,6 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                     children: <Widget>[
                                       DrawerButton(
                                         text: AppLocalizations.of(context)!
-                                            .userTagsTitle,
-                                        iconData: Icons.list,
-                                        onTap: () {
-                                          context.router.push(
-                                              const UserTagsScreenRoute());
-                                        },
-                                      ),
-                                      DrawerButton(
-                                        text: AppLocalizations.of(context)!
                                             .accountMoneyTitle,
                                         iconData: Icons.account_box,
                                         onTap: () {
@@ -225,6 +216,14 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                         onTap: () {
                                           context.router.replace(
                                               const SavedFiltersScreenRoute());
+                                        },
+                                      ),
+                                      DrawerButton(
+                                        text: AppLocalizations.of(context)!.subscription,
+                                        iconData: Icons.star,
+                                        onTap: () {
+                                          context.router.replace(
+                                              const SubscribedFiltersPageRoute());
                                         },
                                       ),
                                       DrawerButton(

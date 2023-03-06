@@ -1,17 +1,17 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/filtrer_dto.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
-import 'package:deedee/ui/saved_filters/bloc/saved_filters_bloc.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
-import 'package:deedee/ui/user_tag_details/bloc/user_tag_details_bloc.dart';
-import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
+import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,19 +45,16 @@ void main() {
             create: (_) => UserBloc(),
           ),
           BlocProvider(
+            create: (_) => FilterDTOBloc(),
+          ),
+          BlocProvider(
             create: (_) => BookmarksBloc(),
           ),
           BlocProvider(
-            create: (_) => SavedFiltersBloc(),
+            create: (_) => FilterDTOBloc(),
           ),
           BlocProvider(
             create: (_) => MainTopicsBloc(),
-          ),
-          BlocProvider(
-            create: (_) => UserTagsBloc(),
-          ),
-          BlocProvider(
-            create: (_) => UserTagDetailsBloc(),
           ),
         ],
         child: const MyApp(),
