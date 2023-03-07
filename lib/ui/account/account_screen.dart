@@ -1,16 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
-import 'package:deedee/ui/account/account_verify_screen.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
-import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/global%20widgets/app_bar_button.dart';
+import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
-import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
 
 import '../global widgets/profile_photo_with_badge.dart';
@@ -24,6 +22,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountState extends State<AccountScreen> {
+  final PanelController _controller = PanelController();
   final Uuid uuid = const Uuid();
   late String cityChoose;
   late List<String> places;
@@ -31,22 +30,20 @@ class _AccountState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    return WillPopScope(
-        onWillPop: () async {
-          return pushReplacement(context, const HomeScreen());
-        },
-        child: Scaffold(
-          drawer: const DeeDeeDrawer(),
-          appBar: AppBar(
-            title: Text(
-              AppLocalizations.of(context)!.accountTitle,
-              style: const TextStyle(color: Colors.black),
-            ),
-            iconTheme: const IconThemeData(color: Colors.black),
-            backgroundColor: Colors.white,
-            centerTitle: true,
-          ),
-          body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.accountTitle,
+          style: const TextStyle(color: Colors.black),
+        ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        actions: [AppBarButton(controller: _controller)],
+      ),
+      body: Stack(
+        children: [
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -208,6 +205,13 @@ class _AccountState extends State<AccountScreen> {
               ),
             ],
           ),
-        ));
+          DeeDeeMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          )
+        ],
+      ),
+    );
   }
 }

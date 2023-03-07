@@ -1,10 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/pick_city_dropdown.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
@@ -15,10 +17,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import '../../injection.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import '../../model/user.dart';
 import '../../services/helper.dart';
 import '../../services/shared.dart';
+import '../global widgets/app_bar_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,7 +32,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeScreen> {
+  final PanelController _controller = PanelController();
   var shownDialog = false;
+
   @override
   void initState() {
     locator.get<GPSUtils>().checkGps();
@@ -53,41 +59,51 @@ class _HomeState extends State<HomeScreen> {
     return BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(),
       child: Scaffold(
-        drawer: const DeeDeeDrawer(),
         appBar: AppBar(
+          actions: [AppBarButton(controller: _controller)],
           title: Text(
             AppLocalizations.of(context)!.homeTitle,
           ),
         ),
-        body: BlocConsumer<HomeBloc, HomePageState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is HomeFailureState) {
-              // _validate = AutovalidateMode.onUserInteraction;
-            }
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showSnackBar(context,
-                        'To change your city, you need to have premium status');
-                  },
-                  child: AbsorbPointer(
-                      absorbing: user.premiumStatus == PremiumStatus.notPremium,
-                      child: const PickCityDropDown()),
-                ),
-                DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                  context.router.push(
-                      MainTopicScreenRoute(screenType: ScreenType.placeTags));
-                }),
-                DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
-                  context.router.push(
-                      MainTopicScreenRoute(screenType: ScreenType.filterTags));
-                }),
-              ],
-            );
-          },
+        body: Stack(
+          children: <Widget>[
+            BlocConsumer<HomeBloc, HomePageState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                if (state is HomeFailureState) {
+                  // _validate = AutovalidateMode.onUserInteraction;
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        showSnackBar(context,
+                            'To change your city, you need to have premium status');
+                      },
+                      child: AbsorbPointer(
+                          absorbing:
+                              user.premiumStatus == PremiumStatus.notPremium,
+                          child: const PickCityDropDown()),
+                    ),
+                    DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
+                      context.router.push(MainTopicScreenRoute(
+                          screenType: ScreenType.placeTags));
+                    }),
+                    DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
+                      context.router.push(MainTopicScreenRoute(
+                          screenType: ScreenType.filterTags));
+                    }),
+                  ],
+                );
+              },
+            ),
+            DeeDeeMenuSlider(
+              context,
+              controller: _controller,
+              user: user,
+            )
+          ],
         ),
       ),
     );
