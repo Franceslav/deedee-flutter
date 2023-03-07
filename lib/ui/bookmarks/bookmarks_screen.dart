@@ -1,11 +1,13 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../global widgets/app_bar_button.dart';
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class BookmarksScreen extends StatefulWidget {
 }
 
 class _BookmarksScreenState extends State<BookmarksScreen> {
+  final PanelController _controller = PanelController();
   List<Tag> _bookmarks = [];
   bool _isInit = true;
 
@@ -40,108 +43,102 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.bookmarksTitle),
+        actions: [AppBarButton(controller: _controller)],
       ),
-      drawer: const DeeDeeDrawer(),
-      body: BlocConsumer<BookmarksBloc, BookmarksState>(
-        listener: (context, state) {
-          if (state is ErrorState) {
-            showSnackBar(context, state.errorMessage);
-          }
-          if (state is LoadedBookmarksState) {
-            _bookmarks = state.bookmarks;
-          }
-          if (state is DeletedSuccessfulState) {
-            showSnackBar(
-              context,
-              AppLocalizations.of(context)!.bookmarkRemovedMessage,
-            );
-          }
-          if (state is DeletedErrorState) {
-            _bookmarks.insert(state.bookmarkIndex, state.bookmark);
-            showSnackBar(
-              context,
-              AppLocalizations.of(context)!.bookmarkNotRemovedMessage,
-            );
-          }
-        },
-        builder: (context, state) => state is InitialState
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : _bookmarks.isEmpty
-                ? Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.noBookamarks,
-                      style: Theme.of(context).textTheme.displayLarge,
-                    ),
+      body: Stack(
+        children: [
+          BlocConsumer<BookmarksBloc, BookmarksState>(
+            listener: (context, state) {
+              if (state is ErrorState) {
+                showSnackBar(context, state.errorMessage);
+              }
+              if (state is LoadedBookmarksState) {
+                _bookmarks = state.bookmarks;
+              }
+              if (state is DeletedSuccessfulState) {
+                showSnackBar(
+                  context,
+                  AppLocalizations.of(context)!.bookmarkRemovedMessage,
+                );
+              }
+              if (state is DeletedErrorState) {
+                _bookmarks.insert(state.bookmarkIndex, state.bookmark);
+                showSnackBar(
+                  context,
+                  AppLocalizations.of(context)!.bookmarkNotRemovedMessage,
+                );
+              }
+            },
+            builder: (context, state) => state is InitialState
+                ? const Center(
+                    child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    itemBuilder: ((context, index) {
-                      final bookmark = _bookmarks[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Dismissible(
-                          key: ValueKey(bookmark.tagId),
-                          direction: DismissDirection.endToStart,
-                          background: Container(
-                            alignment: Alignment.centerRight,
-                            decoration: BoxDecoration(
-                                //    color: Theme.of(context).colorScheme.error,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: const Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          onDismissed: (direction) {
-                            setState(() {
-                              _bookmarks.remove(bookmark);
-                            });
-                            BlocProvider.of<BookmarksBloc>(context).add(
-                              DeleteBookmarkEvent(
-                                userId: user.userId,
-                                bookmark: bookmark,
-                                bookmarkIndex: index,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 85,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: const Offset(0, 1),
-                                  blurRadius: 6,
-                                  color: Colors.black.withOpacity(0.3),
+                : _bookmarks.isEmpty
+                    ? Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.noBookamarks,
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                      )
+                    : ListView.separated(
+                        itemBuilder: ((context, index) {
+                          final bookmark = _bookmarks[index];
+                          return Dismissible(
+                            key: ValueKey(bookmark.tagId),
+                            direction: DismissDirection.endToStart,
+                            background: Container(
+                              color: Theme.of(context).errorColor,
+                              alignment: Alignment.centerRight,
+                              child: const Padding(
+                                padding: EdgeInsets.only(right: 16),
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 30,
                                 ),
-                              ],
+                              ),
                             ),
+                            onDismissed: (direction) {
+                              setState(() {
+                                _bookmarks.remove(bookmark);
+                              });
+                              BlocProvider.of<BookmarksBloc>(context).add(
+                                DeleteBookmarkEvent(
+                                  userId: user.userId,
+                                  bookmark: bookmark,
+                                  bookmarkIndex: index,
+                                ),
+                              );
+                            },
                             child: ListTile(
                               //Should add more values to Tag model
-                              leading: Text(
-                                bookmark.messengerId,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              leading: Text(bookmark.messengerId),
                               title: Text(bookmark.topicId),
                               subtitle: Text(bookmark.geoLocation.toString()),
+                              onTap: () =>
+                                  BlocProvider.of<BookmarksBloc>(context).add(
+                                      AddBookmarkEvent(
+                                          userId: user.userId,
+                                          tagId: bookmark.tagId)),
                             ),
-                          ),
-                        ),
-                      );
-                    }),
-                    itemCount: _bookmarks.length,
-                  ),
+                          );
+                        }),
+                        itemCount: _bookmarks.length,
+                        separatorBuilder: (context, index) {
+                          return Container(
+                            width: double.infinity,
+                            height: 1,
+                            color: Colors.grey,
+                          );
+                        },
+                      ),
+          ),
+          DeeDeeMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }

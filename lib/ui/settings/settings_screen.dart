@@ -1,13 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/settings/settings_cubit.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../global widgets/app_bar_button.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,26 +23,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final PanelController _controller = PanelController();
   final GlobalKey<FormState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return BlocProvider<SettingsCubit>(
         create: (context) => SettingsCubit(),
         child: Builder(builder: (context) {
-          return WillPopScope(
-              onWillPop: () async {
-                return pushReplacement(context, const HomeScreen());
-              },
-              child: Scaffold(
-                drawer: const DeeDeeDrawer(),
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  iconTheme: IconThemeData(
-                      color: isDarkMode(context) ? Colors.white : Colors.black),
-                  elevation: 0.0,
-                ),
-                body: SettingsList(
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                AppLocalizations.of(context)!.settings,
+              ),
+              actions: [AppBarButton(controller: _controller)],
+            ),
+            body: Stack(
+              children: [
+                SettingsList(
                   sections: [
                     SettingsSection(
                       title: const Text('Connection'),
@@ -64,7 +69,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ],
                 ),
-              ));
+                DeeDeeMenuSlider(
+                  context,
+                  controller: _controller,
+                  user: user,
+                ),
+              ],
+            ),
+          );
         }));
   }
 }
