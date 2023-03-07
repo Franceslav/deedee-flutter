@@ -12,6 +12,7 @@ import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
+import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,9 @@ void main() {
           ),
           BlocProvider(
             create: (_) => MainTopicsBloc(),
+          ),
+          BlocProvider(
+            create: (_) => UserTagsBloc(),
           ),
         ],
         child: const MyApp(),

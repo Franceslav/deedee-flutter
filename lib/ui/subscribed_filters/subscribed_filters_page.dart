@@ -3,7 +3,9 @@ import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../global widgets/deedee_appbar.dart';
 import '../user_bloc/user_bloc.dart';
 
 class SubscribedFiltersPage extends StatefulWidget {
@@ -14,6 +16,8 @@ class SubscribedFiltersPage extends StatefulWidget {
 }
 
 class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
+  final PanelController _controller = PanelController();
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
@@ -23,10 +27,10 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
       context.read<FilterDTOBloc>().add(GetFilterDTOSubscription(user.userId));
     });
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-        AppLocalizations.of(context)!.subscription,
-      )),
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.subscription,
+        controller: _controller,
+      ),
       drawer: const DeeDeeDrawer(),
       body: userPersonalFilters.isEmpty
           ? const Center(

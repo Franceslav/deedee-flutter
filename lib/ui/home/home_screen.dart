@@ -6,6 +6,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global%20widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/pick_city_dropdown.dart';
@@ -59,11 +62,9 @@ class _HomeState extends State<HomeScreen> {
     return BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(),
       child: Scaffold(
-        appBar: AppBar(
-          actions: [AppBarButton(controller: _controller)],
-          title: Text(
-            AppLocalizations.of(context)!.homeTitle,
-          ),
+        appBar: DeeDeeAppBar(
+          title: AppLocalizations.of(context)!.homeTitle,
+          controller: _controller,
         ),
         body: Stack(
           children: <Widget>[

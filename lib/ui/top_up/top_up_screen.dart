@@ -12,6 +12,9 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../global widgets/deedee_appbar.dart';
 
 class TopUpPage extends StatefulWidget {
   const TopUpPage({super.key});
@@ -21,6 +24,7 @@ class TopUpPage extends StatefulWidget {
 }
 
 class _TopUpPageState extends State<TopUpPage> {
+  final PanelController _controller = PanelController();
   final GlobalKey<FormState> _key = GlobalKey();
   TextEditingController topUpAmountController =
       TextEditingController(text: "10");
@@ -39,15 +43,7 @@ class _TopUpPageState extends State<TopUpPage> {
         builder: (context) {
           return Scaffold(
             // drawer: const DeeDeeDrawer(),
-            appBar: AppBar(
-              title: Text(
-                AppLocalizations.of(context)!.accountTopUp,
-                style: const TextStyle(color: Colors.black),
-              ),
-              iconTheme: const IconThemeData(color: Colors.black),
-              backgroundColor: Colors.white,
-              centerTitle: true,
-            ),
+        appBar: DeeDeeAppBar(title: AppLocalizations.of(context)!.accountTopUp,controller: _controller,),
             body: BlocConsumer<TopUpBloc, TopUpState>(
               listenWhen: (old, current) => old != current,
               listener: (context, state) {

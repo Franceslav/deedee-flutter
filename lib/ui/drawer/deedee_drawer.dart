@@ -55,7 +55,7 @@ class _DrawerState extends State<DeeDeeDrawer> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ProfilePhotoWithBadge(user: user),
+                              const ProfilePhotoWithBadge(),
                               Expanded(
                                 child: Text(
                                   user.fullName(),

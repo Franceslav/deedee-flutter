@@ -16,6 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../global widgets/deedee_appbar.dart';
 
 class TagDTO {
   final String tagId;
@@ -33,6 +35,7 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
+  final PanelController _controller = PanelController();
   late LatLng _userLocation = DEFAULT_LOCATION;
   bool _serviceStatus = false;
   bool _hasPermission = false;
@@ -68,8 +71,9 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.filterTagsPageTitle),
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.filterTagsPageTitle,
+        controller: _controller,
       ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,

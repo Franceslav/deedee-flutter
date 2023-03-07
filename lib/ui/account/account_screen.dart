@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
-import 'package:deedee/ui/global%20widgets/app_bar_button.dart';
 import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -31,16 +31,9 @@ class _AccountState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.accountTitle,
-          style: const TextStyle(color: Colors.black),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        actions: [AppBarButton(controller: _controller)],
-      ),
+      appBar: DeeDeeAppBar(
+          title: AppLocalizations.of(context)!.accountTitle,
+          controller: _controller),
       body: Stack(
         children: [
           Column(
@@ -48,8 +41,8 @@ class _AccountState extends State<AccountScreen> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Center(
-                child: ProfilePhotoWithBadge(user: user),
+              const Center(
+                child: ProfilePhotoWithBadge(),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

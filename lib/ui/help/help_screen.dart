@@ -9,9 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../global widgets/app_bar_button.dart';
-import '../global widgets/dee_dee_menu_slider.dart';
+import '../drawer/deedee_drawer.dart';
+import '../global widgets/deedee_appbar.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -21,7 +20,7 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpState extends State<HelpScreen> {
-  final PanelController _controllerBar = PanelController();
+  final PanelController _panelController = PanelController();
   TextEditingController messageEditingController = TextEditingController();
   File? image;
 
@@ -33,15 +32,14 @@ class _HelpState extends State<HelpScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final TextEditingController _controller = TextEditingController();
+    final TextEditingController _textController = TextEditingController();
     return BlocProvider<HelpBloc>(
       create: (context) => HelpBloc(),
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              AppLocalizations.of(context)!.helpTitle,
-            ),
-            actions: [AppBarButton(controller: _controllerBar)],
+          drawer: const DeeDeeDrawer(),
+          appBar: DeeDeeAppBar(
+            title: AppLocalizations.of(context)!.helpTitle,
+            controller: _panelController,
           ),
           body: Stack(children: [
             Container(
@@ -117,12 +115,12 @@ class _HelpState extends State<HelpScreen> {
                         builder: (context, state) {
                           return Expanded(
                             child: TextFormField(
-                              controller: _controller,
+                              controller: _textController,
                               onFieldSubmitted: (value) {
                                 context
                                     .read<HelpBloc>()
                                     .add(MessageReceivedEvent(value));
-                                _controller.clear();
+                                _textController.clear();
                               },
                               style: const TextStyle(
                                 color: Colors.white,
@@ -163,11 +161,6 @@ class _HelpState extends State<HelpScreen> {
                   ),
                 ],
               ),
-            ),
-            DeeDeeMenuSlider(
-              context,
-              controller: _controllerBar,
-              user: user,
             ),
           ])),
     );

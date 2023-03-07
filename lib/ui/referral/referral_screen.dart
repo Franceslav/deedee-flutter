@@ -7,9 +7,8 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../global widgets/deedee_appbar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../global widgets/app_bar_button.dart';
 
 class ReferralScreen extends StatefulWidget {
   const ReferralScreen({super.key});
@@ -31,12 +30,9 @@ class _ReferralState extends State<ReferralScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.accountReferralTitle,
-          style: const TextStyle(color: Colors.black),
-        ),
-        actions: [AppBarButton(controller: _controller)],
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.homeTitle,
+        controller: _controller,
       ),
       body: Stack(
         children: [
