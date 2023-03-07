@@ -14,9 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import '../global widgets/deedee_appbar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../global widgets/app_bar_button.dart';
 
 class SavedFiltersScreen extends StatefulWidget {
   const SavedFiltersScreen({super.key});
@@ -48,9 +48,9 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Сохраненные фильтры'),
-        actions: [AppBarButton(controller: _controller)],
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.safe,
+        controller: _controller,
       ),
       body: Stack(
         children: [

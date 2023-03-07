@@ -2,21 +2,19 @@ import 'package:badges/badges.dart' as badges;
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/model/user.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/helper.dart';
+import '../user_bloc/user_bloc.dart';
 
 class ProfilePhotoWithBadge extends StatelessWidget {
-  final User user;
-
-  const ProfilePhotoWithBadge({
-    super.key,
-    required this.user,
-  });
+  const ProfilePhotoWithBadge({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     if (user.profilePictureURL == '') {
-      return addBadge(
+      return _addBadge(
+        user,
         CircleAvatar(
           radius: 35,
           backgroundColor: Colors.grey.shade400,
@@ -29,18 +27,22 @@ class ProfilePhotoWithBadge extends StatelessWidget {
         ),
       );
     } else {
-      return addBadge(
+      return _addBadge(
+        user,
         displayCircleImage(user.profilePictureURL ?? '', 80, false),
       );
     }
   }
 
-  badges.Badge addBadge(Widget child) {
+  Widget _addBadge(User user, Widget child) {
     return badges.Badge(
-        badgeContent: user.emailVerification ==
-                    EmailVerificationStatus.unverified &&
-                user.docVerification == DocVerificationStatus.unverified &&
-                user.premiumStatus == PremiumStatus.notPremium
+        badgeContent: ((user.emailVerification ==
+                        EmailVerificationStatus.unverified &&
+                    user.docVerification == DocVerificationStatus.unverified) ||
+                (user.emailVerification == EmailVerificationStatus.verified &&
+                    user.docVerification == DocVerificationStatus.unverified) ||
+                (user.emailVerification == EmailVerificationStatus.unverified &&
+                    user.docVerification == DocVerificationStatus.verified))
             ? const Icon(
                 CommunityMaterialIcons.help_circle,
                 color: Colors.grey,
@@ -67,6 +69,6 @@ class ProfilePhotoWithBadge extends StatelessWidget {
           padding: EdgeInsets.zero,
         ),
         position: badges.BadgePosition.custom(end: 0, bottom: 0),
-        child: child);
+        child: child,);
   }
 }

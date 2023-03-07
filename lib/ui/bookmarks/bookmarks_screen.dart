@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../global widgets/app_bar_button.dart';
+import '../global widgets/deedee_appbar.dart';
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {
@@ -41,9 +41,9 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.bookmarksTitle),
-        actions: [AppBarButton(controller: _controller)],
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.bookmarksTitle,
+        controller: _controller,
       ),
       body: Stack(
         children: [

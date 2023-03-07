@@ -2,6 +2,7 @@ import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
@@ -10,8 +11,6 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../global widgets/app_bar_button.dart';
 
 class UserTagsScreen extends StatefulWidget {
   const UserTagsScreen({super.key});
@@ -40,9 +39,9 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.userTagsTitle),
-        actions: [AppBarButton(controller: _controller)],
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.userTagsTitle,
+        controller: _controller,
       ),
       body: Stack(
         children: [

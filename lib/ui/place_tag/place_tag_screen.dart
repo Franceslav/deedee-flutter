@@ -22,8 +22,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../deedee_button/deedee_button.dart';
+import '../global widgets/deedee_appbar.dart';
 import '../selector/bloc/selector_bloc.dart';
 import '../selector/selector_list.dart';
 
@@ -35,6 +37,7 @@ class PlaceTagScreen extends StatefulWidget {
 }
 
 class _PlaceTagScreenState extends State<PlaceTagScreen> {
+  final PanelController _controller = PanelController();
   late LatLng _userLocation;
   final String _messengerId = 'ronxbysu';
   bool _serviceStatus = false;
@@ -77,8 +80,9 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.placeBidPageTitle),
+      appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.placeBidPageTitle,
+        controller: _controller,
       ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,
@@ -356,7 +360,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                       child: Text(AppLocalizations.of(context)!
                                           .upgradeToPremium)),
                                   const SizedBox(height: 10),
-                                  state is! DurationSelectedState && _selectedLocation == DEFAULT_LOCATION
+                                  state is! DurationSelectedState &&
+                                          _selectedLocation == DEFAULT_LOCATION
                                       ? ElevatedButton(
                                           onPressed: () => bloc.add(
                                               DurationSelectedEvent(
@@ -370,7 +375,8 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                         ),
                                 ],
                               ),
-                            if ((state is DurationSelectedState) || (_selectedLocation != DEFAULT_LOCATION))
+                            if ((state is DurationSelectedState) ||
+                                (_selectedLocation != DEFAULT_LOCATION))
                               Column(
                                 children: [
                                   Text(
