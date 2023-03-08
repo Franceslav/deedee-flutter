@@ -26,6 +26,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../deedee_button/deedee_button.dart';
 import '../global widgets/deedee_appbar.dart';
+import '../main_topic/enum/topic_screens_enum.dart';
 import '../selector/bloc/selector_bloc.dart';
 import '../selector/selector_list.dart';
 
@@ -148,6 +149,15 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        DeeDeeButton(AppLocalizations.of(context)!.placeBid,
+                            () {
+                          context.router.push(MainTopicScreenRoute(
+                              screenType: ScreenType.placeTags));
+                        }),
+                        DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
+                          context.router.push(MainTopicScreenRoute(
+                              screenType: ScreenType.filterTags));
+                        }),
                         Column(
                           children: [
                             if (_topics.isNotEmpty)

@@ -18,6 +18,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../global widgets/deedee_appbar.dart';
+import '../main_topic/enum/topic_screens_enum.dart';
 
 class TagDTO {
   final String tagId;
@@ -137,6 +138,15 @@ class _FilterPageState extends State<FilterPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        DeeDeeButton(AppLocalizations.of(context)!.placeBid,
+                            () {
+                          context.router.push(MainTopicScreenRoute(
+                              screenType: ScreenType.placeTags));
+                        }),
+                        DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
+                          context.router.push(MainTopicScreenRoute(
+                              screenType: ScreenType.filterTags));
+                        }),
                         Column(
                           children: [
                             if (_topics.isNotEmpty)
