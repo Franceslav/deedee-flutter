@@ -29,7 +29,10 @@ class _MapPopupState extends State<MapPopup> {
       onTap: () {
         widget._pc.open();
       },
-      child: Icon(Icons.location_on, size: 50.0,),
+      child: Icon(
+        Icons.location_on,
+        size: 50.0,
+      ),
     );
   }
 
@@ -60,18 +63,7 @@ class _MessengerLabelButton extends StatelessWidget {
           fontSize: 14.0,
         ),
       ),
-      onTap: () => _launchInstagram(instagramUser),
+      onTap: () {},
     );
-  }
-
-  void _launchInstagram(String instagramUser) async {
-    final path = "https://www.instagram.com/$instagramUser";
-    final uri = Uri.parse(path);
-
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(Uri.parse(path), mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Could not launch Instagram';
-    }
   }
 }
