@@ -82,7 +82,8 @@ class GRCPUtils {
     return response.topic;
   }
 
-  Future<List<TopicDescription>> getTopics(double latitude, double longitude) async {
+  Future<List<TopicDescription>> getTopics(
+      double latitude, double longitude) async {
     var geoLocation = GeoLocation()
       ..latitude = latitude
       ..longitude = longitude;
@@ -93,7 +94,8 @@ class GRCPUtils {
     return response.topicDescriptions;
   }
 
-  Future<List<TopicDescription>> getSubTopics(double latitude, double longitude) async {
+  Future<List<TopicDescription>> getSubTopics(
+      double latitude, double longitude) async {
     var geoLocation = GeoLocation()
       ..latitude = latitude
       ..longitude = longitude;
@@ -226,34 +228,6 @@ class GRCPUtils {
         .verifyDocuments(VerifyDocumentsRequest()..files.addAll([files]));
     // return response.processed;
     return true;
-  }
-
-  Future<List<Tag>> getUserTags(String userId) async {
-    final response = await _tagServiceClient
-        .getUserTags(GetUserTagsRequest()..userId = userId);
-    return response.tags;
-  }
-
-  Future<bool> removeUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.removeUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag.isDeleted;
-  }
-
-  Future<Tag> getUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.getUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag;
-  }
-
-  Future<TagDetails> getUserTagDetails(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.getUserTagDetails(GetUserTagDetailsRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.tagDetails;
   }
 
   Future<List<Tag>> getUserTags(String userId) async {
