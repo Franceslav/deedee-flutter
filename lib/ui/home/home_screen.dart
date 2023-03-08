@@ -13,6 +13,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/pick_city_dropdown.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
+import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -87,14 +88,9 @@ class _HomeState extends State<HomeScreen> {
                               user.premiumStatus == PremiumStatus.notPremium,
                           child: const PickCityDropDown()),
                     ),
-                    DeeDeeButton(AppLocalizations.of(context)!.placeBid, () {
-                      context.router.push(MainTopicScreenRoute(
-                          screenType: ScreenType.placeTags));
-                    }),
-                    DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
-                      context.router.push(MainTopicScreenRoute(
-                          screenType: ScreenType.filterTags));
-                    }),
+                    const Flexible(
+                      child: MainTopicGrid(screenType: ScreenType.placeTags),
+                    ),
                   ],
                 );
               },
