@@ -1,18 +1,18 @@
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
+import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:deedee/services/social_service.dart';
 
 import '../auth/welcome/welcome_screen.dart';
 import '../global widgets/map_sliding_panel_widget.dart';
@@ -46,14 +46,9 @@ class _MapScreenState extends State<MapScreen> {
   final MapController _mapController = MapController();
   late DeeDeeSliderController _pc;
 
-  // bool click = true;
-  // bool click_bm = true;
-
   final List<TagMarker> _markers = [];
 
-  late TagMarker _selectedMarker;
   String _selectedMessengerId = '';
-  String _selectedTagId = '';
 
   @override
   void initState() {
@@ -70,7 +65,6 @@ class _MapScreenState extends State<MapScreen> {
               onTap: () {
                 setState(() {
                   _selectedMessengerId = dto.messengerId;
-                  _selectedTagId = dto.tagId;
                 });
                 _pc.open();
               },
@@ -130,8 +124,6 @@ class _MapScreenState extends State<MapScreen> {
               size: size,
               pc: _pc,
               selectedMessengerId: _selectedMessengerId,
-              tagId: _selectedTagId,
-              userId: widget.user.userId,
             ),
           ],
           children: [
@@ -176,17 +168,11 @@ class _MapScreenState extends State<MapScreen> {
 }
 
 class CustomPanelWidget extends StatefulWidget {
-  final String userId;
-  final String tagId;
-
+  final String _selectedMessengerId;
   const CustomPanelWidget({
     super.key,
     required String selectedMessengerId,
-    required this.userId,
-    required this.tagId,
   }) : _selectedMessengerId = selectedMessengerId;
-
-  final String _selectedMessengerId;
 
   @override
   State<CustomPanelWidget> createState() => _CustomPanelWidgetState();
@@ -195,188 +181,201 @@ class CustomPanelWidget extends StatefulWidget {
 class _CustomPanelWidgetState extends State<CustomPanelWidget> {
   @override
   Widget build(BuildContext context) {
-    final bookmarksBloc = context.watch<BookmarksBloc>();
-    final bookmarksState = bookmarksBloc.state;
-    bool isBookmarkAdded = false;
-    if (bookmarksState is LoadedBookmarksState) {
-      isBookmarkAdded = bookmarksState.bookmarks
-          .where((tag) => tag.tagId == widget.tagId)
-          .isNotEmpty;
-    }
     return SingleChildScrollView(
       child: Column(
-        children: <Widget>[
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.account_box_sharp,
-                  size: 26.0,
-                ),
-                const Spacer(flex: 1),
-                Text(widget._selectedMessengerId,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
-                const Spacer(flex: 6),
-                Row(
-                  children: const [
-                    Icon(Icons.star_rounded,
-                        size: 26.0, color: Color(COLOR_PRIMARY)),
-                    Icon(Icons.star_rounded,
-                        size: 26.0, color: Color(COLOR_PRIMARY)),
-                    Icon(Icons.star_rounded,
-                        size: 26.0, color: Color(COLOR_PRIMARY)),
-                    Icon(Icons.star_rounded,
-                        size: 26.0, color: Color(COLOR_PRIMARY)),
-                    Icon(Icons.star_border, size: 26.0, color: Colors.black),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: const <Widget>[
-                Text('# lorem # ipsum',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    )),
-                Spacer(flex: 10),
-                Icon(
-                  CommunityMaterialIcons.whatsapp,
-                  size: 26.0,
-                  // color: Colors.green,
-                ),
-                Spacer(flex: 1),
-                Icon(
-                  Icons.telegram_sharp,
-                  size: 26.0,
-                  // color: Colors.blue,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Column(
-            children: <Widget>[
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2023, 1),
-                        lastDate: DateTime(2024, 12),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.calendar_month_rounded,
-                      size: 26.0,
-                    ),
-                  ),
-                  const Text('Записаться',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      )),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.message,
-                      size: 26.0,
-                    ),
-                  ),
-                  const Text('Спросить',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      )),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.phone,
-                        size: 26.0, color: Colors.black),
-                  ),
-                  const Text('пн-пт 9.00 - 21.00',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ))
-                ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AccountInfoWidget(widget: widget),
+          ContactsWidget(widget: widget),
+          const AddressInfoWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class AccountInfoWidget extends StatelessWidget {
+  const AccountInfoWidget({
+    super.key,
+    required this.widget,
+  });
+
+  final CustomPanelWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 32),
+        const SizedBox(
+          width: 86,
+          height: 86,
+          //TODO implement data
+          child: Image(image: AssetImage('assets/images/photo.jpg')),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8.0),
+          //TODO implement data
+          child: Text('Василий Пупкинс',
+              //widget._selectedMessengerId,
+              style: TextStyle(
+                  color: mainTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500)),
+        ),
+        //TODO implement data
+        const Text('На сервисе с 2023г',
+            style: TextStyle(
+                color: secondaryTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w400)),
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/star_icon.png'),
+              //TODO implement data
+              const Text(
+                ' 5',
+                style: TextStyle(
+                    color: secondaryTextColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      // setState(() {
-                      //   // bool click = false;
-                      //   click = !click;
-                      // });
-                    },
-                    // icon: Icon(
-                    //     size: 26.0,
-                    //     click
-                    //         ? Icons.favorite_border
-                    //         : Icons.favorite),
-                    icon: const Icon(
-                      size: 26.0,
+        ),
+        const SizedBox(height: 28),
+      ],
+    );
+  }
+}
 
-                      Icons.favorite_border,
-                      // color: click ? Colors.black : Colors.red,
-                      color: Colors.black,
-                    ),
-                    splashRadius: 50,
-                    splashColor: Colors.lightGreenAccent),
-                const Text('В избранное',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    )),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    context.read<BookmarksBloc>().add(AddBookmarkEvent(
-                        userId: widget.userId, tagId: widget.tagId));
-                  },
-                  icon: Icon(
-                      size: 26.0,
-                      isBookmarkAdded
-                          ? Icons.bookmark
-                          : Icons.bookmark_add_outlined),
-                  //Icons.bookmark_add_outlined),
-                  color: isBookmarkAdded
-                      ? const Color(COLOR_PRIMARY)
-                      : Colors.black,
-                  //color: Colors.black,
+class ContactsWidget extends StatelessWidget {
+  const ContactsWidget({
+    super.key,
+    required this.widget,
+  });
+
+  final CustomPanelWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          TextButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                const Text('В закладки',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ))
-              ],
+              ),
             ),
+            //TODO implement data
+            onPressed: () {},
+            child: Image.asset('assets/images/telegram_logo.png'),
+          ),
+          TextButton(
+            onPressed: () =>
+                SocialService.launchInstagram(widget._selectedMessengerId),
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+            ),
+            child: Image.asset('assets/images/instagram_logo.png'),
+          ),
+          TextButton(
+            //TODO implement data
+            onPressed: () {},
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+            ),
+
+            child: Image.asset('assets/images/phone_icon.png'),
+          ),
+          TextButton(
+            //TODO implement data
+            onPressed: () {},
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+            ),
+            child: Image.asset('assets/images/favorite_icon.png'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AddressInfoWidget extends StatelessWidget {
+  const AddressInfoWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //TODO implement data
+        children: [
+          const Text(
+            'Время работы',
+            style: TextStyle(
+                color: secondaryTextColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400),
+          ),
+          Row(
+            children: const [
+              Text(
+                'Пн-Пт 9:00 - 18:00',
+                style: TextStyle(
+                    color: mainTextColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(width: 9),
+              Text(
+                'Сб, ВC-выходной',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'Адрес',
+            style: TextStyle(
+                color: secondaryTextColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400),
+          ),
+          const Text(
+            'ул.Калиновского д.235/4',
+            style: TextStyle(
+                color: mainTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w400),
           ),
         ],
       ),

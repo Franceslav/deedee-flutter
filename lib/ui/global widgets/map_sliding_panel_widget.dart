@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class MapSlidingPanelWidget extends StatelessWidget {
-  final String tagId;
-  final String userId;
-
   const MapSlidingPanelWidget({
     super.key,
     required this.size,
     required DeeDeeSliderController pc,
     required String selectedMessengerId,
-    required this.tagId,
-    required this.userId,
   })  : _pc = pc,
         _selectedMessengerId = selectedMessengerId;
 
@@ -39,8 +34,6 @@ class MapSlidingPanelWidget extends StatelessWidget {
       ),
       panel: CustomPanelWidget(
         selectedMessengerId: _selectedMessengerId,
-        userId: userId,
-        tagId: tagId,
       ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
     );
