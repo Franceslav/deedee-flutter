@@ -1,13 +1,13 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../global widgets/deedee_appbar.dart';
+import '../global_widgets/deedee_appbar.dart';
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {

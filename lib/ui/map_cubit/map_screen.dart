@@ -15,7 +15,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../auth/welcome/welcome_screen.dart';
-import '../global widgets/map_sliding_panel_widget.dart';
+import '../global_widgets/map_sliding_panel_widget.dart';
 
 class MapScreen extends StatefulWidget {
   final User user;

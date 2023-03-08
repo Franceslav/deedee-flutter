@@ -1,4 +1,4 @@
-import 'package:deedee/ui/global%20widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
+import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

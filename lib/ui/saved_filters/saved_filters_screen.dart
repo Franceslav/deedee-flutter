@@ -4,7 +4,7 @@ import 'package:deedee/generated/TagService.pb.dart';
 
 import 'package:deedee/services/helper.dart';
 
-import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 
@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import '../global widgets/deedee_appbar.dart';
+import '../global_widgets/deedee_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

@@ -10,7 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../drawer/deedee_drawer.dart';
-import '../global widgets/deedee_appbar.dart';
+import '../global_widgets/deedee_appbar.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});

@@ -7,9 +7,9 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
-import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
-import 'package:deedee/ui/global%20widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/pick_city_dropdown.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
@@ -25,7 +25,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../model/user.dart';
 import '../../services/helper.dart';
 import '../../services/shared.dart';
-import '../global widgets/app_bar_button.dart';
+import '../global_widgets/app_bar_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

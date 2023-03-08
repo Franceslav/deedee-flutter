@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../global widgets/deedee_appbar.dart';
+import '../global_widgets/deedee_appbar.dart';
 
 class TopUpPage extends StatefulWidget {
   const TopUpPage({super.key});
@@ -43,7 +43,10 @@ class _TopUpPageState extends State<TopUpPage> {
         builder: (context) {
           return Scaffold(
             // drawer: const DeeDeeDrawer(),
-        appBar: DeeDeeAppBar(title: AppLocalizations.of(context)!.accountTopUp,controller: _controller,),
+            appBar: DeeDeeAppBar(
+              title: AppLocalizations.of(context)!.accountTopUp,
+              controller: _controller,
+            ),
             body: BlocConsumer<TopUpBloc, TopUpState>(
               listenWhen: (old, current) => old != current,
               listener: (context, state) {

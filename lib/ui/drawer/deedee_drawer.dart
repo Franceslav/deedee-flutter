@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
-import '../global widgets/profile_photo_with_badge.dart';
+import '../global_widgets/profile_photo_with_badge.dart';
 
 class DeeDeeDrawer extends StatefulWidget {
   const DeeDeeDrawer({super.key});
