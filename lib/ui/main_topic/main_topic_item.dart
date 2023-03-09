@@ -21,33 +21,48 @@ class MainTopicItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (topic.title) {
-      case 'Авто': topic.title = AppLocalizations.of(context)!.autoTag; break;
-      case 'Бьюти': topic.title = AppLocalizations.of(context)!.beautyTag; break;
-      case 'Отделка': topic.title = AppLocalizations.of(context)!.decoratingTag; break;
-      case 'Дети': topic.title = AppLocalizations.of(context)!.childrenTag; break;
-      case 'Рабочие': topic.title = AppLocalizations.of(context)!.workersTag; break;
-      case 'Клининг': topic.title = AppLocalizations.of(context)!.cleaningTag; break;
+      case 'Авто':
+        topic.title = AppLocalizations.of(context)!.autoTag;
+        break;
+      case 'Бьюти':
+        topic.title = AppLocalizations.of(context)!.beautyTag;
+        break;
+      case 'Отделка':
+        topic.title = AppLocalizations.of(context)!.decoratingTag;
+        break;
+      case 'Дети':
+        topic.title = AppLocalizations.of(context)!.childrenTag;
+        break;
+      case 'Рабочие':
+        topic.title = AppLocalizations.of(context)!.workersTag;
+        break;
+      case 'Клининг':
+        topic.title = AppLocalizations.of(context)!.cleaningTag;
+        break;
     }
-    return InkWell(
-       onTap: () {
-        switch (screenType) {
-          case ScreenType.placeTags:
-            push(context, const PlaceTagScreen());
-            break;
-          case ScreenType.filterTags:
-            push(
-                context,
-                FilterPage(
-                  topicsName: topic.title,
-                ));
-            break;
-        }
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        elevation: 5,
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 5,
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        splashColor: Colors.transparent,
+        onTap: () {
+          switch (screenType) {
+            case ScreenType.placeTags:
+              push(context, const PlaceTagScreen());
+              break;
+            case ScreenType.filterTags:
+              push(
+                  context,
+                  FilterPage(
+                    topicsName: topic.title,
+                  ));
+              break;
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -64,11 +79,11 @@ class MainTopicItem extends StatelessWidget {
                 children: [
                   Text(
                     topic.title,
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
                   Text(
                     '${topic.offerCount} ${AppLocalizations.of(context)!.offersTitle}',
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
               ),
