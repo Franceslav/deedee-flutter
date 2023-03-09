@@ -10,10 +10,22 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class FilterRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FilterRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOM<Filter>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filter', subBuilder: Filter.create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'FilterRequest',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOM<Filter>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'filter',
+        subBuilder: Filter.create)
+    ..hasRequiredFields = false;
 
   FilterRequest._() : super();
   factory FilterRequest({
@@ -25,31 +37,40 @@ class FilterRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory FilterRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory FilterRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  factory FilterRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FilterRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   FilterRequest clone() => FilterRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  FilterRequest copyWith(void Function(FilterRequest) updates) => super.copyWith((message) => updates(message as FilterRequest)) as FilterRequest; // ignore: deprecated_member_use
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  FilterRequest copyWith(void Function(FilterRequest) updates) =>
+      super.copyWith((message) => updates(message as FilterRequest))
+          as FilterRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static FilterRequest create() => FilterRequest._();
   FilterRequest createEmptyInstance() => create();
-  static $pb.PbList<FilterRequest> createRepeated() => $pb.PbList<FilterRequest>();
+  static $pb.PbList<FilterRequest> createRepeated() =>
+      $pb.PbList<FilterRequest>();
   @$core.pragma('dart2js:noInline')
-  static FilterRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FilterRequest>(create);
+  static FilterRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FilterRequest>(create);
   static FilterRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   Filter get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter(Filter v) { setField(1, v); }
+  set filter(Filter v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
@@ -59,10 +80,22 @@ class FilterRequest extends $pb.GeneratedMessage {
 }
 
 class FilterResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FilterResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOM<Filter>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filter', subBuilder: Filter.create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'FilterResponse',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOM<Filter>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'filter',
+        subBuilder: Filter.create)
+    ..hasRequiredFields = false;
 
   FilterResponse._() : super();
   factory FilterResponse({
@@ -74,31 +107,40 @@ class FilterResponse extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory FilterResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory FilterResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  factory FilterResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FilterResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   FilterResponse clone() => FilterResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  FilterResponse copyWith(void Function(FilterResponse) updates) => super.copyWith((message) => updates(message as FilterResponse)) as FilterResponse; // ignore: deprecated_member_use
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  FilterResponse copyWith(void Function(FilterResponse) updates) =>
+      super.copyWith((message) => updates(message as FilterResponse))
+          as FilterResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static FilterResponse create() => FilterResponse._();
   FilterResponse createEmptyInstance() => create();
-  static $pb.PbList<FilterResponse> createRepeated() => $pb.PbList<FilterResponse>();
+  static $pb.PbList<FilterResponse> createRepeated() =>
+      $pb.PbList<FilterResponse>();
   @$core.pragma('dart2js:noInline')
-  static FilterResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FilterResponse>(create);
+  static FilterResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FilterResponse>(create);
   static FilterResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   Filter get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter(Filter v) { setField(1, v); }
+  set filter(Filter v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
@@ -108,10 +150,22 @@ class FilterResponse extends $pb.GeneratedMessage {
 }
 
 class GetTopicTitlesResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetTopicTitlesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..pPS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topicTitles', protoName: 'topicTitles')
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetTopicTitlesResponse',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..pPS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'topicTitles',
+        protoName: 'topicTitles')
+    ..hasRequiredFields = false;
 
   GetTopicTitlesResponse._() : super();
   factory GetTopicTitlesResponse({
@@ -123,25 +177,33 @@ class GetTopicTitlesResponse extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory GetTopicTitlesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetTopicTitlesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetTopicTitlesResponse clone() => GetTopicTitlesResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetTopicTitlesResponse copyWith(void Function(GetTopicTitlesResponse) updates) => super.copyWith((message) => updates(message as GetTopicTitlesResponse)) as GetTopicTitlesResponse; // ignore: deprecated_member_use
+  factory GetTopicTitlesResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetTopicTitlesResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetTopicTitlesResponse clone() =>
+      GetTopicTitlesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetTopicTitlesResponse copyWith(
+          void Function(GetTopicTitlesResponse) updates) =>
+      super.copyWith((message) => updates(message as GetTopicTitlesResponse))
+          as GetTopicTitlesResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetTopicTitlesResponse create() => GetTopicTitlesResponse._();
   GetTopicTitlesResponse createEmptyInstance() => create();
-  static $pb.PbList<GetTopicTitlesResponse> createRepeated() => $pb.PbList<GetTopicTitlesResponse>();
+  static $pb.PbList<GetTopicTitlesResponse> createRepeated() =>
+      $pb.PbList<GetTopicTitlesResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetTopicTitlesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTopicTitlesResponse>(create);
+  static GetTopicTitlesResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTopicTitlesResponse>(create);
   static GetTopicTitlesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -149,16 +211,56 @@ class GetTopicTitlesResponse extends $pb.GeneratedMessage {
 }
 
 class Filter extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Filter', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filterId', protoName: 'filterId')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topic')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'subtopic')
-    ..pc<FilterKey>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filterKeys', $pb.PbFieldType.PM, protoName: 'filterKeys', subBuilder: FilterKey.create)
-    ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bookmarked')
-    ..aOB(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'subscribed')
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Filter',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'filterId',
+        protoName: 'filterId')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'userId',
+        protoName: 'userId')
+    ..aOS(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'topic')
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'subtopic')
+    ..pc<FilterKey>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'filterKeys',
+        $pb.PbFieldType.PM,
+        protoName: 'filterKeys',
+        subBuilder: FilterKey.create)
+    ..aOB(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'bookmarked')
+    ..aOB(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'subscribed')
+    ..hasRequiredFields = false;
 
   Filter._() : super();
   factory Filter({
@@ -194,31 +296,39 @@ class Filter extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory Filter.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Filter.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  factory Filter.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Filter.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Filter clone() => Filter()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Filter copyWith(void Function(Filter) updates) => super.copyWith((message) => updates(message as Filter)) as Filter; // ignore: deprecated_member_use
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Filter copyWith(void Function(Filter) updates) =>
+      super.copyWith((message) => updates(message as Filter))
+          as Filter; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Filter create() => Filter._();
   Filter createEmptyInstance() => create();
   static $pb.PbList<Filter> createRepeated() => $pb.PbList<Filter>();
   @$core.pragma('dart2js:noInline')
-  static Filter getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Filter>(create);
+  static Filter getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Filter>(create);
   static Filter? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get filterId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set filterId($core.String v) { $_setString(0, v); }
+  set filterId($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasFilterId() => $_has(0);
   @$pb.TagNumber(1)
@@ -227,7 +337,10 @@ class Filter extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userId => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userId($core.String v) { $_setString(1, v); }
+  set userId($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasUserId() => $_has(1);
   @$pb.TagNumber(2)
@@ -236,7 +349,10 @@ class Filter extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get topic => $_getSZ(2);
   @$pb.TagNumber(3)
-  set topic($core.String v) { $_setString(2, v); }
+  set topic($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasTopic() => $_has(2);
   @$pb.TagNumber(3)
@@ -245,7 +361,10 @@ class Filter extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get subtopic => $_getSZ(3);
   @$pb.TagNumber(4)
-  set subtopic($core.String v) { $_setString(3, v); }
+  set subtopic($core.String v) {
+    $_setString(3, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasSubtopic() => $_has(3);
   @$pb.TagNumber(4)
@@ -257,7 +376,10 @@ class Filter extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.bool get bookmarked => $_getBF(5);
   @$pb.TagNumber(6)
-  set bookmarked($core.bool v) { $_setBool(5, v); }
+  set bookmarked($core.bool v) {
+    $_setBool(5, v);
+  }
+
   @$pb.TagNumber(6)
   $core.bool hasBookmarked() => $_has(5);
   @$pb.TagNumber(6)
@@ -266,7 +388,10 @@ class Filter extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.bool get subscribed => $_getBF(6);
   @$pb.TagNumber(7)
-  set subscribed($core.bool v) { $_setBool(6, v); }
+  set subscribed($core.bool v) {
+    $_setBool(6, v);
+  }
+
   @$pb.TagNumber(7)
   $core.bool hasSubscribed() => $_has(6);
   @$pb.TagNumber(7)
@@ -274,11 +399,27 @@ class Filter extends $pb.GeneratedMessage {
 }
 
 class FilterKey extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FilterKey', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topicId', protoName: 'topicId')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'title')
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'FilterKey',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'topicId',
+        protoName: 'topicId')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'title')
+    ..hasRequiredFields = false;
 
   FilterKey._() : super();
   factory FilterKey({
@@ -294,31 +435,39 @@ class FilterKey extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory FilterKey.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory FilterKey.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  factory FilterKey.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FilterKey.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   FilterKey clone() => FilterKey()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  FilterKey copyWith(void Function(FilterKey) updates) => super.copyWith((message) => updates(message as FilterKey)) as FilterKey; // ignore: deprecated_member_use
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  FilterKey copyWith(void Function(FilterKey) updates) =>
+      super.copyWith((message) => updates(message as FilterKey))
+          as FilterKey; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static FilterKey create() => FilterKey._();
   FilterKey createEmptyInstance() => create();
   static $pb.PbList<FilterKey> createRepeated() => $pb.PbList<FilterKey>();
   @$core.pragma('dart2js:noInline')
-  static FilterKey getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FilterKey>(create);
+  static FilterKey getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FilterKey>(create);
   static FilterKey? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get topicId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set topicId($core.String v) { $_setString(0, v); }
+  set topicId($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasTopicId() => $_has(0);
   @$pb.TagNumber(1)
@@ -327,7 +476,10 @@ class FilterKey extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get title => $_getSZ(1);
   @$pb.TagNumber(2)
-  set title($core.String v) { $_setString(1, v); }
+  set title($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasTitle() => $_has(1);
   @$pb.TagNumber(2)
@@ -335,10 +487,22 @@ class FilterKey extends $pb.GeneratedMessage {
 }
 
 class GetAllFiltersRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAllFiltersRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', protoName: 'userId')
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetAllFiltersRequest',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'userId',
+        protoName: 'userId')
+    ..hasRequiredFields = false;
 
   GetAllFiltersRequest._() : super();
   factory GetAllFiltersRequest({
@@ -350,31 +514,41 @@ class GetAllFiltersRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory GetAllFiltersRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetAllFiltersRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetAllFiltersRequest clone() => GetAllFiltersRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetAllFiltersRequest copyWith(void Function(GetAllFiltersRequest) updates) => super.copyWith((message) => updates(message as GetAllFiltersRequest)) as GetAllFiltersRequest; // ignore: deprecated_member_use
+  factory GetAllFiltersRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetAllFiltersRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetAllFiltersRequest clone() =>
+      GetAllFiltersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetAllFiltersRequest copyWith(void Function(GetAllFiltersRequest) updates) =>
+      super.copyWith((message) => updates(message as GetAllFiltersRequest))
+          as GetAllFiltersRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetAllFiltersRequest create() => GetAllFiltersRequest._();
   GetAllFiltersRequest createEmptyInstance() => create();
-  static $pb.PbList<GetAllFiltersRequest> createRepeated() => $pb.PbList<GetAllFiltersRequest>();
+  static $pb.PbList<GetAllFiltersRequest> createRepeated() =>
+      $pb.PbList<GetAllFiltersRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetAllFiltersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAllFiltersRequest>(create);
+  static GetAllFiltersRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetAllFiltersRequest>(create);
   static GetAllFiltersRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get userId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userId($core.String v) { $_setString(0, v); }
+  set userId($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasUserId() => $_has(0);
   @$pb.TagNumber(1)
@@ -382,10 +556,22 @@ class GetAllFiltersRequest extends $pb.GeneratedMessage {
 }
 
 class GetFilterKeysRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetFilterKeysRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'topicId', protoName: 'topicId')
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetFilterKeysRequest',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'topicId',
+        protoName: 'topicId')
+    ..hasRequiredFields = false;
 
   GetFilterKeysRequest._() : super();
   factory GetFilterKeysRequest({
@@ -397,31 +583,41 @@ class GetFilterKeysRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory GetFilterKeysRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetFilterKeysRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetFilterKeysRequest clone() => GetFilterKeysRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetFilterKeysRequest copyWith(void Function(GetFilterKeysRequest) updates) => super.copyWith((message) => updates(message as GetFilterKeysRequest)) as GetFilterKeysRequest; // ignore: deprecated_member_use
+  factory GetFilterKeysRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetFilterKeysRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetFilterKeysRequest clone() =>
+      GetFilterKeysRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetFilterKeysRequest copyWith(void Function(GetFilterKeysRequest) updates) =>
+      super.copyWith((message) => updates(message as GetFilterKeysRequest))
+          as GetFilterKeysRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetFilterKeysRequest create() => GetFilterKeysRequest._();
   GetFilterKeysRequest createEmptyInstance() => create();
-  static $pb.PbList<GetFilterKeysRequest> createRepeated() => $pb.PbList<GetFilterKeysRequest>();
+  static $pb.PbList<GetFilterKeysRequest> createRepeated() =>
+      $pb.PbList<GetFilterKeysRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetFilterKeysRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFilterKeysRequest>(create);
+  static GetFilterKeysRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetFilterKeysRequest>(create);
   static GetFilterKeysRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get topicId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set topicId($core.String v) { $_setString(0, v); }
+  set topicId($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasTopicId() => $_has(0);
   @$pb.TagNumber(1)
@@ -429,10 +625,24 @@ class GetFilterKeysRequest extends $pb.GeneratedMessage {
 }
 
 class GetFilterKeysResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetFilterKeysResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..pc<FilterKey>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filterKeys', $pb.PbFieldType.PM, protoName: 'filterKeys', subBuilder: FilterKey.create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetFilterKeysResponse',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'bucket'),
+      createEmptyInstance: create)
+    ..pc<FilterKey>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'filterKeys',
+        $pb.PbFieldType.PM,
+        protoName: 'filterKeys',
+        subBuilder: FilterKey.create)
+    ..hasRequiredFields = false;
 
   GetFilterKeysResponse._() : super();
   factory GetFilterKeysResponse({
@@ -444,28 +654,35 @@ class GetFilterKeysResponse extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory GetFilterKeysResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetFilterKeysResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetFilterKeysResponse clone() => GetFilterKeysResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetFilterKeysResponse copyWith(void Function(GetFilterKeysResponse) updates) => super.copyWith((message) => updates(message as GetFilterKeysResponse)) as GetFilterKeysResponse; // ignore: deprecated_member_use
+  factory GetFilterKeysResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetFilterKeysResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetFilterKeysResponse clone() =>
+      GetFilterKeysResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetFilterKeysResponse copyWith(
+          void Function(GetFilterKeysResponse) updates) =>
+      super.copyWith((message) => updates(message as GetFilterKeysResponse))
+          as GetFilterKeysResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetFilterKeysResponse create() => GetFilterKeysResponse._();
   GetFilterKeysResponse createEmptyInstance() => create();
-  static $pb.PbList<GetFilterKeysResponse> createRepeated() => $pb.PbList<GetFilterKeysResponse>();
+  static $pb.PbList<GetFilterKeysResponse> createRepeated() =>
+      $pb.PbList<GetFilterKeysResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetFilterKeysResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFilterKeysResponse>(create);
+  static GetFilterKeysResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetFilterKeysResponse>(create);
   static GetFilterKeysResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<FilterKey> get filterKeys => $_getList(0);
 }
-

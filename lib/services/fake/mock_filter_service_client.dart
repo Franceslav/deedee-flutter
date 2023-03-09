@@ -42,8 +42,13 @@ class MockFilterServiceClient implements FilterServiceClient {
   ResponseFuture<FilterResponse> addFilterToSubscribedFilters(
       FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement addFilterToSubscribedFilters
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _addFilterToSubscribedFilters(request)));
+  }
+
+  Future<FilterResponse> _addFilterToSubscribedFilters(
+      FilterRequest request) async {
+    return FilterResponse()..filter = Filter();
   }
 
   @override
@@ -58,8 +63,13 @@ class MockFilterServiceClient implements FilterServiceClient {
   ResponseFuture<FilterResponse> editFilterInSubscribedFilters(
       FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement editFilterInSubscribedFilters
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _editFilterInSubscribedFilters(request)));
+  }
+
+  Future<FilterResponse> _editFilterInSubscribedFilters(
+      FilterRequest request) async {
+    return FilterResponse()..filter = Filter();
   }
 
   @override
@@ -74,8 +84,13 @@ class MockFilterServiceClient implements FilterServiceClient {
   ResponseFuture<FilterResponse> removeFilterFromSubscribedFilters(
       FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement removeFilterFromSubscribedFilters
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _removeFilterFromSubscribedFilters(request)));
+  }
+
+  Future<FilterResponse> _removeFilterFromSubscribedFilters(
+      FilterRequest request) async {
+    return FilterResponse()..filter = Filter();
   }
 
   @override

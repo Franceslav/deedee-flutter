@@ -30,7 +30,6 @@ class FilterDTO extends Equatable {
   );
 
   bool get isEmpty => this == FilterDTO.empty;
-
   bool get isNotEmpty => this != FilterDTO.empty;
 
   factory FilterDTO.fromJson(Map<String, dynamic> parsedJson) {

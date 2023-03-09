@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/global%20widgets/genaral_sliding_panel/general_sliding_panel.dart';
-import 'package:deedee/ui/global%20widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
+import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel.dart';
+import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +80,15 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
                 context.router.replace(const SavedFiltersScreenRoute());
+              }),
+          GeneralSlidingPanelItem(
+              icon: Icons.star_border_purple500_sharp,
+              text: AppLocalizations.of(context)!.subscription,
+              onTap: () {
+                if (context.router.current.isActive) {
+                  controller.close();
+                }
+                context.router.replace(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,

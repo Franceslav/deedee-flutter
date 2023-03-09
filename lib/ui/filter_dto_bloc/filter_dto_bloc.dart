@@ -2,10 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/generated/filter_service.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/filtrer_dto.dart';
+import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
-
 
 part 'filter_dto_state.dart';
 
@@ -76,11 +75,15 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
     }
   }
 
-  _onRemoveFilterEvent(RemoveFilterEvent event, Emitter<FilterDTOState> emit) {
+  _onRemoveFilterEvent(
+      RemoveFilterEvent event, Emitter<FilterDTOState> emit) async {
+    FilterDTOState(
+      state.filterDTOList..removeAt(event.index),
+    );
     try {
-      event.filters.removeAt(event.index);
-
-      // event.filters.removeAt(event.index);
+      await locator
+          .get<GRCPUtils>()
+          .removeFilterSubscriptionElement(state.filterDTOList[event.index]);
     } catch (error) {
       print(error.toString());
     }
@@ -90,13 +93,24 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       AddFilterDTOSubscription event, Emitter<FilterDTOState> emit) async {
     emit(
       FilterDTOState(
-        state.filterDTOList..add(event.userPersonalFilter),
+        state.filterDTOList
+          ..add(
+            FilterDTO(
+              filterId: '',
+              userId: '',
+              topic: '',
+              subtopic: '',
+              filterKeys: [],
+              bookmarked: true,
+              subscribed: false,
+            ),
+          ),
       ),
     );
     try {
       final response = await locator
           .get<GRCPUtils>()
-          .addFilterSubscriptionElement(event.userPersonalFilter);
+          .addFilterSubscriptionElement(event.filterDTO);
     } catch (error) {
       print(error.toString());
     }
@@ -105,20 +119,22 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
   _onGetFilterDTOSubscription(
       GetFilterDTOSubscription event, Emitter<FilterDTOState> emit) async {
     try {
-
-      final stream = await locator.get<GRCPUtils>().getFilterSubscriptions(event.userId);
+      final stream =
+          await locator.get<GRCPUtils>().getFilterSubscriptions(event.userId);
 
       List<Filter> fproto = await stream.toList();
 
-      List<FilterDTO> filters = fproto.map((f) =>         FilterDTO(
-        filterId: f.filterId,
-        userId: f.userId,
-        filterKeys: f.filterKeys.map((e) => e.title).toList(),
-        bookmarked: f.bookmarked,
-        subscribed: f.subscribed,
-        subtopic: f.subtopic,
-        topic: f.topic,
-      )).toList();
+      List<FilterDTO> filters = fproto
+          .map((f) => FilterDTO(
+                filterId: f.filterId,
+                userId: f.userId,
+                filterKeys: f.filterKeys.map((e) => e.title).toList(),
+                bookmarked: f.bookmarked,
+                subscribed: f.subscribed,
+                subtopic: f.subtopic,
+                topic: f.topic,
+              ))
+          .toList();
 
       emit(
         FilterDTOState(

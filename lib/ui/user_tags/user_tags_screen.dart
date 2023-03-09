@@ -1,8 +1,8 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
-import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';

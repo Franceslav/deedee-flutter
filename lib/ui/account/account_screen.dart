@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
-import 'package:deedee/ui/global%20widgets/dee_dee_menu_slider.dart';
-import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
 
-import '../global widgets/profile_photo_with_badge.dart';
+import '../global_widgets/profile_photo_with_badge.dart';
 import 'account_popover.dart';
 
 class AccountScreen extends StatefulWidget {

@@ -39,9 +39,9 @@ class RemoveFilterEvent extends FilterDTOEvent {
 }
 
 class AddFilterDTOSubscription extends FilterDTOEvent {
-  final FilterDTO userPersonalFilter;
+  final FilterDTO filterDTO;
 
-  AddFilterDTOSubscription(this.userPersonalFilter);
+  AddFilterDTOSubscription(this.filterDTO);
 }
 
 class GetFilterDTOSubscription extends FilterDTOEvent {

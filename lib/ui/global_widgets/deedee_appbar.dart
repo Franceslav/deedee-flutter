@@ -1,4 +1,4 @@
-import 'package:deedee/ui/global%20widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

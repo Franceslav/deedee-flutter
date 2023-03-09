@@ -101,5 +101,6 @@
      "tagExpires": "expires",
      "noUserTags": "no tags",
      "myFilters": "My filters",
-     "homeChooseCity": "Choose your city"
+     "homeChooseCity": "Choose your city",
+     "subscription": "subscription"
 }

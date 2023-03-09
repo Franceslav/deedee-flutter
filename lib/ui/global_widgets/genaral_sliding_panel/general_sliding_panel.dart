@@ -1,4 +1,4 @@
-import 'package:deedee/ui/global%20widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
+import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -17,7 +17,7 @@ class GeneralSlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       backdropEnabled: true,
       minHeight: 0,
-      maxHeight: MediaQuery.of(context).size.height * 0.77,
+      maxHeight: MediaQuery.of(context).size.height * 0.73,
       controller: _controller,
       header: Container(
         margin: EdgeInsets.fromLTRB(
@@ -32,8 +32,10 @@ class GeneralSlidingPanel extends StatelessWidget {
       panel: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, left: 10),
-          child: Column(
-            children: generalSlidingPanelItemList,
+          child: SingleChildScrollView(
+            child: Column(
+              children: generalSlidingPanelItemList,
+            ),
           ),
         ),
       ),

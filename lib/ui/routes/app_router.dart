@@ -50,6 +50,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: MainTopicScreen, path: 'main-topic'),
     MaterialRoute(page: UserTagsScreen, path: ''),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
+    MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
   ],
 )
 class $AppRouter {}

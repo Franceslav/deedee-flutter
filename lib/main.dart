@@ -1,6 +1,5 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/filtrer_dto.dart';
 import 'package:deedee/ui/account/account_bloc.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
@@ -55,19 +54,20 @@ void main() {
             create: (_) => BookmarksBloc(),
           ),
           BlocProvider(
-            create: (_) => FilterDTOBloc(),
-          ),
-          BlocProvider(
             create: (_) => MainTopicsBloc(),
           ),
           BlocProvider(
             create: (_) => UserTagsBloc(),
           ),
-
           BlocProvider(
             create: (_) => UserTagDetailsBloc(),
           ),
-
+          BlocProvider(
+            create: (_) => BookmarksBloc(),
+          ),
+          BlocProvider(
+            create: (_) => FilterDTOBloc(),
+          ),
         ],
         child: const MyApp(),
       ),

@@ -320,6 +320,10 @@ class AppRouter extends _i25.RootStackRouter {
           UserTagDetailsScreenRoute.name,
           path: ':userId/:tagId',
         ),
+        _i25.RouteConfig(
+          SubscribedFiltersPageRoute.name,
+          path: '/subscribed-filter',
+        ),
       ];
 }
 

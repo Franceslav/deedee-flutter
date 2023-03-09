@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/help/help_bloc.dart';
 import 'package:deedee/ui/help/help_state.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../drawer/deedee_drawer.dart';
-import '../global widgets/deedee_appbar.dart';
+import '../global_widgets/deedee_appbar.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -22,6 +23,7 @@ class HelpScreen extends StatefulWidget {
 class _HelpState extends State<HelpScreen> {
   final PanelController _panelController = PanelController();
   TextEditingController messageEditingController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   File? image;
 
   @override
@@ -32,11 +34,10 @@ class _HelpState extends State<HelpScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final TextEditingController _textController = TextEditingController();
+
     return BlocProvider<HelpBloc>(
       create: (context) => HelpBloc(),
       child: Scaffold(
-          drawer: const DeeDeeDrawer(),
           appBar: DeeDeeAppBar(
             title: AppLocalizations.of(context)!.helpTitle,
             controller: _panelController,
@@ -161,6 +162,11 @@ class _HelpState extends State<HelpScreen> {
                   ),
                 ],
               ),
+            ),
+            DeeDeeMenuSlider(
+              context,
+              controller: _panelController,
+              user: user,
             ),
           ])),
     );

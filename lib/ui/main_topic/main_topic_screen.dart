@@ -1,5 +1,6 @@
 import 'package:deedee/generated/TagService.pb.dart';
-import 'package:deedee/ui/global%20widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_custom_toggle.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
