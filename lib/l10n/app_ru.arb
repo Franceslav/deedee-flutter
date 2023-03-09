@@ -97,5 +97,6 @@
      "tagExpires": "истекает",
      "noUserTags": "нет тегов",
      "myFilters": "Мои фильтры",
-     "homeChooseCity": "Выберите свой город"
+     "homeChooseCity": "Выберите свой город",
+     "subscription": "подписки"
 }

@@ -33,7 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Builder(builder: (context) {
           return Scaffold(
             appBar: DeeDeeAppBar(
-              title: '',
+              title: AppLocalizations.of(context)!.settings,
               controller: _controller,
             ),
             body: Stack(

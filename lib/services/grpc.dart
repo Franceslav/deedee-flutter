@@ -1,10 +1,12 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
-import 'package:deedee/generated/FilterService.pbgrpc.dart';
+
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/client_channel.dart';
 import 'package:deedee/services/shared.dart';
@@ -256,5 +258,35 @@ class GRCPUtils {
           ..userId = userId
           ..tagId = tagId);
     return response.tagDetails;
+  }
+
+  Future<ResponseStream<Filter>> getFilterSubscriptions(String userId) async {
+    final response = await _filterServiceClient
+        .getAllSubscribedFilters(GetAllFiltersRequest()..userId = userId);
+    return response;
+  }
+
+  Future<FilterDTO> addFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .addFilterToSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
+  }
+
+  Future<FilterDTO> removeFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
+  }
+
+  Future<FilterDTO> editFilterSubscriptionElement(FilterDTO filterDTO) async {
+    var response = await _filterServiceClient
+        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
+
+    throw UnimplementedError();
+    // return response.filter;
   }
 }

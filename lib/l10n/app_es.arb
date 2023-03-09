@@ -96,5 +96,6 @@
      "actualTags": "real",
      "archiveTags": "archivo",
      "tagExpires": "caduca",
-     "noUserTags": "sin etiquetas"
+     "noUserTags": "sin etiquetas",
+     "subscription": "suscripción"
 }

@@ -32,8 +32,10 @@ class GeneralSlidingPanel extends StatelessWidget {
       panel: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, left: 10),
-          child: Column(
-            children: generalSlidingPanelItemList,
+          child: SingleChildScrollView(
+            child: Column(
+              children: generalSlidingPanelItemList,
+            ),
           ),
         ),
       ),

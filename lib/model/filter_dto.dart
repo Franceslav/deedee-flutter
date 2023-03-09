@@ -1,6 +1,7 @@
+
 import 'package:equatable/equatable.dart';
 
-class Filter extends Equatable {
+class FilterDTO extends Equatable {
   final String filterId;
   final String userId;
   final String topic;
@@ -9,7 +10,7 @@ class Filter extends Equatable {
   final bool bookmarked;
   final bool subscribed;
 
-  const Filter({
+  const FilterDTO({
     required this.filterId,
     required this.userId,
     required this.topic,
@@ -19,7 +20,7 @@ class Filter extends Equatable {
     required this.subscribed,
   });
 
-  static const empty = Filter(
+  static const empty = FilterDTO(
     filterId: '',
     userId: '',
     topic: '',
@@ -29,11 +30,11 @@ class Filter extends Equatable {
     subscribed: false,
   );
 
-  bool get isEmpty => this == Filter.empty;
-  bool get isNotEmpty => this != Filter.empty;
+  bool get isEmpty => this == FilterDTO.empty;
+  bool get isNotEmpty => this != FilterDTO.empty;
 
-  factory Filter.fromJson(Map<String, dynamic> parsedJson) {
-    return Filter(
+  factory FilterDTO.fromJson(Map<String, dynamic> parsedJson) {
+    return FilterDTO(
       filterId: parsedJson['filterId'] ?? '',
       userId: parsedJson['userId'] ?? '',
       topic: parsedJson['topic'] ?? '',
@@ -56,7 +57,7 @@ class Filter extends Equatable {
     };
   }
 
-  Filter copyWith({
+  FilterDTO copyWith({
     String? filterId,
     String? userId,
     String? topic,
@@ -65,7 +66,7 @@ class Filter extends Equatable {
     bool? bookmarked,
     bool? subscribed,
   }) {
-    return Filter(
+    return FilterDTO(
       filterId: filterId ?? this.filterId,
       userId: userId ?? this.userId,
       topic: topic ?? this.topic,

@@ -19,6 +19,7 @@ import 'package:deedee/ui/referral/referral_screen.dart';
 import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/settings/settings_screen.dart';
+import 'package:deedee/ui/subscribed_filters/subscribed_filters_page.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
@@ -48,6 +49,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: MainTopicScreen, path: 'main-topic'),
     MaterialRoute(page: UserTagsScreen, path: ''),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
+    MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
   ],
 )
 class $AppRouter {}

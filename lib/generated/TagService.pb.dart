@@ -1204,6 +1204,11 @@ class Tag extends $pb.GeneratedMessage {
             ? ''
             : 'isDeleted',
         protoName: 'isDeleted')
+    ..aOB(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'bookmarked')
     ..hasRequiredFields = false;
 
   Tag._() : super();

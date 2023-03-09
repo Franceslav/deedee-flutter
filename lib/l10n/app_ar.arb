@@ -86,5 +86,6 @@
      "actualTags": "الفعلي",
      "archiveTags": "أرشيف",
      "tagExpires": "تنتهي صلاحيتها",
-     "noUserTags": "لا توجد علامات"
+     "noUserTags": "لا توجد علامات",
+     "subscription": "الاشتراك"
 }
