@@ -17,7 +17,7 @@ class GeneralSlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       backdropEnabled: true,
       minHeight: 0,
-      maxHeight: MediaQuery.of(context).size.height * 0.77,
+      maxHeight: MediaQuery.of(context).size.height * 0.73,
       controller: _controller,
       header: Container(
         margin: EdgeInsets.fromLTRB(
