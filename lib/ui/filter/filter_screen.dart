@@ -6,6 +6,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
@@ -75,6 +76,7 @@ class _FilterPageState extends State<FilterPage> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.filterTagsPageTitle,
         controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,

@@ -6,6 +6,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -29,6 +30,7 @@ import '../global_widgets/deedee_appbar.dart';
 import '../main_topic/enum/topic_screens_enum.dart';
 import '../selector/bloc/selector_bloc.dart';
 import '../selector/selector_list.dart';
+import 'dialog_widget.dart';
 
 class PlaceTagScreen extends StatefulWidget {
   const PlaceTagScreen({super.key});
@@ -84,6 +86,16 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.placeBidPageTitle,
         controller: _controller,
+        child: GestureDetector(
+            child: const Icon(Icons.bookmark_border),
+          onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return DialogWidget();
+                  });
+          },
+        )
       ),
       body: BlocConsumer<SelectorBloc, SelectorState>(
         bloc: bloc,

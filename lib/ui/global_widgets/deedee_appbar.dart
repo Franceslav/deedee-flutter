@@ -8,10 +8,12 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
 
   final String title;
   final PanelController controller;
+  final Widget child;
 
   DeeDeeAppBar({
     required this.title,
     required this.controller,
+    required this.child,
     Key? key,
   })  : preferredSize = const Size.fromHeight(50.0),
         super(key: key);
@@ -30,9 +32,9 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
               controller.open();
             }
           },
-          child: const Padding(
-            padding: EdgeInsets.all(5),
-            child: ProfilePhotoWithBadge(),
+          child:  Padding(
+            padding: const EdgeInsets.all(5),
+            child: child,
           ),
         )
       ],

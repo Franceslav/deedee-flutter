@@ -3,6 +3,7 @@ import 'package:deedee/generated/ReferralService.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +34,7 @@ class _ReferralState extends State<ReferralScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.homeTitle,
         controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
         children: [

@@ -1,6 +1,7 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.bookmarksTitle,
         controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
         children: [

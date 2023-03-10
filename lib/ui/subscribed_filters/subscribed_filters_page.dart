@@ -1,6 +1,7 @@
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/global_widgets/slidable_filter_list.dart';
 
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.subscription,
         controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
         children: [

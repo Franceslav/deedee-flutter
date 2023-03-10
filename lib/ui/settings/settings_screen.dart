@@ -3,6 +3,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
@@ -35,6 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             appBar: DeeDeeAppBar(
               title: AppLocalizations.of(context)!.settings,
               controller: _controller,
+              child: const ProfilePhotoWithBadge(),
             ),
             body: Stack(
               children: [

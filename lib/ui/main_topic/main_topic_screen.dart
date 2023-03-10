@@ -1,5 +1,6 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_custom_toggle.dart';
@@ -33,6 +34,7 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.topics,
         controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: SafeArea(
         child: Column(

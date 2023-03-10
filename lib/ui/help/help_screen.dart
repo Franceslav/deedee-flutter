@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/help/help_bloc.dart';
 import 'package:deedee/ui/help/help_state.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -41,6 +42,7 @@ class _HelpState extends State<HelpScreen> {
           appBar: DeeDeeAppBar(
             title: AppLocalizations.of(context)!.helpTitle,
             controller: _panelController,
+            child: const ProfilePhotoWithBadge(),
           ),
           body: Stack(children: [
             Container(

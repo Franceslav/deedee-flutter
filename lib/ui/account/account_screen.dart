@@ -33,7 +33,9 @@ class _AccountState extends State<AccountScreen> {
     return Scaffold(
       appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.accountTitle,
-          controller: _controller),
+          controller: _controller,
+          child: const ProfilePhotoWithBadge(),
+      ),
       body: Stack(
         children: [
           Column(

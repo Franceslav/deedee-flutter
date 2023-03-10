@@ -4,6 +4,7 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/top_up/top_up_bloc.dart';
@@ -46,6 +47,7 @@ class _TopUpPageState extends State<TopUpPage> {
             appBar: DeeDeeAppBar(
               title: AppLocalizations.of(context)!.accountTopUp,
               controller: _controller,
+              child: const ProfilePhotoWithBadge(),
             ),
             body: BlocConsumer<TopUpBloc, TopUpState>(
               listenWhen: (old, current) => old != current,
