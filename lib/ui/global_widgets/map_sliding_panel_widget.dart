@@ -3,25 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class MapSlidingPanelWidget extends StatelessWidget {
+  final Size size;
+  final DeeDeeSliderController _pc;
+  final String _selectedMessengerId;
+  final bool _openedFirstTime;
+
   const MapSlidingPanelWidget({
     super.key,
     required this.size,
     required DeeDeeSliderController pc,
     required String selectedMessengerId,
+    required bool openedFirstTime,
   })  : _pc = pc,
-        _selectedMessengerId = selectedMessengerId;
-
-  final Size size;
-  final DeeDeeSliderController _pc;
-  final String _selectedMessengerId;
+        _selectedMessengerId = selectedMessengerId,
+        _openedFirstTime = openedFirstTime;
 
   @override
   Widget build(BuildContext context) {
-    return SlidingUpPanel(
+    SlidingUpPanel panel = SlidingUpPanel(
+      renderPanelSheet: true,
+      panelSnapping: true,
+      defaultPanelState: PanelState.CLOSED,
+      onPanelOpened: () {
+        if (_openedFirstTime) {
+          _pc.hide();
+        }
+      },
+      onPanelSlide: (_) {
+        if (_openedFirstTime) {
+          _pc.hide();
+        }
+      },
       backdropEnabled: true,
-      collapsed: const CustomCollapsedWidget(),
-      minHeight: size.height * 0.04,
-      maxHeight: size.height * 0.5,
+      collapsed: CustomCollapsedWidget(
+        openedFirstTime: _openedFirstTime,
+      ),
+      minHeight: MediaQuery.of(context).size.height * 0.04,
+      maxHeight: MediaQuery.of(context).size.height * 0.5,
       controller: _pc,
       header: Container(
         margin: EdgeInsets.fromLTRB(size.width / 2 - 30, 10.0, 24.0, 0.0),
@@ -34,8 +52,31 @@ class MapSlidingPanelWidget extends StatelessWidget {
       ),
       panel: CustomPanelWidget(
         selectedMessengerId: _selectedMessengerId,
+        openedFirstTime: _openedFirstTime,
       ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
     );
+
+    return panel;
+  }
+}
+
+class CustomCollapsedWidget extends StatelessWidget {
+  final bool _openedFirstTime;
+
+  const CustomCollapsedWidget({
+    super.key,
+    required openedFirstTime,
+  }) : _openedFirstTime = openedFirstTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15))),
+      child:
+          const Center(child: Text('Нажмите на маркер для просмотра заявки')),
+    );
+    // }
   }
 }

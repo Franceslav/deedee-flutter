@@ -1,9 +1,11 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
 import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +14,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:deedee/services/social_service.dart';
 
 import '../auth/welcome/welcome_screen.dart';
-import '../global_widgets/map_sliding_panel_widget.dart';
 
 class MapScreen extends StatefulWidget {
   final User user;
@@ -42,13 +42,13 @@ class DeeDeeSliderController extends PanelController {
 class _MapScreenState extends State<MapScreen> {
   LatLng get geo => widget.user.lastGeoLocation ?? LatLng(0, 0);
 
-  final PopupController _popupController = PopupController();
   final MapController _mapController = MapController();
-  late DeeDeeSliderController _pc;
+  final DeeDeeSliderController _pc = DeeDeeSliderController();
 
   final List<TagMarker> _markers = [];
 
   String _selectedMessengerId = '';
+  bool openedFirstTime = true;
 
   @override
   void initState() {
@@ -65,6 +65,7 @@ class _MapScreenState extends State<MapScreen> {
               onTap: () {
                 setState(() {
                   _selectedMessengerId = dto.messengerId;
+                  openedFirstTime = !openedFirstTime;
                 });
                 _pc.open();
               },
@@ -81,7 +82,7 @@ class _MapScreenState extends State<MapScreen> {
         );
       },
     );
-    _pc = DeeDeeSliderController();
+
     super.initState();
   }
 
@@ -124,6 +125,7 @@ class _MapScreenState extends State<MapScreen> {
               size: size,
               pc: _pc,
               selectedMessengerId: _selectedMessengerId,
+              openedFirstTime: openedFirstTime,
             ),
           ],
           children: [
@@ -169,10 +171,14 @@ class _MapScreenState extends State<MapScreen> {
 
 class CustomPanelWidget extends StatefulWidget {
   final String _selectedMessengerId;
+  final bool _openedFirstTime;
+
   const CustomPanelWidget({
     super.key,
     required String selectedMessengerId,
-  }) : _selectedMessengerId = selectedMessengerId;
+    required bool openedFirstTime,
+  })  : _selectedMessengerId = selectedMessengerId,
+        _openedFirstTime = openedFirstTime;
 
   @override
   State<CustomPanelWidget> createState() => _CustomPanelWidgetState();
@@ -184,11 +190,13 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AccountInfoWidget(widget: widget),
-          ContactsWidget(widget: widget),
-          const AddressInfoWidget(),
-        ],
+        children: widget._openedFirstTime
+            ? []
+            : [
+                AccountInfoWidget(widget: widget),
+                ContactsWidget(widget: widget),
+                const AddressInfoWidget(),
+              ],
       ),
     );
   }
@@ -379,23 +387,6 @@ class AddressInfoWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class CustomCollapsedWidget extends StatelessWidget {
-  const CustomCollapsedWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey.shade400,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
-      child:
-          const Center(child: Text('Нажмите на маркер для просмотра заявки')),
     );
   }
 }
