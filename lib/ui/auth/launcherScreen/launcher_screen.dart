@@ -25,7 +25,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(COLOR_PRIMARY),
+      backgroundColor: Colors.white,
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           switch (state.authState) {
