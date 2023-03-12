@@ -3,7 +3,9 @@ part of 'home_bloc.dart';
 @immutable
 abstract class HomePageState {}
 
-class HomeInitial extends HomePageState {}
+class HomeInitial extends HomePageState {
+
+}
 
 class ValidHomeField extends HomePageState {}
 

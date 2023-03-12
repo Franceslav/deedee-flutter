@@ -25,6 +25,7 @@ import 'package:injectable/injectable.dart' as _i2;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
+const String _test = 'test';
 
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
@@ -47,15 +48,16 @@ _i1.GetIt $configureDependencies(
     () => _i6.MockFilterServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i7.GPSUtils>(
-    () => _i7.GPSUtils(),
+  gh.lazySingleton<_i7.GPSRepository>(
+    () => _i7.GPSRepository(),
     registerFor: {
       _dev,
       _prod,
+      _test,
     },
   );
-  gh.lazySingleton<_i8.GRCPUtils>(
-    () => _i8.GRCPUtils(),
+  gh.lazySingleton<_i8.GRCPRepository>(
+    () => _i8.GRCPRepository(),
     registerFor: {
       _dev,
       _prod,

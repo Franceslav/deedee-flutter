@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart';
 import '../generated/ReferralService.pbgrpc.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
-class GRCPUtils {
+class GRCPRepository {
   final LocationServiceClient _locationServiceClient =
       locator.get<LocationServiceClient>();
   final AccountServiceClient _accountServiceClient =

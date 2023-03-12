@@ -63,7 +63,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
   @override
   void initState() {
     super.initState();
-    locator.get<GPSUtils>().checkGps();
+    locator.get<GPSRepository>().getGPSPosition();
   }
 
   @override

@@ -27,7 +27,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onLoadSubTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
     try {
-      final response = await locator.get<GRCPUtils>().getSubTopics(
+      final response = await locator.get<GRCPRepository>().getSubTopics(
             event.location.latitude,
             event.location.longitude,
           );
@@ -51,7 +51,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(LoadingFiltersKeyState());
     try {
       final response =
-          await locator.get<GRCPUtils>().getFilterItems(event.topic);
+          await locator.get<GRCPRepository>().getFilterItems(event.topic);
       emit(LoadedFilterKeysState(response.map((fi) => fi.title).toList()));
     } catch (error) {
       ErrorState(error.toString());
@@ -70,7 +70,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(LoadingSelectorState());
     try {
       Topic topic = await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
     } catch (error) {
@@ -82,7 +82,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(LoadingSelectorState());
     try {
       Topic topic = await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
     } catch (error) {
@@ -93,7 +93,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushTag(PushTagEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      await locator.get<GRCPUtils>().placeTag(
+      await locator.get<GRCPRepository>().placeTag(
             event.accountType,
             event.topic,
             event.messengerId,

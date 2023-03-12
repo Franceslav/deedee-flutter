@@ -51,7 +51,7 @@ dependencies:
 
   sliding_up_panel: ^2.0.0+1
   dartx: ^1.1.0
-
+  mockito: ^5.1.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -70,10 +70,16 @@ dependencies:
 
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
+  test: ^1.22.0
   flutter_lints: ^2.0.1
   injectable_generator:
   build_runner:
   flutter_launcher_icons: "^0.12.0"
+  bloc_test: ^9.0.3
 
 flutter_icons:
   android: "launcher_icon"

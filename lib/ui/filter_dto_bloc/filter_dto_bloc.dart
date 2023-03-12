@@ -6,9 +6,9 @@ import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 
-part 'filter_dto_state.dart';
-
 part 'filter_dto_event.dart';
+
+part 'filter_dto_state.dart';
 
 class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
   FilterDTOBloc() : super(FilterDTOState([])) {
@@ -23,7 +23,11 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
     try {
       // TODO: DEEMOB-97
       final stream =
-          await locator.get<GRCPUtils>().getUserSavedFilters(event.userId);
+          await locator.get<GRCPRepository>().getUserSavedFilters(event.userId);
+
+      // StreamSubscription<Filter>? _filterSubscription = _someShitTasksNotifier.listen(
+      //       (someShitTask) => add(CurrentBlocEvent._someShit(someShitTask)),
+      // );
 
       List<FilterDTO> filters = [];
       stream.listen((value) {
@@ -67,7 +71,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       PushSavedFiltersEvent event, Emitter<FilterDTOState> emit) async {
     try {
       Topic topic = await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       // emit(UserSavedFiltersDoneState(topic));
     } catch (error) {
@@ -82,7 +86,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
     );
     try {
       await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .removeFilterSubscriptionElement(state.filterDTOList[event.index]);
     } catch (error) {
       print(error.toString());
@@ -95,7 +99,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       FilterDTOState(
         state.filterDTOList
           ..add(
-            FilterDTO(
+            const FilterDTO(
               filterId: '',
               userId: '',
               topic: '',
@@ -108,9 +112,9 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       ),
     );
     try {
-      final response = await locator
-          .get<GRCPUtils>()
-          .addFilterSubscriptionElement(event.filterDTO);
+/*      final response = await locator
+          .get<GRCPRepository>()
+          .addFilterSubscriptionElement(event.userPersonalFilter);*/
     } catch (error) {
       print(error.toString());
     }
@@ -119,8 +123,9 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
   _onGetFilterDTOSubscription(
       GetFilterDTOSubscription event, Emitter<FilterDTOState> emit) async {
     try {
-      final stream =
-          await locator.get<GRCPUtils>().getFilterSubscriptions(event.userId);
+      final stream = await locator
+          .get<GRCPRepository>()
+          .getFilterSubscriptions(event.userId);
 
       List<Filter> fproto = await stream.toList();
 

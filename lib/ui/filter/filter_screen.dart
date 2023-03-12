@@ -55,7 +55,7 @@ class _FilterPageState extends State<FilterPage> {
   @override
   void initState() {
     super.initState();
-    locator.get<GPSUtils>().checkGps();
+    locator.get<GPSRepository>().getGPSPosition();
   }
 
   @override

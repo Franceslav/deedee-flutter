@@ -14,7 +14,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _onLoadTags(LoadTagsEvent event, Emitter<UserTagsState> emit) async {
     try {
-      final tags = await locator.get<GRCPUtils>().getUserTags(event.userId);
+      final tags = await locator.get<GRCPRepository>().getUserTags(event.userId);
       emit(LoadedTagsState(tags: tags));
     } catch (error) {
       emit(ErrorState(
@@ -25,7 +25,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _onDeleteTags(DeleteTagEvent event, Emitter<UserTagsState> emit) async {
     try {
-      final response = await locator.get<GRCPUtils>().removeUserTag(
+      final response = await locator.get<GRCPRepository>().removeUserTag(
             event.userId,
             event.tag.tagId,
           );

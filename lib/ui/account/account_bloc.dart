@@ -15,7 +15,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> with ChangeNotifier {
   AccountBloc() : super(AccountInitial()) {
     on<LoadPlacesEvent>((event, emit) async {
       List<Place> places = await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .getPlaces(event.geoLocation, event.radius);
       emit(AccountPlacesLoadState(places));
     });

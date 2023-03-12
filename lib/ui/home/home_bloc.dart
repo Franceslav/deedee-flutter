@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
+import 'package:deedee/services/grpc.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -10,33 +12,33 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomePageState> {
-  HomeBloc() : super(HomeInitial()) {
+  final GPSRepository _gpsRepository;
+  final GRCPRepository _grpcRepository;
+
+  HomeBloc(this._gpsRepository, this._grpcRepository) : super(HomeInitial()) {
     on<HomePageLoadEvent>((event, emit) async {
-/*
-
-      List<Topic> topics =
-          await GRCPUtils.getTopics(event.latitude, event.longitude);
-
-      emit(HomePageLoadedState(topics.map((e) => e.title).toList()));
-
-*/
-      emit(HomePageLoadedState(["строительство", "маникюр"]));
+      // emit(HomePageLoadedState());
     });
 
-    on<GPSEvent>((event, emit) async {
-      Future<dynamic> gpsFuture = await locator.get<GPSUtils>().checkGps();
-      gpsFuture.then((value) {
-        emit(HomePageGPSReceivedState(value));
+    on<GPSEvent>((event, emit) {
+      Future<Position?> fp = _gpsRepository.getGPSPosition();
+      fp.then((value) {
+        emit(HomePageGPSReceivedState(value!));
       });
     });
 
     on<HomePageChangeEvent>((event, emit) async {
       emit(HomePageChangeState(event.topic));
     });
+
+    initialize();
   }
 
-  bool servicestatus = false;
-  bool haspermission = false;
-  late LocationPermission permission;
-  late Position position;
+  initialize() async {
+    var fp = await _gpsRepository.getGPSPosition();
+    List<TopicDescription> topics =
+        await _grpcRepository.getTopics(fp!.latitude, fp!.longitude);
+
+    emit(HomePageLoadedState(topics.map((e) => e.title).toList()));
+  }
 }

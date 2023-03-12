@@ -34,6 +34,6 @@ class DeedeeDrawerCubit extends Cubit<DeedeeDrawerState> {
   }
 
   Future<double> getBalance(String userId) async {
-    return locator.get<GRCPUtils>().getUserBalance(userId);
+    return locator.get<GRCPRepository>().getUserBalance(userId);
   }
 }

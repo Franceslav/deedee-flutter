@@ -14,7 +14,7 @@ class MainTopicsBloc extends Bloc<MainTopicsEvent, MainTopicsState> {
   void _onLoadMainTopics(
       LoadMainTopicsEvent event, Emitter<MainTopicsState> emit) async {
     try {
-      final mainTopics = await locator.get<GRCPUtils>().getTopics(
+      final mainTopics = await locator.get<GRCPRepository>().getTopics(
             event.userLocation.latitude,
             event.userLocation.longitude,
           );

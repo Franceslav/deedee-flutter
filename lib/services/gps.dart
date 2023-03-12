@@ -4,17 +4,16 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(env: [Environment.dev, Environment.prod])
-class GPSUtils {
-  bool servicestatus = false;
-  bool haspermission = false;
+@LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
+class GPSRepository {
+
   late LocationPermission permission;
-  late Position position;
 
   late StreamSubscription<Position> positionStream;
 
-  checkGps() async {
-    servicestatus = await Geolocator.isLocationServiceEnabled();
+  Future<Position?> getGPSPosition() async {
+    bool haspermission = false;
+    var servicestatus = await Geolocator.isLocationServiceEnabled();
     if (servicestatus) {
       permission = await Geolocator.checkPermission();
 
@@ -35,26 +34,22 @@ class GPSUtils {
         // setState(() {
         // });
 
-        getLocation();
+        return getLocation();
       }
     } else {
+      return null;
       // showSnackBar(context, 'GPS Service is not enabled, turn on GPS location');
     }
+    return null;
 
     // setState(() {});
   }
 
-  getLocation() async {
-    position = await Geolocator.getCurrentPosition(
+  Future<Position> getLocation() async {
+    var position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    // _lon = position.longitude;
-    // _lat = position.latitude;
-    //
-    // setState(() {
-    // });
-
-    LocationSettings locationSettings = LocationSettings(
+    LocationSettings locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.bestForNavigation,
       //accuracy of the location data
       distanceFilter: 100, //minimum distance (measured in meters) a
@@ -64,11 +59,7 @@ class GPSUtils {
     StreamSubscription<Position> positionStream =
         Geolocator.getPositionStream(locationSettings: locationSettings)
             .listen((Position position) {
-      // _lon = position.longitude;
-      // _lat = position.latitude;
-      //
-      // setState(() {
-      // });
     });
+    return position;
   }
 }

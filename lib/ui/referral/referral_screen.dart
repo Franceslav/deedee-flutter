@@ -140,7 +140,7 @@ class _ReferralState extends State<ReferralScreen> {
 
   Future<List<UserReferral>> getUserReferrals() async {
     return locator
-        .get<GRCPUtils>()
+        .get<GRCPRepository>()
         .getUserReferrals(BlocProvider.of<UserBloc>(context).state.user.email)
         .then((referrals) {
       return referrals;

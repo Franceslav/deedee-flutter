@@ -79,7 +79,7 @@ class AuthenticationBloc
       if (result != null && result is User) {
         user = result;
         //Optional: adding a checking method for new users on backend
-        locator.get<GRCPUtils>().sendVerificationEmail(user!.email);
+        locator.get<GRCPRepository>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -113,7 +113,7 @@ class AuthenticationBloc
           lastName: event.lastName);
       if (result != null && result is User) {
         user = result;
-        locator.get<GRCPUtils>().sendVerificationEmail(user!.email);
+        locator.get<GRCPRepository>().sendVerificationEmail(user!.email);
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));

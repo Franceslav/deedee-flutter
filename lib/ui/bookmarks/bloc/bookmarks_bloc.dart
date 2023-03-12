@@ -19,7 +19,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       LoadBookmarksEvent event, Emitter<BookmarksState> emit) async {
     try {
       final bookmarks =
-          await locator.get<GRCPUtils>().getUserBookmarks(event.userId);
+          await locator.get<GRCPRepository>().getUserBookmarks(event.userId);
       emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       emit(ErrorState(error.toString()));
@@ -29,7 +29,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   _onDeleteBookmark(
       DeleteBookmarkEvent event, Emitter<BookmarksState> emit) async {
     try {
-      final response = await locator.get<GRCPUtils>().removeUserBookmark(
+      final response = await locator.get<GRCPRepository>().removeUserBookmark(
             event.userId,
             event.bookmark.tagId,
           );
@@ -52,7 +52,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   ) async {
     //do something
     try {
-      final response = await locator.get<GRCPUtils>().addUserBookmark(
+      final response = await locator.get<GRCPRepository>().addUserBookmark(
             event.userId,
             event.tagId,
           );

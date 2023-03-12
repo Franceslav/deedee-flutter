@@ -35,7 +35,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   _onUserGetBalance(UserGetBalance event, Emitter<UserState> emit) async {
     try {
       final balance =
-          await locator.get<GRCPUtils>().getUserBalance(state.user.userId);
+          await locator.get<GRCPRepository>().getUserBalance(state.user.userId);
       emit(UserState(state.user.copyWith(balance: balance)));
     } catch (error) {
       print(error.toString());
@@ -53,7 +53,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       final response = await locator
-          .get<GRCPUtils>()
+          .get<GRCPRepository>()
           .toggleUserPremiumStatus(state.user.userId);
 
       if (response) {}
@@ -68,7 +68,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         .copyWith(emailVerification: EmailVerificationStatus.verified)));
     try {
       final response =
-          await locator.get<GRCPUtils>().verifyUserEmail(state.user.email);
+          await locator.get<GRCPRepository>().verifyUserEmail(state.user.email);
     } catch (error) {
       print(error.toString());
     }
@@ -91,7 +91,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserState(state.user
             .copyWith(docVerification: DocVerificationStatus.verified)));
         final response =
-            await locator.get<GRCPUtils>().verifyUserIdentity(event.files);
+            await locator.get<GRCPRepository>().verifyUserIdentity(event.files);
       } catch (error) {
         print(error.toString());
       }
@@ -108,7 +108,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     List<Place> places =
-        await locator.get<GRCPUtils>().getPlaces(GeoLocation(), 0.0);
+        await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
     emit(
       UserState(
         state.user.copyWith(availablePlaces: places

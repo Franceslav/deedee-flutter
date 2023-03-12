@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
+import 'package:deedee/services/grpc.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
@@ -41,7 +42,6 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   void initState() {
-    locator.get<GPSUtils>().checkGps();
     super.initState();
   }
 
@@ -61,7 +61,10 @@ class _HomeState extends State<HomeScreen> {
     }
 
     return BlocProvider<HomeBloc>(
-      create: (context) => HomeBloc(),
+      create: (context) => HomeBloc(
+        locator.get<GPSRepository>(),
+        locator.get<GRCPRepository>(),
+      ),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
@@ -76,6 +79,7 @@ class _HomeState extends State<HomeScreen> {
                 if (state is HomeFailureState) {
                   // _validate = AutovalidateMode.onUserInteraction;
                 }
+                // final user = context.select((UserBloc bloc) => bloc.state.user);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

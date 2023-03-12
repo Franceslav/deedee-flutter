@@ -12,7 +12,7 @@ class TopUpBloc extends Bloc<TopUpEvent, TopUpState> {
 
   TopUpBloc(this.user) : super(TopUpInitial()) {
     on<TopUpActionEvent>((event, emit) async {
-      bool succeed = await locator.get<GRCPUtils>().topUpAccount(event.amount);
+      bool succeed = await locator.get<GRCPRepository>().topUpAccount(event.amount);
       emit(TopUpDoneState(succeed));
     });
   }
