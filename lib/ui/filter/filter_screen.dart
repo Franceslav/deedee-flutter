@@ -6,6 +6,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -77,147 +78,162 @@ class _FilterPageState extends State<FilterPage> {
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),
-      body: BlocConsumer<SelectorBloc, SelectorState>(
-        bloc: bloc,
-        listener: (context, state) {
-          if (state is LoadedTopicsState) {
-            _topics = state.topics.map((e) => e.title).toList();
-          }
-          if (state is TopicSelectedState) {
-            if (_selectedTopic == state.topic) {
-              _selectedTopic = '';
-              _selectedFilterKeys = [];
-              _filterKeys = [];
-            } else {
-              _selectedTopic = state.topic;
-              _filterKeys = [];
-              _selectedFilterKeys = [];
-              bloc.add(LoadFilterKeysEvent(_selectedTopic));
-            }
-          }
-          if (state is LoadedFilterKeysState) {
-            _filterKeys = state.filterKeys;
-          }
-          if (state is FilterKeySelectedState) {
-            _selectedFilterKeys.contains(state.filterKey)
-                ? _selectedFilterKeys.remove(state.filterKey)
-                : _selectedFilterKeys.add(state.filterKey);
-          }
-          if (state is LoadingSelectorState) {
-            context.read<LoadingCubit>().showLoading(
-                  context,
-                  AppLocalizations.of(context)!.filteringTagsHistTitle,
-                  false,
-                );
-          }
-          if (state is UserFiltersDoneState || state is ErrorState) {
-            context.read<LoadingCubit>().hideLoading();
-            if (state is ErrorState) {
-              showSnackBar(context, state.errorMessage);
-            }
-            if (state is UserFiltersDoneState) {
-              Map<LatLng, TagDTO> tagMap = {
-                for (var tag in state.topic.tags)
-                  LatLng(tag.geoLocation.latitude, tag.geoLocation.longitude):
-                      TagDTO(tag.tagId, tag.messengerId)
-              };
-              context.router.replace(MapScreenRoute(
-                tagDescriptionMap: tagMap,
-                user: user,
-              ));
-            }
-          }
-        },
-        builder: (context, state) {
-          return state is InitialState
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        DeeDeeButton(AppLocalizations.of(context)!.placeBid,
-                            () {
-                          context.router.push(MainTopicScreenRoute(
-                              screenType: ScreenType.placeTags));
-                        }),
-                        DeeDeeButton(AppLocalizations.of(context)!.seeTags, () {
-                          context.router.push(MainTopicScreenRoute(
-                              screenType: ScreenType.filterTags));
-                        }),
-                        Column(
+      body: Stack(
+        children: [
+          BlocConsumer<SelectorBloc, SelectorState>(
+            bloc: bloc,
+            listener: (context, state) {
+              if (state is LoadedTopicsState) {
+                _topics = state.topics.map((e) => e.title).toList();
+              }
+              if (state is TopicSelectedState) {
+                if (_selectedTopic == state.topic) {
+                  _selectedTopic = '';
+                  _selectedFilterKeys = [];
+                  _filterKeys = [];
+                } else {
+                  _selectedTopic = state.topic;
+                  _filterKeys = [];
+                  _selectedFilterKeys = [];
+                  bloc.add(LoadFilterKeysEvent(_selectedTopic));
+                }
+              }
+              if (state is LoadedFilterKeysState) {
+                _filterKeys = state.filterKeys;
+              }
+              if (state is FilterKeySelectedState) {
+                _selectedFilterKeys.contains(state.filterKey)
+                    ? _selectedFilterKeys.remove(state.filterKey)
+                    : _selectedFilterKeys.add(state.filterKey);
+              }
+              if (state is LoadingSelectorState) {
+                context.read<LoadingCubit>().showLoading(
+                      context,
+                      AppLocalizations.of(context)!.filteringTagsHistTitle,
+                      false,
+                    );
+              }
+              if (state is UserFiltersDoneState || state is ErrorState) {
+                context.read<LoadingCubit>().hideLoading();
+                if (state is ErrorState) {
+                  showSnackBar(context, state.errorMessage);
+                }
+                if (state is UserFiltersDoneState) {
+                  Map<LatLng, TagDTO> tagMap = {
+                    for (var tag in state.topic.tags)
+                      LatLng(tag.geoLocation.latitude,
+                              tag.geoLocation.longitude):
+                          TagDTO(tag.tagId, tag.messengerId)
+                  };
+                  context.router.replace(MapScreenRoute(
+                    tagDescriptionMap: tagMap,
+                    user: user,
+                  ));
+                }
+              }
+            },
+            builder: (context, state) {
+              return state is InitialState
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            if (_topics.isNotEmpty)
-                              Column(
-                                children: [
-                                  Text(
-                                    AppLocalizations.of(context)!.chooseTopic,
-                                    style:
-                                        Theme.of(context).textTheme.headline1,
-                                  ),
-                                  SelectorList(
-                                    data: _topics,
-                                    onTap: (String topic) =>
-                                        bloc.add(SelectTopicEvent(topic)),
-                                    selectedItems: [_selectedTopic],
-                                  ),
-                                ],
-                              ),
-                            if (_filterKeys.isEmpty &&
-                                state is LoadingFiltersKeyState)
-                              const Center(child: CircularProgressIndicator()),
-                            if (_filterKeys.isNotEmpty)
-                              Column(
-                                children: [
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .chooseFilterKeys,
-                                    style:
-                                        Theme.of(context).textTheme.headline1,
-                                  ),
-                                  SelectorList(
-                                    data: _filterKeys,
-                                    onTap: (String filterKey) => bloc
-                                        .add(SelectFilterKeyEvent(filterKey)),
-                                    selectedItems: _selectedFilterKeys,
-                                  ),
-                                ],
-                              ),
-                            if (_selectedFilterKeys.length >= 3)
-                              DeeDeeButton(
-                                AppLocalizations.of(context)!.filterTags,
+                            DeeDeeButton(AppLocalizations.of(context)!.placeBid,
                                 () {
-                                  bloc.add(PushFiltersEvent(
-                                    topic: _selectedTopic,
-                                    filterKeys: _selectedFilterKeys,
-                                    accountType: user.accountType,
-                                  ));
-                                },
-                              ),
-                            if (_selectedFilterKeys.length >= 3)
-                              DeeDeeButton(
-                                'Сохранить фильтр и перейти на карту',
+                              context.router.push(MainTopicScreenRoute(
+                                  screenType: ScreenType.placeTags));
+                            }),
+                            DeeDeeButton(AppLocalizations.of(context)!.seeTags,
                                 () {
-                                  bloc.add(SaveFiltersEvent(
-                                    isSubscribe: false,
-                                    topic: widget.topicsName,
-                                    subtopic: _selectedTopic,
-                                    filterKeys: _selectedFilterKeys,
-                                    accountType: user.accountType,
-                                    userId: user.userId,
-                                  ));
-                                },
-                              ),
+                              context.router.push(MainTopicScreenRoute(
+                                  screenType: ScreenType.filterTags));
+                            }),
+                            Column(
+                              children: [
+                                if (_topics.isNotEmpty)
+                                  Column(
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .chooseTopic,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1,
+                                      ),
+                                      SelectorList(
+                                        data: _topics,
+                                        onTap: (String topic) =>
+                                            bloc.add(SelectTopicEvent(topic)),
+                                        selectedItems: [_selectedTopic],
+                                      ),
+                                    ],
+                                  ),
+                                if (_filterKeys.isEmpty &&
+                                    state is LoadingFiltersKeyState)
+                                  const Center(
+                                      child: CircularProgressIndicator()),
+                                if (_filterKeys.isNotEmpty)
+                                  Column(
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .chooseFilterKeys,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1,
+                                      ),
+                                      SelectorList(
+                                        data: _filterKeys,
+                                        onTap: (String filterKey) => bloc.add(
+                                            SelectFilterKeyEvent(filterKey)),
+                                        selectedItems: _selectedFilterKeys,
+                                      ),
+                                    ],
+                                  ),
+                                if (_selectedFilterKeys.length >= 3)
+                                  DeeDeeButton(
+                                    AppLocalizations.of(context)!.filterTags,
+                                    () {
+                                      bloc.add(PushFiltersEvent(
+                                        topic: _selectedTopic,
+                                        filterKeys: _selectedFilterKeys,
+                                        accountType: user.accountType,
+                                      ));
+                                    },
+                                  ),
+                                if (_selectedFilterKeys.length >= 3)
+                                  DeeDeeButton(
+                                    'Сохранить фильтр и перейти на карту',
+                                    () {
+                                      bloc.add(SaveFiltersEvent(
+                                        isSubscribe: false,
+                                        topic: widget.topicsName,
+                                        subtopic: _selectedTopic,
+                                        filterKeys: _selectedFilterKeys,
+                                        accountType: user.accountType,
+                                        userId: user.userId,
+                                      ));
+                                    },
+                                  ),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-        },
+                      ),
+                    );
+            },
+          ),
+          DeeDeeMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }

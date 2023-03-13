@@ -1,4 +1,5 @@
 import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 
@@ -30,21 +31,31 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: DeeDeeAppBar(
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Flexible(
-              child: MainTopicGrid(
-                screenType: widget.screenType,
-              ),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                Flexible(
+                  child: MainTopicGrid(
+                    screenType: widget.screenType,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          DeeDeeMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }

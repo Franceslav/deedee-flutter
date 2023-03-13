@@ -39,11 +39,12 @@ class _HelpState extends State<HelpScreen> {
     return BlocProvider<HelpBloc>(
       create: (context) => HelpBloc(),
       child: Scaffold(
-          appBar: DeeDeeAppBar(
-            controller: _panelController,
-            child: const ProfilePhotoWithBadge(),
-          ),
-          body: Stack(children: [
+        appBar: DeeDeeAppBar(
+          controller: _panelController,
+          child: const ProfilePhotoWithBadge(),
+        ),
+        body: Stack(
+          children: [
             Container(
               alignment: Alignment.bottomCenter,
               color: Colors.indigo,
@@ -169,7 +170,9 @@ class _HelpState extends State<HelpScreen> {
               controller: _panelController,
               user: user,
             ),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 
