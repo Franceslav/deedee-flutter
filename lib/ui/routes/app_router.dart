@@ -25,6 +25,8 @@ import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
+
+
 @MaterialAutoRouter(
   routes: <AutoRoute>[
     MaterialRoute(page: LauncherScreen, initial: true),
@@ -53,6 +55,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
+
   ],
 )
 class $AppRouter {}
