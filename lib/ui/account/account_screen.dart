@@ -32,9 +32,8 @@ class _AccountState extends State<AccountScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: DeeDeeAppBar(
-          title: AppLocalizations.of(context)!.accountTitle,
-          controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+        controller: _controller,
+        child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
         children: [

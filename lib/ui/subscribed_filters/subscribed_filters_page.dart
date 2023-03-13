@@ -48,7 +48,6 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
 
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.subscription,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),

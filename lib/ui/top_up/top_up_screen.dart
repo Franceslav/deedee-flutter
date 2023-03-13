@@ -45,7 +45,6 @@ class _TopUpPageState extends State<TopUpPage> {
           return Scaffold(
             // drawer: const DeeDeeDrawer(),
             appBar: DeeDeeAppBar(
-              title: AppLocalizations.of(context)!.accountTopUp,
               controller: _controller,
               child: const ProfilePhotoWithBadge(),
             ),

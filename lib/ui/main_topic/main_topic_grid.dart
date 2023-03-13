@@ -65,13 +65,6 @@ class _MainTopicGridState extends State<MainTopicGrid> {
         } else {
           return Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 30,
-                  horizontal: 16,
-                ),
-                child: CustomToggleButton(padding: 16),
-              ),
               Flexible(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

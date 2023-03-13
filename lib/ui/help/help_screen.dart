@@ -40,7 +40,6 @@ class _HelpState extends State<HelpScreen> {
       create: (context) => HelpBloc(),
       child: Scaffold(
           appBar: DeeDeeAppBar(
-            title: AppLocalizations.of(context)!.helpTitle,
             controller: _panelController,
             child: const ProfilePhotoWithBadge(),
           ),

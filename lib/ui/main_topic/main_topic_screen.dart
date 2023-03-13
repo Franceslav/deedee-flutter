@@ -32,7 +32,6 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.topics,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),

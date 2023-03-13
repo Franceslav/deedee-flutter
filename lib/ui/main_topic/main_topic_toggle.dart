@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class MainTopicToggle extends StatelessWidget {
   final List<bool> isSelected;
   final void Function(int index)? onPressed;
-  const MainTopicToggle({super.key, required this.onPressed, required this.isSelected});
+  const MainTopicToggle(
+      {super.key, required this.onPressed, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +30,14 @@ class MainTopicToggle extends StatelessWidget {
               textStyle: const TextStyle(fontWeight: FontWeight.bold),
               renderBorder: false,
               borderRadius: BorderRadius.circular(7),
-              constraints: BoxConstraints.expand(width: constraints.maxWidth / 2 - 1),
+              constraints:
+                  BoxConstraints.expand(width: constraints.maxWidth / 2 - 1),
               onPressed: onPressed,
               children: [
-                Text(
-                    AppLocalizations.of(context)!.clientToggle,
-                    style: Theme.of(context).textTheme.button
-                ),
-                Text(
-                    AppLocalizations.of(context)!.providerToggle,
-                    style: Theme.of(context).textTheme.button
-                ),
+                Text(AppLocalizations.of(context)!.clientToggle,
+                    style: Theme.of(context).textTheme.button),
+                Text(AppLocalizations.of(context)!.providerToggle,
+                    style: Theme.of(context).textTheme.button),
               ],
             ),
           );

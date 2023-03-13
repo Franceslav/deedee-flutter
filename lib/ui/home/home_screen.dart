@@ -67,7 +67,6 @@ class _HomeState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: DeeDeeAppBar(
-          title: AppLocalizations.of(context)!.homeTitle,
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),

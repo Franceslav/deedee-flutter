@@ -43,7 +43,6 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.bookmarksTitle,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),

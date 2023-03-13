@@ -1,4 +1,5 @@
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/main_topic/main_topic_custom_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -6,12 +7,10 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  final String title;
   final PanelController controller;
   final Widget child;
 
   DeeDeeAppBar({
-    required this.title,
     required this.controller,
     required this.child,
     Key? key,
@@ -21,7 +20,7 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: const CustomToggleButton(),
       actions: [
         GestureDetector(
           onTap: () {

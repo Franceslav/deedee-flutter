@@ -41,7 +41,6 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.userTagsTitle,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),
