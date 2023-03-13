@@ -55,6 +55,16 @@ String? validateInstagram(String? value) {
     return null;
   }
 }
+String? validateTelegram(String? value) {
+  String pattern =
+      r'(?:^|[^\w])(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)';
+  RegExp regex = RegExp(pattern);
+  if (!regex.hasMatch(value ?? '')) {
+    return 'Enter Valid Telegram Id';
+  } else {
+    return null;
+  }
+}
 
 String? validateTopic(String? value) {
   String pattern =

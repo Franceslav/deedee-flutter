@@ -1,7 +1,7 @@
 {
     "safe": "يحفظ",
-    "placeBid": "محاولة مكان",
-    "placeBidPageTitle": "المناقصة",
+    "placeOrder": "محاولة مكان",
+    "placeOrderPageTitle": "المناقصة",
     "accountTitle": "الحساب",
     "accountMoneyTitle": "مال",
     "accountReferralTitle": "الإحالات",
@@ -92,5 +92,15 @@
      "archiveTags": "أرشيف",
      "tagExpires": "تنتهي صلاحيتها",
      "noUserTags": "لا توجد علامات",
-     "subscription": "الاشتراك"
+     "orderSent": "تم إرسال طلبك",
+     "contactInformation": "معلومات الاتصال",
+     "orderProvideInformation": "* حدد طريقة اتصال واحدة على الأقل",
+     "phone": "هاتف",
+     "instagram": "Instagram",
+     "telegram": "Telegram",
+     "time": "وقت",
+     "additionalInformation": "معلومات إضافية",
+     "text": "نص",
+     "convenientTime": "وقت مناسب",
+     "day": "يوم"
 }

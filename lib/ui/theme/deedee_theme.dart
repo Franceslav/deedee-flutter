@@ -19,31 +19,36 @@ ThemeData deeDeeTheme = ThemeData(
     elevation: 0,
   ),
   textTheme: const TextTheme(
-    headline1: TextStyle(
+    displayLarge: TextStyle(
       fontSize: 16,
       color: mainTextColor,
       fontWeight: FontWeight.w500,
     ),
     //text style for DrawerHeader
-    headline2: TextStyle(
+    displayMedium: TextStyle(
       fontSize: 20,
       color: Colors.white,
       overflow: TextOverflow.ellipsis,
     ),
     //text style for DrawerHeader
-    subtitle2: TextStyle(
+    titleSmall: TextStyle(
       fontSize: 16,
       color: Colors.white,
     ),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
       fontSize: 16,
       color: Colors.white,
       overflow: TextOverflow.ellipsis,
     ),
-    headline4: TextStyle(
+    headlineMedium: TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: secondaryTextColor,
+    ),
+    headlineLarge: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+      color: mainTextColor,
     ),
   ),
   snackBarTheme:

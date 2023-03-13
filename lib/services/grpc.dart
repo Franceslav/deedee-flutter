@@ -13,8 +13,8 @@ import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
-
 import '../generated/ReferralService.pbgrpc.dart';
+import '../model/order.dart' as order;
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
 class GRCPRepository {
@@ -287,5 +287,9 @@ class GRCPRepository {
           ..userId = userId
           ..tagId = tagId);
     return response.tagDetails;
+  }
+
+  Future<bool> placeBidRequest(String userId, order.Order order) async {
+    return true;
   }
 }

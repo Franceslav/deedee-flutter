@@ -4,8 +4,8 @@
       "description": "The conventional newborn programmer greeting"
     },
     "safe": "safe",
-    "placeBid": "place bid",
-    "placeBidPageTitle": "bid",
+    "placeOrder": "Place order",
+    "placeOrderPageTitle": "Order",
     "accountTitle": "account",
     "accountMoneyTitle": "money",
     "clientToggle": "Client",
@@ -106,5 +106,15 @@
      "noUserTags": "no tags",
      "myFilters": "My filters",
      "homeChooseCity": "Choose your city",
-     "subscription": "subscription"
+     "orderSent": "Your order has been sent",
+     "contactInformation": "Contact Information",
+     "orderProvideInformation": "*Provide at least 1 contact method",
+     "phone": "Phone",
+     "instagram": "Instagram",
+     "telegram": "Telegram",
+     "time": "Time",
+     "additionalInformation": "Additional Information",
+     "text": "Text",
+     "convenientTime": "Convenient time",
+     "day": "Day"
 }

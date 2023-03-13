@@ -1,8 +1,8 @@
 {
     "safe": "сохранить",
     "helloWorld": "Привет, Мир",
-    "placeBid": "разместить заявку",
-    "placeBidPageTitle": "заявка",
+    "placeOrder": "Разместить заявку",
+    "placeOrderPageTitle": "Заявка",
     "accountTitle": "учётка",
     "accountMoneyTitle": "личный счёт",
     "accountTypeBuyTitle": "учётка покупателя",
@@ -103,8 +103,15 @@
      "archiveTags": "архив",
      "tagExpires": "истекает",
      "noUserTags": "нет тегов",
-     "myFilters": "Мои фильтры",
-     "homeChooseCity": "Выберите свой город",
-     "subscription": "подписки",
-     "noUserTags": "нет тегов"
+     "orderSent": "Ваша заявка была отправлена",
+     "contactInformation": "Контактная информация",
+     "orderProvideInformation": "*Укажите как минимум 1 способ связи",
+     "phone": "Телефон",
+     "instagram": "Инстаграм",
+     "telegram": "Телеграм",
+     "time": "Время",
+     "additionalInformation": "Дополнительная информация",
+     "text": "Текст",
+     "convenientTime": "Удобное время",
+     "day": "День"
 }

@@ -13,6 +13,7 @@ import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
+import 'package:deedee/ui/place_bid/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
@@ -51,6 +52,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: UserTagsScreen, path: ''),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
+    MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
   ],
 )
 class $AppRouter {}

@@ -1,8 +1,8 @@
 {
     "safe": "asegurar",
     "helloWorld": "Hola Mundo!",
-    "placeBid": "realizar oferta",
-    "placeBidPageTitle": "oferta",
+    "placeOrder": "Realizar oferta",
+    "placeOrderPageTitle": "Oferta",
     "accountTitle": "cuenta",
     "accountMoneyTitle": "dinero",
     "accountReferralTitle": "referencias",
@@ -102,5 +102,15 @@
      "archiveTags": "archivo",
      "tagExpires": "caduca",
      "noUserTags": "sin etiquetas",
-     "subscription": "suscripción"
+     "orderSent": "Tu solicitud ha sido enviada",
+     "contactInformation": "Información del contacto",
+     "orderProvideInformation": "*Especifique al menos 1 método de contacto",
+     "phone": "Teléfono",
+     "instagram": "Instagram",
+     "telegram": "Telegram",
+     "time": "Tiempo",
+     "additionalInformation": "información adicional",
+     "text": "Texto",
+     "convenientTime": "Tiempo conveniente",
+     "day": "Día"
 }

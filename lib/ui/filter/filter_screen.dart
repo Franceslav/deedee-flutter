@@ -146,7 +146,7 @@ class _FilterPageState extends State<FilterPage> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             DeeDeeButton(
-                                title: AppLocalizations.of(context)!.placeBid,
+                                title: AppLocalizations.of(context)!.placeOrder,
                                 gradientButton: true,
                                 onPressed: () {
                                   context.router.push(MainTopicScreenRoute(
@@ -160,6 +160,7 @@ class _FilterPageState extends State<FilterPage> {
                                       screenType: ScreenType.filterTags));
                                 }),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 if (_topics.isNotEmpty)
                                   Column(
@@ -201,6 +202,15 @@ class _FilterPageState extends State<FilterPage> {
                                       ),
                                     ],
                                   ),
+                                if (_selectedFilterKeys.length >= 3)
+                                  DeeDeeButton(
+                                      title: AppLocalizations.of(context)!
+                                          .placeOrder,
+                                          gradientButton: false,
+                                      onPressed: () {
+                                        context.router.push(
+                                            const PlaceOrderScreenRoute());
+                                      }),
                                 if (_selectedFilterKeys.length >= 3)
                                   DeeDeeButton(
                                     title: AppLocalizations.of(context)!

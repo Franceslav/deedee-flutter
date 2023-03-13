@@ -1,8 +1,8 @@
 {
     "safe": "zachować",
     "helloWorld": "witaj świecie",
-    "placeBid": "złóż ofertę",
-    "placeBidPageTitle": "oferta",
+    "placeOrder": "Złóż ofertę",
+    "placeOrderPageTitle": "Oferta",
     "accountTitle": "konto",
     "accountMoneyTitle": "pieniądze",
     "accountReferralTitle": "polecenia",
@@ -102,5 +102,15 @@
      "noUserTags": "brak tagów",
      "myFilters": "moje filtry",
     "homeChooseCity": "Wybierz swoje miasto",
-    "subscription": "subskrypcja"
+    "orderSent": "Twoja aplikacja została wysłana",
+    "contactInformation": "Informacje kontaktowe",
+    "orderProvideInformation": "*Określ co najmniej 1 metodę kontaktu",
+    "phone": "Telefon",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
+    "time": "Czas",
+    "additionalInformation": "Dodatkowe informacje",
+    "text": "Tekst",
+    "convenientTime": "Dogodny termin",
+    "day": "Dzień"
 }

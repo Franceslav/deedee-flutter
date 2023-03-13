@@ -183,12 +183,11 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                               alignment: Alignment.bottomCenter,
                               child: SizedBox())),
                       DeeDeeButton(
-                        title: AppLocalizations.of(context)!.placeBid,
-                        onPressed: () {
-                          context.router.push(MainTopicScreenRoute(
-                              screenType: ScreenType.placeTags));
-                        },
+                        title: AppLocalizations.of(context)!.placeOrder,
                         gradientButton: false,
+                        onPressed: () {
+                          context.router.push(const PlaceOrderScreenRoute());
+                        },
                       ),
                       const SizedBox(height: 8),
                       DeeDeeButton(
