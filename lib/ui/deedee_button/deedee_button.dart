@@ -3,35 +3,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DeeDeeButton extends StatelessWidget {
-  late String title;
-  late VoidCallback onPressed;
+  final String title;
+  final VoidCallback? onPressed;
+  final bool gradientButton;
+  final double borderRadius = 12.0;
 
-  DeeDeeButton(this.title, this.onPressed, {super.key});
+  DeeDeeButton(
+      {required this.title, required this.onPressed, required this.gradientButton, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: const Color(COLOR_PRIMARY),
-          padding: const EdgeInsets.only(top: 12, bottom: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
-            side: const BorderSide(
-              color: Color(COLOR_PRIMARY),
-            ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        height: 50,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+              colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: gradientButton ? Colors.transparent : Colors
+                  .white,
+              disabledBackgroundColor: const Color(BASIC_GREY_COLOR),
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  side: (gradientButton) ? const BorderSide(
+                      color: Colors.transparent) : const BorderSide(
+                      color: Colors.black, width: 0.0)
+              )
+          ),
+          onPressed: onPressed,
+          child: Text(
+              title,
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: gradientButton ? Colors.white : const Color(
+                      BASIC_GREY_COLOR)
+              )
           ),
         ),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        onPressed: onPressed,
       ),
     );
   }

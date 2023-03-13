@@ -1,13 +1,12 @@
 import 'package:latlong2/latlong.dart';
 
 const FINISHED_ON_BOARDING = 'finishedOnBoarding';
-const COLOR_PRIMARY = 0xFF4549BC;
+const COLOR_PRIMARY = 0xFF742AED;
 const FACEBOOK_BUTTON_COLOR = 0xFF415893;
 const GRADIENT_COLOR_START = 0XFFAD6CFF;
 const GRADIENT_COLOR_END = 0XFF742AED;
-const TEXTFIELD_BORDER_COLOR = 0xFF8C8C9A;
 const TEXTFIELD_COLOR = 0XFFF2F2F2;
-const DIALOG_CANCEL_COLOR = 0XFF8C8C9A;
+const BASIC_GREY_COLOR = 0XFF8C8C9A;
 const USERS = 'users';
 const EULA = 'https://www.instamobile.io/eula-instachatty/';
 const SHA_PHRASE = 'deedee';

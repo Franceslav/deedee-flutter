@@ -19,6 +19,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import '../global_widgets/deedee_appbar.dart';
 import '../main_topic/enum/topic_screens_enum.dart';
 
@@ -31,6 +32,7 @@ class TagDTO {
 
 class FilterPage extends StatefulWidget {
   final String topicsName;
+
   const FilterPage({super.key, required this.topicsName});
 
   @override
@@ -143,16 +145,20 @@ class _FilterPageState extends State<FilterPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            DeeDeeButton(AppLocalizations.of(context)!.placeBid,
-                                () {
-                              context.router.push(MainTopicScreenRoute(
-                                  screenType: ScreenType.placeTags));
-                            }),
-                            DeeDeeButton(AppLocalizations.of(context)!.seeTags,
-                                () {
-                              context.router.push(MainTopicScreenRoute(
-                                  screenType: ScreenType.filterTags));
-                            }),
+                            DeeDeeButton(
+                                title: AppLocalizations.of(context)!.placeBid,
+                                gradientButton: true,
+                                onPressed: () {
+                                  context.router.push(MainTopicScreenRoute(
+                                      screenType: ScreenType.placeTags));
+                                }),
+                            DeeDeeButton(
+                                title: AppLocalizations.of(context)!.seeTags,
+                                gradientButton: true,
+                                onPressed: () {
+                                  context.router.push(MainTopicScreenRoute(
+                                      screenType: ScreenType.filterTags));
+                                }),
                             Column(
                               children: [
                                 if (_topics.isNotEmpty)
@@ -197,8 +203,10 @@ class _FilterPageState extends State<FilterPage> {
                                   ),
                                 if (_selectedFilterKeys.length >= 3)
                                   DeeDeeButton(
-                                    AppLocalizations.of(context)!.filterTags,
-                                    () {
+                                    title: AppLocalizations.of(context)!
+                                        .filterTags,
+                                    gradientButton: true,
+                                    onPressed: () {
                                       bloc.add(PushFiltersEvent(
                                         topic: _selectedTopic,
                                         filterKeys: _selectedFilterKeys,
@@ -208,8 +216,10 @@ class _FilterPageState extends State<FilterPage> {
                                   ),
                                 if (_selectedFilterKeys.length >= 3)
                                   DeeDeeButton(
-                                    'Сохранить фильтр и перейти на карту',
-                                    () {
+                                    title:
+                                        'Сохранить фильтр и перейти на карту',
+                                    gradientButton: true,
+                                    onPressed: () {
                                       bloc.add(SaveFiltersEvent(
                                         isSubscribe: false,
                                         topic: widget.topicsName,

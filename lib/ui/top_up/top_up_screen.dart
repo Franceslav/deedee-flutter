@@ -1,12 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/top_up/top_up_bloc.dart';
 import 'package:deedee/ui/top_up/top_up_event.dart';
@@ -93,10 +89,13 @@ class _TopUpPageState extends State<TopUpPage> {
                                     errorColor: Theme.of(context).errorColor)),
                           ),
                           DeeDeeButton(
-                              AppLocalizations.of(context)!.accountTopUp, () {
-                            context.read<TopUpBloc>().add(TopUpActionEvent(
-                                double.tryParse(topUpAmountController.text)!));
-                          }),
+                              title: AppLocalizations.of(context)!.accountTopUp,
+                              gradientButton: true,
+                              onPressed: () {
+                                context.read<TopUpBloc>().add(TopUpActionEvent(
+                                    double.tryParse(
+                                        topUpAmountController.text)!));
+                              }),
                         ],
                       ),
                     );

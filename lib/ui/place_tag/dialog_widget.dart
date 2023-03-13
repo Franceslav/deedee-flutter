@@ -68,7 +68,7 @@ class _DialogWidgetState extends State<DialogWidget> {
                           style: ElevatedButton.styleFrom(
                               side: const BorderSide(
                                   width: 1.0,
-                                  color: Color(TEXTFIELD_BORDER_COLOR),
+                                  color: Color(BASIC_GREY_COLOR),
                                   strokeAlign: BorderSide.strokeAlignInside),
                               backgroundColor: Colors.white,
                               shadowColor: Colors.transparent,
@@ -85,7 +85,7 @@ class _DialogWidgetState extends State<DialogWidget> {
                                   fontFamily: 'Roboto',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(DIALOG_CANCEL_COLOR))
+                                  color: Color(BASIC_GREY_COLOR))
                               ),
                         ),
                       ),
@@ -103,7 +103,7 @@ class _DialogWidgetState extends State<DialogWidget> {
                           style: ElevatedButton.styleFrom(
                               side: const BorderSide(
                                 width: 0,
-                                color: Color(TEXTFIELD_BORDER_COLOR),
+                                color: Color(BASIC_GREY_COLOR),
                               ),
                               backgroundColor: Colors.transparent,
                               shadowColor: Colors.transparent,
