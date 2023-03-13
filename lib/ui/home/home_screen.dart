@@ -93,7 +93,7 @@ class _HomeState extends State<HomeScreen> {
                           child: const PickCityDropDown()),
                     ),
                     const Flexible(
-                      child: MainTopicGrid(screenType: ScreenType.placeTags),
+                      child: MainTopicGrid(screenType: ScreenType.filterTags),
                     ),
                   ],
                 );

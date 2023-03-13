@@ -18,10 +18,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:search_address_repository/search_address_repository.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../global_widgets/deedee_appbar.dart';
-import '../main_topic/enum/topic_screens_enum.dart';
 
 class TagDTO {
   final String tagId;
@@ -65,6 +65,8 @@ class _FilterPageState extends State<FilterPage> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     if (_isInit) {
+      _position = await Geolocator.getCurrentPosition();
+      _userLocation = LatLng(_position.latitude, _position.longitude);
       //without delay services fail to determine _userLocation
       await Future.delayed(const Duration(seconds: 1));
       bloc.add(LoadTopicsEvent(_userLocation));
@@ -140,94 +142,90 @@ class _FilterPageState extends State<FilterPage> {
                       child: CircularProgressIndicator(),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            DeeDeeButton(
-                                title: AppLocalizations.of(context)!.placeOrder,
-                                gradientButton: true,
-                                onPressed: () {
-                                  context.router.push(MainTopicScreenRoute(
-                                      screenType: ScreenType.placeTags));
-                                }),
-                            DeeDeeButton(
-                                title: AppLocalizations.of(context)!.seeTags,
-                                gradientButton: true,
-                                onPressed: () {
-                                  context.router.push(MainTopicScreenRoute(
-                                      screenType: ScreenType.filterTags));
-                                }),
-                            Column(
+                      padding: const EdgeInsets.only(top: 16, bottom: 66),
+                      child: Column(
+                        children: [
+                          SingleChildScrollView(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                if (_topics.isNotEmpty)
-                                  Column(
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .chooseTopic,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1,
+                                Column(
+                                  children: [
+                                    if (_topics.isNotEmpty)
+                                      Column(
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .chooseTopic,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1,
+                                          ),
+                                          SelectorList(
+                                            data: _topics,
+                                            onTap: (String topic) => bloc
+                                                .add(SelectTopicEvent(topic)),
+                                            selectedItems: [_selectedTopic],
+                                          ),
+                                        ],
                                       ),
-                                      SelectorList(
-                                        data: _topics,
-                                        onTap: (String topic) =>
-                                            bloc.add(SelectTopicEvent(topic)),
-                                        selectedItems: [_selectedTopic],
+                                    if (_filterKeys.isEmpty &&
+                                        state is LoadingFiltersKeyState)
+                                      const Center(
+                                          child: CircularProgressIndicator()),
+                                    if (_filterKeys.isNotEmpty)
+                                      Column(
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .chooseFilterKeys,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1,
+                                          ),
+                                          SelectorList(
+                                            data: _filterKeys,
+                                            onTap: (String filterKey) =>
+                                                bloc.add(SelectFilterKeyEvent(
+                                                    filterKey)),
+                                            selectedItems: _selectedFilterKeys,
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (_selectedFilterKeys.length >= 3)
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  const Expanded(
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: SizedBox(),
+                                    ),
                                   ),
-                                if (_filterKeys.isEmpty &&
-                                    state is LoadingFiltersKeyState)
-                                  const Center(
-                                      child: CircularProgressIndicator()),
-                                if (_filterKeys.isNotEmpty)
-                                  Column(
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .chooseFilterKeys,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1,
-                                      ),
-                                      SelectorList(
-                                        data: _filterKeys,
-                                        onTap: (String filterKey) => bloc.add(
-                                            SelectFilterKeyEvent(filterKey)),
-                                        selectedItems: _selectedFilterKeys,
-                                      ),
-                                    ],
-                                  ),
-                                if (_selectedFilterKeys.length >= 3)
-                                  DeeDeeButton(
-                                      title: AppLocalizations.of(context)!
-                                          .placeOrder,
-                                          gradientButton: false,
-                                      onPressed: () {
-                                        context.router.push(
-                                            const PlaceOrderScreenRoute());
-                                      }),
-                                if (_selectedFilterKeys.length >= 3)
-                                  DeeDeeButton(
-                                    title: AppLocalizations.of(context)!
-                                        .filterTags,
-                                    gradientButton: true,
-                                    onPressed: () {
-                                      bloc.add(PushFiltersEvent(
-                                        topic: _selectedTopic,
-                                        filterKeys: _selectedFilterKeys,
-                                        accountType: user.accountType,
-                                      ));
-                                    },
-                                  ),
-                                if (_selectedFilterKeys.length >= 3)
                                   DeeDeeButton(
                                     title:
-                                        'Сохранить фильтр и перейти на карту',
+                                        AppLocalizations.of(context)!.placeBid,
+                                    onPressed: () async {
+                                      final data = await context.router.push(
+                                              MapSetLocationScreenRoute(
+                                                  userLocation: _userLocation))
+                                          as AddressModel?;
+                                      if (data == null) {
+                                        return;
+                                      }
+                                      bloc.add(SelectLocationEvent(data));
+                                    },
+                                    gradientButton: false,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  DeeDeeButton(
+                                    title:
+                                        AppLocalizations.of(context)!.seeTags,
                                     gradientButton: true,
                                     onPressed: () {
                                       bloc.add(SaveFiltersEvent(
@@ -240,10 +238,10 @@ class _FilterPageState extends State<FilterPage> {
                                       ));
                                     },
                                   ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                ],
+                              ),
+                            )
+                        ],
                       ),
                     );
             },

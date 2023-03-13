@@ -18,13 +18,14 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../deedee_button/deedee_button.dart';
 import '../global_widgets/deedee_appbar.dart';
-import '../main_topic/enum/topic_screens_enum.dart';
 import '../selector/bloc/selector_bloc.dart';
 import '../selector/selector_list.dart';
 import 'dialog_widget.dart';
 
 class PlaceTagScreen extends StatefulWidget {
-  const PlaceTagScreen({super.key});
+  final String topicsName;
+
+  const PlaceTagScreen({super.key, required this.topicsName});
 
   @override
   State<PlaceTagScreen> createState() => _PlaceTagScreenState();
@@ -178,32 +179,46 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                           ],
                         ),
                       ),
-                      const Expanded(
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: SizedBox())),
-                      DeeDeeButton(
-                        title: AppLocalizations.of(context)!.placeOrder,
-                        gradientButton: false,
-                        onPressed: () {
-                          context.router.push(const PlaceOrderScreenRoute());
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      DeeDeeButton(
-                        title: AppLocalizations.of(context)!.seeTags,
-                        gradientButton: true,
-                        onPressed: () async {
-                          final data = await context.router.push(
-                                  MapSetLocationScreenRoute(
-                                      userLocation: _userLocation))
-                              as AddressModel?;
-                          if (data == null) {
-                            return;
-                          }
-                          bloc.add(SelectLocationEvent(data));
-                        },
-                      ),
+                      if (_selectedFilterKeys.length >= 3)
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Expanded(
+                                  child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: SizedBox())),
+                              DeeDeeButton(
+                                title: AppLocalizations.of(context)!.placeBid,
+                                onPressed: () async {
+                                  final data = await context.router.push(
+                                          MapSetLocationScreenRoute(
+                                              userLocation: _userLocation))
+                                      as AddressModel?;
+                                  if (data == null) {
+                                    return;
+                                  }
+                                  bloc.add(SelectLocationEvent(data));
+                                },
+                                gradientButton: false,
+                              ),
+                              const SizedBox(height: 8),
+                              DeeDeeButton(
+                                title: 'Сохранить фильтр и перейти на карту',
+                                gradientButton: true,
+                                onPressed: () {
+                                  bloc.add(SaveFiltersEvent(
+                                    isSubscribe: false,
+                                    topic: widget.topicsName,
+                                    subtopic: _selectedTopic,
+                                    filterKeys: _selectedFilterKeys,
+                                    accountType: user.accountType,
+                                    userId: user.userId,
+                                  ));
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                 );

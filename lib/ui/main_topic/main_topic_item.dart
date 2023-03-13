@@ -52,7 +52,9 @@ class MainTopicItem extends StatelessWidget {
         onTap: () {
           switch (screenType) {
             case ScreenType.placeTags:
-              push(context, const PlaceTagScreen());
+              push(context, PlaceTagScreen(
+                topicsName: topic.title,
+              ));
               break;
             case ScreenType.filterTags:
               push(
