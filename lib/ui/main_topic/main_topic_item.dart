@@ -49,12 +49,15 @@ class MainTopicItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         splashColor: Colors.transparent,
+        highlightColor: const Color(0xFFF8F4FE),
         onTap: () {
           switch (screenType) {
             case ScreenType.placeTags:
-              push(context, PlaceTagScreen(
-                topicsName: topic.title,
-              ));
+              push(
+                  context,
+                  PlaceTagScreen(
+                    topicsName: topic.title,
+                  ));
               break;
             case ScreenType.filterTags:
               push(

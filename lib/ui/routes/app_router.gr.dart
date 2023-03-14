@@ -31,6 +31,7 @@ import '../home/home_screen.dart' as _i4;
 import '../main_topic/enum/topic_screens_enum.dart' as _i30;
 import '../main_topic/main_topic_screen.dart' as _i22;
 import '../map_cubit/map_screen.dart' as _i7;
+import '../place_bid/place_order_screen.dart' as _i25;
 import '../place_tag/map_set_location_screen.dart' as _i8;
 import '../place_tag/place_tag_screen.dart' as _i5;
 import '../referral/referral_screen.dart' as _i14;
@@ -74,6 +75,7 @@ class AppRouter extends _i26.RootStackRouter {
       );
     },
     PlaceTagScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<PlaceTagScreenRouteArgs>();
       return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.PlaceTagScreen(
@@ -390,14 +392,36 @@ class HomeScreenRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PlaceTagScreen]
-class PlaceTagScreenRoute extends _i26.PageRouteInfo<void> {
-  const PlaceTagScreenRoute()
-      : super(
+class PlaceTagScreenRoute extends _i26.PageRouteInfo<PlaceTagScreenRouteArgs> {
+  PlaceTagScreenRoute({
+    _i27.Key? key,
+    required String topicsName,
+  }) : super(
           PlaceTagScreenRoute.name,
           path: '/place-tag',
+          args: PlaceTagScreenRouteArgs(
+            key: key,
+            topicsName: topicsName,
+          ),
         );
 
   static const String name = 'PlaceTagScreenRoute';
+}
+
+class PlaceTagScreenRouteArgs {
+  const PlaceTagScreenRouteArgs({
+    this.key,
+    required this.topicsName,
+  });
+
+  final _i27.Key? key;
+
+  final String topicsName;
+
+  @override
+  String toString() {
+    return 'PlaceTagScreenRouteArgs{key: $key, topicsName: $topicsName}';
+  }
 }
 
 /// generated route for

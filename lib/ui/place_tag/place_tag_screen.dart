@@ -188,7 +188,7 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                                       alignment: Alignment.bottomCenter,
                                       child: SizedBox())),
                               DeeDeeButton(
-                                title: AppLocalizations.of(context)!.placeBid,
+                                title: AppLocalizations.of(context)!.placeOrder,
                                 onPressed: () async {
                                   final data = await context.router.push(
                                           MapSetLocationScreenRoute(
