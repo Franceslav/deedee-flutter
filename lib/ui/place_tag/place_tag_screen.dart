@@ -23,9 +23,7 @@ import '../selector/selector_list.dart';
 import 'dialog_widget.dart';
 
 class PlaceTagScreen extends StatefulWidget {
-  final String topicsName;
-
-  const PlaceTagScreen({super.key, required this.topicsName});
+  const PlaceTagScreen({super.key});
 
   @override
   State<PlaceTagScreen> createState() => _PlaceTagScreenState();
@@ -179,46 +177,6 @@ class _PlaceTagScreenState extends State<PlaceTagScreen> {
                           ],
                         ),
                       ),
-                      if (_selectedFilterKeys.length >= 3)
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const Expanded(
-                                  child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: SizedBox())),
-                              DeeDeeButton(
-                                title: AppLocalizations.of(context)!.placeOrder,
-                                onPressed: () async {
-                                  final data = await context.router.push(
-                                          MapSetLocationScreenRoute(
-                                              userLocation: _userLocation))
-                                      as AddressModel?;
-                                  if (data == null) {
-                                    return;
-                                  }
-                                  bloc.add(SelectLocationEvent(data));
-                                },
-                                gradientButton: false,
-                              ),
-                              const SizedBox(height: 8),
-                              DeeDeeButton(
-                                title: 'Сохранить фильтр и перейти на карту',
-                                gradientButton: true,
-                                onPressed: () {
-                                  bloc.add(SaveFiltersEvent(
-                                    isSubscribe: false,
-                                    topic: widget.topicsName,
-                                    subtopic: _selectedTopic,
-                                    filterKeys: _selectedFilterKeys,
-                                    accountType: user.accountType,
-                                    userId: user.userId,
-                                  ));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
                     ],
                   ),
                 );

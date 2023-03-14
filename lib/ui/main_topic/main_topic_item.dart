@@ -4,6 +4,7 @@ import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'enum/topic_screens_enum.dart';
 
 class MainTopicItem extends StatelessWidget {
@@ -53,11 +54,7 @@ class MainTopicItem extends StatelessWidget {
         onTap: () {
           switch (screenType) {
             case ScreenType.placeTags:
-              push(
-                  context,
-                  PlaceTagScreen(
-                    topicsName: topic.title,
-                  ));
+              push(context, PlaceTagScreen());
               break;
             case ScreenType.filterTags:
               push(

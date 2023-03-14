@@ -208,8 +208,8 @@ class _FilterPageState extends State<FilterPage> {
                                     ),
                                   ),
                                   DeeDeeButton(
-                                    title:
-                                        AppLocalizations.of(context)!.placeBid,
+                                    title: AppLocalizations.of(context)!
+                                        .placeOrder,
                                     onPressed: () async {
                                       final data = await context.router.push(
                                               MapSetLocationScreenRoute(
