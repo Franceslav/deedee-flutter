@@ -17,6 +17,7 @@ import 'package:deedee/ui/user_tag_details/bloc/user_tag_details_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,6 +27,8 @@ import 'package:search_address_repository/search_address_repository.dart';
 void main() {
   configureDependencies('dev');
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   // locator.get<SharedUtils>().clearAll();
 
   runApp(MultiProvider(providers: [
