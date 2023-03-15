@@ -1,8 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
+import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
@@ -13,7 +17,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
+
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import 'package:deedee/constants.dart';
+import 'package:deedee/model/user.dart';
+import 'package:deedee/services/helper.dart';
+import 'package:deedee/ui/auth/authentication_bloc.dart';
+import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
+import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 
 import '../auth/welcome/welcome_screen.dart';
 import '../place_tag/place_tag_screen.dart';
@@ -21,11 +35,15 @@ import '../place_tag/place_tag_screen.dart';
 class MapScreen extends StatefulWidget {
   final User user;
   final Map<LatLng, TagDTO> tagDescriptionMap;
+  List<String> filterKeys;
+  List<String> selectedFilterKeys;
 
-  const MapScreen({
+  MapScreen({
     Key? key,
-    required this.tagDescriptionMap,
     required this.user,
+    required this.tagDescriptionMap,
+    required this.filterKeys,
+    required this.selectedFilterKeys,
   }) : super(key: key);
 
   @override
@@ -83,7 +101,10 @@ class _MapScreenState extends State<MapScreen> {
         );
       },
     );
-
+    _pc = DeeDeeSliderController();
+    context
+        .read<SelectorBloc>()
+        .add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
     super.initState();
   }
 
@@ -100,9 +121,39 @@ class _MapScreenState extends State<MapScreen> {
         }
       },
       child: Scaffold(
-        drawer: const DeeDeeDrawer(),
         appBar: AppBar(
+          toolbarHeight: size.height * 0.105,
           backgroundColor: Colors.transparent,
+          actions: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 50,
+                ),
+                child: BlocConsumer<SelectorBloc, SelectorState>(
+                  listener: (context, state) {
+                    if (state is LoadedFilterKeysState) {
+                      widget.filterKeys = state.filterKeys;
+                    }
+                    if (state is FilterKeySelectedState) {
+                      widget.selectedFilterKeys.contains(state.filterKey)
+                          ? widget.selectedFilterKeys.remove(state.filterKey)
+                          : widget.selectedFilterKeys.add(state.filterKey);
+                    }
+                  },
+                  builder: (context, state) {
+                    return SelectorAppBar(
+                      data: widget.filterKeys,
+                      onTap: (String filterKey) => context
+                          .read<SelectorBloc>()
+                          .add(SelectFilterKeyEvent(filterKey)),
+                      selectedItems: widget.selectedFilterKeys,
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
           iconTheme: IconThemeData(
               color: isDarkMode(context) ? Colors.white : Colors.black),
           elevation: 0.0,

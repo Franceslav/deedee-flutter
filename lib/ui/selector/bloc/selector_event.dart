@@ -24,6 +24,11 @@ class SelectFilterKeyEvent extends SelectorEvent {
   SelectFilterKeyEvent(this.filterKey);
 }
 
+class SelectListFilterKeyEvent extends SelectorEvent {
+  final List<String> listFilterKey;
+  SelectListFilterKeyEvent(this.listFilterKey);
+}
+
 class SelectDurationEvent extends SelectorEvent {
   final bool userChoseDuration;
   SelectDurationEvent(this.userChoseDuration);

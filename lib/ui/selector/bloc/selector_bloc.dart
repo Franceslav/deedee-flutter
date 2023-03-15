@@ -15,6 +15,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<SelectTopicEvent>(_onSelectTopic);
     on<LoadFilterKeysEvent>(_onLoadFilterKeys);
     on<SelectFilterKeyEvent>(_onSelectFilterKey);
+    on<SelectListFilterKeyEvent>(_onSelectListFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
     on<SaveFiltersEvent>(_onSaveFilters);
     on<PushTagEvent>(_onPushTag);
@@ -60,6 +61,13 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onSelectFilterKey(SelectFilterKeyEvent event, Emitter<SelectorState> emit) {
     emit(FilterKeySelectedState(event.filterKey));
+  }
+
+  _onSelectListFilterKey(
+      SelectListFilterKeyEvent event, Emitter<SelectorState> emit) {
+    for (var element in event.listFilterKey) {
+      emit(FilterKeySelectedState(element));
+    }
   }
 
   _onSelectLocation(SelectLocationEvent event, Emitter<SelectorState> emit) {

@@ -114,6 +114,12 @@ class MockFilterServiceClient implements FilterServiceClient {
         FilterKey()
           ..topicId = "маникюр"
           ..title = "ф",
+        FilterKey()
+          ..topicId = "маникюр"
+          ..title = "первый",
+        FilterKey()
+          ..topicId = "маникюр"
+          ..title = "второй",
       ]);
   }
 

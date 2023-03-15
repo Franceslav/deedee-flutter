@@ -11,11 +11,12 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i26;
-import 'package:flutter/material.dart' as _i27;
+
+import 'package:auto_route/auto_route.dart' as _i25;
+import 'package:flutter/material.dart' as _i26;
 import 'package:latlong2/latlong.dart' as _i28;
 
-import '../../model/user.dart' as _i29;
+import '../../model/user.dart' as _i27;
 import '../account/account_screen.dart' as _i9;
 import '../account/account_verify_screen.dart' as _i10;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
@@ -100,8 +101,10 @@ class AppRouter extends _i26.RootStackRouter {
         routeData: routeData,
         child: _i7.MapScreen(
           key: args.key,
-          tagDescriptionMap: args.tagDescriptionMap,
           user: args.user,
+          tagDescriptionMap: args.tagDescriptionMap,
+          filterKeys: args.filterKeys,
+          selectedFilterKeys: args.selectedFilterKeys,
         ),
       );
     },
@@ -462,16 +465,22 @@ class FilterPageRouteArgs {
 /// [_i7.MapScreen]
 class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
   MapScreenRoute({
-    _i27.Key? key,
+
+    _i26.Key? key,
+    required _i27.User user,
     required Map<_i28.LatLng, _i6.TagDTO> tagDescriptionMap,
-    required _i29.User user,
+    required List<String> filterKeys,
+    required List<String> selectedFilterKeys,
+
   }) : super(
           MapScreenRoute.name,
           path: '/map',
           args: MapScreenRouteArgs(
             key: key,
-            tagDescriptionMap: tagDescriptionMap,
             user: user,
+            tagDescriptionMap: tagDescriptionMap,
+            filterKeys: filterKeys,
+            selectedFilterKeys: selectedFilterKeys,
           ),
         );
 
@@ -481,19 +490,27 @@ class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
 class MapScreenRouteArgs {
   const MapScreenRouteArgs({
     this.key,
-    required this.tagDescriptionMap,
     required this.user,
+    required this.tagDescriptionMap,
+    required this.filterKeys,
+    required this.selectedFilterKeys,
   });
 
   final _i27.Key? key;
 
+
+  final _i27.User user;
+
   final Map<_i28.LatLng, _i6.TagDTO> tagDescriptionMap;
 
-  final _i29.User user;
+  final List<String> filterKeys;
+
+  final List<String> selectedFilterKeys;
+
 
   @override
   String toString() {
-    return 'MapScreenRouteArgs{key: $key, tagDescriptionMap: $tagDescriptionMap, user: $user}';
+    return 'MapScreenRouteArgs{key: $key, user: $user, tagDescriptionMap: $tagDescriptionMap, filterKeys: $filterKeys, selectedFilterKeys: $selectedFilterKeys}';
   }
 }
 
@@ -502,7 +519,9 @@ class MapScreenRouteArgs {
 class MapSetLocationScreenRoute
     extends _i26.PageRouteInfo<MapSetLocationScreenRouteArgs> {
   MapSetLocationScreenRoute({
-    _i27.Key? key,
+
+    _i26.Key? key,
+
     required _i28.LatLng userLocation,
   }) : super(
           MapSetLocationScreenRoute.name,

@@ -132,6 +132,8 @@ class _FilterPageState extends State<FilterPage> {
                   context.router.replace(MapScreenRoute(
                     tagDescriptionMap: tagMap,
                     user: user,
+                         filterKeys: _filterKeys,
+                selectedFilterKeys: _selectedFilterKeys,
                   ));
                 }
               }

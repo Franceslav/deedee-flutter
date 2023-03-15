@@ -72,7 +72,7 @@ class _SlidableFilterListState extends State<SlidableFilterList> {
               context.router.replace(MapScreenRoute(
                 // добавить сюда фильтры для меток
                 tagDescriptionMap: {},
-                user: user,
+                user: user, filterKeys: [], selectedFilterKeys: [],
               ));
               FilterDTOBloc().add(PushSavedFiltersEvent(
                   accountType: user.accountType,
