@@ -104,7 +104,6 @@ class _MapScreenState extends State<MapScreen> {
         );
       },
     );
-    _pc = DeeDeeSliderController();
     context
         .read<SelectorBloc>()
         .add(SelectListFilterKeyEvent(widget.selectedFilterKeys));

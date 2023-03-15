@@ -11,12 +11,11 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i26;
+import 'package:flutter/material.dart' as _i27;
+import 'package:latlong2/latlong.dart' as _i29;
 
-import 'package:auto_route/auto_route.dart' as _i25;
-import 'package:flutter/material.dart' as _i26;
-import 'package:latlong2/latlong.dart' as _i28;
-
-import '../../model/user.dart' as _i27;
+import '../../model/user.dart' as _i28;
 import '../account/account_screen.dart' as _i9;
 import '../account/account_verify_screen.dart' as _i10;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
@@ -76,13 +75,9 @@ class AppRouter extends _i26.RootStackRouter {
       );
     },
     PlaceTagScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<PlaceTagScreenRouteArgs>();
       return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.PlaceTagScreen(
-          key: args.key,
-          topicsName: args.topicsName,
-        ),
+        child: const _i5.PlaceTagScreen(),
       );
     },
     FilterPageRoute.name: (routeData) {
@@ -395,36 +390,14 @@ class HomeScreenRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PlaceTagScreen]
-class PlaceTagScreenRoute extends _i26.PageRouteInfo<PlaceTagScreenRouteArgs> {
-  PlaceTagScreenRoute({
-    _i27.Key? key,
-    required String topicsName,
-  }) : super(
+class PlaceTagScreenRoute extends _i26.PageRouteInfo<void> {
+  const PlaceTagScreenRoute()
+      : super(
           PlaceTagScreenRoute.name,
           path: '/place-tag',
-          args: PlaceTagScreenRouteArgs(
-            key: key,
-            topicsName: topicsName,
-          ),
         );
 
   static const String name = 'PlaceTagScreenRoute';
-}
-
-class PlaceTagScreenRouteArgs {
-  const PlaceTagScreenRouteArgs({
-    this.key,
-    required this.topicsName,
-  });
-
-  final _i27.Key? key;
-
-  final String topicsName;
-
-  @override
-  String toString() {
-    return 'PlaceTagScreenRouteArgs{key: $key, topicsName: $topicsName}';
-  }
 }
 
 /// generated route for
@@ -465,13 +438,11 @@ class FilterPageRouteArgs {
 /// [_i7.MapScreen]
 class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
   MapScreenRoute({
-
-    _i26.Key? key,
-    required _i27.User user,
-    required Map<_i28.LatLng, _i6.TagDTO> tagDescriptionMap,
+    _i27.Key? key,
+    required _i28.User user,
+    required Map<_i29.LatLng, _i6.TagDTO> tagDescriptionMap,
     required List<String> filterKeys,
     required List<String> selectedFilterKeys,
-
   }) : super(
           MapScreenRoute.name,
           path: '/map',
@@ -498,15 +469,13 @@ class MapScreenRouteArgs {
 
   final _i27.Key? key;
 
+  final _i28.User user;
 
-  final _i27.User user;
-
-  final Map<_i28.LatLng, _i6.TagDTO> tagDescriptionMap;
+  final Map<_i29.LatLng, _i6.TagDTO> tagDescriptionMap;
 
   final List<String> filterKeys;
 
   final List<String> selectedFilterKeys;
-
 
   @override
   String toString() {
@@ -519,10 +488,8 @@ class MapScreenRouteArgs {
 class MapSetLocationScreenRoute
     extends _i26.PageRouteInfo<MapSetLocationScreenRouteArgs> {
   MapSetLocationScreenRoute({
-
-    _i26.Key? key,
-
-    required _i28.LatLng userLocation,
+    _i27.Key? key,
+    required _i29.LatLng userLocation,
   }) : super(
           MapSetLocationScreenRoute.name,
           path: '/map-set-location',
@@ -543,7 +510,7 @@ class MapSetLocationScreenRouteArgs {
 
   final _i27.Key? key;
 
-  final _i28.LatLng userLocation;
+  final _i29.LatLng userLocation;
 
   @override
   String toString() {
