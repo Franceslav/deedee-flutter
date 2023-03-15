@@ -34,6 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Builder(builder: (context) {
           return Scaffold(
             appBar: DeeDeeAppBar(
+              title: AppLocalizations.of(context)!.settings,
               controller: _controller,
               child: const ProfilePhotoWithBadge(),
             ),

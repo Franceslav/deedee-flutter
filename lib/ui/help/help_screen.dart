@@ -41,6 +41,7 @@ class _HelpState extends State<HelpScreen> {
       child: Scaffold(
         appBar: DeeDeeAppBar(
           controller: _panelController,
+          title: AppLocalizations.of(context)!.helpTitle,
           child: const ProfilePhotoWithBadge(),
         ),
         body: Stack(

@@ -34,6 +34,7 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.topics,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),

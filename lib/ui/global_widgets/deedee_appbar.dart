@@ -6,11 +6,12 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
-
+  final String title;
   final PanelController controller;
   final Widget child;
 
   DeeDeeAppBar({
+    required this.title,
     required this.controller,
     required this.child,
     Key? key,
@@ -20,7 +21,7 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const CustomToggleButton(),
+      title: Text(title),
       actions: [
         GestureDetector(
           onTap: () {
@@ -31,7 +32,7 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
               controller.open();
             }
           },
-          child:  Padding(
+          child: Padding(
             padding: const EdgeInsets.all(5),
             child: child,
           ),

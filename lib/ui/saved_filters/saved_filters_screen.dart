@@ -57,6 +57,7 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
     _filters = filterDTOList;
     return Scaffold(
       appBar: DeeDeeAppBar(
+        title: AppLocalizations.of(context)!.safe,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),

@@ -33,6 +33,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       create: (context) => PlaceOrderBloc(),
       child: Scaffold(
         appBar: DeeDeeAppBar(
+          title: AppLocalizations.of(context)!.placeOrderPageTitle,
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),
@@ -58,7 +59,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       Text(
-                       AppLocalizations.of(context)!.orderProvideInformation,
+                        AppLocalizations.of(context)!.orderProvideInformation,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 16),

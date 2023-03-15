@@ -80,6 +80,7 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
       appBar: DeeDeeAppBar(
         controller: _controller,
+        title: AppLocalizations.of(context)!.filterTagsPageTitle,
         child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
