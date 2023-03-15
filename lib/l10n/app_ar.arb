@@ -102,5 +102,11 @@
      "additionalInformation": "معلومات إضافية",
      "text": "نص",
      "convenientTime": "وقت مناسب",
-     "day": "يوم"
+     "day": "يوم",
+     "verification": "تَحَقّق",
+     "verifyYourAccount": "تحقق من حسابك",
+     "premium": "غالي",
+     "activated": "مفعل",
+     "profile": "حساب تعريفي",
+     "switchAccount": "تبديل الحساب"
 }

@@ -116,5 +116,11 @@
      "additionalInformation": "Additional Information",
      "text": "Text",
      "convenientTime": "Convenient time",
-     "day": "Day"
+     "day": "Day",
+     "verification": "Verification",
+     "verifyYourAccount": "Verify your account",
+     "premium": "Premium",
+     "activated": "Activated",
+     "profile": "Profile",
+     "switchAccount": "Switch account"
 }

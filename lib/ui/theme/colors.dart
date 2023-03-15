@@ -2,3 +2,12 @@ import 'package:flutter/material.dart';
 
 const Color mainTextColor = Color(0xFF1A1A1B);
 const Color secondaryTextColor = Color(0xFF717184);
+
+abstract class AppColors {
+  static const black = Color(0xFF1A1A1B);
+  static const grey = Color(0xFF717D96);
+  static const lightgrey = Color.fromARGB(255, 239, 238, 238);
+  static const tapButton = Color(0xFFF8F4FE);
+  static const blue = Color(0xFF4D94E9);
+  static const red = Color(0xFFD74138);
+}

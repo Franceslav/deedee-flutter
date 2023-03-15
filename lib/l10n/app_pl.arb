@@ -112,5 +112,11 @@
     "additionalInformation": "Dodatkowe informacje",
     "text": "Tekst",
     "convenientTime": "Dogodny termin",
-    "day": "Dzień"
+    "day": "Dzień",
+     "verification": "Weryfikacja",
+     "verifyYourAccount": "Zweryfikuj swoje konto",
+     "premium": "Premia",
+     "activated": "Aktywowany",
+     "profile": "Profil",
+     "switchAccount": "Przełącz konto"
 }

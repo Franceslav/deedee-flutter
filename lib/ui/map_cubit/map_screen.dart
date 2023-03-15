@@ -10,8 +10,11 @@ import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
+import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -245,7 +248,7 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
         children: widget._openedFirstTime
             ? []
             : [
-                AccountInfoWidget(widget: widget),
+                const AccountInfoWidget(),
                 ContactsWidget(widget: widget),
                 const AddressInfoWidget(),
               ],
@@ -257,39 +260,34 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
 class AccountInfoWidget extends StatelessWidget {
   const AccountInfoWidget({
     super.key,
-    required this.widget,
   });
-
-  final CustomPanelWidget widget;
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 32),
-        const SizedBox(
-          width: 86,
-          height: 86,
-          //TODO implement data
-          child: Image(image: AssetImage('assets/images/photo.jpg')),
+        const Center(
+          child: ProfilePhotoWithBadge(),
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 8.0),
-          //TODO implement data
-          child: Text('Василий Пупкинс',
-              //widget._selectedMessengerId,
-              style: TextStyle(
-                  color: mainTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500)),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            user.fullName(),
+            style: AppTextTheme.titleLarge,
+          ),
         ),
         //TODO implement data
-        const Text('На сервисе с 2023г',
-            style: TextStyle(
-                color: secondaryTextColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w400)),
+        const Padding(
+          padding: EdgeInsets.only(top: 4),
+          child: Text('На сервисе с 2023г',
+              style: TextStyle(
+                  color: secondaryTextColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400)),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Row(
