@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
@@ -8,6 +9,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
 
 class FireStoreUtils {
@@ -161,7 +163,7 @@ class FireStoreUtils {
         profilePicUrl =
             await uploadUserImageToServer(image, result.user?.uid ?? '');
       }
-      User user = User(
+      User user = User(LatLng(0, 0),
           email: emailAddress,
           firstName: firstName,
           userId: result.user?.uid ?? '',
@@ -232,7 +234,7 @@ class FireStoreUtils {
         profileImageUrl = await uploadUserImageToServer(
             image, userCredential.user?.uid ?? '');
       }
-      User user = User(
+      User user = User(LatLng(0, 0),
           firstName:
               firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
           lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
@@ -282,6 +284,7 @@ class FireStoreUtils {
       return user;
     } else {
       user = User(
+        LatLng(0, 0),
         email: appleIdCredential.email ?? '',
         firstName: appleIdCredential.fullName?.givenName ?? '',
         profilePictureURL: '',

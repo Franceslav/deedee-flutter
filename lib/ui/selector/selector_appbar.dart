@@ -28,13 +28,11 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            ...widget.data.map(
-              (title) => SelectorItem(
-                title: title,
-                onTap: widget.onTap,
-                isSelected: widget.selectedItems.contains(title),
-              ),
-            ),
+            ...widget.data.map((title) => SelectorItem(
+                  title: title,
+                  onTap: widget.onTap,
+                  isSelected: widget.selectedItems.contains(title),
+                )),
           ],
         ),
       ),

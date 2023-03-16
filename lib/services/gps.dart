@@ -22,6 +22,7 @@ class GPSRepository {
         if (permission == LocationPermission.denied) {
           // showSnackBar(context, 'Location permissions are denied');
         } else if (permission == LocationPermission.deniedForever) {
+
           // showSnackBar(context, 'Location permissions are permanently denied');
         } else {
           haspermission = true;

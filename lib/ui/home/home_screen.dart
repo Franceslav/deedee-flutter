@@ -2,32 +2,26 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/grpc.dart';
-import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
 import 'package:deedee/ui/home/pick_city_dropdown.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../model/user.dart';
 import '../../services/helper.dart';
 import '../../services/shared.dart';
-import '../global_widgets/app_bar_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,9 +56,7 @@ class _HomeState extends State<HomeScreen> {
 
     return BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(
-        locator.get<GPSRepository>(),
-        locator.get<GRCPRepository>(),
-      ),
+          locator.get<GPSRepository>(), locator.get<GRCPRepository>(), user),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
@@ -147,49 +139,5 @@ class _HomeState extends State<HomeScreen> {
         ),
       );
     }
-  }
-
-  checkGps() async {
-    servicestatus = await Geolocator.isLocationServiceEnabled();
-    if (servicestatus) {
-      permission = await Geolocator.checkPermission();
-
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          // showSnackBar(context, 'Location permissions are denied');
-        } else if (permission == LocationPermission.deniedForever) {
-          // showSnackBar(context, 'Location permissions are permanently denied');
-        } else {
-          haspermission = true;
-        }
-      } else {
-        haspermission = true;
-      }
-
-      if (haspermission) {
-        getLocation();
-      }
-    } else {
-      // showSnackBar(context, 'GPS Service is not enabled, turn on GPS location');
-    }
-  }
-
-  getLocation() async {
-    position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    LocationSettings locationSettings = const LocationSettings(
-      accuracy: LocationAccuracy.bestForNavigation,
-      //accuracy of the location data
-      distanceFilter: 100, //minimum distance (measured in meters) a
-      //device must move horizontally before an update event is generated;
-    );
-
-    StreamSubscription<Position> positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position position) {
-      BlocProvider.of<UserBloc>(context).add(UserSetLastGeolocation(
-          LatLng(position.latitude, position.longitude)));
-    });
   }
 }

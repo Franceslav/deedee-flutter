@@ -1,26 +1,15 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:deedee/constants.dart';
-import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/filter_dto.dart';
-
-import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
-
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/global_widgets/slidable_filter_list.dart';
-import 'package:deedee/ui/loading_cubit.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
-
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
-import '../global_widgets/deedee_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../global_widgets/deedee_appbar.dart';
 
 class SavedFiltersScreen extends StatefulWidget {
   const SavedFiltersScreen({super.key});

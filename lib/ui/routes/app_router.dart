@@ -15,7 +15,6 @@ import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
 import 'package:deedee/ui/place_bid/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
-import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
 import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/settings/connection_settings/connection_settings_screen.dart';
@@ -33,7 +32,6 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: OnBoardingScreen, path: '/boarding'),
     MaterialRoute(page: WelcomeScreen, path: '/welcome'),
     MaterialRoute(page: HomeScreen, path: '/main'),
-    MaterialRoute(page: PlaceTagScreen, path: '/place-tag'),
     MaterialRoute(page: FilterPage, path: '/filter'),
     MaterialRoute(page: MapScreen, path: '/map'),
     MaterialRoute(page: MapSetLocationScreen, path: '/map-set-location'),

@@ -1,7 +1,6 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
-import 'package:deedee/ui/place_tag/place_tag_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -52,18 +51,12 @@ class MainTopicItem extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: const Color(0xFFF8F4FE),
         onTap: () {
-          switch (screenType) {
-            case ScreenType.placeTags:
-              push(context, PlaceTagScreen());
-              break;
-            case ScreenType.filterTags:
-              push(
-                  context,
-                  FilterPage(
-                    topicsName: topic.title,
-                  ));
-              break;
-          }
+          push(
+            context,
+            FilterPage(
+              topicsName: topic.title,
+            ),
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(24),

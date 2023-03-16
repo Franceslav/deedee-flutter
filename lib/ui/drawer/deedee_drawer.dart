@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
+
 import '../global_widgets/profile_photo_with_badge.dart';
 
 class DeeDeeDrawer extends StatefulWidget {
@@ -219,7 +220,8 @@ class _DrawerState extends State<DeeDeeDrawer> {
                                         },
                                       ),
                                       DrawerButton(
-                                        text: AppLocalizations.of(context)!.subscription,
+                                        text: AppLocalizations.of(context)!
+                                            .subscription,
                                         iconData: Icons.star,
                                         onTap: () {
                                           context.router.replace(

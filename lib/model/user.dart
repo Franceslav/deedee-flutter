@@ -56,23 +56,32 @@ class User extends Equatable {
   final double balance;
   final int availableTags;
   final AccountType accountType;
-  final LatLng? lastGeoLocation;
   final List<Place>? availablePlaces;
   final List<String>? savedFilters;
 
-  static const empty = User(
+  LatLng lastUserGeoLocation;
+
+  static User empty = User(
+    LatLng(0, 0),
     userId: '',
     email: '',
     firstName: '',
     lastName: '',
   );
 
+  LatLng get lastGeoLocation => lastUserGeoLocation;
+
+  set lastGeoLocation(LatLng lastGeoLocation) =>
+      lastUserGeoLocation = lastGeoLocation;
+
   String fullName() => '$firstName $lastName';
 
   bool get isEmpty => this == User.empty;
+
   bool get isNotEmpty => this != User.empty;
 
-  const User({
+  User(
+    this.lastUserGeoLocation, {
     required this.userId,
     required this.email,
     required this.firstName,
@@ -84,13 +93,13 @@ class User extends Equatable {
     this.balance = 0.0,
     this.availableTags = 3,
     this.accountType = AccountType.buy,
-    this.lastGeoLocation,
     this.availablePlaces,
     this.savedFilters,
   });
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
+      LatLng(0, 0),
       userId: parsedJson['userId'] ?? '',
       email: parsedJson['email'] ?? '',
       firstName: parsedJson['firstName'] ?? '',
@@ -98,7 +107,6 @@ class User extends Equatable {
       profilePictureURL: parsedJson['profilePictureURL'] ?? '',
       balance: parsedJson['balance'] ?? 0.0,
       availableTags: parsedJson['availableTags'] ?? 0,
-      lastGeoLocation: null,
       availablePlaces: null,
       savedFilters: null,
     );
@@ -116,8 +124,8 @@ class User extends Equatable {
       'premiumStatus': premiumStatus,
       'balance': balance,
       'availableTags': availableTags,
-      'lastLat': lastGeoLocation?.latitude ?? 0.0,
-      'lastLon': lastGeoLocation?.longitude ?? 0.0,
+      'lastLat': lastGeoLocation.latitude ?? 0.0,
+      'lastLon': lastGeoLocation.longitude ?? 0.0,
     };
   }
 
@@ -134,6 +142,7 @@ class User extends Equatable {
     List<String>? savedFilters,
   }) {
     return User(
+      lastGeoLocation,
       userId: userId,
       email: email,
       firstName: firstName,
@@ -145,7 +154,6 @@ class User extends Equatable {
       balance: balance ?? this.balance,
       availableTags: availableTags ?? this.availableTags,
       accountType: accountType ?? this.accountType,
-      lastGeoLocation: lastGeoLocation,
       availablePlaces: availablePlaces,
       savedFilters: savedFilters,
     );

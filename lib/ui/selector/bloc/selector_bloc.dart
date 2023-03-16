@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
-import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:latlong2/latlong.dart';
@@ -10,7 +9,10 @@ part 'selector_event.dart';
 part 'selector_state.dart';
 
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
-  SelectorBloc() : super(InitialState()) {
+  final GRCPRepository _grpcRepository;
+  final User _user;
+
+  SelectorBloc(this._grpcRepository, this._user) : super(InitialState()) {
     on<LoadTopicsEvent>(_onLoadSubTopics);
     on<SelectTopicEvent>(_onSelectTopic);
     on<LoadFilterKeysEvent>(_onLoadFilterKeys);
@@ -24,19 +26,22 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<DurationSelectedEvent>(_userChoseDuration);
 
     on<SelectFirstLvlTopicEvent>(_onSelectFirstLvlTopic);
+    initialize();
   }
 
-  _onLoadSubTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {
+  initialize() async {
     try {
-      final response = await locator.get<GRCPRepository>().getSubTopics(
-            event.location.latitude,
-            event.location.longitude,
-          );
+      final response = await _grpcRepository.getSubTopics(
+        _user.lastGeoLocation.latitude,
+        _user.lastGeoLocation.longitude,
+      );
       emit(LoadedTopicsState(response));
     } catch (error) {
       ErrorState(error.toString());
     }
   }
+
+  _onLoadSubTopics(LoadTopicsEvent event, Emitter<SelectorState> emit) async {}
 
   _onSelectTopic(SelectTopicEvent event, Emitter<SelectorState> emit) {
     emit(TopicSelectedState(event.topic));
@@ -51,8 +56,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
       LoadFilterKeysEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingFiltersKeyState());
     try {
-      final response =
-          await locator.get<GRCPRepository>().getFilterItems(event.topic);
+      final response = await _grpcRepository.getFilterItems(event.topic);
       emit(LoadedFilterKeysState(response.map((fi) => fi.title).toList()));
     } catch (error) {
       ErrorState(error.toString());
@@ -77,9 +81,8 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      Topic topic = await locator
-          .get<GRCPRepository>()
-          .getFilteredTags(event.topic, event.filterKeys, event.accountType);
+      Topic topic = await _grpcRepository.getFilteredTags(
+          event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
     } catch (error) {
       ErrorState(error.toString());
@@ -89,9 +92,8 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      Topic topic = await locator
-          .get<GRCPRepository>()
-          .getFilteredTags(event.topic, event.filterKeys, event.accountType);
+      Topic topic = await _grpcRepository.getFilteredTags(
+          event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
     } catch (error) {
       ErrorState(error.toString());
@@ -101,14 +103,14 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushTag(PushTagEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      await locator.get<GRCPRepository>().placeTag(
-            event.accountType,
-            event.topic,
-            event.messengerId,
-            event.location.latitude,
-            event.location.longitude,
-            event.filterKeys,
-          );
+      await _grpcRepository.placeTag(
+        event.accountType,
+        event.topic,
+        event.messengerId,
+        event.location.latitude,
+        event.location.longitude,
+        event.filterKeys,
+      );
       emit(UserTagPlacedState());
     } catch (error) {
       ErrorState(error.toString());
