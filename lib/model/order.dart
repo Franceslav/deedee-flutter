@@ -3,7 +3,7 @@ class Order {
   String? instagram;
   String? telegram;
   String? information;
-  Map<String, List<String>> convenientTime;
+  Map<String, List<String>>? convenientTime;
 
   Order({
     this.phone,
@@ -11,15 +11,15 @@ class Order {
     this.telegram,
     this.information,
   }) : convenientTime = {
-          'Ежедневно': ['', ''],
-          'Будние дни': ['', ''],
-          'Выходные дни': ['', ''],
-          'Понедельник': ['', ''],
-          'Вторник': ['', ''],
-          'Среда': ['', ''],
-          'Четверг': ['', ''],
-          'Пятница': ['', ''],
-          'Суббота': ['', ''],
-          'Воскресенье': ['', ''],
+          'Daily': ['', ''],
+          'Weekdays': ['', ''],
+          'Weekends': ['', ''],
+          'Monday': ['', ''],
+          'Tuesday': ['', ''],
+          'Wednesday': ['', ''],
+          'Thursday': ['', ''],
+          'Friday': ['', ''],
+          'Saturday': ['', ''],
+          'Sunday': ['', ''],
         };
 }

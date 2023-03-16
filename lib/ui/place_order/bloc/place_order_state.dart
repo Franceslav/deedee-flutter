@@ -4,7 +4,11 @@ abstract class PlaceOrderState {}
 
 class PlaceBidInitial extends PlaceOrderState {}
 
-class PlaceOrderValid extends PlaceOrderState {}
+class PlaceOrderSetValue extends PlaceOrderState {
+  final Order order;
+
+  PlaceOrderSetValue(this.order);
+}
 
 class PlaceOrderRequest extends PlaceOrderState {}
 

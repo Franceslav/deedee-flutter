@@ -16,7 +16,7 @@ class _ConvenientTimePickerState extends State<ConvenientTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    selectedValue = 'Ежедневно';
+    selectedValue = 'Daily';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,7 +37,7 @@ class _ConvenientTimePickerState extends State<ConvenientTimePicker> {
               ),
             ),
             value: selectedValue,
-            items: widget.order.convenientTime.keys
+            items: widget.order.convenientTime!.keys
                 .map<DropdownMenuItem<String>>(
                   (String value) => DropdownMenuItem<String>(
                     value: value,
@@ -59,11 +59,11 @@ class _ConvenientTimePickerState extends State<ConvenientTimePicker> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             pickTimeField(context, '08:00', (value) {
-              widget.order.convenientTime[selectedValue]!.first = value!;
+              widget.order.convenientTime![selectedValue]!.first = value!;
             }),
             const Text('—', style: TextStyle(fontSize: 25)),
             pickTimeField(context, '20:00', (value) {
-              widget.order.convenientTime[selectedValue]!.last = value!;
+              widget.order.convenientTime![selectedValue]!.last = value!;
             }),
           ],
         ),

@@ -13,7 +13,6 @@ import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/home/home_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/map_cubit/map_screen.dart';
-import 'package:deedee/ui/place_bid/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/referral/referral_screen.dart';
 import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
@@ -23,6 +22,8 @@ import 'package:deedee/ui/subscribed_filters/subscribed_filters_page.dart';
 import 'package:deedee/ui/top_up/top_up_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
+
+import '../place_order/place_order_screen.dart';
 
 
 

@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../generated/LocationService.pb.dart';
+import '../../model/contact.dart';
 
 part 'user_event.dart';
 
@@ -26,6 +27,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
     on<UserImagePicker>(_onUserImagePicker);
     on<UserAvailablePlaces>(_onUserAvailablePlaces);
+    on<AddUserContacts>(_onAddUserContacts); // TODO dummy contacts
   }
 
   _onUserAuthenticated(UserAuthenticated event, Emitter<UserState> emit) {
@@ -118,6 +120,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             //   Place(title: 'city 3'),
             // ]
             ),
+      ),
+    );
+  }
+
+  _onAddUserContacts(AddUserContacts event, Emitter<UserState> emit) async {
+    emit(
+      UserState(
+        state.user.copyWith(
+          contacts: {
+            ContactType.email: Contact('', ''),
+            ContactType.phone: Contact('+375(29)888-88-88', ''),
+            ContactType.instagram: Contact('@Profile', ''),
+            ContactType.telegram: Contact('@Deedee', ''),
+          },
+        ),
       ),
     );
   }

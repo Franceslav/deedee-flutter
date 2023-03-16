@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 import '../generated/LocationService.pb.dart';
+import 'contact.dart';
 
 enum AccountType { buy, sell }
 
@@ -22,6 +23,13 @@ enum DocVerificationStatus {
 enum PremiumStatus {
   isPremium,
   notPremium,
+}
+
+enum ContactType {
+  email,
+  phone,
+  instagram,
+  telegram,
 }
 
 extension AccountTypeExtension on AccountType {
@@ -47,6 +55,7 @@ extension AccountTypeExtension on AccountType {
 class User extends Equatable {
   final String userId;
   final String email;
+  final Map<ContactType, Contact>? contacts;
   final String firstName;
   final String lastName;
   final String? profilePictureURL;
@@ -84,6 +93,7 @@ class User extends Equatable {
     this.lastUserGeoLocation, {
     required this.userId,
     required this.email,
+    this.contacts,
     required this.firstName,
     required this.lastName,
     this.profilePictureURL,
@@ -140,6 +150,7 @@ class User extends Equatable {
     LatLng? lastGeolocation,
     List<Place>? availablePlaces,
     List<String>? savedFilters,
+    Map<ContactType, Contact>? contacts,
   }) {
     return User(
       lastGeoLocation,
@@ -156,6 +167,7 @@ class User extends Equatable {
       accountType: accountType ?? this.accountType,
       availablePlaces: availablePlaces,
       savedFilters: savedFilters,
+      contacts: contacts ?? this.contacts,
     );
   }
 

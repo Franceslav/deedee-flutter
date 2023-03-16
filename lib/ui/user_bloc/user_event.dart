@@ -37,3 +37,5 @@ class UserImagePicker extends UserEvent {
 }
 
 class UserAvailablePlaces extends UserEvent {}
+
+class AddUserContacts extends UserEvent {}

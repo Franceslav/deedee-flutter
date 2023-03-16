@@ -31,7 +31,7 @@ import '../home/home_screen.dart' as _i4;
 import '../main_topic/enum/topic_screens_enum.dart' as _i29;
 import '../main_topic/main_topic_screen.dart' as _i21;
 import '../map_cubit/map_screen.dart' as _i6;
-import '../place_bid/place_order_screen.dart' as _i24;
+import '../place_order/place_order_screen.dart' as _i24;
 import '../place_tag/map_set_location_screen.dart' as _i7;
 import '../referral/referral_screen.dart' as _i13;
 import '../saved_filters/saved_filters_screen.dart' as _i12;
