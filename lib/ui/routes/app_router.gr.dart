@@ -100,6 +100,7 @@ class AppRouter extends _i26.RootStackRouter {
           tagDescriptionMap: args.tagDescriptionMap,
           filterKeys: args.filterKeys,
           selectedFilterKeys: args.selectedFilterKeys,
+          topicsName: args.topicsName,
         ),
       );
     },
@@ -443,6 +444,7 @@ class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
     required Map<_i29.LatLng, _i6.TagDTO> tagDescriptionMap,
     required List<String> filterKeys,
     required List<String> selectedFilterKeys,
+    required String topicsName,
   }) : super(
           MapScreenRoute.name,
           path: '/map',
@@ -452,6 +454,7 @@ class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
             tagDescriptionMap: tagDescriptionMap,
             filterKeys: filterKeys,
             selectedFilterKeys: selectedFilterKeys,
+            topicsName: topicsName,
           ),
         );
 
@@ -465,6 +468,7 @@ class MapScreenRouteArgs {
     required this.tagDescriptionMap,
     required this.filterKeys,
     required this.selectedFilterKeys,
+    required this.topicsName,
   });
 
   final _i27.Key? key;
@@ -477,9 +481,11 @@ class MapScreenRouteArgs {
 
   final List<String> selectedFilterKeys;
 
+  final String topicsName;
+
   @override
   String toString() {
-    return 'MapScreenRouteArgs{key: $key, user: $user, tagDescriptionMap: $tagDescriptionMap, filterKeys: $filterKeys, selectedFilterKeys: $selectedFilterKeys}';
+    return 'MapScreenRouteArgs{key: $key, user: $user, tagDescriptionMap: $tagDescriptionMap, filterKeys: $filterKeys, selectedFilterKeys: $selectedFilterKeys, topicsName: $topicsName}';
   }
 }
 

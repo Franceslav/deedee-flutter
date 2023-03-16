@@ -21,22 +21,22 @@ class SelectorAppBar extends StatefulWidget {
 class _SelectorAppBarState extends State<SelectorAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 16,
-      ),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          ...widget.data.map(
-            (title) => SelectorItem(
-              title: title,
-              onTap: widget.onTap,
-              isSelected: widget.selectedItems.contains(title),
+    return Align(
+      alignment: Alignment.center,
+      child: SizedBox(
+        height: 44,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            ...widget.data.map(
+              (title) => SelectorItem(
+                title: title,
+                onTap: widget.onTap,
+                isSelected: widget.selectedItems.contains(title),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

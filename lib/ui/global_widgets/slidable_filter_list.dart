@@ -73,6 +73,7 @@ class _SlidableFilterListState extends State<SlidableFilterList> {
                 // добавить сюда фильтры для меток
                 tagDescriptionMap: {},
                 user: user, filterKeys: [], selectedFilterKeys: [],
+                topicsName: '',
               ));
               FilterDTOBloc().add(PushSavedFiltersEvent(
                   accountType: user.accountType,

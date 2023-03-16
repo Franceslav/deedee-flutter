@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
@@ -40,6 +42,7 @@ class MapScreen extends StatefulWidget {
   final Map<LatLng, TagDTO> tagDescriptionMap;
   List<String> filterKeys;
   List<String> selectedFilterKeys;
+  final String topicsName;
 
   MapScreen({
     Key? key,
@@ -47,6 +50,7 @@ class MapScreen extends StatefulWidget {
     required this.tagDescriptionMap,
     required this.filterKeys,
     required this.selectedFilterKeys,
+    required this.topicsName,
   }) : super(key: key);
 
   @override
@@ -124,6 +128,13 @@ class _MapScreenState extends State<MapScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              context.router
+                  .replace(FilterPageRoute(topicsName: widget.topicsName));
+            },
+          ),
           toolbarHeight: size.height * 0.105,
           backgroundColor: Colors.transparent,
           actions: [

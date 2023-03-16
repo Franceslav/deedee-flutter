@@ -130,11 +130,12 @@ class _FilterPageState extends State<FilterPage> {
                               tag.geoLocation.longitude):
                           TagDTO(tag.tagId, tag.messengerId)
                   };
-                  context.router.push(MapScreenRoute(
+                  context.router.replace(MapScreenRoute(
                     tagDescriptionMap: tagMap,
                     user: user,
                     filterKeys: _filterKeys,
                     selectedFilterKeys: _selectedFilterKeys,
+                    topicsName: widget.topicsName,
                   ));
                 }
               }
