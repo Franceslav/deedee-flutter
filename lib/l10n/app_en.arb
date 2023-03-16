@@ -122,5 +122,7 @@
      "premium": "Premium",
      "activated": "Activated",
      "profile": "Profile",
-     "switchAccount": "Switch account"
+     "switchAccount": "Switch account",
+     "edit": "Edit",
+     "share": "Share"
 }

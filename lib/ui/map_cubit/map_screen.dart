@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/account/account_info_widget.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
@@ -9,20 +12,24 @@ import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
 import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
-import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
-import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
-import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import 'package:deedee/constants.dart';
+import 'package:deedee/model/user.dart';
+import 'package:deedee/services/helper.dart';
+import 'package:deedee/ui/auth/authentication_bloc.dart';
+import 'package:deedee/ui/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/map_cubit/tag_marker/tag_marker.dart';
+import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 
 import '../auth/welcome/welcome_screen.dart';
 
@@ -254,60 +261,6 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
                 const AddressInfoWidget(),
               ],
       ),
-    );
-  }
-}
-
-class AccountInfoWidget extends StatelessWidget {
-  const AccountInfoWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final user = context.select((UserBloc bloc) => bloc.state.user);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 32),
-        const Center(
-          child: ProfilePhotoWithBadge(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            user.fullName(),
-            style: AppTextTheme.titleLarge,
-          ),
-        ),
-        //TODO implement data
-        const Padding(
-          padding: EdgeInsets.only(top: 4),
-          child: Text('На сервисе с 2023г',
-              style: TextStyle(
-                  color: secondaryTextColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400)),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/star_icon.png'),
-              //TODO implement data
-              const Text(
-                ' 5',
-                style: TextStyle(
-                    color: secondaryTextColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 28),
-      ],
     );
   }
 }

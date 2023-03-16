@@ -1,8 +1,10 @@
+
+import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomToggleButton extends StatefulWidget {
-  const CustomToggleButton({
+class DeeDeeToggleButton extends StatefulWidget {
+  const DeeDeeToggleButton({
     super.key,
   });
 
@@ -13,7 +15,7 @@ class CustomToggleButton extends StatefulWidget {
 const double loginAlign = -1;
 const double signInAlign = 1;
 
-class _ToggleButtonState extends State<CustomToggleButton> {
+class _ToggleButtonState extends State<DeeDeeToggleButton> {
   late double xAlign;
 
   @override
@@ -38,7 +40,7 @@ class _ToggleButtonState extends State<CustomToggleButton> {
       decoration: const BoxDecoration(
         color: Color(0X26767680),
         borderRadius: BorderRadius.all(
-          Radius.circular(16.0),
+          Radius.circular(7.0),
         ),
       ),
       child: Stack(
@@ -90,12 +92,12 @@ class RightAlighWidget extends StatelessWidget {
     return Align(
       alignment: const Alignment(1, 0),
       child: Container(
-        width: width / 4,
+        width: (width / 2) - 16,
         color: Colors.transparent,
         alignment: Alignment.center,
         child: Text(
           AppLocalizations.of(context)!.providerToggle,
-          style: style,
+          style: AppTextTheme.labelLarge,
         ),
       ),
     );
@@ -119,12 +121,12 @@ class LeftAlignWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: width / 4,
+            width: (width / 2) - 16,
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
               AppLocalizations.of(context)!.clientToggle,
-              style: style,
+              style: AppTextTheme.labelLarge,
             ),
           ),
         ],
@@ -151,7 +153,7 @@ class AnimatedAlignWidget extends StatelessWidget {
         alignment: Alignment(xAlign, 0),
         duration: const Duration(milliseconds: 200),
         child: Container(
-          width: width / 3.5,
+          width: (width / 2) - 16,
           height: 28,
           decoration: BoxDecoration(
               boxShadow: [
@@ -168,7 +170,7 @@ class AnimatedAlignWidget extends StatelessWidget {
               ],
               color: Colors.white,
               borderRadius: const BorderRadius.all(
-                Radius.circular(16.0),
+                Radius.circular(7.0),
               ),
               border: Border.all(
                   width: 0.5,

@@ -1,5 +1,3 @@
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/main_topic/main_topic_custom_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

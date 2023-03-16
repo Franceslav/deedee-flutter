@@ -1,7 +1,8 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/account/account_screen.dart';
 import 'package:deedee/ui/drawer/deedee_drawer.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                     itemBuilder: ((context, index) {
                       final bookmark = _bookmarks[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Dismissible(
                           key: ValueKey(bookmark.tagId),
                           direction: DismissDirection.endToStart,
@@ -112,17 +113,24 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                               ),
                             );
                           },
-                          child: InfoWidgetRow(
-                            mainText: Text(
-                              bookmark.messengerId,
-                              style: AppTextTheme.bodyLarge,
-                            ),
-                            secondaryText: Text(
-                              bookmark.topicId,
-                              style: AppTextTheme.labelMedium,
-                            ),
-                            //     subtitle: Text(bookmark.geoLocation.toString()),
-                            onTap: () {},
+                          child: Column(
+                            children: [
+                              DeeDeeRowInfoWidget(
+                                icon: Image.asset(
+                                    'assets/images/bookmark_icon.png'),
+                                mainText: Text(
+                                  bookmark.messengerId,
+                                  style: AppTextTheme.bodyLarge,
+                                ),
+                                secondaryText: Text(
+                                  bookmark.topicId,
+                                  style: AppTextTheme.labelMedium,
+                                ),
+                                //     subtitle: Text(bookmark.geoLocation.toString()),
+                                onTap: () {},
+                              ),
+                              const DeeDeeDeviderWidget(),
+                            ],
                           ),
                         ),
                       );

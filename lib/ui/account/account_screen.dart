@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:deedee/ui/map_cubit/map_screen.dart';
+import 'package:deedee/ui/account/account_info_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:flutter/material.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
@@ -15,7 +17,6 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountState extends State<AccountScreen> {
-  final PanelController _controller = PanelController();
   final Uuid uuid = const Uuid();
   late String cityChoose;
   late List<String> places;
@@ -38,34 +39,69 @@ class _AccountState extends State<AccountScreen> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AccountInfoWidget(),
-          // if account is verified SizedBox(height: 111),
-          const SizedBox(height: 83),
-          const _InfoWidget(),
-          const SizedBox(height: 100),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Переключить аккаунт',
-                  style: AppTextTheme.bodyLarge.copyWith(color: AppColors.blue),
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                locale.logout,
-                style: AppTextTheme.bodyLarge.copyWith(color: AppColors.red),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 32),
+            const DeeDeeToggleButton(),
+            const SizedBox(height: 34),
+            const AccountInfoWidget(),
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                _OutlinedButtonWidget(
+                  text: locale.edit,
+                ),
+                const SizedBox(width: 16),
+                _OutlinedButtonWidget(
+                  text: locale.share,
+                ),
+              ],
+            ),
+            const SizedBox(height: 48),
+            const _InfoWidget(),
+            const SizedBox(height: 42),
+            _TextButtonWidget(
+              text: locale.switchAccount,
+              style: AppTextTheme.bodyLarge.copyWith(color: AppColors.blue),
+            ),
+            const SizedBox(height: 8),
+            _TextButtonWidget(
+              text: locale.logout,
+              style: AppTextTheme.bodyLarge.copyWith(
+                color: AppColors.red,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OutlinedButtonWidget extends StatelessWidget {
+  final String text;
+  const _OutlinedButtonWidget({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(AppColors.lightgrey),
+            overlayColor: MaterialStateProperty.all(AppColors.tapButton),
+            side: MaterialStateProperty.all(
+                const BorderSide(color: Colors.transparent))),
+        child: Text(
+          text,
+          style: AppTextTheme.labelLarge,
+        ),
       ),
     );
   }
@@ -79,43 +115,47 @@ class _InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      padding: const EdgeInsets.only(left: 16),
       child: Column(
         children: [
-          InfoWidgetRow(
+          DeeDeeRowInfoWidget(
+            icon: Image.asset('assets/images/verify_0_icon.png'),
             mainText: Text(
               locale.verification,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: Text(
               locale.verifyYourAccount,
-              style: AppTextTheme.labelMedium,
+              style: AppTextTheme.bodyMedium,
             ),
             onTap: () {},
           ),
-          InfoWidgetRow(
+          const DeeDeeDeviderWidget(),
+          DeeDeeRowInfoWidget(
+            icon: Image.asset('assets/images/balance_icon.png'),
             mainText: Text(
               locale.balanceTitle,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: const Text(
-              '00,00',
-              style: AppTextTheme.labelMedium,
+              '\$0.00',
+              style: AppTextTheme.bodyMedium,
             ),
             onTap: () {},
           ),
-          InfoWidgetRow(
+          const DeeDeeDeviderWidget(),
+          DeeDeeRowInfoWidget(
             mainText: Text(
               locale.premium,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: Text(
               locale.activated,
-              style: AppTextTheme.labelMedium,
+              style: AppTextTheme.bodyMedium,
             ),
             onTap: () {},
+            icon: Image.asset('assets/images/premium_0_icon.png'),
           ),
         ],
       ),
@@ -123,58 +163,22 @@ class _InfoWidget extends StatelessWidget {
   }
 }
 
-class InfoWidgetRow extends StatelessWidget {
-  final Text mainText;
-  final Text secondaryText;
-  final void Function()? onTap;
-  const InfoWidgetRow({
-    Key? key,
-    required this.mainText,
-    required this.secondaryText,
-    required this.onTap,
-  }) : super(key: key);
+class _TextButtonWidget extends StatelessWidget {
+  final String text;
+  final TextStyle style;
+  const _TextButtonWidget({
+    super.key,
+    required this.text,
+    required this.style,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: const Color(0xFFF8F4FE),
-            borderRadius: BorderRadius.circular(30),
-            onTap: () {},
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Image.asset('assets/images/account_item_icon.png'),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      mainText,
-                      secondaryText,
-                    ],
-                  ),
-                ),
-                Image.asset('assets/images/chevron_right_icon.png'),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Container(
-            height: 1,
-            width: MediaQuery.of(context).size.width,
-            color: AppColors.lightgrey,
-          ),
-        ),
-      ],
-    );
+    return TextButton(
+        onPressed: () {},
+        child: Text(
+          text,
+          style: style,
+        ));
   }
 }

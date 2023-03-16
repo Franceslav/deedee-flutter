@@ -118,5 +118,7 @@
      "premium": "Premia",
      "activated": "Aktywowany",
      "profile": "Profil",
-     "switchAccount": "Przełącz konto"
+     "switchAccount": "Przełącz konto",
+     "edit": "Edytować",
+     "share": "udział"
 }

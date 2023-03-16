@@ -108,5 +108,7 @@
      "premium": "غالي",
      "activated": "مفعل",
      "profile": "حساب تعريفي",
-     "switchAccount": "تبديل الحساب"
+     "switchAccount": "تبديل الحساب",
+     "edit": "يحرر",
+     "share": "يشارك"
 }
