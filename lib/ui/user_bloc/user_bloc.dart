@@ -9,6 +9,7 @@ import 'package:deedee/services/rest.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../model/contact.dart';
 import '../../generated/LocationService.pb.dart';
 import '../../model/contact.dart';
 
@@ -128,12 +129,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(
       UserState(
         state.user.copyWith(
-          contacts: {
-            ContactType.email: Contact('', ''),
-            ContactType.phone: Contact('+375(29)888-88-88', ''),
-            ContactType.instagram: Contact('@Profile', ''),
-            ContactType.telegram: Contact('@Deedee', ''),
-          },
+          contacts: [
+            Contact(ContactType.email, 'email.com', ''),
+            Contact(ContactType.phone, '+375(29)888-88-88', ''),
+            Contact(ContactType.instagram, '@Profile', ''),
+            Contact(ContactType.telegram, '@Deedee', ''),
+            Contact(ContactType.phone, '888-88-88', ''),
+          ],
         ),
       ),
     );

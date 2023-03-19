@@ -109,6 +109,7 @@
      "orderSent": "Your order has been sent",
      "contactInformation": "Contact Information",
      "orderProvideInformation": "*Provide at least 1 contact method",
+     "email": "Email",
      "phone": "Phone",
      "instagram": "Instagram",
      "telegram": "Telegram",

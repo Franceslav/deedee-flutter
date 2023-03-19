@@ -24,14 +24,6 @@ enum PremiumStatus {
   isPremium,
   notPremium,
 }
-
-enum ContactType {
-  email,
-  phone,
-  instagram,
-  telegram,
-}
-
 extension AccountTypeExtension on AccountType {
   String stringType(BuildContext context) {
     switch (this) {
@@ -55,7 +47,7 @@ extension AccountTypeExtension on AccountType {
 class User extends Equatable {
   final String userId;
   final String email;
-  final Map<ContactType, Contact>? contacts;
+  final List<Contact>? contacts;
   final String firstName;
   final String lastName;
   final String? profilePictureURL;
@@ -150,7 +142,7 @@ class User extends Equatable {
     LatLng? lastGeolocation,
     List<Place>? availablePlaces,
     List<String>? savedFilters,
-    Map<ContactType, Contact>? contacts,
+    List<Contact>? contacts,
   }) {
     return User(
       lastGeoLocation,

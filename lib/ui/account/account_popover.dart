@@ -10,7 +10,9 @@ import '../../constants.dart';
 import '../../model/user.dart';
 import '../../services/helper.dart';
 
-class Popover extends StatelessWidget {
+class AccountPopover extends StatelessWidget {
+  const AccountPopover({super.key});
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
