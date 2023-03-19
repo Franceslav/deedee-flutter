@@ -24,21 +24,12 @@ class MapSlidingPanelWidget extends StatelessWidget {
       renderPanelSheet: true,
       panelSnapping: true,
       defaultPanelState: PanelState.CLOSED,
-      onPanelOpened: () {
-        if (_openedFirstTime) {
-          _pc.hide();
-        }
-      },
-      onPanelSlide: (_) {
-        if (_openedFirstTime) {
-          _pc.hide();
-        }
-      },
       backdropEnabled: true,
       collapsed: CustomCollapsedWidget(
         openedFirstTime: _openedFirstTime,
       ),
-      minHeight: MediaQuery.of(context).size.height * 0.04,
+      minHeight:
+          _openedFirstTime ? 0 : MediaQuery.of(context).size.height * 0.04,
       maxHeight: MediaQuery.of(context).size.height * 0.5,
       controller: _pc,
       header: Container(
@@ -73,7 +64,9 @@ class CustomCollapsedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(15))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+        color: Colors.white,
+      ),
       child:
           const Center(child: Text('Нажмите на маркер для просмотра заявки')),
     );
