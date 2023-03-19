@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'package:deedee/ui/global_widgets/calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
@@ -197,6 +200,12 @@ class _FilterPageState extends State<FilterPage> {
                                         alignment: Alignment.bottomCenter,
                                         child: SizedBox(),
                                       ),
+                                    ),
+                                    DeeDeeButton(
+                                      onPressed: () =>
+                                          Calendar().showCalendar(context),
+                                      gradientButton: true,
+                                      title: 'Fake Button Сalendar',
                                     ),
                                     DeeDeeButton(
                                       title: AppLocalizations.of(context)!

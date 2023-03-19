@@ -123,6 +123,9 @@
      "activated": "Activated",
      "profile": "Profile",
      "switchAccount": "Switch account",
+     "selectDate": "Select a date",
+     "selectTime": "Select a time",
+     "book": "Book",
      "edit": "Edit",
      "share": "Share"
 }

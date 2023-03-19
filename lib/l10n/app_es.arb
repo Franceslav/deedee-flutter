@@ -119,6 +119,9 @@
      "activated": "Activado",
      "profile": "Perfil",
      "switchAccount": "Cambiar cuenta",
+      "selectDate": "Seleccione una fecha",
+     "selectTime": "Seleccione la hora",
+     "book": "Encargar",
      "edit": "Editar",
      "share": "Compartir"
 }

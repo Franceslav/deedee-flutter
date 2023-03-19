@@ -119,6 +119,9 @@
      "activated": "Aktywowany",
      "profile": "Profil",
      "switchAccount": "Przełącz konto",
+    "selectDate": "Wybierz datę",
+     "selectTime": "Wybierz czas",
+     "book": "Zamówić",
      "edit": "Edytować",
      "share": "udział"
 }

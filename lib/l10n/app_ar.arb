@@ -109,6 +109,9 @@
      "activated": "مفعل",
      "profile": "حساب تعريفي",
      "switchAccount": "تبديل الحساب",
+     "selectDate": "حدد التاريخ",
+     "selectTime": "اختر الوقت",
+     "book": "لأجل",
      "edit": "يحرر",
      "share": "يشارك"
 }
