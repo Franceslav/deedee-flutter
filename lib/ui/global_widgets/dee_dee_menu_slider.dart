@@ -1,13 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
+import 'package:deedee/ui/messages/message.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class DeeDeeMenuSlider extends GeneralSlidingPanel {
   final User user;
@@ -27,6 +31,14 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
                 context.router.replace(const HomeScreenRoute());
+              }),
+          GeneralSlidingPanelItem(
+              icon: Icons.published_with_changes_sharp,
+              text: 'Push',
+              onTap: () async {
+                final pushNotificationService =
+                    PushNotificationService.instance;
+                await pushNotificationService.makeCall();
               }),
           GeneralSlidingPanelItem(
               icon: Icons.list,

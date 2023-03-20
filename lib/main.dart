@@ -19,6 +19,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
@@ -151,20 +152,22 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       );
     }
 
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      locale: context.watch<AccountBloc>().appLocal,
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      theme: deeDeeTheme,
-      debugShowCheckedModeBanner: false,
-      color: const Color(COLOR_PRIMARY),
+    return OverlaySupport.global(
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        locale: context.watch<AccountBloc>().appLocal,
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        theme: deeDeeTheme,
+        debugShowCheckedModeBanner: false,
+        color: const Color(COLOR_PRIMARY),
+      ),
     );
   }
 
