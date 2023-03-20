@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/order.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/place_order/place_order_popover.dart';
 import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../../constants.dart';
 import '../../model/contact.dart';
 import '../../services/helper.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../global_widgets/dee_dee_menu_slider.dart';
 import '../global_widgets/profile_photo_with_badge.dart';
 import '../global_widgets/deedee_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,181 +53,190 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),
-        body: BlocConsumer<PlaceOrderBloc, PlaceOrderState>(
-          listener: (context, state) {
-            if (state is PlaceOrderRequest) {
-              showSnackBar(context, AppLocalizations.of(context)!.orderSent);
-            }
-          },
-          buildWhen: (old, current) =>
-              current is PlaceOrderFailureState && old != current,
-          builder: (context, state) {
-            return Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      AnimatedContainer(
-                        alignment: Alignment.center,
-                        height: _contactFieldList.length * 100 + 70,
-                        duration: const Duration(milliseconds: 100),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+        body: Stack(
+          children: [
+            BlocConsumer<PlaceOrderBloc, PlaceOrderState>(
+              listener: (context, state) {
+                if (state is PlaceOrderRequest) {
+                  showSnackBar(
+                      context, AppLocalizations.of(context)!.orderSent);
+                }
+              },
+              buildWhen: (old, current) =>
+                  current is PlaceOrderFailureState && old != current,
+              builder: (context, state) {
+                return Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          AnimatedContainer(
+                            alignment: Alignment.center,
+                            height: _contactFieldList.length * 100 + 70,
+                            duration: const Duration(milliseconds: 100),
+                            child: SingleChildScrollView(
+                              child: Column(
                                 children: [
-                                  Column(
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .contactInformation,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge,
+                                      Column(
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .contactInformation,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge,
+                                          ),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .orderProvideInformation,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium,
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .orderProvideInformation,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium,
+                                      IconButton(
+                                        onPressed: () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (context) =>
+                                                const PlaceOrderPopover(),
+                                          ).then(
+                                            (value) {
+                                              setState(() {
+                                                _contactFieldList.add(
+                                                  OrderTextFormField(
+                                                    index: value,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        order.phone = value;
+                                                      });
+                                                    },
+                                                  ),
+                                                );
+                                              });
+                                            },
+                                          );
+                                        },
+                                        icon: const Icon(Icons.add),
                                       ),
                                     ],
                                   ),
-                                  IconButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        backgroundColor: Colors.transparent,
-                                        builder: (context) =>
-                                            const PlaceOrderPopover(),
-                                      ).then(
-                                        (value) {
-                                          setState(() {
-                                            _contactFieldList.add(
-                                              OrderTextFormField(
-                                                index: value,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    order.phone = value;
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          });
-                                        },
-                                      );
-                                    },
-                                    icon: const Icon(Icons.add),
-                                  ),
-                                ],
-                              ),
-                              _contactFieldList.isEmpty
-                                  ? const SizedBox.shrink()
-                                  : Column(children: _contactFieldList),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 70,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)!.time,
-                              style: Theme.of(context).textTheme.headlineLarge,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _times.add(
-                                    ConvenientTimePicker(
-                                      order: order,
-                                    ),
-                                  );
-                                });
-                              },
-                              icon: const Icon(Icons.add),
-                            )
-                          ],
-                        ),
-                      ),
-                      AnimatedContainer(
-                        height: _times.length * 205,
-                        duration: const Duration(milliseconds: 300),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: List.generate(
-                              _times.length,
-                              (index) => Column(
-                                children: [
-                                  _times[index],
-                                  _times[index] == _times.last
+                                  _contactFieldList.isEmpty
                                       ? const SizedBox.shrink()
-                                      : const Divider(height: 32)
+                                      : Column(children: _contactFieldList),
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      const SizedBox(height: 24),
-                      Text(
-                        AppLocalizations.of(context)!.additionalInformation,
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.text,
-                          filled: true,
-                          fillColor: const Color.fromRGBO(242, 242, 242, 1),
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
+                          const Divider(thickness: 1),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 70,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.time,
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _times.add(
+                                        ConvenientTimePicker(
+                                          order: order,
+                                        ),
+                                      );
+                                    });
+                                  },
+                                  icon: const Icon(Icons.add),
+                                )
+                              ],
                             ),
                           ),
-                        ),
-                        maxLength: 500,
-                        onChanged: (value) {
-                          setState(() {
-                            order.information = value;
-                          });
-                        },
+                          AnimatedContainer(
+                            height: _times.length * 205,
+                            duration: const Duration(milliseconds: 300),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: List.generate(
+                                  _times.length,
+                                  (index) => Column(
+                                    children: [
+                                      _times[index],
+                                      _times[index] == _times.last
+                                          ? const SizedBox.shrink()
+                                          : const Divider(height: 32)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Divider(thickness: 1),
+                          const SizedBox(height: 24),
+                          Text(
+                            AppLocalizations.of(context)!.additionalInformation,
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.text,
+                              filled: true,
+                              fillColor: const Color.fromRGBO(242, 242, 242, 1),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                            maxLength: 500,
+                            onChanged: (value) {
+                              setState(() {
+                                order.information = value;
+                              });
+                            },
+                          ),
+                          DeeDeeButton(
+                            onPressed: _contactFieldList.isEmpty
+                                ? null
+                                : () {
+                                    context
+                                        .read<PlaceOrderBloc>()
+                                        .add(PlaceOrderRequestEvent(
+                                          userId: user.userId,
+                                          order: order,
+                                        ));
+                                    context.router
+                                        .replace(const HomeScreenRoute());
+                                  },
+                            gradientButton: true,
+                            title: AppLocalizations.of(context)!.safe,
+                          )
+                        ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          context
-                              .read<PlaceOrderBloc>()
-                              .add(PlaceOrderRequestEvent(
-                                userId: user.userId,
-                                order: order,
-                              ));
-                          context.router.replace(const HomeScreenRoute());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          disabledForegroundColor:
-                              Colors.grey.withOpacity(0.38),
-                          disabledBackgroundColor:
-                              Colors.grey.withOpacity(0.12),
-                        ),
-                        child: Text(AppLocalizations.of(context)!.safe),
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+            DeeDeeMenuSlider(
+              context,
+              controller: _controller,
+              user: user,
+            ),
+          ],
         ),
       ),
     );
