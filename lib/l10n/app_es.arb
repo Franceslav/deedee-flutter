@@ -123,5 +123,6 @@
      "selectTime": "Seleccione la hora",
      "book": "Encargar",
      "edit": "Editar",
-     "share": "Compartir"
+     "share": "Compartir",
+     "saveAndSubscribe": "Guardar y suscribirse"
 }

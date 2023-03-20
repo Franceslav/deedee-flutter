@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:deedee/ui/global_widgets/calendar.dart';
+import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
@@ -68,7 +69,16 @@ class _FilterPageState extends State<FilterPage> {
         appBar: DeeDeeAppBar(
           controller: _controller,
           title: AppLocalizations.of(context)!.filterTagsPageTitle,
-          child: const ProfilePhotoWithBadge(),
+          child: GestureDetector(
+            child: const Icon(Icons.bookmark_border),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const DialogWidget();
+                  });
+            },
+          ),
         ),
         body: Stack(
           children: [
