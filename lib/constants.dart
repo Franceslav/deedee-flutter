@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:latlong2/latlong.dart';
 
 const FINISHED_ON_BOARDING = 'finishedOnBoarding';
@@ -22,3 +24,6 @@ const MAP_ZOOM = 12.0;
 const MAP_SEARCH_AREA = 0.04; // for the future
 const DEFAULT_EXPECTATION_NUMBER_OF_DAYS = 3;
 const SERVER_KEY = 'AAAApVrusrI:APA91bGHaWQQOhSsa45ALIumubnvnFh8EXjIoNNDDLtu4YrpWhy8XQCYCRh6CF2qP0KC9XMdts5OoaM-iFOKTqA1u2rIvXJOEj1ssMc2093KFWbyrphRcWzaBg6NCAnc7KjsTIfE3a7Y';
+const DEFAULT_PUSH_NOTIFICATION_URL = 'https://fcm.googleapis.com/fcm/send';
+const DEFAULT_ENCODING = 'utf-8';
+const DEFAULT_CONTENT_TYPE = 'application/json';

@@ -1,18 +1,14 @@
-import 'dart:convert';
-import 'package:deedee/constants.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+@LazySingleton(env: [Environment.dev, Environment.prod])
 class PushNotificationService {
-  PushNotificationService._();
-
-  static final PushNotificationService _instance = PushNotificationService._();
-
-  static PushNotificationService get instance => _instance;
-
+  final HttpService httpService = locator.get<HttpService>();
   final FirebaseMessaging messaging = FirebaseMessaging.instance;
   late String? deviceToken;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -54,9 +50,7 @@ class PushNotificationService {
     }
   }
 
-
-   Future<void> initInfo() async {
-
+  Future<void> initInfo() async {
     var androidInitialize =
         const AndroidInitializationSettings('@mipmap/launcher_icon');
     var initializationSettings =
@@ -64,7 +58,6 @@ class PushNotificationService {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
         message.notification!.body.toString(),
         htmlFormatBigText: true,
@@ -73,12 +66,14 @@ class PushNotificationService {
       );
 
       AndroidNotificationDetails androidPlatformChannelSpecifics =
-          AndroidNotificationDetails('123', '123',
-              importance: Importance.high,
-              styleInformation: bigTextStyleInformation,
-              priority: Priority.high,
-              playSound: true,
-          );
+          AndroidNotificationDetails(
+        '123',
+        '123',
+        importance: Importance.high,
+        styleInformation: bigTextStyleInformation,
+        priority: Priority.high,
+        playSound: true,
+      );
 
       NotificationDetails platformChannelSpecifics =
           NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -99,46 +94,8 @@ class PushNotificationService {
     });
   }
 
-
-  Future<bool> makeCall() async {
+  Future<bool> sendPushNotification() async {
     await initInfo();
-
-    const postUrl = 'https://fcm.googleapis.com/fcm/send';
-    String token = await getToken();
-
-    final data = {
-      "notification": {"body": "Text Text Text Text Text", "title": "Title"},
-      "priority": "high",
-      "data": {
-        "click_action": "FLUTTER_NOTIFICATION_CLICK",
-        "id": "1",
-        "status": "done"
-      },
-      "to": token
-    };
-
-    final headers = {
-      'content-type': 'application/json',
-      'Authorization':
-          'key=$SERVER_KEY'
-    };
-
-    try {
-      final response = await http.post(Uri.parse(postUrl),
-          body: json.encode(data),
-          encoding: Encoding.getByName('utf-8'),
-          headers: headers);
-
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        print('Request sending failed with status code ${response.statusCode}');
-        return false;
-      }
-    } catch (e) {
-      print(e.toString());
-      return false;
-    }
+    return httpService.sendPushNotificationRequest("New Order Request", "This is a test order. Please accept", await getToken());
   }
-
 }

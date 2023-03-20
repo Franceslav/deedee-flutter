@@ -2,19 +2,11 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:deedee/ui/messages/message.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/push_notification_service.dart';
-import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
-
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
-
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/home/home_bloc.dart';
@@ -27,13 +19,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import '../../model/user.dart';
 import '../../services/helper.dart';
 import '../../services/shared.dart';
-
-import '../global_widgets/app_bar_button.dart';
-import 'package:overlay_support/overlay_support.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,13 +34,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   final PanelController _controller = PanelController();
   var shownDialog = false;
-  final pushNotificationService = PushNotificationService.instance;
-
 
   @override
   void initState() {
     super.initState();
-    pushNotificationService.requestPermission();
   }
 
   @override
@@ -70,7 +56,7 @@ class _HomeState extends State<HomeScreen> {
     }
 
     return BlocProvider<HomeBloc>(
-      create: (context) => HomeBloc(
+      create: (context) => HomeBloc(locator.get<PushNotificationService>(),
           locator.get<GPSRepository>(), locator.get<GRCPRepository>(), user),
       child: Scaffold(
         appBar: DeeDeeAppBar(

@@ -5,7 +5,7 @@ import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/rest.dart';
+import 'package:deedee/services/http_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -79,7 +79,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserImagePicker(UserImagePicker event, Emitter<UserState> emit) async {
     final type = event.type;
-    final session = RestService.instance;
+    final session = locator.get<HttpService>();
     final image = await ImagePicker().pickImage(source: type);
     if (image == null) return;
     final imageTemp = File(image.path);
