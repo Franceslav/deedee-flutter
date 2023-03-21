@@ -254,15 +254,21 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widget._openedFirstTime
-            ? []
-            : [
-                const AccountInfoWidget(),
-                ContactsWidget(widget: widget),
-                const AddressInfoWidget(),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 52, 16, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widget._openedFirstTime
+              ? []
+              : [
+                  const AccountInfoWidget(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: ContactsWidget(widget: widget),
+                  ),
+                  const AddressInfoWidget(),
+                ],
+        ),
       ),
     );
   }
@@ -278,62 +284,59 @@ class ContactsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          TextButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
-            //TODO implement data
-            onPressed: () {},
-            child: Image.asset('assets/images/telegram_logo.png'),
           ),
-          TextButton(
-            onPressed: () =>
-                SocialService.launchInstagram(widget._selectedMessengerId),
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+          //TODO implement data
+          onPressed: () {},
+          child: Image.asset('assets/images/telegram_logo.png'),
+        ),
+        TextButton(
+          onPressed: () =>
+              SocialService.launchInstagram(widget._selectedMessengerId),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
-            child: Image.asset('assets/images/instagram_logo.png'),
           ),
-          TextButton(
-            //TODO implement data
-            onPressed: () {},
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+          child: Image.asset('assets/images/instagram_logo.png'),
+        ),
+        TextButton(
+          //TODO implement data
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
+          ),
 
-            child: Image.asset('assets/images/phone_icon.png'),
-          ),
-          TextButton(
-            //TODO implement data
-            onPressed: () {},
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+          child: Image.asset('assets/images/phone_icon.png'),
+        ),
+        TextButton(
+          //TODO implement data
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
-            child: Image.asset('assets/images/favorite_icon.png'),
           ),
-        ],
-      ),
+          child: Image.asset('assets/images/favorite_icon.png'),
+        ),
+      ],
     );
   }
 }
@@ -350,47 +353,25 @@ class AddressInfoWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         //TODO implement data
-        children: [
-          const Text(
+        children: const [
+          Text(
             'Время работы',
-            style: TextStyle(
-                color: secondaryTextColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w400),
+            style: AppTextTheme.bodyMedium,
           ),
-          Row(
-            children: const [
-              Text(
-                'Пн-Пт 9:00 - 18:00',
-                style: TextStyle(
-                    color: mainTextColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(width: 9),
-              Text(
-                'Сб, ВC-выходной',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-            ],
+          SizedBox(height: 2),
+          Text(
+            'Пн-Пт 9:00 - 18:00',
+            style: AppTextTheme.bodyLarge,
           ),
-          const SizedBox(height: 12),
-          const Text(
+          SizedBox(height: 12),
+          Text(
             'Адрес',
-            style: TextStyle(
-                color: secondaryTextColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w400),
+            style: AppTextTheme.bodyMedium,
           ),
-          const Text(
+          SizedBox(height: 2),
+          Text(
             'ул.Калиновского д.235/4',
-            style: TextStyle(
-                color: mainTextColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w400),
+            style: AppTextTheme.bodyLarge,
           ),
         ],
       ),

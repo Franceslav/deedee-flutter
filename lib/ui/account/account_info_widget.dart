@@ -12,72 +12,69 @@ class AccountInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                  height: 64, width: 64, child: ProfilePhotoWithBadge()),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  user.fullName(),
-                  style: AppTextTheme.titleNormal,
-                ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+                height: 64, width: 64, child: ProfilePhotoWithBadge()),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                user.fullName(),
+                style: AppTextTheme.titleNormal,
               ),
-              //TODO implement data
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Text(
-                  'На сервисе с 2023г',
-                  style: AppTextTheme.titleNormal
-                      .copyWith(color: const Color(0xFF8C8C9A)),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 30.5,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  ' 228',
-                  style: AppTextTheme.titleMedium,
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Text(
-                  'Тегов',
-                  style: AppTextTheme.titleNormal,
-                )
-              ],
             ),
-          ),
-          Column(
+            //TODO implement data
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                'На сервисе с 2023г',
+                style: AppTextTheme.titleNormal
+                    .copyWith(color: const Color(0xFF8C8C9A)),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 30.5,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [
               Text(
-                '1488',
+                ' 228',
                 style: AppTextTheme.titleMedium,
               ),
               SizedBox(
                 height: 2,
               ),
               Text(
-                'Просмотров',
+                'Тегов',
                 style: AppTextTheme.titleNormal,
               )
             ],
           ),
-        ],
-      ),
+        ),
+        Column(
+          children: const [
+            Text(
+              '1488',
+              style: AppTextTheme.titleMedium,
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Text(
+              'Просмотров',
+              style: AppTextTheme.titleNormal,
+            )
+          ],
+        ),
+      ],
     );
   }
 }
