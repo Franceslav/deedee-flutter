@@ -10,4 +10,8 @@ abstract class AppColors {
   static const tapButton = Color(0xFFF8F4FE);
   static const blue = Color(0xFF4D94E9);
   static const red = Color(0xFFD74138);
+  static const fiolet = Color(0xFF742AED);
+  static const lightFiolet = Color.fromARGB(255, 186, 140, 248);
+
+  static const white = Color(0xFFFFFFFF);
 }

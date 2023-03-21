@@ -3,7 +3,12 @@ import 'package:deedee/ui/account/account_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
@@ -17,6 +22,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountState extends State<AccountScreen> {
+  final PanelController _controller = PanelController();
   final Uuid uuid = const Uuid();
   late String cityChoose;
   late List<String> places;
@@ -24,58 +30,59 @@ class _AccountState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          locale.profile,
-          style: AppTextTheme.titleLarge,
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              //TODO
-            },
-          ),
-        ],
+      appBar: DeeDeeAppBar(
+        title: locale.profile,
+        controller: _controller,
+        child: const Icon(Icons.menu),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 32),
-            const DeeDeeToggleButton(),
-            const SizedBox(height: 34),
-            const AccountInfoWidget(),
-            const SizedBox(height: 32),
-            Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _OutlinedButtonWidget(
-                  text: locale.edit,
+                const SizedBox(height: 32),
+                const DeeDeeToggleButton(),
+                const SizedBox(height: 34),
+                const AccountInfoWidget(),
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    _OutlinedButtonWidget(
+                      text: locale.edit,
+                    ),
+                    const SizedBox(width: 16),
+                    _OutlinedButtonWidget(
+                      text: locale.share,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                _OutlinedButtonWidget(
-                  text: locale.share,
+                const SizedBox(height: 48),
+                const _InfoWidget(),
+                const SizedBox(height: 42),
+                _TextButtonWidget(
+                  text: locale.switchAccount,
+                  style: AppTextTheme.bodyLarge.copyWith(color: AppColors.blue),
+                ),
+                const SizedBox(height: 8),
+                _TextButtonWidget(
+                  text: locale.logout,
+                  style: AppTextTheme.bodyLarge.copyWith(
+                    color: AppColors.red,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 48),
-            const _InfoWidget(),
-            const SizedBox(height: 42),
-            _TextButtonWidget(
-              text: locale.switchAccount,
-              style: AppTextTheme.bodyLarge.copyWith(color: AppColors.blue),
-            ),
-            const SizedBox(height: 8),
-            _TextButtonWidget(
-              text: locale.logout,
-              style: AppTextTheme.bodyLarge.copyWith(
-                color: AppColors.red,
-              ),
-            ),
-          ],
-        ),
+          ),
+          ProfileMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }
@@ -94,13 +101,13 @@ class _OutlinedButtonWidget extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {},
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.lightgrey),
-            overlayColor: MaterialStateProperty.all(AppColors.tapButton),
+            backgroundColor: MaterialStateProperty.all(AppColors.fiolet),
+            overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
             side: MaterialStateProperty.all(
                 const BorderSide(color: Colors.transparent))),
         child: Text(
           text,
-          style: AppTextTheme.labelLarge,
+          style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
         ),
       ),
     );
