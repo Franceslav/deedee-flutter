@@ -6,7 +6,9 @@ abstract class BookmarksEvent {}
 class LoadBookmarksEvent extends BookmarksEvent {
   final String userId;
 
-  LoadBookmarksEvent(this.userId);
+  LoadBookmarksEvent({
+    required this.userId,
+  });
 }
 
 class DeleteBookmarkEvent extends BookmarksEvent {
