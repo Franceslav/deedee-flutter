@@ -125,6 +125,11 @@
      "book": "Заказать",
      "edit": "Редактировать",
      "share": "Поделиться",
-     "saveAndSubscribe": "Сохранить и подписаться"
+     "saveAndSubscribe": "Сохранить и подписаться",
+     "switchLanguage": "Переключить язык",
+     "onServiceSince": "На сервисе с ",
+     "tags": "Тегов",
+     "views": "Просмотров"
+
 
 }

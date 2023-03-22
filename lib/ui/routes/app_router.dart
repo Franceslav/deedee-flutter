@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/account/account_language_screen.dart';
 import 'package:deedee/ui/account/account_screen.dart';
 import 'package:deedee/ui/account/account_verify_screen.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
@@ -25,8 +26,6 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
 import '../place_order/place_order_screen.dart';
 
-
-
 @MaterialAutoRouter(
   routes: <AutoRoute>[
     MaterialRoute(page: LauncherScreen, initial: true),
@@ -38,6 +37,7 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: MapSetLocationScreen, path: '/map-set-location'),
     MaterialRoute(page: AccountScreen, path: '/account'),
     MaterialRoute(page: VerifyScreen, path: '/verify'),
+    MaterialRoute(page: AccountLanguageScreen, path: '/account-language'),
     MaterialRoute(page: TopUpPage, path: '/account/top-up'),
     MaterialRoute(page: BookmarksScreen, path: '/bookmarks'),
     MaterialRoute(page: SavedFiltersScreen, path: '/saved-filters'),
@@ -54,7 +54,6 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
-
   ],
 )
 class $AppRouter {}

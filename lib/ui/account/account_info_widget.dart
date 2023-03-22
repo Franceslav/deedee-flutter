@@ -3,6 +3,7 @@ import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountInfoWidget extends StatelessWidget {
   const AccountInfoWidget({
@@ -11,6 +12,7 @@ class AccountInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,10 +32,19 @@ class AccountInfoWidget extends StatelessWidget {
             //TODO implement data
             Padding(
               padding: const EdgeInsets.only(top: 4),
-              child: Text(
-                'На сервисе с 2023г',
-                style: AppTextTheme.titleNormal
-                    .copyWith(color: const Color(0xFF8C8C9A)),
+              child: Row(
+                children: [
+                  Text(
+                    locale.onServiceSince,
+                    style: AppTextTheme.titleNormal
+                        .copyWith(color: const Color(0xFF8C8C9A)),
+                  ),
+                  Text(
+                    '2023',
+                    style: AppTextTheme.titleNormal
+                        .copyWith(color: const Color(0xFF8C8C9A)),
+                  ),
+                ],
               ),
             ),
           ],
@@ -44,32 +55,32 @@ class AccountInfoWidget extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              Text(
-                ' 228',
+            children: [
+              const Text(
+                '228',
                 style: AppTextTheme.titleMedium,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 2,
               ),
               Text(
-                'Тегов',
+                locale.tags,
                 style: AppTextTheme.titleNormal,
               )
             ],
           ),
         ),
         Column(
-          children: const [
-            Text(
+          children: [
+            const Text(
               '1488',
               style: AppTextTheme.titleMedium,
             ),
-            SizedBox(
+            const SizedBox(
               height: 2,
             ),
             Text(
-              'Просмотров',
+              locale.views,
               style: AppTextTheme.titleNormal,
             )
           ],

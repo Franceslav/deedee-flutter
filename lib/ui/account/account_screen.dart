@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/account_info_widget.dart';
+import 'package:deedee/ui/account/account_language_screen.dart';
 import 'package:deedee/ui/account/account_popover.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
@@ -68,17 +69,25 @@ class _AccountState extends State<AccountScreen> {
                 ),
                 const SizedBox(height: 48),
                 const _InfoWidget(),
-                const SizedBox(height: 42),
+                const SizedBox(height: 20),
+                _TextButtonWidget(
+                  text: locale.switchLanguage,
+                  textColor: AppColors.blue,
+                  onPressed: () {
+                    context.router.push(const AccountLanguageScreenRoute());
+                  },
+                ),
+                const SizedBox(height: 0),
                 _TextButtonWidget(
                   text: locale.switchAccount,
-                  style: AppTextTheme.bodyLarge.copyWith(color: AppColors.blue),
+                  textColor: AppColors.blue,
+                  onPressed: () {},
                 ),
                 const SizedBox(height: 8),
                 _TextButtonWidget(
                   text: locale.logout,
-                  style: AppTextTheme.bodyLarge.copyWith(
-                    color: AppColors.red,
-                  ),
+                  textColor: AppColors.red,
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -162,20 +171,26 @@ class _InfoWidget extends StatelessWidget {
 
 class _TextButtonWidget extends StatelessWidget {
   final String text;
-  final TextStyle style;
+  final Color textColor;
+
+  final void Function()? onPressed;
+
   const _TextButtonWidget({
     super.key,
     required this.text,
-    required this.style,
+    required this.textColor,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
-          style: style,
+          style: AppTextTheme.bodyLarge.copyWith(
+            color: textColor,
+          ),
         ));
   }
 }

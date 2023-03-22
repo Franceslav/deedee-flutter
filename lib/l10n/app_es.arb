@@ -24,7 +24,7 @@
     "accountTopUp": "completar",
     "switchTo": "cambiar a",
     "homeTitle": "inicio",
-    "logout": "cerrar sesion",
+    "logout": "Cerrar sesion",
     "settings": "configuraciones",
     "seeMap": "ver mapa",
     "seeTags": "ver etiquetas",
@@ -124,5 +124,9 @@
      "book": "Encargar",
      "edit": "Editar",
      "share": "Compartir",
-     "saveAndSubscribe": "Guardar y suscribirse"
+     "saveAndSubscribe": "Guardar y suscribirse",
+     "switchLanguage": "Cambiar idioma",
+     "onServiceSince": "En servicio desde ",
+     "tags": "Etiquetas",
+     "views": "Vistas"
 }
