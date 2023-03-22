@@ -28,7 +28,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const HomeScreenRoute());
+                context.router.pop();
+                context.router.push(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.published_with_changes_sharp,
@@ -45,7 +46,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const UserTagsScreenRoute());
+                context.router.pop();
+                context.router.push(const UserTagsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
@@ -54,7 +56,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const AccountScreenRoute());
+                context.router.pop();
+                context.router.push(const AccountScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.rotate_left_rounded,
@@ -80,7 +83,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const BookmarksScreenRoute());
+                context.router.pop();
+                context.router.push(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.filter_alt,
@@ -89,7 +93,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SavedFiltersScreenRoute());
+                context.router.pop();
+                context.router.push(const SavedFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.star_border_purple500_sharp,
@@ -98,7 +103,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SubscribedFiltersPageRoute());
+                context.router.pop();
+                context.router.push(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,
@@ -107,7 +113,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const ReferralScreenRoute());
+                context.router.pop();
+                context.router.push(const ReferralScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,
@@ -116,7 +123,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SettingsScreenRoute());
+                context.router.pop();
+                context.router.push(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.help_outline,
@@ -125,7 +133,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const HelpScreenRoute());
+                context.router.pop();
+                context.router.push(const HelpScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.exit_to_app,
