@@ -22,7 +22,7 @@ class DeeDeeRowInfoWidget extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: const Color(0xFFF8F4FE),
           borderRadius: BorderRadius.circular(8),
-          onTap: () {},
+          onTap: onTap,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [

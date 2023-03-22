@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/account_info_widget.dart';
+import 'package:deedee/ui/account/account_popover.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,12 +55,14 @@ class _AccountState extends State<AccountScreen> {
                 const SizedBox(height: 32),
                 Row(
                   children: [
-                    _OutlinedButtonWidget(
+                    OutlinedButtonWidget(
                       text: locale.edit,
+                      onPressed: () {},
                     ),
                     const SizedBox(width: 16),
-                    _OutlinedButtonWidget(
+                    OutlinedButtonWidget(
                       text: locale.share,
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -88,32 +94,6 @@ class _AccountState extends State<AccountScreen> {
   }
 }
 
-class _OutlinedButtonWidget extends StatelessWidget {
-  final String text;
-  const _OutlinedButtonWidget({
-    super.key,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.fiolet),
-            overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
-            side: MaterialStateProperty.all(
-                const BorderSide(color: Colors.transparent))),
-        child: Text(
-          text,
-          style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
-        ),
-      ),
-    );
-  }
-}
-
 class _InfoWidget extends StatelessWidget {
   const _InfoWidget({
     super.key,
@@ -136,7 +116,9 @@ class _InfoWidget extends StatelessWidget {
               locale.verifyYourAccount,
               style: AppTextTheme.bodyMedium,
             ),
-            onTap: () {},
+            onTap: () {
+              context.router.push(const VerifyScreenRoute());
+            },
           ),
           const DeeDeeDeviderWidget(),
           DeeDeeRowInfoWidget(
@@ -161,7 +143,15 @@ class _InfoWidget extends StatelessWidget {
               locale.activated,
               style: AppTextTheme.bodyMedium,
             ),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (context) {
+                  return const AccountPopover();
+                },
+              );
+            },
             icon: Image.asset('assets/images/premium_0_icon.png'),
           ),
         ],
