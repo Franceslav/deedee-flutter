@@ -30,7 +30,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
     on<UserImagePicker>(_onUserImagePicker);
     on<UserAvailablePlaces>(_onUserAvailablePlaces);
-    on<AddUserContacts>(_onAddUserContacts); // TODO dummy contacts
+    on<AddUserContact>(_onAddUserContact); 
     on<UserGetGPSPosition>(_onGetUserGPSPosition);
   }
 
@@ -122,17 +122,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  _onAddUserContacts(AddUserContacts event, Emitter<UserState> emit) async {
+  _onAddUserContact(AddUserContact event, Emitter<UserState> emit) async {
+    final contacts = state.user.contacts ?? [];
     emit(
       UserState(
         state.user.copyWith(
-          contacts: [
-            Contact(ContactType.email, 'email.com', ''),
-            Contact(ContactType.phone, '+375(29)888-88-88', ''),
-            Contact(ContactType.instagram, '@Profile', ''),
-            Contact(ContactType.telegram, '@Deedee', ''),
-            Contact(ContactType.phone, '888-88-88', ''),
-          ],
+          contacts: contacts..add(event.contact),
         ),
       ),
     );

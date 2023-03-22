@@ -38,6 +38,11 @@ class UserImagePicker extends UserEvent {
 
 class UserAvailablePlaces extends UserEvent {}
 
+class AddUserContact extends UserEvent {
+  final Contact contact;
+
+  AddUserContact(this.contact);
+}
 class AddUserContacts extends UserEvent {}
 
 class UserGetGPSPosition extends UserEvent {}
