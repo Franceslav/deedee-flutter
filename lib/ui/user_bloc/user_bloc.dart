@@ -6,12 +6,14 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/http_service.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../model/contact.dart';
 import '../../generated/LocationService.pb.dart';
 import '../../model/contact.dart';
+import '../../services/gps.dart';
 
 part 'user_event.dart';
 
@@ -29,6 +31,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserImagePicker>(_onUserImagePicker);
     on<UserAvailablePlaces>(_onUserAvailablePlaces);
     on<AddUserContacts>(_onAddUserContacts); // TODO dummy contacts
+    on<UserGetGPSPosition>(_onGetUserGPSPosition);
   }
 
   _onUserAuthenticated(UserAuthenticated event, Emitter<UserState> emit) {
@@ -103,7 +106,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserSetLastGeolocation(
       UserSetLastGeolocation event, Emitter<UserState> emit) {
-    emit(UserState(state.user.copyWith(lastGeolocation: event.location)));
+    emit(UserState(state.user.copyWith(lastGeoLocation: event.location)));
   }
 
   _onUserAvailablePlaces(
@@ -114,13 +117,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
     emit(
       UserState(
-        state.user.copyWith(availablePlaces: places
-            // [
-            //   Place(title: 'city 1'),
-            //   Place(title: 'city 2'),
-            //   Place(title: 'city 3'),
-            // ]
-            ),
+        state.user.copyWith(availablePlaces: places),
       ),
     );
   }
@@ -139,5 +136,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         ),
       ),
     );
+  }
+
+  _onGetUserGPSPosition(
+      UserGetGPSPosition event, Emitter<UserState> emit) async {
+    try {
+      var fp = await GPSRepository().getGPSPosition();
+      emit(
+        UserState(
+          state.user.copyWith(
+            lastGeoLocation: LatLng(fp!.latitude, fp.longitude),
+          ),
+        ),
+      );
+    } catch (error) {}
   }
 }
