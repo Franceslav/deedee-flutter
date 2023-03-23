@@ -76,9 +76,10 @@ class _SlidableFilterListState extends State<SlidableFilterList> {
                 topicsName: '',
               ));
               FilterDTOBloc().add(PushSavedFiltersEvent(
-                  accountType: user.accountType,
-                  filterKeys: widget.filters[index].filterKeys,
-                  topic: widget.filters[index].subtopic));
+                accountType: user.accountType,
+                filterKeys: widget.filters[index].filterKeys,
+                topic: widget.filters[index].subtopic,
+              ));
             },
             child: Card(
               color: Colors.grey[200],
