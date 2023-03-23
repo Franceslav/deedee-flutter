@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
-import 'package:http/http.dart' as http;
-import 'package:latlong2/latlong.dart';
 
 import 'package:search_address_repository/search_address_repository.dart';
 
