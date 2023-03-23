@@ -28,7 +28,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const HomeScreenRoute());
+                context.router.popAndPush(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.published_with_changes_sharp,
@@ -45,7 +45,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const UserTagsScreenRoute());
+                context.router.popAndPush(const UserTagsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
@@ -54,7 +54,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const AccountScreenRoute());
+                context.router.popAndPush(const AccountScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.rotate_left_rounded,
@@ -80,7 +80,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const BookmarksScreenRoute());
+                context.router.popAndPush(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.filter_alt,
@@ -89,7 +89,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SavedFiltersScreenRoute());
+                context.router.popAndPush(const SavedFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.star_border_purple500_sharp,
@@ -98,7 +98,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SubscribedFiltersPageRoute());
+                context.router.popAndPush(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,
@@ -107,7 +107,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const ReferralScreenRoute());
+                context.router.popAndPush(const ReferralScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,
@@ -116,7 +116,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const SettingsScreenRoute());
+                context.router.popAndPush(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.help_outline,
@@ -125,14 +125,14 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.replace(const HelpScreenRoute());
+                context.router.popAndPush(const HelpScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.exit_to_app,
               text: AppLocalizations.of(context)!.logout,
               onTap: () {
                 context.read<AuthenticationBloc>().add(LogoutEvent());
-                context.router.replace(const LoginScreenRoute());
+                context.router.popAndPush(const LoginScreenRoute());
               }),
         ]);
 }

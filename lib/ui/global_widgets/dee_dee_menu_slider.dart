@@ -28,8 +28,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const HomeScreenRoute());
+
+                context.router.popAndPush(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.published_with_changes_sharp,
@@ -46,8 +46,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const UserTagsScreenRoute());
+
+                context.router.popAndPush(const UserTagsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
@@ -56,8 +56,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const AccountScreenRoute());
+
+                context.router.popAndPush(const AccountScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.rotate_left_rounded,
@@ -83,8 +83,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const BookmarksScreenRoute());
+
+                context.router.popAndPush(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.filter_alt,
@@ -93,8 +93,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const SavedFiltersScreenRoute());
+
+                context.router.popAndPush(const SavedFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.star_border_purple500_sharp,
@@ -103,8 +103,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const SubscribedFiltersPageRoute());
+
+                context.router.popAndPush(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,
@@ -113,8 +113,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const ReferralScreenRoute());
+
+                context.router.popAndPush(const ReferralScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,
@@ -123,8 +123,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const SettingsScreenRoute());
+
+                context.router.popAndPush(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.help_outline,
@@ -133,8 +133,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.pop();
-                context.router.push(const HelpScreenRoute());
+
+                context.router.popAndPush(const HelpScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.exit_to_app,
