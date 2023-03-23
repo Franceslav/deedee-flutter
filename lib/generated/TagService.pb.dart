@@ -1830,14 +1830,14 @@ class GetAllTopicsDescriptionRequest extends $pb.GeneratedMessage {
     $core.String? userId,
     $0.GeoLocation? geoLocation,
   }) {
-    final _result = create();
+    final result = create();
     if (userId != null) {
-      _result.userId = userId;
+      result.userId = userId;
     }
     if (geoLocation != null) {
-      _result.geoLocation = geoLocation;
+      result.geoLocation = geoLocation;
     }
-    return _result;
+    return result;
   }
   factory GetAllTopicsDescriptionRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>

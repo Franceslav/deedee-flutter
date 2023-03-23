@@ -30,7 +30,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
     on<UserImagePicker>(_onUserImagePicker);
     on<UserAvailablePlaces>(_onUserAvailablePlaces);
-    on<AddUserContact>(_onAddUserContact); 
+    on<AddUserContact>(_onAddUserContact);
     on<UserGetGPSPosition>(_onGetUserGPSPosition);
   }
 
@@ -140,7 +140,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(
         UserState(
           state.user.copyWith(
-            lastGeoLocation: LatLng(fp!.latitude, fp.longitude),
+            lastGeoLocation: LatLng(fp.latitude, fp.longitude),
           ),
         ),
       );

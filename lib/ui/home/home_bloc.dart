@@ -43,7 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomePageState> {
   initialize() async {
     _pushNotificationService.requestPermission();
     var fp = await _gpsRepository.getGPSPosition();
-    _user.lastGeoLocation = LatLng(fp!.latitude, fp.longitude);
+    _user.lastGeoLocation = LatLng(fp.latitude, fp.longitude);
     List<TopicDescription> topics =
         await _grpcRepository.getTopics(fp.latitude, fp.longitude);
 
