@@ -35,7 +35,7 @@ class _SelectorItemState extends State<SelectorItem>
     return AnimatedBuilder(
       builder: (context, _) {
         return Padding(
-          padding: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.all(8),
           child: InkWell(
             onTap: () {
               widget.onTap(widget.title);
@@ -44,8 +44,14 @@ class _SelectorItemState extends State<SelectorItem>
               height: 40.0,
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  border: Border.all(color: Colors.black26, width: 1.0),
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0))),
+                  color: Color(CHIPS_COLOR_WHITE),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(CHIPS_SHADOW_COLOR),
+                      blurRadius: 6,
+                    )
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
               child: Stack(
                 key: _commonContainerKey,
                 children: <Widget>[
@@ -58,10 +64,22 @@ class _SelectorItemState extends State<SelectorItem>
                         height: _dotHeightAnimation.value,
                         width: getDotWidthAnimation().value,
                         decoration: const BoxDecoration(
-                            color: Color(COLOR_PRIMARY),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            shape: BoxShape.rectangle),
+                          color: Color(COLOR_PRIMARY),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          shape: BoxShape.rectangle,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 13,
+                    top: 11,
+                    child: ScaleTransition(
+                      scale: _closeImageAnimation,
+                      child: Icon(
+                        Icons.check,
+                        size: 18.0,
+                        color: _textColorAnimation.value,
                       ),
                     ),
                   ),
@@ -70,28 +88,14 @@ class _SelectorItemState extends State<SelectorItem>
                     alignment: Alignment.center,
                     child: Container(
                       padding: EdgeInsets.only(
-                          left: _leftPaddingAnimation.value,
-                          right: _rightPaddingAnimation.value),
+                        left: _leftPaddingAnimation.value,
+                        right: _rightPaddingAnimation.value,
+                      ),
                       child: Text(
                         widget.title,
                         style: TextStyle(
-                            fontSize: 16.0, color: _textColorAnimation.value),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 5.0,
-                    top: 7.0,
-                    child: ScaleTransition(
-                      scale: _closeImageAnimation,
-                      child: Container(
-                        padding: const EdgeInsets.all(2.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey.shade400),
-                        child: const Icon(
-                          Icons.close,
-                          size: 20.0,
+                          fontSize: 16.0,
+                          color: _textColorAnimation.value,
                         ),
                       ),
                     ),
@@ -112,13 +116,14 @@ class _SelectorItemState extends State<SelectorItem>
     //
     _controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 100));
-    _rightPaddingAnimation = Tween(begin: 20.0, end: 40.0).animate(_controller);
-    _leftPaddingAnimation = Tween(begin: 40.0, end: 20.0).animate(_controller);
-    _dotHeightAnimation = Tween(begin: 20.0, end: 40.0).animate(_controller);
+    _rightPaddingAnimation = Tween(begin: 16.0, end: 16.0).animate(_controller);
+    _leftPaddingAnimation = Tween(begin: 16.0, end: 35.0).animate(_controller);
+    _dotHeightAnimation = Tween(begin: 0.0, end: 40.0).animate(_controller);
     _closeImageAnimation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _dotLeftPositionAnimation =
-        Tween(begin: 10.0, end: 0.0).animate(_controller);
-    _dotTopPositionAnimation = Tween(begin: 8.0, end: 0.0).animate(_controller);
+        Tween(begin: 40.0, end: 0.0).animate(_controller);
+    _dotTopPositionAnimation =
+        Tween(begin: 20.0, end: 0.0).animate(_controller);
     _textColorAnimation =
         ColorTween(begin: Colors.black, end: Colors.white).animate(_controller);
   }
@@ -147,7 +152,7 @@ class _SelectorItemState extends State<SelectorItem>
   }
 
   Animation<double> getDotWidthAnimation() {
-    var width = 20.0;
+    var width = 0.0;
     if (_commonContainerKey.currentContext != null) {
       final RenderBox renderBox =
           _commonContainerKey.currentContext!.findRenderObject() as RenderBox;

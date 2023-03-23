@@ -1,3 +1,4 @@
+import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -19,6 +20,8 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 1,
+      shadowColor: const Color(APPBAR_SHADOW_COLOR),
       title: Text(title),
       actions: [
         GestureDetector(
