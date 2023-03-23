@@ -79,7 +79,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   }
 
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
-    emit(LoadingSelectorState());
     try {
       Topic topic = await _grpcRepository.getFilteredTags(
           event.topic, event.filterKeys, event.accountType);
@@ -90,7 +89,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   }
 
   _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
-    emit(LoadingSelectorState());
     try {
       Topic topic = await _grpcRepository.getFilteredTags(
           event.topic, event.filterKeys, event.accountType);

@@ -130,7 +130,7 @@ class _MapScreenState extends State<MapScreen> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 context.router
-                    .replace(FilterPageRoute(topicsName: widget.topicsName));
+                    .popAndPush(FilterPageRoute(topicsName: widget.topicsName));
               },
             ),
             toolbarHeight: size.height * 0.105,
