@@ -106,20 +106,20 @@ class MockFilterServiceClient implements FilterServiceClient {
     return GetFilterKeysResponse()
       ..filterKeys.addAll([
         FilterKey()
-          ..topicId = "маникюр"
-          ..title = "японский",
+          ..topicId = "Ремонт"
+          ..title = "Подвеска",
         FilterKey()
-          ..topicId = "маникюр"
-          ..title = "я",
+          ..topicId = "Ремонт"
+          ..title = "Сварка",
         FilterKey()
-          ..topicId = "маникюр"
-          ..title = "ф",
+          ..topicId = "Ремонт"
+          ..title = "Глушитель",
         FilterKey()
-          ..topicId = "маникюр"
-          ..title = "первый",
+          ..topicId = "Ремонт"
+          ..title = "Электрооборудование",
         FilterKey()
-          ..topicId = "маникюр"
-          ..title = "второй",
+          ..topicId = "Ремонт"
+          ..title = "Двигатель",
       ]);
   }
 

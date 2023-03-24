@@ -115,7 +115,7 @@ class _MapScreenState extends State<MapScreen> {
     Size size = MediaQuery.of(context).size;
     final selectorBloc =
         SelectorBloc(locator.get<GRCPRepository>(), widget.user);
-    selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
+    //selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
     return BlocProvider(
       create: (_) => selectorBloc,
       child: BlocListener<AuthenticationBloc, AuthenticationState>(

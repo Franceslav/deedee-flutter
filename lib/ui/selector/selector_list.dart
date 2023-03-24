@@ -26,16 +26,19 @@ class _SelectorListState extends State<SelectorList> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 8,
+            horizontal: 16,
             vertical: 16,
           ),
           child: Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
             children: [
               ...widget.data.map(
                 (title) => SelectorItem(
                   title: title,
                   onTap: widget.onTap,
                   isSelected: widget.selectedItems.contains(title),
+                  icon: true,
                 ),
               ),
             ],

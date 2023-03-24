@@ -336,17 +336,17 @@ class MockTagServiceClient implements TagServiceClient {
     final subTopics = [
       TopicDescription(
         id: 1,
-        title: 'СТО',
+        title: 'Мойка',
         offerCount: 110,
       ),
       TopicDescription(
         id: 2,
-        title: 'Маникюр',
+        title: 'Ремонт',
         offerCount: 12,
       ),
       TopicDescription(
         id: 3,
-        title: 'Йога',
+        title: 'Шиномонтаж',
         offerCount: 7,
       ),
     ];
