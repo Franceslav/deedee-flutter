@@ -69,15 +69,20 @@ class _FilterPageState extends State<FilterPage> {
         appBar: DeeDeeAppBar(
           controller: _controller,
           title: AppLocalizations.of(context)!.filterTagsPageTitle,
-          child: GestureDetector(
-            child: const Icon(Icons.bookmark_border),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const DialogWidget();
-                  });
-            },
+          child: Row(
+            children: [
+              GestureDetector(
+                child: const Icon(Icons.bookmark_border),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const DialogWidget();
+                      });
+                },
+              ),
+              const ProfilePhotoWithBadge()
+            ],
           ),
         ),
         body: Stack(
@@ -126,10 +131,8 @@ class _FilterPageState extends State<FilterPage> {
                       selectedFilterKeys: _selectedFilterKeys,
                       topicsName: widget.topicsName,
                     ));
-
                   }
                 }
-
               },
               builder: (context, state) {
                 var bloc = context.read<SelectorBloc>();

@@ -47,7 +47,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const UserTagsScreenRoute());
+                context.router.navigate(const UserTagsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
@@ -57,7 +57,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const AccountScreenRoute());
+                context.router.navigate(const AccountScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.rotate_left_rounded,
@@ -84,7 +84,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const BookmarksScreenRoute());
+                context.router.navigate(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.filter_alt,
@@ -94,7 +94,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const SavedFiltersScreenRoute());
+                context.router.navigate(const SavedFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.star_border_purple500_sharp,
@@ -104,7 +104,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const SubscribedFiltersPageRoute());
+                context.router.navigate(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,
@@ -114,7 +114,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const ReferralScreenRoute());
+                context.router.navigate(const ReferralScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,
@@ -124,7 +124,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const SettingsScreenRoute());
+                context.router.navigate(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.help_outline,
@@ -134,7 +134,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.popAndPush(const HelpScreenRoute());
+                context.router.navigate(const HelpScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.exit_to_app,
