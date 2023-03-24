@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:deedee/ui/theme/app_text_theme.dart';
@@ -16,16 +17,25 @@ class OutlinedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.fiolet),
-            overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
-            side: MaterialStateProperty.all(
-                const BorderSide(color: Colors.transparent))),
-        child: Text(
-          text,
-          style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+              colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: OutlinedButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+
+              // backgroundColor: MaterialStateProperty.all(AppColors.fiolet),
+              overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
+              side: MaterialStateProperty.all(
+                  const BorderSide(color: Colors.transparent))),
+          child: Text(
+            text,
+            style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
+          ),
         ),
       ),
     );

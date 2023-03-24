@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -62,55 +63,24 @@ class _DialogWidgetState extends State<DialogWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _Button(
+                  OutlinedButtonWidget(
+                    onPressed: () {
+                      context.router.pop();
+                      _controller.clear();
+                    },
                     text: AppLocalizations.of(context)!.save,
-                    onPress: () {
-                      context.router.pop();
-                      _controller.clear();
-                    },
                   ),
-                  _Button(
-                    text: AppLocalizations.of(context)!.saveAndSubscribe,
-                    onPress: () {
+                  const SizedBox(width: 16),
+                  OutlinedButtonWidget(
+                    onPressed: () {
                       context.router.pop();
                       _controller.clear();
                     },
+                    text: AppLocalizations.of(context)!.saveAndSubscribe,
                   ),
                 ],
               )
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Button extends StatelessWidget {
-  String text;
-  void Function() onPress;
-  _Button({
-    Key? key,
-    required this.text,
-    required this.onPress,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.045,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-            colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: TextButton(
-        onPressed: onPress,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Text(
-            text,
-            style: AppTextTheme.labelLarge.copyWith(color: Colors.white),
           ),
         ),
       ),
