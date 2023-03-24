@@ -36,12 +36,6 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   final List<Widget> _times = [];
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    context.read<UserBloc>().add(AddUserContacts()); //Dummy contacts
-  }
-
-  @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
 

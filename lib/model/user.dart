@@ -24,6 +24,7 @@ enum PremiumStatus {
   isPremium,
   notPremium,
 }
+
 extension AccountTypeExtension on AccountType {
   String stringType(BuildContext context) {
     switch (this) {
@@ -59,18 +60,17 @@ class User extends Equatable {
   final AccountType accountType;
   final List<Place>? availablePlaces;
   final List<String>? savedFilters;
-
-  LatLng lastUserGeoLocation;
+  LatLng? lastUserGeoLocation;
 
   static User empty = User(
-    LatLng(0, 0),
+    lastUserGeoLocation: LatLng(0, 0),
     userId: '',
     email: '',
     firstName: '',
     lastName: '',
   );
 
-  LatLng get lastGeoLocation => lastUserGeoLocation;
+  LatLng get lastGeoLocation => lastUserGeoLocation!;
 
   set lastGeoLocation(LatLng lastGeoLocation) =>
       lastUserGeoLocation = lastGeoLocation;
@@ -81,8 +81,8 @@ class User extends Equatable {
 
   bool get isNotEmpty => this != User.empty;
 
-  User(
-    this.lastUserGeoLocation, {
+  User({
+    this.lastUserGeoLocation,
     required this.userId,
     required this.email,
     this.contacts,
@@ -99,9 +99,9 @@ class User extends Equatable {
     this.savedFilters,
   });
 
-  factory User.fromJson(Map<String, dynamic> parsedJson) {
+  factory User.fromJson(Map<String, dynamic> parsedJson, ) {
     return User(
-      LatLng(0, 0),
+      lastUserGeoLocation: LatLng(0, 0),
       userId: parsedJson['userId'] ?? '',
       email: parsedJson['email'] ?? '',
       firstName: parsedJson['firstName'] ?? '',
@@ -126,8 +126,8 @@ class User extends Equatable {
       'premiumStatus': premiumStatus,
       'balance': balance,
       'availableTags': availableTags,
-      'lastLat': lastGeoLocation.latitude ?? 0.0,
-      'lastLon': lastGeoLocation.longitude ?? 0.0,
+      'lastLat': lastGeoLocation.latitude,
+      'lastLon': lastGeoLocation.longitude,
     };
   }
 
@@ -139,13 +139,13 @@ class User extends Equatable {
     double? balance,
     int? availableTags,
     AccountType? accountType,
-    LatLng? lastGeolocation,
+    LatLng? lastGeoLocation,
     List<Place>? availablePlaces,
     List<String>? savedFilters,
     List<Contact>? contacts,
   }) {
     return User(
-      lastGeoLocation,
+      lastUserGeoLocation: lastGeoLocation ?? this.lastGeoLocation,
       userId: userId,
       email: email,
       firstName: firstName,

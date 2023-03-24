@@ -108,15 +108,7 @@ class _FilterPageState extends State<FilterPage> {
                       ? _selectedFilterKeys.remove(state.filterKey)
                       : _selectedFilterKeys.add(state.filterKey);
                 }
-                if (state is LoadingSelectorState) {
-                  context.read<LoadingCubit>().showLoading(
-                        context,
-                        AppLocalizations.of(context)!.filteringTagsHistTitle,
-                        false,
-                      );
-                }
                 if (state is UserFiltersDoneState || state is ErrorState) {
-                  context.read<LoadingCubit>().hideLoading();
                   if (state is ErrorState) {
                     showSnackBar(context, state.errorMessage);
                   }
@@ -127,15 +119,17 @@ class _FilterPageState extends State<FilterPage> {
                                 tag.geoLocation.longitude):
                             TagDTO(tag.tagId, tag.messengerId)
                     };
-                    context.router.push(MapScreenRoute(
+                    context.router.popAndPush(MapScreenRoute(
                       tagDescriptionMap: tagMap,
                       user: user,
                       filterKeys: _filterKeys,
                       selectedFilterKeys: _selectedFilterKeys,
                       topicsName: widget.topicsName,
                     ));
+
                   }
                 }
+
               },
               builder: (context, state) {
                 var bloc = context.read<SelectorBloc>();

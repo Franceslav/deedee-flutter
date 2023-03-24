@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class VerifyScreen extends StatefulWidget {
   @override
@@ -19,138 +22,148 @@ class VerifyScreen extends StatefulWidget {
 
 class _VerifyScreenState extends State<VerifyScreen> {
   File? image;
+  final PanelController _controller = PanelController();
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.accountVerify,
-          style: const TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
+      appBar: DeeDeeAppBar(
+        title: locale.accountVerify,
+        controller: _controller,
+        child: const Icon(Icons.menu),
       ),
-      body: Container(
-        color: Colors.indigo,
-        child: ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    const Icon(
-                      Icons.mail,
-                      size: 100,
-                    ),
-                    user.emailVerification == EmailVerificationStatus.verified
-                        ? const Icon(
-                            Icons.done,
-                            color: Colors.green,
-                          )
-                        : const SizedBox(height: 0),
-                    Text(AppLocalizations.of(context)!.verifyEmail,
-                        style: Theme.of(context).textTheme.displayLarge),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 10),
+      body: Stack(
+        children: [
+          ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.mail,
+                        size: 100,
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<UserBloc>().add(UserEmailVerification());
-                      },
-                      child: Text(AppLocalizations.of(context)!.accountVerify),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    const Icon(
-                      Icons.person,
-                      size: 100,
-                    ),
-                    user.docVerification == DocVerificationStatus.verified
-                        ? const Icon(
-                            Icons.done,
-                            color: Colors.green,
-                          )
-                        : const SizedBox(height: 0),
-                    Text(AppLocalizations.of(context)!.verifyIdentity,
-                        style: Theme.of(context).textTheme.displayLarge),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SimpleDialog(
-                                title: const Text('Choose Photo'),
-                                children: [
-                                  SimpleDialogOption(
-                                    onPressed: () {
-                                      context.read<UserBloc>().add(UserImagePicker(ImageSource.gallery));
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('From gallery'),
-                                  ),
-                                  SimpleDialogOption(
-                                    onPressed: () {
-                                      context.read<UserBloc>().add(UserImagePicker(ImageSource.camera));
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('From camera'),
-                                  ),
-                                  SimpleDialogOption(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Close'),
-                                  )
-                                ],
-                              );
-                            }
-                        );
-                        //TODO: [DEEMOB-76]
-                        context
-                            .read<UserBloc>()
-                            .add(UserDocVerification(files: FileChunk()));
-                      },
-                      child: SizedBox(
-                        width: 80,
-                        child: Row(
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)!.accountVerify,
-                            ),
-                            const Icon(Icons.attach_file)
-                          ],
+                      user.emailVerification == EmailVerificationStatus.verified
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.green,
+                            )
+                          : const SizedBox(height: 0),
+                      Text(AppLocalizations.of(context)!.verifyEmail,
+                          style: Theme.of(context).textTheme.displayLarge),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 10),
                         ),
                       ),
-                    ),
-                  ],
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<UserBloc>().add(UserEmailVerification());
+                        },
+                        child:
+                            Text(AppLocalizations.of(context)!.accountVerify),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.person,
+                        size: 100,
+                      ),
+                      user.docVerification == DocVerificationStatus.verified
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.green,
+                            )
+                          : const SizedBox(height: 0),
+                      Text(AppLocalizations.of(context)!.verifyIdentity,
+                          style: Theme.of(context).textTheme.displayLarge),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SimpleDialog(
+                                  title: const Text('Choose Photo'),
+                                  children: [
+                                    SimpleDialogOption(
+                                      onPressed: () {
+                                        context.read<UserBloc>().add(
+                                            UserImagePicker(
+                                                ImageSource.gallery));
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('From gallery'),
+                                    ),
+                                    SimpleDialogOption(
+                                      onPressed: () {
+                                        context.read<UserBloc>().add(
+                                            UserImagePicker(
+                                                ImageSource.camera));
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('From camera'),
+                                    ),
+                                    SimpleDialogOption(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Close'),
+                                    )
+                                  ],
+                                );
+                              });
+                          //TODO: [DEEMOB-76]
+                          context
+                              .read<UserBloc>()
+                              .add(UserDocVerification(files: FileChunk()));
+                        },
+                        child: SizedBox(
+                          width: 80,
+                          child: Row(
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.accountVerify,
+                              ),
+                              const Icon(Icons.attach_file)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          ProfileMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }

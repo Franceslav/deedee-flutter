@@ -38,12 +38,14 @@ class _HomeState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      context.read<UserBloc>().add(UserGetGPSPosition());
+    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     context.read<UserBloc>().add(UserAvailablePlaces());
   }
 

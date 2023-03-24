@@ -124,5 +124,9 @@
      "book": "Zamówić",
      "edit": "Edytować",
      "share": "udział",
-      "saveAndSubscribe": "Zapisz i subskrybuj"
+      "saveAndSubscribe": "Zapisz i subskrybuj",
+      "switchLanguage": "Zmień język",
+      "onServiceSince": "W służbie od ",
+     "tags": "Tagi",
+     "views": "wyświetlenia"
 }

@@ -21,19 +21,24 @@ class SelectorAppBar extends StatefulWidget {
 class _SelectorAppBarState extends State<SelectorAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: SizedBox(
-        height: 44,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            ...widget.data.map((title) => SelectorItem(
-                  title: title,
-                  onTap: widget.onTap,
-                  isSelected: widget.selectedItems.contains(title),
-                )),
-          ],
+    return Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Wrap(
+            direction: Axis.horizontal,
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children: [
+              ...widget.data.map((title) => SelectorItem(
+                    title: title,
+                    onTap: widget.onTap,
+                    isSelected: widget.selectedItems.contains(title),
+                    icon: false,
+                  )),
+            ],
+          ),
         ),
       ),
     );

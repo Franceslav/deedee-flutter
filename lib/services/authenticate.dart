@@ -163,7 +163,8 @@ class FireStoreUtils {
         profilePicUrl =
             await uploadUserImageToServer(image, result.user?.uid ?? '');
       }
-      User user = User(LatLng(0, 0),
+      User user = User(
+          lastUserGeoLocation: LatLng(0, 0),
           email: emailAddress,
           firstName: firstName,
           userId: result.user?.uid ?? '',
@@ -234,7 +235,8 @@ class FireStoreUtils {
         profileImageUrl = await uploadUserImageToServer(
             image, userCredential.user?.uid ?? '');
       }
-      User user = User(LatLng(0, 0),
+      User user = User(
+          lastUserGeoLocation: LatLng(0, 0),
           firstName:
               firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
           lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
@@ -284,7 +286,7 @@ class FireStoreUtils {
       return user;
     } else {
       user = User(
-        LatLng(0, 0),
+        lastUserGeoLocation: LatLng(0, 0),
         email: appleIdCredential.email ?? '',
         firstName: appleIdCredential.fullName?.givenName ?? '',
         profilePictureURL: '',

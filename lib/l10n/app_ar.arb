@@ -114,5 +114,9 @@
      "book": "لأجل",
      "edit": "يحرر",
      "share": "يشارك",
-     "saveAndSubscribe": "حفظ والاشتراك"
+     "saveAndSubscribe": "حفظ والاشتراك",
+     "switchLanguage": "تبديل اللغة",
+     "onServiceSince": "في الخدمة منذ ذلك الحين ",
+     "tags": "العلامات",
+     "views": "الآراء"
 }

@@ -28,12 +28,12 @@ class _MainTopicGridState extends State<MainTopicGrid> {
     _fetchMainTopics();
   }
 
-  void _fetchMainTopics() async {
-    final userId = BlocProvider.of<UserBloc>(context).state.user.userId;
-    final position = await Geolocator.getCurrentPosition();
+  void _fetchMainTopics() {
+    final user = BlocProvider.of<UserBloc>(context).state.user;
+    final position = user.lastGeoLocation;
     final userLocation = LatLng(position.latitude, position.longitude);
     BlocProvider.of<MainTopicsBloc>(context).add(LoadMainTopicsEvent(
-      userId: userId,
+      userId: user.userId,
       userLocation: userLocation,
     ));
   }

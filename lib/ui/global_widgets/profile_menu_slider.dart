@@ -11,11 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DeeDeeMenuSlider extends GeneralSlidingPanel {
+class ProfileMenuSlider extends GeneralSlidingPanel {
   final User user;
   final BuildContext context;
 
-  DeeDeeMenuSlider(
+  ProfileMenuSlider(
     this.context, {
     super.key,
     required super.controller,
@@ -28,7 +28,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -46,7 +45,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const UserTagsScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -56,7 +54,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const AccountScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -83,7 +80,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -93,7 +89,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const SavedFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -103,7 +98,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const SubscribedFiltersPageRoute());
               }),
           GeneralSlidingPanelItem(
@@ -113,7 +107,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const ReferralScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -123,7 +116,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -133,7 +125,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.popAndPush(const HelpScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -141,7 +132,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
               text: AppLocalizations.of(context)!.logout,
               onTap: () {
                 context.read<AuthenticationBloc>().add(LogoutEvent());
-                context.router.replace(const LoginScreenRoute());
+                context.router.popAndPush(const LoginScreenRoute());
               }),
         ]);
 }

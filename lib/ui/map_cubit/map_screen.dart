@@ -115,7 +115,7 @@ class _MapScreenState extends State<MapScreen> {
     Size size = MediaQuery.of(context).size;
     final selectorBloc =
         SelectorBloc(locator.get<GRCPRepository>(), widget.user);
-    selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
+    //selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
     return BlocProvider(
       create: (_) => selectorBloc,
       child: BlocListener<AuthenticationBloc, AuthenticationState>(
@@ -130,7 +130,7 @@ class _MapScreenState extends State<MapScreen> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 context.router
-                    .replace(FilterPageRoute(topicsName: widget.topicsName));
+                    .popAndPush(FilterPageRoute(topicsName: widget.topicsName));
               },
             ),
             toolbarHeight: size.height * 0.105,

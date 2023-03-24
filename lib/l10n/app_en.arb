@@ -129,5 +129,10 @@
      "book": "Book",
      "edit": "Edit",
      "share": "Share",
-     "saveAndSubscribe": "Save and subscribe"
+     "saveAndSubscribe": "Save and subscribe",
+     "switchLanguage": "Switch language",
+     "onServiceSince": "On service since ",
+     "tags": "Tags",
+     "views": "Views"
+ 
 }
