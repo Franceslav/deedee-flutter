@@ -126,41 +126,30 @@ class _MapScreenState extends State<MapScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                context.router
-                    .popAndPush(FilterPageRoute(topicsName: widget.topicsName));
-              },
-            ),
-            toolbarHeight: size.height * 0.105,
+            automaticallyImplyLeading: false,
+            toolbarHeight: size.height * 0.07,
             backgroundColor: Colors.transparent,
             actions: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 50,
-                  ),
-                  child: BlocConsumer<SelectorBloc, SelectorState>(
-                    listener: (context, state) {
-                      if (state is LoadedFilterKeysState) {
-                        widget.filterKeys = state.filterKeys;
-                      }
-                      if (state is FilterKeySelectedState) {
-                        widget.selectedFilterKeys.contains(state.filterKey)
-                            ? widget.selectedFilterKeys.remove(state.filterKey)
-                            : widget.selectedFilterKeys.add(state.filterKey);
-                      }
-                    },
-                    builder: (context, state) {
-                      return SelectorAppBar(
-                        data: widget.filterKeys,
-                        onTap: (String filterKey) =>
-                            selectorBloc.add(SelectFilterKeyEvent(filterKey)),
-                        selectedItems: widget.selectedFilterKeys,
-                      );
-                    },
-                  ),
+                child: BlocConsumer<SelectorBloc, SelectorState>(
+                  listener: (context, state) {
+                    if (state is LoadedFilterKeysState) {
+                      widget.filterKeys = state.filterKeys;
+                    }
+                    if (state is FilterKeySelectedState) {
+                      widget.selectedFilterKeys.contains(state.filterKey)
+                          ? widget.selectedFilterKeys.remove(state.filterKey)
+                          : widget.selectedFilterKeys.add(state.filterKey);
+                    }
+                  },
+                  builder: (context, state) {
+                    return SelectorAppBar(
+                      data: widget.filterKeys,
+                      onTap: (String filterKey) =>
+                          selectorBloc.add(SelectFilterKeyEvent(filterKey)),
+                      selectedItems: widget.selectedFilterKeys,
+                    );
+                  },
                 ),
               ),
             ],
@@ -226,6 +215,16 @@ class _MapScreenState extends State<MapScreen> {
                 pc: _pc,
                 selectedMessengerId: _selectedMessengerId,
                 openedFirstTime: openedFirstTime,
+              ),
+              Positioned(
+                  top: 16,
+                  left: 16,
+                child: GestureDetector(
+                  child: const Icon(Icons.close),
+                  onTap: () {
+                    context.router.pop();
+                  },
+                ),
               ),
             ],
           ),

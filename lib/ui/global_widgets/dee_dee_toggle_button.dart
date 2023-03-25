@@ -1,12 +1,14 @@
-
+import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeeDeeToggleButton extends StatefulWidget {
-  const DeeDeeToggleButton({
-    super.key,
-  });
+  final AccountType accountType;
+
+  DeeDeeToggleButton({super.key, required this.accountType});
 
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
@@ -21,11 +23,12 @@ class _ToggleButtonState extends State<DeeDeeToggleButton> {
   @override
   void initState() {
     super.initState();
-    xAlign = loginAlign;
+    xAlign = widget.accountType == AccountType.buy ? loginAlign : signInAlign;
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     final width = MediaQuery.of(context).size.width;
     const style = TextStyle(
       fontFamily: 'Roboto',
@@ -51,6 +54,9 @@ class _ToggleButtonState extends State<DeeDeeToggleButton> {
           ),
           GestureDetector(
             onTap: () {
+              BlocProvider.of<UserBloc>(context)
+                  .add(UserSwitchAccountType(AccountType.buy));
+              user.accountType = AccountType.buy;
               setState(() {
                 xAlign = loginAlign;
               });
@@ -62,6 +68,9 @@ class _ToggleButtonState extends State<DeeDeeToggleButton> {
           ),
           GestureDetector(
             onTap: () {
+              BlocProvider.of<UserBloc>(context)
+                  .add(UserSwitchAccountType(AccountType.sell));
+              user.accountType = AccountType.sell;
               setState(() {
                 xAlign = signInAlign;
               });

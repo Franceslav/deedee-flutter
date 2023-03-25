@@ -57,7 +57,7 @@ class User extends Equatable {
   final PremiumStatus premiumStatus;
   final double balance;
   final int availableTags;
-  final AccountType accountType;
+  AccountType accountType;
   final List<Place>? availablePlaces;
   final List<String>? savedFilters;
   LatLng? lastUserGeoLocation;
