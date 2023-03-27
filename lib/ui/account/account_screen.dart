@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/account/account_info_widget.dart';
 import 'package:deedee/ui/account/account_popover.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
@@ -67,8 +68,8 @@ class _AccountState extends State<AccountScreen> {
                 ),
                 const SizedBox(height: 48),
                 _InfoWidget(
-                  emailVerification: user.emailVerification.name,
-                  premiumStatus: user.premiumStatus.name,
+                  emailVerification: user.emailVerification,
+                  premiumStatus: user.premiumStatus,
                 ),
                 const SizedBox(height: 20),
                 _TextButtonWidget(
@@ -105,8 +106,8 @@ class _AccountState extends State<AccountScreen> {
 }
 
 class _InfoWidget extends StatelessWidget {
-  final String premiumStatus;
-  final String emailVerification;
+  final PremiumStatus premiumStatus;
+  final EmailVerificationStatus emailVerification;
   const _InfoWidget({
     super.key,
     required this.premiumStatus,
@@ -120,12 +121,8 @@ class _InfoWidget extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          emailVerification
-                      .toLowerCase()
-                      .contains("unVerified".toLowerCase()) ||
-                  premiumStatus
-                      .toLowerCase()
-                      .contains("notPremium".toLowerCase())
+          premiumStatus == PremiumStatus.notPremium &&
+                  emailVerification == EmailVerificationStatus.unverified
               ? DeeDeeRowInfoWidget(
                   icon: Image.asset('assets/images/verify_0_icon.png'),
                   mainText: Text(
@@ -155,12 +152,8 @@ class _InfoWidget extends StatelessWidget {
             onTap: () {},
           ),
           const DeeDeeDeviderWidget(),
-          emailVerification
-                      .toLowerCase()
-                      .contains("unVerified".toLowerCase()) ||
-                  premiumStatus
-                      .toLowerCase()
-                      .contains("notPremium".toLowerCase())
+          premiumStatus == PremiumStatus.notPremium &&
+                  emailVerification == EmailVerificationStatus.unverified
               ? DeeDeeRowInfoWidget(
                   mainText: Text(
                     locale.premium,
@@ -171,7 +164,6 @@ class _InfoWidget extends StatelessWidget {
                     style: AppTextTheme.bodyMedium,
                   ),
                   onTap: () {
-                    print("${emailVerification}$premiumStatus");
                     showModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
