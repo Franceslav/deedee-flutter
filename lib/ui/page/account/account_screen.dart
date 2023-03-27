@@ -6,6 +6,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -42,12 +43,11 @@ class _AccountState extends State<AccountScreen> {
       appBar: DeeDeeAppBar(
         title: locale.profile,
         controller: _controller,
-        child: const Icon(Icons.menu),
+        child: const ProfilePhotoWithBadge(),
       ),
       body: BlocConsumer<UserBloc, UserState>(
         bloc: bloc,
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Stack(
             children: [
@@ -57,7 +57,7 @@ class _AccountState extends State<AccountScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 32),
-                     DeeDeeToggleButton(
+                    DeeDeeToggleButton(
                       accountType: accountType,
                     ),
                     const SizedBox(height: 34),
@@ -77,6 +77,10 @@ class _AccountState extends State<AccountScreen> {
                       ],
                     ),
                     const SizedBox(height: 48),
+                    _InfoWidget(
+                      emailVerification: user.emailVerification,
+                      premiumStatus: user.premiumStatus,
+                    ),
                     const SizedBox(height: 20),
                     _TextButtonWidget(
                       text: locale.switchLanguage,
@@ -99,31 +103,6 @@ class _AccountState extends State<AccountScreen> {
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 48),
-              _InfoWidget(
-                emailVerification: user.emailVerification,
-                premiumStatus: user.premiumStatus,
-              ),
-              const SizedBox(height: 20),
-              _TextButtonWidget(
-                text: locale.switchLanguage,
-                textColor: AppColors.blue,
-                onPressed: () {
-                  context.router.push(const AccountLanguageScreenRoute());
-                },
-              ),
-              const SizedBox(height: 0),
-              _TextButtonWidget(
-                text: locale.switchAccount,
-                textColor: AppColors.blue,
-                onPressed: () {},
-              ),
-              const SizedBox(height: 8),
-              _TextButtonWidget(
-                text: locale.logout,
-                textColor: AppColors.red,
-                onPressed: () {},
               ),
               ProfileMenuSlider(
                 context,
