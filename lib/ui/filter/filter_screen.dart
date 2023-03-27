@@ -142,13 +142,6 @@ class _FilterPageState extends State<FilterPage> {
                                   ),
                                 ),
                                 DeeDeeButton(
-                                  onPressed: () => showDialog(
-                                      context: context,
-                                      builder: (ctx) => const CalendarDialog()),
-                                  gradientButton: true,
-                                  title: 'Fake Button Сalendar',
-                                ),
-                                DeeDeeButton(
                                   title:
                                       AppLocalizations.of(context)!.placeOrder,
                                   onPressed: () {

@@ -7,20 +7,18 @@ class SelectorItem extends StatefulWidget {
   final bool isSelected;
   final bool icon;
 
-  const SelectorItem({
-    super.key,
-    required this.title,
-    required this.onTap,
-    required this.isSelected,
-    required this.icon
-  });
+  const SelectorItem(
+      {super.key,
+      required this.title,
+      required this.onTap,
+      required this.isSelected,
+      required this.icon});
 
   @override
   State<SelectorItem> createState() => _SelectorItemState();
 }
 
 class _SelectorItemState extends State<SelectorItem> {
-
   @override
   Widget build(BuildContext context) {
     return ActionChip(
@@ -52,10 +50,9 @@ class _SelectorItemState extends State<SelectorItem> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 16.0),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16))),
         shadowColor: const Color(CHIPS_SHADOW_COLOR),
-        onPressed: () => widget.onTap(widget.title)
-        );
+        onPressed: () => widget.onTap(widget.title));
   }
-
 }

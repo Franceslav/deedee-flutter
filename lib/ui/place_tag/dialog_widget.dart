@@ -63,20 +63,24 @@ class _DialogWidgetState extends State<DialogWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlinedButtonWidget(
-                    onPressed: () {
-                      context.router.pop();
-                      _controller.clear();
-                    },
-                    text: AppLocalizations.of(context)!.save,
+                  Expanded(
+                    child: OutlinedButtonWidget(
+                      onPressed: () {
+                        context.router.pop();
+                        _controller.clear();
+                      },
+                      text: AppLocalizations.of(context)!.save,
+                    ),
                   ),
                   const SizedBox(width: 16),
-                  OutlinedButtonWidget(
-                    onPressed: () {
-                      context.router.pop();
-                      _controller.clear();
-                    },
-                    text: AppLocalizations.of(context)!.saveAndSubscribe,
+                  Expanded(
+                    child: OutlinedButtonWidget(
+                      onPressed: () {
+                        context.router.pop();
+                        _controller.clear();
+                      },
+                      text: AppLocalizations.of(context)!.saveAndSubscribe,
+                    ),
                   ),
                 ],
               )

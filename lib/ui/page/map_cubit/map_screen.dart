@@ -12,7 +12,9 @@ import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/global_widgets/calendar.dart';
 import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
+import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/map_cubit/tag_marker/tag_marker.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -354,25 +356,20 @@ class AddressInfoWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         //TODO implement data
-        children: const [
-          Text(
-            'Время работы',
-            style: AppTextTheme.bodyMedium,
-          ),
-          SizedBox(height: 2),
-          Text(
-            'Пн-Пт 9:00 - 18:00',
-            style: AppTextTheme.bodyLarge,
-          ),
-          SizedBox(height: 12),
-          Text(
+        children: [
+          const Text(
             'Адрес',
             style: AppTextTheme.bodyMedium,
           ),
-          SizedBox(height: 2),
-          Text(
+          const SizedBox(height: 2),
+          const Text(
             'ул.Калиновского д.235/4',
             style: AppTextTheme.bodyLarge,
+          ),
+          const SizedBox(height: 12),
+          OutlinedButtonWidget(
+            onPressed: () => Calendar().showCalendar(context),
+            text: 'Fake Button Сalendar',
           ),
         ],
       ),

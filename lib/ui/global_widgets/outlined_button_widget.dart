@@ -16,26 +16,24 @@ class OutlinedButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-              colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: OutlinedButton(
-          onPressed: onPressed,
-          style: ButtonStyle(
-
-              // backgroundColor: MaterialStateProperty.all(AppColors.fiolet),
-              overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
-              side: MaterialStateProperty.all(
-                  const BorderSide(color: Colors.transparent))),
-          child: Text(
-            text,
-            style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
-          ),
+    return Container(
+      height: 40,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+            colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: OutlinedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(AppColors.lightFiolet),
+            side: MaterialStateProperty.all(
+                const BorderSide(color: Colors.transparent))),
+        child: Text(
+          text,
+          style: AppTextTheme.labelLarge.copyWith(color: AppColors.white),
+          textAlign: TextAlign.center,
         ),
       ),
     );

@@ -8,8 +8,11 @@ class DeeDeeButton extends StatelessWidget {
   final bool gradientButton;
   final double borderRadius = 12.0;
 
-  DeeDeeButton(
-      {required this.title, required this.onPressed, required this.gradientButton, super.key});
+  const DeeDeeButton(
+      {required this.title,
+      required this.onPressed,
+      required this.gradientButton,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +20,7 @@ class DeeDeeButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         height: 50,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
               colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
@@ -28,28 +28,24 @@ class DeeDeeButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              backgroundColor: gradientButton ? Colors.transparent : Colors
-                  .white,
+              backgroundColor:
+                  gradientButton ? Colors.transparent : Colors.white,
               disabledBackgroundColor: const Color(BASIC_GREY_COLOR),
               shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
-                  side: (gradientButton) ? const BorderSide(
-                      color: Colors.transparent) : const BorderSide(
-                      color: Colors.black, width: 0.0)
-              )
-          ),
+                  side: (gradientButton)
+                      ? const BorderSide(color: Colors.transparent)
+                      : const BorderSide(color: Colors.black, width: 0.0))),
           onPressed: onPressed,
-          child: Text(
-              title,
+          child: Text(title,
               style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: gradientButton ? Colors.white : const Color(
-                      BASIC_GREY_COLOR)
-              )
-          ),
+                  color: gradientButton
+                      ? Colors.white
+                      : const Color(BASIC_GREY_COLOR))),
         ),
       ),
     );
