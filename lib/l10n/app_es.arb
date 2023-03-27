@@ -128,5 +128,15 @@
      "switchLanguage": "Cambiar idioma",
      "onServiceSince": "En servicio desde ",
      "tags": "Etiquetas",
-     "views": "Vistas"
+     "views": "Vistas",
+     "selectStartTime": "Seleccione la hora de Inicio",
+     "selectDuration": "Seleccione la Duración",
+     "confirmSelection": "Confirmar selección",
+     "h": "h",
+     "inH": "a",
+     "reset": "Borrar",
+     "apply": "Confirmar",
+     "beginning": "Comienzo",
+     "finish": "Final",
+     "duration": "Duración"
 }

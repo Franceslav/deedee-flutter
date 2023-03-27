@@ -118,5 +118,15 @@
      "switchLanguage": "تبديل اللغة",
      "onServiceSince": "في الخدمة منذ ذلك الحين ",
      "tags": "العلامات",
-     "views": "الآراء"
+     "views": "الآراء",
+     "selectStartTime": "حدد وقت البدء",
+     "selectDuration": "حدد المدة",
+     "confirmSelection": "تأكيد الاختيار",
+     "h": "ساعة",
+     "inH": "في",
+     "reset": "رمي قبالة",
+     "apply": "تأكيد",
+     "beginning": "البداية",
+     "finish": "النهاية",
+     "duration": "المدة"
 }

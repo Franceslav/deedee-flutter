@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:deedee/ui/global_widgets/calendar.dart';
+import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:auto_route/auto_route.dart';
@@ -209,8 +209,10 @@ class _FilterPageState extends State<FilterPage> {
                                       ),
                                     ),
                                     DeeDeeButton(
-                                      onPressed: () =>
-                                          Calendar().showCalendar(context),
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (ctx) =>
+                                              const CalendarDialog()),
                                       gradientButton: true,
                                       title: 'Fake Button Сalendar',
                                     ),

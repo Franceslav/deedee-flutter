@@ -133,6 +133,16 @@
      "switchLanguage": "Switch language",
      "onServiceSince": "On service since ",
      "tags": "Tags",
-     "views": "Views"
+     "views": "Views",
+     "selectStartTime": "Select the start time",
+     "selectDuration": "Select the duration",
+     "confirmSelection": "Confirm the selection",
+     "h": "h",
+     "inH": "in",
+     "reset": "Reset",
+     "apply": "Apply",
+     "beginning": "Beginning",
+     "finish": "Finish",
+     "duration": "Duration"
  
 }

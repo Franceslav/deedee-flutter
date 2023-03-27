@@ -128,5 +128,15 @@
       "switchLanguage": "Zmień język",
       "onServiceSince": "W służbie od ",
      "tags": "Tagi",
-     "views": "wyświetlenia"
+     "views": "wyświetlenia",
+    "selectStartTime": "Wybierz czas rozpoczęcia",
+     "selectDuration": "Wybierz czas trwania",
+     "confirmSelection": "Potwierdź wybór",
+     "h": "h",
+     "inH": "o",
+     "reset": "Zresetować",
+     "apply": "Potwierdzić",
+     "beginning": "Zacząć",
+     "finish": "Końcówka",
+     "duration": "Czas trwania"
 }
