@@ -34,11 +34,11 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
           SafeArea(
             child: Column(
               children: [
-                Flexible(
-                  child: MainTopicGrid(
-                    screenType: widget.screenType,
-                  ),
-                ),
+                // Flexible(
+                //   child: MainTopicGrid(
+                //     screenType: widget.screenType,
+                //   ),
+                // ),
               ],
             ),
           ),

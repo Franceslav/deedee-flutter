@@ -30,42 +30,77 @@ class _AccountState extends State<AccountScreen> {
   final Uuid uuid = const Uuid();
   late String cityChoose;
   late List<String> places;
+  //late AccountType accountType;
 
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
+    final bloc = UserBloc();
+    final AccountType accountType = user.accountType;
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: locale.profile,
         controller: _controller,
         child: const Icon(Icons.menu),
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 32),
-                const DeeDeeToggleButton(),
-                const SizedBox(height: 34),
-                const AccountInfoWidget(),
-                const SizedBox(height: 32),
-                Row(
+      body: BlocConsumer<UserBloc, UserState>(
+        bloc: bloc,
+        listener: (context, state) {
+        },
+        builder: (context, state) {
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    OutlinedButtonWidget(
-                      text: locale.edit,
+                    const SizedBox(height: 32),
+                     DeeDeeToggleButton(
+                      accountType: accountType,
+                    ),
+                    const SizedBox(height: 34),
+                    const AccountInfoWidget(),
+                    const SizedBox(height: 32),
+                    Row(
+                      children: [
+                        OutlinedButtonWidget(
+                          text: locale.edit,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(width: 16),
+                        OutlinedButtonWidget(
+                          text: locale.share,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 48),
+                    const _InfoWidget(),
+                    const SizedBox(height: 20),
+                    _TextButtonWidget(
+                      text: locale.switchLanguage,
+                      textColor: AppColors.blue,
+                      onPressed: () {
+                        context.router.push(const AccountLanguageScreenRoute());
+                      },
+                    ),
+                    const SizedBox(height: 0),
+                    _TextButtonWidget(
+                      text: locale.switchAccount,
+                      textColor: AppColors.blue,
                       onPressed: () {},
                     ),
-                    const SizedBox(width: 16),
-                    OutlinedButtonWidget(
-                      text: locale.share,
+                    const SizedBox(height: 8),
+                    _TextButtonWidget(
+                      text: locale.logout,
+                      textColor: AppColors.red,
                       onPressed: () {},
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 48),
                 _InfoWidget(
                   emailVerification: user.emailVerification,
@@ -100,6 +135,15 @@ class _AccountState extends State<AccountScreen> {
             user: user,
           ),
         ],
+              ),
+              ProfileMenuSlider(
+                context,
+                controller: _controller,
+                user: user,
+              ),
+            ],
+          );
+        }
       ),
     );
   }

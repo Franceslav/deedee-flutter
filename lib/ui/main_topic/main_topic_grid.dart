@@ -9,10 +9,12 @@ import 'package:latlong2/latlong.dart';
 import 'bloc/main_topics_bloc.dart';
 
 class MainTopicGrid extends StatefulWidget {
+  final List<TopicDescription> mainTopics;
   final ScreenType screenType;
 
   const MainTopicGrid({
     super.key,
+    required this.mainTopics,
     required this.screenType,
   });
 
@@ -21,70 +23,26 @@ class MainTopicGrid extends StatefulWidget {
 }
 
 class _MainTopicGridState extends State<MainTopicGrid> {
-  List<TopicDescription> mainTopics = [];
-  @override
-  void initState() {
-    super.initState();
-    _fetchMainTopics();
-  }
-
-  void _fetchMainTopics() {
-    final user = BlocProvider.of<UserBloc>(context).state.user;
-    final position = user.lastGeoLocation;
-    final userLocation = LatLng(position.latitude, position.longitude);
-    BlocProvider.of<MainTopicsBloc>(context).add(LoadMainTopicsEvent(
-      userId: user.userId,
-      userLocation: userLocation,
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
     final width = (MediaQuery.of(context).size.width - 48) / 2;
-    return BlocConsumer<MainTopicsBloc, MainTopicsState>(
-      listener: (context, state) {
-        if (state is LoadedMainTopicsState) {
-          mainTopics = state.mainTopics;
-        }
-      },
-      builder: (context, state) {
-        if (state is InitialState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is ErrorState) {
-          return Center(
-            child: Text(
-              state.errorMessage,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          );
-        } else {
-          return Column(
-            children: [
-              Flexible(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                    crossAxisCount: 2,
-                  ),
-                  itemCount: mainTopics.length,
-                  itemBuilder: ((context, index) {
-                    return MainTopicItem(
-                      topic: mainTopics[index],
-                      width: width,
-                      screenType: widget.screenType,
-                    );
-                  }),
-                ),
-              ),
-            ],
-          );
-        }
-      },
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        crossAxisCount: 2,
+      ),
+      itemCount: widget.mainTopics.length,
+      itemBuilder: ((
+        context,
+        index,
+      ) {
+        return MainTopicItem(
+          topic: widget.mainTopics[index],
+          width: width,
+          screenType: widget.screenType,
+        );
+      }),
     );
   }
 }
