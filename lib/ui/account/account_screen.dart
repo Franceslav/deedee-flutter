@@ -1,7 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/account_info_widget.dart';
-import 'package:deedee/ui/account/account_language_screen.dart';
 import 'package:deedee/ui/account/account_popover.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
@@ -68,7 +66,10 @@ class _AccountState extends State<AccountScreen> {
                   ],
                 ),
                 const SizedBox(height: 48),
-                const _InfoWidget(),
+                _InfoWidget(
+                  emailVerification: user.emailVerification.name,
+                  premiumStatus: user.premiumStatus.name,
+                ),
                 const SizedBox(height: 20),
                 _TextButtonWidget(
                   text: locale.switchLanguage,
@@ -104,8 +105,12 @@ class _AccountState extends State<AccountScreen> {
 }
 
 class _InfoWidget extends StatelessWidget {
+  final String premiumStatus;
+  final String emailVerification;
   const _InfoWidget({
     super.key,
+    required this.premiumStatus,
+    required this.emailVerification,
   });
 
   @override
@@ -115,20 +120,27 @@ class _InfoWidget extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          DeeDeeRowInfoWidget(
-            icon: Image.asset('assets/images/verify_0_icon.png'),
-            mainText: Text(
-              locale.verification,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: Text(
-              locale.verifyYourAccount,
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              context.router.push(const VerifyScreenRoute());
-            },
-          ),
+          emailVerification
+                      .toLowerCase()
+                      .contains("unVerified".toLowerCase()) ||
+                  premiumStatus
+                      .toLowerCase()
+                      .contains("notPremium".toLowerCase())
+              ? DeeDeeRowInfoWidget(
+                  icon: Image.asset('assets/images/verify_0_icon.png'),
+                  mainText: Text(
+                    locale.verification,
+                    style: AppTextTheme.bodyLarge,
+                  ),
+                  secondaryText: Text(
+                    locale.verifyYourAccount,
+                    style: AppTextTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    context.router.push(const VerifyScreenRoute());
+                  },
+                )
+              : const SizedBox(),
           const DeeDeeDeviderWidget(),
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/balance_icon.png'),
@@ -143,26 +155,34 @@ class _InfoWidget extends StatelessWidget {
             onTap: () {},
           ),
           const DeeDeeDeviderWidget(),
-          DeeDeeRowInfoWidget(
-            mainText: Text(
-              locale.premium,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: Text(
-              locale.activated,
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (context) {
-                  return const AccountPopover();
-                },
-              );
-            },
-            icon: Image.asset('assets/images/premium_0_icon.png'),
-          ),
+          emailVerification
+                      .toLowerCase()
+                      .contains("unVerified".toLowerCase()) ||
+                  premiumStatus
+                      .toLowerCase()
+                      .contains("notPremium".toLowerCase())
+              ? DeeDeeRowInfoWidget(
+                  mainText: Text(
+                    locale.premium,
+                    style: AppTextTheme.bodyLarge,
+                  ),
+                  secondaryText: Text(
+                    locale.activated,
+                    style: AppTextTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    print("${emailVerification}$premiumStatus");
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const AccountPopover();
+                      },
+                    );
+                  },
+                  icon: Image.asset('assets/images/premium_0_icon.png'),
+                )
+              : const SizedBox(),
         ],
       ),
     );
