@@ -140,7 +140,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(
         UserState(
           state.user.copyWith(
-            lastGeoLocation: LatLng(fp.latitude, fp.longitude),
+            lastGeoLocation: LatLng(fp?.latitude ?? 0, fp?.longitude ?? 0),
           ),
         ),
       );

@@ -11,7 +11,7 @@ class GPSRepository {
 
   late StreamSubscription<Position> positionStream;
 
-  Future<Position> getGPSPosition() async {
+  Future<Position?> getGPSPosition() async {
     late LocationSettings locationSettings;
 
     if (defaultTargetPlatform == TargetPlatform.android) {
@@ -46,7 +46,8 @@ class GPSRepository {
     }
     var servicestatus = await Geolocator.isLocationServiceEnabled();
     if (!servicestatus) {
-      return Future.error('Location services are disabled.');
+      // return Future.error('Location services are disabled.');
+      return null;
     }
     permission = await Geolocator.checkPermission();
 
@@ -54,13 +55,15 @@ class GPSRepository {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         // showSnackBar(context, 'Location permissions are denied');
-        return Future.error('Location permissions are denied');
+        // return Future.error('Location permissions are denied');
+        return null;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       // showSnackBar(context, 'Location permissions are permanently denied');
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      // return Future.error(
+      //     'Location permissions are permanently denied, we cannot request permissions.');
+      return null;
     }
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);

@@ -99,7 +99,9 @@ class User extends Equatable {
     this.savedFilters,
   });
 
-  factory User.fromJson(Map<String, dynamic> parsedJson, ) {
+  factory User.fromJson(
+    Map<String, dynamic> parsedJson,
+  ) {
     return User(
       lastUserGeoLocation: LatLng(0, 0),
       userId: parsedJson['userId'] ?? '',
@@ -157,7 +159,7 @@ class User extends Equatable {
       balance: balance ?? this.balance,
       availableTags: availableTags ?? this.availableTags,
       accountType: accountType ?? this.accountType,
-      availablePlaces: availablePlaces,
+      availablePlaces: availablePlaces ?? this.availablePlaces,
       savedFilters: savedFilters,
       contacts: contacts ?? this.contacts,
     );

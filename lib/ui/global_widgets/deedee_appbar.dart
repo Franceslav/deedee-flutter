@@ -7,7 +7,7 @@ class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
   final String title;
   final PanelController controller;
-  final Widget child;
+  final Widget? child;
 
   DeeDeeAppBar({
     required this.title,
