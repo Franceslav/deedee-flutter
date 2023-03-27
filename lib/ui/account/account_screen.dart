@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/account/account_info_widget.dart';
-import 'package:deedee/ui/account/account_language_screen.dart';
 import 'package:deedee/ui/account/account_popover.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
@@ -102,6 +100,41 @@ class _AccountState extends State<AccountScreen> {
                     ),
                   ],
                 ),
+
+                const SizedBox(height: 48),
+                _InfoWidget(
+                  emailVerification: user.emailVerification,
+                  premiumStatus: user.premiumStatus,
+                ),
+                const SizedBox(height: 20),
+                _TextButtonWidget(
+                  text: locale.switchLanguage,
+                  textColor: AppColors.blue,
+                  onPressed: () {
+                    context.router.push(const AccountLanguageScreenRoute());
+                  },
+                ),
+                const SizedBox(height: 0),
+                _TextButtonWidget(
+                  text: locale.switchAccount,
+                  textColor: AppColors.blue,
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 8),
+                _TextButtonWidget(
+                  text: locale.logout,
+                  textColor: AppColors.red,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+          ProfileMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
               ),
               ProfileMenuSlider(
                 context,
@@ -110,15 +143,19 @@ class _AccountState extends State<AccountScreen> {
               ),
             ],
           );
-        },
+        }
       ),
     );
   }
 }
 
 class _InfoWidget extends StatelessWidget {
+  final PremiumStatus premiumStatus;
+  final EmailVerificationStatus emailVerification;
   const _InfoWidget({
     super.key,
+    required this.premiumStatus,
+    required this.emailVerification,
   });
 
   @override
@@ -128,20 +165,23 @@ class _InfoWidget extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          DeeDeeRowInfoWidget(
-            icon: Image.asset('assets/images/verify_0_icon.png'),
-            mainText: Text(
-              locale.verification,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: Text(
-              locale.verifyYourAccount,
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              context.router.push(const VerifyScreenRoute());
-            },
-          ),
+          premiumStatus == PremiumStatus.notPremium &&
+                  emailVerification == EmailVerificationStatus.unverified
+              ? DeeDeeRowInfoWidget(
+                  icon: Image.asset('assets/images/verify_0_icon.png'),
+                  mainText: Text(
+                    locale.verification,
+                    style: AppTextTheme.bodyLarge,
+                  ),
+                  secondaryText: Text(
+                    locale.verifyYourAccount,
+                    style: AppTextTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    context.router.push(const VerifyScreenRoute());
+                  },
+                )
+              : const SizedBox(),
           const DeeDeeDeviderWidget(),
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/balance_icon.png'),
@@ -156,26 +196,29 @@ class _InfoWidget extends StatelessWidget {
             onTap: () {},
           ),
           const DeeDeeDeviderWidget(),
-          DeeDeeRowInfoWidget(
-            mainText: Text(
-              locale.premium,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: Text(
-              locale.activated,
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (context) {
-                  return const AccountPopover();
-                },
-              );
-            },
-            icon: Image.asset('assets/images/premium_0_icon.png'),
-          ),
+          premiumStatus == PremiumStatus.notPremium &&
+                  emailVerification == EmailVerificationStatus.unverified
+              ? DeeDeeRowInfoWidget(
+                  mainText: Text(
+                    locale.premium,
+                    style: AppTextTheme.bodyLarge,
+                  ),
+                  secondaryText: Text(
+                    locale.activated,
+                    style: AppTextTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const AccountPopover();
+                      },
+                    );
+                  },
+                  icon: Image.asset('assets/images/premium_0_icon.png'),
+                )
+              : const SizedBox(),
         ],
       ),
     );
