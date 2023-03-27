@@ -54,7 +54,8 @@ class MainTopicItem extends StatelessWidget {
           push(
             context,
             FilterPage(
-              topicsName: topic.title,
+              topicName: topic.title,
+              currentFilter: CompositeFilter([], []),
             ),
           );
         },

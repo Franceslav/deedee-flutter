@@ -1,4 +1,4 @@
-import 'package:deedee/ui/map_cubit/map_screen.dart';
+import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

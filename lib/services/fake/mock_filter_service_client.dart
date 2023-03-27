@@ -1,9 +1,15 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @LazySingleton(as: FilterServiceClient, env: [Environment.dev])
 class MockFilterServiceClient implements FilterServiceClient {
@@ -103,6 +109,8 @@ class MockFilterServiceClient implements FilterServiceClient {
 
   Future<GetFilterKeysResponse> _getFilterKeys(
       GetFilterKeysRequest request) async {
+    String deviceLanguage= Platform.localeName.substring(0,2);
+
     return GetFilterKeysResponse()
       ..filterKeys.addAll([
         FilterKey()
@@ -113,7 +121,7 @@ class MockFilterServiceClient implements FilterServiceClient {
           ..title = "Сварка",
         FilterKey()
           ..topicId = "Ремонт"
-          ..title = "Глушитель",
+          ..title = (await AppLocalizations.delegate.load(Locale(deviceLanguage))).mockFilterKeyMuffler,
         FilterKey()
           ..topicId = "Ремонт"
           ..title = "Электрооборудование",

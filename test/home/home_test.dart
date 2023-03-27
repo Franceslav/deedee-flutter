@@ -1,7 +1,7 @@
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/gps_service.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/home/home_screen.dart';
+import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +12,7 @@ import 'package:mockito/mockito.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockGPSService extends Mock implements GPSRepository {}
+
 //golden toolkit
 void main() {
   GPSRepository gpsService;

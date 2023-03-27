@@ -4,7 +4,8 @@ import 'package:deedee/generated/filter_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/tag_repository.dart';
 
 part 'filter_dto_event.dart';
 
@@ -22,8 +23,9 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
   _onLoadFilters(LoadFiltersEvent event, Emitter<FilterDTOState> emit) async {
     try {
       // TODO: DEEMOB-97
-      final stream =
-          await locator.get<GRCPRepository>().getUserSavedFilters(event.userId);
+      final stream = await locator
+          .get<FilterRepository>()
+          .getUserSavedFilters(event.userId);
 
       // StreamSubscription<Filter>? _filterSubscription = _someShitTasksNotifier.listen(
       //       (someShitTask) => add(CurrentBlocEvent._someShit(someShitTask)),
@@ -71,7 +73,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       PushSavedFiltersEvent event, Emitter<FilterDTOState> emit) async {
     try {
       Topic topic = await locator
-          .get<GRCPRepository>()
+          .get<TagRepository>()
           .getFilteredTags(event.topic, event.filterKeys, event.accountType);
       // emit(UserSavedFiltersDoneState(topic));
     } catch (error) {
@@ -86,7 +88,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
     );
     try {
       await locator
-          .get<GRCPRepository>()
+          .get<FilterRepository>()
           .removeFilterSubscriptionElement(state.filterDTOList[event.index]);
     } catch (error) {
       print(error.toString());
@@ -124,7 +126,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
       GetFilterDTOSubscription event, Emitter<FilterDTOState> emit) async {
     try {
       final stream = await locator
-          .get<GRCPRepository>()
+          .get<FilterRepository>()
           .getFilterSubscriptions(event.userId);
 
       List<Filter> fproto = await stream.toList();

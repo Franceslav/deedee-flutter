@@ -1,18 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/repository/topic_repository.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'selector_event.dart';
+
 part 'selector_state.dart';
 
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
-  final GRCPRepository _grpcRepository;
+  final TagRepository _tagRepository;
+  final TopicRepository _topicRepository;
+  final FilterRepository _filterRepository;
   final User _user;
 
-  SelectorBloc(this._grpcRepository, this._user) : super(InitialState()) {
+  SelectorBloc(
+    this._tagRepository,
+    this._topicRepository,
+    this._filterRepository,
+    this._user,
+  ) : super(InitialState()) {
     on<LoadTopicsEvent>(_onLoadSubTopics);
     on<SelectTopicEvent>(_onSelectTopic);
     on<LoadFilterKeysEvent>(_onLoadFilterKeys);
@@ -31,7 +41,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   initialize() async {
     try {
-      final response = await _grpcRepository.getSubTopics(
+      final response = await _topicRepository.getSubTopics(
         _user.lastGeoLocation.latitude,
         _user.lastGeoLocation.longitude,
       );
@@ -56,7 +66,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
       LoadFilterKeysEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingFiltersKeyState());
     try {
-      final response = await _grpcRepository.getFilterItems(event.topic);
+      final response = await _filterRepository.getFilterItems(event.topic);
       emit(LoadedFilterKeysState(response.map((fi) => fi.title).toList()));
     } catch (error) {
       ErrorState(error.toString());
@@ -80,7 +90,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
     try {
-      Topic topic = await _grpcRepository.getFilteredTags(
+      Topic topic = await _tagRepository.getFilteredTags(
           event.topic, event.filterKeys, event.accountType);
       emit(UserFiltersDoneState(topic));
     } catch (error) {
@@ -90,8 +100,11 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
     try {
-      Topic topic = await _grpcRepository.getFilteredTags(
-          event.topic, event.filterKeys, event.accountType);
+      Topic topic = await _tagRepository.getFilteredTags(
+        event.topic,
+        event.filterKeys,
+        event.accountType,
+      );
       emit(UserFiltersDoneState(topic));
     } catch (error) {
       ErrorState(error.toString());
@@ -101,7 +114,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onPushTag(PushTagEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
-      await _grpcRepository.placeTag(
+      await _tagRepository.placeTag(
         event.accountType,
         event.topic,
         event.messengerId,

@@ -1,19 +1,16 @@
-import 'dart:async';
-import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
-import 'package:deedee/ui/place_tag/dialog_widget.dart';
-import 'package:intl/intl.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/gps.dart';
-import 'package:deedee/services/grpc.dart';
-import 'package:deedee/services/helper.dart';
+import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/filter/filter_page_bloc.dart';
+import 'package:deedee/ui/filter/subtopic_list/filterkey_list.dart';
+import 'package:deedee/ui/filter/subtopic_list/subtopic_list.dart';
+import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/loading_cubit.dart';
+import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
-import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
-import 'package:deedee/ui/selector/selector_list.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,9 +29,11 @@ class TagDTO {
 }
 
 class FilterPage extends StatefulWidget {
-  final String topicsName;
+  final String topicName;
+  final CompositeFilter currentFilter;
 
-  const FilterPage({super.key, required this.topicsName});
+  const FilterPage(
+      {super.key, required this.topicName, required this.currentFilter});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -43,28 +42,17 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   final PanelController _controller = PanelController();
 
-  List<String> _filterKeys = [];
-  List<String> _topics = [];
-  String _selectedTopic = '';
-  List<String> _selectedFilterKeys = [];
-
-  @override
-  void initState() {
-    super.initState();
-    locator.get<GPSRepository>().getGPSPosition();
-  }
-
-  @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final selectorBloc = SelectorBloc(locator.get<GRCPRepository>(), user);
-    return BlocProvider<SelectorBloc>(
-      create: (_) => selectorBloc,
+    final bloc = FilterPageBloc(
+      locator.get<TopicRepository>(),
+      locator.get<FilterRepository>(),
+      user,
+      widget.currentFilter,
+    );
+    return BlocProvider<FilterPageBloc>(
+      create: (_) => bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
           controller: _controller,
@@ -87,185 +75,138 @@ class _FilterPageState extends State<FilterPage> {
         ),
         body: Stack(
           children: [
-            BlocConsumer<SelectorBloc, SelectorState>(
-              bloc: selectorBloc,
+            BlocConsumer<FilterPageBloc, FilterPageState>(
+              bloc: bloc,
               listener: (context, state) {
-                if (state is LoadedTopicsState) {
-                  _topics = state.topics.map((e) => e.title).toList();
-                }
-                if (state is TopicSelectedState) {
-                  if (_selectedTopic == state.topic) {
-                    _selectedTopic = '';
-                    _selectedFilterKeys = [];
-                    _filterKeys = [];
-                  } else {
-                    _selectedTopic = state.topic;
-                    _filterKeys = [];
-                    _selectedFilterKeys = [];
-                    selectorBloc.add(LoadFilterKeysEvent(_selectedTopic));
-                  }
-                }
-                if (state is LoadedFilterKeysState) {
-                  _filterKeys = state.filterKeys;
-                }
-                if (state is FilterKeySelectedState) {
-                  _selectedFilterKeys.contains(state.filterKey)
-                      ? _selectedFilterKeys.remove(state.filterKey)
-                      : _selectedFilterKeys.add(state.filterKey);
-                }
-                if (state is UserFiltersDoneState || state is ErrorState) {
-                  if (state is ErrorState) {
-                    showSnackBar(context, state.errorMessage);
-                  }
-                  if (state is UserFiltersDoneState) {
-                    Map<LatLng, TagDTO> tagMap = {
-                      for (var tag in state.topic.tags)
-                        LatLng(tag.geoLocation.latitude,
-                                tag.geoLocation.longitude):
-                            TagDTO(tag.tagId, tag.messengerId)
-                    };
-                    context.router.popAndPush(MapScreenRoute(
-                      tagDescriptionMap: tagMap,
-                      user: user,
-                      filterKeys: _filterKeys,
-                      selectedFilterKeys: _selectedFilterKeys,
-                      topicsName: widget.topicsName,
-                    ));
-                  }
-                }
+                if (state is UserFiltersDoneState) {}
               },
               builder: (context, state) {
-                var bloc = context.read<SelectorBloc>();
-                return state is InitialState
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 66),
-                        child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                if (state is SubtopicListLoadedState) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 66),
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Column(
                                 children: [
-                                  Column(
-                                    children: [
-                                      if (_topics.isNotEmpty)
-                                        Column(
-                                          children: [
-                                            Text(
-                                              AppLocalizations.of(context)!
-                                                  .chooseTopic,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline1,
-                                            ),
-                                            SelectorList(
-                                              data: _topics,
-                                              onTap: (String topic) => bloc
-                                                  .add(SelectTopicEvent(topic)),
-                                              selectedItems: [_selectedTopic],
-                                            ),
-                                          ],
+                                  if (state.subtopics.isNotEmpty)
+                                    Column(
+                                      children: [
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .chooseTopic,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1,
                                         ),
-                                      if (_filterKeys.isEmpty &&
-                                          state is LoadingFiltersKeyState)
-                                        const Center(
-                                            child: CircularProgressIndicator()),
-                                      if (_filterKeys.isNotEmpty)
-                                        Column(
-                                          children: [
-                                            Text(
-                                              AppLocalizations.of(context)!
-                                                  .chooseFilterKeys,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline1,
-                                            ),
-                                            SelectorList(
-                                              data: _filterKeys,
-                                              onTap: (String filterKey) =>
-                                                  selectorBloc.add(
-                                                      SelectFilterKeyEvent(
-                                                          filterKey)),
-                                              selectedItems:
-                                                  _selectedFilterKeys,
-                                            ),
-                                          ],
+                                        SubtopicList(
+                                          selectedSubtopic: '',
+                                          subtopics: state.subtopics,
                                         ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  if (state.filterKeys.isNotEmpty)
+                                    Column(
+                                      children: [
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .chooseFilterKeys,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1,
+                                        ),
+                                        FilterKeyList(
+                                          subtopic: state.subtopics.first,
+                                          filterKeys: state.filterKeys,
+                                          selectedFilterKeys:
+                                              state.selectedFilterKeys,
+                                        ),
+                                      ],
+                                    ),
                                 ],
                               ),
-                            ),
-                            if (_selectedFilterKeys.length >= 3)
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    const Expanded(
-                                      child: Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: SizedBox(),
-                                      ),
-                                    ),
-                                    DeeDeeButton(
-                                      onPressed: () => showDialog(
-                                          context: context,
-                                          builder: (ctx) =>
-                                              const CalendarDialog()),
-                                      gradientButton: true,
-                                      title: 'Fake Button Сalendar',
-                                    ),
-                                    DeeDeeButton(
-                                      title: AppLocalizations.of(context)!
-                                          .placeOrder,
-                                      onPressed: () {
-                                        context.router
-                                            .push(PlaceOrderScreenRoute());
-                                      },
-                                      gradientButton: false,
-                                    ),
-                                    DeeDeeButton(
-                                      title: AppLocalizations.of(context)!
-                                          .placeOrder,
-                                      onPressed: () async {
-                                        final data = await context.router.push(
-                                                MapSetLocationScreenRoute(
-                                                    userLocation:
-                                                        user.lastGeoLocation))
-                                            as AddressModel?;
-                                        if (data == null) {
-                                          return;
-                                        }
-                                        selectorBloc
-                                            .add(SelectLocationEvent(data));
-                                      },
-                                      gradientButton: false,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    DeeDeeButton(
-                                      title:
-                                          AppLocalizations.of(context)!.seeTags,
-                                      gradientButton: true,
-                                      onPressed: () {
-                                        context.read<SelectorBloc>().add(
-                                              SaveFiltersEvent(
-                                                isSubscribe: false,
-                                                topic: widget.topicsName,
-                                                subtopic: _selectedTopic,
-                                                filterKeys: _selectedFilterKeys,
-                                                accountType: user.accountType,
-                                                userId: user.userId,
-                                              ),
-                                            );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              )
-                          ],
+                            ],
+                          ),
                         ),
-                      );
+                        if (state.selectedFilterKeys.length >= 3)
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Expanded(
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: SizedBox(),
+                                  ),
+                                ),
+                                DeeDeeButton(
+                                  onPressed: () => showDialog(
+                                      context: context,
+                                      builder: (ctx) => const CalendarDialog()),
+                                  gradientButton: true,
+                                  title: 'Fake Button Сalendar',
+                                ),
+                                DeeDeeButton(
+                                  title:
+                                      AppLocalizations.of(context)!.placeOrder,
+                                  onPressed: () {
+                                    context.router
+                                        .push(const PlaceOrderScreenRoute());
+                                  },
+                                  gradientButton: false,
+                                ),
+                                DeeDeeButton(
+                                  title:
+                                      AppLocalizations.of(context)!.placeOrder,
+                                  onPressed: () async {
+                                    final data = await context.router.push(
+                                            MapSetLocationScreenRoute(
+                                                userLocation:
+                                                    user.lastGeoLocation))
+                                        as AddressModel?;
+                                    if (data == null) {
+                                      return;
+                                    }
+                                    bloc.add(SelectLocationEvent(data));
+                                  },
+                                  gradientButton: false,
+                                ),
+                                const SizedBox(height: 8),
+                                DeeDeeButton(
+                                  title: AppLocalizations.of(context)!.seeTags,
+                                  gradientButton: true,
+                                  onPressed: () {
+                                    Map<LatLng, TagDTO> tagMap = {
+                                      // for (var tag in state.topic.tags)
+                                      //   LatLng(tag.geoLocation.latitude,
+                                      //           tag.geoLocation.longitude):
+                                      //       TagDTO(tag.tagId, tag.messengerId)
+                                    };
+                                    context.router.popAndPush(
+                                      MapScreenRoute(
+                                        tagDescriptionMap: tagMap,
+                                        user: user,
+                                        topicName: widget.topicName,
+                                        currentFilter: CompositeFilter(
+                                            state.filterKeys,
+                                            state.selectedFilterKeys),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
               },
             ),
             DeeDeeMenuSlider(
@@ -278,4 +219,15 @@ class _FilterPageState extends State<FilterPage> {
       ),
     );
   }
+}
+
+class CompositeFilter {
+  final List<String> _filterKeys;
+  final List<String> _selectedFilterKeys;
+
+  List<String> get selectedFilterKeys => _selectedFilterKeys;
+
+  List<String> get filterKeys => _filterKeys;
+
+  CompositeFilter(this._filterKeys, this._selectedFilterKeys);
 }

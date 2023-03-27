@@ -22,97 +22,10 @@ class GRCPRepository {
       locator.get<LocationServiceClient>();
   final AccountServiceClient _accountServiceClient =
       locator.get<AccountServiceClient>();
-  final FilterServiceClient _filterServiceClient =
-      locator.get<FilterServiceClient>();
+
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
   final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
-
-  Future<void> placeTag(
-      AccountType accountType,
-      String topic,
-      String messengerId,
-      double lat,
-      double lon,
-      List<String> filterKeys) async {
-    ProtobufClientChannel c = ProtobufClientChannel();
-    var channel = await c.createChannel();
-
-    try {
-      var timestamp = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-      var geo = GeoLocation()
-        ..latitude = lat
-        ..longitude = lon
-        ..title = "";
-      var tag = Tag()
-        ..topicId = topic
-        ..messengerId = messengerId
-        ..geoLocation = geo
-        ..dueDate = timestamp
-        ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!;
-
-      var response = await _tagServiceClient.placeTag(PlaceTagRequest()
-        ..tag = tag
-        ..filters.addAll(filterKeys));
-    } catch (e) {
-      print('Caught error: $e');
-    }
-    await channel.shutdown();
-  }
-
-  Future<Topic> getTopic(String topicId, AccountType accountType) async {
-    var response = await _tagServiceClient.getTopic(GetTopicRequest()
-      ..topicId = topicId
-      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
-    // .then((p0) async {
-    // await channel.shutdown();
-    // },);
-
-    return response.topic;
-    //
-  }
-
-  Future<Topic> getFilteredTags(String topicId, List<String> activeFilters,
-      AccountType accountType) async {
-    var response = await _tagServiceClient.getFilteredTags(GetTopicRequest()
-      ..topicId = topicId
-      ..filters.addAll(activeFilters)
-      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
-
-    return response.topic;
-  }
-
-  Future<List<TopicDescription>> getTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getTopics(GetAllTopicsDescriptionRequest()..geoLocation = geoLocation);
-
-    return response.topicDescriptions;
-  }
-
-  Future<List<TopicDescription>> getSubTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getSubTopics(GetTopicTitlesRequest()..geoLocation = geoLocation);
-
-    return response.topicDescriptions;
-  }
-
-  Future<List<FilterKey>> getFilterItems(String topic) async {
-    var response = await _filterServiceClient
-        .getFilterKeys(GetFilterKeysRequest()..topicId = topic);
-    return response.filterKeys;
-  }
 
   Future<bool> verifyAuthCode(String code) async {
     var response = await _tagServiceClient
@@ -182,11 +95,7 @@ class GRCPRepository {
     return response.tags;
   }
 
-  Future<ResponseStream<Filter>> getUserSavedFilters(String userId) async {
-    final response = await _filterServiceClient
-        .getAllBookmarkedFilters(GetAllFiltersRequest()..userId = userId);
-    return response;
-  }
+
 
   Future<bool> removeUserBookmark(String userId, String tagId) async {
     final response =
@@ -231,36 +140,6 @@ class GRCPRepository {
     return true;
   }
 
-  Future<ResponseStream<Filter>> getFilterSubscriptions(String userId) async {
-    final response = await _filterServiceClient
-        .getAllSubscribedFilters(GetAllFiltersRequest()..userId = userId);
-    return response;
-  }
-
-  Future<FilterDTO> addFilterSubscriptionElement(FilterDTO filterDTO) async {
-    var response = await _filterServiceClient
-        .addFilterToSubscribedFilters(FilterRequest()..filter = Filter());
-
-    throw UnimplementedError();
-    // return response.filter;
-  }
-
-  Future<FilterDTO> removeFilterSubscriptionElement(FilterDTO filterDTO) async {
-    var response = await _filterServiceClient
-        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
-
-    throw UnimplementedError();
-    // return response.filter;
-  }
-
-  Future<FilterDTO> editFilterSubscriptionElement(FilterDTO filterDTO) async {
-    var response = await _filterServiceClient
-        .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
-
-    throw UnimplementedError();
-    // return response.filter;
-  }
-
   Future<List<Tag>> getUserTags(String userId) async {
     final response = await _tagServiceClient
         .getUserTags(GetUserTagsRequest()..userId = userId);
@@ -274,20 +153,7 @@ class GRCPRepository {
     return response.tag.isDeleted;
   }
 
-  Future<Tag> getUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.getUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag;
-  }
 
-  Future<TagDetails> getUserTagDetails(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.getUserTagDetails(GetUserTagDetailsRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.tagDetails;
-  }
 
   Future<bool> placeBidRequest(String userId, order.Order order) async {
     return true;

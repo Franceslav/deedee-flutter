@@ -13,7 +13,7 @@ import 'package:latlong2/latlong.dart';
 import '../../model/contact.dart';
 import '../../generated/LocationService.pb.dart';
 import '../../model/contact.dart';
-import '../../services/gps.dart';
+import '../../repository/gps_repository.dart';
 
 part 'user_event.dart';
 

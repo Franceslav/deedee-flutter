@@ -16,31 +16,31 @@ import 'package:flutter/material.dart' as _i27;
 import 'package:latlong2/latlong.dart' as _i29;
 
 import '../../model/user.dart' as _i28;
-import '../account/account_language_screen.dart' as _i10;
-import '../account/account_screen.dart' as _i8;
-import '../account/account_verify_screen.dart' as _i9;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
 import '../auth/login/login_screen.dart' as _i18;
 import '../auth/onBoarding/on_boarding_screen.dart' as _i2;
 import '../auth/resetPasswordScreen/reset_password_screen.dart' as _i20;
 import '../auth/signUp/sign_up_screen.dart' as _i19;
 import '../auth/welcome/welcome_screen.dart' as _i3;
-import '../bookmarks/bookmarks_screen.dart' as _i12;
 import '../filter/filter_screen.dart' as _i5;
 import '../help/help_screen.dart' as _i17;
-import '../home/home_screen.dart' as _i4;
 import '../main_topic/enum/topic_screens_enum.dart' as _i30;
 import '../main_topic/main_topic_screen.dart' as _i22;
-import '../map_cubit/map_screen.dart' as _i6;
+import '../page/account/account_language_screen.dart' as _i10;
+import '../page/account/account_screen.dart' as _i8;
+import '../page/account/account_verify_screen.dart' as _i9;
+import '../page/bookmarks/bookmarks_screen.dart' as _i12;
+import '../page/home/home_screen.dart' as _i4;
+import '../page/map_cubit/map_screen.dart' as _i6;
+import '../page/referral/referral_screen.dart' as _i14;
+import '../page/settings/connection_settings/connection_settings_screen.dart'
+    as _i16;
+import '../page/settings/settings_screen.dart' as _i15;
+import '../page/subscribed_filters/subscribed_filters_page.dart' as _i21;
+import '../page/top_up/top_up_screen.dart' as _i11;
 import '../place_order/place_order_screen.dart' as _i25;
 import '../place_tag/map_set_location_screen.dart' as _i7;
-import '../referral/referral_screen.dart' as _i14;
 import '../saved_filters/saved_filters_screen.dart' as _i13;
-import '../settings/connection_settings/connection_settings_screen.dart'
-    as _i16;
-import '../settings/settings_screen.dart' as _i15;
-import '../subscribed_filters/subscribed_filters_page.dart' as _i21;
-import '../top_up/top_up_screen.dart' as _i11;
 import '../user_tag_details/user_tag_details_screen.dart' as _i24;
 import '../user_tags/user_tags_screen.dart' as _i23;
 
@@ -80,7 +80,8 @@ class AppRouter extends _i26.RootStackRouter {
         routeData: routeData,
         child: _i5.FilterPage(
           key: args.key,
-          topicsName: args.topicsName,
+          topicName: args.topicName,
+          currentFilter: args.currentFilter,
         ),
       );
     },
@@ -92,9 +93,8 @@ class AppRouter extends _i26.RootStackRouter {
           key: args.key,
           user: args.user,
           tagDescriptionMap: args.tagDescriptionMap,
-          filterKeys: args.filterKeys,
-          selectedFilterKeys: args.selectedFilterKeys,
-          topicsName: args.topicsName,
+          topicName: args.topicName,
+          currentFilter: args.currentFilter,
         ),
       );
     },
@@ -394,13 +394,15 @@ class HomeScreenRoute extends _i26.PageRouteInfo<void> {
 class FilterPageRoute extends _i26.PageRouteInfo<FilterPageRouteArgs> {
   FilterPageRoute({
     _i27.Key? key,
-    required String topicsName,
+    required String topicName,
+    required _i5.CompositeFilter currentFilter,
   }) : super(
           FilterPageRoute.name,
           path: '/filter',
           args: FilterPageRouteArgs(
             key: key,
-            topicsName: topicsName,
+            topicName: topicName,
+            currentFilter: currentFilter,
           ),
         );
 
@@ -410,16 +412,19 @@ class FilterPageRoute extends _i26.PageRouteInfo<FilterPageRouteArgs> {
 class FilterPageRouteArgs {
   const FilterPageRouteArgs({
     this.key,
-    required this.topicsName,
+    required this.topicName,
+    required this.currentFilter,
   });
 
   final _i27.Key? key;
 
-  final String topicsName;
+  final String topicName;
+
+  final _i5.CompositeFilter currentFilter;
 
   @override
   String toString() {
-    return 'FilterPageRouteArgs{key: $key, topicsName: $topicsName}';
+    return 'FilterPageRouteArgs{key: $key, topicName: $topicName, currentFilter: $currentFilter}';
   }
 }
 
@@ -430,9 +435,8 @@ class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
     _i27.Key? key,
     required _i28.User user,
     required Map<_i29.LatLng, _i5.TagDTO> tagDescriptionMap,
-    required List<String> filterKeys,
-    required List<String> selectedFilterKeys,
-    required String topicsName,
+    required String topicName,
+    required _i5.CompositeFilter currentFilter,
   }) : super(
           MapScreenRoute.name,
           path: '/map',
@@ -440,9 +444,8 @@ class MapScreenRoute extends _i26.PageRouteInfo<MapScreenRouteArgs> {
             key: key,
             user: user,
             tagDescriptionMap: tagDescriptionMap,
-            filterKeys: filterKeys,
-            selectedFilterKeys: selectedFilterKeys,
-            topicsName: topicsName,
+            topicName: topicName,
+            currentFilter: currentFilter,
           ),
         );
 
@@ -454,9 +457,8 @@ class MapScreenRouteArgs {
     this.key,
     required this.user,
     required this.tagDescriptionMap,
-    required this.filterKeys,
-    required this.selectedFilterKeys,
-    required this.topicsName,
+    required this.topicName,
+    required this.currentFilter,
   });
 
   final _i27.Key? key;
@@ -465,15 +467,13 @@ class MapScreenRouteArgs {
 
   final Map<_i29.LatLng, _i5.TagDTO> tagDescriptionMap;
 
-  final List<String> filterKeys;
+  final String topicName;
 
-  final List<String> selectedFilterKeys;
-
-  final String topicsName;
+  final _i5.CompositeFilter currentFilter;
 
   @override
   String toString() {
-    return 'MapScreenRouteArgs{key: $key, user: $user, tagDescriptionMap: $tagDescriptionMap, filterKeys: $filterKeys, selectedFilterKeys: $selectedFilterKeys, topicsName: $topicsName}';
+    return 'MapScreenRouteArgs{key: $key, user: $user, tagDescriptionMap: $tagDescriptionMap, topicName: $topicName, currentFilter: $currentFilter}';
   }
 }
 

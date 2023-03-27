@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/repository/tag_repository.dart';
 
 part 'user_tag_details_event.dart';
+
 part 'user_tag_details_state.dart';
 
 class UserTagDetailsBloc
@@ -14,10 +15,11 @@ class UserTagDetailsBloc
 
   _onLoadTag(LoadTagEvent event, Emitter<UserTagDetailsState> emit) async {
     try {
-      final tag =
-          await locator.get<GRCPRepository>().getUserTag(event.userId, event.tagId);
+      final tag = await locator
+          .get<TagRepository>()
+          .getUserTag(event.userId, event.tagId);
       final tagDetails = await locator
-          .get<GRCPRepository>()
+          .get<TagRepository>()
           .getUserTagDetails(event.userId, event.tagId);
       emit(LoadedTagState(
         tag: tag,
