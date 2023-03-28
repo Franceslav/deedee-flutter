@@ -1,20 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/order.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/place_order/place_order_popover.dart';
-import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import '../../constants.dart';
-import '../../model/contact.dart';
-import '../../services/helper.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../global_widgets/dee_dee_menu_slider.dart';
-import '../global_widgets/profile_photo_with_badge.dart';
-import '../global_widgets/deedee_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../services/helper.dart';
+import '../global_widgets/dee_dee_menu_slider.dart';
+import '../global_widgets/deedee_appbar.dart';
+import '../global_widgets/profile_photo_with_badge.dart';
 import '../routes/app_router.gr.dart';
 import '../user_bloc/user_bloc.dart';
 import 'bloc/place_order_bloc.dart';

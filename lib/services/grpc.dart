@@ -2,17 +2,11 @@ import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
-import 'package:deedee/generated/filter_service.pbgrpc.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/generated/filter_service.pbgrpc.dart';
-import 'package:deedee/model/filter_dto.dart';
-import 'package:deedee/model/user.dart';
-import 'package:deedee/services/client_channel.dart';
 import 'package:deedee/services/shared.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
+
 import '../generated/ReferralService.pbgrpc.dart';
 import '../model/order.dart' as order;
 

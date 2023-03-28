@@ -4,7 +4,6 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 
 part 'user_tag_details_event.dart';
-
 part 'user_tag_details_state.dart';
 
 class UserTagDetailsBloc

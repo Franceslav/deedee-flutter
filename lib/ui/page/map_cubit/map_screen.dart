@@ -2,7 +2,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';

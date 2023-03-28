@@ -7,7 +7,6 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
-import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:flutter/material.dart';

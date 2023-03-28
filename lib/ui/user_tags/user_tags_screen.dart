@@ -1,3 +1,4 @@
+import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
@@ -8,7 +9,6 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';

@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:deedee/constants.dart';
-import 'package:flutter/material.dart';
-
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
+import 'package:flutter/material.dart';
 
 class OutlinedButtonWidget extends StatelessWidget {
   final String text;

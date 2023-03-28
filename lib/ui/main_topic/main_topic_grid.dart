@@ -1,12 +1,8 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/ui/main_topic/main_topic_item.dart';
 import 'package:flutter/material.dart';
+
 import 'enum/topic_screens_enum.dart';
-import 'package:deedee/ui/user_bloc/user_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
-import 'bloc/main_topics_bloc.dart';
 
 class MainTopicGrid extends StatefulWidget {
   final List<TopicDescription> mainTopics;

@@ -2,14 +2,12 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
-import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/fake_client.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @LazySingleton(as: FilterServiceClient, env: [Environment.dev])
 class MockFilterServiceClient implements FilterServiceClient {

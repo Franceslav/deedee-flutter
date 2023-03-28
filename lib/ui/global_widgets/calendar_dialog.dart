@@ -1,13 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartx/dartx.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:deedee/constants.dart';
-import 'package:deedee/ui/theme/app_text_theme.dart';
 
 class CalendarDialog extends StatefulWidget {
   const CalendarDialog({super.key});

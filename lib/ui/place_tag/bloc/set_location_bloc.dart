@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:search_address_repository/search_address_repository.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:search_address_repository/search_address_repository.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 part 'set_location_event.dart';

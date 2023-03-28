@@ -5,7 +5,6 @@ import 'package:deedee/services/grpc.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
-
 part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {

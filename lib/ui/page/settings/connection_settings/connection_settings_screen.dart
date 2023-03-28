@@ -2,7 +2,6 @@ import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/shared.dart';
-import 'package:deedee/ui/drawer/deedee_drawer.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_cubit.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,6 @@ class _ConnectionSettingsScreenState extends State<ConnectionSettingsScreen> {
                 return pushReplacement(context, const HomeScreen());
               },
               child: Scaffold(
-                drawer: const DeeDeeDrawer(),
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
                   iconTheme: IconThemeData(

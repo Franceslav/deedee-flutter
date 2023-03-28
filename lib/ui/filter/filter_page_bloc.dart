@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'subtopic_list/subtopic_list_event.dart';
-
 part 'subtopic_list/subtopic_list_state.dart';
 
 class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {

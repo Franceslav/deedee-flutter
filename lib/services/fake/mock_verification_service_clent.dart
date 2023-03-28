@@ -1,9 +1,9 @@
-import '../../generated/VerificationService.pbgrpc.dart';
-import 'package:grpc/src/client/method.dart';
-import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/call.dart';
+import 'package:grpc/src/client/common.dart';
+import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../generated/VerificationService.pbgrpc.dart';
 import 'fake_client.dart';
 
 @LazySingleton(as: VerificationServiceClient, env: [Environment.dev])

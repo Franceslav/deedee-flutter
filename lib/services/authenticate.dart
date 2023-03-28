@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';

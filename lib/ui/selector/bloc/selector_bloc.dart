@@ -8,7 +8,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'selector_event.dart';
-
 part 'selector_state.dart';
 
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {

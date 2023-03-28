@@ -1,7 +1,6 @@
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart';
 
 class ProtobufClientChannel {
   Future<ClientChannel> createChannel() async {

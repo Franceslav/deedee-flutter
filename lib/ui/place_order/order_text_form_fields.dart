@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../model/contact.dart';
-import '../../model/user.dart';
-import '../user_bloc/user_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../model/contact.dart';
+import '../user_bloc/user_bloc.dart';
 
 class OrderTextFormField extends StatefulWidget {
   final int index;

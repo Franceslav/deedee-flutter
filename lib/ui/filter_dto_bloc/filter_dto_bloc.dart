@@ -8,7 +8,6 @@ import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 
 part 'filter_dto_event.dart';
-
 part 'filter_dto_state.dart';
 
 class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {

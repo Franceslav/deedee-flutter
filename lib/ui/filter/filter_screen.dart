@@ -6,7 +6,6 @@ import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/filter/filter_page_bloc.dart';
 import 'package:deedee/ui/filter/subtopic_list/filterkey_list.dart';
 import 'package:deedee/ui/filter/subtopic_list/subtopic_list.dart';
-import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/place_tag/dialog_widget.dart';

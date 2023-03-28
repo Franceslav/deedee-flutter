@@ -6,7 +6,6 @@ import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -31,6 +30,7 @@ class _AccountState extends State<AccountScreen> {
   final Uuid uuid = const Uuid();
   late String cityChoose;
   late List<String> places;
+
   //late AccountType accountType;
 
   @override
@@ -65,18 +65,13 @@ class _AccountState extends State<AccountScreen> {
                     const SizedBox(height: 32),
                     Row(
                       children: [
-                        Expanded(
-                        OutlinedButtonWidget(
-                          text: locale.edit,
-                          onPressed: () {
-                            context.router.push(const EditProfilePageRoute());
-                          },
-                        ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: OutlinedButtonWidget(
-                            text: locale.share,
-                            onPressed: () {},
+                            text: locale.edit,
+                            onPressed: () {
+                              context.router.push(const EditProfilePageRoute());
+                            },
                           ),
                         ),
                       ],
@@ -125,6 +120,7 @@ class _AccountState extends State<AccountScreen> {
 class _InfoWidget extends StatelessWidget {
   final PremiumStatus premiumStatus;
   final EmailVerificationStatus emailVerification;
+
   const _InfoWidget({
     super.key,
     required this.premiumStatus,

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/welcome/welcome_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';

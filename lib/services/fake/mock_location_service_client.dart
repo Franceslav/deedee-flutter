@@ -1,4 +1,3 @@
-import 'package:deedee/constants.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';

@@ -9,10 +9,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'AccountService.pbenum.dart' as $1;
 import 'LocationService.pb.dart' as $0;
 import 'timestamp.pb.dart' as $3;
-
-import 'AccountService.pbenum.dart' as $1;
 
 class GetUserTagsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
