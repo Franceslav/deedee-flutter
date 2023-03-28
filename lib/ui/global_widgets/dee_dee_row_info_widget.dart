@@ -39,7 +39,11 @@ class DeeDeeRowInfoWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Image.asset('assets/images/chevron_right_icon.png'),
+              const Icon(
+                Icons.chevron_right,
+                size: 34,
+                color: Colors.grey,
+              ),
             ],
           ),
         ),

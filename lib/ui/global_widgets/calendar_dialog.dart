@@ -178,7 +178,7 @@ class _CalendarDialogState extends State<CalendarDialog> {
                                       modifier: (double value) {
                                         String screenDuration =
                                             value.ceil().toInt().toString();
-                                        return '$screenDuration ${locale.h}';
+                                        return '$screenDuration ${locale.hoursLabel}';
                                       },
                                     )),
                                 min: 0,
@@ -196,16 +196,17 @@ class _CalendarDialogState extends State<CalendarDialog> {
                         : Column(
                             children: [
                               Text(
-                                  '${locale.beginning}: ${DateFormat.yMd().format(date)} ${locale.inH} ${DateFormat.Hm().format(time)}'),
+                                  '${locale.beginning}: ${DateFormat.yMd().format(date)} ${locale.inPreposition} ${DateFormat.Hm().format(time)}'),
                               SizedBox(
                                   height: MediaQuery.of(context).size.height *
                                       0.015),
                               Text(
-                                  '${locale.finish}: ${DateFormat.yMd().format(date.add(Duration(hours: time.hour + duration)))} ${locale.inH} ${DateFormat.Hm().format(time.add(Duration(hours: duration)))}'),
+                                  '${locale.finish}: ${DateFormat.yMd().format(date.add(Duration(hours: time.hour + duration)))} ${locale.inPreposition} ${DateFormat.Hm().format(time.add(Duration(hours: duration)))}'),
                               SizedBox(
                                   height: MediaQuery.of(context).size.height *
                                       0.015),
-                              Text('${locale.duration}: $duration ${locale.h}'),
+                              Text(
+                                  '${locale.duration}: $duration ${locale.hoursLabel}'),
                               SizedBox(
                                   height: MediaQuery.of(context).size.height *
                                       0.03),

@@ -1,3 +1,4 @@
+import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -20,6 +21,7 @@ class SubscribedFiltersPage extends StatefulWidget {
 class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
   bool _isInit = true;
   final PanelController _controller = PanelController();
+  final AnimatedButtonController _buttonController = AnimatedButtonController();
 
   @override
   void didChangeDependencies() {
@@ -56,7 +58,39 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
               ? const Center(
                   child: Text('You have no subscription'),
                 )
-              : SlidableFilterList(filters: subscribedFilters),
+              : Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: AnimatedButtonBar(
+                        invertedSelection: true,
+                        radius: 25,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        controller: _buttonController,
+                        children: [
+                          ButtonBarEntry(
+                            child:
+                                Text(AppLocalizations.of(context)!.actualTags),
+                            onTap: () {},
+                          ),
+                          ButtonBarEntry(
+                            child:
+                                Text(AppLocalizations.of(context)!.archiveTags),
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      thickness: 0.5,
+                      color: Colors.black,
+                      height: 0,
+                    ),
+                    Expanded(
+                        child: SlidableFilterList(filters: subscribedFilters)),
+                  ],
+                ),
           DeeDeeMenuSlider(
             context,
             controller: _controller,

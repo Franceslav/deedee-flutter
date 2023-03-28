@@ -8,13 +8,10 @@ class DeeDeeDeviderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Container(
-        height: 1,
-        width: MediaQuery.of(context).size.width,
-        color: AppColors.lightgrey,
-      ),
+    return Container(
+      height: 1,
+      width: MediaQuery.of(context).size.width,
+      color: AppColors.lightgrey,
     );
   }
 }

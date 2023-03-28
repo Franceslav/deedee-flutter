@@ -43,7 +43,7 @@ class _AccountState extends State<AccountScreen> {
       appBar: DeeDeeAppBar(
         title: locale.profile,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: const Icon(Icons.menu),
       ),
       body: BlocConsumer<UserBloc, UserState>(
         bloc: bloc,
@@ -155,7 +155,10 @@ class _InfoWidget extends StatelessWidget {
                   },
                 )
               : const SizedBox(),
-          const DeeDeeDeviderWidget(),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: DeeDeeDeviderWidget(),
+          ),
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/balance_icon.png'),
             mainText: Text(
@@ -168,7 +171,10 @@ class _InfoWidget extends StatelessWidget {
             ),
             onTap: () {},
           ),
-          const DeeDeeDeviderWidget(),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: DeeDeeDeviderWidget(),
+          ),
           premiumStatus == PremiumStatus.notPremium &&
                   emailVerification == EmailVerificationStatus.unverified
               ? DeeDeeRowInfoWidget(

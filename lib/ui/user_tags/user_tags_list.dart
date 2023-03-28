@@ -1,9 +1,16 @@
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
+import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tag_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
 enum TagsType { actual, archive }
 
@@ -37,36 +44,60 @@ class _UserTagsListState extends State<UserTagsList> {
         : ListView.separated(
             itemBuilder: ((context, index) {
               final tag = tags[index];
-              return Dismissible(
-                key: ValueKey(tag.tagId),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Theme.of(context).errorColor,
-                  alignment: Alignment.centerRight,
-                  child: const Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                      size: 30,
+              return Slidable(
+                endActionPane: ActionPane(
+                  extentRatio: 0.5,
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: ((context) {}),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.orange,
+                      icon: CommunityMaterialIcons.star,
                     ),
+                    SlidableAction(
+                      onPressed: ((context) {}),
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(COLOR_PRIMARY),
+                      icon: Icons.edit,
+                    ),
+                    SlidableAction(
+                      onPressed: ((context) {
+                        final userId = BlocProvider.of<UserBloc>(context)
+                            .state
+                            .user
+                            .userId;
+                        widget.onDismissed(tag, userId, index);
+                      }),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.red,
+                      icon: Icons.delete,
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: DeeDeeRowInfoWidget(
+                    icon: Image.asset('assets/images/bookmark_icon.png'),
+                    // icon: const Icon(Icons.bookmark_border),
+                    mainText: Text(
+                      tag.topicId,
+                      style: AppTextTheme.bodyLarge,
+                    ),
+                    secondaryText: Text(
+                      '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.dueDate.seconds.toInt() * 1000))}',
+                      style: AppTextTheme.labelMedium,
+                    ),
+                    //     subtitle: Text(bookmark.geoLocation.toString()),
+                    onTap: () {},
                   ),
                 ),
-                onDismissed: (direction) {
-                  final userId =
-                      BlocProvider.of<UserBloc>(context).state.user.userId;
-                  widget.onDismissed(tag, userId, index);
-                },
-                child: UserTagItem(tag: tag),
+                // UserTagItem(tag: tag),
               );
             }),
             itemCount: tags.length,
             separatorBuilder: (context, index) {
-              return Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              );
+              return const DeeDeeDeviderWidget();
             },
           );
   }

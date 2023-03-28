@@ -1,3 +1,4 @@
+import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -22,6 +23,7 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
   final PanelController _controller = PanelController();
   List<FilterDTO> _filters = [];
   bool _isInit = true;
+  final AnimatedButtonController _buttonController = AnimatedButtonController();
 
   @override
   void didChangeDependencies() {
@@ -69,8 +71,41 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
                       ),
                     )
                   : Center(
-                      child: SlidableFilterList(
-                        filters: _filters,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: AnimatedButtonBar(
+                              invertedSelection: true,
+                              radius: 25,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              controller: _buttonController,
+                              children: [
+                                ButtonBarEntry(
+                                  child: Text(
+                                      AppLocalizations.of(context)!.actualTags),
+                                  onTap: () {},
+                                ),
+                                ButtonBarEntry(
+                                  child: Text(AppLocalizations.of(context)!
+                                      .archiveTags),
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 0.5,
+                            color: Colors.black,
+                            height: 0,
+                          ),
+                          Expanded(
+                            child: SlidableFilterList(
+                              filters: _filters,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
           DeeDeeMenuSlider(
