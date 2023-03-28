@@ -23,12 +23,12 @@ class _SubtopicChipState extends State<SubtopicChip> {
   Widget build(BuildContext context) {
     return FilterChip(
       label: Text(widget.chipTitle),
+      checkmarkColor: Colors.white,
       elevation: _isSelected ? 0 : 3,
       selected: _isSelected,
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-      backgroundColor: _isSelected
-          ? const Color(COLOR_PRIMARY)
-          : const Color(CHIPS_COLOR_WHITE),
+      selectedColor: const Color(COLOR_PRIMARY),
+      backgroundColor: const Color(CHIPS_COLOR_WHITE),
       labelStyle: _isSelected
           ? const TextStyle(
               color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18.0)

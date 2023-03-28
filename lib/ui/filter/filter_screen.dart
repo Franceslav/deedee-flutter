@@ -56,20 +56,24 @@ class _FilterPageState extends State<FilterPage> {
         appBar: DeeDeeAppBar(
           controller: _controller,
           title: AppLocalizations.of(context)!.filterTagsPageTitle,
-          child: Row(
-            children: [
-              GestureDetector(
-                child: const Icon(Icons.bookmark_border),
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const DialogWidget();
-                      });
-                },
-              ),
-              const ProfilePhotoWithBadge()
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Row(
+              children: [
+                GestureDetector(
+                  child: const Icon(Icons.bookmark_border),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const DialogWidget();
+                        });
+                  },
+                ),
+                const SizedBox(width: 16),
+                const Icon(Icons.menu),
+              ],
+            ),
           ),
         ),
         body: Stack(

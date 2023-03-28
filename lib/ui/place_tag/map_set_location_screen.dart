@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/place_tag/search_address_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,186 +28,241 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
   bool _isMoving = false;
 
   final MapController _mapController = MapController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () {
-            context.router.pop();
-          },
-        ),
-      ),
-      body: BlocConsumer<SetLocationBloc, SetLocationState>(
-        listener: (ctx, state) {
-          if (state.address != null && state.address!.address != null) {
-            _currentAddress = state.address!.address;
-          }
-        },
-        builder: (context, state) {
-          return StreamBuilder<LatLng>(
-            stream: state.locationStream,
-            builder: (context, snapshot) {
-              return Stack(
-                children: [
-                  FlutterMap(
-                    mapController: _mapController,
-                    options: MapOptions(
-                      center: snapshot.hasData
-                          ? snapshot.data
-                          : widget.userLocation,
-                      zoom: 16,
-                      onPositionChanged: (position, hasGesture) {
-                        BlocProvider.of<SetLocationBloc>(context).add(
-                            CenterPositionChanged(
-                                newPosition: position.center!));
-                      },
-                      onMapReady: () {
-                        BlocProvider.of<SetLocationBloc>(context)
-                            .add(SearchAddressByLocation(widget.userLocation));
-                      },
-                      onMapEvent: (event) {
-                        if (event is MapEventMove) {
-                          _isMoving = true;
-                          _currentAddress = null;
-                        }
-                        if (event is MapEventMoveEnd) {
-                          _isMoving = false;
-                          BlocProvider.of<SetLocationBloc>(context)
-                              .add(SearchAddressByLocation(snapshot.data!));
-                        }
-                      },
-                    ),
-                    children: [
-                      TileLayer(
-                        minZoom: 2,
-                        maxZoom: 18,
-                        backgroundColor: Colors.grey,
-                        urlTemplate: MAP_TILE_URL,
-                        userAgentPackageName: MAP_USER_AGENT_PACKAGE_NAME,
+    return BlocConsumer<SetLocationBloc, SetLocationState>(
+      listener: (ctx, state) {
+        if (state.address != null && state.address!.address != null) {
+          _currentAddress = state.address!.address;
+        }
+      },
+      builder: (context, state) {
+        return StreamBuilder<LatLng>(
+          stream: state.locationStream,
+          builder: (context, snapshot) {
+            return Scaffold(
+              extendBodyBehindAppBar: true,
+              body: SafeArea(
+                child: Stack(
+                  children: [
+                    FlutterMap(
+                      mapController: _mapController,
+                      options: MapOptions(
+                        center: snapshot.hasData
+                            ? snapshot.data
+                            : widget.userLocation,
+                        zoom: 16,
+                        onPositionChanged: (position, hasGesture) {
+                          BlocProvider.of<SetLocationBloc>(context).add(
+                              CenterPositionChanged(
+                                  newPosition: position.center!));
+                        },
+                        onMapReady: () {
+                          BlocProvider.of<SetLocationBloc>(context).add(
+                              SearchAddressByLocation(widget.userLocation));
+                        },
+                        onMapEvent: (event) {
+                          if (event is MapEventMove) {
+                            _isMoving = true;
+                            _currentAddress = null;
+                          }
+                          if (event is MapEventMoveEnd) {
+                            _isMoving = false;
+                            BlocProvider.of<SetLocationBloc>(context)
+                                .add(SearchAddressByLocation(snapshot.data!));
+                          }
+                        },
                       ),
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: snapshot.hasData
-                                ? snapshot.data!
-                                : widget.userLocation,
-                            builder: (context) => Image.asset(
-                              _isMoving
-                                  ? 'assets/images/pin_put_away.png'
-                                  : 'assets/images/pin_put_down.png',
+                      children: [
+                        TileLayer(
+                          minZoom: 2,
+                          maxZoom: 18,
+                          backgroundColor: Colors.grey,
+                          urlTemplate: MAP_TILE_URL,
+                          userAgentPackageName: MAP_USER_AGENT_PACKAGE_NAME,
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: snapshot.hasData
+                                  ? snapshot.data!
+                                  : widget.userLocation,
+                              builder: (context) => Image.asset(
+                                _isMoving
+                                    ? 'assets/images/pin_put_away.png'
+                                    : 'assets/images/pin_put_down.png',
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
+                          ],
+                        ),
+                      ],
+                    ),
+                    if (_isMoving == false)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.black87,
-                                  borderRadius: BorderRadius.circular(25),
+                              FloatingActionButton(
+                                backgroundColor: Colors.white,
+                                onPressed: () {
+                                  _moveToPosition(widget.userLocation);
+                                },
+                                child: const Icon(
+                                  Icons.near_me,
+                                  color: Color(COLOR_PRIMARY),
                                 ),
-                                height: 80,
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
-                                  child: Center(
-                                    child: Text(
-                                      _currentAddress ??
-                                          AppLocalizations.of(context)!.loading,
-                                      style:
-                                          Theme.of(context).textTheme.headline3,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 3,
+                              ),
+                              const SizedBox(height: 8),
+                              FloatingActionButton(
+                                backgroundColor: Colors.white,
+                                onPressed: () {
+                                  _moveToPosition(widget.userLocation);
+                                },
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Color(COLOR_PRIMARY),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              FloatingActionButton(
+                                backgroundColor: Colors.white,
+                                onPressed: () {
+                                  _moveToPosition(widget.userLocation);
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  color: Color(COLOR_PRIMARY),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    if (_isMoving == false)
+                      Positioned(
+                        top: 8,
+                        left: 8,
+                        right: 16,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                context.router.pop();
+                              },
+                            ),
+                            Flexible(
+                              child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: CupertinoSearchTextField(
+                                    controller: _searchController,
+                                    onTap: () async {
+                                      final LatLng? selectedLocation =
+                                          await showModalBottomSheet(
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(25),
+                                          ),
+                                        ),
+                                        context: context,
+                                        isScrollControlled: true,
+                                        builder: (context) =>
+                                            const FractionallySizedBox(
+                                          heightFactor: 0.9,
+                                          child: SearchAddressScreen(),
+                                        ),
+                                      );
+                                      if (selectedLocation == null) {
+                                        return;
+                                      }
+                                      _moveToPosition(selectedLocation);
+                                    },
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (_isMoving == false)
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Container(
+                          height: 150,
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25))),
+                          child: Stack(
+                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FractionalTranslation(
+                                translation: const Offset(5.25, -0.5),
+                                child: SizedBox(
+                                  height: 60,
+                                  width: 60,
+                                  child: FloatingActionButton(
+                                    backgroundColor: const Color(COLOR_PRIMARY),
+                                    onPressed: () {
+                                      context.router.pop(
+                                        AddressModel(
+                                          address: _currentAddress,
+                                          location: snapshot.data ??
+                                              widget.userLocation,
+                                        ),
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              ElevatedButton(
-                                onPressed: () async {
-                                  final LatLng? selectedLocation =
-                                      await showModalBottomSheet(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(25),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      //const Icon(Icons.circle_outlined, size: 30),
+                                      const SizedBox(width: 16),
+                                      Flexible(
+                                        child: Text(
+                                          _currentAddress ??
+                                              AppLocalizations.of(context)!
+                                                  .loading,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                    ),
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (context) =>
-                                        const FractionallySizedBox(
-                                      heightFactor: 0.9,
-                                      child: SearchAddressScreen(),
-                                    ),
-                                  );
-                                  if (selectedLocation == null) {
-                                    return;
-                                  }
-                                  _moveToPosition(selectedLocation);
-                                },
-                                child: Text(AppLocalizations.of(context)!
-                                    .searchByAddress),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: FloatingActionButton(
-                                  onPressed: () {
-                                    _moveToPosition(widget.userLocation);
-                                  },
-                                  child: const Icon(Icons.near_me),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.router.pop(
-                                    AddressModel(
-                                      address: _currentAddress,
-                                      location:
-                                          snapshot.data ?? widget.userLocation,
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                    AppLocalizations.of(context)!.setLocation),
-                              ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          );
-        },
-      ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
