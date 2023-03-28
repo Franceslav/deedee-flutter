@@ -24,6 +24,8 @@ import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
+import '../account/personal_info/edit_pers_info.dart';
+import '../account/personal_info/personal_information.dart';
 import '../place_order/place_order_screen.dart';
 
 @MaterialAutoRouter(
@@ -54,6 +56,8 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
+    MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
+    MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
   ],
 )
 class $AppRouter {}

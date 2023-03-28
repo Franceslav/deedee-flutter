@@ -67,7 +67,9 @@ class _AccountState extends State<AccountScreen> {
                       children: [
                         OutlinedButtonWidget(
                           text: locale.edit,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.router.push(const EditProfilePageRoute());
+                          },
                         ),
                         const SizedBox(width: 16),
                         OutlinedButtonWidget(
