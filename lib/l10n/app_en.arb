@@ -165,7 +165,10 @@
      "mockFilterKeyQuarrel": "Quarrel",
      "mockFilterKeyEngine": "Engine",
      "mockFilterKeyMuffler": "Muffler",
-     "mockFilterKeyElectrical": "Electrical"
+     "mockFilterKeyElectrical": "Electrical",
+     "placed":"Placed",
+     "seen":"Seen",
+     "bookmarked":"Bookmarked"
 
 
 }

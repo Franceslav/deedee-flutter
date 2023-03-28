@@ -65,6 +65,7 @@ class _AccountState extends State<AccountScreen> {
                     const SizedBox(height: 32),
                     Row(
                       children: [
+                        Expanded(
                         OutlinedButtonWidget(
                           text: locale.edit,
                           onPressed: () {
@@ -72,9 +73,11 @@ class _AccountState extends State<AccountScreen> {
                           },
                         ),
                         const SizedBox(width: 16),
-                        OutlinedButtonWidget(
-                          text: locale.share,
-                          onPressed: () {},
+                        Expanded(
+                          child: OutlinedButtonWidget(
+                            text: locale.share,
+                            onPressed: () {},
+                          ),
                         ),
                       ],
                     ),

@@ -49,43 +49,37 @@ class AccountInfoWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          width: 30.5,
-        ),
+        const SizedBox(width: 30.5),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '228',
-                style: AppTextTheme.titleMedium,
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                locale.tags,
-                style: AppTextTheme.titleNormal,
-              )
+              _infoColumn('9', locale.placed),
+              _infoColumn('3', locale.seen),
+              _infoColumn('0', locale.bookmarked),
             ],
           ),
         ),
-        Column(
-          children: [
-            const Text(
-              '1488',
-              style: AppTextTheme.titleMedium,
-            ),
-            const SizedBox(
-              height: 2,
-            ),
-            Text(
-              locale.views,
-              style: AppTextTheme.titleNormal,
-            )
-          ],
-        ),
       ],
+    );
+  }
+
+  Expanded _infoColumn(String type, String quantity) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            type,
+            style: AppTextTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            quantity,
+            style: AppTextTheme.titleNormal,
+          )
+        ],
+      ),
     );
   }
 }

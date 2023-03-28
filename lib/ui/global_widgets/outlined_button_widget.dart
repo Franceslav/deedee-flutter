@@ -17,8 +17,8 @@ class OutlinedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
       width: MediaQuery.of(context).size.width,
+      height: 40,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
             colors: [Color(GRADIENT_COLOR_START), Color(GRADIENT_COLOR_END)]),
