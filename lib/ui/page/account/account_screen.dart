@@ -134,8 +134,7 @@ class _InfoWidget extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          premiumStatus == PremiumStatus.notPremium &&
-                  emailVerification == EmailVerificationStatus.unverified
+          emailVerification == EmailVerificationStatus.unverified
               ? DeeDeeRowInfoWidget(
                   icon: Image.asset('assets/images/verify_0_icon.png'),
                   mainText: Text(
@@ -171,8 +170,7 @@ class _InfoWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: DeeDeeDeviderWidget(),
           ),
-          premiumStatus == PremiumStatus.notPremium &&
-                  emailVerification == EmailVerificationStatus.unverified
+          premiumStatus == PremiumStatus.notPremium
               ? DeeDeeRowInfoWidget(
                   mainText: Text(
                     locale.premium,
