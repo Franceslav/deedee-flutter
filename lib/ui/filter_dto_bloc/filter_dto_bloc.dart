@@ -37,7 +37,7 @@ class FilterDTOBloc extends Bloc<FilterDTOEvent, FilterDTOState> {
             filterId: value.filterId,
             userId: value.userId,
             topic: value.topic,
-            subtopic: value.topic,
+            subtopic: value.subtopic,
             filterKeys: value.filterKeys.map((fk) => fk.title).toList(),
             bookmarked: value.bookmarked,
             subscribed: value.subscribed,

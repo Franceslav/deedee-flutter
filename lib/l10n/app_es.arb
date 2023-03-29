@@ -151,5 +151,20 @@
      "apply": "Confirmar",
      "beginning": "Comienzo",
      "finish": "Final",
-     "duration": "Duración"
+     "duration": "Duración",
+      "mockFilterTitleGasStation": "Gasolinera",
+          "mockFilterTitleParkingGarage":"Garaje de Estacionamiento",
+          "mockFilterTitleCarWash":"Lavado de autos",
+          "mockFilterKeyDiesel": "Diesel",
+          "mockFilterKey24Hour": "24 horas ",
+          "mockFilterKeyBenzene": "Benceno",
+          "mockFilterKeyCovered":"Cubierta",
+          "mockFilterKeyValet":"Ayudante de cámara",
+          "mockFilterKeyElectricCharging":"Carga eléctrica",
+          "mockFilterKeySelfService":"Autoservicio",
+          "mockFilterKeyTouchless":"Sin toque",
+          "mockFilterKeyFullService":"Servicio completo",
+          "mockFilterKeyMotorCycle":"Motocicleta",
+          "mockFilterKeyOverNight":"Durante la noche"
+
 }

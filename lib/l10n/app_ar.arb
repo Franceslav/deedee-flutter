@@ -141,5 +141,20 @@
      "apply": "تأكيد",
      "beginning": "البداية",
      "finish": "النهاية",
-     "duration": "المدة"
+     "duration": "المدة",
+      "mockFilterTitleGasStation": "محطة غاز",
+          "mockFilterTitleParkingGarage":"مرآب للسيارات",
+          "mockFilterTitleCarWash":"غسيل سيارة",
+          "mockFilterKeyDiesel": "ديزل",
+          "mockFilterKey24Hour": "24 ساعة",
+          "mockFilterKeyBenzene": "البنزين",
+          "mockFilterKeyCovered":"مغطى",
+          "mockFilterKeyValet":"خادم",
+          "mockFilterKeyElectricCharging":"شحن كهربائي",
+          "mockFilterKeySelfService":"خدمة ذاتية، إخدم نفسك بنفسك",
+          "mockFilterKeyTouchless":"بلا لمس",
+          "mockFilterKeyFullService":"خدمة شاملة",
+          "mockFilterKeyMotorCycle":"دراجة نارية",
+          "mockFilterKeyOverNight":"بين عشية وضحاها"
+
 }

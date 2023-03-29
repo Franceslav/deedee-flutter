@@ -152,5 +152,21 @@
      "apply": "Potwierdzić",
      "beginning": "Zacząć",
      "finish": "Końcówka",
-     "duration": "Czas trwania"
+     "duration": "Czas trwania",
+        "mockFilterTitleGasStation": "Stacja paliw",
+               "mockFilterTitleParkingGarage":"Garaż parkingowy",
+               "mockFilterTitleCarWash":"Myjnia samochodowa",
+               "mockFilterKeyDiesel": "Diesel",
+                  "mockFilterKey24Hour": "24 godziny",
+
+               "mockFilterKeyBenzene": "Benzen",
+               "mockFilterKeyCovered":"Pokryty",
+               "mockFilterKeyValet":"Kamerdyner",
+               "mockFilterKeyElectricCharging":"Ładowanie elektryczne",
+               "mockFilterKeySelfService":"Samoobsługa",
+               "mockFilterKeyTouchless":"Bez dotyk",
+               "mockFilterKeyFullService":"Pełen serwis",
+                 "mockFilterKeyMotorCycle":"Motocykl",
+                    "mockFilterKeyOverNight":"Nocny"
+
 }

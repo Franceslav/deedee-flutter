@@ -107,25 +107,87 @@ class MockFilterServiceClient implements FilterServiceClient {
 
   Future<GetFilterKeysResponse> _getFilterKeys(
       GetFilterKeysRequest request) async {
-    String deviceLanguage= Platform.localeName.substring(0,2);
+    String deviceLanguage = Platform.localeName.substring(0, 2);
 
     return GetFilterKeysResponse()
       ..filterKeys.addAll([
         FilterKey()
-          ..topicId = "Ремонт"
-          ..title = "Подвеска",
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKey24Hour,
         FilterKey()
-          ..topicId = "Ремонт"
-          ..title = "Сварка",
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyCovered,
         FilterKey()
-          ..topicId = "Ремонт"
-          ..title = (await AppLocalizations.delegate.load(Locale(deviceLanguage))).mockFilterKeyMuffler,
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyElectricCharging,
         FilterKey()
-          ..topicId = "Ремонт"
-          ..title = "Электрооборудование",
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyValet,
         FilterKey()
-          ..topicId = "Ремонт"
-          ..title = "Двигатель",
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyMotorCycle,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyOverNight,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleCarWash
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeySelfService,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleCarWash
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyFullService,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleCarWash
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyTouchless,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleGasStation
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyDiesel,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleGasStation
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyBenzene,
       ]);
   }
 
@@ -135,7 +197,7 @@ class MockFilterServiceClient implements FilterServiceClient {
       topic: 'Клининг',
       filterKeys: [
         FilterKey()
-          // ..topicId = "маникюр"
+        // ..topicId = "маникюр"
           ..title = "японский",
       ],
       bookmarked: false,
@@ -177,7 +239,67 @@ class MockFilterServiceClient implements FilterServiceClient {
   @override
   ResponseStream<Filter> getAllBookmarkedFilters(GetAllFiltersRequest request,
       {CallOptions? options}) {
-    // TODO: implement getAllBookmarkedFilters
-    throw UnimplementedError();
+    return ResponseStream(
+        FakeClientCall<dynamic, Filter>(_getAllBookmarkedFilters(request)));
+  }
+
+  Future<Filter> _getAllBookmarkedFilters(GetAllFiltersRequest request) async {
+    String deviceLanguage = Platform.localeName.substring(0, 2);
+
+    return Filter(
+      filterId: '2',
+      // userId: '',
+      topic: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+          .autoTag,
+      //'Рабочие',
+      subtopic: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+          .mockFilterTitleParkingGarage,
+      filterKeys: [
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKey24Hour,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyCovered,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyElectricCharging,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyValet,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyMotorCycle,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyOverNight,
+      ],
+      bookmarked: true,
+      subscribed: false,
+    );
   }
 }

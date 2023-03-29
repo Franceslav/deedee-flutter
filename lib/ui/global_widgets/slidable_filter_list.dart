@@ -12,6 +12,8 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:deedee/repository/filter_repository.dart';
 
 class SlidableFilterList extends StatefulWidget {
   final List<FilterDTO> filters;
@@ -23,85 +25,128 @@ class SlidableFilterList extends StatefulWidget {
 }
 
 class _SlidableFilterListState extends State<SlidableFilterList> {
+  late FilterRepository _filterRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _filterRepository = FilterRepository();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     return ListView.separated(
       itemCount: widget.filters.length,
-      itemBuilder: ((context, index) {
-        return Slidable(
-          endActionPane: ActionPane(
-            extentRatio: 0.5,
-            motion: const ScrollMotion(),
-            children: [
-              SlidableAction(
-                onPressed: ((context) {
-                  FilterDTOBloc()
-                      .add(AddFilterDTOSubscription(widget.filters[index]));
-                }),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.orange,
-                icon: widget.filters[index].subscribed
-                    ? CommunityMaterialIcons.star
-                    : CommunityMaterialIcons.star_off,
-              ),
-              SlidableAction(
-                onPressed: ((context) {
-                  context.router.replace(FilterPageRoute(
-                    topicName: widget.filters[index].topic,
-                    currentFilter: CompositeFilter([], []),
-                    // index: index
-                  ));
-                }),
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(COLOR_PRIMARY),
-                icon: Icons.edit,
-              ),
-              SlidableAction(
-                onPressed: ((context) {
-                  setState(() {
-                    widget.filters.removeAt(index);
-                  });
-                  FilterDTOBloc().add(
-                      RemoveFilterEvent(filters: widget.filters, index: index));
-                }),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.red,
-                icon: Icons.delete,
-              ),
-            ],
+      itemBuilder: ((context, index)  {
+        return FutureBuilder<List<String>>(
+          future: Future<List<String>>(
+                  () async {
+                List<String>  _filterKeys = (await _filterRepository.getFilterItems( widget.filters[index].subtopic))
+                    .map((fk) => fk.title)
+                    .toList();
+                return _filterKeys;
+              }
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: DeeDeeRowInfoWidget(
-              icon: Image.asset('assets/images/bookmark_icon.png'),
-              mainText: Text(
-                widget.filters[index].topic,
-                style: AppTextTheme.bodyLarge,
-              ),
-              secondaryText: Text(
-                '${widget.filters[index].subtopic} ${widget.filters[index].filterKeys}',
-                style: AppTextTheme.labelMedium,
-              ),
-              //     subtitle: Text(bookmark.geoLocation.toString()),
-              onTap: () {
-                context.router.replace(
-                  MapScreenRoute(
-                    // добавить сюда фильтры для меток
-                    tagDescriptionMap: {},
-                    user: user,
-                    topicName: '',
-                    currentFilter: CompositeFilter([], []),
+          builder: (context, snapshot) {
+            if(snapshot.hasData) {
+              return Slidable(
+                endActionPane: ActionPane(
+                  extentRatio: 0.5,
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: ((context) {
+                        FilterDTOBloc()
+                            .add(
+                            AddFilterDTOSubscription(widget.filters[index]));
+                      }),
+                      backgroundColor: Colors.orange,
+                      foregroundColor: Colors.white,
+                      icon: widget.filters[index].subscribed
+                          ? CommunityMaterialIcons.star
+                          : CommunityMaterialIcons.star_off,
+                    ),
+                    SlidableAction(
+                      onPressed: ((context)  {
+                        context.router.replace(
+                            FilterPageRoute(
+                              topicName: widget.filters[index].topic,
+                              currentFilter: CompositeFilter(
+                                snapshot.data!,
+                                widget.filters[index].filterKeys,
+                              ),
+                            ));
+                      }),
+                      backgroundColor: const Color(COLOR_PRIMARY),
+                      foregroundColor: Colors.white,
+                      icon: Icons.edit,
+                    ),
+                    SlidableAction(
+                      onPressed: ((context) {
+                        setState(() {
+                          widget.filters.removeAt(index);
+                        });
+                        FilterDTOBloc().add(
+                            RemoveFilterEvent(
+                                filters: widget.filters, index: index));
+                      }),
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 8.0),
+                  child: DeeDeeRowInfoWidget(
+                    icon: Image.asset('assets/images/bookmark_icon.png'),
+                    mainText: Text(
+                      '${AppLocalizations.of(context)!
+                          .filterTagsPageTitle}: ${widget.filters[index]
+                          .subtopic}',
+                      style: AppTextTheme.bodyLarge,
+                    ),
+                    secondaryText: Text(
+                      '${AppLocalizations.of(context)!.filterTags}: ${widget
+                          .filters[index].filterKeys.toString()}',
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: AppTextTheme.bodyMedium,
+                    ),
+                    onTap: () {
+                      context.router.replace(
+                        MapScreenRoute(
+                          // добавить сюда фильтры для меток
+                          tagDescriptionMap: {},
+                          user: user,
+                          topicName: widget.filters[index].topic,
+                          currentFilter: CompositeFilter(
+                            snapshot.data!,
+                            widget.filters[index].filterKeys,
+                          ),
+                        ),
+                      );
+                      FilterDTOBloc().add(PushSavedFiltersEvent(
+                        accountType: user.accountType,
+                        filterKeys: widget.filters[index].filterKeys,
+                        topic: widget.filters[index].subtopic,
+                      ));
+                    },
                   ),
-                );
-                FilterDTOBloc().add(PushSavedFiltersEvent(
-                  accountType: user.accountType,
-                  filterKeys: widget.filters[index].filterKeys,
-                  topic: widget.filters[index].subtopic,
-                ));
-              },
-            ),
-          ),
+                ),
+              );
+            }
+            else{
+             return const CircularProgressIndicator.adaptive(
+                backgroundColor: Colors.white,
+                valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
+              );
+            }
+          }
         );
       }),
       separatorBuilder: (BuildContext context, int index) {

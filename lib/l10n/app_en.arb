@@ -166,9 +166,24 @@
      "mockFilterKeyEngine": "Engine",
      "mockFilterKeyMuffler": "Muffler",
      "mockFilterKeyElectrical": "Electrical",
-     "placed":"Placed",
-     "seen":"Seen",
-     "bookmarked":"Bookmarked"
+     "mockFilterTitleGasStation": "Gas station",
+          "mockFilterTitleParkingGarage":"Parking Garage",
+          "mockFilterTitleCarWash":"Car Wash",
+          "mockFilterKeyDiesel": "Diesel",
+          "mockFilterKey24Hour": "24 Hour",
+          "mockFilterKeyBenzene": "Benzene",
+          "mockFilterKeyCovered":"Covered",
+          "mockFilterKeyValet":"Valet",
+          "mockFilterKeyElectricCharging":"Electric charging",
+          "mockFilterKeySelfService":"Self service",
+          "mockFilterKeyTouchless":"Touchless",
+          "mockFilterKeyFullService":"Full service",
+          "mockFilterKeyMotorCycle":"Motor Cycle",
+          "mockFilterKeyOverNight":"Over Night",
+               "placed":"Placed",
+               "seen":"Seen",
+               "bookmarked":"Bookmarked"
+
 
 
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:deedee/generated/AccountService.pb.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
@@ -172,8 +175,8 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagToBookmarkResponse> _removeTagToBookmark(
-    TagToBookmarkRequest request,
-  ) async {
+      TagToBookmarkRequest request,
+      ) async {
     return TagToBookmarkResponse()..succeed = true;
   }
 
@@ -333,20 +336,25 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<GetAllTopicsDescriptionResponse> _getSubTopics(
       GetTopicTitlesRequest request) async {
+    String deviceLanguage = Platform.localeName.substring(0, 2);
+
     final subTopics = [
       TopicDescription(
         id: 1,
-        title: 'Мойка',
+        title: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+            .mockFilterTitleParkingGarage,
         offerCount: 110,
       ),
       TopicDescription(
         id: 2,
-        title: 'Ремонт',
+        title: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+            .mockFilterTitleCarWash,
         offerCount: 12,
       ),
       TopicDescription(
         id: 3,
-        title: 'Шиномонтаж',
+        title: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+            .mockFilterTitleGasStation,
         offerCount: 7,
       ),
     ];

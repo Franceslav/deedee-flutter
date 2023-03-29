@@ -153,5 +153,21 @@
      "apply": "Подтвердить",
      "beginning": "Начало",
      "finish": "Конец",
-     "duration": "Продолжительность"
+     "duration": "Продолжительность",
+
+         "mockFilterTitleGasStation": "Бензоколонка",
+          "mockFilterTitleParkingGarage":"Автостоянка",
+          "mockFilterTitleCarWash":"Автомойка",
+          "mockFilterKeyDiesel": "Дизель",
+          "mockFilterKey24Hour": "24 часа",
+          "mockFilterKeyBenzene": "Бензол",
+          "mockFilterKeyCovered":"Покрытый",
+          "mockFilterKeyValet":"Камердинер",
+          "mockFilterKeyElectricCharging":"Электрическая зарядка",
+          "mockFilterKeySelfService":"Самообслуживание",
+          "mockFilterKeyTouchless":"Без ощущения",
+          "mockFilterKeyFullService":"Полный комплекс услуг",
+          "mockFilterKeyMotorCycle":"Мотоцикл",
+          "mockFilterKeyOverNight":"С ночевкой"
+
 }
