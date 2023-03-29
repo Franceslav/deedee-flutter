@@ -6,24 +6,48 @@ import 'package:latlong2/latlong.dart';
 import '../generated/LocationService.pb.dart';
 import 'contact.dart';
 
-enum AccountType { buy, sell }
+enum AccountType {
+  buy,
+  sell,
+}
 
 enum EmailVerificationStatus {
-  verified,
-  unverified,
-  sent,
+  verified(0),
+  unverified(1),
+  sent(2);
+
+  final int value;
+  const EmailVerificationStatus(this.value);
+
+  static EmailVerificationStatus fromInt(int value) {
+    return EmailVerificationStatus.values.firstWhere((e) => e.value == value);
+  }
 }
 
 enum DocVerificationStatus {
-  verified,
-  unverified,
-  verificationRequestSent,
-  verificationInProgress,
+  verified(0),
+  unverified(1),
+  verificationRequestSent(2),
+  verificationInProgress(3);
+
+  final int value;
+  const DocVerificationStatus(this.value);
+
+  static DocVerificationStatus fromInt(int value) {
+    return DocVerificationStatus.values.firstWhere((e) => e.value == value);
+  }
 }
 
 enum PremiumStatus {
-  isPremium,
-  notPremium,
+  isPremium(0),
+  notPremium(1);
+
+  final int value;
+  const PremiumStatus(this.value);
+
+  static PremiumStatus fromInt(int value) {
+    return PremiumStatus.values.firstWhere((e) => e.value == value);
+  }
 }
 
 extension AccountTypeExtension on AccountType {
@@ -114,6 +138,11 @@ class User extends Equatable {
       availableTags: parsedJson['availableTags'] ?? 0,
       availablePlaces: null,
       savedFilters: null,
+      emailVerification:
+          EmailVerificationStatus.fromInt(parsedJson['emailVerification'] ?? 1),
+      docVerification:
+          DocVerificationStatus.fromInt(parsedJson['docVerification'] ?? 1),
+      premiumStatus: PremiumStatus.fromInt(parsedJson['premiumStatus'] ?? 1),
     );
   }
 
@@ -124,9 +153,9 @@ class User extends Equatable {
       'firstName': firstName,
       'lastName': lastName,
       'profilePictureURL': profilePictureURL,
-      'emailVerification': emailVerification,
-      'docVerification': docVerification,
-      'premiumStatus': premiumStatus,
+      'emailVerification': emailVerification.value,
+      'docVerification': docVerification.value,
+      'premiumStatus': premiumStatus.value,
       'balance': balance,
       'availableTags': availableTags,
       'lastLat': lastGeoLocation.latitude,

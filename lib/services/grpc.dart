@@ -32,8 +32,12 @@ class GRCPRepository {
     String? url = await locator.get<SharedUtils>().getPrefsIpAddress();
     String? port = await locator.get<SharedUtils>().getPrefsPort();
     String? ipAddress = await locator.get<SharedUtils>().getPublicIpAddress();
+    //TODO
+    if (url == null) {
+      return false;
+    }
     final channel = ClientChannel(
-      url!,
+      url,
       port: int.parse(port!),
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
@@ -88,8 +92,6 @@ class GRCPRepository {
         .getBookmarkTags(GetBookmarkTagsRequest()..userId = userId);
     return response.tags;
   }
-
-
 
   Future<bool> removeUserBookmark(String userId, String tagId) async {
     final response =
@@ -146,8 +148,6 @@ class GRCPRepository {
       ..tagId = tagId);
     return response.tag.isDeleted;
   }
-
-
 
   Future<bool> placeBidRequest(String userId, order.Order order) async {
     return true;
