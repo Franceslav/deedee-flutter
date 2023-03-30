@@ -192,6 +192,24 @@ class _InfoWidget extends StatelessWidget {
                   icon: Image.asset('assets/images/premium_0_icon.png'),
                 )
               : const SizedBox(),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: DeeDeeDeviderWidget(),
+          ),
+          DeeDeeRowInfoWidget(
+            icon: Image.asset('assets/images/instagram_logo.png'),
+            mainText: const Text(
+              'Добавить аккаунт',
+              style: AppTextTheme.bodyLarge,
+            ),
+            secondaryText: const Text(
+              '',
+              style: AppTextTheme.bodyMedium,
+            ),
+            onTap: () {
+              context.router.push(const SocialNetworkScreenRoute());
+            },
+          )
         ],
       ),
     );

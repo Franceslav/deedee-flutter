@@ -11,6 +11,7 @@ import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
+import 'package:deedee/ui/page/account/social_network_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
@@ -23,7 +24,7 @@ import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
-
+import 'package:deedee/ui/page/account/social_network_screen.dart';
 import '../account/personal_info/edit_pers_info.dart';
 import '../account/personal_info/personal_information.dart';
 import '../place_order/place_order_screen.dart';
@@ -58,6 +59,7 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
+    MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
   ],
 )
 class $AppRouter {}

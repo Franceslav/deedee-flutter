@@ -139,8 +139,9 @@
   "name": "Ism",
   "username": "Foydalanuvchi nomi",
   "website": "Veb-sayt",
-  "bio":"Bio",
+  "bio": "Bio",
   "phoneNumber": "telefon raqami",
   "gender": "jins",
-  "birthday":"tug'ilgan kun"
+  "birthday": "tug'ilgan kun",
+  "contacts": "Kontaktlar"
 }

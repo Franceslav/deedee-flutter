@@ -6,10 +6,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:deedee/generated/AccountService.pbgrpc.dart' as _i3;
+import 'package:deedee/generated/filter_service.pbgrpc.dart' as _i6;
 import 'package:deedee/generated/LocationService.pbgrpc.dart' as _i12;
 import 'package:deedee/generated/TagService.pbgrpc.dart' as _i17;
 import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i20;
-import 'package:deedee/generated/filter_service.pbgrpc.dart' as _i6;
 import 'package:deedee/repository/filter_repository.dart' as _i5;
 import 'package:deedee/repository/gps_repository.dart' as _i8;
 import 'package:deedee/repository/tag_repository.dart' as _i16;
