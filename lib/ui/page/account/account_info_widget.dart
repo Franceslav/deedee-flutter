@@ -49,7 +49,7 @@ class AccountInfoWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 30.5),
+        const SizedBox(width: 25),
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
