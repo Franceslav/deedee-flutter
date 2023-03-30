@@ -156,5 +156,8 @@
   "mockFilterKeyTouchless": "بلا لمس",
   "mockFilterKeyFullService": "خدمة شاملة",
   "mockFilterKeyMotorCycle": "دراجة نارية",
-  "mockFilterKeyOverNight": "بين عشية وضحاها"
+  "mockFilterKeyOverNight": "بين عشية وضحاها",
+  "placed": "تم وضعها",
+  "seen": "مرئي",
+  "bookmarked": "مرجعية"
 }

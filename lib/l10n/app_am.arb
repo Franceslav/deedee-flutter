@@ -175,5 +175,8 @@
   "mockFilterKeyOverNight": "የማታ ሙሉ ",
   "placed": "ተቀምጧል ",
   "seen": "ታይቷል",
-  "bookmarked": "ተመዝግቧል "
+  "bookmarked": "ተመዝግቧል ",
+  "placed": "ተቀምጧል",
+  "seen": "ታይቷል።",
+  "bookmarked": "ዕልባት ተደርጓል"
 }

@@ -143,5 +143,8 @@
   "phoneNumber": "전화 번호",
   "gender": "성별",
   "birthday": "생일",
-  "contacts": "콘택트 렌즈"
+  "contacts": "콘택트 렌즈",
+  "placed": "배치",
+  "seen": "본",
+  "bookmarked": "북마크됨"
 }

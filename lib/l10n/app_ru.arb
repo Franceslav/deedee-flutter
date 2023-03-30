@@ -167,5 +167,9 @@
   "mockFilterKeyTouchless": "Без ощущения",
   "mockFilterKeyFullService": "Полный комплекс услуг",
   "mockFilterKeyMotorCycle": "Мотоцикл",
-  "mockFilterKeyOverNight": "С ночевкой"
+  "mockFilterKeyOverNight": "С ночевкой",
+  "placed": "Размещено",
+  "seen": "Просмотрено",
+  "bookmarked": "Добавлен в закладки"
+
 }

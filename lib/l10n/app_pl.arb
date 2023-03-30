@@ -166,5 +166,8 @@
   "mockFilterKeyTouchless": "Bez dotyk",
   "mockFilterKeyFullService": "Pełen serwis",
   "mockFilterKeyMotorCycle": "Motocykl",
-  "mockFilterKeyOverNight": "Nocny"
+  "mockFilterKeyOverNight": "Nocny",
+   "placed": "Umieszczony",
+  "seen": "Widziany",
+  "bookmarked": "Zaznaczone"
 }

@@ -49,15 +49,18 @@ class AccountInfoWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 25),
         Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _infoColumn('9', locale.placed),
-              _infoColumn('3', locale.seen),
-              _infoColumn('0', locale.bookmarked),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _infoColumn('9', locale.placed),
+                _infoColumn('3', locale.seen),
+                _infoColumn('0', locale.bookmarked),
+              ],
+            ),
           ),
         ),
       ],
@@ -77,6 +80,7 @@ class AccountInfoWidget extends StatelessWidget {
           Text(
             quantity,
             style: AppTextTheme.titleNormal,
+            textAlign: TextAlign.center,
           )
         ],
       ),

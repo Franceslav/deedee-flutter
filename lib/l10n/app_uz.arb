@@ -143,5 +143,8 @@
   "phoneNumber": "telefon raqami",
   "gender": "jins",
   "birthday": "tug'ilgan kun",
-  "contacts": "Kontaktlar"
+  "contacts": "Kontaktlar",
+  "placed": "joylashtirilgan",
+  "seen": "ko'rgan",
+  "bookmarked": "xatcho'p"
 }
