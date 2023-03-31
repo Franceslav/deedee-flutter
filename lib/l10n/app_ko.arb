@@ -110,6 +110,7 @@
   "instagram": "인스타그램",
   "telegram": "텔레그램",
   "time": "시간을",
+  "date": "날짜",
   "additionalInformation": "추가 정보",
   "text": "본문",
   "convenientTime": "편리한 시간",
@@ -143,5 +144,7 @@
   "phoneNumber": "전화 번호",
   "gender": "성별",
   "birthday": "생일",
-  "contacts": "콘택트 렌즈"
+  "contacts": "콘택트 렌즈",
+  "accept": "수용하다",
+  "request": "요구"
 }

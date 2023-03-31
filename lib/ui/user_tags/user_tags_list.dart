@@ -17,12 +17,14 @@ class UserTagsList extends StatefulWidget {
   final TagsType tagsType;
   final List<Tag> tags;
   final void Function(Tag tag, String userId, int index) onDismissed;
+  final void Function()? onTap;
 
   const UserTagsList({
     super.key,
     required this.tags,
     required this.tagsType,
     required this.onDismissed,
+    required this.onTap,
   });
 
   @override
@@ -88,7 +90,7 @@ class _UserTagsListState extends State<UserTagsList> {
                       style: AppTextTheme.labelMedium,
                     ),
                     //     subtitle: Text(bookmark.geoLocation.toString()),
-                    onTap: () {},
+                    onTap: widget.onTap,
                   ),
                 ),
                 // UserTagItem(tag: tag),

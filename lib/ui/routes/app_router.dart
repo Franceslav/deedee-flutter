@@ -21,6 +21,7 @@ import 'package:deedee/ui/page/settings/settings_screen.dart';
 import 'package:deedee/ui/page/subscribed_filters/subscribed_filters_page.dart';
 import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
+import 'package:deedee/ui/request_screen/request_screen.dart';
 import 'package:deedee/ui/saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
@@ -60,6 +61,7 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
     MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
+    MaterialRoute(page: RequestScreen, path: '/request-page'),
   ],
 )
 class $AppRouter {}

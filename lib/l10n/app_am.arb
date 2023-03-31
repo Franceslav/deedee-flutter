@@ -110,6 +110,7 @@
   "instagram": "ኢንስታግራም ",
   "telegram": "ቴሌግራም ",
   "time": "ጊዜ",
+  "date": "ቀን",
   "additionalInformation": "ተጨማሪ መረጃ ",
   "text": "ፅሁፍ ",
   "convenientTime": "ምቹ ስዓት ",
@@ -175,5 +176,7 @@
   "mockFilterKeyOverNight": "የማታ ሙሉ ",
   "placed": "ተቀምጧል ",
   "seen": "ታይቷል",
-  "bookmarked": "ተመዝግቧል "
+  "bookmarked": "ተመዝግቧል",
+  "accept": "ተቀበል",
+  "request": "ጥያቄ"
 }
