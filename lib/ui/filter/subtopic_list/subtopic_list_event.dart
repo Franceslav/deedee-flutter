@@ -47,3 +47,15 @@ class SelectLocationEvent extends FilterPageEvent {
 
   SelectLocationEvent(this.data);
 }
+
+class PushFiltersEvent extends FilterPageEvent {
+  final String topic;
+  final List<String> filterKeys;
+  final AccountType accountType;
+
+  PushFiltersEvent({
+    required this.topic,
+    required this.filterKeys,
+    required this.accountType,
+  });
+}
