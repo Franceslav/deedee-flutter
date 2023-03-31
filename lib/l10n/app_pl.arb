@@ -109,6 +109,7 @@
   "instagram": "Instagram",
   "telegram": "Telegram",
   "time": "Czas",
+  "date": "Data",
   "additionalInformation": "Dodatkowe informacje",
   "text": "Tekst",
   "convenientTime": "Dogodny termin",
@@ -166,5 +167,7 @@
   "mockFilterKeyTouchless": "Bez dotyk",
   "mockFilterKeyFullService": "Pełen serwis",
   "mockFilterKeyMotorCycle": "Motocykl",
-  "mockFilterKeyOverNight": "Nocny"
+  "mockFilterKeyOverNight": "Nocny",
+  "accept": "Zaakceptować",
+  "request": "Wniosek"
 }

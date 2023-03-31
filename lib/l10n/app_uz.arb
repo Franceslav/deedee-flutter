@@ -110,6 +110,7 @@
   "instagram": "Instagram",
   "telegram": "Telegram",
   "time": "Vaqt",
+  "date": "Sana",
   "additionalInformation": "Qo'shimcha ma'lumot",
   "text": "Tekst",
   "convenientTime": "Qulay vaqt",
@@ -125,6 +126,7 @@
   "book": "Kitob",
   "edit": "Edit",
   "share": "Ulashish",
+  "date": "Дата",
   "saveAndSubscribe": "Saqlash va obuna bo'lish",
   "switchLanguage": "Tilni almashtirish",
   "onServiceSince": "Servis boshlangan",
@@ -143,5 +145,7 @@
   "phoneNumber": "telefon raqami",
   "gender": "jins",
   "birthday": "tug'ilgan kun",
-  "contacts": "Kontaktlar"
+  "contacts": "Kontaktlar",
+  "accept": "Qabul qiling",
+  "request": "So'rov"
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/place_tag/search_address_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,6 +109,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                heroTag: 'near_me',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
                                   _moveToPosition(widget.userLocation);
@@ -119,6 +121,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                               ),
                               const SizedBox(height: 8),
                               FloatingActionButton(
+                                heroTag: 'add',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
                                   _moveToPosition(widget.userLocation);
@@ -130,6 +133,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                               ),
                               const SizedBox(height: 8),
                               FloatingActionButton(
+                                heroTag: 'remove',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
                                   _moveToPosition(widget.userLocation);
@@ -211,15 +215,11 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                   height: 60,
                                   width: 60,
                                   child: FloatingActionButton(
+                                    heroTag: 'check',
                                     backgroundColor: const Color(COLOR_PRIMARY),
                                     onPressed: () {
-                                      context.router.pop(
-                                        AddressModel(
-                                          address: _currentAddress,
-                                          location: snapshot.data ??
-                                              widget.userLocation,
-                                        ),
-                                      );
+                                      context.router
+                                          .push(const PlaceOrderScreenRoute());
                                     },
                                     child: const Icon(
                                       Icons.check,

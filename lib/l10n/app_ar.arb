@@ -99,6 +99,7 @@
   "instagram": "Instagram",
   "telegram": "Telegram",
   "time": "وقت",
+  "date": "تاريخ",
   "additionalInformation": "معلومات إضافية",
   "text": "نص",
   "convenientTime": "وقت مناسب",
@@ -156,5 +157,7 @@
   "mockFilterKeyTouchless": "بلا لمس",
   "mockFilterKeyFullService": "خدمة شاملة",
   "mockFilterKeyMotorCycle": "دراجة نارية",
-  "mockFilterKeyOverNight": "بين عشية وضحاها"
+  "mockFilterKeyOverNight": "بين عشية وضحاها",
+  "accept": "يقبل",
+  "request": "طلب"
 }

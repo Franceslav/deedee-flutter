@@ -1,10 +1,12 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
@@ -114,12 +116,13 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                 tagsType: TagsType.actual,
                                 onDismissed: (tag, userId, index) =>
                                     deleteTag(tag, userId, index),
+                                onTap: () => context.router.push(const RequestScreenRoute()),
                               ),
                               UserTagsList(
                                 tags: _tags,
                                 tagsType: TagsType.archive,
                                 onDismissed: (tag, userId, index) =>
-                                    deleteTag(tag, userId, index),
+                                    deleteTag(tag, userId, index), onTap: () {},
                               )
                             ],
                           ),
