@@ -27,6 +27,7 @@ class MapSetLocationScreen extends StatefulWidget {
 class _MapSetLocationState extends State<MapSetLocationScreen> {
   String? _currentAddress;
   bool _isMoving = false;
+  double _zoom = DEFAULT_ZOOM;
 
   final MapController _mapController = MapController();
   final TextEditingController _searchController = TextEditingController();
@@ -54,7 +55,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                         center: snapshot.hasData
                             ? snapshot.data
                             : widget.userLocation,
-                        zoom: 16,
+                        zoom: _zoom,
                         onPositionChanged: (position, hasGesture) {
                           BlocProvider.of<SetLocationBloc>(context).add(
                               CenterPositionChanged(
@@ -124,7 +125,10 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                 heroTag: 'add',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
-                                  _moveToPosition(widget.userLocation);
+                                  setState(() {
+                                    _zoom += DEFAULT_ZOOM_STEP;
+                                    _moveToPosition(widget.userLocation);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.add,
@@ -136,7 +140,10 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                 heroTag: 'remove',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
-                                  _moveToPosition(widget.userLocation);
+                                  setState(() {
+                                    _zoom -= DEFAULT_ZOOM_STEP;
+                                    _moveToPosition(widget.userLocation);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.remove,
@@ -269,7 +276,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
   void _moveToPosition(LatLng position) {
     _mapController.move(
       position,
-      _mapController.zoom,
+      _zoom,
     );
     _isMoving = false;
     BlocProvider.of<SetLocationBloc>(context)
