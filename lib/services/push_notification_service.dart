@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:injectable/injectable.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -50,12 +54,18 @@ class PushNotificationService {
     }
   }
 
-  Future<void> initInfo() async {
+  Future<void> initInfo(BuildContext context) async {
     var androidInitialize =
         const AndroidInitializationSettings('@mipmap/launcher_icon');
     var initializationSettings =
         InitializationSettings(android: androidInitialize);
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) async {
+        context.router.push(const RequestScreenRoute());
+      },
+    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
@@ -94,8 +104,9 @@ class PushNotificationService {
     });
   }
 
-  Future<bool> sendPushNotification() async {
-    await initInfo();
-    return httpService.sendPushNotificationRequest("New Order Request", "This is a test order. Please accept", await getToken());
+  Future<bool> sendPushNotification([BuildContext? context]) async {
+    await initInfo(context!);
+    return httpService.sendPushNotificationRequest("New Order Request",
+        "This is a test order. Please accept", await getToken());
   }
 }
