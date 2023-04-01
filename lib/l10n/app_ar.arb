@@ -158,6 +158,9 @@
   "mockFilterKeyFullService": "خدمة شاملة",
   "mockFilterKeyMotorCycle": "دراجة نارية",
   "mockFilterKeyOverNight": "بين عشية وضحاها",
+  "placed": "تم وضعها",
+  "seen": "مرئي",
+  "bookmarked": "مرجعية",
   "accept": "يقبل",
   "request": "طلب"
 }

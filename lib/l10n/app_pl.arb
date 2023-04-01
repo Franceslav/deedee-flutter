@@ -168,6 +168,9 @@
   "mockFilterKeyFullService": "Pełen serwis",
   "mockFilterKeyMotorCycle": "Motocykl",
   "mockFilterKeyOverNight": "Nocny",
+  "placed": "Umieszczony",
+  "seen": "Widziany",
+  "bookmarked": "Zaznaczone",
   "accept": "Zaakceptować",
   "request": "Wniosek"
 }

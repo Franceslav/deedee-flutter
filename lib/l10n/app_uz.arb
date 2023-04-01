@@ -146,6 +146,9 @@
   "gender": "jins",
   "birthday": "tug'ilgan kun",
   "contacts": "Kontaktlar",
+  "placed": "joylashtirilgan",
+  "seen": "ko'rgan",
+  "bookmarked": "xatcho'p",
   "accept": "Qabul qiling",
   "request": "So'rov"
 }
