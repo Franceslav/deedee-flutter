@@ -173,10 +173,9 @@
   "mockFilterKeyFullService": "ሙሉ አገልግሎት",
   "mockFilterKeyMotorCycle": "ሞተር",
   "mockFilterKeyOverNight": "የማታ ሙሉ ",
-  "placed": "ተቀምጧል ",
-  "seen": "ታይቷል",
-  "bookmarked": "ተመዝግቧል ",
   "placed": "ተቀምጧል",
   "seen": "ታይቷል።",
-  "bookmarked": "ዕልባት ተደርጓል"
+  "bookmarked": "ዕልባት የተደረገበት",
+  "accept": "ተቀበል",
+  "request": "ጥያቄ"
 }

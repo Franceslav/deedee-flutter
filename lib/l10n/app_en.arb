@@ -179,5 +179,7 @@
   "mockFilterKeyOverNight": "Over Night",
   "placed": "Placed",
   "seen": "Seen",
-  "bookmarked": "Bookmarked"
+  "bookmarked": "Bookmarked",
+  "accept": "accept",
+  "request": "request"
 }

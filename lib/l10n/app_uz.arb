@@ -146,5 +146,7 @@
   "contacts": "Kontaktlar",
   "placed": "joylashtirilgan",
   "seen": "ko'rgan",
-  "bookmarked": "xatcho'p"
+  "bookmarked": "xatcho'p",
+  "accept": "Qabul qiling",
+  "request": "So'rov"
 }

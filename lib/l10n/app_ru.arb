@@ -170,6 +170,7 @@
   "mockFilterKeyOverNight": "С ночевкой",
   "placed": "Размещено",
   "seen": "Просмотрено",
-  "bookmarked": "Добавлен в закладки"
-
+  "bookmarked": "Добавлен в закладки",
+  "accept": "Принять",
+  "request": "Запрос"
 }
