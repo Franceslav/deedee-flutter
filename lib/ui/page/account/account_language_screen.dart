@@ -32,7 +32,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Wrap(
-            //  mainAxisAlignment: MainAxisAlignment.center,
+              //  mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                     onPressed: () {
@@ -54,6 +54,12 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                     icon: Image.asset('assets/images/pl.png')),
                 IconButton(
                     onPressed: () {
+                      context.read<AccountBloc>().changeLocal('ky');
+                    },
+                    iconSize: 50,
+                    icon: Image.asset('assets/images/ky.png')),
+                IconButton(
+                    onPressed: () {
                       context.read<AccountBloc>().changeLocal('es');
                     },
                     iconSize: 50,
@@ -69,7 +75,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                       context.read<AccountBloc>().changeLocal('am');
                     },
                     iconSize: 50,
-                    icon: Image.asset('assets/images/am.png'))
+                    icon: Image.asset('assets/images/am.png')),
               ],
             ),
           ),
