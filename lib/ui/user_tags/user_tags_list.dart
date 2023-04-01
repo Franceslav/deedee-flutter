@@ -4,6 +4,8 @@ import 'package:deedee/constants.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
+import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +14,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:deedee/ui/filter/filter_screen.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 
 enum TagsType { actual, archive }
 

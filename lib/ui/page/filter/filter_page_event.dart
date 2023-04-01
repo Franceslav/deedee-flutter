@@ -1,6 +1,5 @@
-part of '../filter_page_bloc.dart';
+part of 'filter_page_bloc.dart';
 
-@immutable
 abstract class FilterPageEvent {}
 
 class SubtopicListInitialEvent extends FilterPageEvent {}

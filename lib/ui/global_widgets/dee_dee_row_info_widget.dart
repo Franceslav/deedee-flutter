@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DeeDeeRowInfoWidget extends StatelessWidget {
   final Text mainText;
   final Text secondaryText;
-  final Image icon;
+  final Widget icon;
 
   final void Function()? onTap;
   const DeeDeeRowInfoWidget({

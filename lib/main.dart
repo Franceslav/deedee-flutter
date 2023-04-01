@@ -68,9 +68,6 @@ void main() {
           BlocProvider(
             create: (_) => BookmarksBloc(),
           ),
-          BlocProvider(
-            create: (_) => FilterDTOBloc(),
-          ),
         ],
         child: const MyApp(),
       ),

@@ -1,16 +1,17 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
-import 'package:deedee/ui/filter/filter_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:deedee/ui/page/filter/filter_screen.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
-part 'subtopic_list/subtopic_list_event.dart';
-part 'subtopic_list/subtopic_list_state.dart';
+part 'filter_page_event.dart';
+
+part 'filter_page_state.dart';
 
 class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
   final TopicRepository _topicRepository;
@@ -39,7 +40,7 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
     }
     /*      currentFilter.filterKeys.clear();
     currentFilter.filterKeys.addAll(filterKeys);
-  
+
     currentFilter.selectedFilterKeys.clear();
     currentFilter.selectedFilterKeys.addAll(event.selectedFilterKeys);*/
 

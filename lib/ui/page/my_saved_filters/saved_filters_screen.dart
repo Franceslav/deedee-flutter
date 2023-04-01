@@ -2,6 +2,7 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/model/filter_dto.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/global_widgets/slidable_filter_list.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -9,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../global_widgets/deedee_appbar.dart';
 
 class SavedFiltersScreen extends StatefulWidget {
   const SavedFiltersScreen({super.key});

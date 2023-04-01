@@ -8,23 +8,27 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart' as _i3;
 import 'package:deedee/generated/filter_service.pbgrpc.dart' as _i6;
 import 'package:deedee/generated/LocationService.pbgrpc.dart' as _i12;
-import 'package:deedee/generated/TagService.pbgrpc.dart' as _i17;
-import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i20;
+import 'package:deedee/generated/request_service_service.pbgrpc.dart' as _i16;
+import 'package:deedee/generated/TagService.pbgrpc.dart' as _i20;
+import 'package:deedee/generated/VerificationService.pbgrpc.dart' as _i23;
 import 'package:deedee/repository/filter_repository.dart' as _i5;
 import 'package:deedee/repository/gps_repository.dart' as _i8;
-import 'package:deedee/repository/tag_repository.dart' as _i16;
-import 'package:deedee/repository/topic_repository.dart' as _i19;
+import 'package:deedee/repository/service_request_repository.dart' as _i15;
+import 'package:deedee/repository/tag_repository.dart' as _i19;
+import 'package:deedee/repository/topic_repository.dart' as _i22;
 import 'package:deedee/services/channel_service.dart' as _i10;
 import 'package:deedee/services/fake/mock_account_service_client.dart' as _i4;
 import 'package:deedee/services/fake/mock_filter_service_client.dart' as _i7;
 import 'package:deedee/services/fake/mock_location_service_client.dart' as _i13;
-import 'package:deedee/services/fake/mock_tag_service_client.dart' as _i18;
+import 'package:deedee/services/fake/mock_service_request_service_client.dart'
+    as _i17;
+import 'package:deedee/services/fake/mock_tag_service_client.dart' as _i21;
 import 'package:deedee/services/fake/mock_verification_service_clent.dart'
-    as _i21;
+    as _i24;
 import 'package:deedee/services/grpc.dart' as _i9;
 import 'package:deedee/services/http_service.dart' as _i11;
 import 'package:deedee/services/push_notification_service.dart' as _i14;
-import 'package:deedee/services/shared.dart' as _i15;
+import 'package:deedee/services/shared.dart' as _i18;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -95,35 +99,47 @@ _i1.GetIt $configureDependencies(
       _prod,
     },
   );
-  gh.lazySingleton<_i15.SharedUtils>(
-    () => _i15.SharedUtils(),
-    registerFor: {
-      _dev,
-      _prod,
-    },
-  );
-  gh.lazySingleton<_i16.TagRepository>(
-    () => _i16.TagRepository(),
+  gh.lazySingleton<_i15.ServiceRequestRepository>(
+    () => _i15.ServiceRequestRepository(),
     registerFor: {
       _dev,
       _prod,
       _test,
     },
   );
-  gh.lazySingleton<_i17.TagServiceClient>(
-    () => _i18.MockTagServiceClient(),
+  gh.lazySingleton<_i16.ServiceRequestServiceClient>(
+    () => _i17.MockServiceRequestServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i19.TopicRepository>(
-    () => _i19.TopicRepository(),
+  gh.lazySingleton<_i18.SharedUtils>(
+    () => _i18.SharedUtils(),
+    registerFor: {
+      _dev,
+      _prod,
+    },
+  );
+  gh.lazySingleton<_i19.TagRepository>(
+    () => _i19.TagRepository(),
     registerFor: {
       _dev,
       _prod,
       _test,
     },
   );
-  gh.lazySingleton<_i20.VerificationServiceClient>(
-    () => _i21.MockVerificationServiceClient(),
+  gh.lazySingleton<_i20.TagServiceClient>(
+    () => _i21.MockTagServiceClient(),
+    registerFor: {_dev},
+  );
+  gh.lazySingleton<_i22.TopicRepository>(
+    () => _i22.TopicRepository(),
+    registerFor: {
+      _dev,
+      _prod,
+      _test,
+    },
+  );
+  gh.lazySingleton<_i23.VerificationServiceClient>(
+    () => _i24.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
   return getIt;

@@ -1,5 +1,5 @@
-import 'package:deedee/ui/filter/filter_page_bloc.dart';
-import 'package:deedee/ui/filter/subtopic_list/filterkey_chip.dart';
+import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
+import 'package:deedee/ui/page/filter/subtopic_list/filterkey_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,6 @@ class FilterKeyList extends StatefulWidget {
 }
 
 class _FilterKeyListState extends State<FilterKeyList> {
-
   late List<String> _selectedFilterKeys = List.of(widget.selectedFilterKeys);
 
   @override
@@ -44,9 +43,9 @@ class _FilterKeyListState extends State<FilterKeyList> {
                       .contains(widget.filterKeys[index]),
                   onSelected: (isChecked, filterKey) {
                     // if (isChecked) {
-                    isChecked ?
-                    _selectedFilterKeys.add(filterKey):
-                    _selectedFilterKeys.remove(filterKey);
+                    isChecked
+                        ? _selectedFilterKeys.add(filterKey)
+                        : _selectedFilterKeys.remove(filterKey);
 /*                      if (!selectedItems.contains(filterKey)) {
                         selectedItems.add(filterKey);
                       }*/

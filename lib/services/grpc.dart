@@ -2,8 +2,11 @@ import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
+import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/service_request.dart';
 import 'package:deedee/services/shared.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -151,5 +154,58 @@ class GRCPRepository {
 
   Future<bool> placeBidRequest(String userId, order.Order order) async {
     return true;
+  }
+
+  Future<List<ServiceRequest>> getUserRequests(String userId) async {
+    var timestamp1 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp2 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp3 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var timestamp4 = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    return [
+      ServiceRequest(
+          requestId: '1',
+          tag: Tag()..topicId = 'маникюр 1',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          customerName: 'customerName',
+          dateOfRequest: timestamp1,
+          isDone: false),
+      ServiceRequest(
+          requestId: '2',
+          tag: Tag()..topicId = 'маникюр 2',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          customerName: 'customerName',
+          dateOfRequest: timestamp2,
+          isDone: false),
+      ServiceRequest(
+          requestId: '3',
+          tag: Tag()..topicId = 'маникюр 3',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          customerName: 'customerName',
+          dateOfRequest: timestamp3,
+          isDone: false),
+      ServiceRequest(
+          requestId: '4',
+          tag: Tag()..topicId = 'маникюр 4',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          customerName: 'customerName',
+          dateOfRequest: timestamp4,
+          isDone: true),
+    ];
+  }
+
+  Future<bool> removeUserRequest(String userId, String requestsId) async {
+    return false;
   }
 }
