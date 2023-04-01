@@ -172,5 +172,7 @@
   "seen": "Көргөн",
   "bookmarked": "Кыстармаларга кошулду",
   "accept": "Кабыл алуу",
-  "request": "Өтүнүч"
+  "request": "Өтүнүч",
+  "addPayment": "Төлөм кошуу",
+    "paymentPageTitle": "Төлөм"
 }

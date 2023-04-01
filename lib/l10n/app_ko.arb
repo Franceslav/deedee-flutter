@@ -149,5 +149,7 @@
   "seen": "본",
   "bookmarked": "북마크됨",
   "accept": "수용하다",
-  "request": "요구"
+  "request": "요구",
+  "addPayment": "결제 추가",
+    "paymentPageTitle": "지불"
 }

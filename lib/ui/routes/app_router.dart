@@ -30,6 +30,11 @@ import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/request_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
+import 'package:deedee/ui/page/payment/payment_method_screen.dart';
+import 'package:deedee/ui/page/account/social_network_screen.dart';
+import '../account/personal_info/edit_pers_info.dart';
+import '../account/personal_info/personal_information.dart';
+import '../place_order/place_order_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -65,6 +70,7 @@ import 'package:deedee/ui/user_tags/user_tags_screen.dart';
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
+    MaterialRoute(page: PaymentScreen, path: '/payment-page'),
   ],
 )
 class $AppRouter {}

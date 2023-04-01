@@ -164,7 +164,59 @@ class _InfoWidget extends StatelessWidget {
               '\$0.00',
               style: AppTextTheme.bodyMedium,
             ),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (context) {
+                  return   Container(
+                    margin: const EdgeInsets.all(16.0),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                    ),
+                    child:  Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FractionallySizedBox(
+                          widthFactor: 0.25,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 12.0,
+                            ),
+                            child: Container(
+                              height: 5.0,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).dividerColor,
+                                borderRadius: const BorderRadius.all(Radius.circular(2.5)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    context.router.navigate(const PaymentScreenRoute());
+                                  },
+                                  child:  ListTile(
+                                    leading: const Icon(Icons.add_circle),
+                                    title: Text(locale.addPayment),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),

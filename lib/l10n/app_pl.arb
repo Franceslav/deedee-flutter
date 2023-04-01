@@ -172,5 +172,7 @@
   "seen": "Widziany",
   "bookmarked": "Zaznaczone",
   "accept": "Zaakceptować",
-  "request": "Wniosek"
+  "request": "Wniosek",
+  "addPayment": "Dodaj płatność",
+    "paymentPageTitle": "Zapłata"
 }

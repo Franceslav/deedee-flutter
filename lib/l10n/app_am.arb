@@ -178,5 +178,7 @@
   "seen": "ታይቷል",
   "bookmarked": "ተመዝግቧል",
   "accept": "ተቀበል",
-  "request": "ጥያቄ"
+  "request": "ጥያቄ",
+  "addPayment": "ክፍያ ጨምር",
+   "paymentPageTitle": "ክፍያ"
 }

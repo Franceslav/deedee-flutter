@@ -162,5 +162,7 @@
   "seen": "مرئي",
   "bookmarked": "مرجعية",
   "accept": "يقبل",
-  "request": "طلب"
+  "request": "طلب",
+  "addPayment": "إضافة الدفع",
+    "paymentPageTitle": "قسط"
 }
