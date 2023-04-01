@@ -25,20 +25,15 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
   final PanelController _controller = PanelController();
   final AnimatedButtonController _buttonController = AnimatedButtonController();
   List<ServiceRequest> _requests = [];
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
+    var bloc =
+        ServiceRequestBloc(locator.get<ServiceRequestRepository>(), user);
     return BlocProvider<ServiceRequestBloc>(
-      create: (context) =>
-          ServiceRequestBloc(locator.get<ServiceRequestRepository>(), user),
+      create: (context) => bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.myRequests,
@@ -109,13 +104,21 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                             requests: _requests,
                             isDone: false,
                             onDismissed: (request, userId, index) =>
-                                deleteRequest(request, userId, index),
+                                bloc.add(MyRequestDeleteEvent(
+                              request: request,
+                              userId: userId,
+                              index: index,
+                            )),
                           ),
                           MyRequestList(
                             requests: _requests,
                             isDone: true,
-                            onDismissed: (tag, userId, index) =>
-                                deleteRequest(tag, userId, index),
+                            onDismissed: (request, userId, index) =>
+                                bloc.add(MyRequestDeleteEvent(
+                              request: request,
+                              userId: userId,
+                              index: index,
+                            )),
                           )
                         ],
                       ),
@@ -141,17 +144,6 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.bounceIn,
     );
-  }
-
-  void deleteRequest(ServiceRequest request, String userId, int index) {
-    setState(() {
-      _requests.remove(request);
-    });
-    BlocProvider.of<ServiceRequestBloc>(context).add(MyRequestDeleteEvent(
-      request: request,
-      userId: userId,
-      index: index,
-    ));
   }
 
   @override
