@@ -175,8 +175,8 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagToBookmarkResponse> _removeTagToBookmark(
-      TagToBookmarkRequest request,
-      ) async {
+    TagToBookmarkRequest request,
+  ) async {
     return TagToBookmarkResponse()..succeed = true;
   }
 
@@ -245,6 +245,10 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<GetUserTagsResponse> _getUserTags(GetUserTagsRequest request) async {
+    String deviceLanguage = Platform.localeName.substring(0, 2);
+    AppLocalizations myLocal =
+        await AppLocalizations.delegate.load(Locale(deviceLanguage));
+
     var timestamp1 = Timestamp()
       ..seconds = Int64.parseInt(
           (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -269,49 +273,61 @@ class MockTagServiceClient implements TagServiceClient {
     var geoLocation1 = GeoLocation()
       ..latitude = 51.51
       ..longitude = -0.1165888
-      ..title = 'маникюр 1';
+      ..title = myLocal.mockFilterKey24Hour;
 
     var geoLocation2 = GeoLocation()
       ..latitude = 51.521
       ..longitude = -0.116
-      ..title = 'маникюр 2';
+      ..title = myLocal.mockFilterKeyCovered;
 
     var geoLocation3 = GeoLocation()
       ..latitude = 51.53
       ..longitude = 0.1167
-      ..title = 'маникюр 3';
+      ..title = myLocal.mockFilterKeyMotorCycle;
 
     var geoLocation4 = GeoLocation()
       ..latitude = 51.52134
       ..longitude = -0.1169
-      ..title = 'маникюр 4';
+      ..title = myLocal.mockFilterKeyOverNight;
+
+    var geoLocation5 = GeoLocation()
+      ..latitude = 8.91489
+      ..longitude = 38.5169
+      ..title = myLocal.mockFilterKeyBenzene;
 
     var ftags = [
       Tag()
         ..tagId = '1'
-        ..topicId = 'маникюр'
+        ..topicId = myLocal.mockFilterKey24Hour
         ..messengerId = 'beyonce'
         ..geoLocation = geoLocation1
         ..dueDate = timestamp1,
       Tag()
         ..tagId = '2'
-        ..topicId = 'маникюр 2'
+        ..topicId = myLocal.mockFilterKeyCovered
         ..messengerId = 'selenagomez'
         ..geoLocation = geoLocation2
         ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp2,
       Tag()
         ..tagId = '3'
-        ..topicId = 'маникюр 3'
+        ..topicId = myLocal.mockFilterKeyMotorCycle
         ..messengerId = 'arianagrande'
         ..geoLocation = geoLocation3
         ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp3,
       Tag()
         ..tagId = '4'
-        ..topicId = 'маникюр 4'
+        ..topicId = myLocal.mockFilterKeyOverNight
         ..messengerId = 'kyliejenner'
         ..geoLocation = geoLocation4
+        ..tagType = ACCOUNT_TYPE.SELL
+        ..dueDate = timestamp4,
+      Tag()
+        ..tagId = '5'
+        ..topicId = myLocal.mockFilterKeyBenzene
+        ..messengerId = 'Dr. Peterson'
+        ..geoLocation = geoLocation5
         ..tagType = ACCOUNT_TYPE.SELL
         ..dueDate = timestamp4,
     ];
@@ -422,16 +438,30 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<GetBookmarkTagsResponse> _getBookmarkTags(
       GetBookmarkTagsRequest request) async {
+    String deviceLanguage = Platform.localeName.substring(0, 2);
+    AppLocalizations myLocal =
+        await AppLocalizations.delegate.load(Locale(deviceLanguage));
+
     return GetBookmarkTagsResponse()
       ..tags.addAll([
         Tag()
           ..tagId = '1'
-          ..topicId = 'маникюр'
-          ..messengerId = 'beyonce',
+          ..topicId = myLocal.mockFilterKeyOverNight
+          ..geoLocation = GeoLocation(
+            latitude: 50.8476,
+            longitude: 4.3572,
+            title: myLocal.mockFilterKeyOverNight,
+          )
+          ..messengerId = 'Beyonce',
         Tag()
-          ..tagId = '1'
-          ..topicId = 'маникюр'
-          ..messengerId = 'selenagomez',
+          ..tagId = '2'
+          ..topicId = myLocal.mockFilterKeyValet
+          ..geoLocation = GeoLocation(
+            latitude: 48.8566,
+            longitude: 2.3522,
+            title: myLocal.mockFilterKeyValet,
+          )
+          ..messengerId = 'Kylian Mbappe',
       ]);
   }
 }

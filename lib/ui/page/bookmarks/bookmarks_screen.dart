@@ -1,4 +1,5 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/TagService.pb.dart';
@@ -16,8 +17,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import 'bloc/bookmarks_bloc.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 
 class BookmarksScreen extends StatefulWidget {
   const BookmarksScreen({super.key});
@@ -171,7 +174,25 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                         style: AppTextTheme.labelMedium,
                                       ),
                                       //     subtitle: Text(bookmark.geoLocation.toString()),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Map<LatLng, TagDTO> tagMap = {
+                                          LatLng(
+                                              bookmark.geoLocation.latitude,
+                                              bookmark.geoLocation
+                                                  .longitude): TagDTO(
+                                              bookmark.tagId,
+                                              bookmark.messengerId)
+                                        };
+                                        context.router.popAndPush(
+                                          MapScreenRoute(
+                                            tagDescriptionMap: tagMap,
+                                            user: user,
+                                            topicName: bookmark.topicId,
+                                            currentFilter:
+                                                CompositeFilter([], []),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 );

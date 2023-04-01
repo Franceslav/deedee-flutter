@@ -166,7 +166,9 @@ class _MapScreenState extends State<MapScreen> {
                   //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
                   // nePanBoundary: LatLng(
                   //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
-                  center: LatLng(geo.latitude, geo.longitude),
+                  center: widget.tagDescriptionMap.isEmpty
+                      ? LatLng(geo.latitude, geo.longitude)
+                      : widget.tagDescriptionMap.keys.first,
                   // bounds: LatLngBounds.fromPoints(_latLngList),
                   zoom: MAP_ZOOM,
                   onTap: (tapPosition, tapLatLon) {

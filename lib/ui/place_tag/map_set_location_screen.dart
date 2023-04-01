@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/place_tag/search_address_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class MapSetLocationScreen extends StatefulWidget {
 class _MapSetLocationState extends State<MapSetLocationScreen> {
   String? _currentAddress;
   bool _isMoving = false;
+  double _zoom = DEFAULT_ZOOM;
 
   final MapController _mapController = MapController();
   final TextEditingController _searchController = TextEditingController();
@@ -53,7 +55,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                         center: snapshot.hasData
                             ? snapshot.data
                             : widget.userLocation,
-                        zoom: 16,
+                        zoom: _zoom,
                         onPositionChanged: (position, hasGesture) {
                           BlocProvider.of<SetLocationBloc>(context).add(
                               CenterPositionChanged(
@@ -108,6 +110,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                heroTag: 'near_me',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
                                   _moveToPosition(widget.userLocation);
@@ -119,9 +122,13 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                               ),
                               const SizedBox(height: 8),
                               FloatingActionButton(
+                                heroTag: 'add',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
-                                  _moveToPosition(widget.userLocation);
+                                  setState(() {
+                                    _zoom += DEFAULT_ZOOM_STEP;
+                                    _moveToPosition(widget.userLocation);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.add,
@@ -130,9 +137,13 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                               ),
                               const SizedBox(height: 8),
                               FloatingActionButton(
+                                heroTag: 'remove',
                                 backgroundColor: Colors.white,
                                 onPressed: () {
-                                  _moveToPosition(widget.userLocation);
+                                  setState(() {
+                                    _zoom -= DEFAULT_ZOOM_STEP;
+                                    _moveToPosition(widget.userLocation);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.remove,
@@ -211,15 +222,11 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                   height: 60,
                                   width: 60,
                                   child: FloatingActionButton(
+                                    heroTag: 'check',
                                     backgroundColor: const Color(COLOR_PRIMARY),
                                     onPressed: () {
-                                      context.router.pop(
-                                        AddressModel(
-                                          address: _currentAddress,
-                                          location: snapshot.data ??
-                                              widget.userLocation,
-                                        ),
-                                      );
+                                      context.router
+                                          .push(const PlaceOrderScreenRoute());
                                     },
                                     child: const Icon(
                                       Icons.check,
@@ -269,7 +276,7 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
   void _moveToPosition(LatLng position) {
     _mapController.move(
       position,
-      _mapController.zoom,
+      _zoom,
     );
     _isMoving = false;
     BlocProvider.of<SetLocationBloc>(context)

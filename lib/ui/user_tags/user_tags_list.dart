@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/TagService.pb.dart';
@@ -10,6 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 
 enum TagsType { actual, archive }
 
@@ -17,12 +21,14 @@ class UserTagsList extends StatefulWidget {
   final TagsType tagsType;
   final List<Tag> tags;
   final void Function(Tag tag, String userId, int index) onDismissed;
+  final void Function()? onTap;
 
   const UserTagsList({
     super.key,
     required this.tags,
     required this.tagsType,
     required this.onDismissed,
+    required this.onTap,
   });
 
   @override
@@ -88,7 +94,21 @@ class _UserTagsListState extends State<UserTagsList> {
                       style: AppTextTheme.labelMedium,
                     ),
                     //     subtitle: Text(bookmark.geoLocation.toString()),
-                    onTap: () {},
+                    onTap: () {
+                      Map<LatLng, TagDTO> tagMap = {
+                        LatLng(tag.geoLocation.latitude,
+                                tag.geoLocation.longitude):
+                            TagDTO(tag.tagId, tag.messengerId)
+                      };
+                      context.router.popAndPush(
+                        MapScreenRoute(
+                          tagDescriptionMap: tagMap,
+                          user: BlocProvider.of<UserBloc>(context).state.user,
+                          topicName: tag.topicId,
+                          currentFilter: CompositeFilter([], []),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 // UserTagItem(tag: tag),
