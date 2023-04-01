@@ -37,7 +37,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
               onTap: () async {
                 final pushNotificationService =
                     locator.get<PushNotificationService>();
-                await pushNotificationService.sendPushNotification();
+                await pushNotificationService.sendPushNotification(context);
               }),
           GeneralSlidingPanelItem(
               icon: Icons.list,
