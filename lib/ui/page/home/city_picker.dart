@@ -52,7 +52,7 @@ class _CityPickerState extends State<CityPicker> {
       return const Text('No cities are available');
     } else {
       return Padding(
-        padding: const EdgeInsets.fromLTRB(40, 20, 40, 5),
+        padding: const EdgeInsets.fromLTRB(10, 20, 10, 5),
         child: DropdownButton(
           isExpanded: true,
           hint: Row(

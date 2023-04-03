@@ -11,6 +11,7 @@ import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/global_widgets/calendar.dart';
+import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
@@ -369,7 +370,8 @@ class AddressInfoWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           OutlinedButtonWidget(
-            onPressed: () => Calendar().showCalendar(context),
+            onPressed: () => showDialog(
+                context: context, builder: (ctx) => const CalendarDialog()),
             text: 'Fake Button Сalendar',
           ),
         ],

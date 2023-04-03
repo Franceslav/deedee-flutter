@@ -1,6 +1,7 @@
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapSlidingPanelWidget extends StatelessWidget {
   final Size size;
@@ -67,8 +68,9 @@ class CustomCollapsedWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
         color: Colors.white,
       ),
-      child:
-          const Center(child: Text('Нажмите на маркер для просмотра заявки')),
+      child: Center(
+          child:
+              Text(AppLocalizations.of(context)!.clickMarkerViewApplication)),
     );
     // }
   }
