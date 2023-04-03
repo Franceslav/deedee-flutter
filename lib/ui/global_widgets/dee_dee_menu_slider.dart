@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/push_notification_service.dart';
@@ -49,6 +50,18 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
 
                 context.router.navigate(const UserTagsScreenRoute());
               }),
+          user.accountType == AccountType.buy
+              ? GeneralSlidingPanelItem(
+                  icon: CommunityMaterialIcons.order_alphabetical_descending,
+                  text: AppLocalizations.of(context)!.myRequests,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.pop();
+                    context.router.push(const MyRequestScreenRoute());
+                  })
+              : const SizedBox.shrink(),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
               text: AppLocalizations.of(context)!.accountMoneyTitle,
@@ -74,7 +87,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                         .add(UserSwitchAccountType(AccountType.buy));
                     break;
                 }
-                controller.close();
               }),
           GeneralSlidingPanelItem(
               icon: Icons.bookmark,

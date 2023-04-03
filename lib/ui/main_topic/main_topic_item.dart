@@ -1,6 +1,6 @@
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/filter/filter_screen.dart';
+import 'package:deedee/ui/page/filter/filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

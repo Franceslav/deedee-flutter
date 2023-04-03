@@ -150,5 +150,7 @@
   "seen": "ko'rgan",
   "bookmarked": "xatcho'p",
   "accept": "Qabul qiling",
-  "request": "So'rov"
+  "request": "So'rov",
+  "addPayment": "To'lovni qo'shish",
+    "paymentPageTitle": "To'lov"
 }

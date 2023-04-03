@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class GeneralSlidingPanel extends StatelessWidget {
-  final List<GeneralSlidingPanelItem> generalSlidingPanelItemList;
+  final List<Widget> generalSlidingPanelItemList;
   final PanelController _controller;
 
   const GeneralSlidingPanel({

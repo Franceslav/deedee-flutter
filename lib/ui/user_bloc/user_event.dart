@@ -43,6 +43,5 @@ class AddUserContact extends UserEvent {
 
   AddUserContact(this.contact);
 }
-class AddUserContacts extends UserEvent {}
 
 class UserGetGPSPosition extends UserEvent {}

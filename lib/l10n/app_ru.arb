@@ -173,5 +173,7 @@
   "seen": "Просмотрено",
   "bookmarked": "Добавлен в закладки",
   "accept": "Принять",
-  "request": "Запрос"
+  "request": "Запрос",
+  "addPayment": "Добавить платеж",
+    "paymentPageTitle": "Оплата"
 }

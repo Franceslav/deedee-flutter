@@ -1,5 +1,5 @@
-import 'package:deedee/ui/filter/filter_page_bloc.dart';
-import 'package:deedee/ui/filter/subtopic_list/subtopic_chip.dart';
+import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
+import 'package:deedee/ui/page/filter/subtopic_list/subtopic_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

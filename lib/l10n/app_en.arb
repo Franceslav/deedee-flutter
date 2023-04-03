@@ -131,6 +131,8 @@
   "edit": "Edit",
   "share": "Share",
   "saveAndSubscribe": "Save and subscribe",
+  "myRequests": "My Requests",
+  "saveAndSubscribe": "Save and subscribe",
   "switchLanguage": "Switch language",
   "onServiceSince": "On service since ",
   "tags": "Tags",
@@ -182,5 +184,7 @@
   "seen": "Seen",
   "bookmarked": "Bookmarked",
   "accept": "Accept",
-  "request": "Request"
+  "request": "Request",
+  "addPayment": "Add  Payment",
+  "paymentPageTitle": "Payment"
 }

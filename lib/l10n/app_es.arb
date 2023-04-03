@@ -172,5 +172,7 @@
   "seen": "Visto",
   "bookmarked": "Marcado",
   "accept": "Aceptar",
-  "request": "Pedido"
+  "request": "Pedido",
+  "addPayment": "Agregar pago",
+    "paymentPageTitle": "Pago"
 }
