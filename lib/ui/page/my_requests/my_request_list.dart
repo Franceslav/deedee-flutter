@@ -1,10 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MyRequestList extends StatefulWidget {
   final bool isDone;
@@ -39,54 +45,56 @@ class _MyRequestListState extends State<MyRequestList> {
         : ListView.separated(
             itemBuilder: ((context, index) {
               final request = requests[index];
-              return Dismissible(
-                key: ValueKey(request.requestId),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Theme.of(context).errorColor,
-                  alignment: Alignment.centerRight,
-                  child: const Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                      size: 30,
+              return Slidable(
+                endActionPane: ActionPane(
+                  extentRatio: 0.5,
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: ((context) {}),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.orange,
+                      icon: CommunityMaterialIcons.star,
                     ),
-                  ),
+                    SlidableAction(
+                      onPressed: ((context) {}),
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(COLOR_PRIMARY),
+                      icon: Icons.edit,
+                    ),
+                    SlidableAction(
+                      onPressed: ((context) {
+                        widget.onDismissed(request, user.userId, index);
+                      }),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.red,
+                      icon: Icons.delete,
+                    ),
+                  ],
                 ),
-                onDismissed: (direction) {
-                  widget.onDismissed(request, user.userId, index);
-                },
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.work,
-                    size: 64,
-                  ),
-                  title: Text(
-                    request.clientId,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  subtitle: Text(request.description),
-                  trailing: const SizedBox(
-                    height: double.infinity,
-                    child: Icon(
-                      Icons.chevron_right,
-                      size: 40,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: DeeDeeRowInfoWidget(
+                    icon: Image.asset('assets/images/bookmark_icon.png'),
+                    mainText: Text(
+                      request.clientId,
+                      style: AppTextTheme.bodyLarge,
                     ),
+                    secondaryText: Text(
+                      request.description,
+                      style: AppTextTheme.labelMedium,
+                    ),
+                    onTap: () {
+                      context.router
+                          .push(MyRequestDetailRoute(request: request));
+                    },
                   ),
-                  onTap: () {
-                    // context.router.push(MyRequestDetailRoute(request: request));
-                  },
                 ),
               );
             }),
             itemCount: requests.length,
             separatorBuilder: (context, index) {
-              return Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              );
+              return const DeeDeeDeviderWidget();
             },
           );
   }

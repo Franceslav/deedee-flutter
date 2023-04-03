@@ -180,5 +180,8 @@
   "accept": "ተቀበል",
   "request": "ጥያቄ",
   "addPayment": "ክፍያ ጨምር",
-   "paymentPageTitle": "ክፍያ"
+   "paymentPageTitle": "ክፍያ",
+   "alreadyDone": "Արդեն արված է",
+  "inProcess": "ընթացքի մեջ է",
+  "clickMarkerViewApplication": "Հպեք բռնակին ՝ հավելվածը դիտելու համար"
 }

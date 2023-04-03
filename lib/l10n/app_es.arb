@@ -174,5 +174,8 @@
   "accept": "Aceptar",
   "request": "Pedido",
   "addPayment": "Agregar pago",
-    "paymentPageTitle": "Pago"
+    "paymentPageTitle": "Pago",
+    "alreadyDone": "Ya hecho",
+  "inProcess": "En Proceso",
+  "clickMarkerViewApplication": "Haga clic en el marcador para ver la aplicación"
 }

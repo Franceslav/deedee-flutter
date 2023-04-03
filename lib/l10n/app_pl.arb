@@ -174,5 +174,8 @@
   "accept": "Zaakceptować",
   "request": "Wniosek",
   "addPayment": "Dodaj płatność",
-    "paymentPageTitle": "Zapłata"
+    "paymentPageTitle": "Zapłata",
+    "alreadyDone": "Już zrobione",
+  "inProcess": "W Trakcie",
+  "clickMarkerViewApplication": "Kliknij znacznik, aby wyświetlić aplikację"
 }

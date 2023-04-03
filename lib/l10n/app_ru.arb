@@ -175,5 +175,8 @@
   "accept": "Принять",
   "request": "Запрос",
   "addPayment": "Добавить платеж",
-    "paymentPageTitle": "Оплата"
+    "paymentPageTitle": "Оплата",
+    "alreadyDone": "Уже закончено",
+  "inProcess": "В процессе",
+  "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку"
 }
