@@ -169,14 +169,15 @@ class _InfoWidget extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 context: context,
                 builder: (context) {
-                  return   Container(
+                  return Container(
                     margin: const EdgeInsets.all(16.0),
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16.0)),
                     ),
-                    child:  Column(
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         FractionallySizedBox(
@@ -189,7 +190,8 @@ class _InfoWidget extends StatelessWidget {
                               height: 5.0,
                               decoration: BoxDecoration(
                                 color: Theme.of(context).dividerColor,
-                                borderRadius: const BorderRadius.all(Radius.circular(2.5)),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(2.5)),
                               ),
                             ),
                           ),
@@ -202,9 +204,10 @@ class _InfoWidget extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.of(context).pop();
-                                    context.router.navigate(const PaymentScreenRoute());
+                                    context.router
+                                        .navigate(const PaymentScreenRoute());
                                   },
-                                  child:  ListTile(
+                                  child: ListTile(
                                     leading: const Icon(Icons.add_circle),
                                     title: Text(locale.addPayment),
                                   ),
