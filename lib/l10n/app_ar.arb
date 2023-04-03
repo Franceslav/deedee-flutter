@@ -164,5 +164,8 @@
   "accept": "يقبل",
   "request": "طلب",
   "addPayment": "إضافة الدفع",
-    "paymentPageTitle": "قسط"
+    "paymentPageTitle": "قسط",
+    "alreadyDone": "فعلت بالفعل",
+  "inProcess": "في العملية",
+  "clickMarkerViewApplication": "انقر على علامة لعرض التطبيق"
 }

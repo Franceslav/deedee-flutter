@@ -3,6 +3,7 @@ import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyRequestDetail extends StatefulWidget {
   final ServiceRequest request;
@@ -23,7 +24,7 @@ class _MyRequestDetailState extends State<MyRequestDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: 'Request',
+        title: AppLocalizations.of(context)!.request,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),
@@ -33,15 +34,15 @@ class _MyRequestDetailState extends State<MyRequestDetail> {
           Text(widget.request.description),
           Text(widget.request.requestId),
           if (widget.request.description != null)
-          //   Text(widget.request.customerAddress.toString()),
-          // if (widget.request.customerContacts != null)
-          //   Text(widget.request.customerContacts.toString()),
-          // if (widget.request.dateOfDeadline != null)
-          //   Text(widget.request.dateOfDeadline.toString()),
-          // Text(widget.request.dateOfRequest.toString()),
-          widget.request.status == ServiceRequest_Status.DONE
-              ? const Text('Already done')
-              : const Text('In Process'),
+            //   Text(widget.request.customerAddress.toString()),
+            // if (widget.request.customerContacts != null)
+            //   Text(widget.request.customerContacts.toString()),
+            // if (widget.request.dateOfDeadline != null)
+            //   Text(widget.request.dateOfDeadline.toString()),
+            // Text(widget.request.dateOfRequest.toString()),
+            widget.request.status == ServiceRequest_Status.DONE
+                ? Text(AppLocalizations.of(context)!.alreadyDone)
+                : Text(AppLocalizations.of(context)!.inProcess),
           // Text(widget.request.tag.messengerId),
           // Text(widget.request.tag.tagId),
           // Text(widget.request.tag.topicId),

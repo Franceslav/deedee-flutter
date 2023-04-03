@@ -174,5 +174,8 @@
   "accept": "Кабыл алуу",
   "request": "Өтүнүч",
   "addPayment": "Төлөм кошуу",
-    "paymentPageTitle": "Төлөм"
+    "paymentPageTitle": "Төлөм",
+    "alreadyDone": "Буга чейин жасалган",
+  "inProcess": "Процессте",
+  "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз"
 }

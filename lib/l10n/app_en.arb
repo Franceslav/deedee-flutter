@@ -186,5 +186,9 @@
   "accept": "Accept",
   "request": "Request",
   "addPayment": "Add  Payment",
-  "paymentPageTitle": "Payment"
+  "paymentPageTitle": "Payment",
+  "alreadyDone": "Already done",
+  "inProcess": "In Process",
+  "clickMarkerViewApplication": "Click on the marker to view the application"
+  
 }
