@@ -10,7 +10,6 @@ import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
-import 'package:deedee/ui/page/home/city_picker.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
 import 'package:deedee/ui/page/home/home_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -87,15 +86,6 @@ class _HomeState extends State<HomeScreen> {
                     },
                     child: Column(
                       children: [
-                        CityPicker(
-                          selectedCity: _selectedCity,
-                          availableCities: user.availablePlaces,
-                          user: user,
-                          onChangeCity: (user, city) =>
-                              BlocProvider.of<HomeBloc>(context).add(
-                                  HomeScreenChangeEvent(
-                                      user: user, city: city)),
-                        ),
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.all(14.0),
