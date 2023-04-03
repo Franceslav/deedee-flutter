@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +58,27 @@ class AccountInfoWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _infoColumn('9', locale.placed),
-                _infoColumn('3', locale.seen),
-                _infoColumn('0', locale.bookmarked),
+                Expanded(
+                  child: InkWell(
+                      onTap: () {
+                        context.router.push(const UserTagsScreenRoute());
+                      },
+                      child: _infoColumn('9', locale.placed)),
+                ),
+                Expanded(
+                  child: InkWell(
+                      onTap: () {
+                        context.router.push(const StatsScreenRoute());
+                      },
+                      child: _infoColumn('3', locale.seen)),
+                ),
+                Expanded(
+                  child: InkWell(
+                      onTap: () {
+                        context.router.push(const BookmarksScreenRoute());
+                      },
+                      child: _infoColumn('0', locale.bookmarked)),
+                ),
               ],
             ),
           ),

@@ -34,6 +34,7 @@ import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/account/social_network_screen.dart';
 import '../account/personal_info/edit_pers_info.dart';
 import '../account/personal_info/personal_information.dart';
+import '../page/stats/stats_screen.dart';
 import '../place_order/place_order_screen.dart';
 
 @MaterialAutoRouter(
@@ -71,6 +72,7 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
+     MaterialRoute(page: StatsScreen, path: '/stats'),
   ],
 )
 class $AppRouter {}

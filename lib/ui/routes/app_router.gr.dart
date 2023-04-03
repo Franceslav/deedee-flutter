@@ -11,12 +11,12 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i33;
-import 'package:flutter/material.dart' as _i34;
-import 'package:latlong2/latlong.dart' as _i36;
+import 'package:auto_route/auto_route.dart' as _i34;
+import 'package:flutter/material.dart' as _i35;
+import 'package:latlong2/latlong.dart' as _i37;
 
-import '../../generated/request_service_service.pb.dart' as _i38;
-import '../../model/user.dart' as _i35;
+import '../../generated/request_service_service.pb.dart' as _i39;
+import '../../model/user.dart' as _i36;
 import '../account/personal_info/edit_pers_info.dart' as _i26;
 import '../account/personal_info/personal_information.dart' as _i27;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
@@ -26,7 +26,7 @@ import '../auth/resetPasswordScreen/reset_password_screen.dart' as _i20;
 import '../auth/signUp/sign_up_screen.dart' as _i19;
 import '../auth/welcome/welcome_screen.dart' as _i3;
 import '../help/help_screen.dart' as _i17;
-import '../main_topic/enum/topic_screens_enum.dart' as _i37;
+import '../main_topic/enum/topic_screens_enum.dart' as _i38;
 import '../main_topic/main_topic_screen.dart' as _i22;
 import '../page/account/account_language_screen.dart' as _i10;
 import '../page/account/account_screen.dart' as _i8;
@@ -45,6 +45,7 @@ import '../page/payment/payment_method_screen.dart' as _i32;
 import '../page/settings/connection_settings/connection_settings_screen.dart'
     as _i16;
 import '../page/settings/settings_screen.dart' as _i15;
+import '../page/stats/stats_screen.dart' as _i33;
 import '../page/top_up/top_up_screen.dart' as _i11;
 import '../place_order/place_order_screen.dart' as _i25;
 import '../place_tag/map_set_location_screen.dart' as _i7;
@@ -52,39 +53,39 @@ import '../request_screen/request_screen.dart' as _i31;
 import '../user_tag_details/user_tag_details_screen.dart' as _i24;
 import '../user_tags/user_tags_screen.dart' as _i23;
 
-class AppRouter extends _i33.RootStackRouter {
-  AppRouter([_i34.GlobalKey<_i34.NavigatorState>? navigatorKey])
+class AppRouter extends _i34.RootStackRouter {
+  AppRouter([_i35.GlobalKey<_i35.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i33.PageFactory> pagesMap = {
+  final Map<String, _i34.PageFactory> pagesMap = {
     LauncherScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.LauncherScreen(),
       );
     },
     OnBoardingScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.OnBoardingScreen(),
       );
     },
     WelcomeScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.WelcomeScreen(),
       );
     },
     HomeScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.HomeScreen(),
       );
     },
     FilterPageRoute.name: (routeData) {
       final args = routeData.argsAs<FilterPageRouteArgs>();
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.FilterPage(
           key: args.key,
@@ -95,7 +96,7 @@ class AppRouter extends _i33.RootStackRouter {
     },
     MapScreenRoute.name: (routeData) {
       final args = routeData.argsAs<MapScreenRouteArgs>();
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.MapScreen(
           key: args.key,
@@ -108,7 +109,7 @@ class AppRouter extends _i33.RootStackRouter {
     },
     MapSetLocationScreenRoute.name: (routeData) {
       final args = routeData.argsAs<MapSetLocationScreenRouteArgs>();
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.MapSetLocationScreen(
           key: args.key,
@@ -117,92 +118,92 @@ class AppRouter extends _i33.RootStackRouter {
       );
     },
     AccountScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i8.AccountScreen(),
       );
     },
     VerifyScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.VerifyScreen(),
       );
     },
     AccountLanguageScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i10.AccountLanguageScreen(),
       );
     },
     TopUpPageRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i11.TopUpPage(),
       );
     },
     BookmarksScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i12.BookmarksScreen(),
       );
     },
     SavedFiltersScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i13.SavedFiltersScreen(),
       );
     },
     ReferralScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.ReferralScreen(),
       );
     },
     SettingsScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.SettingsScreen(),
       );
     },
     ConnectionSettingsScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i16.ConnectionSettingsScreen(),
       );
     },
     HelpScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i17.HelpScreen(),
       );
     },
     LoginScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i18.LoginScreen(),
       );
     },
     SignUpScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i19.SignUpScreen(),
       );
     },
     ResetPasswordScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i20.ResetPasswordScreen(),
       );
     },
     SubscribedFiltersPageRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i21.SubscribedFiltersPage(),
       );
     },
     MainTopicScreenRoute.name: (routeData) {
       final args = routeData.argsAs<MainTopicScreenRouteArgs>();
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i22.MainTopicScreen(
           key: args.key,
@@ -211,7 +212,7 @@ class AppRouter extends _i33.RootStackRouter {
       );
     },
     UserTagsScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i23.UserTagsScreen(),
       );
@@ -223,7 +224,7 @@ class AppRouter extends _i33.RootStackRouter {
                 userId: pathParams.getString('userId'),
                 tagId: pathParams.getString('tagId'),
               ));
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i24.UserTagDetailsScreen(
           key: args.key,
@@ -233,13 +234,13 @@ class AppRouter extends _i33.RootStackRouter {
       );
     },
     PlaceOrderScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i25.PlaceOrderScreen(),
       );
     },
     EditProfilePageRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i26.EditProfilePage(),
       );
@@ -247,26 +248,26 @@ class AppRouter extends _i33.RootStackRouter {
     PersonalInfoPageRoute.name: (routeData) {
       final args = routeData.argsAs<PersonalInfoPageRouteArgs>(
           orElse: () => const PersonalInfoPageRouteArgs());
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i27.PersonalInfoPage(key: args.key),
       );
     },
     SocialNetworkScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i28.SocialNetworkScreen(),
       );
     },
     MyRequestScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i29.MyRequestScreen(),
       );
     },
     MyRequestDetailRoute.name: (routeData) {
       final args = routeData.argsAs<MyRequestDetailRouteArgs>();
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i30.MyRequestDetail(
           key: args.key,
@@ -275,159 +276,169 @@ class AppRouter extends _i33.RootStackRouter {
       );
     },
     RequestScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i31.RequestScreen(),
       );
     },
     PaymentScreenRoute.name: (routeData) {
-      return _i33.MaterialPageX<dynamic>(
+      return _i34.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i32.PaymentScreen(),
+      );
+    },
+    StatsScreenRoute.name: (routeData) {
+      return _i34.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i33.StatsScreen(),
       );
     },
   };
 
   @override
-  List<_i33.RouteConfig> get routes => [
-        _i33.RouteConfig(
+  List<_i34.RouteConfig> get routes => [
+        _i34.RouteConfig(
           LauncherScreenRoute.name,
           path: '/',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           OnBoardingScreenRoute.name,
           path: '/boarding',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           WelcomeScreenRoute.name,
           path: '/welcome',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           HomeScreenRoute.name,
           path: '/main',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           FilterPageRoute.name,
           path: '/filter',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           MapScreenRoute.name,
           path: '/map',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           MapSetLocationScreenRoute.name,
           path: '/map-set-location',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           AccountScreenRoute.name,
           path: '/account',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           VerifyScreenRoute.name,
           path: '/verify',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           AccountLanguageScreenRoute.name,
           path: '/account-language',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           TopUpPageRoute.name,
           path: '/account/top-up',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           BookmarksScreenRoute.name,
           path: '/bookmarks',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SavedFiltersScreenRoute.name,
           path: '/saved-filters',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           ReferralScreenRoute.name,
           path: '/referral',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SettingsScreenRoute.name,
           path: '/settings',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           ConnectionSettingsScreenRoute.name,
           path: '/connection-settings',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           HelpScreenRoute.name,
           path: '/help',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           LoginScreenRoute.name,
           path: '/login',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SignUpScreenRoute.name,
           path: '/sign-up',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           ResetPasswordScreenRoute.name,
           path: 'reset-password',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SubscribedFiltersPageRoute.name,
           path: '/subscribed-filter',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           MainTopicScreenRoute.name,
           path: 'main-topic',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           UserTagsScreenRoute.name,
           path: '',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           UserTagDetailsScreenRoute.name,
           path: ':userId/:tagId',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SubscribedFiltersPageRoute.name,
           path: '/subscribed-filter',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           PlaceOrderScreenRoute.name,
           path: '/place-order',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           EditProfilePageRoute.name,
           path: '/edit-profile-page',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           PersonalInfoPageRoute.name,
           path: '/personal-info',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           SocialNetworkScreenRoute.name,
           path: '/social-page',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           MyRequestScreenRoute.name,
           path: '/my-request',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           MyRequestDetailRoute.name,
           path: '/my-request-detail',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           RequestScreenRoute.name,
           path: '/request-page',
         ),
-        _i33.RouteConfig(
+        _i34.RouteConfig(
           PaymentScreenRoute.name,
           path: '/payment-page',
+        ),
+        _i34.RouteConfig(
+          StatsScreenRoute.name,
+          path: '/stats',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.LauncherScreen]
-class LauncherScreenRoute extends _i33.PageRouteInfo<void> {
+class LauncherScreenRoute extends _i34.PageRouteInfo<void> {
   const LauncherScreenRoute()
       : super(
           LauncherScreenRoute.name,
@@ -439,7 +450,7 @@ class LauncherScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.OnBoardingScreen]
-class OnBoardingScreenRoute extends _i33.PageRouteInfo<void> {
+class OnBoardingScreenRoute extends _i34.PageRouteInfo<void> {
   const OnBoardingScreenRoute()
       : super(
           OnBoardingScreenRoute.name,
@@ -451,7 +462,7 @@ class OnBoardingScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.WelcomeScreen]
-class WelcomeScreenRoute extends _i33.PageRouteInfo<void> {
+class WelcomeScreenRoute extends _i34.PageRouteInfo<void> {
   const WelcomeScreenRoute()
       : super(
           WelcomeScreenRoute.name,
@@ -463,7 +474,7 @@ class WelcomeScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.HomeScreen]
-class HomeScreenRoute extends _i33.PageRouteInfo<void> {
+class HomeScreenRoute extends _i34.PageRouteInfo<void> {
   const HomeScreenRoute()
       : super(
           HomeScreenRoute.name,
@@ -475,9 +486,9 @@ class HomeScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.FilterPage]
-class FilterPageRoute extends _i33.PageRouteInfo<FilterPageRouteArgs> {
+class FilterPageRoute extends _i34.PageRouteInfo<FilterPageRouteArgs> {
   FilterPageRoute({
-    _i34.Key? key,
+    _i35.Key? key,
     required String topicName,
     required _i5.CompositeFilter currentFilter,
   }) : super(
@@ -500,7 +511,7 @@ class FilterPageRouteArgs {
     required this.currentFilter,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String topicName;
 
@@ -514,11 +525,11 @@ class FilterPageRouteArgs {
 
 /// generated route for
 /// [_i6.MapScreen]
-class MapScreenRoute extends _i33.PageRouteInfo<MapScreenRouteArgs> {
+class MapScreenRoute extends _i34.PageRouteInfo<MapScreenRouteArgs> {
   MapScreenRoute({
-    _i34.Key? key,
-    required _i35.User user,
-    required Map<_i36.LatLng, _i5.TagDTO> tagDescriptionMap,
+    _i35.Key? key,
+    required _i36.User user,
+    required Map<_i37.LatLng, _i5.TagDTO> tagDescriptionMap,
     required String topicName,
     required _i5.CompositeFilter currentFilter,
   }) : super(
@@ -545,11 +556,11 @@ class MapScreenRouteArgs {
     required this.currentFilter,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i35.User user;
+  final _i36.User user;
 
-  final Map<_i36.LatLng, _i5.TagDTO> tagDescriptionMap;
+  final Map<_i37.LatLng, _i5.TagDTO> tagDescriptionMap;
 
   final String topicName;
 
@@ -564,10 +575,10 @@ class MapScreenRouteArgs {
 /// generated route for
 /// [_i7.MapSetLocationScreen]
 class MapSetLocationScreenRoute
-    extends _i33.PageRouteInfo<MapSetLocationScreenRouteArgs> {
+    extends _i34.PageRouteInfo<MapSetLocationScreenRouteArgs> {
   MapSetLocationScreenRoute({
-    _i34.Key? key,
-    required _i36.LatLng userLocation,
+    _i35.Key? key,
+    required _i37.LatLng userLocation,
   }) : super(
           MapSetLocationScreenRoute.name,
           path: '/map-set-location',
@@ -586,9 +597,9 @@ class MapSetLocationScreenRouteArgs {
     required this.userLocation,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i36.LatLng userLocation;
+  final _i37.LatLng userLocation;
 
   @override
   String toString() {
@@ -598,7 +609,7 @@ class MapSetLocationScreenRouteArgs {
 
 /// generated route for
 /// [_i8.AccountScreen]
-class AccountScreenRoute extends _i33.PageRouteInfo<void> {
+class AccountScreenRoute extends _i34.PageRouteInfo<void> {
   const AccountScreenRoute()
       : super(
           AccountScreenRoute.name,
@@ -610,7 +621,7 @@ class AccountScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.VerifyScreen]
-class VerifyScreenRoute extends _i33.PageRouteInfo<void> {
+class VerifyScreenRoute extends _i34.PageRouteInfo<void> {
   const VerifyScreenRoute()
       : super(
           VerifyScreenRoute.name,
@@ -622,7 +633,7 @@ class VerifyScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.AccountLanguageScreen]
-class AccountLanguageScreenRoute extends _i33.PageRouteInfo<void> {
+class AccountLanguageScreenRoute extends _i34.PageRouteInfo<void> {
   const AccountLanguageScreenRoute()
       : super(
           AccountLanguageScreenRoute.name,
@@ -634,7 +645,7 @@ class AccountLanguageScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.TopUpPage]
-class TopUpPageRoute extends _i33.PageRouteInfo<void> {
+class TopUpPageRoute extends _i34.PageRouteInfo<void> {
   const TopUpPageRoute()
       : super(
           TopUpPageRoute.name,
@@ -646,7 +657,7 @@ class TopUpPageRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.BookmarksScreen]
-class BookmarksScreenRoute extends _i33.PageRouteInfo<void> {
+class BookmarksScreenRoute extends _i34.PageRouteInfo<void> {
   const BookmarksScreenRoute()
       : super(
           BookmarksScreenRoute.name,
@@ -658,7 +669,7 @@ class BookmarksScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.SavedFiltersScreen]
-class SavedFiltersScreenRoute extends _i33.PageRouteInfo<void> {
+class SavedFiltersScreenRoute extends _i34.PageRouteInfo<void> {
   const SavedFiltersScreenRoute()
       : super(
           SavedFiltersScreenRoute.name,
@@ -670,7 +681,7 @@ class SavedFiltersScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.ReferralScreen]
-class ReferralScreenRoute extends _i33.PageRouteInfo<void> {
+class ReferralScreenRoute extends _i34.PageRouteInfo<void> {
   const ReferralScreenRoute()
       : super(
           ReferralScreenRoute.name,
@@ -682,7 +693,7 @@ class ReferralScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.SettingsScreen]
-class SettingsScreenRoute extends _i33.PageRouteInfo<void> {
+class SettingsScreenRoute extends _i34.PageRouteInfo<void> {
   const SettingsScreenRoute()
       : super(
           SettingsScreenRoute.name,
@@ -694,7 +705,7 @@ class SettingsScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.ConnectionSettingsScreen]
-class ConnectionSettingsScreenRoute extends _i33.PageRouteInfo<void> {
+class ConnectionSettingsScreenRoute extends _i34.PageRouteInfo<void> {
   const ConnectionSettingsScreenRoute()
       : super(
           ConnectionSettingsScreenRoute.name,
@@ -706,7 +717,7 @@ class ConnectionSettingsScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.HelpScreen]
-class HelpScreenRoute extends _i33.PageRouteInfo<void> {
+class HelpScreenRoute extends _i34.PageRouteInfo<void> {
   const HelpScreenRoute()
       : super(
           HelpScreenRoute.name,
@@ -718,7 +729,7 @@ class HelpScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.LoginScreen]
-class LoginScreenRoute extends _i33.PageRouteInfo<void> {
+class LoginScreenRoute extends _i34.PageRouteInfo<void> {
   const LoginScreenRoute()
       : super(
           LoginScreenRoute.name,
@@ -730,7 +741,7 @@ class LoginScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.SignUpScreen]
-class SignUpScreenRoute extends _i33.PageRouteInfo<void> {
+class SignUpScreenRoute extends _i34.PageRouteInfo<void> {
   const SignUpScreenRoute()
       : super(
           SignUpScreenRoute.name,
@@ -742,7 +753,7 @@ class SignUpScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.ResetPasswordScreen]
-class ResetPasswordScreenRoute extends _i33.PageRouteInfo<void> {
+class ResetPasswordScreenRoute extends _i34.PageRouteInfo<void> {
   const ResetPasswordScreenRoute()
       : super(
           ResetPasswordScreenRoute.name,
@@ -754,7 +765,7 @@ class ResetPasswordScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.SubscribedFiltersPage]
-class SubscribedFiltersPageRoute extends _i33.PageRouteInfo<void> {
+class SubscribedFiltersPageRoute extends _i34.PageRouteInfo<void> {
   const SubscribedFiltersPageRoute()
       : super(
           SubscribedFiltersPageRoute.name,
@@ -767,10 +778,10 @@ class SubscribedFiltersPageRoute extends _i33.PageRouteInfo<void> {
 /// generated route for
 /// [_i22.MainTopicScreen]
 class MainTopicScreenRoute
-    extends _i33.PageRouteInfo<MainTopicScreenRouteArgs> {
+    extends _i34.PageRouteInfo<MainTopicScreenRouteArgs> {
   MainTopicScreenRoute({
-    _i34.Key? key,
-    required _i37.ScreenType screenType,
+    _i35.Key? key,
+    required _i38.ScreenType screenType,
   }) : super(
           MainTopicScreenRoute.name,
           path: 'main-topic',
@@ -789,9 +800,9 @@ class MainTopicScreenRouteArgs {
     required this.screenType,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i37.ScreenType screenType;
+  final _i38.ScreenType screenType;
 
   @override
   String toString() {
@@ -801,7 +812,7 @@ class MainTopicScreenRouteArgs {
 
 /// generated route for
 /// [_i23.UserTagsScreen]
-class UserTagsScreenRoute extends _i33.PageRouteInfo<void> {
+class UserTagsScreenRoute extends _i34.PageRouteInfo<void> {
   const UserTagsScreenRoute()
       : super(
           UserTagsScreenRoute.name,
@@ -814,9 +825,9 @@ class UserTagsScreenRoute extends _i33.PageRouteInfo<void> {
 /// generated route for
 /// [_i24.UserTagDetailsScreen]
 class UserTagDetailsScreenRoute
-    extends _i33.PageRouteInfo<UserTagDetailsScreenRouteArgs> {
+    extends _i34.PageRouteInfo<UserTagDetailsScreenRouteArgs> {
   UserTagDetailsScreenRoute({
-    _i34.Key? key,
+    _i35.Key? key,
     required String userId,
     required String tagId,
   }) : super(
@@ -843,7 +854,7 @@ class UserTagDetailsScreenRouteArgs {
     required this.tagId,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String userId;
 
@@ -857,7 +868,7 @@ class UserTagDetailsScreenRouteArgs {
 
 /// generated route for
 /// [_i25.PlaceOrderScreen]
-class PlaceOrderScreenRoute extends _i33.PageRouteInfo<void> {
+class PlaceOrderScreenRoute extends _i34.PageRouteInfo<void> {
   const PlaceOrderScreenRoute()
       : super(
           PlaceOrderScreenRoute.name,
@@ -869,7 +880,7 @@ class PlaceOrderScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i26.EditProfilePage]
-class EditProfilePageRoute extends _i33.PageRouteInfo<void> {
+class EditProfilePageRoute extends _i34.PageRouteInfo<void> {
   const EditProfilePageRoute()
       : super(
           EditProfilePageRoute.name,
@@ -882,8 +893,8 @@ class EditProfilePageRoute extends _i33.PageRouteInfo<void> {
 /// generated route for
 /// [_i27.PersonalInfoPage]
 class PersonalInfoPageRoute
-    extends _i33.PageRouteInfo<PersonalInfoPageRouteArgs> {
-  PersonalInfoPageRoute({_i34.Key? key})
+    extends _i34.PageRouteInfo<PersonalInfoPageRouteArgs> {
+  PersonalInfoPageRoute({_i35.Key? key})
       : super(
           PersonalInfoPageRoute.name,
           path: '/personal-info',
@@ -896,7 +907,7 @@ class PersonalInfoPageRoute
 class PersonalInfoPageRouteArgs {
   const PersonalInfoPageRouteArgs({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   @override
   String toString() {
@@ -906,7 +917,7 @@ class PersonalInfoPageRouteArgs {
 
 /// generated route for
 /// [_i28.SocialNetworkScreen]
-class SocialNetworkScreenRoute extends _i33.PageRouteInfo<void> {
+class SocialNetworkScreenRoute extends _i34.PageRouteInfo<void> {
   const SocialNetworkScreenRoute()
       : super(
           SocialNetworkScreenRoute.name,
@@ -918,7 +929,7 @@ class SocialNetworkScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i29.MyRequestScreen]
-class MyRequestScreenRoute extends _i33.PageRouteInfo<void> {
+class MyRequestScreenRoute extends _i34.PageRouteInfo<void> {
   const MyRequestScreenRoute()
       : super(
           MyRequestScreenRoute.name,
@@ -931,10 +942,10 @@ class MyRequestScreenRoute extends _i33.PageRouteInfo<void> {
 /// generated route for
 /// [_i30.MyRequestDetail]
 class MyRequestDetailRoute
-    extends _i33.PageRouteInfo<MyRequestDetailRouteArgs> {
+    extends _i34.PageRouteInfo<MyRequestDetailRouteArgs> {
   MyRequestDetailRoute({
-    _i34.Key? key,
-    required _i38.ServiceRequest request,
+    _i35.Key? key,
+    required _i39.ServiceRequest request,
   }) : super(
           MyRequestDetailRoute.name,
           path: '/my-request-detail',
@@ -953,9 +964,9 @@ class MyRequestDetailRouteArgs {
     required this.request,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i38.ServiceRequest request;
+  final _i39.ServiceRequest request;
 
   @override
   String toString() {
@@ -965,7 +976,7 @@ class MyRequestDetailRouteArgs {
 
 /// generated route for
 /// [_i31.RequestScreen]
-class RequestScreenRoute extends _i33.PageRouteInfo<void> {
+class RequestScreenRoute extends _i34.PageRouteInfo<void> {
   const RequestScreenRoute()
       : super(
           RequestScreenRoute.name,
@@ -977,7 +988,7 @@ class RequestScreenRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i32.PaymentScreen]
-class PaymentScreenRoute extends _i33.PageRouteInfo<void> {
+class PaymentScreenRoute extends _i34.PageRouteInfo<void> {
   const PaymentScreenRoute()
       : super(
           PaymentScreenRoute.name,
@@ -985,4 +996,16 @@ class PaymentScreenRoute extends _i33.PageRouteInfo<void> {
         );
 
   static const String name = 'PaymentScreenRoute';
+}
+
+/// generated route for
+/// [_i33.StatsScreen]
+class StatsScreenRoute extends _i34.PageRouteInfo<void> {
+  const StatsScreenRoute()
+      : super(
+          StatsScreenRoute.name,
+          path: '/stats',
+        );
+
+  static const String name = 'StatsScreenRoute';
 }
