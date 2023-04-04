@@ -175,8 +175,12 @@
   "accept": "Принять",
   "request": "Запрос",
   "addPayment": "Добавить платеж",
-    "paymentPageTitle": "Оплата",
-    "alreadyDone": "Уже закончено",
+  "paymentPageTitle": "Оплата",
+  "cardHolder": "Владелец",
+  "cardNumber": "Номер карты",
+  "expiredDate": "Действует до",
+  "addCard": "Добавить карту",
+  "alreadyDone": "Уже закончено",
   "inProcess": "В процессе",
   "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку"
 }

@@ -174,8 +174,12 @@
   "accept": "Zaakceptować",
   "request": "Wniosek",
   "addPayment": "Dodaj płatność",
-    "paymentPageTitle": "Zapłata",
-    "alreadyDone": "Już zrobione",
+  "paymentPageTitle": "Zapłata",
+  "cardHolder": "Posiadacz karty",
+  "cardNumber": "Numer",
+  "expiredDate": "Data ważności",
+  "addCard": "Dodaj kartę",
+  "alreadyDone": "Już zrobione",
   "inProcess": "W Trakcie",
   "clickMarkerViewApplication": "Kliknij znacznik, aby wyświetlić aplikację"
 }

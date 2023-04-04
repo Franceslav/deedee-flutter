@@ -1,5 +1,6 @@
 part of 'filter_page_bloc.dart';
 
+@immutable
 abstract class FilterPageState {}
 
 class SubtopicListInitialState extends FilterPageState {}
@@ -11,12 +12,14 @@ class SubtopicListFailureState extends FilterPageState {
 }
 
 class SubtopicListLoadedState extends FilterPageState {
-  final List<String> subtopics;
-  final List<String> filterKeys;
-  final List<String> selectedFilterKeys;
+  final Map<String, List<String>> allSubtopicsFilter;
+  final Map<String, List<String>> selectedSubtopicsFilter;
 
-  SubtopicListLoadedState(
-      this.subtopics, this.filterKeys, this.selectedFilterKeys);
+  SubtopicListLoadedState({
+    required this.allSubtopicsFilter,
+    required this.selectedSubtopicsFilter,
+
+  });
 }
 
 class SubtopicListItemSelectedState extends FilterPageState {
@@ -49,7 +52,6 @@ class LoadedTopicsState extends FilterPageState {
 
 class TopicSelectedState extends FilterPageState {
   final String topic;
-
   TopicSelectedState(this.topic);
 }
 
@@ -63,7 +65,6 @@ class LoadedFilterKeysState extends FilterPageState {
 
 class FilterKeySelectedState extends FilterPageState {
   final List<String> selectedFilterKeys;
-
   FilterKeySelectedState(this.selectedFilterKeys);
 }
 
@@ -76,12 +77,10 @@ class UserTagPlacedState extends FilterPageState {}
 
 class ErrorState extends FilterPageState {
   final String errorMessage;
-
   ErrorState(this.errorMessage);
 }
 
 class FirstLvlTopicSelectedState extends FilterPageState {
   final String topic;
-
   FirstLvlTopicSelectedState(this.topic);
 }

@@ -132,7 +132,6 @@
   "share": "Share",
   "saveAndSubscribe": "Save and subscribe",
   "myRequests": "My Requests",
-  "saveAndSubscribe": "Save and subscribe",
   "switchLanguage": "Switch language",
   "onServiceSince": "On service since ",
   "tags": "Tags",
@@ -189,6 +188,10 @@
   "paymentPageTitle": "Payment",
   "alreadyDone": "Already done",
   "inProcess": "In Process",
+  "clickMarkerViewApplication": "Click on the marker to view the application",
+  "cardHolder": "Card Holder",
+  "cardNumber": "Number",
+  "expiredDate": "Expired Date",
+  "addCard": "Add card",
   "clickMarkerViewApplication": "Click on the marker to view the application"
-
 }

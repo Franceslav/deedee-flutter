@@ -2,14 +2,12 @@ import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
 
 class SubtopicChip extends StatefulWidget {
-  String chipTitle;
-  bool selected;
+  final String chipTitle;
   Function(bool, String) onSelected;
 
   SubtopicChip(
       {super.key,
       required this.chipTitle,
-      required this.selected,
       required this.onSelected});
 
   @override

@@ -174,8 +174,12 @@
   "accept": "Aceptar",
   "request": "Pedido",
   "addPayment": "Agregar pago",
-    "paymentPageTitle": "Pago",
-    "alreadyDone": "Ya hecho",
+  "paymentPageTitle": "Pago",
+  "alreadyDone": "Ya hecho",
   "inProcess": "En Proceso",
-  "clickMarkerViewApplication": "Haga clic en el marcador para ver la aplicación"
+  "clickMarkerViewApplication": "Haga clic en el marcador para ver la aplicación",
+  "cardHolder": "Titular",
+  "cardNumber": "Número",
+  "expiredDate": "Válido hasta",
+  "addCard": "Agregar tarjeta"
 }

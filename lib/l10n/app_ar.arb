@@ -164,8 +164,12 @@
   "accept": "يقبل",
   "request": "طلب",
   "addPayment": "إضافة الدفع",
-    "paymentPageTitle": "قسط",
-    "alreadyDone": "فعلت بالفعل",
+  "paymentPageTitle": "قسط",
+  "alreadyDone": "فعلت بالفعل",
   "inProcess": "في العملية",
-  "clickMarkerViewApplication": "انقر على علامة لعرض التطبيق"
+  "clickMarkerViewApplication": "انقر على علامة لعرض التطبيق",
+  "cardHolder": "حامل البطاقة",
+  "cardNumber": "رقم البطاقة",
+  "expiredDate": "منتهي الصلاحية",
+  "addCard": "إضافة بطاقة"
 }

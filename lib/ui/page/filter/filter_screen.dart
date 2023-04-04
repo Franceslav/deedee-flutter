@@ -6,9 +6,9 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
-import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
-import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/filterkey_list.dart';
+import 'filter_page_bloc.dart';
+import '../../global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_list.dart';
 import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -40,8 +40,8 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   final PanelController _controller = PanelController();
-  late var _filterKeys;
-  late var _selectedFilterKeys;
+  late List<String> _filterKeys;
+  late List<String> _selectedFilterKeys;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +113,7 @@ class _FilterPageState extends State<FilterPage> {
                           children: [
                             Column(
                               children: [
-                                if (state.subtopics.isNotEmpty)
+                                if (state.allSubtopicsFilter.isNotEmpty)
                                   Column(
                                     children: [
                                       Text(
@@ -124,12 +124,15 @@ class _FilterPageState extends State<FilterPage> {
                                             .headline1,
                                       ),
                                       SubtopicList(
-                                        selectedSubtopic: '',
-                                        subtopics: state.subtopics,
+                                        selectedSubtopics: state
+                                            .selectedSubtopicsFilter.keys
+                                            .toList(),
+                                        subtopics: state.allSubtopicsFilter.keys
+                                            .toList(),
                                       ),
                                     ],
                                   ),
-                                if (state.filterKeys.isNotEmpty)
+                                if (state.selectedSubtopicsFilter.isNotEmpty)
                                   Column(
                                     children: [
                                       Text(
@@ -137,23 +140,26 @@ class _FilterPageState extends State<FilterPage> {
                                             .chooseFilterKeys,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline1,
+                                            .displayLarge,
                                       ),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.4,
                                         child: ListView.builder(
-                                          itemCount: state.subtopics.length,
+                                          itemCount: state
+                                              .selectedSubtopicsFilter.length,
                                           itemBuilder: (context, index) {
+                                            final subtopic = state
+                                                .selectedSubtopicsFilter.keys
+                                                .toList()[index];
                                             return Column(
                                               children: [
                                                 FilterKeyList(
-                                                  subtopic:
-                                                      state.subtopics.first,
-                                                  filterKeys: state.filterKeys,
-                                                  selectedFilterKeys:
-                                                      state.selectedFilterKeys,
+                                                  subtopic: subtopic,
+                                                  filterKeys:
+                                                      state.allSubtopicsFilter[
+                                                          subtopic]!,
                                                 ),
                                                 const DeeDeeDeviderWidget(),
                                               ],
@@ -167,7 +173,9 @@ class _FilterPageState extends State<FilterPage> {
                             ),
                           ],
                         ),
-                        if (state.selectedFilterKeys.length >= 3)
+                        if (state.selectedSubtopicsFilter.values.isNotEmpty &&
+                            state.selectedSubtopicsFilter.values
+                                .every((element) => element.length >= 3))
                           Expanded(
                             child: Column(
                               children: [
@@ -200,12 +208,20 @@ class _FilterPageState extends State<FilterPage> {
                                   onPressed: () {
                                     bloc.add(PushFiltersEvent(
                                       topic: widget.topicName,
-                                      filterKeys: state.selectedFilterKeys,
+                                      filterKeys: state
+                                          .selectedSubtopicsFilter.values.first,
                                       accountType: user.accountType,
                                     ));
-                                    _filterKeys = state.filterKeys;
-                                    _selectedFilterKeys =
-                                        state.selectedFilterKeys;
+                                    var filterKeys = <String>[];
+                                    var selectedFilterKeys = <String>[];
+                                    for (var i = 0; i <= state.selectedSubtopicsFilter.length - 1; i++) {
+                                      filterKeys.addAll(state.allSubtopicsFilter[state.selectedSubtopicsFilter.keys.toList()[i]]!);
+                                    }
+                                    for (var i = 0; i <= state.selectedSubtopicsFilter.length - 1; i++) {
+                                      selectedFilterKeys.addAll(state.selectedSubtopicsFilter.values.toList()[i]);
+                                    }
+                                    _filterKeys = filterKeys;
+                                    _selectedFilterKeys = selectedFilterKeys;
                                   },
                                 ),
                               ],

@@ -151,8 +151,12 @@
   "accept": "수용하다",
   "request": "요구",
   "addPayment": "결제 추가",
-    "paymentPageTitle": "지불",
-    "alreadyDone": "이미 완료",
+  "paymentPageTitle": "지불",
+  "cardHolder": "카드 번호",
+  "cardNumber": "번호",
+  "expiredDate": "유통 기한",
+  "addCard": "카드 추가",
+  "alreadyDone": "이미 완료",
   "inProcess": "진행 중",
   "clickMarkerViewApplication": "응용 프로그램을 볼 수있는 마커를 클릭합니다"
 }

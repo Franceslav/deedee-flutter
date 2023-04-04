@@ -1,14 +1,15 @@
-import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../filter_page_bloc.dart';
+
 
 class SubtopicList extends StatefulWidget {
   final List<String> subtopics;
-  final String selectedSubtopic;
+  final List<String> selectedSubtopics;
 
   const SubtopicList(
-      {super.key, required this.subtopics, required this.selectedSubtopic});
+      {super.key, required this.subtopics, required this.selectedSubtopics});
 
   @override
   State<SubtopicList> createState() => _SubtopicListState();
@@ -33,14 +34,10 @@ class _SubtopicListState extends State<SubtopicList> {
               (int index) {
                 return SubtopicChip(
                   chipTitle: widget.subtopics[index],
-                  selected: widget.subtopics[index] == widget.selectedSubtopic,
                   onSelected: (isChecked, selectedSubtopic) {
-                    if (!isChecked) {
-                      selectedSubtopic = '';
-                    }
                     context.read<FilterPageBloc>().add(
-                        FilterPageChipSelectedEvent(
-                            selectedSubtopic, const []));
+                        FilterPageSubtopicSelectedEvent(
+                            selectedSubtopic));
                   },
                 );
               },
