@@ -11,9 +11,12 @@ import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
+import 'package:deedee/ui/page/account/account_bloc.dart';
+
 
 @LazySingleton(as: TagServiceClient, env: [Environment.dev])
 class MockTagServiceClient implements TagServiceClient {
+  AccountBloc bloc = AccountBloc();
   @override
   ClientCall<Q, R> $createCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,
@@ -245,7 +248,7 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<GetUserTagsResponse> _getUserTags(GetUserTagsRequest request) async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
     AppLocalizations myLocal =
         await AppLocalizations.delegate.load(Locale(deviceLanguage));
 
@@ -352,7 +355,7 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<GetAllTopicsDescriptionResponse> _getSubTopics(
       GetTopicTitlesRequest request) async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
 
     final subTopics = [
       TopicDescription(
@@ -438,7 +441,7 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<GetBookmarkTagsResponse> _getBookmarkTags(
       GetBookmarkTagsRequest request) async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
     AppLocalizations myLocal =
         await AppLocalizations.delegate.load(Locale(deviceLanguage));
 

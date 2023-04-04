@@ -12,20 +12,26 @@ import 'package:uuid/uuid.dart';
 part 'account_state.dart';
 
 class AccountBloc extends Bloc<AccountEvent, AccountState> with ChangeNotifier {
-  AccountBloc() : super(AccountInitial()) {
+
+  AccountBloc._sharedInstance(
+      ): super(AccountInitial()) {
     on<LoadPlacesEvent>((event, emit) async {
       List<Place> places = await locator
           .get<GRCPRepository>()
           .getPlaces(event.geoLocation, event.radius);
       emit(AccountPlacesLoadState(places));
-    });
-  }
+    });}
+
+  static final AccountBloc _shared = AccountBloc._sharedInstance();
+
+  factory AccountBloc() => _shared ;
+
 
   final uuid = const Uuid();
 
-  Locale? _appLocale = Get.deviceLocale;
+  Locale? _appLocale;
 
-  Locale get appLocal => _appLocale ?? Locale('en');
+  Locale? get appLocal => _appLocale;
 
   void changeLocal(String s) {
     _appLocale = Locale(s);
