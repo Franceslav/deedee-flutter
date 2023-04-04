@@ -180,8 +180,12 @@
   "accept": "ተቀበል",
   "request": "ጥያቄ",
   "addPayment": "ክፍያ ጨምር",
-   "paymentPageTitle": "ክፍያ",
-   "alreadyDone": "Արդեն արված է",
+  "paymentPageTitle": "ክፍያ",
+  "cardHolder": "ካርድ ያዥ",
+  "cardNumber": "የካርታ ቁጥር",
+  "expiredDate": "ጊዜው ያለፈበት ቀን",
+  "addCard": "ካርድ ጨምር",
+  "alreadyDone": "Արդեն արված է",
   "inProcess": "ընթացքի մեջ է",
   "clickMarkerViewApplication": "Հպեք բռնակին ՝ հավելվածը դիտելու համար"
 }

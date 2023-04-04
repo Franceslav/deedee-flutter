@@ -13,6 +13,7 @@ import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
 import 'package:deedee/ui/page/account/social_network_screen.dart';
+import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/page/filter/filter_screen.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
@@ -72,7 +73,8 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
-     MaterialRoute(page: StatsScreen, path: '/stats'),
+    MaterialRoute(page: CardScreen, path: '/card-page'),
+    MaterialRoute(page: StatsScreen, path: '/stats'),
   ],
 )
 class $AppRouter {}

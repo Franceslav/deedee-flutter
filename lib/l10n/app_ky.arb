@@ -174,8 +174,12 @@
   "accept": "Кабыл алуу",
   "request": "Өтүнүч",
   "addPayment": "Төлөм кошуу",
-    "paymentPageTitle": "Төлөм",
-    "alreadyDone": "Буга чейин жасалган",
+  "paymentPageTitle": "Төлөм",
+  "cardHolder": "Кармоочу",
+  "cardNumber": "Номери",
+  "expiredDate": "Чейин жарактуу",
+  "addCard": "Карта кошуу",
+  "alreadyDone": "Буга чейин жасалган",
   "inProcess": "Процессте",
   "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз"
 }

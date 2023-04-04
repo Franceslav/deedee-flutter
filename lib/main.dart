@@ -5,6 +5,7 @@ import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
+import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
 import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -67,6 +68,9 @@ void main() {
           ),
           BlocProvider(
             create: (_) => BookmarksBloc(),
+          ),
+          BlocProvider(
+            create: (_) => CardBloc(),
           ),
         ],
         child: const MyApp(),

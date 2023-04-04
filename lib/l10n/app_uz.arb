@@ -152,8 +152,12 @@
   "accept": "Qabul qiling",
   "request": "So'rov",
   "addPayment": "To'lovni qo'shish",
-    "paymentPageTitle": "To'lov",
-    "alreadyDone": "Allaqachon qilingan",
+  "paymentPageTitle": "To'lov",
+  "cardHolder": "Ta karta egasi",
+  "cardNumber": "Raqami",
+  "expiredDate": "Yaroqlilik muddati",
+  "addCard": "Karta qo'shing",
+  "alreadyDone": "Allaqachon qilingan",
   "inProcess": "Jarayonda",
   "clickMarkerViewApplication": "Ilovani ko'rish uchun markerni bosing"
 }

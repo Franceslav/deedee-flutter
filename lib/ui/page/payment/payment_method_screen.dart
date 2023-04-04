@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/page/add_card/add_card_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,6 +36,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
           children: <Widget>[
             Container(
               // TODO : implement Payment Screen
+              child: ElevatedButton(
+                child: Text('Card'),
+                onPressed: () {
+                  context.router.navigate(const CardScreenRoute());
+                },
+              ),
             ),
             DeeDeeMenuSlider(
               context,
