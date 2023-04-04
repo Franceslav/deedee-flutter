@@ -92,7 +92,74 @@ class FilterServiceApi {
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyBenzene,
-      ]
+      ],
+      "Parking Garage": [
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyValet,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyMotorCycle,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyOverNight,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleCarWash
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeySelfService,
+      ],
+      "Gas station": [
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleCarWash
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyTouchless,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleGasStation
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyDiesel,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleGasStation
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyBenzene,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKey24Hour,
+        FilterKey()
+          ..topicId =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterTitleParkingGarage
+          ..title =
+              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
+                  .mockFilterKeyCovered,
+      ],
     };
   }
 

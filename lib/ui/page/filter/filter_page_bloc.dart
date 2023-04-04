@@ -1,16 +1,16 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
+import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
-import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:search_address_repository/search_address_repository.dart';
+import 'filter_screen.dart';
 
 part 'filter_page_event.dart';
-
 part 'filter_page_state.dart';
 
 class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
@@ -21,31 +21,66 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
   final TagRepository _tagRepository;
 
   List<String> _subtopics = [];
+  List<String> _filterKeys = [];
+  final Map<String, List<String>> _allSubtopicsFilter = {};
+  final Map<String, List<String>> _selectedSubtopicsFilter = {};
 
   FilterPageBloc(this._topicRepository, this._filterRepository, this._user,
       this.currentFilter, this._tagRepository)
       : super(SubtopicListInitialState()) {
-    on<FilterPageChipSelectedEvent>(_selectChips);
+    on<FilterPageSubtopicSelectedEvent>(_selectSubtopics);
+    on<FilterPageFilterKeySelectedEvent>(_selectFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
-    initialize();
+    _initialize();
   }
 
-  FutureOr<void> _selectChips(event, emit) async {
-    var subtopic = event.selectedSubtopic;
-    List<String> filterKeys = [];
-    if (event.selectedSubtopic != '') {
-      filterKeys = (await _filterRepository.getFilterItems(subtopic))
-          .map((fk) => fk.title)
-          .toList();
+  _selectSubtopics(FilterPageSubtopicSelectedEvent event, emit) async {
+    final selectedSubtopic = event.selectedSubtopic;
+
+    if (_selectedSubtopicsFilter.containsKey(selectedSubtopic)) {
+      _selectedSubtopicsFilter.remove(selectedSubtopic);
+    } else {
+      _selectedSubtopicsFilter.addAll({selectedSubtopic: []});
     }
-    /*      currentFilter.filterKeys.clear();
-    currentFilter.filterKeys.addAll(filterKeys);
 
-    currentFilter.selectedFilterKeys.clear();
-    currentFilter.selectedFilterKeys.addAll(event.selectedFilterKeys);*/
+    emit(
+      SubtopicListLoadedState(
+        allSubtopicsFilter: _allSubtopicsFilter,
+        selectedSubtopicsFilter: _selectedSubtopicsFilter,
+      ),
+    );
+  }
 
-    emit(SubtopicListLoadedState(
-        _subtopics, filterKeys, event.selectedFilterKeys));
+  _selectFilterKey(FilterPageFilterKeySelectedEvent event, emit) async {
+    final selectedSubtopic = event.selectedSubtopic;
+    final selectedFilterKey = event.selectedFilterKey;
+
+    if (_selectedSubtopicsFilter[selectedSubtopic] != null) {
+      if (_selectedSubtopicsFilter[selectedSubtopic]!
+          .contains(selectedFilterKey)) {
+        _selectedSubtopicsFilter.update(
+          selectedSubtopic,
+          (value) {
+            value.remove(selectedFilterKey);
+            return value;
+          },
+        );
+      } else {
+        _selectedSubtopicsFilter.update(
+          selectedSubtopic,
+          (value) {
+            value.add(selectedFilterKey);
+            return value;
+          },
+        );
+      }
+    }
+    emit(
+      SubtopicListLoadedState(
+        allSubtopicsFilter: _allSubtopicsFilter,
+        selectedSubtopicsFilter: _selectedSubtopicsFilter,
+      ),
+    );
   }
 
   _onPushFilters(event, emit) async {
@@ -58,15 +93,23 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
     }
   }
 
-  initialize() async {
+  _initialize() async {
     _subtopics = (await _topicRepository.getSubTopics(
             _user.lastGeoLocation.latitude, _user.lastGeoLocation.longitude))
         .map((e) => e.title)
         .toList();
-    emit(SubtopicListLoadedState(
-      _subtopics,
-      currentFilter.filterKeys,
-      currentFilter.selectedFilterKeys,
-    ));
+
+    for (var i = 0; i <= _subtopics.length - 1; i++) {
+      _filterKeys = (await _filterRepository.getFilterItems(_subtopics[i]))
+          .map((fk) => fk.title)
+          .toList();
+      _allSubtopicsFilter.addAll({_subtopics[i]: _filterKeys});
+    }
+    emit(
+      SubtopicListLoadedState(
+        allSubtopicsFilter: _allSubtopicsFilter,
+        selectedSubtopicsFilter: const {},
+      ),
+    );
   }
 }
