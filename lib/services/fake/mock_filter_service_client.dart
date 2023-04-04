@@ -10,9 +10,12 @@ import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
+import 'package:deedee/ui/page/account/account_bloc.dart';
 
 @LazySingleton(as: FilterServiceClient, env: [Environment.dev])
 class MockFilterServiceClient implements FilterServiceClient {
+  AccountBloc bloc = AccountBloc();
+
   FilterServiceApi api = locator.get<FilterServiceApi>();
 
   @override
@@ -111,6 +114,10 @@ class MockFilterServiceClient implements FilterServiceClient {
 
   Future<GetFilterKeysResponse> _getFilterKeys(
       GetFilterKeysRequest request) async {
+
+    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
+
+
     return GetFilterKeysResponse()
       ..filterKeys.addAll(api.getFilterKeys(request.topicId));
   }
@@ -168,7 +175,8 @@ class MockFilterServiceClient implements FilterServiceClient {
   }
 
   Future<Filter> _getAllBookmarkedFilters(GetAllFiltersRequest request) async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+
+    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
 
     return Filter(
       filterId: '2',
