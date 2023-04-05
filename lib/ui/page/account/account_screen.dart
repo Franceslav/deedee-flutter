@@ -74,6 +74,13 @@ class _AccountState extends State<AccountScreen> {
                             },
                           ),
                         ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: OutlinedButtonWidget(
+                            text: locale.share,
+                            onPressed: () {},
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 48),
