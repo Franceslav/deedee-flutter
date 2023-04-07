@@ -15,12 +15,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class MyRequestList extends StatefulWidget {
   final bool isDone;
   final List<ServiceRequest> requests;
+  final void Function( ServiceRequest request, String userId) onChanged;
   final void Function(ServiceRequest request, String userId, int index)
       onDismissed;
 
   const MyRequestList({
     super.key,
     required this.requests,
+    required this.onChanged,
     required this.isDone,
     required this.onDismissed,
   });
@@ -57,7 +59,9 @@ class _MyRequestListState extends State<MyRequestList> {
                       icon: CommunityMaterialIcons.star,
                     ),
                     SlidableAction(
-                      onPressed: ((context) {}),
+                      onPressed: ((context) {
+                        widget.onChanged(request, user.userId,);
+                      }),
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(COLOR_PRIMARY),
                       icon: Icons.edit,

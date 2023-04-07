@@ -78,4 +78,32 @@ class ServiceRequestServiceApi {
         .firstWhere((rq) => rq.requestId == requestId)
       ..status = ServiceRequest_Status.DELETED;
   }
+
+  ServiceRequest create(userId, ServiceRequest request) {
+    _serviceRequests
+        .getOrElse(
+          userId,
+          () => [],
+        )
+        .add(request..status = ServiceRequest_Status.ACCEPTED);
+    return request;
+  }
+
+  ServiceRequest update(userId, ServiceRequest request) {
+    return _serviceRequests
+        .update(
+          userId,
+          (value) => value,
+          ifAbsent: () => [],
+        )
+        .firstWhere(
+          (rq) => rq.requestId == request.requestId,
+          orElse: () => request,
+        )
+        ..status = ServiceRequest_Status.CHANGED
+        ..price = request.price
+        ..description = request.description
+        ..dateOfRequest = request.dateOfRequest
+    ;
+  }
 }

@@ -16,7 +16,41 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       : super(MyRequestInitial()) {
     on<MyRequestLoadEvent>(_onLoadRequest);
     on<MyRequestDeleteEvent>(_onDeleteRequest);
+    on<AcceptRequestEvent>(_onAcceptRequest);
+    on<UpdateRequestEvent>(_onUpdateRequest);
     initialize();
+  }
+
+  _onAcceptRequest(
+      AcceptRequestEvent event, Emitter<MyRequestState> emit) async {
+    try {
+      _serviceRequestRepository.create(
+        ServiceRequestRequest()..serviceRequest = event.request,
+      );
+      final requests = await _serviceRequestRepository.getAll(_user.userId);
+      emit(MyRequestLoadState(requests));
+
+    }catch (error){
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  _onUpdateRequest(
+      UpdateRequestEvent event, Emitter<MyRequestState> emit) async {
+    try {
+      _serviceRequestRepository.change(
+        ServiceRequestRequest()..serviceRequest = event.request,
+      );
+      final requests = await _serviceRequestRepository.getAll(_user.userId);
+      emit(MyRequestLoadState(requests));
+
+    }catch (error){
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
   }
 
   initialize() async {
@@ -36,9 +70,8 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
-      var sr = ServiceRequest()..requestId = event.request.requestId;
       final response = await _serviceRequestRepository.delete(
-        ServiceRequestRequest()..serviceRequest = sr,
+        ServiceRequestRequest()..serviceRequest = event.request,
       );
       if (response.status == ServiceRequest_Status.DELETED) {
         emit(DeletedSuccessfulState());
