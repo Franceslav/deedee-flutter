@@ -116,7 +116,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                 tagsType: TagsType.actual,
                                 onDismissed: (tag, userId, index) =>
                                     deleteTag(tag, userId, index),
-                                onTap: () => context.router.push(const RequestScreenRoute()),
+                                onTap: () => context.router.push(RequestScreenRoute()),
                               ),
                               UserTagsList(
                                 tags: _tags,

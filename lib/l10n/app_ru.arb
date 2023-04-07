@@ -182,5 +182,7 @@
   "addCard": "Добавить карту",
   "alreadyDone": "Уже закончено",
   "inProcess": "В процессе",
-  "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку"
+  "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку",
+  "send": "Отправить",
+  "customerProfile": "Профиль клиента"
 }

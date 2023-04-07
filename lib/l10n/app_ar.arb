@@ -171,5 +171,7 @@
   "cardHolder": "حامل البطاقة",
   "cardNumber": "رقم البطاقة",
   "expiredDate": "منتهي الصلاحية",
-  "addCard": "إضافة بطاقة"
+  "addCard": "إضافة بطاقة",
+  "send": "يرسل",
+  "customerProfile": "ملف الزائر"
 }

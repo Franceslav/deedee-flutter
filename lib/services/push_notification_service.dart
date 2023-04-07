@@ -63,7 +63,7 @@ class PushNotificationService {
       initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
-        context.router.push(const RequestScreenRoute());
+        context.router.push(RequestScreenRoute());
       },
     );
 

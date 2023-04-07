@@ -181,5 +181,7 @@
   "cardHolder": "Titular",
   "cardNumber": "Número",
   "expiredDate": "Válido hasta",
-  "addCard": "Agregar tarjeta"
+  "addCard": "Agregar tarjeta",
+  "send": "Enviar",
+  "customerProfile": "Perfil de cliente"
 }

@@ -181,5 +181,7 @@
   "addCard": "Карта кошуу",
   "alreadyDone": "Буга чейин жасалган",
   "inProcess": "Процессте",
-  "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз"
+  "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз",
+  "send": "Жөнөтүү",
+  "customerProfile": "Кардар профили"
 }
