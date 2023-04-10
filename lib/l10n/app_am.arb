@@ -187,5 +187,7 @@
   "addCard": "ካርድ ጨምር",
   "alreadyDone": "Արդեն արված է",
   "inProcess": "ընթացքի մեջ է",
-  "clickMarkerViewApplication": "Հպեք բռնակին ՝ հավելվածը դիտելու համար"
+  "clickMarkerViewApplication": "Հպեք բռնակին ՝ հավելվածը դիտելու համար",
+  "send": "ላክ",
+  "customerProfile": "የደንበኛ መገለጫ"
 }

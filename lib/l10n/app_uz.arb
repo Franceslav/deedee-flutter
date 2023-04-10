@@ -159,5 +159,7 @@
   "addCard": "Karta qo'shing",
   "alreadyDone": "Allaqachon qilingan",
   "inProcess": "Jarayonda",
-  "clickMarkerViewApplication": "Ilovani ko'rish uchun markerni bosing"
+  "clickMarkerViewApplication": "Ilovani ko'rish uchun markerni bosing",
+  "send": "Yuborish",
+  "customerProfile": "Mijoz profili"
 }

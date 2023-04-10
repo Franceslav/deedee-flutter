@@ -109,6 +109,13 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                               userId: userId,
                               index: index,
                             )),
+                            onChanged: (request, userId) =>
+                            BlocProvider.of<ServiceRequestBloc>(context).add(
+                          UpdateRequestEvent(
+                            request: request,
+                            userId: userId,
+                          )
+                            )
                           ),
                           MyRequestList(
                             requests: _requests,
@@ -119,6 +126,13 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                               userId: userId,
                               index: index,
                             )),
+                           onChanged: (request, userId) =>
+                               BlocProvider.of<ServiceRequestBloc>(context).add(
+                                      UpdateRequestEvent(
+                                        request: request,
+                                        userId: userId,
+                                      )
+                                  )
                           )
                         ],
                       ),

@@ -193,5 +193,6 @@
   "cardNumber": "Number",
   "expiredDate": "Expired Date",
   "addCard": "Add card",
-  "clickMarkerViewApplication": "Click on the marker to view the application"
+  "send": "Send",
+  "customerProfile": "Customer Profile"
 }

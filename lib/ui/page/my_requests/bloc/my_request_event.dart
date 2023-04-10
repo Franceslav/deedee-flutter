@@ -20,3 +20,23 @@ class MyRequestDeleteEvent extends MyRequestEvent {
     required this.index,
   });
 }
+
+class AcceptRequestEvent extends MyRequestEvent {
+  final String userId;
+  final ServiceRequest request;
+
+  AcceptRequestEvent({
+    required this.userId,
+    required this.request,
+  });
+}
+
+class UpdateRequestEvent extends MyRequestEvent {
+  final String userId;
+  final ServiceRequest request;
+
+  UpdateRequestEvent({
+    required this.userId,
+    required this.request,
+  });
+}
