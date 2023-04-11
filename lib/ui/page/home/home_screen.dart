@@ -1,3 +1,4 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/injection.dart';
@@ -7,7 +8,6 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
@@ -23,6 +23,18 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State createState() => _HomeState();
+}
+
+class MenuIconWithPadding extends StatelessWidget {
+  const MenuIconWithPadding({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+      child: const Icon(CommunityMaterialIcons.menu, size: 35),
+    );
+  }
 }
 
 class _HomeState extends State<HomeScreen> {
@@ -45,7 +57,7 @@ class _HomeState extends State<HomeScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
           controller: _controller,
-          child: _hideAppBarButton ? null : const ProfilePhotoWithBadge(),
+          child: _hideAppBarButton ? null : const MenuIconWithPadding(),
         ),
         body: Stack(
           children: [
