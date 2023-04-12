@@ -1,4 +1,3 @@
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/TagService.pb.dart';
 import 'package:deedee/injection.dart';
@@ -25,18 +24,6 @@ class HomeScreen extends StatefulWidget {
   State createState() => _HomeState();
 }
 
-class MenuIconWithPadding extends StatelessWidget {
-  const MenuIconWithPadding({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-      child: const Icon(CommunityMaterialIcons.menu, size: 35),
-    );
-  }
-}
-
 class _HomeState extends State<HomeScreen> {
   List<TopicDescription> _mainTopics = [];
   Place? _selectedCity;
@@ -57,7 +44,7 @@ class _HomeState extends State<HomeScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
           controller: _controller,
-          child: _hideAppBarButton ? null : const MenuIconWithPadding(),
+          child: _hideAppBarButton ? null : const Icon(Icons.menu),
         ),
         body: Stack(
           children: [
