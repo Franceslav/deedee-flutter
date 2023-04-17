@@ -1,8 +1,9 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
+import 'package:deedee/ui/composite_filter_bloc/composite_filter_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
@@ -53,22 +54,19 @@ void main() {
             create: (_) => UserBloc(),
           ),
           BlocProvider(
-            create: (_) => FilterDTOBloc(),
+            create: (_) => CompositeFilterBloc(),
           ),
           BlocProvider(
-            create: (_) => BookmarksBloc(),
+            create: (_) => BookmarksBloc(locator.get<TagRepository>()),
           ),
           BlocProvider(
             create: (_) => MainTopicsBloc(locator.get<TopicRepository>()),
           ),
           BlocProvider(
-            create: (_) => UserTagsBloc(),
+            create: (_) => UserTagsBloc(locator.get<TagRepository>()),
           ),
           BlocProvider(
             create: (_) => UserTagDetailsBloc(),
-          ),
-          BlocProvider(
-            create: (_) => BookmarksBloc(),
           ),
           BlocProvider(
             create: (_) => CardBloc(),

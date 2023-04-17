@@ -6,11 +6,9 @@ class InitialState extends UserTagDetailsState {}
 
 class LoadedTagState extends UserTagDetailsState {
   final Tag tag;
-  final TagDetails tagDetails;
 
   LoadedTagState({
     required this.tag,
-    required this.tagDetails,
   });
 }
 

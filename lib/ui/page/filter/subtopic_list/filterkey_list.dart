@@ -1,23 +1,26 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'filterkey_chip.dart';
 
-class FilterKeyList extends StatefulWidget {
+class SubtopicFilterKeyList extends StatefulWidget {
   final String subtopic;
   final List<String> filterKeys;
+  final List<String> selectedFilterKeys;
 
-  FilterKeyList(
-      {super.key,
-      required this.subtopic,
-      required this.filterKeys,});
+  SubtopicFilterKeyList({
+    super.key,
+    required this.subtopic,
+    required this.filterKeys,
+    required this.selectedFilterKeys,
+  });
 
   @override
-  State<FilterKeyList> createState() => _FilterKeyListState();
+  State<SubtopicFilterKeyList> createState() => _SubtopicFilterKeyListState();
 }
 
-class _FilterKeyListState extends State<FilterKeyList> {
-
+class _SubtopicFilterKeyListState extends State<SubtopicFilterKeyList> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,9 +38,13 @@ class _FilterKeyListState extends State<FilterKeyList> {
               widget.filterKeys.length,
               (int index) {
                 return FilterKeyChip(
-                    chipTitle: widget.filterKeys[index],
-                    filterKeys: widget.filterKeys,
-                    subtopic: widget.subtopic);
+                  chipTitle: widget.filterKeys[index],
+                  filterKeys: widget.filterKeys,
+                  isSelected: widget.filterKeys.contains(
+                      widget.selectedFilterKeys.firstOrNullWhere(
+                          (element) => widget.filterKeys[index] == element)),
+                  subtopic: widget.subtopic,
+                );
               },
             ).toList(),
           ),

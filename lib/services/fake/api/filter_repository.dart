@@ -3,11 +3,14 @@ import 'dart:ui';
 
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
 class FilterServiceApi {
+  late Map<String, List<CompositeFilter>> _compositeFilters;
   late Map<String, List<FilterKey>> _filterKeys;
 
   @PostConstruct(preResolve: true)
@@ -16,77 +19,77 @@ class FilterServiceApi {
     _filterKeys = {
       "Car Wash": [
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKey24Hour,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyCovered,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyElectricCharging,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyValet,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyMotorCycle,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyOverNight,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleCarWash
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeySelfService,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleCarWash
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyFullService,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleCarWash
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyTouchless,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleGasStation
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyDiesel,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleGasStation
           ..title =
@@ -95,28 +98,28 @@ class FilterServiceApi {
       ],
       "Parking Garage": [
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyValet,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyMotorCycle,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyOverNight,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleCarWash
           ..title =
@@ -125,35 +128,35 @@ class FilterServiceApi {
       ],
       "Gas station": [
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleCarWash
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyTouchless,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleGasStation
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyDiesel,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleGasStation
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKeyBenzene,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterKey24Hour,
         FilterKey()
-          ..topicId =
+          ..subtopicId =
               (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
                   .mockFilterTitleParkingGarage
           ..title =
@@ -161,9 +164,83 @@ class FilterServiceApi {
                   .mockFilterKeyCovered,
       ],
     };
+
+    _compositeFilters = {
+      '': [
+        CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(title: '1'),
+          filterMap: {},
+          status: CompositeFilter_Status.BOOKMARKED,
+        ),
+        CompositeFilter(
+          compositeFilterId: Int64(2),
+          topic: Topic(title: '2'),
+          filterMap: {},
+          status: CompositeFilter_Status.BOOKMARKED,
+        ),
+        CompositeFilter(
+          compositeFilterId: Int64(3),
+          topic: Topic(title: '3'),
+          filterMap: {},
+          status: CompositeFilter_Status.BOOKMARKED,
+        ),
+      ]
+    };
   }
 
-  List<FilterKey> getFilterKeys(String subtopic) {
+  List<FilterKey> getFilterKeys(subtopic) {
     return _filterKeys.getOrElse(subtopic, () => []);
+  }
+
+  CompositeFilter createCompositeFilter({
+    required String userId,
+    required Int64 filterId,
+    required Topic topic,
+    required String subtopic,
+    required List<FilterKey> filterKeys,
+    required CompositeFilter_Status status,
+  }) {
+    var filter = CompositeFilter(
+      compositeFilterId: filterId,
+      topic: topic,
+      filterMap: {subtopic: FilterKeyList(filterKeys: filterKeys)},
+      status: status,
+    );
+    _compositeFilters.update(userId, (value) {
+      value.add(filter);
+      return value;
+    });
+    return filter;
+  }
+
+  List<CompositeFilter> readCompositeFilter(String userId) {
+    return _compositeFilters.getOrElse(userId, () => []);
+  }
+
+  CompositeFilter updateCompositeFilter(
+    String userId,
+    Int64 filterId,
+    String subtopic,
+    List<FilterKey> filterKeys,
+  ) {
+    var currentFilter = _compositeFilters
+        .getOrElse(userId, () => [])
+        .firstWhere((element) => element.compositeFilterId == filterId);
+    var updatedFilter = CompositeFilter(
+      compositeFilterId: currentFilter.compositeFilterId,
+      topic: currentFilter.topic,
+      filterMap: {subtopic: FilterKeyList(filterKeys: filterKeys)},
+      status: currentFilter.status,
+    );
+    currentFilter.status = CompositeFilter_Status.DELETED;
+    return updatedFilter;
+  }
+
+  CompositeFilter deleteCompositeFilter(String userId, Int64 filterId) {
+    return _compositeFilters
+        .getOrElse(userId, () => [])
+        .firstWhere((element) => element.compositeFilterId == filterId)
+      ..status = CompositeFilter_Status.DELETED;
   }
 }

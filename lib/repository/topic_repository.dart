@@ -1,47 +1,40 @@
-import 'package:deedee/generated/AccountService.pbenum.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/TagService.pbgrpc.dart';
+import 'package:deedee/generated/geolocation_service.pb.dart';
+import 'package:deedee/generated/topic_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class TopicRepository {
-  final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
+  final TopicServiceClient _topicServiceClient =
+      locator.get<TopicServiceClient>();
 
-  Future<Topic> getTopic(String topicId, AccountType accountType) async {
-    var response = await _tagServiceClient.getTopic(GetTopicRequest()
-      ..topicId = topicId
-      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
-    // .then((p0) async {
-    // await channel.shutdown();
-    // },);
+  Future<List<Topic>> getTopics(double latitude, double longitude) async {
+    var response = await _topicServiceClient.getTopics(
+      TopicRequest()
+        ..topic = Topic(
+          geolocation: Geolocation(
+            latitude: latitude,
+            longitude: longitude,
+          ),
+        ),
+    );
 
-    return response.topic;
-    //
+    return response.topics;
   }
 
-  Future<List<TopicDescription>> getTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getTopics(GetAllTopicsDescriptionRequest()..geoLocation = geoLocation);
+  Future<List<Subtopic>> getSubTopics(
+      userId, int topicId, double latitude, double longitude) async {
+    var response = await _topicServiceClient.getSubtopics(
+      SubtopicRequest()
+        ..subtopic = Subtopic(
+          topicId: topicId,
+          geolocation: Geolocation()
+            ..latitude = latitude
+            ..longitude = longitude,
+          userId: userId,
+        ),
+    );
 
-    return response.topicDescriptions;
-  }
-
-  Future<List<TopicDescription>> getSubTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getSubTopics(GetTopicTitlesRequest()..geoLocation = geoLocation);
-
-    return response.topicDescriptions;
+    return response.subtopic;
   }
 }

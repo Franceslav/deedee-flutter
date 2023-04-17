@@ -1,14 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
+
 part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
-  BookmarksBloc() : super(InitialState()) {
+  final TagRepository _tagRepository;
+  BookmarksBloc(this._tagRepository) : super(InitialState()) {
     on<LoadBookmarksEvent>(_onLoadBookmarks);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
@@ -17,8 +20,9 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   _onLoadBookmarks(
       LoadBookmarksEvent event, Emitter<BookmarksState> emit) async {
     try {
-      final bookmarks =
-          await locator.get<GRCPRepository>().getUserBookmarks(event.userId);
+      // final bookmarks =
+      //     await locator.get<GRCPRepository>().getUserBookmarks(event.userId);
+      final bookmarks = await _tagRepository.getBookmarkTags(event.userId);
       emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       emit(ErrorState(error.toString()));
@@ -30,7 +34,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     try {
       final response = await locator.get<GRCPRepository>().removeUserBookmark(
             event.userId,
-            event.bookmark.tagId,
+            event.bookmark.tagId.toString(),
           );
       if (response) {
         emit(DeletedSuccessfulState());

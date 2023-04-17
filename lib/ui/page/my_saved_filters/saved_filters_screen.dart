@@ -1,6 +1,4 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
-import 'package:deedee/model/filter_dto.dart';
-import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
@@ -11,6 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../generated/filter_service.pb.dart';
+import '../../composite_filter_bloc/composite_filter_bloc.dart';
+
 class SavedFiltersScreen extends StatefulWidget {
   const SavedFiltersScreen({super.key});
 
@@ -20,7 +21,7 @@ class SavedFiltersScreen extends StatefulWidget {
 
 class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
   final PanelController _controller = PanelController();
-  List<FilterDTO> _filters = [];
+  List<CompositeFilter> _filters = [];
   bool _isInit = true;
   final AnimatedButtonController _buttonController = AnimatedButtonController();
 
@@ -29,7 +30,8 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
     super.didChangeDependencies();
     if (_isInit) {
       final userId = BlocProvider.of<UserBloc>(context).state.user.userId;
-      BlocProvider.of<FilterDTOBloc>(context).add(LoadFiltersEvent(userId));
+      BlocProvider.of<CompositeFilterBloc>(context)
+          .add(LoadFiltersEvent(userId));
       _isInit = false;
     }
   }
@@ -42,9 +44,9 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final filterDTOList =
-        context.select((FilterDTOBloc bloc) => bloc.state.filterDTOList);
-    _filters = filterDTOList;
+    final compositeFilterList = context
+        .select((CompositeFilterBloc bloc) => bloc.state.compositeFilterList);
+    _filters = compositeFilterList;
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.safe,
@@ -53,7 +55,7 @@ class _SavedFiltersScreenState extends State<SavedFiltersScreen> {
       ),
       body: Stack(
         children: [
-          filterDTOList == null
+          compositeFilterList == null
               ? const Center(
                   child: CircularProgressIndicator(),
                 )

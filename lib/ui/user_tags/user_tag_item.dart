@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +25,16 @@ class _UserTagStateState extends State<UserTagItem> {
     final tag = widget.tag;
     final String formattedDate = DateFormat('dd-MM-yyyy HH:mm').format(
         DateTime.fromMillisecondsSinceEpoch(
-            tag.dueDate.seconds.toInt() * 1000));
+            tag.createdAt.seconds.toInt() * 1000)); //TODO
     return ListTile(
-      title: Text(tag.topicId),
+      title: Text(tag.compositeFilter.topic.title),
       subtitle:
           Text('${AppLocalizations.of(context)!.tagExpires}: $formattedDate'),
       onTap: () {
         final userId = BlocProvider.of<UserBloc>(context).state.user.userId;
         context.router.push(UserTagDetailsScreenRoute(
           userId: userId,
-          tagId: tag.tagId,
+          tagId: tag.tagId.toString(),
         ));
       },
     );

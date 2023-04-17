@@ -1,17 +1,18 @@
+import 'package:deedee/generated/filter_service.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
 import './selector_item.dart';
 
 class SelectorAppBar extends StatefulWidget {
-  final List<String> data;
-  final void Function(String title) onTap;
-  final List<String> selectedItems;
+  final List<FilterKey> allItems;
+  final List<FilterKey> selectedItems;
+  final void Function(FilterKey filterKey) onTap;
 
   const SelectorAppBar({
     super.key,
-    required this.data,
-    required this.onTap,
+    required this.allItems,
     required this.selectedItems,
+    required this.onTap,
   });
 
   @override
@@ -31,10 +32,10 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
             spacing: 8.0,
             runSpacing: 8.0,
             children: [
-              ...widget.data.map((title) => SelectorItem(
-                    title: title,
+              ...widget.allItems.map((filterKey) => SelectorItem(
+                    filterKey: filterKey,
                     onTap: widget.onTap,
-                    isSelected: widget.selectedItems.contains(title),
+                    isSelected: widget.selectedItems.contains(filterKey),
                     icon: false,
                   )),
             ],

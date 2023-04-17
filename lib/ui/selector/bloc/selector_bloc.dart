@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
@@ -8,6 +10,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'selector_event.dart';
+
 part 'selector_state.dart';
 
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
@@ -26,7 +29,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<SelectTopicEvent>(_onSelectTopic);
     on<LoadFilterKeysEvent>(_onLoadFilterKeys);
     on<SelectFilterKeyEvent>(_onSelectFilterKey);
-    on<SelectListFilterKeyEvent>(_onSelectListFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
     on<SaveFiltersEvent>(_onSaveFilters);
     on<PushTagEvent>(_onPushTag);
@@ -41,6 +43,8 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   initialize() async {
     try {
       final response = await _topicRepository.getSubTopics(
+        _user.userId,
+        0, //FIXME:
         _user.lastGeoLocation.latitude,
         _user.lastGeoLocation.longitude,
       );
@@ -76,12 +80,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(FilterKeySelectedState(event.filterKey));
   }
 
-  _onSelectListFilterKey(
-      SelectListFilterKeyEvent event, Emitter<SelectorState> emit) {
-    for (var element in event.listFilterKey) {
-      emit(FilterKeySelectedState(element));
-    }
-  }
 
   _onSelectLocation(SelectLocationEvent event, Emitter<SelectorState> emit) {
     emit(LocationSelectedState(event.data));
@@ -89,8 +87,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onPushFilters(PushFiltersEvent event, Emitter<SelectorState> emit) async {
     try {
-      Topic topic = await _tagRepository.getFilteredTags(
-          event.topic, event.filterKeys, event.accountType);
+      Topic topic = (await _topicRepository.getTopics(0, 0)).first; //TODO:
       emit(UserFiltersDoneState(topic));
     } catch (error) {
       ErrorState(error.toString());
@@ -99,11 +96,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   _onSaveFilters(SaveFiltersEvent event, Emitter<SelectorState> emit) async {
     try {
-      Topic topic = await _tagRepository.getFilteredTags(
-        event.topic,
-        event.filterKeys,
-        event.accountType,
-      );
+      Topic topic = (await _topicRepository.getTopics(0, 0)).first; //TODO:
       emit(UserFiltersDoneState(topic));
     } catch (error) {
       ErrorState(error.toString());

@@ -6,6 +6,7 @@ import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
+import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,13 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                     locator.get<PushNotificationService>();
                 await pushNotificationService.sendPushNotification(context);
               }),
+          GeneralSlidingPanelItem(
+              icon: Icons.published_with_changes_sharp,
+              text: 'QR Scanner',
+              onTap: () async {
+                context.router.navigate(const BookmarkQRScannerRoute());
+                },
+          ),
           GeneralSlidingPanelItem(
               icon: Icons.list,
               text: AppLocalizations.of(context)!.userTagsTitle,

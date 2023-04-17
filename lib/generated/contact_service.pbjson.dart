@@ -22,12 +22,12 @@ final $typed_data.Uint8List contactRequestDescriptor = $convert.base64Decode('Cg
 const ContactResponse$json = const {
   '1': 'ContactResponse',
   '2': const [
-    const {'1': 'contact', '3': 1, '4': 1, '5': 11, '6': '.bucket.Contact', '10': 'contact'},
+    const {'1': 'contacts', '3': 1, '4': 3, '5': 11, '6': '.bucket.Contact', '10': 'contacts'},
   ],
 };
 
 /// Descriptor for `ContactResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List contactResponseDescriptor = $convert.base64Decode('Cg9Db250YWN0UmVzcG9uc2USKQoHY29udGFjdBgBIAEoCzIPLmJ1Y2tldC5Db250YWN0Ugdjb250YWN0');
+final $typed_data.Uint8List contactResponseDescriptor = $convert.base64Decode('Cg9Db250YWN0UmVzcG9uc2USKwoIY29udGFjdHMYASADKAsyDy5idWNrZXQuQ29udGFjdFIIY29udGFjdHM=');
 @$core.Deprecated('Use getTopicTitlesResponseDescriptor instead')
 const GetTopicTitlesResponse$json = const {
   '1': 'GetTopicTitlesResponse',

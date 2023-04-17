@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'custom_panel_widget.dart';
+
 class MapSlidingPanelWidget extends StatelessWidget {
   final Size size;
   final DeeDeeSliderController _pc;

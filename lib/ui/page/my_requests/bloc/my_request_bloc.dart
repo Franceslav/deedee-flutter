@@ -15,22 +15,30 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   ServiceRequestBloc(this._serviceRequestRepository, this._user)
       : super(MyRequestInitial()) {
     on<MyRequestLoadEvent>(_onLoadRequest);
+    on<MyRequestCreateEvent>(_onCreateRequest);
+    on<MyRequestAcceptEvent>(_onAcceptRequest);
     on<MyRequestDeleteEvent>(_onDeleteRequest);
-    on<AcceptRequestEvent>(_onAcceptRequest);
+    // on<AcceptRequestEvent>(_onAcceptRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     initialize();
   }
 
   _onAcceptRequest(
-      AcceptRequestEvent event, Emitter<MyRequestState> emit) async {
+      MyRequestAcceptEvent event, Emitter<MyRequestState> emit) async {
     try {
-      _serviceRequestRepository.create(
-        ServiceRequestRequest()..serviceRequest = event.request,
+      var sr = ServiceRequest()..requestId = event.request.requestId;
+      final response = await _serviceRequestRepository.accept(
+        ServiceRequestRequest()..serviceRequest = sr,
       );
-      final requests = await _serviceRequestRepository.getAll(_user.userId);
-      emit(MyRequestLoadState(requests));
-
-    }catch (error){
+      if (response.status == ServiceRequest_Status.ACCEPTED) {
+        emit(AcceptSuccessfulState());
+      } else {
+        emit(AcceptedErrorState(
+          request: event.request,
+          index: event.index,
+        ));
+      }
+    } catch (error) {
       emit(ErrorState(
         errorMessage: error.toString(),
       ));
@@ -67,6 +75,23 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onLoadRequest(
       MyRequestLoadEvent event, Emitter<MyRequestState> emit) async {}
 
+  _onCreateRequest(
+      MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
+    try {
+      var sr = ServiceRequest();
+      final response = await _serviceRequestRepository.create(
+        ServiceRequestRequest()..serviceRequest = sr,
+      );
+      emit(MyRequestCreateState(response));
+    } catch (error) {
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+
+
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
@@ -76,8 +101,6 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       if (response.status == ServiceRequest_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
-        //without delay this error appears 'A dismissed Dismissible widget is still part of the tree.'
-        await Future.delayed(const Duration(seconds: 1));
         emit(DeletedErrorState(
           request: event.request,
           index: event.index,

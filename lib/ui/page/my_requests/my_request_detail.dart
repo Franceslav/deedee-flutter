@@ -40,9 +40,14 @@ class _MyRequestDetailState extends State<MyRequestDetail> {
             // if (widget.request.dateOfDeadline != null)
             //   Text(widget.request.dateOfDeadline.toString()),
             // Text(widget.request.dateOfRequest.toString()),
-            widget.request.status == ServiceRequest_Status.DONE
-                ? Text(AppLocalizations.of(context)!.alreadyDone)
-                : Text(AppLocalizations.of(context)!.inProcess),
+             if(widget.request.status == ServiceRequest_Status.PENDING)
+                 const Text('not accepted'),
+             if(widget.request.status == ServiceRequest_Status.ACCEPTED)
+                 Text(AppLocalizations.of(context)!.inProcess),
+             if(widget.request.status == ServiceRequest_Status.DONE)
+                 Text(AppLocalizations.of(context)!.alreadyDone),
+             if(widget.request.status == ServiceRequest_Status.DELETED)
+                 const Text('Deleted')
           // Text(widget.request.tag.messengerId),
           // Text(widget.request.tag.tagId),
           // Text(widget.request.tag.topicId),

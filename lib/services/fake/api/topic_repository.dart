@@ -1,47 +1,55 @@
-import 'package:deedee/generated/AccountService.pbenum.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/TagService.pbgrpc.dart';
-import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
+import 'dart:io';
+import 'dart:ui';
+
+import 'package:dartx/dartx.dart';
+import 'package:deedee/generated/geolocation_service.pb.dart';
+import 'package:deedee/generated/topic_service.pbgrpc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
-class TopicRepository {
-  final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
+class TopicServiceApi {
+  late List<Topic> _topics;
+  late Map<Topic, List<Subtopic>> _subtopics;
 
-  Future<Topic> getTopic(String topicId, AccountType accountType) async {
-    var response = await _tagServiceClient.getTopic(GetTopicRequest()
-      ..topicId = topicId
-      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
-    // .then((p0) async {
-    // await channel.shutdown();
-    // },);
-
-    return response.topic;
-    //
+  @PostConstruct(preResolve: true)
+  Future<void> init() async {
+    String deviceLanguage = Platform.localeName.substring(0, 2);
+    _topics = [
+      Topic(
+        userId: "",
+        topicId: 1,
+        title: "Auto",
+        geolocation: Geolocation(),
+      ),
+      Topic(
+        userId: "",
+        topicId: 2,
+        title: "Children",
+        geolocation: Geolocation(),
+      ),
+    ];
+    _subtopics = {
+      _topics[0]: [
+        Subtopic(topicId: 1, subtopicId: 1, title: "Car Wash"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Parking Garage"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Gas station"),
+      ],
+      _topics[1]: [
+        Subtopic(topicId: 1, subtopicId: 1, title: "Car Wash"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Gas station"),
+      ],
+    };
   }
 
-  Future<List<TopicDescription>> getTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getTopics(GetAllTopicsDescriptionRequest()..geoLocation = geoLocation);
-
-    return response.topicDescriptions;
+  Future<List<Topic>> getTopics(userId, latitude, longitude) async {
+    return _topics.filter((t) => t.userId == userId).toList();
   }
 
-  Future<List<TopicDescription>> getSubTopics(
-      double latitude, double longitude) async {
-    var geoLocation = GeoLocation()
-      ..latitude = latitude
-      ..longitude = longitude;
-    // return [Topic()..title = "test0", Topic()..title = "test1"];
-    var response = await _tagServiceClient
-        .getSubTopics(GetTopicTitlesRequest()..geoLocation = geoLocation);
-
-    return response.topicDescriptions;
+  Future<List<Subtopic>> getSubTopics(
+      userId, topicId, latitude, longitude) async {
+    var subtopics = _subtopics.getOrElse(
+        _subtopics.keys.firstWhere((t) => t.topicId == topicId), () => []);
+    return subtopics;
   }
 }

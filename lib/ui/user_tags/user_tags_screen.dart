@@ -1,6 +1,6 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -74,61 +74,61 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             builder: (context, state) {
               return state is InitialState
                   ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
+                child: CircularProgressIndicator(),
+              )
                   : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: AnimatedButtonBar(
+                      invertedSelection: true,
+                      radius: 25,
+                      backgroundColor:
+                      Theme.of(context).scaffoldBackgroundColor,
+                      controller: _buttonController,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: AnimatedButtonBar(
-                            invertedSelection: true,
-                            radius: 25,
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            controller: _buttonController,
-                            children: [
-                              ButtonBarEntry(
-                                child: Text(
-                                    AppLocalizations.of(context)!.actualTags),
-                                onTap: () => setPage(0),
-                              ),
-                              ButtonBarEntry(
-                                child: Text(
-                                    AppLocalizations.of(context)!.archiveTags),
-                                onTap: () => setPage(1),
-                              ),
-                            ],
-                          ),
+                        ButtonBarEntry(
+                          child: Text(
+                              AppLocalizations.of(context)!.actualTags),
+                          onTap: () => setPage(0),
                         ),
-                        const Divider(
-                          thickness: 0.5,
-                          color: Colors.black,
-                          height: 0,
-                        ),
-                        Expanded(
-                          child: PageView(
-                            controller: _pageController,
-                            onPageChanged: (value) =>
-                                _buttonController.setIndex(value),
-                            children: [
-                              UserTagsList(
-                                tags: _tags,
-                                tagsType: TagsType.actual,
-                                onDismissed: (tag, userId, index) =>
-                                    deleteTag(tag, userId, index),
-                                onTap: () => context.router.push(RequestScreenRoute()),
-                              ),
-                              UserTagsList(
-                                tags: _tags,
-                                tagsType: TagsType.archive,
-                                onDismissed: (tag, userId, index) =>
-                                    deleteTag(tag, userId, index), onTap: () {},
-                              )
-                            ],
-                          ),
+                        ButtonBarEntry(
+                          child: Text(
+                              AppLocalizations.of(context)!.archiveTags),
+                          onTap: () => setPage(1),
                         ),
                       ],
-                    );
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 0.5,
+                    color: Colors.black,
+                    height: 0,
+                  ),
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (value) =>
+                          _buttonController.setIndex(value),
+                      children: [
+                        UserTagsList(
+                          tags: _tags,
+                          tagsType: TagsType.actual,
+                          onDismissed: (tag, userId, index) =>
+                              deleteTag(tag, userId, index),
+                          onTap: () => context.router.push(RequestScreenRoute()),
+                        ),
+                        UserTagsList(
+                          tags: _tags,
+                          tagsType: TagsType.archive,
+                          onDismissed: (tag, userId, index) =>
+                              deleteTag(tag, userId, index), onTap: () {},
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              );
             },
           ),
           DeeDeeMenuSlider(
@@ -150,9 +150,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   }
 
   void deleteTag(Tag tag, String userId, int index) {
-    setState(() {
-      _tags.remove(tag);
-    });
+
     BlocProvider.of<UserTagsBloc>(context)
         .add(DeleteTagEvent(tag: tag, userId: userId, index: index));
   }

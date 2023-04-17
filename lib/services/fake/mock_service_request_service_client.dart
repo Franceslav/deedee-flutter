@@ -1,11 +1,11 @@
 import 'package:deedee/generated/request_service_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/service_request_repository.dart';
+import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
-import 'fake_client.dart';
 
 @LazySingleton(as: ServiceRequestServiceClient, env: [Environment.dev])
 class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
@@ -37,8 +37,16 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   @override
   ResponseFuture<ServiceRequestResponse> accept(ServiceRequestRequest request,
       {CallOptions? options}) {
-    // TODO: implement accept
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, ServiceRequestResponse>(_accept(request)));
+  }
+
+  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {
+    return ServiceRequestResponse()
+      ..serviceRequest = api.accept(
+        request.userId,
+        request.serviceRequest.requestId,
+      );
   }
 
   @override
@@ -50,7 +58,8 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
 
   Future<ServiceRequestResponse> _change(ServiceRequestRequest request) async {
     return ServiceRequestResponse()
-      ..serviceRequest = api.update(request.userId, request.serviceRequest);
+      ..serviceRequest =
+          api.change(request.userId, request.serviceRequest.requestId, '', 0);
   }
 
   @override
@@ -62,7 +71,7 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
 
   Future<ServiceRequestResponse> _create(ServiceRequestRequest request) async {
     return ServiceRequestResponse()
-      ..serviceRequest = api.create(request.userId, request.serviceRequest);
+      ..serviceRequest = api.create(request.userId);
   }
 
   @override
@@ -74,8 +83,10 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
 
   Future<ServiceRequestResponse> _delete(ServiceRequestRequest request) async {
     return ServiceRequestResponse()
-      ..serviceRequest =
-          api.delete(request.userId, request.serviceRequest.requestId);
+      ..serviceRequest = api.delete(
+        request.userId,
+        request.serviceRequest.requestId,
+      );
   }
 
   @override

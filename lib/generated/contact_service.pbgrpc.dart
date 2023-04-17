@@ -65,11 +65,10 @@ class ContactServiceClient extends $grpc.Client {
         options: options);
   }
 
-  $grpc.ResponseStream<$0.ContactResponse> getSocialNetworkContacts(
+  $grpc.ResponseFuture<$0.ContactResponse> getSocialNetworkContacts(
       $0.ContactRequest request,
       {$grpc.CallOptions? options}) {
-    return $createStreamingCall(
-        _$getSocialNetworkContacts, $async.Stream.fromIterable([request]),
+    return $createUnaryCall(_$getSocialNetworkContacts, request,
         options: options);
   }
 }
@@ -103,7 +102,7 @@ abstract class ContactServiceBase extends $grpc.Service {
         'getSocialNetworkContacts',
         getSocialNetworkContacts_Pre,
         false,
-        true,
+        false,
         ($core.List<$core.int> value) => $0.ContactRequest.fromBuffer(value),
         ($0.ContactResponse value) => value.writeToBuffer()));
   }
@@ -123,9 +122,9 @@ abstract class ContactServiceBase extends $grpc.Service {
     return deleteSocialNetworkContact(call, await request);
   }
 
-  $async.Stream<$0.ContactResponse> getSocialNetworkContacts_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.ContactRequest> request) async* {
-    yield* getSocialNetworkContacts(call, await request);
+  $async.Future<$0.ContactResponse> getSocialNetworkContacts_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.ContactRequest> request) async {
+    return getSocialNetworkContacts(call, await request);
   }
 
   $async.Future<$0.ContactResponse> addSocialNetworkContact(
@@ -134,6 +133,6 @@ abstract class ContactServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.ContactRequest request);
   $async.Future<$0.ContactResponse> deleteSocialNetworkContact(
       $grpc.ServiceCall call, $0.ContactRequest request);
-  $async.Stream<$0.ContactResponse> getSocialNetworkContacts(
+  $async.Future<$0.ContactResponse> getSocialNetworkContacts(
       $grpc.ServiceCall call, $0.ContactRequest request);
 }

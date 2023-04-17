@@ -4,7 +4,7 @@ abstract class UserTagDetailsEvent {}
 
 class LoadTagEvent extends UserTagDetailsEvent {
   final String userId;
-  final String tagId;
+  final Int64 tagId;
 
   LoadTagEvent({
     required this.userId,

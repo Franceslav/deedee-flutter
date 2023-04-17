@@ -65,17 +65,17 @@ class ContactRequest extends $pb.GeneratedMessage {
 
 class ContactResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ContactResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'bucket'), createEmptyInstance: create)
-    ..aOM<Contact>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'contact', subBuilder: Contact.create)
+    ..pc<Contact>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'contacts', $pb.PbFieldType.PM, subBuilder: Contact.create)
     ..hasRequiredFields = false
   ;
 
   ContactResponse._() : super();
   factory ContactResponse({
-    Contact? contact,
+    $core.Iterable<Contact>? contacts,
   }) {
     final _result = create();
-    if (contact != null) {
-      _result.contact = contact;
+    if (contacts != null) {
+      _result.contacts.addAll(contacts);
     }
     return _result;
   }
@@ -101,15 +101,7 @@ class ContactResponse extends $pb.GeneratedMessage {
   static ContactResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Contact get contact => $_getN(0);
-  @$pb.TagNumber(1)
-  set contact(Contact v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasContact() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearContact() => clearField(1);
-  @$pb.TagNumber(1)
-  Contact ensureContact() => $_ensure(0);
+  $core.List<Contact> get contacts => $_getList(0);
 }
 
 class GetTopicTitlesResponse extends $pb.GeneratedMessage {

@@ -1,6 +1,5 @@
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/filter_dto.dart';
 import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -27,7 +26,7 @@ class FilterRepository {
     return response;
   }
 
-  Future<FilterDTO> addFilterSubscriptionElement(FilterDTO filterDTO) async {
+  Future<CompositeFilter> addFilterSubscriptionElement(CompositeFilter compositeFilter) async {
     var response = await _filterServiceClient
         .addFilterToSubscribedFilters(FilterRequest()..filter = Filter());
 
@@ -35,7 +34,7 @@ class FilterRepository {
     // return response.filter;
   }
 
-  Future<FilterDTO> removeFilterSubscriptionElement(FilterDTO filterDTO) async {
+  Future<CompositeFilter> removeFilterSubscriptionElement(CompositeFilter compositeFilter) async {
     var response = await _filterServiceClient
         .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
 
@@ -43,7 +42,7 @@ class FilterRepository {
     // return response.filter;
   }
 
-  Future<FilterDTO> editFilterSubscriptionElement(FilterDTO filterDTO) async {
+  Future<CompositeFilter> editFilterSubscriptionElement(CompositeFilter compositeFilter) async {
     var response = await _filterServiceClient
         .removeFilterFromSubscribedFilters(FilterRequest()..filter = Filter());
 

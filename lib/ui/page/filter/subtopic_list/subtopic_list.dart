@@ -1,8 +1,8 @@
+import 'package:dartx/dartx.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../filter_page_bloc.dart';
-
 
 class SubtopicList extends StatefulWidget {
   final List<String> subtopics;
@@ -34,10 +34,13 @@ class _SubtopicListState extends State<SubtopicList> {
               (int index) {
                 return SubtopicChip(
                   chipTitle: widget.subtopics[index],
+                  isSelected: widget.subtopics.contains(widget.selectedSubtopics
+                      .firstOrNullWhere(
+                          (element) => widget.subtopics[index] == element)),
                   onSelected: (isChecked, selectedSubtopic) {
-                    context.read<FilterPageBloc>().add(
-                        FilterPageSubtopicSelectedEvent(
-                            selectedSubtopic));
+                    context
+                        .read<FilterPageBloc>()
+                        .add(FilterPageSubtopicSelectedEvent(selectedSubtopic));
                   },
                 );
               },

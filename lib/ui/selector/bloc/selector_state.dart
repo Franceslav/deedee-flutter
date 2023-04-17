@@ -7,13 +7,14 @@ class InitialState extends SelectorState {}
 class LoadingSelectorState extends SelectorState {}
 
 class LoadedTopicsState extends SelectorState {
-  final List<TopicDescription> topics;
+  final List<Subtopic> topics;
 
   LoadedTopicsState(this.topics);
 }
 
 class TopicSelectedState extends SelectorState {
   final String topic;
+
   TopicSelectedState(this.topic);
 }
 
@@ -26,7 +27,8 @@ class LoadedFilterKeysState extends SelectorState {
 }
 
 class FilterKeySelectedState extends SelectorState {
-  final String filterKey;
+  final FilterKey filterKey;
+
   FilterKeySelectedState(this.filterKey);
 }
 
@@ -51,10 +53,12 @@ class UserTagPlacedState extends SelectorState {}
 
 class ErrorState extends SelectorState {
   final String errorMessage;
+
   ErrorState(this.errorMessage);
 }
 
 class FirstLvlTopicSelectedState extends SelectorState {
   final String topic;
+
   FirstLvlTopicSelectedState(this.topic);
 }

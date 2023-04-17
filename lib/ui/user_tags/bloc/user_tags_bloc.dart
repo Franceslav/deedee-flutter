@@ -1,20 +1,28 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/repository/tag_repository.dart';
+// import 'package:deedee/services/fake/api/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
+import 'package:fixnum/fixnum.dart';
 
 part 'user_tags_event.dart';
+
 part 'user_tags_state.dart';
 
 class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
-  UserTagsBloc() : super(InitialState()) {
+  final TagRepository _tagRepository;
+  UserTagsBloc(this._tagRepository) : super(InitialState()) {
     on<LoadTagsEvent>(_onLoadTags);
     on<DeleteTagEvent>(_onDeleteTags);
   }
 
   _onLoadTags(LoadTagsEvent event, Emitter<UserTagsState> emit) async {
     try {
-      final tags = await locator.get<GRCPRepository>().getUserTags(event.userId);
+      // final tags =
+      //     await locator.get<GRCPRepository>().getUserTags(event.userId);
+      // emit(LoadedTagsState(tags: tags));
+      final tags = await _tagRepository.getTags(event.userId,);
       emit(LoadedTagsState(tags: tags));
     } catch (error) {
       emit(ErrorState(
@@ -25,11 +33,12 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _onDeleteTags(DeleteTagEvent event, Emitter<UserTagsState> emit) async {
     try {
-      final response = await locator.get<GRCPRepository>().removeUserTag(
-            event.userId,
-            event.tag.tagId,
-          );
-      if (response) {
+      // final response = await locator.get<GRCPRepository>().removeUserTag(
+      //       event.userId,
+      //       event.tag.tagId,
+      //     );
+      final response = await _tagRepository.deleteTag('', event.tag.tagId);
+      if (response.status == Tag_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
         //without delay this error appears 'A dismissed Dismissible widget is still part of the tree.'
