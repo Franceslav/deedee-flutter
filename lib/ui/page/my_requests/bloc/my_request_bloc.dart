@@ -4,6 +4,8 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../generated/timestamp.pb.dart';
+
 part 'my_request_event.dart';
 
 part 'my_request_state.dart';
@@ -53,8 +55,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       );
       final requests = await _serviceRequestRepository.getAll(_user.userId);
       emit(MyRequestLoadState(requests));
-
-    }catch (error){
+    } catch (error) {
       emit(ErrorState(
         errorMessage: error.toString(),
       ));
@@ -78,7 +79,13 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onCreateRequest(
       MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
     try {
-      var sr = ServiceRequest();
+      var sr = ServiceRequest(
+        requestId: DateTime.now().toString(),
+        clientId: _user.userId,
+        description: DateTime.now().toString() * 4,
+        dateOfRequest: Timestamp(),
+        status: ServiceRequest_Status.PENDING,
+      );
       final response = await _serviceRequestRepository.create(
         ServiceRequestRequest()..serviceRequest = sr,
       );
@@ -89,8 +96,6 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       ));
     }
   }
-
-
 
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {

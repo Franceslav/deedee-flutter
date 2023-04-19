@@ -137,6 +137,33 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       )
                                   )
                           ),
+                          MyRequestList(
+                            requests: _requests,
+                            statuses: const [
+                              ServiceRequest_Status.DELETED,
+                              ServiceRequest_Status.DONE,
+                            ],
+                            onDismissed: (request, userId, index) =>
+                                bloc.add(MyRequestDeleteEvent(
+                              request: request,
+                              userId: userId,
+                              index: index,
+                            )),
+                            onAccept: (request, userId, index) {
+                              bloc.add(MyRequestAcceptEvent(
+                                userId: userId,
+                                request: request,
+                                index: index,
+                              ));
+                            },
+                              onChanged: (request, userId) =>
+                                  BlocProvider.of<ServiceRequestBloc>(context).add(
+                                      UpdateRequestEvent(
+                                        request: request,
+                                        userId: userId,
+                                      )
+                                  )
+                          ),
                         ],
                       ),
                     ),

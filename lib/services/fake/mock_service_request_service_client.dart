@@ -71,7 +71,7 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
 
   Future<ServiceRequestResponse> _create(ServiceRequestRequest request) async {
     return ServiceRequestResponse()
-      ..serviceRequest = api.create(request.userId);
+      ..serviceRequest = api.create(request.serviceRequest);
   }
 
   @override

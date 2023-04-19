@@ -1,3 +1,4 @@
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 
 import '../page/account/account_info_widget.dart';
@@ -7,14 +8,17 @@ import 'contacts_widget.dart';
 
 class CustomPanelWidget extends StatefulWidget {
   final String selectedMessengerId;
-  final bool openedFirstTime;
+  final Int64 selectedTagId;
+  final bool _openedFirstTime;
 
   const CustomPanelWidget({
     super.key,
     required String selectedMessengerId,
+    required Int64 selectedTagId,
     required bool openedFirstTime,
   })  : selectedMessengerId = selectedMessengerId,
-        openedFirstTime = openedFirstTime;
+        selectedTagId = selectedTagId,
+        _openedFirstTime = openedFirstTime;
 
   @override
   State<CustomPanelWidget> createState() => _CustomPanelWidgetState();
@@ -28,7 +32,7 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
         padding: const EdgeInsets.fromLTRB(16, 52, 16, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: widget.openedFirstTime
+          children: widget._openedFirstTime
               ? []
               : [
                   const AccountInfoWidget(),
@@ -36,7 +40,9 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
                     padding: const EdgeInsets.symmetric(vertical: 24),
                     child: ContactsWidget(widget: widget),
                   ),
-                  const AddressInfoWidget(),
+                  AddressInfoWidget(
+                    selectedTagId: widget.selectedTagId,
+                  ),
                 ],
         ),
       ),

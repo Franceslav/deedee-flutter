@@ -12,7 +12,6 @@ import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
-import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
@@ -21,6 +20,7 @@ import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -29,6 +29,7 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../../map_sliding_panel/map_sliding_panel.dart';
 import '../../user_bloc/user_bloc.dart';
 
 class MapScreen extends StatefulWidget {
@@ -60,6 +61,7 @@ class _MapScreenState extends State<MapScreen> {
   final List<TagMarker> _markers = [];
 
   String _selectedMessengerId = '';
+  Int64 _selectedTagId = Int64();
   bool openedFirstTime = true;
 
   @override
@@ -78,6 +80,7 @@ class _MapScreenState extends State<MapScreen> {
                 setState(() {
                   openedFirstTime = false;
                   _selectedMessengerId = dto.messengerId;
+                  _selectedTagId = dto.tagId;
                 });
                 _pc.open();
               },
@@ -210,10 +213,11 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                 ],
               ),
-              MapSlidingPanelWidget(
+              MapSlidingPanel(
                 size: size,
                 pc: _pc,
                 selectedMessengerId: _selectedMessengerId,
+                selectedTagId: _selectedTagId,
                 openedFirstTime: openedFirstTime,
               ),
               Positioned(
@@ -296,13 +300,3 @@ class _MapScreenState extends State<MapScreen> {
     return selectedFilterMap;
   }
 }
-
-
-
-
-
-
-
-
-
-

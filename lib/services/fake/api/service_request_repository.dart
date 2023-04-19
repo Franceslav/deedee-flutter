@@ -72,15 +72,8 @@ class ServiceRequestServiceApi {
     return _serviceRequests.getOrElse(userId, () => []);
   }
 
-  ServiceRequest create(String userId) {
-    var request = ServiceRequest(
-      requestId: DateTime.now().toString(),
-      clientId: DateTime.now().toString(),
-      description: DateTime.now().toString() * 4,
-      dateOfRequest: Timestamp(),
-      status: ServiceRequest_Status.PENDING,
-    );
-    _serviceRequests[userId]!.add(request);
+  ServiceRequest create(ServiceRequest request) {
+    _serviceRequests[request.clientId]!.add(request);
     return request;
   }
 
