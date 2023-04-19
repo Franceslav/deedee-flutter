@@ -150,7 +150,6 @@ class TagServiceApi {
   }
 
   Future<List<Tag>> getTags(String userId) async {
-    await init();
     return _tags.getOrElse(userId, () => []).toList();
   }
 

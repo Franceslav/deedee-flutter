@@ -33,11 +33,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _onDeleteTags(DeleteTagEvent event, Emitter<UserTagsState> emit) async {
     try {
-      // final response = await locator.get<GRCPRepository>().removeUserTag(
-      //       event.userId,
-      //       event.tag.tagId,
-      //     );
-      final response = await _tagRepository.deleteTag('', event.tag.tagId);
+      final response = await _tagRepository.deleteTag(event.userId, event.tag.tagId);
       if (response.status == Tag_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
