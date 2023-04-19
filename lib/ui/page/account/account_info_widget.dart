@@ -87,23 +87,21 @@ class AccountInfoWidget extends StatelessWidget {
     );
   }
 
-  Expanded _infoColumn(String type, String quantity) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            type,
-            style: AppTextTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            quantity,
-            style: AppTextTheme.titleNormal,
-            textAlign: TextAlign.center,
-          )
-        ],
-      ),
+   Column _infoColumn(String type, String quantity) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          type,
+          style: AppTextTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          quantity,
+          style: AppTextTheme.titleNormal,
+          textAlign: TextAlign.center,
+        )
+      ],
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/filterkey_list.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_list.dart';
 import 'package:deedee/ui/place_tag/dialog_widget.dart';
@@ -192,46 +193,54 @@ class _FilterPageState extends State<FilterPage> {
                                     child: SizedBox(),
                                   ),
                                 ),
-                                DeeDeeButton(
-                                  title:
-                                      AppLocalizations.of(context)!.placeOrder,
-                                  onPressed: () async {
-                                    final data = await context.router.push(
-                                            MapSetLocationScreenRoute(
-                                                userLocation:
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: OutlinedButtonWidget(
+                                          text:  AppLocalizations.of(context)!.placeOrder,
+                                          onPressed: () async {
+                                            final data = await context.router.push(
+                                                MapSetLocationScreenRoute(
+                                                    userLocation:
                                                     user.lastGeoLocation))
-                                        as AddressModel?;
-                                    if (data == null) {
-                                      return;
-                                    }
-                                    bloc.add(SelectLocationEvent(data));
-                                  },
-                                  gradientButton: false,
-                                ),
-                                const SizedBox(height: 8),
-                                DeeDeeButton(
-                                  title: AppLocalizations.of(context)!.seeTags,
-                                  gradientButton: true,
-                                  onPressed: () {
-                                    bloc.add(PushFiltersEvent(
-                                      topic: widget.currentFilter.topic.title,
-                                      filterKeys:
-                                          selectedSubtopicsFilter.values.first,
-                                      accountType: user.accountType,
-                                    ));
-                                    var filterMap = _filtersWithSelected(
-                                        allSubtopicsFilter: allSubtopicsFilter,
-                                        selectedSubtopicsFilter:
-                                            selectedSubtopicsFilter);
+                                            as AddressModel?;
+                                            if (data == null) {
+                                              return;
+                                            }
+                                            bloc.add(SelectLocationEvent(data));
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: OutlinedButtonWidget(
+                                          text: AppLocalizations.of(context)!.seeTags,
+                                          onPressed: () {
+                                            bloc.add(PushFiltersEvent(
+                                              topic: widget.currentFilter.topic.title,
+                                              filterKeys:
+                                              selectedSubtopicsFilter.values.first,
+                                              accountType: user.accountType,
+                                            ));
+                                            var filterMap = _filtersWithSelected(
+                                                allSubtopicsFilter: allSubtopicsFilter,
+                                                selectedSubtopicsFilter:
+                                                selectedSubtopicsFilter);
 
-                                    _compositeFilter = CompositeFilter(
-                                      compositeFilterId: widget
-                                          .currentFilter.compositeFilterId,
-                                      topic: widget.currentFilter.topic,
-                                      filterMap: filterMap,
-                                      status: widget.currentFilter.status,
-                                    );
-                                  },
+                                            _compositeFilter = CompositeFilter(
+                                              compositeFilterId: widget
+                                                  .currentFilter.compositeFilterId,
+                                              topic: widget.currentFilter.topic,
+                                              filterMap: filterMap,
+                                              status: widget.currentFilter.status,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
