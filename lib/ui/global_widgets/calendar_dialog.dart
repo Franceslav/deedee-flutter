@@ -28,7 +28,11 @@ class _CalendarDialogState extends State<CalendarDialog> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(
+          left: 8.0,
+          right: 8.0,
+          bottom: 8.0,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -209,9 +213,10 @@ class _CalendarDialogState extends State<CalendarDialog> {
                                   height: MediaQuery.of(context).size.height *
                                       0.03),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     OutlinedButtonWidget(
                                       text: locale.reset,
@@ -224,7 +229,7 @@ class _CalendarDialogState extends State<CalendarDialog> {
                                         });
                                       },
                                     ),
-                                    const SizedBox(width: 16),
+                                    const SizedBox(width: 16.0),
                                     OutlinedButtonWidget(
                                       text: locale.apply,
                                       onPressed: () {
