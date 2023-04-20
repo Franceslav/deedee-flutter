@@ -40,13 +40,14 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 final pushNotificationService =
                     locator.get<PushNotificationService>();
                 await pushNotificationService.sendPushNotification(context);
+                print(await pushNotificationService.getToken());
               }),
           GeneralSlidingPanelItem(
-              icon: Icons.published_with_changes_sharp,
-              text: 'QR Scanner',
-              onTap: () async {
-                context.router.navigate(const BookmarkQRScannerRoute());
-                },
+            icon: Icons.published_with_changes_sharp,
+            text: 'QR Scanner',
+            onTap: () async {
+              context.router.navigate(const BookmarkQRScannerRoute());
+            },
           ),
           GeneralSlidingPanelItem(
               icon: Icons.list,
