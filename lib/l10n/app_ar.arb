@@ -173,5 +173,6 @@
   "expiredDate": "منتهي الصلاحية",
   "addCard": "إضافة بطاقة",
   "send": "يرسل",
-  "customerProfile": "ملف الزائر"
+  "customerProfile": "ملف الزائر",
+  "notAuthorized":"الخاص بك غير مصرح للمشاهدة"
 }

@@ -161,5 +161,6 @@
   "inProcess": "Jarayonda",
   "clickMarkerViewApplication": "Ilovani ko'rish uchun markerni bosing",
   "send": "Yuborish",
-  "customerProfile": "Mijoz profili"
+  "customerProfile": "Mijoz profili",
+   "notAuthorized":"Koʻrishga ruxsatingiz yoʻq"
 }

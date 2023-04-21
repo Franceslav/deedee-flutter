@@ -151,5 +151,6 @@
   "expiredDate": "Діє до",
   "addCard": "Додати карту",
   "send": "Відправити",
-  "customerProfile": "Профіль клієнта"
+  "customerProfile": "Профіль клієнта",
+   "notAuthorized":"Ви не авторизовані для перегляду"
 }

@@ -185,9 +185,10 @@
   "cardNumber": "የካርታ ቁጥር",
   "expiredDate": "ጊዜው ያለፈበት ቀን",
   "addCard": "ካርድ ጨምር",
-  "alreadyDone": "Արդեն արված է",
-  "inProcess": "ընթացքի մեջ է",
-  "clickMarkerViewApplication": "Հպեք բռնակին ՝ հավելվածը դիտելու համար",
+  "alreadyDone": "አስቀድሞ ተከናውኗል",
+  "inProcess": "በሂደት ላይ",
+  "clickMarkerViewApplication": "አፕሊኬሽኑን ለማየት ምልክት ማድረጊያውን ጠቅ ያድርጉ",
   "send": "ላክ",
-  "customerProfile": "የደንበኛ መገለጫ"
+  "customerProfile": "የደንበኛ መገለጫ",
+  "notAuthorized":"ለማየት ፍቃድ የሎትም"
 }

@@ -183,5 +183,7 @@
   "inProcess": "Процессте",
   "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз",
   "send": "Жөнөтүү",
-  "customerProfile": "Кардар профили"
+  "customerProfile": "Кардар профили",
+   "notAuthorized":"Көрүүгө уруксатыңыз жок"
+
 }

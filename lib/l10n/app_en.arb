@@ -194,5 +194,6 @@
   "expiredDate": "Expired Date",
   "addCard": "Add card",
   "send": "Send",
-  "customerProfile": "Customer Profile"
+  "customerProfile": "Customer Profile",
+  "notAuthorized":"Your not authorized to view"
 }

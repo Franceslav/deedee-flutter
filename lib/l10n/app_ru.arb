@@ -184,5 +184,6 @@
   "inProcess": "В процессе",
   "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку",
   "send": "Отправить",
-  "customerProfile": "Профиль клиента"
+  "customerProfile": "Профиль клиента",
+   "notAuthorized":"Вы не авторизованы для просмотра"
 }
