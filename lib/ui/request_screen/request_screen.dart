@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
@@ -15,11 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
-import 'package:deedee/injection.dart';
-import 'package:deedee/repository/service_request_repository.dart';
+
+import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
   RequestScreen({Key? key}) : super(key: key);
@@ -231,6 +231,11 @@ class _RequestScreenState extends State<RequestScreen> {
                               ),
                             ],
                           )),
+                      DeeDeeMenuSlider(
+                        context,
+                        controller: _controller,
+                        user: user,
+                      ),
                     ],
                   ),
                 );
