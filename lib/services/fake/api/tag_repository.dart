@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:dartx/dartx.dart';
-
 import 'package:deedee/generated/LocationService.pb.dart';
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
 import 'package:deedee/generated/geolocation_service.pb.dart';
@@ -11,7 +9,6 @@ import 'package:deedee/generated/tag_service.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/generated/topic_service.pbgrpc.dart';
 import 'package:deedee/model/user.dart';
-
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,6 +20,7 @@ class TagServiceApi {
   @PostConstruct(preResolve: true)
   Future<void> init() async {
     String deviceLanguage = Platform.localeName.substring(0, 2);
+
     _tags = {
       "": [
         Tag()
@@ -147,13 +145,14 @@ class TagServiceApi {
           ..status = Tag_Status.BOOKMARKED
       ],
     };
+
   }
 
   Future<List<Tag>> getTags(String userId) async {
     return _tags.getOrElse(userId, () => []).toList();
   }
 
-  Future<List<Tag>> getBookmarkTags(String userId) async {
+  Future<List<Tag>> getFavoriteTags(String userId) async {
     await init();
     return _tags
         .getOrElse(userId, () => [])
@@ -168,24 +167,11 @@ class TagServiceApi {
       ..status = Tag_Status.DELETED;
   }
 
-  // List<Tag> getTags(String userId) {
-  //   return _tags.getOrElse(userId, () => []).toList();
-  // }
+  Future<Tag> addTagToFavorites(String userId, Int64 tagId) async {
+    return _tags
+        .getOrElse(userId, () => [])
+        .firstWhere((rq) => rq.tagId == tagId)
+      ..status = Tag_Status.BOOKMARKED;
+  }
 
-  // Tag deleteTag(String userId, String tagId) {
-  //   return _tags
-  //       .getOrElse(userId, () => [])
-  //       .firstWhere((rq) => rq.tagId == tagId)
-  //     ..isDeleted = true;
-  // }
-
-  // Future<void> placeTag(
-  //     AccountType accountType,
-  //     String topic,
-  //     String messengerId,
-  //     double lat,
-  //     double lon,
-  //     List<String> filterKeys) async {
-  //   throw UnimplementedError();
-  // }
 }

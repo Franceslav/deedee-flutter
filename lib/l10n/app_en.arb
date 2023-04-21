@@ -67,7 +67,7 @@
   "userNotVerifiedMessage": "you're not verified. check your e-mail inbox or restart the application.",
   "balanceTitle": "balance",
   "availableTagsTitle": "available tags",
-  "bookmarksTitle": "bookmarks",
+  "bookmarksTitle": "My favorites",
   "noBookamarks": "you do not have bookmarks",
   "bookmarkDeletedMessage": "bookmark was deleted",
   "bookmarkNotDeletedMessage": "bookmark was not deleted. something went wrong",

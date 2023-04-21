@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,16 +56,12 @@ class _BookmarkQRScannerState extends State<BookmarkQRScanner> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
-    setState(() {
       this.controller = controller;
-    });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
         result = scanData;
-        BlocProvider.of<BookmarksBloc>(context)
-            .add(AddBookmarkEvent(userId: describeEnum(result!.format), tagId: ''));
+        // BlocProvider.of<BookmarksBloc>(context)
+        //     .add(AddBookmarkEvent(userId: describeEnum(result!.format), tagId: ''));
         context.router.replace(const BookmarksScreenRoute());
-      });
     });
   }
 

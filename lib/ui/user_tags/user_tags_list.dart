@@ -103,7 +103,7 @@ class _UserTagsListState extends State<UserTagsList> {
                       tag.geolocation.longitude):
                   TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
                 };
-                context.router.popAndPush(
+                context.router.push(
                   MapScreenRoute(
                     tagDescriptionMap: tagMap,
                     currentFilter: CompositeFilter(filterMap: {}), //TODO:

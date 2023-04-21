@@ -38,7 +38,7 @@ class _CustomPanelWidgetState extends State<CustomPanelWidget> {
                   const AccountInfoWidget(),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: ContactsWidget(widget: widget),
+                    child: ContactsWidget(widget: widget, tagId: widget.selectedTagId, userId: widget.selectedMessengerId),
                   ),
                   AddressInfoWidget(
                     selectedTagId: widget.selectedTagId,

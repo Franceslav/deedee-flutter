@@ -67,7 +67,9 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagResponse> _addTagToBookmark(TagRequest request) async {
-    return TagResponse();
+    final userId = retrieveUserIdFrom(request);
+    return TagResponse()..tags.add(await api.addTagToFavorites(userId, request.tag.tagId));
+
   }
 
   @override
@@ -92,32 +94,8 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagResponse> _getBookmarkTags(TagRequest request) async {
-    // var book = TagResponse()..tags.addAll(await api.getTags(''));
-    // List<Tag> bookm = [];
-    // book.tags
-    //     .map((e) => e.status == Tag_Status.BOOKMARKED ? bookm.add(e) : null);
-    // print(bookm);
-    return TagResponse()..tags.addAll(await api.getTags(''));
-    // String deviceLanguage =
-    //     bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
-    // AppLocalizations myLocal =
-    // await AppLocalizations.delegate.load(Locale(deviceLanguage));
-
-    // return TagResponse()
-    //   ..tags.addAll([
-    //     Tag()
-    //       ..tagId = Int64(0)
-    //       ..geolocation = Geolocation(
-    //         latitude: 50.8476,
-    //         longitude: 4.3572,
-    //       ),
-    //     Tag()
-    //       ..tagId = Int64(2)
-    //       ..geolocation = Geolocation(
-    //         latitude: 48.8566,
-    //         longitude: 2.3522,
-    //       )
-    //   ]);
+    final userId = retrieveUserIdFrom(request);
+    return TagResponse()..tags.addAll(await api.getFavoriteTags(userId));
   }
 
   @override

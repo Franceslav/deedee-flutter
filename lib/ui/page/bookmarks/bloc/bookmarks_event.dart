@@ -25,7 +25,7 @@ class DeleteBookmarkEvent extends BookmarksEvent {
 
 class AddBookmarkEvent extends BookmarksEvent {
   final String userId;
-  final String tagId;
+  final Int64 tagId;
 
   AddBookmarkEvent({
     required this.userId,

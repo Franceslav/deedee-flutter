@@ -3,6 +3,7 @@ import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
@@ -11,6 +12,7 @@ part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   final TagRepository _tagRepository;
+
   BookmarksBloc(this._tagRepository) : super(InitialState()) {
     on<LoadBookmarksEvent>(_onLoadBookmarks);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
@@ -20,9 +22,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   _onLoadBookmarks(
       LoadBookmarksEvent event, Emitter<BookmarksState> emit) async {
     try {
-      // final bookmarks =
-      //     await locator.get<GRCPRepository>().getUserBookmarks(event.userId);
-      final bookmarks = await _tagRepository.getBookmarkTags(event.userId);
+      final bookmarks = await _tagRepository.getFavoriteTags(event.userId);
       emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       emit(ErrorState(error.toString()));
@@ -53,19 +53,11 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     AddBookmarkEvent event,
     Emitter<BookmarksState> emit,
   ) async {
-    //do something
     try {
-      final response = await locator.get<GRCPRepository>().addUserBookmark(
-            event.userId,
-            event.tagId,
-          );
-      if (response) {
-        emit(TapSuccessfulState());
-      }
-    } catch (error) {
-      emit(ErrorState(error.toString()));
+      final tag =
+          await _tagRepository.addTagToFavorites(event.userId, event.tagId);
+    } catch (e) {
+      print(e.toString());
     }
-    // print(event.tagId);
-    // print(event.userId);
   }
 }

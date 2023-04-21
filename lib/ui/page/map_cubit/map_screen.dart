@@ -230,16 +230,17 @@ class _MapScreenState extends State<MapScreen> {
                       widget.currentFilter.filterMap,
                       selectedFilterKeys,
                     );
+                    context.router.pop();
 
-                    context.router.popAndPush(FilterPageRoute(
-                      currentFilter: CompositeFilter(
-                        compositeFilterId:
-                            widget.currentFilter.compositeFilterId,
-                        topic: widget.currentFilter.topic,
-                        filterMap: filterMap,
-                        status: widget.currentFilter.status,
-                      ),
-                    ));
+                    // context.router.popAndPush(FilterPageRoute(
+                    //   currentFilter: CompositeFilter(
+                    //     compositeFilterId:
+                    //         widget.currentFilter.compositeFilterId,
+                    //     topic: widget.currentFilter.topic,
+                    //     filterMap: filterMap,
+                    //     status: widget.currentFilter.status,
+                    //   ),
+                    // ));
                   },
                 ),
               ),

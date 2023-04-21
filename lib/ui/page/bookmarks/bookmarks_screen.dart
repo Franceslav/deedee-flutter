@@ -104,7 +104,9 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ButtonBarEntry(
                                   child: Text(
                                       AppLocalizations.of(context)!.actualTags),
-                                  onTap: () {},
+                                  onTap: () {
+
+                                  },
                                 ),
                                 ButtonBarEntry(
                                   child: Text(AppLocalizations.of(context)!
@@ -185,7 +187,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                               bookmark.tagId,
                                               ''/*bookmark.messengerId*/)
                                         };
-                                        context.router.popAndPush(
+                                        context.router.push(
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
                                             currentFilter:
