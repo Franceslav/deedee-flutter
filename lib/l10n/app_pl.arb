@@ -183,5 +183,6 @@
   "inProcess": "W Trakcie",
   "clickMarkerViewApplication": "Kliknij znacznik, aby wyświetlić aplikację",
   "send": "Wysłać",
-  "customerProfile": "Profil klienta"
+  "customerProfile": "Profil klienta",
+   "notAuthorized":"Nie masz uprawnień do przeglądania"
 }
