@@ -5,7 +5,13 @@ abstract class MyRequestEvent {}
 
 class MyRequestLoadEvent extends MyRequestEvent {}
 
-class MyRequestCreateEvent extends MyRequestEvent {}
+class MyRequestCreateEvent extends MyRequestEvent {
+  final ServiceRequest? request;
+
+  MyRequestCreateEvent({
+    this.request,
+  });
+}
 
 class MyRequestDeleteEvent extends MyRequestEvent {
   final String userId;
@@ -22,22 +28,12 @@ class MyRequestDeleteEvent extends MyRequestEvent {
 class MyRequestAcceptEvent extends MyRequestEvent {
   final String userId;
   final ServiceRequest request;
-  final int index;
+  final int? index;
 
   MyRequestAcceptEvent({
     required this.userId,
     required this.request,
-    required this.index,
-  });
-}
-
-class AcceptRequestEvent extends MyRequestEvent {
-  final String userId;
-  final ServiceRequest request;
-
-  AcceptRequestEvent({
-    required this.userId,
-    required this.request,
+    this.index,
   });
 }
 

@@ -167,26 +167,23 @@ class _RequestScreenState extends State<RequestScreen> {
                                       child: OutlinedButtonWidget(
                                         text: locale.send,
                                         onPressed: () {
+                                          var serviceRequest = ServiceRequest(
+                                              requestId: state
+                                                  .serviceRequest.requestId,
+                                              clientId:
+                                                  state.serviceRequest.clientId,
+                                              dateOfRequest: state
+                                                  .serviceRequest.dateOfRequest,
+                                              price: state.serviceRequest.price,
+                                              description: state
+                                                  .serviceRequest.description,
+                                              status: ServiceRequest_Status
+                                                  .CHANGED);
+
                                           BlocProvider.of<ServiceRequestBloc>(
                                                   context)
-                                              .add(AcceptRequestEvent(
-                                            userId: user.userId,
-                                            request: ServiceRequest(
-                                                requestId: state
-                                                    .serviceRequest.requestId,
-                                                clientId: state
-                                                    .serviceRequest.clientId,
-                                                status: ServiceRequest_Status
-                                                    .CHANGED,
-                                                dateOfRequest: state
-                                                    .serviceRequest
-                                                    .dateOfRequest,
-                                                price:
-                                                    state.serviceRequest.price,
-                                                description: state
-                                                    .serviceRequest
-                                                    .description),
-                                          ));
+                                              .add(MyRequestCreateEvent(
+                                                  request: serviceRequest));
                                           context.router.pop();
                                         },
                                       ),
@@ -196,26 +193,26 @@ class _RequestScreenState extends State<RequestScreen> {
                                       child: OutlinedButtonWidget(
                                         text: locale.accept,
                                         onPressed: () {
+                                          var serviceRequest = ServiceRequest(
+                                              requestId: state
+                                                  .serviceRequest.requestId,
+                                              clientId:
+                                                  state.serviceRequest.clientId,
+                                              description: state
+                                                  .serviceRequest.description,
+                                              dateOfRequest: state
+                                                  .serviceRequest.dateOfRequest,
+                                              price: state.serviceRequest.price,
+                                              status: ServiceRequest_Status
+                                                  .ACCEPTED);
+
                                           BlocProvider.of<ServiceRequestBloc>(
                                                   context)
-                                              .add(AcceptRequestEvent(
-                                            userId: user.userId,
-                                            request: ServiceRequest(
-                                                requestId: state
-                                                    .serviceRequest.requestId,
-                                                clientId: state
-                                                    .serviceRequest.clientId,
-                                                status: ServiceRequest_Status
-                                                    .ACCEPTED,
-                                                dateOfRequest: state
-                                                    .serviceRequest
-                                                    .dateOfRequest,
-                                                price:
-                                                    state.serviceRequest.price,
-                                                description: state
-                                                    .serviceRequest
-                                                    .description),
-                                          ));
+                                              .add(
+                                            MyRequestCreateEvent(
+                                              request: serviceRequest,
+                                            ),
+                                          );
                                           context.router.pop();
                                         },
                                       ),

@@ -27,9 +27,11 @@ class ServicePushRequestBloc
       Emitter<ServicePushRequestState> emit) {
     try {
       ServiceRequest serviceRequest = ServiceRequest()
-        ..price = event.price.toDouble()
         ..requestId = _initialServiceRequest.requestId
-        ..status = _initialServiceRequest.status;
+        ..clientId =_initialServiceRequest.clientId
+        ..description  =_initialServiceRequest.description
+        ..dateOfRequest =_initialServiceRequest.dateOfRequest
+        ..price = event.price.toDouble();
 
       bool changed =
           !identical(_initialServiceRequest.price, serviceRequest.price);

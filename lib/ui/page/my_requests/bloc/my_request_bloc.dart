@@ -34,10 +34,10 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       );
       if (response.status == ServiceRequest_Status.ACCEPTED) {
         emit(AcceptSuccessfulState());
-      } else {
+      } else if (event.index != null) {
         emit(AcceptedErrorState(
           request: event.request,
-          index: event.index,
+          index: event.index!,
         ));
       }
     } catch (error) {
@@ -84,8 +84,12 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
         clientId: _user.userId,
         description: DateTime.now().toString() * 4,
         dateOfRequest: Timestamp(),
+        price: 0,
         status: ServiceRequest_Status.PENDING,
       );
+      if (event.request != null) {
+        sr = event.request!..clientId = _user.userId;
+      }
       final response = await _serviceRequestRepository.create(
         ServiceRequestRequest()..serviceRequest = sr,
       );
