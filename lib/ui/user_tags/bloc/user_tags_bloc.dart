@@ -15,6 +15,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   UserTagsBloc(this._tagRepository) : super(InitialState()) {
     on<LoadTagsEvent>(_onLoadTags);
     on<DeleteTagEvent>(_onDeleteTags);
+    on<SearchUserTagsEvent>(_onSearchTags);
   }
 
   _onLoadTags(LoadTagsEvent event, Emitter<UserTagsState> emit) async {
@@ -22,7 +23,9 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
       // final tags =
       //     await locator.get<GRCPRepository>().getUserTags(event.userId);
       // emit(LoadedTagsState(tags: tags));
-      final tags = await _tagRepository.getTags(event.userId,);
+      final tags = await _tagRepository.getTags(
+        event.userId,
+      );
       emit(LoadedTagsState(tags: tags));
     } catch (error) {
       emit(ErrorState(
@@ -33,7 +36,8 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _onDeleteTags(DeleteTagEvent event, Emitter<UserTagsState> emit) async {
     try {
-      final response = await _tagRepository.deleteTag(event.userId, event.tag.tagId);
+      final response =
+          await _tagRepository.deleteTag(event.userId, event.tag.tagId);
       if (response.status == Tag_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
@@ -49,5 +53,10 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
         errorMessage: error.toString(),
       ));
     }
+  }
+
+  _onSearchTags(SearchUserTagsEvent event, Emitter<UserTagsState> emit) async {
+    final searchTag = await _tagRepository.getTags(event.tagName);
+    emit(LoadedTagsState(tags: searchTag));
   }
 }

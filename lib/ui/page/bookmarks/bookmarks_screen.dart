@@ -104,9 +104,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ButtonBarEntry(
                                   child: Text(
                                       AppLocalizations.of(context)!.actualTags),
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                 ),
                                 ButtonBarEntry(
                                   child: Text(AppLocalizations.of(context)!
@@ -116,13 +114,33 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                               ],
                             ),
                           ),
-                          const Divider(
-                            thickness: 0.5,
-                            color: Colors.black,
-                            height: 0,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
+                            ),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: AppLocalizations.of(context)!.search,
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 16,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                BlocProvider.of<BookmarksBloc>(context)
+                                    .add(SearchBookmarksEvent(value));
+                              },
+                            ),
                           ),
                           Expanded(
                             child: ListView.separated(
+                              keyboardDismissBehavior:
+                                  ScrollViewKeyboardDismissBehavior.onDrag,
                               itemBuilder: ((context, index) {
                                 final bookmark = _bookmarks[index];
                                 return Slidable(
@@ -170,7 +188,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                       icon: Image.asset(
                                           'assets/images/bookmark_icon.png'),
                                       mainText: Text(
-                                        ''/*bookmark.messengerId*/, //TODO:
+                                        '' /*bookmark.messengerId*/, //TODO:
                                         style: AppTextTheme.bodyLarge,
                                       ),
                                       secondaryText: Text(
@@ -185,7 +203,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                               bookmark.geolocation
                                                   .longitude): TagDTO(
                                               bookmark.tagId,
-                                              ''/*bookmark.messengerId*/)
+                                              '' /*bookmark.messengerId*/)
                                         };
                                         context.router.push(
                                           MapScreenRoute(

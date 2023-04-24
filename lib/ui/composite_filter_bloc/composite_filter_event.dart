@@ -49,3 +49,9 @@ class GetFilterSubscription extends CompositeFilterEvent {
 
   GetFilterSubscription(this.userId);
 }
+
+class SearchSavedFiltersEvent extends CompositeFilterEvent {
+  final String filterName;
+
+  SearchSavedFiltersEvent(this.filterName);
+}

@@ -15,7 +15,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class MyRequestList extends StatefulWidget {
   final List<ServiceRequest_Status> statuses;
   final List<ServiceRequest> requests;
-  final void Function( ServiceRequest request, String userId) onChanged;
+  final void Function(ServiceRequest request, String userId) onChanged;
   final void Function(ServiceRequest request, String userId, int index)
       onDismissed;
   final void Function(ServiceRequest request, String userId, int index)
@@ -42,11 +42,12 @@ class _MyRequestListState extends State<MyRequestList> {
     return requests.isEmpty
         ? Center(
             child: Text(
-              AppLocalizations.of(context)!.noUserTags,
+              AppLocalizations.of(context)!.notFound,
               style: Theme.of(context).textTheme.headline1,
             ),
           )
         : ListView.separated(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemBuilder: ((context, index) {
               final request = requests[index];
               return Slidable(

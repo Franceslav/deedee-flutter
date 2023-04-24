@@ -21,6 +21,7 @@ class CompositeFilterBloc
     on<AddFilterSubscriptionEvent>(_onAddFilterSubscription);
     on<GetFilterSubscription>(_onGetFilterSubscription);
     on<RemoveFilterEvent>(_onRemoveFilterEvent);
+    on<SearchSavedFiltersEvent>(_onSearchFilters);
   }
 
   _onLoadFilters(
@@ -41,9 +42,7 @@ class CompositeFilterBloc
   _onPushSavedFilters(
       PushSavedFiltersEvent event, Emitter<CompositeFilterState> emit) async {
     try {
-      var x = await locator
-          .get<TagRepository>()
-          .getTags(event.topic);
+      var x = await locator.get<TagRepository>().getTags(event.topic);
       // emit(UserSavedFiltersDoneState(topic)); //TODO:
     } catch (error) {
       print(error.toString());
@@ -103,5 +102,12 @@ class CompositeFilterBloc
     } catch (error) {
       print(error.toString());
     }
+  }
+
+  _onSearchFilters(
+      SearchSavedFiltersEvent event, Emitter<CompositeFilterState> emit) async {
+    final filters = await locator
+        .get<FilterRepository>()
+        .getUserSavedFilters(event.filterName);
   }
 }

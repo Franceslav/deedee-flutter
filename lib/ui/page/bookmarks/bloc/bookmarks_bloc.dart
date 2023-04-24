@@ -4,6 +4,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
+import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
@@ -17,6 +18,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     on<LoadBookmarksEvent>(_onLoadBookmarks);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
+    on<SearchBookmarksEvent>(_onSearchBookmark);
   }
 
   _onLoadBookmarks(
@@ -59,5 +61,11 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  _onSearchBookmark(
+      SearchBookmarksEvent event, Emitter<BookmarksState> emit) async {
+    final tag = await _tagRepository.getTags(event.bookmarkName);
+    emit(LoadedBookmarksState(tag));
   }
 }

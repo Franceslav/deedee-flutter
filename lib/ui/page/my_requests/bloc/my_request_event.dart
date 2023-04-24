@@ -46,3 +46,9 @@ class UpdateRequestEvent extends MyRequestEvent {
     required this.request,
   });
 }
+
+class SearchRequestEvent extends MyRequestEvent {
+  final String name;
+
+  SearchRequestEvent(this.name);
+}

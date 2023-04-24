@@ -174,5 +174,7 @@
   "addCard": "إضافة بطاقة",
   "send": "يرسل",
   "customerProfile": "ملف الزائر",
-  "notAuthorized":"الخاص بك غير مصرح للمشاهدة"
+  "notAuthorized":"الخاص بك غير مصرح للمشاهدة",
+  "search":"يبحث",
+  "notFound":"غير موجود"
 }

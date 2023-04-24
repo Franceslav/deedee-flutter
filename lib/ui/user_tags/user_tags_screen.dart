@@ -74,61 +74,82 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             builder: (context, state) {
               return state is InitialState
                   ? const Center(
-                child: CircularProgressIndicator(),
-              )
+                      child: CircularProgressIndicator(),
+                    )
                   : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: AnimatedButtonBar(
-                      invertedSelection: true,
-                      radius: 25,
-                      backgroundColor:
-                      Theme.of(context).scaffoldBackgroundColor,
-                      controller: _buttonController,
                       children: [
-                        ButtonBarEntry(
-                          child: Text(
-                              AppLocalizations.of(context)!.actualTags),
-                          onTap: () => setPage(0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: AnimatedButtonBar(
+                            invertedSelection: true,
+                            radius: 25,
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                            controller: _buttonController,
+                            children: [
+                              ButtonBarEntry(
+                                child: Text(
+                                    AppLocalizations.of(context)!.actualTags),
+                                onTap: () => setPage(0),
+                              ),
+                              ButtonBarEntry(
+                                child: Text(
+                                    AppLocalizations.of(context)!.archiveTags),
+                                onTap: () => setPage(1),
+                              ),
+                            ],
+                          ),
                         ),
-                        ButtonBarEntry(
-                          child: Text(
-                              AppLocalizations.of(context)!.archiveTags),
-                          onTap: () => setPage(1),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          child: TextField(
+
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.search,
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40)),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 16,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              BlocProvider.of<UserTagsBloc>(context)
+                                  .add(SearchUserTagsEvent(value));
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: PageView(
+                            controller: _pageController,
+                            onPageChanged: (value) =>
+                                _buttonController.setIndex(value),
+                            children: [
+                              UserTagsList(
+                                tags: _tags,
+                                tagsType: TagsType.actual,
+                                onDismissed: (tag, userId, index) =>
+                                    deleteTag(tag, userId, index),
+                                onTap: () =>
+                                    context.router.push(RequestScreenRoute()),
+                              ),
+                              UserTagsList(
+                                tags: _tags,
+                                tagsType: TagsType.archive,
+                                onDismissed: (tag, userId, index) =>
+                                    deleteTag(tag, userId, index),
+                                onTap: () {},
+                              )
+                            ],
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 0.5,
-                    color: Colors.black,
-                    height: 0,
-                  ),
-                  Expanded(
-                    child: PageView(
-                      controller: _pageController,
-                      onPageChanged: (value) =>
-                          _buttonController.setIndex(value),
-                      children: [
-                        UserTagsList(
-                          tags: _tags,
-                          tagsType: TagsType.actual,
-                          onDismissed: (tag, userId, index) =>
-                              deleteTag(tag, userId, index),
-                          onTap: () => context.router.push(RequestScreenRoute()),
-                        ),
-                        UserTagsList(
-                          tags: _tags,
-                          tagsType: TagsType.archive,
-                          onDismissed: (tag, userId, index) =>
-                              deleteTag(tag, userId, index), onTap: () {},
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              );
+                    );
             },
           ),
           DeeDeeMenuSlider(
@@ -150,7 +171,6 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   }
 
   void deleteTag(Tag tag, String userId, int index) {
-
     BlocProvider.of<UserTagsBloc>(context)
         .add(DeleteTagEvent(tag: tag, userId: userId, index: index));
   }

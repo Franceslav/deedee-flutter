@@ -22,6 +22,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
     on<MyRequestDeleteEvent>(_onDeleteRequest);
     // on<AcceptRequestEvent>(_onAcceptRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
+    on<SearchRequestEvent>(_onSearchRequest);
     initialize();
   }
 
@@ -120,5 +121,11 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
         errorMessage: error.toString(),
       ));
     }
+  }
+
+  _onSearchRequest(
+      SearchRequestEvent event, Emitter<MyRequestState> emit) async {
+    final request = await _serviceRequestRepository.getAll(event.name);
+    emit(MyRequestLoadState(request));
   }
 }
