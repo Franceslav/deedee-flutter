@@ -1,15 +1,16 @@
 import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
+import '../../generated/filter_service.pb.dart';
 
 class SelectorItem extends StatefulWidget {
-  final String title;
-  final void Function(String title) onTap;
+  final FilterKey filterKey;
+  final void Function(FilterKey title) onTap;
   final bool isSelected;
   final bool icon;
 
   const SelectorItem(
       {super.key,
-      required this.title,
+      required this.filterKey,
       required this.onTap,
       required this.isSelected,
       required this.icon});
@@ -32,10 +33,10 @@ class _SelectorItemState extends State<SelectorItem> {
                     color: Colors.white,
                   ),
                   const SizedBox(width: 4),
-                  Text(widget.title),
+                  Text(widget.filterKey.title),
                 ],
               )
-            : Text(widget.title),
+            : Text(widget.filterKey.title),
         elevation: widget.isSelected ? 0 : 3,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         backgroundColor: widget.isSelected
@@ -53,6 +54,6 @@ class _SelectorItemState extends State<SelectorItem> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(16))),
         shadowColor: const Color(CHIPS_SHADOW_COLOR),
-        onPressed: () => widget.onTap(widget.title));
+        onPressed: () => widget.onTap(widget.filterKey));
   }
 }

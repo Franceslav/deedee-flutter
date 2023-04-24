@@ -1,6 +1,4 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
-import 'package:deedee/model/filter_dto.dart';
-import 'package:deedee/ui/filter_dto_bloc/filter_dto_bloc.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
@@ -10,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../../generated/filter_service.pb.dart';
+import '../../composite_filter_bloc/composite_filter_bloc.dart';
 
 class SubscribedFiltersPage extends StatefulWidget {
   const SubscribedFiltersPage({super.key});
@@ -28,7 +29,7 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
     super.didChangeDependencies();
     if (_isInit) {
       final userId = BlocProvider.of<UserBloc>(context).state.user.userId;
-      context.read<FilterDTOBloc>().add(GetFilterDTOSubscription(userId));
+      context.read<CompositeFilterBloc>().add(GetFilterSubscription(userId));
       _isInit = false;
     }
   }
@@ -41,10 +42,11 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final filterDTOList =
-        context.select((FilterDTOBloc bloc) => bloc.state.filterDTOList);
-    List<FilterDTO> subscribedFilters =
-        filterDTOList.where((element) => element.subscribed == true).toList();
+    final compositeFilterList = context
+        .select((CompositeFilterBloc bloc) => bloc.state.compositeFilterList);
+    List<CompositeFilter> subscribedFilters = compositeFilterList
+        .where((element) => element.status == CompositeFilter_Status.SUBSCRIBED)
+        .toList();
 
     return Scaffold(
       appBar: DeeDeeAppBar(
@@ -54,7 +56,7 @@ class _SubscribedFiltersPageState extends State<SubscribedFiltersPage> {
       ),
       body: Stack(
         children: [
-          filterDTOList.isEmpty
+          compositeFilterList.isEmpty
               ? const Center(
                   child: Text('You have no subscription'),
                 )

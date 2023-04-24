@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../generated/LocationService.pb.dart';
-import '../../../generated/TagService.pb.dart';
 import '../../../injection.dart';
 import '../../../repository/gps_repository.dart';
 import '../../../repository/topic_repository.dart';
@@ -31,10 +31,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
 
-  List<TopicDescription> _mainTopics = [];
+  List<Topic> _mainTopics = [];
   Place? _selectedCity;
   final PanelController _controller = PanelController();
   bool _isInit = true;
+
   @override
   void initState() {
     _namecontroller = TextEditingController(text: 'my name ');

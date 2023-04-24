@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/filter_service.pb.dart';
 import './selector_item.dart';
 
 class SelectorList extends StatefulWidget {
-  final List<String> data;
-  final void Function(String title) onTap;
+  final List<FilterKey> allItems;
   final List<String> selectedItems;
+  final void Function(FilterKey title) onTap;
 
   const SelectorList({
     super.key,
-    required this.data,
-    required this.onTap,
+    required this.allItems,
     required this.selectedItems,
+    required this.onTap,
   });
 
   @override
@@ -33,11 +34,11 @@ class _SelectorListState extends State<SelectorList> {
             spacing: 8.0,
             runSpacing: 8.0,
             children: [
-              ...widget.data.map(
-                (title) => SelectorItem(
-                  title: title,
+              ...widget.allItems.map(
+                (filterKey) => SelectorItem(
+                  filterKey: filterKey,
                   onTap: widget.onTap,
-                  isSelected: widget.selectedItems.contains(title),
+                  isSelected: widget.selectedItems.contains(filterKey),
                   icon: true,
                 ),
               ),

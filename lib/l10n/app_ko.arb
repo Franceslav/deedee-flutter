@@ -160,5 +160,6 @@
   "inProcess": "진행 중",
   "clickMarkerViewApplication": "응용 프로그램을 볼 수있는 마커를 클릭합니다",
   "send": "보내다",
-  "customerProfile": "고객 프로필"
+  "customerProfile": "고객 프로필",
+  "notAuthorized":"볼 수 있는 권한이 없습니다"
 }

@@ -29,7 +29,7 @@ class ServiceRequestServiceApi {
           // tag: Tag()..topicId = 'маникюр 2',
           description:
               'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          clientId: 'customer Name',
+          clientId: 'Vasia Pupkin',
           status: ServiceRequest_Status.PENDING,
           dateOfRequest: timestamp1,
           price: 100,
@@ -39,7 +39,7 @@ class ServiceRequestServiceApi {
           // tag: Tag()..topicId = 'маникюр 2',
           description:
               'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          clientId: 'customer Name',
+          clientId: 'Ivan  Ivanov',
           dateOfRequest: timestamp2,
           status: ServiceRequest_Status.PENDING,
           price: 100,
@@ -49,7 +49,7 @@ class ServiceRequestServiceApi {
           // tag: Tag()..topicId = 'маникюр 3',
           description:
               'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          clientId: 'customer Name',
+          clientId: 'John Smith',
           dateOfRequest: timestamp3,
           status: ServiceRequest_Status.DELETED,
           price: 100,
@@ -59,7 +59,7 @@ class ServiceRequestServiceApi {
           // tag: Tag()..topicId = 'маникюр 4',
           description:
               'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          clientId: 'customer Name',
+          clientId: 'Joe Biden',
           dateOfRequest: timestamp4,
           status: ServiceRequest_Status.DONE,
           price: 100,
@@ -72,21 +72,32 @@ class ServiceRequestServiceApi {
     return _serviceRequests.getOrElse(userId, () => []);
   }
 
+  ServiceRequest create(ServiceRequest request) {
+    _serviceRequests[request.clientId]!.add(request);
+    return request;
+  }
+
+  ServiceRequest change(
+      String userId, String requestId, String description, double price) {
+    return _serviceRequests
+        .getOrElse(userId, () => [])
+        .firstWhere((rq) => rq.requestId == requestId)
+      ..description = description
+      ..price = price;
+  }
+
+  ServiceRequest accept(userId, requestId) {
+    return _serviceRequests
+        .getOrElse(userId, () => [])
+        .firstWhere((rq) => rq.requestId == requestId)
+      ..status = ServiceRequest_Status.ACCEPTED;
+  }
+
   ServiceRequest delete(userId, requestId) {
     return _serviceRequests
         .getOrElse(userId, () => [])
         .firstWhere((rq) => rq.requestId == requestId)
       ..status = ServiceRequest_Status.DELETED;
-  }
-
-  ServiceRequest create(userId, ServiceRequest request) {
-    _serviceRequests
-        .getOrElse(
-          userId,
-          () => [],
-        )
-        .add(request..status = ServiceRequest_Status.ACCEPTED);
-    return request;
   }
 
   ServiceRequest update(userId, ServiceRequest request) {
@@ -100,10 +111,9 @@ class ServiceRequestServiceApi {
           (rq) => rq.requestId == request.requestId,
           orElse: () => request,
         )
-        ..status = ServiceRequest_Status.CHANGED
-        ..price = request.price
-        ..description = request.description
-        ..dateOfRequest = request.dateOfRequest
-    ;
+      ..status = ServiceRequest_Status.CHANGED
+      ..price = request.price
+      ..description = request.description
+      ..dateOfRequest = request.dateOfRequest;
   }
 }

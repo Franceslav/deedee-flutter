@@ -12,13 +12,12 @@ class SubtopicListFailureState extends FilterPageState {
 }
 
 class SubtopicListLoadedState extends FilterPageState {
-  final Map<String, List<String>> allSubtopicsFilter;
+  final Map<String,FilterKeyList> allSubtopicsFilter;
   final Map<String, List<String>> selectedSubtopicsFilter;
 
   SubtopicListLoadedState({
     required this.allSubtopicsFilter,
     required this.selectedSubtopicsFilter,
-
   });
 }
 
@@ -35,9 +34,9 @@ class FilterKeyListSelectedState extends FilterPageState {
 }
 
 class UserFiltersDoneState extends FilterPageState {
-  final Topic topic;
+  final List<Tag> tags;
 
-  UserFiltersDoneState(this.topic);
+  UserFiltersDoneState(this.tags);
 }
 
 class InitialState extends FilterPageState {}
@@ -45,13 +44,14 @@ class InitialState extends FilterPageState {}
 class LoadingFilterPageState extends FilterPageState {}
 
 class LoadedTopicsState extends FilterPageState {
-  final List<TopicDescription> topics;
+  final List<Topic> topics;
 
   LoadedTopicsState(this.topics);
 }
 
 class TopicSelectedState extends FilterPageState {
   final String topic;
+
   TopicSelectedState(this.topic);
 }
 
@@ -65,6 +65,7 @@ class LoadedFilterKeysState extends FilterPageState {
 
 class FilterKeySelectedState extends FilterPageState {
   final List<String> selectedFilterKeys;
+
   FilterKeySelectedState(this.selectedFilterKeys);
 }
 
@@ -77,10 +78,12 @@ class UserTagPlacedState extends FilterPageState {}
 
 class ErrorState extends FilterPageState {
   final String errorMessage;
+
   ErrorState(this.errorMessage);
 }
 
 class FirstLvlTopicSelectedState extends FilterPageState {
   final String topic;
+
   FirstLvlTopicSelectedState(this.topic);
 }

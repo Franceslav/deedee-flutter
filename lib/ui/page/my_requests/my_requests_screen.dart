@@ -40,6 +40,12 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),
+        floatingActionButton: IconButton(
+          onPressed: () {
+            bloc.add(MyRequestCreateEvent());
+          },
+          icon: const Icon(Icons.add),
+        ),
         body: Stack(
           children: [
             BlocConsumer<ServiceRequestBloc, MyRequestState>(
@@ -47,18 +53,22 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                 if (state is MyRequestLoadState) {
                   _requests = state.requests;
                 }
+                if (state is MyRequestCreateState) {
+                  _requests.add(state.request);
+                }
                 if (state is DeletedSuccessfulState) {
-                  showSnackBar(
-                    context,
-                    AppLocalizations.of(context)!.tagRemovedMessage,
-                  );
+                  showSnackBar(context, 'request declined');
+                }
+                if (state is AcceptSuccessfulState) {
+                  showSnackBar(context, 'request accepted');
                 }
                 if (state is DeletedErrorState) {
                   _requests.insert(state.index, state.request);
-                  showSnackBar(
-                    context,
-                    AppLocalizations.of(context)!.tagNotRemovedMessage,
-                  );
+                  showSnackBar(context, 'request was not declined');
+                }
+                if (state is AcceptedErrorState) {
+                  _requests.insert(state.index, state.request);
+                  showSnackBar(context, 'request was not accepted');
                 }
                 if (state is ErrorState) {
                   showSnackBar(context, state.errorMessage);
@@ -102,38 +112,58 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                         children: [
                           MyRequestList(
                             requests: _requests,
-                            isDone: false,
+                            statuses: const [
+                              ServiceRequest_Status.PENDING,
+                              ServiceRequest_Status.ACCEPTED,
+                            ],
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
                               request: request,
                               userId: userId,
                               index: index,
                             )),
-                            onChanged: (request, userId) =>
-                            BlocProvider.of<ServiceRequestBloc>(context).add(
-                          UpdateRequestEvent(
-                            request: request,
-                            userId: userId,
-                          )
-                            )
-                          ),
-                          MyRequestList(
-                            requests: _requests,
-                            isDone: true,
-                            onDismissed: (request, userId, index) =>
-                                bloc.add(MyRequestDeleteEvent(
-                              request: request,
-                              userId: userId,
-                              index: index,
-                            )),
-                           onChanged: (request, userId) =>
-                               BlocProvider.of<ServiceRequestBloc>(context).add(
+                            onAccept: (request, userId, index) {
+                              bloc.add(MyRequestAcceptEvent(
+                                userId: userId,
+                                request: request,
+                                index: index,
+                              ));
+                            },
+                              onChanged: (request, userId) =>
+                                  BlocProvider.of<ServiceRequestBloc>(context).add(
                                       UpdateRequestEvent(
                                         request: request,
                                         userId: userId,
                                       )
                                   )
-                          )
+                          ),
+                          MyRequestList(
+                            requests: _requests,
+                            statuses: const [
+                              ServiceRequest_Status.DELETED,
+                              ServiceRequest_Status.DONE,
+                            ],
+                            onDismissed: (request, userId, index) =>
+                                bloc.add(MyRequestDeleteEvent(
+                              request: request,
+                              userId: userId,
+                              index: index,
+                            )),
+                            onAccept: (request, userId, index) {
+                              bloc.add(MyRequestAcceptEvent(
+                                userId: userId,
+                                request: request,
+                                index: index,
+                              ));
+                            },
+                              onChanged: (request, userId) =>
+                                  BlocProvider.of<ServiceRequestBloc>(context).add(
+                                      UpdateRequestEvent(
+                                        request: request,
+                                        userId: userId,
+                                      )
+                                  )
+                          ),
                         ],
                       ),
                     ),

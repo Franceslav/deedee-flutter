@@ -11,23 +11,23 @@ class ContactRepository {
 
   Future<Contact> update(ContactRequest request,
       {CallOptions? options}) async {
-    return (await _contactServiceClient.editSocialNetworkContact(request)).contact;
+    return (await _contactServiceClient.editSocialNetworkContact(request)).contacts.first;
   }
 
   Future<Contact> add(ContactRequest request,
       {CallOptions? options}) async {
-    return (await _contactServiceClient.addSocialNetworkContact(request)).contact;
+    return (await _contactServiceClient.addSocialNetworkContact(request)).contacts.first;
   }
 
   Future<Contact> delete(ContactRequest request,
       {CallOptions? options}) async {
-    return (await _contactServiceClient.deleteSocialNetworkContact(request)).contact;
+    return (await _contactServiceClient.deleteSocialNetworkContact(request)).contacts.first;
   }
 
   Future<List<Contact>> getAll(String userId,
       {CallOptions? options}) async {
-    var response = _contactServiceClient
-        .getSocialNetworkContacts(ContactRequest()..contact = Contact(userId: userId));
+    return (await _contactServiceClient
+        .getSocialNetworkContacts(ContactRequest())).contacts;
     return []; //TODO: implement
   }
 }

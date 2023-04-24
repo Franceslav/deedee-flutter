@@ -1,5 +1,5 @@
 import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeScreen> {
-  List<TopicDescription> _mainTopics = [];
+  List<Topic> _mainTopics = [];
   Place? _selectedCity;
   final PanelController _controller = PanelController();
   bool _isInit = true;

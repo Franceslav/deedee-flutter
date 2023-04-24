@@ -1,10 +1,13 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:ui';
 
 import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/filter_repository.dart';
 import 'package:deedee/services/fake/fake_client.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
@@ -45,8 +48,20 @@ class MockFilterServiceClient implements FilterServiceClient {
   ResponseFuture<FilterResponse> addFilterToBookmarkedFilters(
       FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement addFilterToBookmarkedFilters
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _createCompositeFilter(request)));
+  }
+
+  Future<FilterResponse> _createCompositeFilter(FilterRequest request) async {
+    var filter = api.createCompositeFilter(
+      userId: '',
+      filterId: Int64(),
+      topic: Topic(),
+      subtopic: 'subtopic',
+      filterKeys: [],
+      status: CompositeFilter_Status.BOOKMARKED,
+    );
+    return FilterResponse()..filter = Filter();
   }
 
   @override
@@ -66,8 +81,18 @@ class MockFilterServiceClient implements FilterServiceClient {
   ResponseFuture<FilterResponse> editFilterInBookmarkedFilters(
       FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement editFilterInBookmarkedFilters
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _updateCompositeFilter(request)));
+  }
+
+  Future<FilterResponse> _updateCompositeFilter(FilterRequest request) async {
+    var filter = api.updateCompositeFilter(
+      '',
+      Int64(),
+      request.filter.subtopic,
+      request.filter.filterKeys,
+    );
+    return FilterResponse()..filter = Filter();
   }
 
   @override
@@ -81,14 +106,6 @@ class MockFilterServiceClient implements FilterServiceClient {
   Future<FilterResponse> _editFilterInSubscribedFilters(
       FilterRequest request) async {
     return FilterResponse()..filter = Filter();
-  }
-
-  @override
-  ResponseFuture<FilterResponse> removeFilterFilterBookmarkedFilters(
-      FilterRequest request,
-      {CallOptions? options}) {
-    // TODO: implement removeFilterFilterBookmarkedFilters
-    throw UnimplementedError();
   }
 
   @override
@@ -114,9 +131,7 @@ class MockFilterServiceClient implements FilterServiceClient {
 
   Future<GetFilterKeysResponse> _getFilterKeys(
       GetFilterKeysRequest request) async {
-
-    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
-
+    // String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
 
     return GetFilterKeysResponse()
       ..filterKeys.addAll(api.getFilterKeys(request.topicId));
@@ -128,7 +143,7 @@ class MockFilterServiceClient implements FilterServiceClient {
       topic: 'Клининг',
       filterKeys: [
         FilterKey()
-          // ..topicId = "маникюр"
+          // ..subtopicId = "маникюр"
           ..title = "японский",
       ],
       bookmarked: false,
@@ -163,75 +178,24 @@ class MockFilterServiceClient implements FilterServiceClient {
   @override
   ResponseFuture<FilterResponse> removeBookmarkedFilter(FilterRequest request,
       {CallOptions? options}) {
-    // TODO: implement removeBookmarkedFilter
-    throw UnimplementedError();
+    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+        _deleteCompositeFilter(request)));
+  }
+
+  Future<FilterResponse> _deleteCompositeFilter(FilterRequest request) async {
+    var filter = api.deleteCompositeFilter(request.filter.userId, Int64());
+    return FilterResponse()..filter = Filter();
   }
 
   @override
   ResponseStream<Filter> getAllBookmarkedFilters(GetAllFiltersRequest request,
       {CallOptions? options}) {
     return ResponseStream(
-        FakeClientCall<dynamic, Filter>(_getAllBookmarkedFilters(request)));
+        FakeClientCall<dynamic, Filter>(_readCompositeFilter(request)));
   }
 
-  Future<Filter> _getAllBookmarkedFilters(GetAllFiltersRequest request) async {
-
-    String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
-
-    return Filter(
-      filterId: '2',
-      // userId: '',
-      topic: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-          .autoTag,
-      //'Рабочие',
-      subtopic: (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-          .mockFilterTitleParkingGarage,
-      filterKeys: [
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKey24Hour,
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKeyCovered,
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKeyElectricCharging,
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKeyValet,
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKeyMotorCycle,
-        FilterKey()
-          ..topicId =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterTitleParkingGarage
-          ..title =
-              (await AppLocalizations.delegate.load(Locale(deviceLanguage)))
-                  .mockFilterKeyOverNight,
-      ],
-      bookmarked: true,
-      subscribed: false,
-    );
+  Future<Filter> _readCompositeFilter(GetAllFiltersRequest request) async {
+    var filter = api.readCompositeFilter(request.userId);
+    return Filter();
   }
 }

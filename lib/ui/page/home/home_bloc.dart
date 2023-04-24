@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/gps_repository.dart';
@@ -22,10 +22,10 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final TopicRepository _topicRepository;
 
   HomeBloc(
-      this._pushNotificationService,
-      this._gpsRepository,
-      this._topicRepository,
-      ) : super(HomeScreenInitialState()) {
+    this._pushNotificationService,
+    this._gpsRepository,
+    this._topicRepository,
+  ) : super(HomeScreenInitialState()) {
     on<HomeScreenInitLoadEvent>(_onInitLoadEvent);
 
     on<HomeScreenChangeEvent>(_onChange);
@@ -52,7 +52,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
     try {
       if (userPosition == null) {
-        List<TopicDescription> topics = await _topicRepository.getTopics(0, 0);
+        List<Topic> topics = await _topicRepository.getTopics(0, 0);
         emit(HomeScreenLoadedState(
           topics: topics,
           selectedCity: null,
@@ -65,7 +65,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         return;
       }
 
-      List<TopicDescription> topics = await _topicRepository.getTopics(
+      List<Topic> topics = await _topicRepository.getTopics(
           userPosition.latitude, userPosition.longitude);
       emit(HomeScreenLoadedState(
         topics: topics,
@@ -84,7 +84,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     emit(HomeScreenLoadingState());
     try {
       //get LatLng from Place object
-      List<TopicDescription> topics = await _topicRepository.getTopics(0, 0);
+      List<Topic> topics =  await _topicRepository.getTopics(0, 0);
       emit(HomeScreenLoadedState(
         topics: topics,
         selectedCity: event.city,

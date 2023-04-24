@@ -3,10 +3,14 @@ part of 'my_request_bloc.dart';
 @immutable
 abstract class MyRequestEvent {}
 
-class MyRequestLoadEvent extends MyRequestEvent {
-  final String userId;
+class MyRequestLoadEvent extends MyRequestEvent {}
 
-  MyRequestLoadEvent(this.userId);
+class MyRequestCreateEvent extends MyRequestEvent {
+  final ServiceRequest? request;
+
+  MyRequestCreateEvent({
+    this.request,
+  });
 }
 
 class MyRequestDeleteEvent extends MyRequestEvent {
@@ -21,13 +25,15 @@ class MyRequestDeleteEvent extends MyRequestEvent {
   });
 }
 
-class AcceptRequestEvent extends MyRequestEvent {
+class MyRequestAcceptEvent extends MyRequestEvent {
   final String userId;
   final ServiceRequest request;
+  final int? index;
 
-  AcceptRequestEvent({
+  MyRequestAcceptEvent({
     required this.userId,
     required this.request,
+    this.index,
   });
 }
 

@@ -37,6 +37,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 final pushNotificationService =
                     locator.get<PushNotificationService>();
                 await pushNotificationService.sendPushNotification();
+                print(await pushNotificationService.getToken());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.list,

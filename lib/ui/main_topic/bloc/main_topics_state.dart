@@ -5,7 +5,7 @@ abstract class MainTopicsState {}
 class InitialState extends MainTopicsState {}
 
 class LoadedMainTopicsState extends MainTopicsState {
-  final List<TopicDescription> mainTopics;
+  final List<Topic> mainTopics;
 
   LoadedMainTopicsState(this.mainTopics);
 }

@@ -1,6 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/filter_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
@@ -10,35 +11,34 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
-import 'package:deedee/ui/global_widgets/calendar.dart';
 import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
-import 'package:deedee/ui/global_widgets/map_sliding_panel_widget.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
-import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/map_cubit/tag_marker/tag_marker.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_appbar.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:mockito/mockito.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../../map_sliding_panel/map_sliding_panel.dart';
+import '../../user_bloc/user_bloc.dart';
 
 class MapScreen extends StatefulWidget {
-  final User user;
   final Map<LatLng, TagDTO> tagDescriptionMap;
-  final String topicName;
   final CompositeFilter currentFilter;
 
-  MapScreen({
+  const MapScreen({
     Key? key,
-    required this.user,
     required this.tagDescriptionMap,
-    required this.topicName,
     required this.currentFilter,
   }) : super(key: key);
 
@@ -55,14 +55,13 @@ class DeeDeeSliderController extends PanelController {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  LatLng get geo => widget.user.lastGeoLocation;
-
   final MapController _mapController = MapController();
   final DeeDeeSliderController _pc = DeeDeeSliderController();
 
   final List<TagMarker> _markers = [];
 
   String _selectedMessengerId = '';
+  Int64 _selectedTagId = Int64();
   bool openedFirstTime = true;
 
   @override
@@ -81,6 +80,7 @@ class _MapScreenState extends State<MapScreen> {
                 setState(() {
                   openedFirstTime = false;
                   _selectedMessengerId = dto.messengerId;
+                  _selectedTagId = dto.tagId;
                 });
                 _pc.open();
               },
@@ -105,12 +105,19 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
+
+    var filterKeys = _allFilterKeys(widget.currentFilter.filterMap);
+    var selectedFilterKeys =
+        _selectedFilterKeys(widget.currentFilter.filterMap);
+
+    LatLng geo = user.lastGeoLocation;
     Size size = MediaQuery.of(context).size;
     final selectorBloc = SelectorBloc(
       locator.get<TagRepository>(),
       locator.get<TopicRepository>(),
       locator.get<FilterRepository>(),
-      widget.user,
+      user,
     );
     //selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
     return BlocProvider(
@@ -130,25 +137,18 @@ class _MapScreenState extends State<MapScreen> {
               Expanded(
                 child: BlocConsumer<SelectorBloc, SelectorState>(
                   listener: (context, state) {
-                    if (state is LoadedFilterKeysState) {
-                      widget.currentFilter.filterKeys.clear();
-                      widget.currentFilter.filterKeys.addAll(state.filterKeys);
-                    }
                     if (state is FilterKeySelectedState) {
-                      widget.currentFilter.selectedFilterKeys
-                              .contains(state.filterKey)
-                          ? widget.currentFilter.selectedFilterKeys
-                              .remove(state.filterKey)
-                          : widget.currentFilter.selectedFilterKeys
-                              .add(state.filterKey);
+                      selectedFilterKeys.contains(state.filterKey)
+                          ? selectedFilterKeys.remove(state.filterKey)
+                          : selectedFilterKeys.add(state.filterKey);
                     }
                   },
                   builder: (context, state) {
                     return SelectorAppBar(
-                      data: widget.currentFilter.filterKeys,
-                      onTap: (String filterKey) =>
+                      allItems: filterKeys,
+                      selectedItems: selectedFilterKeys,
+                      onTap: (FilterKey filterKey) =>
                           selectorBloc.add(SelectFilterKeyEvent(filterKey)),
-                      selectedItems: widget.currentFilter.selectedFilterKeys,
                     );
                   },
                 ),
@@ -213,10 +213,11 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                 ],
               ),
-              MapSlidingPanelWidget(
+              MapSlidingPanel(
                 size: size,
                 pc: _pc,
                 selectedMessengerId: _selectedMessengerId,
+                selectedTagId: _selectedTagId,
                 openedFirstTime: openedFirstTime,
               ),
               Positioned(
@@ -225,10 +226,21 @@ class _MapScreenState extends State<MapScreen> {
                 child: GestureDetector(
                   child: const Icon(Icons.close),
                   onTap: () {
-                    context.router.popAndPush(FilterPageRoute(
-                      topicName: widget.topicName,
-                      currentFilter: widget.currentFilter,
-                    ));
+                    var filterMap = _updateFilterMap(
+                      widget.currentFilter.filterMap,
+                      selectedFilterKeys,
+                    );
+                    context.router.pop();
+
+                    // context.router.popAndPush(FilterPageRoute(
+                    //   currentFilter: CompositeFilter(
+                    //     compositeFilterId:
+                    //         widget.currentFilter.compositeFilterId,
+                    //     topic: widget.currentFilter.topic,
+                    //     filterMap: filterMap,
+                    //     status: widget.currentFilter.status,
+                    //   ),
+                    // ));
                   },
                 ),
               ),
@@ -238,144 +250,54 @@ class _MapScreenState extends State<MapScreen> {
       ),
     );
   }
-}
 
-class CustomPanelWidget extends StatefulWidget {
-  final String _selectedMessengerId;
-  final bool _openedFirstTime;
-
-  const CustomPanelWidget({
-    super.key,
-    required String selectedMessengerId,
-    required bool openedFirstTime,
-  })  : _selectedMessengerId = selectedMessengerId,
-        _openedFirstTime = openedFirstTime;
-
-  @override
-  State<CustomPanelWidget> createState() => _CustomPanelWidgetState();
-}
-
-class _CustomPanelWidgetState extends State<CustomPanelWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 52, 16, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: widget._openedFirstTime
-              ? []
-              : [
-                  const AccountInfoWidget(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: ContactsWidget(widget: widget),
-                  ),
-                  const AddressInfoWidget(),
-                ],
-        ),
-      ),
-    );
+  List<FilterKey> _allFilterKeys(Map<String, FilterKeyList> filterMap) {
+    var filterKeys = <FilterKey>[];
+    for (var i = 0; i <= filterMap.length - 1; i++) {
+      var subtopic = filterMap.keys.toList()[i];
+      var filterList = filterMap[subtopic]!.filterKeys;
+      if (filterList.firstWhereOrNull((element) => element.selected) != null) {
+        filterKeys
+            .addAll(filterList.map((filter) => filter..subtopicId = subtopic));
+      }
+    }
+    return filterKeys;
   }
-}
 
-class ContactsWidget extends StatelessWidget {
-  const ContactsWidget({
-    super.key,
-    required this.widget,
-  });
-
-  final CustomPanelWidget widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        TextButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          //TODO implement data
-          onPressed: () {},
-          child: Image.asset('assets/images/telegram_logo.png'),
-        ),
-        TextButton(
-          onPressed: () =>
-              SocialService.launchInstagram(widget._selectedMessengerId),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          child: Image.asset('assets/images/instagram_logo.png'),
-        ),
-        TextButton(
-          //TODO implement data
-          onPressed: () {},
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-
-          child: Image.asset('assets/images/phone_icon.png'),
-        ),
-        TextButton(
-          //TODO implement data
-          onPressed: () {},
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          child: Image.asset('assets/images/favorite_icon.png'),
-        ),
-      ],
-    );
+  List<FilterKey> _selectedFilterKeys(Map<String, FilterKeyList> filterMap) {
+    var selectedFilterKeys = <FilterKey>[];
+    for (var i = 0; i <= filterMap.length - 1; i++) {
+      var subtopic = filterMap.keys.toList()[i];
+      var filterList = filterMap[subtopic]!.filterKeys;
+      if (filterList.firstWhereOrNull((element) => element.selected) != null) {
+        for (var filter in filterList) {
+          if (filter.selected) {
+            selectedFilterKeys.add(filter..subtopicId = subtopic);
+          }
+        }
+      }
+    }
+    return selectedFilterKeys;
   }
-}
 
-class AddressInfoWidget extends StatelessWidget {
-  const AddressInfoWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        //TODO implement data
-        children: [
-          const Text(
-            'Адрес',
-            style: AppTextTheme.bodyMedium,
-          ),
-          const SizedBox(height: 2),
-          const Text(
-            'ул.Калиновского д.235/4',
-            style: AppTextTheme.bodyLarge,
-          ),
-          const SizedBox(height: 12),
-          OutlinedButtonWidget(
-            onPressed: () => showDialog(
-                context: context, builder: (ctx) => const CalendarDialog()),
-            text: 'Fake Button Сalendar',
-          ),
-        ],
-      ),
-    );
+  Map<String, FilterKeyList> _updateFilterMap(
+    Map<String, FilterKeyList> widgetFilterMap,
+    List<FilterKey> selectedFilterKeys,
+  ) {
+    var selectedFilterMap = <String, FilterKeyList>{};
+    for (var filter in selectedFilterKeys) {
+      if (selectedFilterMap.containsKey(filter.subtopicId)) {
+        selectedFilterMap.update(filter.subtopicId, (value) {
+          value.filterKeys.add(filter..selected = true);
+          return value;
+        });
+      } else {
+        selectedFilterMap.addAll({
+          filter.subtopicId:
+              FilterKeyList(filterKeys: [filter..selected = true])
+        });
+      }
+    }
+    return selectedFilterMap;
   }
 }

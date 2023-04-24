@@ -1,14 +1,15 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:search_address_repository/search_address_repository.dart';
-import 'filter_screen.dart';
 
 part 'filter_page_event.dart';
 part 'filter_page_state.dart';
@@ -17,16 +18,16 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
   final TopicRepository _topicRepository;
   final FilterRepository _filterRepository;
   final User _user;
-  final CompositeFilter currentFilter;
+  final CompositeFilter _currentFilter;
   final TagRepository _tagRepository;
 
   List<String> _subtopics = [];
   List<String> _filterKeys = [];
-  final Map<String, List<String>> _allSubtopicsFilter = {};
+  final Map<String, FilterKeyList> _allSubtopicsFilter = {};
   final Map<String, List<String>> _selectedSubtopicsFilter = {};
 
   FilterPageBloc(this._topicRepository, this._filterRepository, this._user,
-      this.currentFilter, this._tagRepository)
+      this._currentFilter, this._tagRepository)
       : super(SubtopicListInitialState()) {
     on<FilterPageSubtopicSelectedEvent>(_selectSubtopics);
     on<FilterPageFilterKeySelectedEvent>(_selectFilterKey);
@@ -85,9 +86,8 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
 
   _onPushFilters(event, emit) async {
     try {
-      Topic topic = await _tagRepository.getFilteredTags(
-          event.topic, event.filterKeys, event.accountType);
-      emit(UserFiltersDoneState(topic));
+      List<Tag> tags = await _tagRepository.getTags(event.topic);
+      emit(UserFiltersDoneState(tags));
     } catch (error) {
       ErrorState(error.toString());
     }
@@ -95,7 +95,11 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
 
   _initialize() async {
     _subtopics = (await _topicRepository.getSubTopics(
-            _user.lastGeoLocation.latitude, _user.lastGeoLocation.longitude))
+      _user.userId,
+      _currentFilter.topic.topicId,
+      _user.lastGeoLocation.latitude,
+      _user.lastGeoLocation.longitude,
+    ))
         .map((e) => e.title)
         .toList();
 
@@ -103,12 +107,38 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
       _filterKeys = (await _filterRepository.getFilterItems(_subtopics[i]))
           .map((fk) => fk.title)
           .toList();
-      _allSubtopicsFilter.addAll({_subtopics[i]: _filterKeys});
+      final filterKeyList = FilterKeyList(
+        filterKeys: _filterKeys.map(
+          (e) => FilterKey(title: e),
+        ),
+      );
+      _allSubtopicsFilter.addAll({_subtopics[i]: filterKeyList});
     }
+
+    _currentFilter.filterMap.forEach((key, value) {
+      if (value.filterKeys.firstOrNullWhere((element) => element.selected) !=
+          null) {
+        for (var filter in value.filterKeys) {
+          if (filter.selected) {
+            if (_selectedSubtopicsFilter.containsKey(key)) {
+              _selectedSubtopicsFilter.update(key, (value) {
+                value.add(filter.title);
+                return value;
+              });
+            } else {
+              _selectedSubtopicsFilter.addAll({
+                key: [filter.title]
+              });
+            }
+          }
+        }
+      }
+    });
+
     emit(
       SubtopicListLoadedState(
         allSubtopicsFilter: _allSubtopicsFilter,
-        selectedSubtopicsFilter: const {},
+        selectedSubtopicsFilter: _selectedSubtopicsFilter,
       ),
     );
   }

@@ -11,6 +11,14 @@ class MyRequestLoadState extends MyRequestState {
   MyRequestLoadState(this.requests);
 }
 
+class MyRequestCreateState extends MyRequestState {
+  final ServiceRequest request;
+
+  MyRequestCreateState(this.request);
+}
+
+class AcceptSuccessfulState extends MyRequestState {}
+
 class DeletedSuccessfulState extends MyRequestState {}
 
 class DeletedErrorState extends MyRequestState {
@@ -18,6 +26,16 @@ class DeletedErrorState extends MyRequestState {
   final int index;
 
   DeletedErrorState({
+    required this.request,
+    required this.index,
+  });
+}
+
+class AcceptedErrorState extends MyRequestState {
+  final ServiceRequest request;
+  final int index;
+
+  AcceptedErrorState({
     required this.request,
     required this.index,
   });

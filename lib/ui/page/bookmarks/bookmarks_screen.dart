@@ -2,7 +2,8 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
@@ -10,7 +11,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -103,7 +104,9 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ButtonBarEntry(
                                   child: Text(
                                       AppLocalizations.of(context)!.actualTags),
-                                  onTap: () {},
+                                  onTap: () {
+
+                                  },
                                 ),
                                 ButtonBarEntry(
                                   child: Text(AppLocalizations.of(context)!
@@ -167,30 +170,28 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                       icon: Image.asset(
                                           'assets/images/bookmark_icon.png'),
                                       mainText: Text(
-                                        bookmark.messengerId,
+                                        ''/*bookmark.messengerId*/, //TODO:
                                         style: AppTextTheme.bodyLarge,
                                       ),
                                       secondaryText: Text(
-                                        bookmark.topicId,
+                                        bookmark.compositeFilter.topic.title,
                                         style: AppTextTheme.labelMedium,
                                       ),
-                                      //     subtitle: Text(bookmark.geoLocation.toString()),
+                                      //     subtitle: Text(bookmark.geolocation.toString()),
                                       onTap: () {
                                         Map<LatLng, TagDTO> tagMap = {
                                           LatLng(
-                                              bookmark.geoLocation.latitude,
-                                              bookmark.geoLocation
+                                              bookmark.geolocation.latitude,
+                                              bookmark.geolocation
                                                   .longitude): TagDTO(
                                               bookmark.tagId,
-                                              bookmark.messengerId)
+                                              ''/*bookmark.messengerId*/)
                                         };
-                                        context.router.popAndPush(
+                                        context.router.push(
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
-                                            user: user,
-                                            topicName: bookmark.topicId,
                                             currentFilter:
-                                                CompositeFilter([], []),
+                                                CompositeFilter(), //TODO
                                           ),
                                         );
                                       },

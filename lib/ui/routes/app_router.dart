@@ -15,8 +15,9 @@ import 'package:deedee/ui/page/account/account_verify_screen.dart';
 import 'package:deedee/ui/page/account/social_network_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
+import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
 import 'package:deedee/ui/page/customer_profile/customer_profile_screen.dart';
-import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/page/my_referrals/referral_screen.dart';
@@ -24,6 +25,7 @@ import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/page/my_requests/my_requests_screen.dart';
 import 'package:deedee/ui/page/my_saved_filters/saved_filters_screen.dart';
 import 'package:deedee/ui/page/my_subscribed_filters/subscribed_filters_page.dart';
+import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/page/settings/settings_screen.dart';
 import 'package:deedee/ui/page/top_up/top_up_screen.dart';
@@ -32,12 +34,8 @@ import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/request_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
-import 'package:deedee/ui/page/payment/payment_method_screen.dart';
-import 'package:deedee/ui/page/account/social_network_screen.dart';
-import '../account/personal_info/edit_pers_info.dart';
-import '../account/personal_info/personal_information.dart';
+
 import '../page/stats/stats_screen.dart';
-import '../place_order/place_order_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -76,6 +74,7 @@ import '../place_order/place_order_screen.dart';
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
     MaterialRoute(page: CardScreen, path: '/card-page'),
     MaterialRoute(page: StatsScreen, path: '/stats'),
+    MaterialRoute(page: BookmarkQRScanner, path: '/qr-scan'),
     MaterialRoute(page: CustomerProfile, path: '/customer-profile'),
   ],
 )

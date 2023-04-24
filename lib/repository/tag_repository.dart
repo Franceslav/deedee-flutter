@@ -1,73 +1,77 @@
 import 'package:deedee/generated/AccountService.pbenum.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/TagService.pbgrpc.dart';
+import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/tag_service.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/client_channel.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
+import '../generated/geolocation_service.pb.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class TagRepository {
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
 
-  Future<void> placeTag(
+  Future<Tag> placeTag(
       AccountType accountType,
       String topic,
       String messengerId,
       double lat,
       double lon,
       List<String> filterKeys) async {
-    ProtobufClientChannel c = ProtobufClientChannel();
-    var channel = await c.createChannel();
+    var timestamp = Timestamp()
+      ..seconds = Int64.parseInt(
+          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+    var geo = Geolocation()
+      ..latitude = lat
+      ..longitude = lon;
+    var tag = Tag()
+      ..tagId = Int64(0)
+      ..geolocation = geo
+      ..createdAt = timestamp
+      ..type = Tag_Type.valueOf(accountType.index)!; //TODO:
 
-    try {
-      var timestamp = Timestamp()
-        ..seconds = Int64.parseInt(
-            (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-      var geo = GeoLocation()
-        ..latitude = lat
-        ..longitude = lon
-        ..title = "";
-      var tag = Tag()
-        ..topicId = topic
-        ..messengerId = messengerId
-        ..geoLocation = geo
-        ..dueDate = timestamp
-        ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!;
+    var response = await _tagServiceClient.placeTag(TagRequest()..tag = tag);
 
-      var response = await _tagServiceClient.placeTag(PlaceTagRequest()
-        ..tag = tag
-        ..filters.addAll(filterKeys));
-    } catch (e) {
-      print('Caught error: $e');
-    }
-    await channel.shutdown();
+    return response.tags.first;
   }
 
-  Future<Topic> getFilteredTags(String topicId, List<String> activeFilters,
-      AccountType accountType) async {
-    var response = await _tagServiceClient.getFilteredTags(GetTopicRequest()
-      ..topicId = topicId
-      ..filters.addAll(activeFilters)
-      ..tagType = ACCOUNT_TYPE.valueOf(accountType.index)!);
-
-    return response.topic;
+  Future<List<Tag>> getTags(String userId) async {
+    final response = await _tagServiceClient.getTags(
+        TagRequest(tag: Tag(compositeFilter: CompositeFilter(topic: Topic(userId: userId))))
+    );
+    return response.tags;
   }
 
-  Future<TagDetails> getUserTagDetails(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.getUserTagDetails(GetUserTagDetailsRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.tagDetails;
+  Future<Tag> deleteTag(String userId, Int64 tagId) async {
+    final response = await _tagServiceClient.removeTag(
+        TagRequest(tag: Tag(
+            tagId: tagId, compositeFilter: CompositeFilter(topic: Topic(userId: userId))
+        ))
+    );
+    return response.tags.first;
   }
 
-  Future<Tag> getUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.getUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag;
+  Future<List<Tag>> getFavoriteTags(String userId) async {
+    final response = await _tagServiceClient.getBookmarkedTags(
+        TagRequest()..tag = Tag(status: Tag_Status.BOOKMARKED));
+    return response.tags;
+  }
+
+  Future<Tag> addTagToFavorites(String userId, Int64 tagId) async {
+    final response = await _tagServiceClient.addTagToBookmarks(
+        TagRequest(tag: Tag(
+            tagId: tagId, compositeFilter: CompositeFilter(topic: Topic(userId: userId))
+        ))
+    );
+    return response.tags.first;
   }
 }
+
+
+
+
+

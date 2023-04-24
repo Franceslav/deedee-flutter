@@ -17,7 +17,7 @@ class HomeScreenFailureState extends HomeScreenState {
 
 class HomeScreenLoadedState extends HomeScreenState {
   final Place? selectedCity;
-  final List<TopicDescription> topics;
+  final List<Topic> topics;
 
   HomeScreenLoadedState({
     required this.topics,

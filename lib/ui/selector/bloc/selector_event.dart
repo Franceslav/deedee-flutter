@@ -20,13 +20,8 @@ class LoadFilterKeysEvent extends SelectorEvent {
 }
 
 class SelectFilterKeyEvent extends SelectorEvent {
-  final String filterKey;
+  final FilterKey filterKey;
   SelectFilterKeyEvent(this.filterKey);
-}
-
-class SelectListFilterKeyEvent extends SelectorEvent {
-  final List<String> listFilterKey;
-  SelectListFilterKeyEvent(this.listFilterKey);
 }
 
 class SelectDurationEvent extends SelectorEvent {

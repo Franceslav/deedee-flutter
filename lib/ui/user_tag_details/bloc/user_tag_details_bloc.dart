@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:deedee/generated/tag_service.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/tag_repository.dart';
+import 'package:fixnum/fixnum.dart';
 
 part 'user_tag_details_event.dart';
+
 part 'user_tag_details_state.dart';
 
 class UserTagDetailsBloc
@@ -11,19 +14,26 @@ class UserTagDetailsBloc
   UserTagDetailsBloc() : super(InitialState()) {
     on<LoadTagEvent>(_onLoadTag);
   }
+  Tag? _tag;
 
   _onLoadTag(LoadTagEvent event, Emitter<UserTagDetailsState> emit) async {
     try {
-      final tag = await locator
-          .get<TagRepository>()
-          .getUserTag(event.userId, event.tagId);
-      final tagDetails = await locator
-          .get<TagRepository>()
-          .getUserTagDetails(event.userId, event.tagId);
-      emit(LoadedTagState(
-        tag: tag,
-        tagDetails: tagDetails,
-      ));
+      if (_tag != null) {
+        final tags = await locator.get<TagRepository>().getTags(
+            _tag!.compositeFilter.topic.topicId.toString());/*
+            AccountType.buy); //TODO
+*/
+        emit(LoadedTagState(
+          tag: tags.first,
+        ));
+      } else {
+        final tags = await locator
+            .get<TagRepository>()
+            .getTags(''); //TODO
+        emit(LoadedTagState(
+          tag: tags.first,
+        ));
+      }
     } catch (error) {
       emit(ErrorState(error.toString()));
     }

@@ -59,17 +59,25 @@ class MockContactServiceClient implements ContactServiceClient {
   }
 
   @override
-  ResponseStream<ContactResponse> getSocialNetworkContacts(
+  ResponseFuture<ContactResponse> getSocialNetworkContacts(
       ContactRequest request,
       {CallOptions? options}) {
-    return ResponseStream(FakeClientCall<dynamic, ContactResponse>(
-        _getSocialNetworkContacts(request)));
+    return ResponseFuture(
+      FakeClientCall<dynamic, ContactResponse>(
+        _getSocialNetworkContacts(request),
+      ),
+    );
   }
 
   Future<ContactResponse> _getSocialNetworkContacts(
       ContactRequest request) async {
-    return ContactResponse()
-      ..contact =
-          api.getContacts(request.contact.userId)[0]; //TODO: make stream
+    var contact = Contact();
+    var contacts = api.getContacts(request.contact.userId);
+    //TODO: check if stream is working
+/*    var contactStream = Stream.fromIterable(contacts);
+    contactStream.listen((value) {
+      contact = value;
+    });*/
+    return ContactResponse()..contacts.addAll(contacts);
   }
 }

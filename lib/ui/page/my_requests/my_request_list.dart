@@ -13,18 +13,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MyRequestList extends StatefulWidget {
-  final bool isDone;
+  final List<ServiceRequest_Status> statuses;
   final List<ServiceRequest> requests;
   final void Function( ServiceRequest request, String userId) onChanged;
   final void Function(ServiceRequest request, String userId, int index)
       onDismissed;
+  final void Function(ServiceRequest request, String userId, int index)
+      onAccept;
 
   const MyRequestList({
     super.key,
     required this.requests,
+    required this.statuses,
     required this.onChanged,
-    required this.isDone,
     required this.onDismissed,
+    required this.onAccept,
   });
 
   @override
@@ -35,7 +38,6 @@ class _MyRequestListState extends State<MyRequestList> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-
     final requests = sortRequests();
     return requests.isEmpty
         ? Center(
@@ -49,29 +51,23 @@ class _MyRequestListState extends State<MyRequestList> {
               final request = requests[index];
               return Slidable(
                 endActionPane: ActionPane(
-                  extentRatio: 0.5,
+                  extentRatio: 0.4,
                   motion: const ScrollMotion(),
                   children: [
                     SlidableAction(
-                      onPressed: ((context) {}),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.orange,
-                      icon: CommunityMaterialIcons.star,
-                    ),
-                    SlidableAction(
                       onPressed: ((context) {
-                        widget.onChanged(request, user.userId,);
+                        widget.onAccept(request, user.userId, index);
                       }),
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(COLOR_PRIMARY),
-                      icon: Icons.edit,
+                      icon: CommunityMaterialIcons.check,
                     ),
                     SlidableAction(
                       onPressed: ((context) {
                         widget.onDismissed(request, user.userId, index);
                       }),
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.red,
+                      foregroundColor: Theme.of(context).colorScheme.error,
                       icon: Icons.delete,
                     ),
                   ],
@@ -104,18 +100,12 @@ class _MyRequestListState extends State<MyRequestList> {
   }
 
   List<ServiceRequest> sortRequests() {
-    if (widget.isDone) {
-      return widget.requests
-          .where((request) =>
-              request.status == ServiceRequest_Status.DONE ||
-              request.status == ServiceRequest_Status.DELETED)
-          .toList();
-    } else {
-      return widget.requests
-          .where((request) =>
-              request.status != ServiceRequest_Status.DONE &&
-              request.status != ServiceRequest_Status.DELETED)
-          .toList();
+    var requests = <ServiceRequest>[];
+    for (var i = 0; i <= widget.statuses.length - 1; i++) {
+      requests.addAll(widget.requests
+          .where((request) => request.status == widget.statuses[i])
+          .toList());
     }
+    return requests;
   }
 }

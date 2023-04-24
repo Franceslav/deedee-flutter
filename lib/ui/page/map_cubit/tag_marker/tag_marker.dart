@@ -1,7 +1,8 @@
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter_map/plugin_api.dart';
 
 class TagMarker {
-  final String tagId;
+  final Int64 tagId;
   final String tagMessengerId;
 
   final Marker marker;

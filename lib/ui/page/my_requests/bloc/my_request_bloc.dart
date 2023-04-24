@@ -4,6 +4,8 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../generated/timestamp.pb.dart';
+
 part 'my_request_event.dart';
 
 part 'my_request_state.dart';
@@ -15,22 +17,30 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   ServiceRequestBloc(this._serviceRequestRepository, this._user)
       : super(MyRequestInitial()) {
     on<MyRequestLoadEvent>(_onLoadRequest);
+    on<MyRequestCreateEvent>(_onCreateRequest);
+    on<MyRequestAcceptEvent>(_onAcceptRequest);
     on<MyRequestDeleteEvent>(_onDeleteRequest);
-    on<AcceptRequestEvent>(_onAcceptRequest);
+    // on<AcceptRequestEvent>(_onAcceptRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     initialize();
   }
 
   _onAcceptRequest(
-      AcceptRequestEvent event, Emitter<MyRequestState> emit) async {
+      MyRequestAcceptEvent event, Emitter<MyRequestState> emit) async {
     try {
-      _serviceRequestRepository.create(
-        ServiceRequestRequest()..serviceRequest = event.request,
+      var sr = ServiceRequest()..requestId = event.request.requestId;
+      final response = await _serviceRequestRepository.accept(
+        ServiceRequestRequest()..serviceRequest = sr,
       );
-      final requests = await _serviceRequestRepository.getAll(_user.userId);
-      emit(MyRequestLoadState(requests));
-
-    }catch (error){
+      if (response.status == ServiceRequest_Status.ACCEPTED) {
+        emit(AcceptSuccessfulState());
+      } else if (event.index != null) {
+        emit(AcceptedErrorState(
+          request: event.request,
+          index: event.index!,
+        ));
+      }
+    } catch (error) {
       emit(ErrorState(
         errorMessage: error.toString(),
       ));
@@ -45,8 +55,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       );
       final requests = await _serviceRequestRepository.getAll(_user.userId);
       emit(MyRequestLoadState(requests));
-
-    }catch (error){
+    } catch (error) {
       emit(ErrorState(
         errorMessage: error.toString(),
       ));
@@ -67,6 +76,31 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onLoadRequest(
       MyRequestLoadEvent event, Emitter<MyRequestState> emit) async {}
 
+  _onCreateRequest(
+      MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
+    try {
+      var sr = ServiceRequest(
+        requestId: DateTime.now().toString(),
+        clientId: _user.userId,
+        description: DateTime.now().toString() * 4,
+        dateOfRequest: Timestamp(),
+        price: 0,
+        status: ServiceRequest_Status.PENDING,
+      );
+      if (event.request != null) {
+        sr = event.request!..clientId = _user.userId;
+      }
+      final response = await _serviceRequestRepository.create(
+        ServiceRequestRequest()..serviceRequest = sr,
+      );
+      emit(MyRequestCreateState(response));
+    } catch (error) {
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
@@ -76,8 +110,6 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       if (response.status == ServiceRequest_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
-        //without delay this error appears 'A dismissed Dismissible widget is still part of the tree.'
-        await Future.delayed(const Duration(seconds: 1));
         emit(DeletedErrorState(
           request: event.request,
           index: event.index,

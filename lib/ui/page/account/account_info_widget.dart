@@ -6,6 +6,7 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:deedee/services/helper.dart';
 
 class AccountInfoWidget extends StatelessWidget {
   const AccountInfoWidget({
@@ -61,21 +62,30 @@ class AccountInfoWidget extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                       onTap: () {
-                        context.router.push(const UserTagsScreenRoute());
+                        showSnackBar(
+                          context,
+                          AppLocalizations.of(context)!.notAuthorized,
+                        );
                       },
                       child: _infoColumn('9', locale.placed)),
                 ),
                 Expanded(
                   child: InkWell(
                       onTap: () {
-                        context.router.push(const StatsScreenRoute());
+                        showSnackBar(
+                          context,
+                          AppLocalizations.of(context)!.notAuthorized,
+                        );
                       },
                       child: _infoColumn('3', locale.seen)),
                 ),
                 Expanded(
                   child: InkWell(
                       onTap: () {
-                        context.router.push(const BookmarksScreenRoute());
+                        showSnackBar(
+                          context,
+                          AppLocalizations.of(context)!.notAuthorized,
+                        );
                       },
                       child: _infoColumn('0', locale.bookmarked)),
                 ),
@@ -87,23 +97,21 @@ class AccountInfoWidget extends StatelessWidget {
     );
   }
 
-  Expanded _infoColumn(String type, String quantity) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            type,
-            style: AppTextTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            quantity,
-            style: AppTextTheme.titleNormal,
-            textAlign: TextAlign.center,
-          )
-        ],
-      ),
+   Column _infoColumn(String type, String quantity) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          type,
+          style: AppTextTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          quantity,
+          style: AppTextTheme.titleNormal,
+          textAlign: TextAlign.center,
+        )
+      ],
     );
   }
 }

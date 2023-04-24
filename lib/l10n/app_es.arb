@@ -183,5 +183,6 @@
   "expiredDate": "Válido hasta",
   "addCard": "Agregar tarjeta",
   "send": "Enviar",
-  "customerProfile": "Perfil de cliente"
+  "customerProfile": "Perfil de cliente",
+  "notAuthorized":"No estás autorizado para ver"
 }

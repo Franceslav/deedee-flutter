@@ -1,10 +1,10 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
-import 'package:deedee/generated/TagService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
+import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/tag_service.pbgrpc.dart';
 import 'package:deedee/generated/timestamp.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/service_request.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
@@ -23,13 +23,6 @@ class GRCPRepository {
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
   final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
-
-  Future<bool> verifyAuthCode(String code) async {
-    var response = await _tagServiceClient
-        .verifyAuthCode(VerifyAuthCodeRequest()..code = code);
-
-    return response.authenticated;
-  }
 
   Future<bool> sendVerificationEmail(String email) async {
     String? url = await locator.get<SharedUtils>().getPrefsIpAddress();
@@ -86,30 +79,26 @@ class GRCPRepository {
 
   Future<bool> bookmarkTag(String userId) async {
     final response = await _tagServiceClient
-        .addTagToBookmark(TagToBookmarkRequest()..userId = userId);
-    return response.succeed;
+        .addTagToBookmarks(TagRequest()..tag = Tag());
+    return response.tags.first.status == Tag_Status.BOOKMARKED;
   }
 
   Future<List<Tag>> getUserBookmarks(String userId) async {
     final response = await _tagServiceClient
-        .getBookmarkTags(GetBookmarkTagsRequest()..userId = userId);
+        .getBookmarkedTags(TagRequest()..tag = Tag()); //TODO
     return response.tags;
   }
 
   Future<bool> removeUserBookmark(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.removeTagToBookmark(TagToBookmarkRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.succeed;
+    final response = await _tagServiceClient
+        .addTagToBookmarks(TagRequest()..tag = Tag());
+    return response.tags.first.status == Tag_Status.PLACED;
   }
 
   Future<bool> addUserBookmark(String userId, String tagId) async {
-    final response =
-        await _tagServiceClient.addTagToBookmark(TagToBookmarkRequest()
-          ..userId = userId
-          ..tagId = tagId);
-    return response.succeed;
+    final response = await _tagServiceClient
+        .addTagToBookmarks(TagRequest()..tag = Tag());
+    return response.tags.first.status == Tag_Status.BOOKMARKED;
   }
 
   Future<bool> getUserPremiumStatus(String userId) async {
@@ -141,68 +130,17 @@ class GRCPRepository {
 
   Future<List<Tag>> getUserTags(String userId) async {
     final response = await _tagServiceClient
-        .getUserTags(GetUserTagsRequest()..userId = userId);
+        .getTags(TagRequest()..tag = Tag());
     return response.tags;
   }
 
-  Future<bool> removeUserTag(String userId, String tagId) async {
-    final response = await _tagServiceClient.removeUserTag(UserTagRequest()
-      ..userId = userId
-      ..tagId = tagId);
-    return response.tag.isDeleted;
+  Future<bool> removeUserTag(String userId, Int64 tagId) async {
+    final response = await _tagServiceClient.removeTag(TagRequest()); //TODO:
+    return response.tags.first.status == Tag_Status.DELETED;
   }
 
   Future<bool> placeBidRequest(String userId, order.Order order) async {
     return true;
-  }
-
-  Future<List<ServiceRequest>> getUserRequests(String userId) async {
-    var timestamp1 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp2 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp3 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    var timestamp4 = Timestamp()
-      ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
-    return [
-      ServiceRequest(
-          requestId: '1',
-          tag: Tag()..topicId = 'маникюр 1',
-          description:
-              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          customerName: 'customerName',
-          dateOfRequest: timestamp1,
-          isDone: false),
-      ServiceRequest(
-          requestId: '2',
-          tag: Tag()..topicId = 'маникюр 2',
-          description:
-              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          customerName: 'customerName',
-          dateOfRequest: timestamp2,
-          isDone: false),
-      ServiceRequest(
-          requestId: '3',
-          tag: Tag()..topicId = 'маникюр 3',
-          description:
-              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          customerName: 'customerName',
-          dateOfRequest: timestamp3,
-          isDone: false),
-      ServiceRequest(
-          requestId: '4',
-          tag: Tag()..topicId = 'маникюр 4',
-          description:
-              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-          customerName: 'customerName',
-          dateOfRequest: timestamp4,
-          isDone: true),
-    ];
   }
 
   Future<bool> removeUserRequest(String userId, String requestsId) async {

@@ -1,13 +1,16 @@
-import 'package:deedee/generated/TagService.pb.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/topic_service.pb.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/page/filter/filter_screen.dart';
+import 'package:deedee/ui/page/filter/filter_page.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'enum/topic_screens_enum.dart';
 
 class MainTopicItem extends StatelessWidget {
-  final TopicDescription topic;
+  final Topic topic;
   final double width;
   final ScreenType screenType;
 
@@ -51,11 +54,9 @@ class MainTopicItem extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: const Color(0xFFF8F4FE),
         onTap: () {
-          push(
-            context,
-            FilterPage(
-              topicName: topic.title,
-              currentFilter: CompositeFilter([], []),
+          context.router.popAndPush(
+            FilterPageRoute(
+              currentFilter: CompositeFilter(topic: topic), //TODO
             ),
           );
         },
@@ -66,7 +67,7 @@ class MainTopicItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                _getImagePath(topic.id),
+                _getImagePath(topic.topicId),
                 width: width * 0.28,
                 height: width * 0.28,
               ),
@@ -78,7 +79,7 @@ class MainTopicItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                   Text(
-                    '${topic.offerCount} ${AppLocalizations.of(context)!.offersTitle}',
+                    '${topic.topicId} ${AppLocalizations.of(context)!.offersTitle}', //TODO:
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
