@@ -13,7 +13,8 @@ class FilterPageFilterKeySelectedEvent extends FilterPageEvent {
   final String selectedSubtopic;
   final String selectedFilterKey;
 
-  FilterPageFilterKeySelectedEvent(this.selectedSubtopic, this.selectedFilterKey);
+  FilterPageFilterKeySelectedEvent(
+      this.selectedSubtopic, this.selectedFilterKey);
 }
 
 class SelectLocationEvent extends FilterPageEvent {

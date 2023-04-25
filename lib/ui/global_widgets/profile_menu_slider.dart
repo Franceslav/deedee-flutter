@@ -90,16 +90,8 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.popAndPush(const SavedFiltersScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.star_border_purple500_sharp,
-              text: AppLocalizations.of(context)!.subscription,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const SubscribedFiltersPageRoute());
+                context.router
+                    .popAndPush(const FavoriteCompositeFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,

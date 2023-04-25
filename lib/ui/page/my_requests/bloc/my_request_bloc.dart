@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
+import 'package:deedee/generated/deedee/api/service/service_request_service.pb.dart';
+import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
-
-import '../../../../generated/timestamp.pb.dart';
 
 part 'my_request_event.dart';
 
@@ -16,22 +17,30 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
 
   ServiceRequestBloc(this._serviceRequestRepository, this._user)
       : super(MyRequestInitial()) {
-    on<MyRequestLoadEvent>(_onLoadRequest);
     on<MyRequestCreateEvent>(_onCreateRequest);
     on<MyRequestAcceptEvent>(_onAcceptRequest);
     on<MyRequestDeleteEvent>(_onDeleteRequest);
-    // on<AcceptRequestEvent>(_onAcceptRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     initialize();
+  }
+
+  initialize() async {
+    try {
+      final requests = await _serviceRequestRepository.getAll(_user.userId);
+      emit(MyRequestLoadState(requests));
+    } catch (error) {
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
   }
 
   _onAcceptRequest(
       MyRequestAcceptEvent event, Emitter<MyRequestState> emit) async {
     try {
-      var sr = ServiceRequest()..requestId = event.request.requestId;
-      final response = await _serviceRequestRepository.accept(
-        ServiceRequestRequest()..serviceRequest = sr,
-      );
+      var serverRequest = ServiceRequest()
+        ..serviceRequestId = event.request.serviceRequestId;
+      final response = await _serviceRequestRepository.accept(serverRequest);
       if (response.status == ServiceRequest_Status.ACCEPTED) {
         emit(AcceptSuccessfulState());
       } else if (event.index != null) {
@@ -50,9 +59,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onUpdateRequest(
       UpdateRequestEvent event, Emitter<MyRequestState> emit) async {
     try {
-      _serviceRequestRepository.change(
-        ServiceRequestRequest()..serviceRequest = event.request,
-      );
+      _serviceRequestRepository.change(event.request, event.request);
       final requests = await _serviceRequestRepository.getAll(_user.userId);
       emit(MyRequestLoadState(requests));
     } catch (error) {
@@ -61,38 +68,22 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       ));
     }
   }
-
-  initialize() async {
-    try {
-      final requests = await _serviceRequestRepository.getAll(_user.userId);
-      emit(MyRequestLoadState(requests));
-    } catch (error) {
-      emit(ErrorState(
-        errorMessage: error.toString(),
-      ));
-    }
-  }
-
-  _onLoadRequest(
-      MyRequestLoadEvent event, Emitter<MyRequestState> emit) async {}
 
   _onCreateRequest(
       MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
     try {
-      var sr = ServiceRequest(
-        requestId: DateTime.now().toString(),
-        clientId: _user.userId,
+      var serviceRequest = ServiceRequest(
+        serviceRequestId: Int64(DateTime.now().microsecondsSinceEpoch),
+        createdFor: _user.userId,
         description: DateTime.now().toString() * 4,
-        dateOfRequest: Timestamp(),
+        createdAt: Timestamp(),
         price: 0,
         status: ServiceRequest_Status.PENDING,
       );
       if (event.request != null) {
-        sr = event.request!..clientId = _user.userId;
+        serviceRequest = event.request!..createdFor = _user.userId;
       }
-      final response = await _serviceRequestRepository.create(
-        ServiceRequestRequest()..serviceRequest = sr,
-      );
+      final response = await _serviceRequestRepository.create(serviceRequest);
       emit(MyRequestCreateState(response));
     } catch (error) {
       emit(ErrorState(
@@ -104,9 +95,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
-      final response = await _serviceRequestRepository.delete(
-        ServiceRequestRequest()..serviceRequest = event.request,
-      );
+      final response = await _serviceRequestRepository.delete(event.request);
       if (response.status == ServiceRequest_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {

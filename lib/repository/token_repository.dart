@@ -1,4 +1,5 @@
-import 'package:deedee/generated/token_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/token.pb.dart';
+import 'package:deedee/generated/deedee/api/service/token_service.pbgrpc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../injection.dart';
@@ -7,7 +8,7 @@ import '../injection.dart';
 class TokenRepository {
   final _tagServiceClient = locator.get<TokenServiceClient>();
 
-  Future<Token> getToken(String userId) async {
+  Future<PushNotificationToken> getToken(String userId) async {
     var response = await _tagServiceClient.getToken(
       TokenRequest(userId: userId),
     );

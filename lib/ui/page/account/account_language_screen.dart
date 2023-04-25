@@ -88,6 +88,18 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                     },
                     iconSize: 50,
                     icon: Image.asset('assets/images/pt.png')),
+                IconButton(
+                    onPressed: () {
+                      context.read<AccountBloc>().changeLocal('he');
+                    },
+                    iconSize: 50,
+                    icon: Image.asset('assets/images/he.png')),
+                IconButton(
+                    onPressed: () {
+                      context.read<AccountBloc>().changeLocal('fr');
+                    },
+                    iconSize: 50,
+                    icon: Image.asset('assets/images/fr.png')),
               ],
             ),
           ),

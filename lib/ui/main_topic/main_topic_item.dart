@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
-import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/page/filter/filter_page.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

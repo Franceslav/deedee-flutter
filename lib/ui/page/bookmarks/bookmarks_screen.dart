@@ -2,8 +2,8 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
@@ -104,9 +104,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ButtonBarEntry(
                                   child: Text(
                                       AppLocalizations.of(context)!.actualTags),
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                 ),
                                 ButtonBarEntry(
                                   child: Text(AppLocalizations.of(context)!
@@ -170,7 +168,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                       icon: Image.asset(
                                           'assets/images/bookmark_icon.png'),
                                       mainText: Text(
-                                        ''/*bookmark.messengerId*/, //TODO:
+                                        '' /*bookmark.messengerId*/, //TODO:
                                         style: AppTextTheme.bodyLarge,
                                       ),
                                       secondaryText: Text(
@@ -185,7 +183,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                               bookmark.geolocation
                                                   .longitude): TagDTO(
                                               bookmark.tagId,
-                                              ''/*bookmark.messengerId*/)
+                                              '' /*bookmark.messengerId*/)
                                         };
                                         context.router.push(
                                           MapScreenRoute(

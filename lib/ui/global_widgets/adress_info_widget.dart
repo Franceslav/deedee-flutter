@@ -2,7 +2,6 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../generated/tag_service.pb.dart';
 import '../../injection.dart';
 import '../../repository/service_request_repository.dart';
 import '../map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
@@ -13,6 +12,7 @@ import 'outlined_button_widget.dart';
 
 class AddressInfoWidget extends StatelessWidget {
   final Int64 selectedTagId;
+
   const AddressInfoWidget({
     super.key,
     required this.selectedTagId,

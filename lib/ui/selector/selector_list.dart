@@ -1,6 +1,6 @@
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:flutter/material.dart';
 
-import '../../generated/filter_service.pb.dart';
 import './selector_item.dart';
 
 class SelectorList extends StatefulWidget {

@@ -12,7 +12,7 @@ class SubtopicListFailureState extends FilterPageState {
 }
 
 class SubtopicListLoadedState extends FilterPageState {
-  final Map<String,FilterKeyList> allSubtopicsFilter;
+  final Map<String, FilterKeyList> allSubtopicsFilter;
   final Map<String, List<String>> selectedSubtopicsFilter;
 
   SubtopicListLoadedState({
