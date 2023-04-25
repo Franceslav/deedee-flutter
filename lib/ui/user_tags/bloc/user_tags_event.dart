@@ -21,3 +21,9 @@ class DeleteTagEvent extends UserTagsEvent {
     required this.index,
   });
 }
+
+class SearchUserTagsEvent extends UserTagsEvent {
+  final String tagName;
+
+  SearchUserTagsEvent(this.tagName);
+}

@@ -99,10 +99,27 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                         ],
                       ),
                     ),
-                    const Divider(
-                      thickness: 0.5,
-                      color: Colors.black,
-                      height: 0,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.search,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 16,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          BlocProvider.of<ServiceRequestBloc>(context)
+                              .add(SearchRequestEvent(value));
+                        },
+                      ),
                     ),
                     Expanded(
                       child: PageView(
@@ -129,20 +146,18 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                 index: index,
                               ));
                             },
-                            onChanged: (request, userId) =>
-                                BlocProvider.of<ServiceRequestBloc>(context)
-                                    .add(
-                              UpdateRequestEvent(
-                                request: request,
-                                userId: userId,
-                              ),
-                            ),
+                              onChanged: (request, userId) =>
+                                  BlocProvider.of<ServiceRequestBloc>(context).add(
+                                      UpdateRequestEvent(
+                                        request: request,
+                                        userId: userId,
+                                      )
+                                  )
                           ),
-                          MyRequestList(
-                            requests: _requests,
+                          MyRequestList(requests: _requests,
                             statuses: const [
-                              ServiceRequest_Status.DONE,
                               ServiceRequest_Status.DELETED,
+                              ServiceRequest_Status.DONE,
                             ],
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
@@ -157,14 +172,13 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                 index: index,
                               ));
                             },
-                            onChanged: (request, userId) =>
-                                BlocProvider.of<ServiceRequestBloc>(context)
-                                    .add(
-                              UpdateRequestEvent(
-                                request: request,
-                                userId: userId,
-                              ),
-                            ),
+                              onChanged: (request, userId) =>
+                                  BlocProvider.of<ServiceRequestBloc>(context).add(
+                                      UpdateRequestEvent(
+                                        request: request,
+                                        userId: userId,
+                                      )
+                                  )
                           ),
                         ],
                       ),

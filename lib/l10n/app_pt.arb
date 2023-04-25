@@ -185,5 +185,7 @@
   "clickMarkerViewApplication": "Clique no marcador para visualizar o aplicativo",
   "send": "Enviar",
   "customerProfile": "Perfil do cliente",
-   "notAuthorized":"Você não está autorizado a visualizar"
+  "notAuthorized":"Você não está autorizado a visualizar",
+  "search":"Procurar",
+  "notFound": "Não encontrado"
 }
