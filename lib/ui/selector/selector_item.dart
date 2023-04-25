@@ -1,6 +1,6 @@
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:flutter/material.dart';
-import '../../generated/filter_service.pb.dart';
 
 class SelectorItem extends StatefulWidget {
   final FilterKey filterKey;

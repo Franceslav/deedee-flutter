@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -78,7 +78,7 @@ class _MyRequestListState extends State<MyRequestList> {
                   child: DeeDeeRowInfoWidget(
                     icon: Image.asset('assets/images/bookmark_icon.png'),
                     mainText: Text(
-                      request.clientId,
+                      request.createdBy,
                       style: AppTextTheme.bodyLarge,
                     ),
                     secondaryText: Text(

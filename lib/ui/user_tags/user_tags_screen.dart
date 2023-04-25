@@ -1,6 +1,6 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -122,7 +122,11 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               BlocProvider.of<UserTagsBloc>(context)
                                   .add(SearchUserTagsEvent(value));
                             },
-                          ),
+                          ),),
+                        const Divider(
+                          thickness: 0.5,
+                          color: Colors.black,
+                          height: 0,
                         ),
                         Expanded(
                           child: PageView(

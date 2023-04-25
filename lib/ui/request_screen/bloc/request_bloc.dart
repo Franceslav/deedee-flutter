@@ -1,7 +1,6 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:meta/meta.dart';
@@ -27,10 +26,10 @@ class ServicePushRequestBloc
       Emitter<ServicePushRequestState> emit) {
     try {
       ServiceRequest serviceRequest = ServiceRequest()
-        ..requestId = _initialServiceRequest.requestId
-        ..clientId =_initialServiceRequest.clientId
-        ..description  =_initialServiceRequest.description
-        ..dateOfRequest =_initialServiceRequest.dateOfRequest
+        ..serviceRequestId = _initialServiceRequest.serviceRequestId
+        ..createdFor = _initialServiceRequest.createdFor
+        ..description = _initialServiceRequest.description
+        ..createdAt = _initialServiceRequest.createdAt
         ..price = event.price.toDouble();
 
       bool changed =
@@ -46,8 +45,8 @@ class ServicePushRequestBloc
   _initialize() async {
     try {
       _initialServiceRequest =
-          (await _serviceRequestRepository.getAll(_user.userId))
-              .firstWhere((sr) => sr.requestId == _pushNotificationRequestId);
+          (await _serviceRequestRepository.getAll(_user.userId)).firstWhere(
+              (sr) => sr.serviceRequestId == _pushNotificationRequestId);
       emit(ServiceRequestChangeState(
           serviceRequest: _initialServiceRequest, changed: false));
     } catch (error) {

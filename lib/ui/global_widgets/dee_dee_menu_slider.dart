@@ -115,17 +115,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.navigate(const SavedFiltersScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.star_border_purple500_sharp,
-              text: AppLocalizations.of(context)!.subscription,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-
-                context.router.navigate(const SubscribedFiltersPageRoute());
+                context.router
+                    .navigate(const FavoriteCompositeFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,

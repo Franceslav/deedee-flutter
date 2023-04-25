@@ -1,11 +1,10 @@
-import 'package:deedee/generated/topic_service.pb.dart';
-import 'package:deedee/generated/topic_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/service/topic_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/topic_repository.dart';
 import 'package:deedee/services/fake/fake_client.dart';
-import 'package:grpc/src/client/method.dart';
-import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/call.dart';
+import 'package:grpc/src/client/common.dart';
+import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: TopicServiceClient, env: [Environment.dev])
@@ -44,7 +43,7 @@ class MockTopicServiceClient implements TopicServiceClient {
 
   Future<SubtopicResponse> _getSubtopics(SubtopicRequest request) async {
     return SubtopicResponse()
-      ..subtopic.addAll(await api.getSubTopics(
+      ..subtopics.addAll(await api.getSubTopics(
           request.subtopic.userId, request.subtopic.topicId, 0, 0));
   }
 

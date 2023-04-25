@@ -34,3 +34,8 @@ class HomePageGPSReceivedState extends HomeScreenState {
 
   HomePageGPSReceivedState(this.position);
 }
+
+class HomePageRequestReceivedState extends HomeScreenState {
+  final String? id;
+  HomePageRequestReceivedState(this.id);
+}

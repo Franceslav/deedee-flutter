@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
@@ -42,85 +42,84 @@ class _UserTagsListState extends State<UserTagsList> {
     final tags = sortTags();
     return tags.isEmpty
         ? Center(
-            child: Text(
-              AppLocalizations.of(context)!.notFound,
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          )
+      child: Text(
+        AppLocalizations.of(context)!.noUserTags,
+        style: Theme.of(context).textTheme.headline1,
+      ),
+    )
         : ListView.separated(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            itemBuilder: ((context, index) {
-              final tag = tags[index];
-              return Slidable(
-                endActionPane: ActionPane(
-                  extentRatio: 0.5,
-                  motion: const ScrollMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: ((context) {}),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.orange,
-                      icon: CommunityMaterialIcons.star,
-                    ),
-                    SlidableAction(
-                      onPressed: ((context) {}),
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(COLOR_PRIMARY),
-                      icon: Icons.edit,
-                    ),
-                    SlidableAction(
-                      onPressed: ((context) {
-                        final userId = BlocProvider.of<UserBloc>(context)
-                            .state
-                            .user
-                            .userId;
-                        widget.onDismissed(tag, userId, index);
-                      }),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.red,
-                      icon: Icons.delete,
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: DeeDeeRowInfoWidget(
-                    icon: Image.asset('assets/images/bookmark_icon.png'),
-                    // icon: const Icon(Icons.bookmark_border),
-                    mainText: Text(
-                      tag.compositeFilter.topic
-                          .title, // tag.compositeFilter.filterMap.values.first.filterKeys
+      itemBuilder: ((context, index) {
+        final tag = tags[index];
+        return Slidable(
+          endActionPane: ActionPane(
+            extentRatio: 0.5,
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) {}),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.orange,
+                icon: CommunityMaterialIcons.star,
+              ),
+              SlidableAction(
+                onPressed: ((context) {}),
+                backgroundColor: Colors.white,
+                foregroundColor: const Color(COLOR_PRIMARY),
+                icon: Icons.edit,
+              ),
+              SlidableAction(
+                onPressed: ((context) {
+                  final userId = BlocProvider.of<UserBloc>(context)
+                      .state
+                      .user
+                      .userId;
+                  widget.onDismissed(tag, userId, index);
+                }),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.red,
+                icon: Icons.delete,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: DeeDeeRowInfoWidget(
+              icon: Image.asset('assets/images/bookmark_icon.png'),
+              // icon: const Icon(Icons.bookmark_border),
+              mainText: Text(
+                tag.compositeFilter.topic
+                    .title, // tag.compositeFilter.filterMap.values.first.filterKeys
 
-                      style: AppTextTheme.bodyLarge,
-                    ),
-                    secondaryText: Text(
-                      '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
-                      style: AppTextTheme.labelMedium,
-                    ),
-                    //     subtitle: Text(bookmark.geolocation.toString()),
-                    onTap: () {
-                      Map<LatLng, TagDTO> tagMap = {
-                        LatLng(tag.geolocation.latitude,
-                                tag.geolocation.longitude):
-                            TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
-                      };
-                      context.router.push(
-                        MapScreenRoute(
-                          tagDescriptionMap: tagMap,
-                          currentFilter: CompositeFilter(filterMap: {}), //TODO:
-                        ),
-                      );
-                    },
+                style: AppTextTheme.bodyLarge,
+              ),
+              secondaryText: Text(
+                '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
+                style: AppTextTheme.labelMedium,
+              ),
+              //     subtitle: Text(bookmark.geolocation.toString()),
+              onTap: () {
+                Map<LatLng, TagDTO> tagMap = {
+                  LatLng(tag.geolocation.latitude,
+                      tag.geolocation.longitude):
+                  TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
+                };
+                context.router.push(
+                  MapScreenRoute(
+                    tagDescriptionMap: tagMap,
+                    currentFilter: CompositeFilter(filterMap: {}), //TODO:
                   ),
-                ),
-                // UserTagItem(tag: tag),
-              );
-            }),
-            itemCount: tags.length,
-            separatorBuilder: (context, index) {
-              return const DeeDeeDeviderWidget();
-            },
-          );
+                );
+              },
+            ),
+          ),
+          // UserTagItem(tag: tag),
+        );
+      }),
+      itemCount: tags.length,
+      separatorBuilder: (context, index) {
+        return const DeeDeeDeviderWidget();
+      },
+    );
   }
 
   List<Tag> sortTags() {
@@ -136,5 +135,48 @@ class _UserTagsListState extends State<UserTagsList> {
             .where((tag) => tag.status == Tag_Status.DELETED)
             .toList();
     }
+  }
+}
+
+class _TagCardWidget extends StatelessWidget {
+  const _TagCardWidget({
+    super.key,
+    required this.tag,
+  });
+
+  final Tag tag;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: DeeDeeRowInfoWidget(
+        icon: Image.asset('assets/images/bookmark_icon.png'),
+        // icon: const Icon(Icons.bookmark_border),
+        mainText: Text(
+          tag.compositeFilter.topic.title,
+          // tag.compositeFilter.filterMap.values.first.filterKeys
+
+          style: AppTextTheme.bodyLarge,
+        ),
+        secondaryText: Text(
+          '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
+          style: AppTextTheme.labelMedium,
+        ),
+        //     subtitle: Text(bookmark.geolocation.toString()),
+        onTap: () {
+          Map<LatLng, TagDTO> tagMap = {
+            LatLng(tag.geolocation.latitude, tag.geolocation.longitude):
+                TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
+          };
+          context.router.push(
+            MapScreenRoute(
+              tagDescriptionMap: tagMap,
+              currentFilter: CompositeFilter(filterMap: {}), //TODO:
+            ),
+          );
+        },
+      ),
+    );
   }
 }

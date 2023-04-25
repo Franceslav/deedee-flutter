@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';

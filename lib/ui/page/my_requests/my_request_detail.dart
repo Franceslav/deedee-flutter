@@ -1,4 +1,4 @@
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +30,9 @@ class _MyRequestDetailState extends State<MyRequestDetail> {
       ),
       body: ListView(
         children: [
-          Text(widget.request.clientId),
+          Text(widget.request.createdFor),
           Text(widget.request.description),
-          Text(widget.request.requestId),
+          Text(widget.request.serviceRequestId.toString()),
           if (widget.request.description != null)
             //   Text(widget.request.customerAddress.toString()),
             // if (widget.request.customerContacts != null)

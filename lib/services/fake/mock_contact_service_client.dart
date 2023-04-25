@@ -1,6 +1,6 @@
-import 'package:deedee/generated/contact_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/service/contact_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/contact_repository.dart';
+import 'package:deedee/services/fake/api/contact_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
@@ -71,7 +71,6 @@ class MockContactServiceClient implements ContactServiceClient {
 
   Future<ContactResponse> _getSocialNetworkContacts(
       ContactRequest request) async {
-    var contact = Contact();
     var contacts = api.getContacts(request.contact.userId);
     //TODO: check if stream is working
 /*    var contactStream = Stream.fromIterable(contacts);

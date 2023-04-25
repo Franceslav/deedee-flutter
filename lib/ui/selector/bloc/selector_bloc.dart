@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/filter_service.pbgrpc.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/subtopic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:latlong2/latlong.dart';
@@ -16,13 +16,13 @@ part 'selector_state.dart';
 class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   final TagRepository _tagRepository;
   final TopicRepository _topicRepository;
-  final FilterRepository _filterRepository;
+  final CompositeFilterRepository _compositeFilterRepository;
   final User _user;
 
   SelectorBloc(
     this._tagRepository,
     this._topicRepository,
-    this._filterRepository,
+    this._compositeFilterRepository,
     this._user,
   ) : super(InitialState()) {
     on<LoadTopicsEvent>(_onLoadSubTopics);
@@ -69,7 +69,8 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
       LoadFilterKeysEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingFiltersKeyState());
     try {
-      final response = await _filterRepository.getFilterItems(event.topic);
+      final response =
+          await _compositeFilterRepository.getFilterKeys(event.topic);
       emit(LoadedFilterKeysState(response.map((fi) => fi.title).toList()));
     } catch (error) {
       ErrorState(error.toString());
@@ -79,7 +80,6 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
   _onSelectFilterKey(SelectFilterKeyEvent event, Emitter<SelectorState> emit) {
     emit(FilterKeySelectedState(event.filterKey));
   }
-
 
   _onSelectLocation(SelectLocationEvent event, Emitter<SelectorState> emit) {
     emit(LocationSelectedState(event.data));

@@ -1,12 +1,23 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../generated/deedee/api/model/composite_filter.pb.dart';
+import '../../injection.dart';
+import '../../repository/composite_filter_repository.dart';
+import '../page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
+import '../user_bloc/user_bloc.dart';
+
 class DialogWidget extends StatefulWidget {
-  const DialogWidget({super.key});
+  final CompositeFilter compositeFilter;
+
+  const DialogWidget({
+    super.key,
+    required this.compositeFilter,
+  });
 
   @override
   _DialogWidgetState createState() => _DialogWidgetState();
@@ -28,6 +39,11 @@ class _DialogWidgetState extends State<DialogWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((UserBloc bloc) => bloc.state.user);
+    final compositeFilterBloc = CompositeFilterBloc(
+      locator.get<CompositeFilterRepository>(),
+      user,
+    );
     final screenHeight = MediaQuery.of(context).size.height;
     final dialogHeight = screenHeight * 0.2;
     return Dialog(
@@ -59,25 +75,21 @@ class _DialogWidgetState extends State<DialogWidget> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: OutlinedButtonWidget(
                       onPressed: () {
+                        compositeFilterBloc.add(
+                          CompositeFilterCreateEvent(
+                            widget.compositeFilter
+                              ..status = CompositeFilter_Status.FAVORITE
+                              ..title = _controller.text,
+                          ),
+                        );
                         context.router.pop();
                         _controller.clear();
                       },
                       text: AppLocalizations.of(context)!.save,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: OutlinedButtonWidget(
-                      onPressed: () {
-                        context.router.pop();
-                        _controller.clear();
-                      },
-                      text: AppLocalizations.of(context)!.saveAndSubscribe,
                     ),
                   ),
                 ],
