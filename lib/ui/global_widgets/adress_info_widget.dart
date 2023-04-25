@@ -39,6 +39,14 @@ class AddressInfoWidget extends StatelessWidget {
             style: AppTextTheme.bodyLarge,
           ),
           const SizedBox(height: 12),
+<<<<<<< HEAD
+=======
+          IconButton(
+            onPressed: () => showDialog(
+                context: context, builder: (ctx) => const CalendarDialog()),
+            icon: const Icon(Icons.calendar_today),
+          ),
+>>>>>>> 8d87687eeb101962e6dd48d8a08890e95b68bd78
           const SizedBox(height: 2),
           OutlinedButtonWidget(
             onPressed: () {
