@@ -28,6 +28,8 @@ import '../auth/welcome/welcome_screen.dart' as _i3;
 import '../help/help_screen.dart' as _i17;
 import '../main_topic/enum/topic_screens_enum.dart' as _i41;
 import '../main_topic/main_topic_screen.dart' as _i22;
+import '../page/account/account_business_page.dart' as _i42;
+import '../page/account/account_business_page.dart';
 import '../page/account/account_language_screen.dart' as _i10;
 import '../page/account/account_screen.dart' as _i8;
 import '../page/account/account_verify_screen.dart' as _i9;
@@ -163,6 +165,12 @@ class AppRouter extends _i37.RootStackRouter {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.SettingsScreen(),
+      );
+    },
+    AccountInfoBusinessPage.name: (routeData) {
+      return _i37.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i42.AccountInfoBusinessPage(),
       );
     },
     ConnectionSettingsScreenRoute.name: (routeData) {
@@ -380,6 +388,10 @@ class AppRouter extends _i37.RootStackRouter {
         _i37.RouteConfig(
           SettingsScreenRoute.name,
           path: '/settings',
+        ),
+        _i37.RouteConfig(
+          AccountInfoBusinessPage.name,
+          path: '/business',
         ),
         _i37.RouteConfig(
           ConnectionSettingsScreenRoute.name,
@@ -722,6 +734,18 @@ class SettingsScreenRoute extends _i37.PageRouteInfo<void> {
         );
 
   static const String name = 'SettingsScreenRoute';
+}
+
+/// generated route for
+/// [_i42.AccountInfoBusinessPage]
+class AccountInfoBusinessPage extends _i37.PageRouteInfo<void> {
+  const AccountInfoBusinessPage()
+      : super(
+          AccountInfoBusinessPage.name,
+          path: '/business',
+        );
+
+  static const String name = 'AccountInfoBusinessPage';
 }
 
 /// generated route for
