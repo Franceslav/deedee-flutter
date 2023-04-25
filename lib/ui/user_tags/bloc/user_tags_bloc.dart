@@ -12,6 +12,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   UserTagsBloc(this._tagRepository) : super(InitialState()) {
     on<LoadTagsEvent>(_onLoadTags);
     on<DeleteTagEvent>(_onDeleteTags);
+    on<SearchUserTagsEvent>(_onSearchTags);
   }
 
   _onLoadTags(LoadTagsEvent event, Emitter<UserTagsState> emit) async {
@@ -49,5 +50,10 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
         errorMessage: error.toString(),
       ));
     }
+  }
+
+  _onSearchTags(SearchUserTagsEvent event, Emitter<UserTagsState> emit) async {
+    final searchTag = await _tagRepository.getTags(event.tagName);
+    emit(LoadedTagsState(tags: searchTag));
   }
 }

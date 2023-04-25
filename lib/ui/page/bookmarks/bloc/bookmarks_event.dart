@@ -32,3 +32,9 @@ class AddBookmarkEvent extends BookmarksEvent {
     required this.tagId,
   });
 }
+
+class SearchBookmarksEvent extends BookmarksEvent {
+  final String bookmarkName;
+
+  SearchBookmarksEvent(this.bookmarkName);
+}
