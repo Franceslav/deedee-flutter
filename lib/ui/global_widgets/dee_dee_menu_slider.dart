@@ -139,6 +139,17 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 context.router.navigate(const SettingsScreenRoute());
               }),
           GeneralSlidingPanelItem(
+              icon: Icons.business_center,
+              text: AppLocalizations.of(context)!.accountTypeSellTitle,
+              onTap: () {
+                if (context.router.current.isActive) {
+                  controller.close();
+                }
+                context.router.navigate(
+                  const AccountInfoBusinessPage(),
+                );
+              }),
+          GeneralSlidingPanelItem(
               icon: Icons.help_outline,
               text: AppLocalizations.of(context)!.helpTitle,
               onTap: () {

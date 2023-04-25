@@ -26,8 +26,8 @@ import '../auth/resetPasswordScreen/reset_password_screen.dart' as _i20;
 import '../auth/signUp/sign_up_screen.dart' as _i19;
 import '../auth/welcome/welcome_screen.dart' as _i3;
 import '../help/help_screen.dart' as _i17;
-import '../main_topic/enum/topic_screens_enum.dart' as _i40;
-import '../main_topic/main_topic_screen.dart' as _i21;
+import '../main_topic/enum/topic_screens_enum.dart' as _i41;
+import '../main_topic/main_topic_screen.dart' as _i22;
 import '../page/account/account_language_screen.dart' as _i10;
 import '../page/account/account_screen.dart' as _i8;
 import '../page/account/account_verify_screen.dart' as _i9;
@@ -163,6 +163,12 @@ class AppRouter extends _i36.RootStackRouter {
       return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.SettingsScreen(),
+      );
+    },
+    AccountInfoBusinessPage.name: (routeData) {
+      return _i37.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i42.AccountInfoBusinessPage(),
       );
     },
     ConnectionSettingsScreenRoute.name: (routeData) {
@@ -375,7 +381,7 @@ class AppRouter extends _i36.RootStackRouter {
           SettingsScreenRoute.name,
           path: '/settings',
         ),
-        _i36.RouteConfig(
+        _i37.RouteConfig(
           ConnectionSettingsScreenRoute.name,
           path: '/connection-settings',
         ),
@@ -708,6 +714,18 @@ class SettingsScreenRoute extends _i36.PageRouteInfo<void> {
         );
 
   static const String name = 'SettingsScreenRoute';
+}
+
+/// generated route for
+/// [_i42.AccountInfoBusinessPage]
+class AccountInfoBusinessPage extends _i37.PageRouteInfo<void> {
+  const AccountInfoBusinessPage()
+      : super(
+          AccountInfoBusinessPage.name,
+          path: '/business',
+        );
+
+  static const String name = 'AccountInfoBusinessPage';
 }
 
 /// generated route for
