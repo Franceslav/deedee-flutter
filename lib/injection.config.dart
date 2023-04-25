@@ -13,35 +13,41 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'generated/AccountService.pbgrpc.dart' as _i3;
-import 'generated/contact_service.pbgrpc.dart' as _i8;
-import 'generated/filter_service.pbgrpc.dart' as _i12;
+import 'generated/deedee/api/service/composite_filter_service.pbgrpc.dart'
+    as _i8;
+import 'generated/deedee/api/service/contact_service.pbgrpc.dart' as _i12;
+import 'generated/deedee/api/service/service_request_service.pbgrpc.dart'
+    as _i24;
+import 'generated/deedee/api/service/tag_service.pbgrpc.dart' as _i29;
+import 'generated/deedee/api/service/token_service.pbgrpc.dart' as _i33;
+import 'generated/deedee/api/service/topic_service.pbgrpc.dart' as _i37;
 import 'generated/LocationService.pbgrpc.dart' as _i19;
-import 'generated/request_service_service.pbgrpc.dart' as _i24;
-import 'generated/tag_service.pbgrpc.dart' as _i29;
-import 'generated/topic_service.pbgrpc.dart' as _i33;
-import 'generated/VerificationService.pbgrpc.dart' as _i35;
+import 'generated/VerificationService.pbgrpc.dart' as _i39;
 import 'repository/card_repository.dart' as _i5;
-import 'repository/contact_repository.dart' as _i6;
-import 'repository/filter_repository.dart' as _i10;
-import 'repository/gps_repository.dart' as _i14;
+import 'repository/composite_filter_repository.dart' as _i6;
+import 'repository/contact_repository.dart' as _i10;
+import 'repository/gps_repository.dart' as _i15;
 import 'repository/service_request_repository.dart' as _i22;
 import 'repository/tag_repository.dart' as _i27;
-import 'repository/topic_repository.dart' as _i31;
+import 'repository/token_repository.dart' as _i31;
+import 'repository/topic_repository.dart' as _i35;
 import 'services/channel_service.dart' as _i17;
-import 'services/fake/api/contact_repository.dart' as _i7;
-import 'services/fake/api/filter_repository.dart' as _i11;
-import 'services/fake/api/gps_repository.dart' as _i15;
-import 'services/fake/api/service_request_repository.dart' as _i23;
-import 'services/fake/api/tag_repository.dart' as _i28;
-import 'services/fake/api/topic_repository.dart' as _i32;
+import 'services/fake/api/composite_filter_service_api.dart' as _i7;
+import 'services/fake/api/contact_service_api.dart' as _i11;
+import 'services/fake/api/gps_repository.dart' as _i14;
+import 'services/fake/api/service_request_service_api.dart' as _i23;
+import 'services/fake/api/tag_service_api.dart' as _i28;
+import 'services/fake/api/token_service_api.dart' as _i32;
+import 'services/fake/api/topic_repository.dart' as _i36;
 import 'services/fake/mock_account_service_client.dart' as _i4;
-import 'services/fake/mock_contact_service_client.dart' as _i9;
-import 'services/fake/mock_filter_service_client.dart' as _i13;
+import 'services/fake/mock_contact_service_client.dart' as _i13;
+import 'services/fake/mock_filter_service_client.dart' as _i9;
 import 'services/fake/mock_location_service_client.dart' as _i20;
 import 'services/fake/mock_service_request_service_client.dart' as _i25;
 import 'services/fake/mock_tag_service_client.dart' as _i30;
-import 'services/fake/mock_topic_service_client.dart' as _i34;
-import 'services/fake/mock_verification_service_clent.dart' as _i36;
+import 'services/fake/mock_token_service_client.dart' as _i34;
+import 'services/fake/mock_topic_service_client.dart' as _i38;
+import 'services/fake/mock_verification_service_clent.dart' as _i40;
 import 'services/grpc.dart' as _i16;
 import 'services/http_service.dart' as _i18;
 import 'services/push_notification_service.dart' as _i21;
@@ -76,40 +82,41 @@ Future<_i1.GetIt> $configureDependencies(
       _test,
     },
   );
-  gh.lazySingleton<_i6.ContactRepository>(
-    () => _i6.ContactRepository(),
+  gh.lazySingleton<_i6.CompositeFilterRepository>(
+    () => _i6.CompositeFilterRepository(),
     registerFor: {
       _dev,
       _prod,
       _test,
     },
   );
-  await gh.lazySingletonAsync<_i7.ContactServiceApi>(
+  await gh.lazySingletonAsync<_i7.CompositeFilterServiceApi>(
     () {
-      final i = _i7.ContactServiceApi();
+      final i = _i7.CompositeFilterServiceApi();
       return i.init().then((_) => i);
     },
     registerFor: {
       _dev,
+      _prod,
       _test,
     },
     preResolve: true,
   );
-  gh.lazySingleton<_i8.ContactServiceClient>(
-    () => _i9.MockContactServiceClient(),
+  gh.lazySingleton<_i8.CompositeFilterServiceClient>(
+    () => _i9.MockCompositeFilterServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i10.FilterRepository>(
-    () => _i10.FilterRepository(),
+  gh.lazySingleton<_i10.ContactRepository>(
+    () => _i10.ContactRepository(),
     registerFor: {
       _dev,
       _prod,
       _test,
     },
   );
-  await gh.lazySingletonAsync<_i11.FilterServiceApi>(
+  await gh.lazySingletonAsync<_i11.ContactServiceApi>(
     () {
-      final i = _i11.FilterServiceApi();
+      final i = _i11.ContactServiceApi();
       return i.init().then((_) => i);
     },
     registerFor: {
@@ -118,8 +125,8 @@ Future<_i1.GetIt> $configureDependencies(
     },
     preResolve: true,
   );
-  gh.lazySingleton<_i12.FilterServiceClient>(
-    () => _i13.MockFilterServiceClient(),
+  gh.lazySingleton<_i12.ContactServiceClient>(
+    () => _i13.MockContactServiceClient(),
     registerFor: {_dev},
   );
   gh.lazySingleton<_i14.GPSRepository>(
@@ -217,17 +224,17 @@ Future<_i1.GetIt> $configureDependencies(
     () => _i30.MockTagServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i31.TopicRepository>(
-    () => _i31.TopicRepository(),
+  gh.lazySingleton<_i31.TokenRepository>(
+    () => _i31.TokenRepository(),
     registerFor: {
       _dev,
       _prod,
       _test,
     },
   );
-  await gh.lazySingletonAsync<_i32.TopicServiceApi>(
+  await gh.lazySingletonAsync<_i32.TokenServiceApi>(
     () {
-      final i = _i32.TopicServiceApi();
+      final i = _i32.TokenServiceApi();
       return i.init().then((_) => i);
     },
     registerFor: {
@@ -237,12 +244,36 @@ Future<_i1.GetIt> $configureDependencies(
     },
     preResolve: true,
   );
-  gh.lazySingleton<_i33.TopicServiceClient>(
-    () => _i34.MockTopicServiceClient(),
+  gh.lazySingleton<_i33.TokenServiceClient>(
+    () => _i34.MockTokenServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i35.VerificationServiceClient>(
-    () => _i36.MockVerificationServiceClient(),
+  gh.lazySingleton<_i35.TopicRepository>(
+    () => _i35.TopicRepository(),
+    registerFor: {
+      _dev,
+      _prod,
+      _test,
+    },
+  );
+  await gh.lazySingletonAsync<_i36.TopicServiceApi>(
+    () {
+      final i = _i36.TopicServiceApi();
+      return i.init().then((_) => i);
+    },
+    registerFor: {
+      _dev,
+      _prod,
+      _test,
+    },
+    preResolve: true,
+  );
+  gh.lazySingleton<_i37.TopicServiceClient>(
+    () => _i38.MockTopicServiceClient(),
+    registerFor: {_dev},
+  );
+  gh.lazySingleton<_i39.VerificationServiceClient>(
+    () => _i40.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
   return getIt;

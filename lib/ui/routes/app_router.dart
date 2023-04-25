@@ -23,8 +23,6 @@ import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/page/my_referrals/referral_screen.dart';
 import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/page/my_requests/my_requests_screen.dart';
-import 'package:deedee/ui/page/my_saved_filters/saved_filters_screen.dart';
-import 'package:deedee/ui/page/my_subscribed_filters/subscribed_filters_page.dart';
 import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/page/settings/settings_screen.dart';
@@ -35,6 +33,7 @@ import 'package:deedee/ui/request_screen/request_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
+import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
 import '../page/stats/stats_screen.dart';
 
 @MaterialAutoRouter(
@@ -51,7 +50,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: AccountLanguageScreen, path: '/account-language'),
     MaterialRoute(page: TopUpPage, path: '/account/top-up'),
     MaterialRoute(page: BookmarksScreen, path: '/bookmarks'),
-    MaterialRoute(page: SavedFiltersScreen, path: '/saved-filters'),
+    MaterialRoute(page: FavoriteCompositeFiltersScreen, path: '/saved-filters'),
     MaterialRoute(page: ReferralScreen, path: '/referral'),
     MaterialRoute(page: SettingsScreen, path: '/settings'),
     MaterialRoute(page: ConnectionSettingsScreen, path: '/connection-settings'),
@@ -59,11 +58,9 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: LoginScreen, path: '/login'),
     MaterialRoute(page: SignUpScreen, path: '/sign-up'),
     MaterialRoute(page: ResetPasswordScreen, path: 'reset-password'),
-    MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
     MaterialRoute(page: MainTopicScreen, path: 'main-topic'),
     MaterialRoute(page: UserTagsScreen, path: ''),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
-    MaterialRoute(page: SubscribedFiltersPage, path: '/subscribed-filter'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/gps_repository.dart';

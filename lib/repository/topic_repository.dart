@@ -1,5 +1,7 @@
-import 'package:deedee/generated/geolocation_service.pb.dart';
-import 'package:deedee/generated/topic_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/subtopic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/generated/deedee/api/service/topic_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,6 +37,6 @@ class TopicRepository {
         ),
     );
 
-    return response.subtopic;
+    return response.subtopics;
   }
 }

@@ -1,11 +1,11 @@
-import 'package:grpc/src/client/method.dart';
-import 'package:grpc/src/client/common.dart';
+import 'package:deedee/generated/deedee/api/service/token_service.pbgrpc.dart';
+import 'package:deedee/services/fake/api/token_service_api.dart';
 import 'package:grpc/src/client/call.dart';
+import 'package:grpc/src/client/common.dart';
+import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../generated/token_service.pbgrpc.dart';
 import '../../injection.dart';
-import 'api/token_repository.dart';
 import 'fake_client.dart';
 
 @LazySingleton(as: TokenServiceClient, env: [Environment.dev])
@@ -43,7 +43,6 @@ class MockTokenServiceClient implements TokenServiceClient {
   }
 
   Future<TokenResponse> _getToken(TokenRequest request) async {
-    return TokenResponse()
-      ..token =(await api.getToken(request.userId));
+    return TokenResponse()..token = (await api.getToken(request.userId));
   }
 }

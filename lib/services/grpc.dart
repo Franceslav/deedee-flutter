@@ -1,9 +1,8 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/VerificationService.pbgrpc.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
-import 'package:deedee/generated/tag_service.pbgrpc.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
@@ -78,8 +77,8 @@ class GRCPRepository {
   }
 
   Future<bool> bookmarkTag(String userId) async {
-    final response = await _tagServiceClient
-        .addTagToBookmarks(TagRequest()..tag = Tag());
+    final response =
+        await _tagServiceClient.addTagToBookmarks(TagRequest()..tag = Tag());
     return response.tags.first.status == Tag_Status.BOOKMARKED;
   }
 
@@ -90,14 +89,14 @@ class GRCPRepository {
   }
 
   Future<bool> removeUserBookmark(String userId, String tagId) async {
-    final response = await _tagServiceClient
-        .addTagToBookmarks(TagRequest()..tag = Tag());
+    final response =
+        await _tagServiceClient.addTagToBookmarks(TagRequest()..tag = Tag());
     return response.tags.first.status == Tag_Status.PLACED;
   }
 
   Future<bool> addUserBookmark(String userId, String tagId) async {
-    final response = await _tagServiceClient
-        .addTagToBookmarks(TagRequest()..tag = Tag());
+    final response =
+        await _tagServiceClient.addTagToBookmarks(TagRequest()..tag = Tag());
     return response.tags.first.status == Tag_Status.BOOKMARKED;
   }
 
@@ -129,8 +128,7 @@ class GRCPRepository {
   }
 
   Future<List<Tag>> getUserTags(String userId) async {
-    final response = await _tagServiceClient
-        .getTags(TagRequest()..tag = Tag());
+    final response = await _tagServiceClient.getTags(TagRequest()..tag = Tag());
     return response.tags;
   }
 

@@ -1,25 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartx/dartx.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
-import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/services/social_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
-import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
-import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
-import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/map_cubit/tag_marker/tag_marker.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
 import 'package:deedee/ui/selector/selector_appbar.dart';
-import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,9 +19,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:mockito/mockito.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import '../../map_sliding_panel/map_sliding_panel.dart';
+import '../../routes/app_router.gr.dart';
 import '../../user_bloc/user_bloc.dart';
 
 class MapScreen extends StatefulWidget {
@@ -116,7 +109,7 @@ class _MapScreenState extends State<MapScreen> {
     final selectorBloc = SelectorBloc(
       locator.get<TagRepository>(),
       locator.get<TopicRepository>(),
-      locator.get<FilterRepository>(),
+      locator.get<CompositeFilterRepository>(),
       user,
     );
     //selectorBloc.add(SelectListFilterKeyEvent(widget.selectedFilterKeys));
@@ -230,17 +223,15 @@ class _MapScreenState extends State<MapScreen> {
                       widget.currentFilter.filterMap,
                       selectedFilterKeys,
                     );
-                    context.router.pop();
-
-                    // context.router.popAndPush(FilterPageRoute(
-                    //   currentFilter: CompositeFilter(
-                    //     compositeFilterId:
-                    //         widget.currentFilter.compositeFilterId,
-                    //     topic: widget.currentFilter.topic,
-                    //     filterMap: filterMap,
-                    //     status: widget.currentFilter.status,
-                    //   ),
-                    // ));
+                    context.router.popAndPush(FilterPageRoute(
+                      currentFilter: CompositeFilter(
+                        compositeFilterId:
+                            widget.currentFilter.compositeFilterId,
+                        topic: widget.currentFilter.topic,
+                        filterMap: filterMap,
+                        status: widget.currentFilter.status,
+                      ),
+                    ));
                   },
                 ),
               ),

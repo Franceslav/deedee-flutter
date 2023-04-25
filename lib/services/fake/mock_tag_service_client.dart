@@ -1,20 +1,9 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:ui';
-
-import 'package:deedee/generated/AccountService.pb.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/geolocation_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
-import 'package:deedee/generated/tag_service.pbgrpc.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/tag_repository.dart';
+import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:deedee/ui/page/account/account_bloc.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
@@ -68,8 +57,8 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _addTagToBookmark(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.add(await api.addTagToFavorites(userId, request.tag.tagId));
-
+    return TagResponse()
+      ..tags.add(await api.addTagToFavorites(userId, request.tag.tagId));
   }
 
   @override
@@ -130,7 +119,8 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _removeTag(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.add(await api.deleteTag(userId, request.tag.tagId));
+    return TagResponse()
+      ..tags.add(await api.deleteTag(userId, request.tag.tagId));
   }
 
   @override

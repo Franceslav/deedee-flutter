@@ -1,4 +1,4 @@
-import 'package:deedee/generated/filter_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:flutter/material.dart';
 
 import './selector_item.dart';

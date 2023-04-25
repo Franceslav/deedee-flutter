@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
@@ -122,7 +122,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                 ),
                                 onTap: () {
                                   context.router.push(CustomerProfileRoute(
-                                      id: state.serviceRequest.clientId));
+                                      id: state.serviceRequest.createdFor));
                                 },
                               ),
                               const Padding(
@@ -175,12 +175,14 @@ class _RequestScreenState extends State<RequestScreen> {
                                         text: locale.send,
                                         onPressed: () {
                                           var serviceRequest = ServiceRequest(
-                                              requestId: state
-                                                  .serviceRequest.requestId,
-                                              clientId:
-                                                  state.serviceRequest.clientId,
-                                              dateOfRequest: state
-                                                  .serviceRequest.dateOfRequest,
+                                              createdBy: user.userId,
+                                              serviceRequestId: state
+                                                  .serviceRequest
+                                                  .serviceRequestId,
+                                              createdFor: state
+                                                  .serviceRequest.createdFor,
+                                              createdAt: state
+                                                  .serviceRequest.createdAt,
                                               price: state.serviceRequest.price,
                                               description: state
                                                   .serviceRequest.description,
@@ -201,14 +203,16 @@ class _RequestScreenState extends State<RequestScreen> {
                                         text: locale.accept,
                                         onPressed: () {
                                           var serviceRequest = ServiceRequest(
-                                              requestId: state
-                                                  .serviceRequest.requestId,
-                                              clientId:
-                                                  state.serviceRequest.clientId,
+                                              createdBy: user.userId,
+                                              serviceRequestId: state
+                                                  .serviceRequest
+                                                  .serviceRequestId,
+                                              createdFor: state
+                                                  .serviceRequest.createdFor,
                                               description: state
                                                   .serviceRequest.description,
-                                              dateOfRequest: state
-                                                  .serviceRequest.dateOfRequest,
+                                              createdAt: state
+                                                  .serviceRequest.createdAt,
                                               price: state.serviceRequest.price,
                                               status: ServiceRequest_Status
                                                   .ACCEPTED);

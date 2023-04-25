@@ -1,25 +1,21 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:ui';
-
-import 'package:deedee/generated/filter_service.pbgrpc.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/generated/deedee/api/service/composite_filter_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/filter_repository.dart';
+import 'package:deedee/services/fake/api/composite_filter_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
+import 'package:deedee/ui/page/account/account_bloc.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
-import 'package:deedee/ui/page/account/account_bloc.dart';
 
-@LazySingleton(as: FilterServiceClient, env: [Environment.dev])
-class MockFilterServiceClient implements FilterServiceClient {
+@LazySingleton(as: CompositeFilterServiceClient, env: [Environment.dev])
+class MockCompositeFilterServiceClient implements CompositeFilterServiceClient {
   AccountBloc bloc = AccountBloc();
 
-  FilterServiceApi api = locator.get<FilterServiceApi>();
+  CompositeFilterServiceApi api = locator.get<CompositeFilterServiceApi>();
 
   @override
   ClientCall<Q, R> $createCall<Q, R>(
@@ -45,157 +41,90 @@ class MockFilterServiceClient implements FilterServiceClient {
   }
 
   @override
-  ResponseFuture<FilterResponse> addFilterToBookmarkedFilters(
-      FilterRequest request,
+  ResponseFuture<FilterKeyResponse> getFilterKeys(FilterKeyRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
-        _createCompositeFilter(request)));
+    return ResponseFuture(
+        FakeClientCall<dynamic, FilterKeyResponse>(_getFilterKeys(request)));
   }
 
-  Future<FilterResponse> _createCompositeFilter(FilterRequest request) async {
-    var filter = api.createCompositeFilter(
-      userId: '',
-      filterId: Int64(),
-      topic: Topic(),
-      subtopic: 'subtopic',
-      filterKeys: [],
-      status: CompositeFilter_Status.BOOKMARKED,
-    );
-    return FilterResponse()..filter = Filter();
+  Future<FilterKeyResponse> _getFilterKeys(FilterKeyRequest request) async {
+    return FilterKeyResponse()
+      ..filterKeys.addAll(api.getFilterKeys(request.filterKey.subtopicId));
   }
 
   @override
-  ResponseFuture<FilterResponse> addFilterToSubscribedFilters(
-      FilterRequest request,
+  ResponseFuture<CompositeFilterResponse> removeBookmarkedFilter(
+      CompositeFilterRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
-        _addFilterToSubscribedFilters(request)));
-  }
-
-  Future<FilterResponse> _addFilterToSubscribedFilters(
-      FilterRequest request) async {
-    return FilterResponse()..filter = Filter();
-  }
-
-  @override
-  ResponseFuture<FilterResponse> editFilterInBookmarkedFilters(
-      FilterRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
-        _updateCompositeFilter(request)));
-  }
-
-  Future<FilterResponse> _updateCompositeFilter(FilterRequest request) async {
-    var filter = api.updateCompositeFilter(
-      '',
-      Int64(),
-      request.filter.subtopic,
-      request.filter.filterKeys,
-    );
-    return FilterResponse()..filter = Filter();
-  }
-
-  @override
-  ResponseFuture<FilterResponse> editFilterInSubscribedFilters(
-      FilterRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
-        _editFilterInSubscribedFilters(request)));
-  }
-
-  Future<FilterResponse> _editFilterInSubscribedFilters(
-      FilterRequest request) async {
-    return FilterResponse()..filter = Filter();
-  }
-
-  @override
-  ResponseFuture<FilterResponse> removeFilterFromSubscribedFilters(
-      FilterRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
-        _removeFilterFromSubscribedFilters(request)));
-  }
-
-  Future<FilterResponse> _removeFilterFromSubscribedFilters(
-      FilterRequest request) async {
-    return FilterResponse()..filter = Filter();
-  }
-
-  @override
-  ResponseFuture<GetFilterKeysResponse> getFilterKeys(
-      GetFilterKeysRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, GetFilterKeysResponse>(
-        _getFilterKeys(request)));
-  }
-
-  Future<GetFilterKeysResponse> _getFilterKeys(
-      GetFilterKeysRequest request) async {
-    // String deviceLanguage =  bloc.appLocal?.languageCode ?? Platform.localeName.substring(0, 2);
-
-    return GetFilterKeysResponse()
-      ..filterKeys.addAll(api.getFilterKeys(request.topicId));
-  }
-
-  Future<Filter> _getBF(GetAllFiltersRequest request) async {
-    return Filter(
-      filterId: '1',
-      topic: 'Клининг',
-      filterKeys: [
-        FilterKey()
-          // ..subtopicId = "маникюр"
-          ..title = "японский",
-      ],
-      bookmarked: false,
-      subscribed: true,
-    );
-  }
-
-  @override
-  ResponseStream<Filter> getAllSubscribedFilters(GetAllFiltersRequest request,
-      {CallOptions? options}) {
-    return ResponseStream(
-        FakeClientCall<dynamic, Filter>(_getAllSubscribedFilters(request)));
-  }
-
-  Future<Filter> _getAllSubscribedFilters(GetAllFiltersRequest request) async {
-/*    var fakeStream = Stream<Filter>.periodic(
-      const Duration(microseconds: 1),
-      (computationCount) => Filter(
-        topic: '$computationCount',
-        bookmarked: true,
-        subscribed: true,
-      ),
-    ).take(3) as ResponseStream<Filter>;
-    return fakeStream;*/
-    return Filter(
-      topic: '1',
-      bookmarked: true,
-      subscribed: true,
-    );
-  }
-
-  @override
-  ResponseFuture<FilterResponse> removeBookmarkedFilter(FilterRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, FilterResponse>(
+    return ResponseFuture(FakeClientCall<dynamic, CompositeFilterResponse>(
         _deleteCompositeFilter(request)));
   }
 
-  Future<FilterResponse> _deleteCompositeFilter(FilterRequest request) async {
-    var filter = api.deleteCompositeFilter(request.filter.userId, Int64());
-    return FilterResponse()..filter = Filter();
+  Future<CompositeFilterResponse> _deleteCompositeFilter(
+      CompositeFilterRequest request) async {
+    var filter =
+        api.deleteCompositeFilter(request.compositeFilter.userId, Int64());
+    return CompositeFilterResponse()..compositeFilters.first = filter;
   }
 
   @override
-  ResponseStream<Filter> getAllBookmarkedFilters(GetAllFiltersRequest request,
+  ResponseFuture<CompositeFilterResponse> addToFavorites(
+      CompositeFilterRequest request,
       {CallOptions? options}) {
-    return ResponseStream(
-        FakeClientCall<dynamic, Filter>(_readCompositeFilter(request)));
+    return ResponseFuture(FakeClientCall<dynamic, CompositeFilterResponse>(
+        _addToFavorites(request)));
   }
 
-  Future<Filter> _readCompositeFilter(GetAllFiltersRequest request) async {
-    var filter = api.readCompositeFilter(request.userId);
-    return Filter();
+  Future<CompositeFilterResponse> _addToFavorites(
+      CompositeFilterRequest request) async {
+    var filter = api.createCompositeFilter(request.compositeFilter);
+    return CompositeFilterResponse()..compositeFilters.first = filter;
+  }
+
+  @override
+  ResponseFuture<CompositeFilterResponse> editFavorites(
+      CompositeFilterRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, CompositeFilterResponse>(
+        _editFavorites(request)));
+  }
+
+  Future<CompositeFilterResponse> _editFavorites(
+      CompositeFilterRequest request) async {
+    var filter = api.updateCompositeFilter(
+        '', Int64(), request.compositeFilter.filterMap);
+    return CompositeFilterResponse()..compositeFilters.first = filter;
+  }
+
+  @override
+  ResponseFuture<CompositeFilterResponse> removeFromFavorites(
+      CompositeFilterRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, CompositeFilterResponse>(
+        _removeFromFavorites(request)));
+  }
+
+  Future<CompositeFilterResponse> _removeFromFavorites(
+      CompositeFilterRequest request) async {
+    return CompositeFilterResponse()
+      ..compositeFilters.addAll([
+        api.deleteCompositeFilter(request.compositeFilter.userId,
+            request.compositeFilter.compositeFilterId)
+      ]);
+  }
+
+  @override
+  ResponseFuture<CompositeFilterResponse> getAllFavorites(
+      CompositeFilterRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, CompositeFilterResponse>(
+        _getAllFavorites(request)));
+  }
+
+  Future<CompositeFilterResponse> _getAllFavorites(
+      CompositeFilterRequest request) async {
+    return CompositeFilterResponse()
+      ..compositeFilters
+          .addAll(api.readCompositeFilter(request.compositeFilter.userId));
   }
 }

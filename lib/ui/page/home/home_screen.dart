@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';

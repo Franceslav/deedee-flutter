@@ -1,4 +1,4 @@
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/ui/main_topic/main_topic_item.dart';
 import 'package:flutter/material.dart';
 
