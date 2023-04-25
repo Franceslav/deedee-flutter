@@ -42,63 +42,84 @@ class _UserTagsListState extends State<UserTagsList> {
     final tags = sortTags();
     return tags.isEmpty
         ? Center(
-            child: Text(
-              AppLocalizations.of(context)!.noUserTags,
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          )
+      child: Text(
+        AppLocalizations.of(context)!.noUserTags,
+        style: Theme.of(context).textTheme.headline1,
+      ),
+    )
         : ListView.separated(
-            itemBuilder: ((context, index) {
-              final tag = tags[index];
-              return (tag.status != Tag_Status.DELETED)
-                  ? Slidable(
-                      endActionPane: ActionPane(
-                        extentRatio: 0.5,
-                        motion: const ScrollMotion(),
-                        children: [
-                          (tag.status != Tag_Status.DELETED)
-                              ? SlidableAction(
-                                  onPressed: ((context) {}),
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.orange,
-                                  icon: CommunityMaterialIcons.star,
-                                )
-                              : SlidableAction(
-                                  onPressed: ((context) {}),
-                                  backgroundColor: Colors.green,
-                                  foregroundColor: Colors.red,
-                                  icon: CommunityMaterialIcons.star,
-                                ),
-                          SlidableAction(
-                            onPressed: ((context) {}),
-                            backgroundColor: Colors.white,
-                            foregroundColor: const Color(COLOR_PRIMARY),
-                            icon: Icons.edit,
-                          ),
-                          SlidableAction(
-                            onPressed: ((context) {
-                              final userId = BlocProvider.of<UserBloc>(context)
-                                  .state
-                                  .user
-                                  .userId;
-                              widget.onDismissed(tag, userId, index);
-                            }),
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.red,
-                            icon: Icons.delete,
-                          ),
-                        ],
-                      ),
-                      child: _TagCardWidget(tag: tag),
-                      // UserTagItem(tag: tag),
-                    )
-                  : _TagCardWidget(tag: tag);
-            }),
-            itemCount: tags.length,
-            separatorBuilder: (context, index) {
-              return const DeeDeeDeviderWidget();
-            },
-          );
+      itemBuilder: ((context, index) {
+        final tag = tags[index];
+        return Slidable(
+          endActionPane: ActionPane(
+            extentRatio: 0.5,
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) {}),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.orange,
+                icon: CommunityMaterialIcons.star,
+              ),
+              SlidableAction(
+                onPressed: ((context) {}),
+                backgroundColor: Colors.white,
+                foregroundColor: const Color(COLOR_PRIMARY),
+                icon: Icons.edit,
+              ),
+              SlidableAction(
+                onPressed: ((context) {
+                  final userId = BlocProvider.of<UserBloc>(context)
+                      .state
+                      .user
+                      .userId;
+                  widget.onDismissed(tag, userId, index);
+                }),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.red,
+                icon: Icons.delete,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: DeeDeeRowInfoWidget(
+              icon: Image.asset('assets/images/bookmark_icon.png'),
+              // icon: const Icon(Icons.bookmark_border),
+              mainText: Text(
+                tag.compositeFilter.topic
+                    .title, // tag.compositeFilter.filterMap.values.first.filterKeys
+
+                style: AppTextTheme.bodyLarge,
+              ),
+              secondaryText: Text(
+                '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
+                style: AppTextTheme.labelMedium,
+              ),
+              //     subtitle: Text(bookmark.geolocation.toString()),
+              onTap: () {
+                Map<LatLng, TagDTO> tagMap = {
+                  LatLng(tag.geolocation.latitude,
+                      tag.geolocation.longitude):
+                  TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
+                };
+                context.router.push(
+                  MapScreenRoute(
+                    tagDescriptionMap: tagMap,
+                    currentFilter: CompositeFilter(filterMap: {}), //TODO:
+                  ),
+                );
+              },
+            ),
+          ),
+          // UserTagItem(tag: tag),
+        );
+      }),
+      itemCount: tags.length,
+      separatorBuilder: (context, index) {
+        return const DeeDeeDeviderWidget();
+      },
+    );
   }
 
   List<Tag> sortTags() {
