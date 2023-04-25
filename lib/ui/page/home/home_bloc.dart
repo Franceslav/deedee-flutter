@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../../services/http_service.dart';
+
 part 'home_event.dart';
 part 'home_state.dart';
 
@@ -20,26 +22,31 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final PushNotificationService _pushNotificationService;
   final GPSRepository _gpsRepository;
   final TopicRepository _topicRepository;
+  final HttpService? _httpService;
 
   HomeBloc(
-    this._pushNotificationService,
-    this._gpsRepository,
-    this._topicRepository,
-  ) : super(HomeScreenInitialState()) {
+      this._pushNotificationService,
+      this._gpsRepository,
+      this._topicRepository,
+      {HttpService? httpService}
+      ) : _httpService = httpService , super(HomeScreenInitialState()) {
     on<HomeScreenInitLoadEvent>(_onInitLoadEvent);
-
     on<HomeScreenChangeEvent>(_onChange);
-
     on<GPSEvent>((event, emit) {
       Future<Position?> fp = _gpsRepository.getGPSPosition();
       fp.then((value) {
         emit(HomePageGPSReceivedState(value!));
       });
     });
-
-    // on<HomePageChangeEvent>((event, emit) async {
-    //   emit(HomePageChangeState(event.topic));
-    // });
+    _init();
+  }
+  _init() async {
+    if(_httpService != null) {
+      final requestId = await _httpService!.initDeepLinkListener();
+      if(requestId != null) {
+        emit(HomePageRequestReceivedState(requestId));
+      }
+    }
   }
 
   _onInitLoadEvent(

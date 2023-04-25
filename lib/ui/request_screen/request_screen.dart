@@ -17,7 +17,14 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:fixnum/fixnum.dart';
+import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/timestamp.pb.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/repository/service_request_repository.dart';
+import 'package:deedee/services/http_service.dart';
 
 import '../global_widgets/dee_dee_menu_slider.dart';
 
@@ -221,7 +228,13 @@ class _RequestScreenState extends State<RequestScreen> {
                                   Expanded(
                                     child: OutlinedButtonWidget(
                                       text: locale.share,
-                                      onPressed: () {},
+                                      onPressed: () {
+
+                                        Share.share(
+                                            locator.get<HttpService>().prepareRequestString(state
+                                                .serviceRequest.requestId)
+                                        );
+                                      },
                                     ),
                                   ),
                                 ],
