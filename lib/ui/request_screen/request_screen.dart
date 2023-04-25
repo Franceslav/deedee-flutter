@@ -3,6 +3,7 @@ import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
@@ -19,12 +20,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
-import 'package:deedee/injection.dart';
-import 'package:deedee/repository/service_request_repository.dart';
-import 'package:deedee/services/http_service.dart';
 
 import '../global_widgets/dee_dee_menu_slider.dart';
 
@@ -233,11 +228,11 @@ class _RequestScreenState extends State<RequestScreen> {
                                     child: OutlinedButtonWidget(
                                       text: locale.share,
                                       onPressed: () {
-
-                                        Share.share(
-                                            locator.get<HttpService>().prepareRequestString(state
-                                                .serviceRequest.requestId)
-                                        );
+                                        Share.share(locator
+                                            .get<HttpService>()
+                                            .prepareRequestString(state
+                                                .serviceRequest.serviceRequestId
+                                                .toString()));
                                       },
                                     ),
                                   ),
