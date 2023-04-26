@@ -7,7 +7,6 @@ import '../../repository/service_request_repository.dart';
 import '../map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
 import '../theme/app_text_theme.dart';
 import '../user_bloc/user_bloc.dart';
-import 'calendar_dialog.dart';
 import 'outlined_button_widget.dart';
 
 class AddressInfoWidget extends StatelessWidget {
@@ -41,11 +40,6 @@ class AddressInfoWidget extends StatelessWidget {
             style: AppTextTheme.bodyLarge,
           ),
           const SizedBox(height: 12),
-          OutlinedButtonWidget(
-            onPressed: () => showDialog(
-                context: context, builder: (ctx) => const CalendarDialog()),
-            text: 'Fake Button Calendar',
-          ),
           const SizedBox(height: 2),
           OutlinedButtonWidget(
             onPressed: () {
