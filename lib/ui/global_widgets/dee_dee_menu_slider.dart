@@ -146,7 +146,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
                 context.router.navigate(
-                  const AccountInfoBusinessPage(),
+                  const AccountBusinessPage(),
                 );
               }),
           GeneralSlidingPanelItem(
