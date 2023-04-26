@@ -1,4 +1,5 @@
 import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:deedee/services/helper.dart';
@@ -59,6 +60,11 @@ class AccountInfoTitle extends StatelessWidget {
           ),
           const SizedBox(
             height: 30,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            color: AppColors.grey,
+            child: Text("data"),
           ),
         ],
       ),
