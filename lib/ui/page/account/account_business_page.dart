@@ -13,7 +13,7 @@ class AccountBusinessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
       ),
       body: const AccountInfoBusinessPage(),
     );
@@ -97,6 +97,18 @@ class BusinesRowInfoWidget extends StatefulWidget {
 class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
   @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        //MaterialState.hovered,
+        //MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+
     bool isChecked = false;
     return Padding(
       padding: const EdgeInsets.all(13.0),
@@ -126,12 +138,23 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
               labelText: AppLocalizations.of(context)!.phoneNumber,
             ),
           ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.emailAddressTitle,
+              labelText: AppLocalizations.of(context)!.emailAddressTitle,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppLocalizations.of(context)!.agreePP,
-                  style: AppTextTheme.bodyLarge, softWrap: true, maxLines: 2),
+              Flexible(
+                child: Text(AppLocalizations.of(context)!.agreePP,
+                    style: AppTextTheme.bodyLarge, softWrap: true, maxLines: 2),
+              ),
               Checkbox(
+                focusColor: AppColors.fiolet,
+                checkColor: AppColors.white,
+                fillColor: MaterialStateProperty.resolveWith(getColor),
                 value: isChecked,
                 onChanged: (bool? value) {
                   setState(() {
