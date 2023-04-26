@@ -195,5 +195,8 @@
   "addCard": "Add card",
   "send": "Send",
   "customerProfile": "Customer Profile",
-  "notAuthorized":"Your not authorized to view"
+  "notAuthorized":"Your not authorized to view",
+  "deeDeeForBusiness":"DeeDee for bisuness",
+  "placeText": "Place for free text",
+  "search": "search"
 }
