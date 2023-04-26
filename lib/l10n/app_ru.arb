@@ -188,12 +188,11 @@
   "notAuthorized":"Вы не авторизованы для просмотра",
   "search":"Поиск",
   "notFound": "Не найдено",
-  "deeDeeForBusiness": "DeeDee для бизснеса",
+  "deeDeeForBusiness": "DeeDee для бизнеса",
   "placeText": "Место для вашего текста",
   "businessProfile": "Бизнесс аккаунт",
   "regToBecomeClient": "Зарегистрируйтесь, чтобы стать клиентом",
   "nameCompany": "Название компании",
-  "agreePP": "Соглашаюсь с политикой 
-  конфиденциальности",
+  "agreePP": "Соглашаюсь с политикой конфиденциальности",
   "connect": "Подключить"
 }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:deedee/services/helper.dart';
 
+import '../../../constants.dart';
+
 class AccountBusinessPage extends StatelessWidget {
   const AccountBusinessPage({super.key});
 
@@ -145,8 +147,11 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
               //width: 100.0,
               height: 50.0,
               decoration: BoxDecoration(
-                color: AppColors.lightFiolet,
-                borderRadius: BorderRadius.circular(10.0),
+                gradient: const LinearGradient(colors: [
+                  Color(GRADIENT_COLOR_START),
+                  Color(GRADIENT_COLOR_END)
+                ]),
+                borderRadius: BorderRadius.circular(5.0),
               ),
               child: Center(
                 child: Text(
