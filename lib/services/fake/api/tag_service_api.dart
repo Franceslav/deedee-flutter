@@ -143,12 +143,11 @@ class TagServiceApi {
     };
   }
 
-  Future<List<Tag>> getTags(String userId) async {
+  List<Tag> getTags(String userId) {
     return _tags.getOrElse(userId, () => []).toList();
   }
 
-  Future<List<Tag>> getFavoriteTags(String userId) async {
-    await init();
+  List<Tag> getFavoriteTags(String userId) {
     return _tags
         .getOrElse(userId, () => [])
         .filter((element) => element.status == Tag_Status.BOOKMARKED)
@@ -162,7 +161,7 @@ class TagServiceApi {
       ..status = Tag_Status.DELETED;
   }
 
-  Future<Tag> addTagToFavorites(String userId, Int64 tagId) async {
+  Tag addTagToFavorites(String userId, Int64 tagId) {
     return _tags
         .getOrElse(userId, () => [])
         .firstWhere((rq) => rq.tagId == tagId)

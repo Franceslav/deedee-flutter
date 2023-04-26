@@ -23,22 +23,31 @@ class CompositeFilterRepository {
   Future<CompositeFilter> addToFavorites(
       CompositeFilter compositeFilter) async {
     final response = await _compositeFilterServiceClient.addToFavorites(
-      CompositeFilterRequest(compositeFilter: compositeFilter),
-    );
-    return response.compositeFilters.first;
-  }
-
-  Future<CompositeFilter> editFavorites(userId, compositeFilter) async {
-    final response = await _compositeFilterServiceClient.editFavorites(
       CompositeFilterRequest(
         compositeFilter: CompositeFilter(
-          userId: userId,
-          compositeFilterId: compositeFilter,
+          compositeFilterId: compositeFilter.compositeFilterId,
+          userId: compositeFilter.userId,
+          topic: compositeFilter.topic,
+          filterMap: compositeFilter.filterMap,
+          status: compositeFilter.status,
+          title: compositeFilter.title,
         ),
       ),
     );
     return response.compositeFilters
         .firstWhere((element) => element == compositeFilter);
+  }
+
+  Future<CompositeFilter> editFavorites(Int64 compositeFilterId) async {
+    final response = await _compositeFilterServiceClient.editFavorites(
+      CompositeFilterRequest(
+        compositeFilter: CompositeFilter(
+          compositeFilterId: compositeFilterId,
+        ),
+      ),
+    );
+    return response.compositeFilters.firstWhere(
+        (element) => element.compositeFilterId == compositeFilterId);
   }
 
   Future<List<CompositeFilter>> getAllFavorites(userId) async {
@@ -52,12 +61,15 @@ class CompositeFilterRepository {
     return response.compositeFilters;
   }
 
-  Future<CompositeFilter> removeFromFavorites(
-      CompositeFilter compositeFilter) async {
+  Future<CompositeFilter> removeFromFavorites(Int64 compositeFilterId) async {
     final response = await _compositeFilterServiceClient.removeFromFavorites(
-      CompositeFilterRequest(compositeFilter: compositeFilter),
+      CompositeFilterRequest(
+        compositeFilter: CompositeFilter(
+          compositeFilterId: compositeFilterId,
+        ),
+      ),
     );
-    return response.compositeFilters
-        .firstWhere((element) => element == compositeFilter);
+    return response.compositeFilters.firstWhere(
+        (element) => element.compositeFilterId == compositeFilterId);
   }
 }

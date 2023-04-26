@@ -57,8 +57,8 @@ class CompositeFilterBloc
   _onFilterDelete(CompositeFilterDeleteEvent event,
       Emitter<CompositeFilterState> emit) async {
     try {
-      final response =
-          await _filterRepository.removeFromFavorites(event.compositeFilter);
+      final response = await _filterRepository
+          .removeFromFavorites(event.compositeFilter.compositeFilterId);
       if (response.status == CompositeFilter_Status.DELETED) {
         emit(CompositeFilterDeleteSuccessfulState());
         _compositeFilterList.remove(event.compositeFilter);

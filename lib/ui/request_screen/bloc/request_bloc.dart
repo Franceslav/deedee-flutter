@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
 
 part 'request_event.dart';
@@ -13,7 +14,7 @@ class ServicePushRequestBloc
     extends Bloc<ServicePushRequestEvent, ServicePushRequestState> {
   final ServiceRequestRepository _serviceRequestRepository;
   final User _user;
-  final String _pushNotificationRequestId = '1';
+  final Int64 _pushNotificationRequestId = Int64(1);//TODO: implement services
   late ServiceRequest _initialServiceRequest;
 
   ServicePushRequestBloc(this._serviceRequestRepository, this._user)

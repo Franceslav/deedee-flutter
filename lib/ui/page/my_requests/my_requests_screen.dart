@@ -136,7 +136,6 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
                               request: request,
-                              userId: userId,
                               index: index,
                             )),
                             onAccept: (request, userId, index) {
@@ -162,7 +161,6 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
                               request: request,
-                              userId: userId,
                               index: index,
                             )),
                             onAccept: (request, userId, index) {
