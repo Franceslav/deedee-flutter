@@ -186,6 +186,8 @@
   "send": "Отправить",
   "customerProfile": "Профиль клиента",
   "notAuthorized":"Вы не авторизованы для просмотра",
-  "deeDeeForBusiness": "DeeDee для бизнеса",
-  "placeText": " Место для вашего текста"
+  "search":"Поиск",
+  "notFound": "Не найдено",
+  "deeDeeForBusiness": "DeeDee для бизснеса",
+  "placeText": "Место для вашего текста"
 }

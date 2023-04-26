@@ -196,7 +196,8 @@
   "send": "Send",
   "customerProfile": "Customer Profile",
   "notAuthorized":"Your not authorized to view",
-  "deeDeeForBusiness":"DeeDee for bisuness",
-  "placeText": "Place for free text",
-  "search": "search"
+  "search": "Search",
+  "notFound":"Not found",
+  "deeDeeForBusiness": "DeeDee for business",
+  "placeText": "Place for your text"
 }
