@@ -95,21 +95,21 @@ class BusinesRowInfoWidget extends StatefulWidget {
 }
 
 class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
-        //MaterialState.hovered,
-        //MaterialState.focused,
+        MaterialState.hovered,
+        MaterialState.focused,
       };
       if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
+        return AppColors.blue;
       }
-      return Colors.red;
+      return AppColors.fiolet;
     }
 
-    bool isChecked = false;
     return Padding(
       padding: const EdgeInsets.all(13.0),
       child: Column(
@@ -152,7 +152,6 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
                     style: AppTextTheme.bodyLarge, softWrap: true, maxLines: 2),
               ),
               Checkbox(
-                focusColor: AppColors.fiolet,
                 checkColor: AppColors.white,
                 fillColor: MaterialStateProperty.resolveWith(getColor),
                 value: isChecked,
