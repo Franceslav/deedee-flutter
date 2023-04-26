@@ -6,7 +6,8 @@ on:
 
 jobs:
   build-and-release-windows:
-    runs-on: self-hosted
+    runs-on: 
+      - self-hosted
       - deedee
     steps:
       - uses: actions/checkout@v2
