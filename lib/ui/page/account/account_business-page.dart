@@ -74,7 +74,6 @@ class AccountInfoBusinessPage extends StatelessWidget {
   }
 
   Row infoBusinessUser(BuildContext context) {
-    final locale = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -94,8 +93,7 @@ class AccountInfoBusinessPage extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "locale.onServiceSince",
-                    //locale.onServiceSince,
+                    AppLocalizations.of(context)!.onServiceSince,
                     style: AppTextTheme.titleNormal
                         .copyWith(color: const Color(0xFF8C8C9A)),
                   ),

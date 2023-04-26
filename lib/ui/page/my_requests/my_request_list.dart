@@ -42,11 +42,12 @@ class _MyRequestListState extends State<MyRequestList> {
     return requests.isEmpty
         ? Center(
             child: Text(
-              AppLocalizations.of(context)!.noUserTags,
+              AppLocalizations.of(context)!.notFound,
               style: Theme.of(context).textTheme.headline1,
             ),
           )
         : ListView.separated(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemBuilder: ((context, index) {
               final request = requests[index];
               return Slidable(

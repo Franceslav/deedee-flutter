@@ -100,6 +100,29 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                             ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          child: TextField(
+
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.search,
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40)),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 16,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              BlocProvider.of<UserTagsBloc>(context)
+                                  .add(SearchUserTagsEvent(value));
+                            },
+                          ),),
                         const Divider(
                           thickness: 0.5,
                           color: Colors.black,

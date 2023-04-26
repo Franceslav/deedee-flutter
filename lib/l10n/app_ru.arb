@@ -185,5 +185,7 @@
   "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку",
   "send": "Отправить",
   "customerProfile": "Профиль клиента",
-  "notAuthorized":"Вы не авторизованы для просмотра"
+  "notAuthorized":"Вы не авторизованы для просмотра",
+  "search":"Поиск",
+  "notFound": "Не найдено"
 }

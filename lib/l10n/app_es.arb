@@ -184,5 +184,7 @@
   "addCard": "Agregar tarjeta",
   "send": "Enviar",
   "customerProfile": "Perfil de cliente",
-  "notAuthorized":"No estás autorizado para ver"
+  "notAuthorized":"No estás autorizado para ver",
+  "search":"Buscar",
+  "notFound":"No encontrado"
 }

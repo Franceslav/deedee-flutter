@@ -190,5 +190,7 @@
   "clickMarkerViewApplication": "አፕሊኬሽኑን ለማየት ምልክት ማድረጊያውን ጠቅ ያድርጉ",
   "send": "ላክ",
   "customerProfile": "የደንበኛ መገለጫ",
-  "notAuthorized":"ለማየት ፍቃድ የሎትም"
+  "notAuthorized":"ለማየት ፍቃድ የሎትም",
+  "search":"ፍለጋ",
+  "notFound":"አልተገኘም።"
 }
