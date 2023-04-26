@@ -12,12 +12,10 @@ class MyRequestCreateEvent extends MyRequestEvent {
 }
 
 class MyRequestDeleteEvent extends MyRequestEvent {
-  final String userId;
   final ServiceRequest request;
   final int index;
 
   MyRequestDeleteEvent({
-    required this.userId,
     required this.request,
     required this.index,
   });

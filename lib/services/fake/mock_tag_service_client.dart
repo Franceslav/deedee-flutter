@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
@@ -57,8 +59,11 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _addTagToBookmark(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()
-      ..tags.add(await api.addTagToFavorites(userId, request.tag.tagId));
+    return TagResponse(
+      tags: [
+        api.addTagToFavorites(userId, request.tag.tagId),
+      ],
+    );
   }
 
   @override
@@ -84,7 +89,7 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _getBookmarkTags(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.addAll(await api.getFavoriteTags(userId));
+    return TagResponse()..tags.addAll(api.getFavoriteTags(userId));
   }
 
   @override
@@ -104,10 +109,11 @@ class MockTagServiceClient implements TagServiceClient {
   String retrieveUserIdFrom(TagRequest request) =>
       request.tag.compositeFilter.topic.userId;
 
-  Future<TagResponse> _getTags(TagRequest request) async {
+  Future<TagResponse> _getTags(TagRequest request) {
     final userId = retrieveUserIdFrom(request);
-    final tags = await api.getTags(userId);
-    return TagResponse(tags: tags);
+    final completer = Completer<TagResponse>();
+    completer.complete(TagResponse(tags: api.getTags(userId)));
+    return completer.future;
   }
 
   @override

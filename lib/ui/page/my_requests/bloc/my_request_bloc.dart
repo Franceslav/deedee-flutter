@@ -41,7 +41,8 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
     try {
       var serverRequest = ServiceRequest()
         ..serviceRequestId = event.request.serviceRequestId;
-      final response = await _serviceRequestRepository.accept(serverRequest);
+      final response = await _serviceRequestRepository
+          .accept(serverRequest.serviceRequestId);
       if (response.status == ServiceRequest_Status.ACCEPTED) {
         emit(AcceptSuccessfulState());
       } else if (event.index != null) {
@@ -96,7 +97,8 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
-      final response = await _serviceRequestRepository.delete(event.request);
+      final response = await _serviceRequestRepository
+          .delete(event.request.serviceRequestId);
       if (response.status == ServiceRequest_Status.DELETED) {
         emit(DeletedSuccessfulState());
       } else {
