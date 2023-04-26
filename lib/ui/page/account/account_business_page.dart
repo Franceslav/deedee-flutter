@@ -23,13 +23,31 @@ class AccountInfoBusinessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
+    return SizedBox(
+      //height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Colors.red,
+      //color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [AccountInfoTitle()],
+        children: [
+          const AccountInfoTitle(),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            color: AppColors.lightgrey,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 13,
+              ),
+              child: Text(
+                AppLocalizations.of(context)!.regToBecomeClient,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const BusinesRowInfoWidget()
+        ],
       ),
     );
   }
@@ -42,7 +60,7 @@ class AccountInfoTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(13.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -61,10 +79,82 @@ class AccountInfoTitle extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            color: AppColors.grey,
-            child: Text("data"),
+        ],
+      ),
+    );
+  }
+}
+
+class BusinesRowInfoWidget extends StatefulWidget {
+  const BusinesRowInfoWidget({super.key});
+
+  @override
+  State<BusinesRowInfoWidget> createState() => _BusinesRowInfoWidgetState();
+}
+
+class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
+  @override
+  Widget build(BuildContext context) {
+    bool isChecked = false;
+    return Padding(
+      padding: const EdgeInsets.all(13.0),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.nameCompany,
+              labelText: AppLocalizations.of(context)!.nameCompany,
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.homeChooseCity,
+              labelText: AppLocalizations.of(context)!.homeChooseCity,
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.contactInformation,
+              labelText: AppLocalizations.of(context)!.contactInformation,
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.phoneNumber,
+              labelText: AppLocalizations.of(context)!.phoneNumber,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(AppLocalizations.of(context)!.agreePP,
+                  style: AppTextTheme.bodyLarge, softWrap: true, maxLines: 2),
+              Checkbox(
+                value: isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    isChecked = value!;
+                  });
+                },
+              )
+            ],
+          ),
+          InkWell(
+            onTap: () => {},
+            child: Container(
+              //width: 100.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                color: AppColors.lightFiolet,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.connect,
+                  style: AppTextTheme.titleLarge,
+                ),
+              ),
+            ),
           ),
         ],
       ),
