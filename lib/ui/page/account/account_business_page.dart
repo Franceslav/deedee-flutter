@@ -156,7 +156,9 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
               child: Center(
                 child: Text(
                   AppLocalizations.of(context)!.connect,
-                  style: AppTextTheme.titleLarge,
+                  style: AppTextTheme.titleLarge.copyWith(
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             ),
