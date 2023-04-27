@@ -3,11 +3,11 @@ part of 'bookmarks_bloc.dart';
 @immutable
 abstract class BookmarksEvent {}
 
-class LoadBookmarksEvent extends BookmarksEvent {
-  final String userId;
+class _BookmarksLoadedEvent extends BookmarksEvent {
+  final List<Tag> tags;
 
-  LoadBookmarksEvent({
-    required this.userId,
+  _BookmarksLoadedEvent({
+    required this.tags,
   });
 }
 
@@ -24,11 +24,17 @@ class DeleteBookmarkEvent extends BookmarksEvent {
 }
 
 class AddBookmarkEvent extends BookmarksEvent {
-  final String userId;
   final Int64 tagId;
 
   AddBookmarkEvent({
-    required this.userId,
+    required this.tagId,
+  });
+}
+
+class UndoAddBookmarkEvent extends BookmarksEvent {
+  final Int64 tagId;
+
+  UndoAddBookmarkEvent({
     required this.tagId,
   });
 }

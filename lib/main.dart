@@ -52,7 +52,10 @@ void main() {
             create: (_) => UserBloc(),
           ),
           BlocProvider(
-            create: (_) => BookmarksBloc(locator.get<TagRepository>()),
+            create: (BuildContext context) {
+              final user = BlocProvider.of<UserBloc>(context).state.user;
+              return BookmarksBloc(locator.get<TagRepository>(), user.userId);
+            },
           ),
           BlocProvider(
             create: (_) => MainTopicsBloc(locator.get<TopicRepository>()),

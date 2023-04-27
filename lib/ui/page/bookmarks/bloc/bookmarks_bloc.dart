@@ -1,10 +1,10 @@
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
@@ -13,22 +13,28 @@ part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   final TagRepository _tagRepository;
+  final String userId;
 
-  BookmarksBloc(this._tagRepository) : super(InitialState()) {
-    on<LoadBookmarksEvent>(_onLoadBookmarks);
+  BookmarksBloc(this._tagRepository, this.userId) : super(InitialState()) {
+    on<_BookmarksLoadedEvent>(_onBookmarksLoaded);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
+    on<UndoAddBookmarkEvent>(_onUndoAddBookmark);
     on<SearchBookmarksEvent>(_onSearchBookmark);
+    _loadBookmarks();
   }
 
-  _onLoadBookmarks(
-      LoadBookmarksEvent event, Emitter<BookmarksState> emit) async {
+  _loadBookmarks() async {
     try {
-      final bookmarks = await _tagRepository.getFavoriteTags(event.userId);
-      emit(LoadedBookmarksState(bookmarks));
+      final bookmarks = await _tagRepository.getFavoriteTags(userId);
+      add(_BookmarksLoadedEvent(tags: bookmarks));
     } catch (error) {
-      emit(ErrorState(error.toString()));
+      stderr.writeln(error.toString());
     }
+  }
+
+  void _onBookmarksLoaded(_BookmarksLoadedEvent event, Emitter<BookmarksState> emit) {
+    emit(LoadedBookmarksState(event.tags));
   }
 
   _onDeleteBookmark(
@@ -56,10 +62,22 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     Emitter<BookmarksState> emit,
   ) async {
     try {
-      final tag =
-          await _tagRepository.addTagToFavorites(event.userId, event.tagId);
-    } catch (e) {
-      print(e.toString());
+      final resultTag = await _tagRepository.addTagToFavorites(userId, event.tagId);
+      emit(AddedSuccessfullyState(newBookmark: resultTag));
+    } catch (error) {
+      emit(ErrorState(error.toString()));
+    }
+  }
+
+  Future<void> _onUndoAddBookmark(
+      UndoAddBookmarkEvent event,
+      Emitter<BookmarksState> emit,
+      ) async {
+    try {
+      final tag = await _tagRepository.removeTagFromFavorites(userId, event.tagId);
+      emit(AddUndoneState(undoneBookmarkId: tag.tagId));
+    } catch (error) {
+      emit(ErrorState(error.toString()));
     }
   }
 

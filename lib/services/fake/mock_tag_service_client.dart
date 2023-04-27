@@ -148,6 +148,8 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagResponse> _removeTagFromFavorites(TagRequest request) async {
-    return TagResponse(tags: []);
+    final userId = retrieveUserIdFrom(request);
+    final responseTag = await api.removeTagFromFavorites(userId, request.tag.tagId);
+    return TagResponse(tags: [responseTag]);
   }
 }
