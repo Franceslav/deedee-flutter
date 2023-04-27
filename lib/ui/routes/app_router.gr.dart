@@ -38,7 +38,6 @@ import '../page/bookmarks/qr_scanner/qr_scanner.dart' as _i34;
 import '../page/customer_profile/customer_profile_screen.dart' as _i35;
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart'
     as _i13;
-import '../page/account/account_business_page.dart' as _i22;
 import '../page/filter/filter_page.dart' as _i5;
 import '../page/home/home_screen.dart' as _i4;
 import '../page/map_cubit/map_screen.dart' as _i6;
@@ -160,12 +159,6 @@ class AppRouter extends _i36.RootStackRouter {
         child: const _i14.ReferralScreen(),
       );
     },
-    AccountBusinessPageRoute.name: (routeData) {
-      return _i36.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i22.AccountBusinessPage(),
-      );
-    },
     SettingsScreenRoute.name: (routeData) {
       return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -277,11 +270,13 @@ class AppRouter extends _i36.RootStackRouter {
       );
     },
     RequestScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<RequestScreenRouteArgs>(
-          orElse: () => const RequestScreenRouteArgs());
+      final args = routeData.argsAs<RequestScreenRouteArgs>();
       return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i30.RequestScreen(key: args.key),
+        child: _i30.RequestScreen(
+          key: args.key,
+          serviceRequestId: args.serviceRequestId,
+        ),
       );
     },
     PaymentScreenRoute.name: (routeData) {
@@ -377,10 +372,6 @@ class AppRouter extends _i36.RootStackRouter {
         _i36.RouteConfig(
           ReferralScreenRoute.name,
           path: '/referral',
-        ),
-        _i36.RouteConfig(
-          AccountBusinessPageRoute.name,
-          path: '/business',
         ),
         _i36.RouteConfig(
           SettingsScreenRoute.name,
@@ -710,18 +701,6 @@ class ReferralScreenRoute extends _i36.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i42.AccountBusinessPage]
-class AccountBusinessPageRoute extends _i36.PageRouteInfo<void> {
-  const AccountBusinessPageRoute()
-      : super(
-          AccountBusinessPageRoute.name,
-          path: '/business',
-        );
-
-  static const String name = 'AccountBusinessPageRoute';
-}
-
-/// generated route for
 /// [_i15.SettingsScreen]
 class SettingsScreenRoute extends _i36.PageRouteInfo<void> {
   const SettingsScreenRoute()
@@ -995,24 +974,34 @@ class MyRequestDetailRouteArgs {
 /// generated route for
 /// [_i30.RequestScreen]
 class RequestScreenRoute extends _i36.PageRouteInfo<RequestScreenRouteArgs> {
-  RequestScreenRoute({_i37.Key? key})
-      : super(
+  RequestScreenRoute({
+    _i37.Key? key,
+    required int serviceRequestId,
+  }) : super(
           RequestScreenRoute.name,
           path: '/request-page',
-          args: RequestScreenRouteArgs(key: key),
+          args: RequestScreenRouteArgs(
+            key: key,
+            serviceRequestId: serviceRequestId,
+          ),
         );
 
   static const String name = 'RequestScreenRoute';
 }
 
 class RequestScreenRouteArgs {
-  const RequestScreenRouteArgs({this.key});
+  const RequestScreenRouteArgs({
+    this.key,
+    required this.serviceRequestId,
+  });
 
   final _i37.Key? key;
 
+  final int serviceRequestId;
+
   @override
   String toString() {
-    return 'RequestScreenRouteArgs{key: $key}';
+    return 'RequestScreenRouteArgs{key: $key, serviceRequestId: $serviceRequestId}';
   }
 }
 

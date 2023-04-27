@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
 
@@ -14,10 +15,12 @@ class ServicePushRequestBloc
     extends Bloc<ServicePushRequestEvent, ServicePushRequestState> {
   final ServiceRequestRepository _serviceRequestRepository;
   final User _user;
-  final Int64 _pushNotificationRequestId = Int64(1);//TODO: implement services
+  final int _pushNotificationRequestId;
+
   late ServiceRequest _initialServiceRequest;
 
-  ServicePushRequestBloc(this._serviceRequestRepository, this._user)
+  ServicePushRequestBloc(this._serviceRequestRepository, this._user,
+      this._pushNotificationRequestId)
       : super(RequestInitial()) {
     on<ServiceRequestPriceChangeEvent>(_onServiceRequestPriceChangeEvent);
     _initialize();
@@ -47,7 +50,7 @@ class ServicePushRequestBloc
     try {
       _initialServiceRequest =
           (await _serviceRequestRepository.getAll(_user.userId)).firstWhere(
-              (sr) => sr.serviceRequestId == _pushNotificationRequestId);
+              (sr) => sr.serviceRequestId == Int64(_pushNotificationRequestId));
       emit(ServiceRequestChangeState(
           serviceRequest: _initialServiceRequest, changed: false));
     } catch (error) {

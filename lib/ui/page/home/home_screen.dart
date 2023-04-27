@@ -54,8 +54,12 @@ class _HomeState extends State<HomeScreen> {
           children: [
             BlocConsumer<HomeBloc, HomeScreenState>(
               listener: (ctx, state) {
-                if(state is HomePageRequestReceivedState){
-                  context.router.push(RequestScreenRoute());
+                if (state is HomePageRequestReceivedState) {
+                  context.router.push(
+                    RequestScreenRoute(
+                      serviceRequestId: int.parse(state.id!),
+                    ),
+                  );
                 }
                 if (state is HomeScreenLoadedState) {
                   setState(() {

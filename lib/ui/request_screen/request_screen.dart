@@ -24,7 +24,9 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
-  RequestScreen({Key? key}) : super(key: key);
+  final int serviceRequestId;
+
+  const RequestScreen({super.key, required this.serviceRequestId});
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();
@@ -57,8 +59,8 @@ class _RequestScreenState extends State<RequestScreen> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final pushBloc =
-        ServicePushRequestBloc(locator.get<ServiceRequestRepository>(), user);
+    final pushBloc = ServicePushRequestBloc(
+        locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
     final serviceBloc =
         ServiceRequestBloc(locator.get<ServiceRequestRepository>(), user);
 
