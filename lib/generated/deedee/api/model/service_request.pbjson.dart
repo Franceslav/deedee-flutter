@@ -20,6 +20,7 @@ const ServiceRequest$json = const {
     const {'1': 'geolocation', '3': 6, '4': 1, '5': 11, '6': '.deedee.api.geolocation.model.Geolocation', '10': 'geolocation'},
     const {'1': 'price', '3': 7, '4': 1, '5': 1, '10': 'price'},
     const {'1': 'status', '3': 8, '4': 1, '5': 14, '6': '.deedee.api.servicerequest.model.ServiceRequest.Status', '10': 'status'},
+    const {'1': 'tagId', '3': 9, '4': 1, '5': 4, '10': 'tagId'},
   ],
   '4': const [ServiceRequest_Status$json],
 };
@@ -39,4 +40,4 @@ const ServiceRequest_Status$json = const {
 };
 
 /// Descriptor for `ServiceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List serviceRequestDescriptor = $convert.base64Decode('Cg5TZXJ2aWNlUmVxdWVzdBIqChBzZXJ2aWNlUmVxdWVzdElkGAEgASgEUhBzZXJ2aWNlUmVxdWVzdElkEh4KCmNyZWF0ZWRGb3IYAiABKAlSCmNyZWF0ZWRGb3ISHAoJY3JlYXRlZEJ5GAMgASgJUgljcmVhdGVkQnkSIAoLZGVzY3JpcHRpb24YBCABKAlSC2Rlc2NyaXB0aW9uEjgKCWNyZWF0ZWRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBJLCgtnZW9sb2NhdGlvbhgGIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9uEhQKBXByaWNlGAcgASgBUgVwcmljZRJOCgZzdGF0dXMYCCABKA4yNi5kZWVkZWUuYXBpLnNlcnZpY2VyZXF1ZXN0Lm1vZGVsLlNlcnZpY2VSZXF1ZXN0LlN0YXR1c1IGc3RhdHVzImYKBlN0YXR1cxILCgdQRU5ESU5HEAASDAoIQUNDRVBURUQQARIMCghNT0RJRklFRBACEgsKB0RFTEVURUQQAxIPCgtJTl9QUk9HUkVTUxAEEggKBERPTkUQBRILCgdDSEFOR0VEEAY=');
+final $typed_data.Uint8List serviceRequestDescriptor = $convert.base64Decode('Cg5TZXJ2aWNlUmVxdWVzdBIqChBzZXJ2aWNlUmVxdWVzdElkGAEgASgEUhBzZXJ2aWNlUmVxdWVzdElkEh4KCmNyZWF0ZWRGb3IYAiABKAlSCmNyZWF0ZWRGb3ISHAoJY3JlYXRlZEJ5GAMgASgJUgljcmVhdGVkQnkSIAoLZGVzY3JpcHRpb24YBCABKAlSC2Rlc2NyaXB0aW9uEjgKCWNyZWF0ZWRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBJLCgtnZW9sb2NhdGlvbhgGIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9uEhQKBXByaWNlGAcgASgBUgVwcmljZRJOCgZzdGF0dXMYCCABKA4yNi5kZWVkZWUuYXBpLnNlcnZpY2VyZXF1ZXN0Lm1vZGVsLlNlcnZpY2VSZXF1ZXN0LlN0YXR1c1IGc3RhdHVzEhQKBXRhZ0lkGAkgASgEUgV0YWdJZCJmCgZTdGF0dXMSCwoHUEVORElORxAAEgwKCEFDQ0VQVEVEEAESDAoITU9ESUZJRUQQAhILCgdERUxFVEVEEAMSDwoLSU5fUFJPR1JFU1MQBBIICgRET05FEAUSCwoHQ0hBTkdFRBAG');
