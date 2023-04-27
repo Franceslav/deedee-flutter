@@ -5,6 +5,7 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
+import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
@@ -21,10 +22,12 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     on<AddBookmarkEvent>(_onAddBookmark);
     on<UndoAddBookmarkEvent>(_onUndoAddBookmark);
     on<SearchBookmarksEvent>(_onSearchBookmark);
-    _loadBookmarks();
+    on<UserOpenedTagMarkerEvent>(_onUserOpenedTagMarker);
+    on<MapScreenIsDisposedEvent>(_loadBookmarks);
+    _initialize();
   }
 
-  _loadBookmarks() async {
+  void _initialize() async {
     try {
       final bookmarks = await _tagRepository.getFavoriteTags(userId);
       add(_BookmarksLoadedEvent(tags: bookmarks));
@@ -35,6 +38,15 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
 
   void _onBookmarksLoaded(_BookmarksLoadedEvent event, Emitter<BookmarksState> emit) {
     emit(LoadedBookmarksState(event.tags));
+  }
+
+  void _loadBookmarks(BookmarksEvent _, Emitter<BookmarksState> emit) async {
+    try {
+      final bookmarks = await _tagRepository.getFavoriteTags(userId);
+      emit(LoadedBookmarksState(bookmarks));
+    } catch (error) {
+      emit(ErrorState(error.toString()));
+    }
   }
 
   _onDeleteBookmark(
@@ -63,7 +75,12 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   ) async {
     try {
       final resultTag = await _tagRepository.addTagToFavorites(userId, event.tagId);
-      emit(AddedSuccessfullyState(newBookmark: resultTag));
+      emit(
+          TagMarkerOpenedState(
+              resultTag.tagId,
+              isTagBookmarked: resultTag.status == Tag_Status.BOOKMARKED
+          )
+      );
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -75,7 +92,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       ) async {
     try {
       final tag = await _tagRepository.removeTagFromFavorites(userId, event.tagId);
-      emit(AddUndoneState(undoneBookmarkId: tag.tagId));
+      emit(TagMarkerOpenedState(tag.tagId, isTagBookmarked: tag.status == Tag_Status.BOOKMARKED));
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -85,5 +102,12 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       SearchBookmarksEvent event, Emitter<BookmarksState> emit) async {
     final tag = await _tagRepository.getTags(event.bookmarkName);
     emit(LoadedBookmarksState(tag));
+  }
+
+  _onUserOpenedTagMarker(
+      UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
+    final List<Tag> favouriteTags = await _tagRepository.getFavoriteTags(userId);
+    final tag = favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
+    emit(TagMarkerOpenedState(event.tagId, isTagBookmarked: tag != null));
   }
 }

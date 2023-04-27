@@ -8,6 +8,7 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
+import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/map_cubit/tag_marker/tag_marker.dart';
 import 'package:deedee/ui/selector/bloc/selector_bloc.dart';
@@ -50,6 +51,7 @@ class DeeDeeSliderController extends PanelController {
 class _MapScreenState extends State<MapScreen> {
   final MapController _mapController = MapController();
   final DeeDeeSliderController _pc = DeeDeeSliderController();
+  BookmarksBloc? _bookmarksBloc;
 
   final List<TagMarker> _markers = [];
 
@@ -59,6 +61,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   void initState() {
+    _bookmarksBloc = BlocProvider.of<BookmarksBloc>(context);
     widget.tagDescriptionMap.forEach(
       (point, dto) {
         TagMarker tagMarker = TagMarker(
@@ -75,6 +78,10 @@ class _MapScreenState extends State<MapScreen> {
                   _selectedMessengerId = dto.messengerId;
                   _selectedTagId = dto.tagId;
                 });
+
+                BlocProvider.of<BookmarksBloc>(context)
+                    .add(UserOpenedTagMarkerEvent(dto.tagId));
+
                 _pc.open();
               },
               child: const Icon(
@@ -95,6 +102,12 @@ class _MapScreenState extends State<MapScreen> {
 
   final FitBoundsOptions _fitBoundsOptions =
       const FitBoundsOptions(padding: EdgeInsets.all(8.0));
+
+  @override
+  void dispose() {
+    _bookmarksBloc?.add(MapScreenIsDisposedEvent());
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -44,3 +44,13 @@ class SearchBookmarksEvent extends BookmarksEvent {
 
   SearchBookmarksEvent(this.bookmarkName);
 }
+
+class UserOpenedTagMarkerEvent extends BookmarksEvent {
+  final Int64 tagId;
+
+  UserOpenedTagMarkerEvent(this.tagId);
+}
+
+class MapScreenIsDisposedEvent extends BookmarksEvent {
+  MapScreenIsDisposedEvent();
+}
