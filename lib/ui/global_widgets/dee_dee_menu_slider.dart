@@ -34,15 +34,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 context.router.popAndPush(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
-              icon: Icons.published_with_changes_sharp,
-              text: 'Push',
-              onTap: () async {
-                final pushNotificationService =
-                    locator.get<PushNotificationService>();
-                await pushNotificationService.sendPushNotification(context);
-                print(await pushNotificationService.getToken());
-              }),
-          GeneralSlidingPanelItem(
             icon: Icons.published_with_changes_sharp,
             text: 'QR Scanner',
             onTap: () async {

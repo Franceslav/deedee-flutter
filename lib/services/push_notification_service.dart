@@ -111,9 +111,17 @@ class PushNotificationService {
     });
   }
 
-  Future<bool> sendPushNotification([BuildContext? context]) async {
-    await initInfo(context!);
-    return httpService.sendPushNotificationRequest("New Order Request",
-        "This is a test order. Please accept", await getToken());
+  Future<bool> sendPushNotification({
+    required BuildContext context,
+    required String tagId,
+    // required String token,// TODO
+  }) async {
+    await initInfo(context);
+    return httpService.sendPushNotificationRequest(
+      "New Order Request",
+      "This is a test order. Please accept",
+      await getToken(),
+      tagId,
+    );
   }
 }
