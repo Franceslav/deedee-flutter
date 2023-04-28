@@ -7,11 +7,13 @@ import '../../services/social_service.dart';
 class ContactsWidget extends StatelessWidget {
   final String selectedMessengerId;
   final Int64 tagId;
+  final String userId;
 
   const ContactsWidget({
     super.key,
     required this.selectedMessengerId,
     required this.tagId,
+    required this.userId,
   });
 
   @override
