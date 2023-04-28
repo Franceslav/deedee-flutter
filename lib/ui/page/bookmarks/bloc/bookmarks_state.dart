@@ -10,16 +10,6 @@ class LoadedBookmarksState extends BookmarksState {
   LoadedBookmarksState(this.bookmarks);
 }
 
-class AddedSuccessfullyState extends BookmarksState {
-  final Tag newBookmark;
-  AddedSuccessfullyState({required this.newBookmark});
-}
-
-class AddUndoneState extends BookmarksState {
-  final Int64 undoneBookmarkId;
-  AddUndoneState({required this.undoneBookmarkId});
-}
-
 class DeletedSuccessfulState extends BookmarksState {}
 
 class DeletedErrorState extends BookmarksState {

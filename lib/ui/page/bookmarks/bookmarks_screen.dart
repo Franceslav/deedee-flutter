@@ -55,18 +55,6 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
               if (state is LoadedBookmarksState) {
                 _bookmarks = state.bookmarks;
               }
-              if (state is AddedSuccessfullyState) {
-                setState(() {
-                  _bookmarks.add(state.newBookmark);
-                });
-              }
-              if (state is AddUndoneState) {
-                setState(() {
-                  _bookmarks.removeWhere(
-                          (tag) => tag.tagId == state.undoneBookmarkId
-                  );
-                });
-              }
               if (state is DeletedSuccessfulState) {
                 showSnackBar(
                   context,

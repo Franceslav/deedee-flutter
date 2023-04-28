@@ -104,7 +104,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     emit(LoadedBookmarksState(tag));
   }
 
-  _onUserOpenedTagMarker(
+  void _onUserOpenedTagMarker(
       UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
     final List<Tag> favouriteTags = await _tagRepository.getFavoriteTags(userId);
     final tag = favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
