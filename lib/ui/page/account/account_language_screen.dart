@@ -118,6 +118,12 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                     },
                     iconSize: 50,
                     icon: Image.asset('assets/images/th.png')),
+                IconButton(
+                    onPressed: () {
+                      context.read<AccountBloc>().changeLocal('sv');
+                    },
+                    iconSize: 50,
+                    icon: Image.asset('assets/images/sv.png')),
               ],
             ),
           ),
