@@ -12,10 +12,23 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../model/payment_method.pb.dart' as $1;
 
 class PaymentMethodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PaymentMethodRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.payment.service'), createEmptyInstance: create)
-    ..aOM<$1.PaymentMethod>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'paymentMethod', protoName: 'paymentMethod', subBuilder: $1.PaymentMethod.create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PaymentMethodRequest',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'deedee.api.payment.service'),
+      createEmptyInstance: create)
+    ..aOM<$1.PaymentMethod>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'paymentMethod',
+        protoName: 'paymentMethod',
+        subBuilder: $1.PaymentMethod.create)
+    ..hasRequiredFields = false;
 
   PaymentMethodRequest._() : super();
   factory PaymentMethodRequest({
@@ -27,31 +40,41 @@ class PaymentMethodRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory PaymentMethodRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PaymentMethodRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  PaymentMethodRequest clone() => PaymentMethodRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PaymentMethodRequest copyWith(void Function(PaymentMethodRequest) updates) => super.copyWith((message) => updates(message as PaymentMethodRequest)) as PaymentMethodRequest; // ignore: deprecated_member_use
+  factory PaymentMethodRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PaymentMethodRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  PaymentMethodRequest clone() =>
+      PaymentMethodRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PaymentMethodRequest copyWith(void Function(PaymentMethodRequest) updates) =>
+      super.copyWith((message) => updates(message as PaymentMethodRequest))
+          as PaymentMethodRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PaymentMethodRequest create() => PaymentMethodRequest._();
   PaymentMethodRequest createEmptyInstance() => create();
-  static $pb.PbList<PaymentMethodRequest> createRepeated() => $pb.PbList<PaymentMethodRequest>();
+  static $pb.PbList<PaymentMethodRequest> createRepeated() =>
+      $pb.PbList<PaymentMethodRequest>();
   @$core.pragma('dart2js:noInline')
-  static PaymentMethodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PaymentMethodRequest>(create);
+  static PaymentMethodRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PaymentMethodRequest>(create);
   static PaymentMethodRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $1.PaymentMethod get paymentMethod => $_getN(0);
   @$pb.TagNumber(1)
-  set paymentMethod($1.PaymentMethod v) { setField(1, v); }
+  set paymentMethod($1.PaymentMethod v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasPaymentMethod() => $_has(0);
   @$pb.TagNumber(1)
@@ -61,10 +84,24 @@ class PaymentMethodRequest extends $pb.GeneratedMessage {
 }
 
 class PaymentMethodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PaymentMethodResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.payment.service'), createEmptyInstance: create)
-    ..pc<$1.PaymentMethod>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'paymentMethods', $pb.PbFieldType.PM, protoName: 'paymentMethods', subBuilder: $1.PaymentMethod.create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PaymentMethodResponse',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'deedee.api.payment.service'),
+      createEmptyInstance: create)
+    ..pc<$1.PaymentMethod>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'paymentMethods',
+        $pb.PbFieldType.PM,
+        protoName: 'paymentMethods',
+        subBuilder: $1.PaymentMethod.create)
+    ..hasRequiredFields = false;
 
   PaymentMethodResponse._() : super();
   factory PaymentMethodResponse({
@@ -76,28 +113,35 @@ class PaymentMethodResponse extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory PaymentMethodResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PaymentMethodResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  PaymentMethodResponse clone() => PaymentMethodResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PaymentMethodResponse copyWith(void Function(PaymentMethodResponse) updates) => super.copyWith((message) => updates(message as PaymentMethodResponse)) as PaymentMethodResponse; // ignore: deprecated_member_use
+  factory PaymentMethodResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PaymentMethodResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  PaymentMethodResponse clone() =>
+      PaymentMethodResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PaymentMethodResponse copyWith(
+          void Function(PaymentMethodResponse) updates) =>
+      super.copyWith((message) => updates(message as PaymentMethodResponse))
+          as PaymentMethodResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PaymentMethodResponse create() => PaymentMethodResponse._();
   PaymentMethodResponse createEmptyInstance() => create();
-  static $pb.PbList<PaymentMethodResponse> createRepeated() => $pb.PbList<PaymentMethodResponse>();
+  static $pb.PbList<PaymentMethodResponse> createRepeated() =>
+      $pb.PbList<PaymentMethodResponse>();
   @$core.pragma('dart2js:noInline')
-  static PaymentMethodResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PaymentMethodResponse>(create);
+  static PaymentMethodResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PaymentMethodResponse>(create);
   static PaymentMethodResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<$1.PaymentMethod> get paymentMethods => $_getList(0);
 }
-
