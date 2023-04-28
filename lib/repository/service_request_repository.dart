@@ -45,11 +45,11 @@ class ServiceRequestRepository {
           geolocation: serviceRequest.geolocation,
           price: serviceRequest.price,
           status: serviceRequest.status,
+          tagId: serviceRequest.tagId,
         ),
       ),
     );
-    return response.serviceRequests
-        .firstWhere((element) => element == serviceRequest);
+    return response.serviceRequests.first;
   }
 
   Future<ServiceRequest> delete(Int64 serviceRequestId) async {

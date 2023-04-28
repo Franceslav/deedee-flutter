@@ -3,17 +3,16 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/social_service.dart';
-import 'custom_panel_widget.dart';
 
 class ContactsWidget extends StatelessWidget {
+  final String selectedMessengerId;
   final Int64 tagId;
 
   const ContactsWidget({
     super.key,
-    required this.widget, required this.tagId,
+    required this.selectedMessengerId,
+    required this.tagId,
   });
-
-  final CustomPanelWidget widget;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,7 @@ class ContactsWidget extends StatelessWidget {
           child: Image.asset('assets/images/telegram_logo.png'),
         ),
         TextButton(
-          onPressed: () =>
-              SocialService.launchInstagram(widget.selectedMessengerId),
+          onPressed: () => SocialService.launchInstagram(selectedMessengerId),
           style: ButtonStyle(
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(

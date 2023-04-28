@@ -44,6 +44,13 @@ class TagRepository {
     return response.tags;
   }
 
+  Future<List<Tag>> getTagsByName(String title) async {
+    final response = await _tagServiceClient.getTags(TagRequest(
+        tag:
+            Tag(compositeFilter: CompositeFilter(topic: Topic(title: title)))));
+    return response.tags;
+  }
+
   Future<Tag> deleteTag(String userId, Int64 tagId) async {
     final response = await _tagServiceClient.removeTag(TagRequest(
         tag: Tag(

@@ -27,6 +27,7 @@ class ServiceRequest extends $pb.GeneratedMessage {
     ..aOM<$1.Geolocation>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $1.Geolocation.create)
     ..a<$core.double>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OD)
     ..e<ServiceRequest_Status>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: ServiceRequest_Status.PENDING, valueOf: ServiceRequest_Status.valueOf, enumValues: ServiceRequest_Status.values)
+    ..a<$fixnum.Int64>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', $pb.PbFieldType.OU6, protoName: 'tagId', defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -40,6 +41,7 @@ class ServiceRequest extends $pb.GeneratedMessage {
     $1.Geolocation? geolocation,
     $core.double? price,
     ServiceRequest_Status? status,
+    $fixnum.Int64? tagId,
   }) {
     final _result = create();
     if (serviceRequestId != null) {
@@ -65,6 +67,9 @@ class ServiceRequest extends $pb.GeneratedMessage {
     }
     if (status != null) {
       _result.status = status;
+    }
+    if (tagId != null) {
+      _result.tagId = tagId;
     }
     return _result;
   }
@@ -164,5 +169,14 @@ class ServiceRequest extends $pb.GeneratedMessage {
   $core.bool hasStatus() => $_has(7);
   @$pb.TagNumber(8)
   void clearStatus() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get tagId => $_getI64(8);
+  @$pb.TagNumber(9)
+  set tagId($fixnum.Int64 v) { $_setInt64(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasTagId() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTagId() => clearField(9);
 }
 

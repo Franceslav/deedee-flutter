@@ -21,6 +21,7 @@ class TagServiceApi {
       "": [
         Tag()
           ..tagId = Int64(1)
+          ..createdBy=Int64(1)
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -41,6 +42,8 @@ class TagServiceApi {
           ..status = Tag_Status.PLACED,
         Tag()
           ..tagId = Int64(2)
+          ..createdBy=Int64(1)
+
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -61,6 +64,8 @@ class TagServiceApi {
           ..status = Tag_Status.PLACED,
         Tag()
           ..tagId = Int64(3)
+          ..createdBy=Int64(1)
+
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
@@ -81,6 +86,8 @@ class TagServiceApi {
           ..status = Tag_Status.PLACED,
         Tag()
           ..tagId = Int64(4)
+          ..createdBy=Int64(1)
+
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
@@ -101,6 +108,7 @@ class TagServiceApi {
           ..status = Tag_Status.PLACED,
         Tag()
           ..tagId = Int64(5)
+          ..createdBy=Int64(5)
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
@@ -121,6 +129,7 @@ class TagServiceApi {
           ..status = Tag_Status.BOOKMARKED,
         Tag()
           ..tagId = Int64(6)
+          ..createdBy=Int64(6)
           ..createdAt = Timestamp(
               seconds: Int64.parseInt(
                   (DateTime.now().millisecondsSinceEpoch / 1000 + 3000000)
