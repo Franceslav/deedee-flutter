@@ -1,7 +1,6 @@
-import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/global_widgets/add_to_favourites_clickable_icon.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../services/social_service.dart';
 
@@ -58,20 +57,7 @@ class ContactsWidget extends StatelessWidget {
 
           child: Image.asset('assets/images/phone_icon.png'),
         ),
-        TextButton(
-          onPressed: () {
-            BlocProvider.of<BookmarksBloc>(context)
-                .add(AddBookmarkEvent(userId: userId, tagId: tagId));
-          },
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          child: Image.asset('assets/images/favorite_icon.png'),
-        ),
+        AddToFavouritesClickableIcon(tagId: tagId,)
       ],
     );
   }

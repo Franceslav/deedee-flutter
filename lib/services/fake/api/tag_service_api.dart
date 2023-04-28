@@ -176,4 +176,11 @@ class TagServiceApi {
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.BOOKMARKED;
   }
+
+  Future<Tag> removeTagFromFavorites(String userId, Int64 tagId) async {
+    return _tags
+        .getOrElse(userId, () => [])
+        .firstWhere((rq) => rq.tagId == tagId)
+      ..status = Tag_Status.PLACED;
+  }
 }
