@@ -31,3 +31,10 @@ class ErrorState extends BookmarksState {
 class TapSuccessfulState extends BookmarksState {
   TapSuccessfulState();
 }
+
+class TagMarkerOpenedState extends BookmarksState {
+  final Int64 tagId;
+  final bool isTagBookmarked;
+
+  TagMarkerOpenedState(this.tagId, {required this.isTagBookmarked});
+}

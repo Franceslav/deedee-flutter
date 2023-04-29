@@ -59,13 +59,6 @@ class PushNotificationService {
         const AndroidInitializationSettings('@mipmap/launcher_icon');
     var initializationSettings =
         InitializationSettings(android: androidInitialize);
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse:
-          (NotificationResponse notificationResponse) async {
-        context.router.push(RequestScreenRoute());
-      },
-    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
@@ -73,6 +66,20 @@ class PushNotificationService {
         htmlFormatBigText: true,
         contentTitle: message.notification!.title.toString(),
         htmlFormatContentTitle: true,
+        summaryText: message.data['id'],
+      );
+      await flutterLocalNotificationsPlugin.initialize(
+        initializationSettings,
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {
+          context.router.push(
+            RequestScreenRoute(
+              serviceRequestId: int.parse(
+                bigTextStyleInformation.summaryText!,
+              ),
+            ),
+          );
+        },
       );
 
       AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -104,9 +111,17 @@ class PushNotificationService {
     });
   }
 
-  Future<bool> sendPushNotification([BuildContext? context]) async {
-    await initInfo(context!);
-    return httpService.sendPushNotificationRequest("New Order Request",
-        "This is a test order. Please accept", await getToken());
+  Future<bool> sendPushNotification({
+    required BuildContext context,
+    required String tagId,
+    // required String token,// TODO
+  }) async {
+    await initInfo(context);
+    return httpService.sendPushNotificationRequest(
+      "New Order Request",
+      "This is a test order. Please accept",
+      await getToken(),
+      tagId,
+    );
   }
 }

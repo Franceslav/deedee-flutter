@@ -106,7 +106,6 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                             vertical: 16,
                           ),
                           child: TextField(
-
                             decoration: InputDecoration(
                               hintText: AppLocalizations.of(context)!.search,
                               border: const OutlineInputBorder(
@@ -122,7 +121,8 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               BlocProvider.of<UserTagsBloc>(context)
                                   .add(SearchUserTagsEvent(value));
                             },
-                          ),),
+                          ),
+                        ),
                         const Divider(
                           thickness: 0.5,
                           color: Colors.black,
@@ -139,8 +139,9 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                 tagsType: TagsType.actual,
                                 onDismissed: (tag, userId, index) =>
                                     deleteTag(tag, userId, index),
-                                onTap: () =>
-                                    context.router.push(RequestScreenRoute()),
+                                onTap: () => context.router.push(
+                                  RequestScreenRoute(serviceRequestId: 1),
+                                ),
                               ),
                               UserTagsList(
                                 tags: _tags,

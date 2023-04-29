@@ -5,6 +5,9 @@ abstract class MapSlidingPanelEvent {}
 
 class MapSlidingPanelRequestCreate extends MapSlidingPanelEvent {
   final Int64 selectedTagId;
+  final BuildContext context;
 
-  MapSlidingPanelRequestCreate(this.selectedTagId);
+  MapSlidingPanelRequestCreate(this.selectedTagId, this.context);
+
+
 }

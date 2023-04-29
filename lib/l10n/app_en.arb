@@ -197,5 +197,12 @@
   "customerProfile": "Customer Profile",
   "notAuthorized":"Your not authorized to view",
   "search": "Search",
-  "notFound":"Not found"
+  "notFound":"Not found",
+  "deeDeeForBusiness": "DeeDee for business",
+  "placeText": "Place for your text",
+  "businessProfile": "Business profile",
+  "regToBecomeClient": "Register to become a costumer",
+  "nameCompany": "Name company",
+  "agreePP": "Agree to the Privacy Policy",
+  "connect": "Connect"
 }

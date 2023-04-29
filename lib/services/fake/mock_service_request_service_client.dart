@@ -42,11 +42,14 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequests.first = api.accept(
-        request.serviceRequest.createdBy,
-        request.serviceRequest.serviceRequestId,
-      );
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.accept(
+          request.serviceRequest.createdBy,
+          request.serviceRequest.serviceRequestId,
+        ),
+      ],
+    );
   }
 
   @override
@@ -57,9 +60,12 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _change(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequests.first = api.change(request.serviceRequest.createdBy,
-          request.serviceRequest.serviceRequestId.toString(), '', 0);
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.change(request.serviceRequest.createdBy,
+            request.serviceRequest.serviceRequestId.toString(), '', 0),
+      ],
+    );
   }
 
   @override
@@ -70,8 +76,11 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _create(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequests.first = api.create(request.serviceRequest);
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.create(request.serviceRequest),
+      ],
+    );
   }
 
   @override
@@ -82,11 +91,14 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _delete(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequests.first = api.delete(
-        request.serviceRequest.createdFor,
-        request.serviceRequest.serviceRequestId,
-      );
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.delete(
+          request.serviceRequest.createdFor,
+          request.serviceRequest.serviceRequestId,
+        )
+      ],
+    );
   }
 
   @override
@@ -97,9 +109,10 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _getAll(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequests
-          .addAll(api.getServiceRequests(request.serviceRequest.createdFor));
+    return ServiceRequestResponse(
+      serviceRequests:
+          api.getServiceRequests(request.serviceRequest.createdFor),
+    );
   }
 
   @override

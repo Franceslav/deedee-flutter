@@ -1,21 +1,20 @@
-import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/global_widgets/add_to_favourites_clickable_icon.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../services/social_service.dart';
-import 'custom_panel_widget.dart';
 
 class ContactsWidget extends StatelessWidget {
-  final String userId;
+  final String selectedMessengerId;
   final Int64 tagId;
+  final String userId;
 
   const ContactsWidget({
     super.key,
-    required this.widget, required this.tagId, required this.userId,
+    required this.selectedMessengerId,
+    required this.tagId,
+    required this.userId,
   });
-
-  final CustomPanelWidget widget;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,7 @@ class ContactsWidget extends StatelessWidget {
           child: Image.asset('assets/images/telegram_logo.png'),
         ),
         TextButton(
-          onPressed: () =>
-              SocialService.launchInstagram(widget.selectedMessengerId),
+          onPressed: () => SocialService.launchInstagram(selectedMessengerId),
           style: ButtonStyle(
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
@@ -59,22 +57,8 @@ class ContactsWidget extends StatelessWidget {
 
           child: Image.asset('assets/images/phone_icon.png'),
         ),
-        TextButton(
-          onPressed: () {
-            BlocProvider.of<BookmarksBloc>(context)
-                .add(AddBookmarkEvent(userId: userId, tagId: tagId));
-          },
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          child: Image.asset('assets/images/favorite_icon.png'),
-        ),
+        AddToFavouritesClickableIcon(tagId: tagId,)
       ],
     );
   }
 }
-

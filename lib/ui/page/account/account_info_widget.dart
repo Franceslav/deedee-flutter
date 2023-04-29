@@ -1,6 +1,5 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +86,11 @@ class AccountInfoWidget extends StatelessWidget {
                           AppLocalizations.of(context)!.notAuthorized,
                         );
                       },
-                      child: _infoColumn('0', locale.bookmarked)),
+                      child: IconButton(
+                          onPressed: () => showDialog(
+                              context: context,
+                              builder: (ctx) => const CalendarDialog()),
+                          icon: const Icon(Icons.calendar_month))),
                 ),
               ],
             ),
@@ -97,7 +100,7 @@ class AccountInfoWidget extends StatelessWidget {
     );
   }
 
-   Column _infoColumn(String type, String quantity) {
+  Column _infoColumn(String type, String quantity) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

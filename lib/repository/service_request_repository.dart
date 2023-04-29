@@ -12,12 +12,16 @@ class ServiceRequestRepository {
   final ServiceRequestServiceClient _requestServiceClient =
       locator.get<ServiceRequestServiceClient>();
 
-  Future<ServiceRequest> accept(ServiceRequest serviceRequest) async {
+  Future<ServiceRequest> accept(Int64 serviceRequestId) async {
     var response = await _requestServiceClient.accept(
-      ServiceRequestRequest(serviceRequest: serviceRequest),
+      ServiceRequestRequest(
+        serviceRequest: ServiceRequest(
+          serviceRequestId: serviceRequestId,
+        ),
+      ),
     );
     return response.serviceRequests
-        .firstWhere((element) => element == serviceRequest);
+        .firstWhere((element) => element.serviceRequestId == serviceRequestId);
   }
 
   Future<ServiceRequest> change(
@@ -31,18 +35,33 @@ class ServiceRequestRepository {
 
   Future<ServiceRequest> create(ServiceRequest serviceRequest) async {
     var response = await _requestServiceClient.create(
-      ServiceRequestRequest(serviceRequest: serviceRequest),
+      ServiceRequestRequest(
+        serviceRequest: ServiceRequest(
+          serviceRequestId: serviceRequest.serviceRequestId,
+          createdFor: serviceRequest.createdFor,
+          createdBy: serviceRequest.createdBy,
+          description: serviceRequest.description,
+          createdAt: serviceRequest.createdAt,
+          geolocation: serviceRequest.geolocation,
+          price: serviceRequest.price,
+          status: serviceRequest.status,
+          tagId: serviceRequest.tagId,
+        ),
+      ),
     );
-    return response.serviceRequests
-        .firstWhere((element) => element == serviceRequest);
+    return response.serviceRequests.first;
   }
 
-  Future<ServiceRequest> delete(ServiceRequest serviceRequest) async {
+  Future<ServiceRequest> delete(Int64 serviceRequestId) async {
     var response = await _requestServiceClient.delete(
-      ServiceRequestRequest(serviceRequest: serviceRequest),
+      ServiceRequestRequest(
+        serviceRequest: ServiceRequest(
+          serviceRequestId: serviceRequestId,
+        ),
+      ),
     );
-    return response.serviceRequests.firstWhere((element) =>
-        element.serviceRequestId == serviceRequest.serviceRequestId);
+    return response.serviceRequests
+        .firstWhere((element) => element.serviceRequestId == serviceRequestId);
   }
 
   Future<List<ServiceRequest>> getAll(String userId) async {
