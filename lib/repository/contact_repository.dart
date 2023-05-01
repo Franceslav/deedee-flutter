@@ -9,20 +9,9 @@ class ContactRepository {
   final ContactServiceClient _contactServiceClient =
       locator.get<ContactServiceClient>();
 
-  Future<Contact> update(ContactRequest request, {CallOptions? options}) async {
-    return (await _contactServiceClient.editSocialNetworkContact(request))
-        .contacts
-        .first;
-  }
-
-  Future<Contact> add(ContactRequest request, {CallOptions? options}) async {
+  
+    Future<Contact> add(ContactRequest request, {CallOptions? options}) async {
     return (await _contactServiceClient.addSocialNetworkContact(request))
-        .contacts
-        .first;
-  }
-
-  Future<Contact> delete(ContactRequest request, {CallOptions? options}) async {
-    return (await _contactServiceClient.deleteSocialNetworkContact(request))
         .contacts
         .first;
   }
@@ -33,4 +22,19 @@ class ContactRepository {
         .contacts;
     return []; //TODO: implement
   }
+
+  
+  Future<Contact> update(ContactRequest request, {CallOptions? options}) async {
+    return (await _contactServiceClient.editSocialNetworkContact(request))
+        .contacts
+        .first;
+  }
+
+
+  Future<Contact> delete(ContactRequest request, {CallOptions? options}) async {
+    return (await _contactServiceClient.deleteSocialNetworkContact(request))
+        .contacts
+        .first;
+  }
+
 }
