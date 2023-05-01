@@ -27,7 +27,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
 
   initialize() async {
     try {
-      final requests = await _serviceRequestRepository.getAll(_user.userId);
+      final requests = await _serviceRequestRepository.getAll(_user.email);
       emit(MyRequestLoadState(requests));
     } catch (error) {
       emit(ErrorState(

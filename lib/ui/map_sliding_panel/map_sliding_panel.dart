@@ -1,3 +1,4 @@
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
@@ -10,27 +11,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../injection.dart';
 import '../../repository/service_request_repository.dart';
+import '../../services/helper.dart';
+import '../../services/social_service.dart';
 import '../global_widgets/outlined_button_widget.dart';
 import '../page/account/account_info_widget.dart';
 import '../theme/app_text_theme.dart';
-import 'contacts_widget.dart';
 import '../user_bloc/user_bloc.dart';
 
 class MapSlidingPanel extends StatefulWidget {
-  final Size size;
-  final DeeDeeSliderController _pc;
+  final DeeDeeSliderController _panelController;
   final String _selectedMessengerId;
   final Int64 _selectedTagId;
   final bool _openedFirstTime;
 
   const MapSlidingPanel({
     super.key,
-    required this.size,
-    required DeeDeeSliderController pc,
+    required DeeDeeSliderController controller,
     required String selectedMessengerId,
     required Int64 selectedTagId,
     required bool openedFirstTime,
-  })  : _pc = pc,
+  })  : _panelController = controller,
         _selectedMessengerId = selectedMessengerId,
         _selectedTagId = selectedTagId,
         _openedFirstTime = openedFirstTime;
@@ -40,23 +40,50 @@ class MapSlidingPanel extends StatefulWidget {
 }
 
 class _MapSlidingPanelState extends State<MapSlidingPanel> {
+  var _isBookmarked = false;
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = MapSlidingPanelBloc(
       locator.get<ServiceRequestRepository>(),
       locator.get<TagRepository>(),
-      locator.get<PushNotificationService>(),
+      widget._selectedTagId,
       user,
+    );
+    final size = MediaQuery.of(context).size;
+    final bottomStyle = ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+      ),
     );
 
     return BlocProvider<MapSlidingPanelBloc>(
       create: (context) => bloc,
       child: BlocConsumer<MapSlidingPanelBloc, MapSlidingPanelState>(
+        bloc: bloc,
         listener: (context, state) {
-          if (state is MapSlidingPanelCreateRequestState) {}
+          if (state is ServiceRequestCreatedState) {
+            locator.get<PushNotificationService>().sendPushNotification(
+                  context: context,
+                  serviceRequestId: state.serviceRequestId.toString(),
+                );
+          }
+          if (state is MapSlidingPanelIsBookmarkedState &&
+              state.snackbarNotification != null) {
+            showSnackBar(context, state.snackbarNotification!);
+          }
+          if (state is ErrorState) {
+            showSnackBar(context, state.errorMessage);
+          }
         },
         builder: (context, state) {
+          if (state is MapSlidingPanelIsBookmarkedState &&
+              widget._selectedTagId != Int64(0)) {
+            _isBookmarked = state.isBookmarked;
+          }
           return SlidingUpPanel(
             renderPanelSheet: true,
             panelSnapping: true,
@@ -69,10 +96,9 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                 ? 0
                 : MediaQuery.of(context).size.height * 0.04,
             maxHeight: MediaQuery.of(context).size.height * 0.5,
-            controller: widget._pc,
+            controller: widget._panelController,
             header: Container(
-              margin: EdgeInsets.fromLTRB(
-                  widget.size.width / 2 - 30, 10.0, 24.0, 0.0),
+              margin: EdgeInsets.fromLTRB(size.width / 2 - 30, 10.0, 24.0, 0.0),
               width: 60,
               height: 7,
               decoration: BoxDecoration(
@@ -91,10 +117,44 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                           const AccountInfoWidget(),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: ContactsWidget(
-                              tagId: widget._selectedTagId,
-                              selectedMessengerId: widget._selectedMessengerId,
-                              userId: user.userId,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                TextButton(
+                                  //TODO implement data
+                                  onPressed: () {},
+                                  style: bottomStyle,
+                                  child: Image.asset(
+                                      'assets/images/telegram_logo.png'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      SocialService.launchInstagram(
+                                          widget._selectedMessengerId),
+                                  style: bottomStyle,
+                                  child: Image.asset(
+                                      'assets/images/instagram_logo.png'),
+                                ),
+                                TextButton(
+                                  //TODO implement data
+                                  onPressed: () {},
+                                  style: bottomStyle,
+                                  child: Image.asset(
+                                      'assets/images/phone_icon.png'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    bloc.add(
+                                        MapSlidingPanelChangeBookmarkEvent());
+                                  },
+                                  style: bottomStyle,
+                                  child: _isBookmarked
+                                      ? Image.asset(
+                                          'assets/images/favorite_icon_filled.png')
+                                      : Image.asset(
+                                          'assets/images/favorite_icon.png'),
+                                )
+                              ],
                             ),
                           ),
                           Padding(
@@ -119,7 +179,6 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                                     bloc.add(
                                       MapSlidingPanelRequestCreate(
                                         widget._selectedTagId,
-                                        context,
                                       ),
                                     );
                                   },
@@ -158,6 +217,5 @@ class _CustomCollapsedWidget extends StatelessWidget {
           child:
               Text(AppLocalizations.of(context)!.clickMarkerViewApplication)),
     );
-    // }
   }
 }

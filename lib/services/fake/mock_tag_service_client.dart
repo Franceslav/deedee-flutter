@@ -15,6 +15,8 @@ import 'package:injectable/injectable.dart';
 class MockTagServiceClient implements TagServiceClient {
   TagServiceApi api = locator.get<TagServiceApi>();
   AccountBloc bloc = AccountBloc();
+  String retrieveUserIdFrom(TagRequest request) =>
+      request.tag.compositeFilter.topic.userId;
 
   @override
   ClientCall<Q, R> $createCall<Q, R>(
@@ -106,13 +108,14 @@ class MockTagServiceClient implements TagServiceClient {
         FakeClientCall<dynamic, TagResponse>(_getTags(request)));
   }
 
-  String retrieveUserIdFrom(TagRequest request) =>
-      request.tag.compositeFilter.topic.userId;
-
   Future<TagResponse> _getTags(TagRequest request) {
     final userId = retrieveUserIdFrom(request);
     final completer = Completer<TagResponse>();
-    completer.complete(TagResponse(tags: api.getTags(userId)));
+    completer.complete(
+      TagResponse(
+        tags: api.getTags(userId),
+      ),
+    );
     return completer.future;
   }
 
@@ -149,7 +152,8 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _removeTagFromFavorites(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    final responseTag = await api.removeTagFromFavorites(userId, request.tag.tagId);
+    final responseTag =
+        await api.removeTagFromFavorites(userId, request.tag.tagId);
     return TagResponse(tags: [responseTag]);
   }
 }

@@ -117,7 +117,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                       context.read<AccountBloc>().changeLocal('th');
                     },
                     iconSize: 50,
-                    icon: Image.asset('assets/images/th.png')),
+                    icon: Image.asset('assets/images/tha.png')),
                 IconButton(
                     onPressed: () {
                       context.read<AccountBloc>().changeLocal('sv');

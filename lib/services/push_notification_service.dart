@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
@@ -84,8 +85,8 @@ class PushNotificationService {
 
       AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
-        '123',
-        '123',
+        PUSH_NOTIFICATION_CHANNEL_ID,
+        PUSH_NOTIFICATION_CHANNEL_NAME,
         importance: Importance.high,
         styleInformation: bigTextStyleInformation,
         priority: Priority.high,
@@ -113,7 +114,7 @@ class PushNotificationService {
 
   Future<bool> sendPushNotification({
     required BuildContext context,
-    required String tagId,
+    required String serviceRequestId,
     // required String token,// TODO
   }) async {
     await initInfo(context);
@@ -121,7 +122,7 @@ class PushNotificationService {
       "New Order Request",
       "This is a test order. Please accept",
       await getToken(),
-      tagId,
+      serviceRequestId,
     );
   }
 }

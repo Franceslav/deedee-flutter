@@ -23,106 +23,106 @@ class ServiceRequestServiceApi {
       ..seconds = Int64.parseInt(
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
     _serviceRequests = {
-      // "": [
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(1),
-      //     // tag: Tag()..topicId = 'маникюр 2',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '1',
-      //     createdFor: '',
-      //     status: ServiceRequest_Status.PENDING,
-      //     createdAt: timestamp1,
-      //     price: 100,
-      //     tagId: Int64(1),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(2),
-      //     // tag: Tag()..topicId = 'маникюр 2',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '2',
-      //     createdFor: '',
-      //     createdAt: timestamp2,
-      //     status: ServiceRequest_Status.PENDING,
-      //     price: 100,
-      //     tagId: Int64(2),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(3),
-      //     // tag: Tag()..topicId = 'маникюр 3',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '3',
-      //     createdFor: '',
-      //     createdAt: timestamp3,
-      //     status: ServiceRequest_Status.DELETED,
-      //     price: 100,
-      //     tagId: Int64(3),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(4),
-      //     // tag: Tag()..topicId = 'маникюр 4',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '4',
-      //     createdFor: '',
-      //     createdAt: timestamp4,
-      //     status: ServiceRequest_Status.DONE,
-      //     price: 100,
-      //     tagId: Int64(4),
-      //   ),
-      // ],
-      // "1": [
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(1),
-      //     // tag: Tag()..topicId = 'маникюр 2',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '1',
-      //     createdFor: '',
-      //     status: ServiceRequest_Status.PENDING,
-      //     createdAt: timestamp1,
-      //     price: 100,
-      //     tagId: Int64(1),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(2),
-      //     // tag: Tag()..topicId = 'маникюр 2',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '2',
-      //     createdFor: '',
-      //     createdAt: timestamp2,
-      //     status: ServiceRequest_Status.PENDING,
-      //     price: 100,
-      //     tagId: Int64(2),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(3),
-      //     // tag: Tag()..topicId = 'маникюр 3',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '3',
-      //     createdFor: '',
-      //     createdAt: timestamp3,
-      //     status: ServiceRequest_Status.DELETED,
-      //     price: 100,
-      //     tagId: Int64(3),
-      //   ),
-      //   ServiceRequest(
-      //     serviceRequestId: Int64(4),
-      //     // tag: Tag()..topicId = 'маникюр 4',
-      //     description:
-      //         'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-      //     createdBy: '4',
-      //     createdFor: '',
-      //     createdAt: timestamp4,
-      //     status: ServiceRequest_Status.DONE,
-      //     price: 100,
-      //     tagId: Int64(4),
-      //   ),
-      // ]
+      "ron.x.by.su@gmail.com": [
+        ServiceRequest(
+          serviceRequestId: Int64(1),
+          // tag: Tag()..topicId = 'маникюр 2',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '1',
+          createdFor: '',
+          status: ServiceRequest_Status.PENDING,
+          createdAt: timestamp1,
+          price: 100,
+          tagId: Int64(1),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(2),
+          // tag: Tag()..topicId = 'маникюр 2',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '2',
+          createdFor: '',
+          createdAt: timestamp2,
+          status: ServiceRequest_Status.PENDING,
+          price: 100,
+          tagId: Int64(2),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(3),
+          // tag: Tag()..topicId = 'маникюр 3',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '3',
+          createdFor: '',
+          createdAt: timestamp3,
+          status: ServiceRequest_Status.DELETED,
+          price: 100,
+          tagId: Int64(3),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(4),
+          // tag: Tag()..topicId = 'маникюр 4',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '4',
+          createdFor: '',
+          createdAt: timestamp4,
+          status: ServiceRequest_Status.DONE,
+          price: 100,
+          tagId: Int64(4),
+        ),
+      ],
+      "1": [
+        ServiceRequest(
+          serviceRequestId: Int64(1),
+          // tag: Tag()..topicId = 'маникюр 2',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '1',
+          createdFor: '',
+          status: ServiceRequest_Status.PENDING,
+          createdAt: timestamp1,
+          price: 100,
+          tagId: Int64(1),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(2),
+          // tag: Tag()..topicId = 'маникюр 2',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '2',
+          createdFor: '',
+          createdAt: timestamp2,
+          status: ServiceRequest_Status.PENDING,
+          price: 100,
+          tagId: Int64(2),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(3),
+          // tag: Tag()..topicId = 'маникюр 3',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '3',
+          createdFor: '',
+          createdAt: timestamp3,
+          status: ServiceRequest_Status.DELETED,
+          price: 100,
+          tagId: Int64(3),
+        ),
+        ServiceRequest(
+          serviceRequestId: Int64(4),
+          // tag: Tag()..topicId = 'маникюр 4',
+          description:
+              'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+          createdBy: '4',
+          createdFor: '',
+          createdAt: timestamp4,
+          status: ServiceRequest_Status.DONE,
+          price: 100,
+          tagId: Int64(4),
+        ),
+      ]
     };
   }
 
@@ -131,6 +131,7 @@ class ServiceRequestServiceApi {
   }
 
   ServiceRequest create(ServiceRequest request) {
+    request.serviceRequestId = Int64(DateTime.now().microsecondsSinceEpoch);
     _serviceRequests.getOrElse(request.createdFor, () => []).add(request);
     return request;
   }
