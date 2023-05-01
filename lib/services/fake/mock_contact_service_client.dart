@@ -1,7 +1,9 @@
+import 'package:deedee/generated/deedee/api/model/contact.pb.dart';
 import 'package:deedee/generated/deedee/api/service/contact_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/contact_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
@@ -38,24 +40,26 @@ class MockContactServiceClient implements ContactServiceClient {
   ResponseFuture<ContactResponse> addSocialNetworkContact(
       ContactRequest request,
       {CallOptions? options}) {
-    // TODO: implement addSocialNetworkContact
-    throw UnimplementedError();
+    return ResponseFuture(
+      FakeClientCall<dynamic, ContactResponse>(
+        _addSocialNetworkContact(request),
+      ),
+    );
   }
 
-  @override
-  ResponseFuture<ContactResponse> deleteSocialNetworkContact(
-      ContactRequest request,
-      {CallOptions? options}) {
-    // TODO: implement deleteSocialNetworkContact
-    throw UnimplementedError();
-  }
-
-  @override
-  ResponseFuture<ContactResponse> editSocialNetworkContact(
-      ContactRequest request,
-      {CallOptions? options}) {
-    // TODO: implement editSocialNetworkContact
-    throw UnimplementedError();
+  Future<ContactResponse> _addSocialNetworkContact(ContactRequest request) async {
+    return ContactResponse(
+      contacts: [
+        api.create(
+          Contact(
+            contactId: Int64(DateTime.now().microsecondsSinceEpoch),
+            userId: request.contact.userId,
+            status: request.contact.status,
+            type: request.contact.type,
+            value: request.contact.value,
+          )),
+      ]
+    );
   }
 
   @override
@@ -71,12 +75,58 @@ class MockContactServiceClient implements ContactServiceClient {
 
   Future<ContactResponse> _getSocialNetworkContacts(
       ContactRequest request) async {
-    var contacts = api.getContacts(request.contact.userId);
+    var contacts = api.getContacts(
+      Contact(contactId: request.contact.contactId),
+    );
     //TODO: check if stream is working
 /*    var contactStream = Stream.fromIterable(contacts);
     contactStream.listen((value) {
       contact = value;
     });*/
     return ContactResponse()..contacts.addAll(contacts);
+  }
+
+  @override
+  ResponseFuture<ContactResponse> deleteSocialNetworkContact(
+      ContactRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+      FakeClientCall<dynamic, ContactResponse>(
+        _deleteSocialNetworkContact(request),
+      ),
+    );
+  }
+
+  Future<ContactResponse> _deleteSocialNetworkContact(ContactRequest request) async {
+    return ContactResponse(
+      contacts: [
+        api.delete(
+          Contact(
+            contactId: request.contact.contactId,
+          )),
+      ]
+    );
+  }
+
+  @override
+  ResponseFuture<ContactResponse> editSocialNetworkContact(
+      ContactRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+      FakeClientCall<dynamic, ContactResponse>(
+        _editSocialNetworkContact(request),
+      ),
+    );
+  }
+
+  Future<ContactResponse> _editSocialNetworkContact (ContactRequest request) async {
+      return ContactResponse(
+        contacts: [
+          api.update(
+            Contact(
+              contactId: request.contact.contactId,
+            )),
+        ]
+      );
   }
 }
