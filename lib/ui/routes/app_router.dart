@@ -30,7 +30,7 @@ import 'package:deedee/ui/page/settings/settings_screen.dart';
 import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
-import 'package:deedee/ui/request_screen/request_screen.dart';
+import 'package:deedee/ui/request_screen/service_request_page.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
@@ -68,7 +68,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
-    MaterialRoute(page: RequestScreen, path: '/request-page'),
+    MaterialRoute(page: RequestScreen, path: '/service-request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
     MaterialRoute(page: CardScreen, path: '/card-page'),
     MaterialRoute(page: StatsScreen, path: '/stats'),

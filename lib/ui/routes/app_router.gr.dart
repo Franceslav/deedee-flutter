@@ -53,7 +53,7 @@ import '../page/stats/stats_screen.dart' as _i33;
 import '../page/top_up/top_up_screen.dart' as _i11;
 import '../place_order/place_order_screen.dart' as _i24;
 import '../place_tag/map_set_location_screen.dart' as _i7;
-import '../request_screen/request_screen.dart' as _i30;
+import '../request_screen/service_request_page.dart' as _i30;
 import '../user_tag_details/user_tag_details_screen.dart' as _i23;
 import '../user_tags/user_tags_screen.dart' as _i22;
 
@@ -442,7 +442,7 @@ class AppRouter extends _i37.RootStackRouter {
         ),
         _i37.RouteConfig(
           RequestScreenRoute.name,
-          path: '/request-page',
+          path: '/service-request-page',
         ),
         _i37.RouteConfig(
           PaymentScreenRoute.name,
@@ -990,7 +990,7 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
     required int serviceRequestId,
   }) : super(
           RequestScreenRoute.name,
-          path: '/request-page',
+          path: '/service-request-page',
           args: RequestScreenRouteArgs(
             key: key,
             serviceRequestId: serviceRequestId,

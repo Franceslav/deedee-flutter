@@ -93,7 +93,7 @@ class MapSlidingPanelBloc
 
   _init() async {
     try {
-      final tags = await _tagRepository.getTags(_user.userId);
+      final tags = await _tagRepository.getTags(_user.email);
       _selectedTag = tags.firstWhere((tag) => tag.tagId == _selectedTagId);
       emit(MapSlidingPanelIsBookmarkedState(
           isBookmarked: _selectedTag.status == Tag_Status.BOOKMARKED));

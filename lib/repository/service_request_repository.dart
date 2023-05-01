@@ -12,16 +12,16 @@ class ServiceRequestRepository {
   final ServiceRequestServiceClient _requestServiceClient =
       locator.get<ServiceRequestServiceClient>();
 
-  Future<ServiceRequest> accept(Int64 serviceRequestId) async {
+  Future<ServiceRequest> accept(ServiceRequest serviceRequest) async {
     var response = await _requestServiceClient.accept(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
-          serviceRequestId: serviceRequestId,
+          serviceRequestId: serviceRequest.serviceRequestId,
         ),
       ),
     );
-    return response.serviceRequests
-        .firstWhere((element) => element.serviceRequestId == serviceRequestId);
+    return response.serviceRequests.firstWhere((element) =>
+        element.serviceRequestId == serviceRequest.serviceRequestId);
   }
 
   Future<ServiceRequest> change(

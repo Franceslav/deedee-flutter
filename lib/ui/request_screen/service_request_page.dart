@@ -9,7 +9,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/my_requests/bloc/my_request_bloc.dart';
-import 'package:deedee/ui/request_screen/bloc/request_bloc.dart';
+import 'package:deedee/ui/request_screen/bloc/service_request_bloc.dart';
 import 'package:deedee/ui/request_screen/request_expansion_tile.dart';
 import 'package:deedee/ui/request_screen/request_price_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -61,18 +61,8 @@ class _RequestScreenState extends State<RequestScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final pushBloc = ServicePushRequestBloc(
         locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
-    final serviceBloc =
-        ServiceRequestBloc(locator.get<ServiceRequestRepository>(), user);
-
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ServicePushRequestBloc>(
-          create: (context) => pushBloc,
-        ),
-        BlocProvider<ServiceRequestBloc>(
-          create: (context) => serviceBloc,
-        ),
-      ],
+    return BlocProvider(
+      create: (_) => pushBloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: locale.request,
@@ -84,6 +74,9 @@ class _RequestScreenState extends State<RequestScreen> {
             listener: (context, state) {
               if (state is ServiceRequestErrorState) {
                 showSnackBar(context, state.errorMessage);
+              }
+              if (state is AcceptServiceRequestState) {
+                context.router.replace(const MyRequestScreenRoute());
               }
             },
             builder: (context, state) {
@@ -171,25 +164,30 @@ class _RequestScreenState extends State<RequestScreen> {
                                       child: OutlinedButtonWidget(
                                         text: locale.send,
                                         onPressed: () {
-                                          var serviceRequest = ServiceRequest(
-                                              createdBy: user.userId,
-                                              serviceRequestId: state
-                                                  .serviceRequest
-                                                  .serviceRequestId,
-                                              createdFor: state
-                                                  .serviceRequest.createdFor,
-                                              createdAt: state
-                                                  .serviceRequest.createdAt,
-                                              price: state.serviceRequest.price,
-                                              description: state
-                                                  .serviceRequest.description,
-                                              status: ServiceRequest_Status
-                                                  .CHANGED);
-
-                                          BlocProvider.of<ServiceRequestBloc>(
+                                          BlocProvider.of<
+                                                      ServicePushRequestBloc>(
                                                   context)
-                                              .add(MyRequestCreateEvent(
-                                                  request: serviceRequest));
+                                              .add(
+                                            AcceptServiceRequestEvent(
+                                              serviceRequest: ServiceRequest(
+                                                  createdBy: user.userId,
+                                                  serviceRequestId: state
+                                                      .serviceRequest
+                                                      .serviceRequestId,
+                                                  createdFor: state
+                                                      .serviceRequest
+                                                      .createdFor,
+                                                  createdAt: state
+                                                      .serviceRequest.createdAt,
+                                                  price: state
+                                                      .serviceRequest.price,
+                                                  description: state
+                                                      .serviceRequest
+                                                      .description,
+                                                  status: ServiceRequest_Status
+                                                      .CHANGED),
+                                            ),
+                                          );
                                           context.router.pop();
                                         },
                                       ),
@@ -199,26 +197,28 @@ class _RequestScreenState extends State<RequestScreen> {
                                       child: OutlinedButtonWidget(
                                         text: locale.accept,
                                         onPressed: () {
-                                          var serviceRequest = ServiceRequest(
-                                              createdBy: user.userId,
-                                              serviceRequestId: state
-                                                  .serviceRequest
-                                                  .serviceRequestId,
-                                              createdFor: state
-                                                  .serviceRequest.createdFor,
-                                              description: state
-                                                  .serviceRequest.description,
-                                              createdAt: state
-                                                  .serviceRequest.createdAt,
-                                              price: state.serviceRequest.price,
-                                              status: ServiceRequest_Status
-                                                  .ACCEPTED);
-
-                                          BlocProvider.of<ServiceRequestBloc>(
-                                                  context)
+                                          BlocProvider.of<
+                                              ServicePushRequestBloc>(
+                                              context)
                                               .add(
-                                            MyRequestCreateEvent(
-                                              request: serviceRequest,
+                                            AcceptServiceRequestEvent(
+                                              serviceRequest: ServiceRequest(
+                                                  createdBy: user.userId,
+                                                  serviceRequestId: state
+                                                      .serviceRequest
+                                                      .serviceRequestId,
+                                                  createdFor: state
+                                                      .serviceRequest
+                                                      .createdFor,
+                                                  createdAt: state
+                                                      .serviceRequest.createdAt,
+                                                  price: state
+                                                      .serviceRequest.price,
+                                                  description: state
+                                                      .serviceRequest
+                                                      .description,
+                                                  status: ServiceRequest_Status
+                                                      .CHANGED),
                                             ),
                                           );
                                           context.router.pop();

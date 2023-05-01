@@ -16,9 +16,8 @@ class TagServiceApi {
   @PostConstruct(preResolve: true)
   Future<void> init() async {
     String deviceLanguage = Platform.localeName.substring(0, 2);
-
     _tags = {
-      "": [
+      "ron.x.by.su@gmail.com": [
         Tag()
           ..tagId = Int64(1)
           ..createdBy = Int64(1)

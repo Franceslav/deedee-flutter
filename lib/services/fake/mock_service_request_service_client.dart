@@ -1,3 +1,4 @@
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/service_request_service_api.dart';
@@ -46,8 +47,9 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
     return ServiceRequestResponse(
       serviceRequests: [
         api.accept(
-          request.serviceRequest.createdBy,
-          request.serviceRequest.serviceRequestId,
+          ServiceRequest(
+            serviceRequestId: request.serviceRequest.serviceRequestId,
+          ),
         ),
       ],
     );
@@ -63,8 +65,9 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   Future<ServiceRequestResponse> _change(ServiceRequestRequest request) async {
     return ServiceRequestResponse(
       serviceRequests: [
-        api.change(request.serviceRequest.createdBy,
-            request.serviceRequest.serviceRequestId.toString(), '', 0),
+        api.change(
+          ServiceRequest(),
+        ),
       ],
     );
   }
@@ -95,8 +98,9 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
     return ServiceRequestResponse(
       serviceRequests: [
         api.delete(
-          request.serviceRequest.createdFor,
-          request.serviceRequest.serviceRequestId,
+          ServiceRequest(
+            serviceRequestId: request.serviceRequest.serviceRequestId,
+          ),
         )
       ],
     );

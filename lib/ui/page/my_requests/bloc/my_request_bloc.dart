@@ -41,8 +41,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
     try {
       var serverRequest = ServiceRequest()
         ..serviceRequestId = event.request.serviceRequestId;
-      final response = await _serviceRequestRepository
-          .accept(serverRequest.serviceRequestId);
+      final response = await _serviceRequestRepository.accept(serverRequest);
       if (response.status == ServiceRequest_Status.ACCEPTED) {
         emit(AcceptSuccessfulState());
       } else if (event.index != null) {
@@ -62,7 +61,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       UpdateRequestEvent event, Emitter<MyRequestState> emit) async {
     try {
       _serviceRequestRepository.change(event.request, event.request);
-      final requests = await _serviceRequestRepository.getAll(_user.userId);
+      final requests = await _serviceRequestRepository.getAll(_user.email);
       emit(MyRequestLoadState(requests));
     } catch (error) {
       emit(ErrorState(
@@ -83,7 +82,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
         status: ServiceRequest_Status.PENDING,
       );
       if (event.request != null) {
-        serviceRequest = event.request!..createdFor = _user.userId;
+        serviceRequest = event.request!..createdFor = _user.email;
       }
       final response = await _serviceRequestRepository.create(serviceRequest);
       emit(MyRequestCreateState(response));
