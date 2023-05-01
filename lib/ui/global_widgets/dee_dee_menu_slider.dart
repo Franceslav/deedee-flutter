@@ -126,8 +126,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
-                // context.router.navigate(const AccountBusinessPageRoute());
+                context.router.navigate(const AccountBusinessPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,
