@@ -64,13 +64,13 @@ Contact create(Contact contact) {
   Contact update(Contact contact) {
     Contact c =_contacts
         .firstWhere((c) => c.contactId == contact.contactId && c.status != Contact_Status.DELETED, 
-                    orElse: () => Contact(
-                      contactId: contact.contactId, 
-                      userId: contact.userId, 
-                      status: contact.status,
-                      type: contact.type,
-                      value: contact.value,
-                      ));
+          orElse: () => Contact(
+            contactId: contact.contactId, 
+            userId: contact.userId, 
+            status: contact.status,
+            type: contact.type,
+            value: contact.value,
+            ));
       c.status = contact.status;
       c.type = contact.type;
       c.value = contact.value;
