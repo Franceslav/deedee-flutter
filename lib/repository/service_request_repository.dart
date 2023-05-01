@@ -37,7 +37,6 @@ class ServiceRequestRepository {
     var response = await _requestServiceClient.create(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
-          serviceRequestId: serviceRequest.serviceRequestId,
           createdFor: serviceRequest.createdFor,
           createdBy: serviceRequest.createdBy,
           description: serviceRequest.description,

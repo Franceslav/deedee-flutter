@@ -50,7 +50,7 @@ class DeeDeeSliderController extends PanelController {
 
 class _MapScreenState extends State<MapScreen> {
   final MapController _mapController = MapController();
-  final DeeDeeSliderController _pc = DeeDeeSliderController();
+  final DeeDeeSliderController _panelController = DeeDeeSliderController();
   BookmarksBloc? _bookmarksBloc;
 
   final List<TagMarker> _markers = [];
@@ -82,7 +82,7 @@ class _MapScreenState extends State<MapScreen> {
                 BlocProvider.of<BookmarksBloc>(context)
                     .add(UserOpenedTagMarkerEvent(dto.tagId));
 
-                _pc.open();
+                _panelController.open();
               },
               child: const Icon(
                 Icons.location_on_sharp,
@@ -179,7 +179,7 @@ class _MapScreenState extends State<MapScreen> {
                   // bounds: LatLngBounds.fromPoints(_latLngList),
                   zoom: MAP_ZOOM,
                   onTap: (tapPosition, tapLatLon) {
-                    _pc.close();
+                    _panelController.close();
                   },
                 ),
                 children: [
@@ -220,8 +220,7 @@ class _MapScreenState extends State<MapScreen> {
                 ],
               ),
               MapSlidingPanel(
-                size: size,
-                pc: _pc,
+                controller: _panelController,
                 selectedMessengerId: _selectedMessengerId,
                 selectedTagId: _selectedTagId,
                 openedFirstTime: openedFirstTime,

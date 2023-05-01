@@ -61,9 +61,6 @@ void main() {
             create: (_) => MainTopicsBloc(locator.get<TopicRepository>()),
           ),
           BlocProvider(
-            create: (_) => UserTagsBloc(locator.get<TagRepository>()),
-          ),
-          BlocProvider(
             create: (_) => UserTagDetailsBloc(),
           ),
           BlocProvider(
@@ -112,6 +109,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       return MaterialApp(
         locale: context.watch<AccountBloc>().appLocal,
         supportedLocales: AppLocalizations.supportedLocales,
+        navigatorKey: navigatorKey,
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

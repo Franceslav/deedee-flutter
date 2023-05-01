@@ -22,6 +22,7 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     on<AddBookmarkEvent>(_onAddBookmark);
     on<UndoAddBookmarkEvent>(_onUndoAddBookmark);
     on<SearchBookmarksEvent>(_onSearchBookmark);
+    on<UserTappedBookmarksMenuItemEvent>(_onUserTappedBookmarksMenuItem);
     on<UserOpenedTagMarkerEvent>(_onUserOpenedTagMarker);
     on<MapScreenIsDisposedEvent>(_loadBookmarks);
     _initialize();
@@ -109,5 +110,12 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     final List<Tag> favouriteTags = await _tagRepository.getFavoriteTags(userId);
     final tag = favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
     emit(TagMarkerOpenedState(event.tagId, isTagBookmarked: tag != null));
+  }
+
+  void _onUserTappedBookmarksMenuItem(
+      UserTappedBookmarksMenuItemEvent event, Emitter<BookmarksState> emit) async {
+    if (state is TagMarkerOpenedState) {
+      _loadBookmarks(event, emit);
+    }
   }
 }

@@ -45,6 +45,10 @@ class SearchBookmarksEvent extends BookmarksEvent {
   SearchBookmarksEvent(this.bookmarkName);
 }
 
+class UserTappedBookmarksMenuItemEvent extends BookmarksEvent {
+  UserTappedBookmarksMenuItemEvent();
+}
+
 class UserOpenedTagMarkerEvent extends BookmarksEvent {
   final Int64 tagId;
 

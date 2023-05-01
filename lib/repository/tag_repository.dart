@@ -60,14 +60,10 @@ class TagRepository {
   }
 
   Future<List<Tag>> getFavoriteTags(String userId) async {
-    final response = await _tagServiceClient.getBookmarkedTags(
-        TagRequest(
-            tag: Tag(
-                status: Tag_Status.BOOKMARKED,
-                compositeFilter: CompositeFilter(topic: Topic(userId: userId))
-            )
-        )
-    );
+    final response = await _tagServiceClient.getBookmarkedTags(TagRequest(
+        tag: Tag(
+            status: Tag_Status.BOOKMARKED,
+            compositeFilter: CompositeFilter(topic: Topic(userId: userId)))));
     return response.tags;
   }
 
