@@ -37,29 +37,10 @@ class ContactServiceApi {
           userId: '',
           status: Contact_Status.ADDED,
           type: Contact_Type.VK,
-          value: '',
+          value: 'durov',
         ),
       ];
   }
-
-  // void create(
-  //     String userId,
-  //     Int64 contactId, 
-  //     String contactUserID,
-  //     Contact_Type type,
-  //     [Contact_Status status = Contact_Status.ADDED,
-  //     String value = '']) {
-        
-  //       _contacts[userId]?.add(
-  //         Contact(
-  //           contactId: contactId,
-  //           userId: contactUserID,
-  //           status: status,
-  //           type: type,
-  //           value: value,
-  //         )
-  //       );
-  // }
 
 
 Contact create(Contact contact) {
@@ -70,28 +51,15 @@ Contact create(Contact contact) {
           type: contact.type,
           value: contact.value,
         );
-    
     _contacts.add(c);
-
     return c;
 }
 
-
-
-
-
-
-
-
-
-  
   List<Contact> getContacts(Contact contact) {
     return _contacts
         .filter((c) => c.status != Contact_Status.DELETED)
         .toList();
   }
-
-
 
   Contact update(Contact contact) {
     Contact c =_contacts
@@ -103,24 +71,17 @@ Contact create(Contact contact) {
                       type: contact.type,
                       value: contact.value,
                       ));
-
-
       c.status = contact.status;
       c.type = contact.type;
       c.value = contact.value;
-
       return c;
-
-
   }
-
  
   Contact delete(Contact contact) {
     return _contacts
         .firstWhere((c) => c.contactId == contact.contactId)
       ..status = Contact_Status.DELETED;
   }
-
 }
 
   

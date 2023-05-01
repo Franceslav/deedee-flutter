@@ -58,12 +58,9 @@ class MockContactServiceClient implements ContactServiceClient {
             type: request.contact.type,
             value: request.contact.value,
           )),
-
       ]
     );
   }
-
-
 
   @override
   ResponseFuture<ContactResponse> getSocialNetworkContacts(
@@ -89,8 +86,6 @@ class MockContactServiceClient implements ContactServiceClient {
     return ContactResponse()..contacts.addAll(contacts);
   }
 
-
-
   @override
   ResponseFuture<ContactResponse> deleteSocialNetworkContact(
       ContactRequest request,
@@ -102,7 +97,6 @@ class MockContactServiceClient implements ContactServiceClient {
     );
   }
 
-
   Future<ContactResponse> _deleteSocialNetworkContact(ContactRequest request) async {
     return ContactResponse(
       contacts: [
@@ -110,14 +104,9 @@ class MockContactServiceClient implements ContactServiceClient {
           Contact(
             contactId: request.contact.contactId,
           )),
-
       ]
     );
   }
-
-
-
-
 
   @override
   ResponseFuture<ContactResponse> editSocialNetworkContact(
@@ -130,24 +119,14 @@ class MockContactServiceClient implements ContactServiceClient {
     );
   }
 
-  
   Future<ContactResponse> _editSocialNetworkContact (ContactRequest request) async {
-    
       return ContactResponse(
         contacts: [
           api.update(
             Contact(
               contactId: request.contact.contactId,
             )),
-
         ]
       );
-
   }
-
-
-
-
-
-
 }

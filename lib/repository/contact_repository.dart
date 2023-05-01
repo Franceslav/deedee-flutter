@@ -20,7 +20,6 @@ class ContactRepository {
     return (await _contactServiceClient
             .getSocialNetworkContacts(ContactRequest()))
         .contacts;
-    return []; //TODO: implement
   }
 
   
