@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   ServiceRequestServiceApi api = locator.get<ServiceRequestServiceApi>();
 
+
   @override
   ClientCall<Q, R> $createCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,

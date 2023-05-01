@@ -1,13 +1,17 @@
+import 'package:deedee/services/fake/api/verification_service_api.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../generated/VerificationService.pbgrpc.dart';
+import '../../generated/deedee/api/model/verification.pb.dart';
+import '../../generated/deedee/api/service/verification_service.pbgrpc.dart';
+import '../../injection.dart';
 import 'fake_client.dart';
 
 @LazySingleton(as: VerificationServiceClient, env: [Environment.dev])
 class MockVerificationServiceClient implements VerificationServiceClient {
+ VerificationServiceApi api = locator.get<VerificationServiceApi>();
+
   @override
   ClientCall<Q, R> $createCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,
@@ -32,26 +36,71 @@ class MockVerificationServiceClient implements VerificationServiceClient {
   }
 
   @override
-  ResponseFuture<VerifyDocumentsResponse> verifyDocuments(
-      VerifyDocumentsRequest request,
+  ResponseFuture<VerificationResponse> cancelVerification(
+      VerificationRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, VerifyDocumentsResponse>(
-        _verifyDocuments(request)));
+    return ResponseFuture(FakeClientCall<dynamic, VerificationResponse>(
+        _cancelVerification(request)));
   }
 
-  Future<VerifyDocumentsResponse> _verifyDocuments(
-      VerifyDocumentsRequest request) async {
-    return VerifyDocumentsResponse()..processed = true;
+  Future<VerificationResponse> _cancelVerification(
+      VerificationRequest request) async {
+    return VerificationResponse(
+      verifications: [
+        api.cancelVerification(request.verification),
+      ],
+    );
   }
 
   @override
-  ResponseFuture<VerifyEmailResponse> verifyEmail(VerifyEmailRequest request,
+  ResponseFuture<VerificationResponse> createVerification(
+      VerificationRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, VerifyEmailResponse>(_verifyEmail(request)));
+    return ResponseFuture(FakeClientCall<dynamic, VerificationResponse>(
+        _createVerification(request)));
   }
 
-  Future<VerifyEmailResponse> _verifyEmail(VerifyEmailRequest request) async {
-    return VerifyEmailResponse()..processed = true;
+  Future<VerificationResponse> _createVerification(
+      VerificationRequest request) async {
+    return VerificationResponse(
+      verifications: [
+        api.createVerification(request.verification),
+      ],
+    );
+  }
+
+  @override
+  ResponseFuture<VerificationResponse> getVerifications(
+      VerificationRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, VerificationResponse>(
+        _getVerifications(request)));
+  }
+
+  Future<VerificationResponse> _getVerifications(
+    VerificationRequest request,
+  ) async {
+    return VerificationResponse(
+      verifications:
+        api.getVerifications(request.verification),
+    );
+  }
+
+  @override
+  ResponseFuture<VerificationResponse> modifyVerification(
+      VerificationRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(FakeClientCall<dynamic, VerificationResponse>(
+        _modifyVerification(request)));
+  }
+
+  Future<VerificationResponse> _modifyVerification(
+    VerificationRequest request,
+  ) async {
+    return VerificationResponse(
+      verifications: [
+        api.modifyVerification(request.verification),
+      ],
+    );
   }
 }

@@ -17,29 +17,32 @@ import 'generated/deedee/api/service/composite_filter_service.pbgrpc.dart'
     as _i10;
 import 'generated/deedee/api/service/contact_service.pbgrpc.dart' as _i14;
 import 'generated/deedee/api/service/service_request_service.pbgrpc.dart'
+    as _i26;
 import 'generated/deedee/api/service/tag_service.pbgrpc.dart' as _i31;
 import 'generated/deedee/api/service/token_service.pbgrpc.dart' as _i35;
 import 'generated/deedee/api/service/topic_service.pbgrpc.dart' as _i39;
+import 'generated/deedee/api/service/verification_service.pbgrpc.dart' as _i43;
 import 'generated/LocationService.pbgrpc.dart' as _i21;
-import 'generated/VerificationService.pbgrpc.dart' as _i41;
 import 'repository/account_repository.dart' as _i3;
 import 'repository/card_repository.dart' as _i7;
 import 'repository/composite_filter_repository.dart' as _i8;
 import 'repository/contact_repository.dart' as _i12;
-import 'repository/gps_repository.dart' as _i17;
+import 'repository/gps_repository.dart' as _i16;
 import 'repository/service_request_repository.dart' as _i24;
 import 'repository/tag_repository.dart' as _i29;
 import 'repository/token_repository.dart' as _i33;
 import 'repository/topic_repository.dart' as _i37;
+import 'repository/verification_repository.dart' as _i41;
 import 'services/channel_service.dart' as _i19;
 import 'services/fake/api/account_service_api.dart' as _i4;
 import 'services/fake/api/composite_filter_service_api.dart' as _i9;
 import 'services/fake/api/contact_service_api.dart' as _i13;
-import 'services/fake/api/gps_repository.dart' as _i16;
+import 'services/fake/api/gps_repository.dart' as _i17;
 import 'services/fake/api/service_request_service_api.dart' as _i25;
 import 'services/fake/api/tag_service_api.dart' as _i30;
 import 'services/fake/api/token_service_api.dart' as _i34;
 import 'services/fake/api/topic_repository.dart' as _i38;
+import 'services/fake/api/verification_service_api.dart' as _i42;
 import 'services/fake/mock_account_service_client.dart' as _i6;
 import 'services/fake/mock_contact_service_client.dart' as _i15;
 import 'services/fake/mock_filter_service_client.dart' as _i11;
@@ -48,48 +51,11 @@ import 'services/fake/mock_service_request_service_client.dart' as _i27;
 import 'services/fake/mock_tag_service_client.dart' as _i32;
 import 'services/fake/mock_token_service_client.dart' as _i36;
 import 'services/fake/mock_topic_service_client.dart' as _i40;
-import 'services/fake/mock_verification_service_clent.dart' as _i42;
+import 'services/fake/mock_verification_service_clent.dart' as _i44;
 import 'services/grpc.dart' as _i18;
 import 'services/http_service.dart' as _i20;
 import 'services/push_notification_service.dart' as _i23;
 import 'services/shared.dart' as _i28;
-
-    as _i24;
-import 'generated/deedee/api/service/tag_service.pbgrpc.dart' as _i29;
-import 'generated/deedee/api/service/token_service.pbgrpc.dart' as _i33;
-import 'generated/deedee/api/service/topic_service.pbgrpc.dart' as _i37;
-import 'generated/LocationService.pbgrpc.dart' as _i19;
-import 'generated/VerificationService.pbgrpc.dart' as _i39;
-import 'repository/card_repository.dart' as _i5;
-import 'repository/composite_filter_repository.dart' as _i6;
-import 'repository/contact_repository.dart' as _i10;
-import 'repository/gps_repository.dart' as _i14;
-import 'repository/service_request_repository.dart' as _i22;
-import 'repository/tag_repository.dart' as _i27;
-import 'repository/token_repository.dart' as _i31;
-import 'repository/topic_repository.dart' as _i35;
-import 'services/channel_service.dart' as _i17;
-import 'services/fake/api/composite_filter_service_api.dart' as _i7;
-import 'services/fake/api/contact_service_api.dart' as _i11;
-import 'services/fake/api/gps_repository.dart' as _i15;
-import 'services/fake/api/service_request_service_api.dart' as _i23;
-import 'services/fake/api/tag_service_api.dart' as _i28;
-import 'services/fake/api/token_service_api.dart' as _i32;
-import 'services/fake/api/topic_repository.dart' as _i36;
-import 'services/fake/mock_account_service_client.dart' as _i4;
-import 'services/fake/mock_contact_service_client.dart' as _i13;
-import 'services/fake/mock_filter_service_client.dart' as _i9;
-import 'services/fake/mock_location_service_client.dart' as _i20;
-import 'services/fake/mock_service_request_service_client.dart' as _i25;
-import 'services/fake/mock_tag_service_client.dart' as _i30;
-import 'services/fake/mock_token_service_client.dart' as _i34;
-import 'services/fake/mock_topic_service_client.dart' as _i38;
-import 'services/fake/mock_verification_service_clent.dart' as _i40;
-import 'services/grpc.dart' as _i16;
-import 'services/http_service.dart' as _i18;
-import 'services/push_notification_service.dart' as _i21;
-import 'services/shared.dart' as _i26;
-
 
 const String _dev = 'dev';
 const String _prod = 'prod';
@@ -330,8 +296,27 @@ Future<_i1.GetIt> $configureDependencies(
     () => _i40.MockTopicServiceClient(),
     registerFor: {_dev},
   );
-  gh.lazySingleton<_i41.VerificationServiceClient>(
-    () => _i42.MockVerificationServiceClient(),
+  gh.lazySingleton<_i41.VerificationRepository>(
+    () => _i41.VerificationRepository(),
+    registerFor: {
+      _dev,
+      _prod,
+      _test,
+    },
+  );
+  await gh.lazySingletonAsync<_i42.VerificationServiceApi>(
+    () {
+      final i = _i42.VerificationServiceApi();
+      return i.init().then((_) => i);
+    },
+    registerFor: {
+      _dev,
+      _test,
+    },
+    preResolve: true,
+  );
+  gh.lazySingleton<_i43.VerificationServiceClient>(
+    () => _i44.MockVerificationServiceClient(),
     registerFor: {_dev},
   );
   return getIt;
