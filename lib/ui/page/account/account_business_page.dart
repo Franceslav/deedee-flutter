@@ -2,9 +2,6 @@ import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:deedee/services/helper.dart';
-
-import '../../../constants.dart';
 
 class AccountBusinessPage extends StatelessWidget {
   const AccountBusinessPage({super.key});
@@ -25,31 +22,33 @@ class AccountInfoBusinessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      //height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      //color: Colors.red,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AccountInfoTitle(),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            color: AppColors.lightgrey,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 13,
-              ),
-              child: Text(
-                AppLocalizations.of(context)!.regToBecomeClient,
+    return SingleChildScrollView(
+      child: SizedBox(
+        //height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        //color: Colors.red,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const AccountInfoTitle(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: AppColors.lightgrey,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 13,
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.regToBecomeClient,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const BusinesRowInfoWidget()
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            const BusinessRowInfoWidget()
+          ],
+        ),
       ),
     );
   }
@@ -87,15 +86,16 @@ class AccountInfoTitle extends StatelessWidget {
   }
 }
 
-class BusinesRowInfoWidget extends StatefulWidget {
-  const BusinesRowInfoWidget({super.key});
+class BusinessRowInfoWidget extends StatefulWidget {
+  const BusinessRowInfoWidget({super.key});
 
   @override
-  State<BusinesRowInfoWidget> createState() => _BusinesRowInfoWidgetState();
+  State<BusinessRowInfoWidget> createState() => _BusinessRowInfoWidgetState();
 }
 
-class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
+class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -121,6 +121,7 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
             ),
           ),
           TextField(
+            keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.homeChooseCity,
               labelText: AppLocalizations.of(context)!.homeChooseCity,
@@ -133,12 +134,14 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
             ),
           ),
           TextField(
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.phoneNumber,
               labelText: AppLocalizations.of(context)!.phoneNumber,
             ),
           ),
           TextField(
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.emailAddressTitle,
               labelText: AppLocalizations.of(context)!.emailAddressTitle,
@@ -157,7 +160,7 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
                 value: isChecked,
                 onChanged: (bool? value) {
                   setState(() {
-                    isChecked = value!;
+                    isChecked = value ?? false;
                   });
                 },
               )
@@ -166,24 +169,24 @@ class _BusinesRowInfoWidgetState extends State<BusinesRowInfoWidget> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.17,
           ),
-          InkWell(
-            onTap: () => {},
-            child: Container(
-              //width: 100.0,
-              height: 50.0,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [
-                  Color(GRADIENT_COLOR_START),
-                  Color(GRADIENT_COLOR_END)
-                ]),
-                borderRadius: BorderRadius.circular(5.0),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                    disabledBackgroundColor: AppColors.grey)
+                .copyWith(
+              shape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
               ),
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.connect,
-                  style: AppTextTheme.titleLarge.copyWith(
-                    color: AppColors.white,
-                  ),
+            ),
+            onPressed:
+                // null,
+                isChecked ? () {} : null,
+            child: Center(
+              child: Text(
+                AppLocalizations.of(context)!.connect,
+                style: AppTextTheme.titleLarge.copyWith(
+                  color: AppColors.white,
                 ),
               ),
             ),
