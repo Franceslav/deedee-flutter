@@ -1,16 +1,16 @@
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/contact.pb.dart';
+import 'package:deedee/generated/deedee/api/service/contact_service.pbgrpc.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
 class ContactServiceApi {
-  late Map<String, List<Contact>> _contacts;
+  late List<Contact> _contacts;
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    _contacts = {
-      "": [
+    _contacts = [
         Contact(
           contactId: Int64(1),
           userId: '',
@@ -37,23 +37,51 @@ class ContactServiceApi {
           userId: '',
           status: Contact_Status.ADDED,
           type: Contact_Type.VK,
-          value: '',
+          value: 'durov',
         ),
-      ]
-    };
+      ];
   }
 
-  List<Contact> getContacts(String userId) {
+
+Contact create(Contact contact) {
+    Contact c = Contact(
+          contactId: contact.contactId,
+          userId: contact.userId,
+          status: contact.status,
+          type: contact.type,
+          value: contact.value,
+        );
+    _contacts.add(c);
+    return c;
+}
+
+  List<Contact> getContacts(Contact contact) {
     return _contacts
-        .getOrElse(userId, () => [])
         .filter((c) => c.status != Contact_Status.DELETED)
         .toList();
   }
 
-  Contact delete(userId, contactId) {
+  Contact update(Contact contact) {
+    Contact c =_contacts
+        .firstWhere((c) => c.contactId == contact.contactId && c.status != Contact_Status.DELETED, 
+          orElse: () => Contact(
+            contactId: contact.contactId, 
+            userId: contact.userId, 
+            status: contact.status,
+            type: contact.type,
+            value: contact.value,
+            ));
+      c.status = contact.status;
+      c.type = contact.type;
+      c.value = contact.value;
+      return c;
+  }
+ 
+  Contact delete(Contact contact) {
     return _contacts
-        .getOrElse(userId, () => [])
-        .firstWhere((c) => c.contactId == contactId)
+        .firstWhere((c) => c.contactId == contact.contactId)
       ..status = Contact_Status.DELETED;
   }
 }
+
+  

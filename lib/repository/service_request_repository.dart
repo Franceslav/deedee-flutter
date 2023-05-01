@@ -37,7 +37,6 @@ class ServiceRequestRepository {
     var response = await _requestServiceClient.create(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
-          serviceRequestId: serviceRequest.serviceRequestId,
           createdFor: serviceRequest.createdFor,
           createdBy: serviceRequest.createdBy,
           description: serviceRequest.description,
@@ -45,11 +44,11 @@ class ServiceRequestRepository {
           geolocation: serviceRequest.geolocation,
           price: serviceRequest.price,
           status: serviceRequest.status,
+          tagId: serviceRequest.tagId,
         ),
       ),
     );
-    return response.serviceRequests
-        .firstWhere((element) => element == serviceRequest);
+    return response.serviceRequests.first;
   }
 
   Future<ServiceRequest> delete(Int64 serviceRequestId) async {

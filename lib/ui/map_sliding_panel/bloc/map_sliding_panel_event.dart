@@ -8,3 +8,5 @@ class MapSlidingPanelRequestCreate extends MapSlidingPanelEvent {
 
   MapSlidingPanelRequestCreate(this.selectedTagId);
 }
+
+class MapSlidingPanelChangeBookmarkEvent extends MapSlidingPanelEvent {}

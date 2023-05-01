@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 
 const FINISHED_ON_BOARDING = 'finishedOnBoarding';
@@ -32,3 +33,8 @@ const APPBAR_SHADOW_COLOR=0XFFC6C6D7;
 const TILE_COLOR = 0XFFF2F2F2;
 const DEFAULT_ZOOM = 13.0;
 const DEFAULT_ZOOM_STEP = 1.0;
+
+const PUSH_NOTIFICATION_CHANNEL_ID = 'deedee';
+const PUSH_NOTIFICATION_CHANNEL_NAME = 'deedee';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

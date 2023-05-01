@@ -2,33 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
 
+import '../../../model/user.dart';
+
 part 'user_tags_event.dart';
 
 part 'user_tags_state.dart';
 
 class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   final TagRepository _tagRepository;
+  final User _user;
 
-  UserTagsBloc(this._tagRepository) : super(InitialState()) {
-    on<LoadTagsEvent>(_onLoadTags);
+  UserTagsBloc(this._tagRepository, this._user) : super(InitialState()) {
     on<DeleteTagEvent>(_onDeleteTags);
     on<SearchUserTagsEvent>(_onSearchTags);
-  }
-
-  _onLoadTags(LoadTagsEvent event, Emitter<UserTagsState> emit) async {
-    try {
-      // final tags =
-      //     await locator.get<GRCPRepository>().getUserTags(event.userId);
-      // emit(LoadedTagsState(tags: tags));
-      final tags = await _tagRepository.getTags(
-        event.userId,
-      );
-      emit(LoadedTagsState(tags: tags));
-    } catch (error) {
-      emit(ErrorState(
-        errorMessage: error.toString(),
-      ));
-    }
+    _init();
   }
 
   _onDeleteTags(DeleteTagEvent event, Emitter<UserTagsState> emit) async {
@@ -55,5 +42,16 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   _onSearchTags(SearchUserTagsEvent event, Emitter<UserTagsState> emit) async {
     final searchTag = await _tagRepository.getTags(event.tagName);
     emit(LoadedTagsState(tags: searchTag));
+  }
+
+  _init() async {
+    try {
+      final tags = await _tagRepository.getTags(_user.userId);
+      emit(LoadedTagsState(tags: tags));
+    } catch (error) {
+      emit(ErrorState(
+        errorMessage: error.toString(),
+      ));
+    }
   }
 }

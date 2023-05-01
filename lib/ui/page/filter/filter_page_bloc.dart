@@ -24,7 +24,7 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
   final User _user;
   final CompositeFilter _currentFilter;
   final TagRepository _tagRepository;
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+  String deviceLanguage = Platform.localeName.substring(0, 2);
 
   List<String> _subtopics = [];
   List<String> _filterKeys = [];
@@ -91,7 +91,7 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
 
   _onPushFilters(event, emit) async {
     try {
-      List<Tag> tags = await _tagRepository.getTags(event.topic);
+      List<Tag> tags = await _tagRepository.getTagsByName(event.topic);
       emit(UserFiltersDoneState(tags));
     } catch (error) {
       ErrorState(error.toString());

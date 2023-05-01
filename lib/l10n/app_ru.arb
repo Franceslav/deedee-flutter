@@ -187,5 +187,12 @@
   "customerProfile": "Профиль клиента",
   "notAuthorized":"Вы не авторизованы для просмотра",
   "search":"Поиск",
-  "notFound": "Не найдено"
+  "notFound": "Не найдено",
+  "deeDeeForBusiness": "DeeDee для бизнеса",
+  "placeText": "Место для вашего текста",
+  "businessProfile": "Бизнесс аккаунт",
+  "regToBecomeClient": "Зарегистрируйтесь, чтобы стать клиентом",
+  "nameCompany": "Название компании",
+  "agreePP": "Соглашаюсь с политикой конфиденциальности",
+  "connect": "Подключить"
 }

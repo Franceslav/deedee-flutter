@@ -32,7 +32,11 @@ class HttpService {
   }
 
   Future<bool> sendPushNotificationRequest(
-      String title, String message, String token) async {
+    String title,
+    String message,
+    String token,
+    String tagId,
+  ) async {
     const postUrl = DEFAULT_PUSH_NOTIFICATION_URL;
 
     final data = {
@@ -40,7 +44,7 @@ class HttpService {
       "priority": "high",
       "data": {
         "click_action": "FLUTTER_NOTIFICATION_CLICK",
-        "id": "1",
+        "id": tagId,
         "status": "done"
       },
       "to": token
@@ -71,7 +75,7 @@ class HttpService {
 
   String prepareRequestString(String requestId) {
     final url =
-    Uri.https('deedee.com', '/my-request', {'requestId': requestId});
+        Uri.https('deedee.com', '/my-request', {'requestId': requestId});
     return url.toString();
   }
 
@@ -81,8 +85,7 @@ class HttpService {
       String? initialLink = await getInitialLink();
       if (initialLink != null) {
         id = _handleDeepLink(initialLink);
-      }
-      else{
+      } else {
         return null;
       }
     } on Exception catch (e) {

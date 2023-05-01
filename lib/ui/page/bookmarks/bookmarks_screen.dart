@@ -4,7 +4,8 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
-import 'package:deedee/model/user.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -34,21 +35,12 @@ class BookmarksScreen extends StatefulWidget {
 class _BookmarksScreenState extends State<BookmarksScreen> {
   final PanelController _controller = PanelController();
   List<Tag> _bookmarks = [];
-  late final User _user;
   final AnimatedButtonController _buttonController = AnimatedButtonController();
-
-  @override
-  void initState() {
-    super.initState();
-    _user = BlocProvider.of<UserBloc>(context).state.user;
-    BlocProvider.of<BookmarksBloc>(context)
-        .add(LoadBookmarksEvent(userId: _user.userId));
-  }
 
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-
+    final bloc = BookmarksBloc(locator<TagRepository>(), user.userId);
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.bookmarksTitle,
@@ -58,6 +50,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
       body: Stack(
         children: <Widget>[
           BlocConsumer<BookmarksBloc, BookmarksState>(
+            bloc: bloc,
             listener: (context, state) {
               if (state is ErrorState) {
                 showSnackBar(context, state.errorMessage);
@@ -102,8 +95,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                               controller: _buttonController,
                               children: [
                                 ButtonBarEntry(
-                                  child: Text(
-                                      AppLocalizations.of(context)!.actualTags),
+                                  child: Text(AppLocalizations.of(context)!
+                                      .actualTags),
                                   onTap: () {},
                                 ),
                                 ButtonBarEntry(
@@ -121,7 +114,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                             ),
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.search,
+                                hintText:
+                                    AppLocalizations.of(context)!.search,
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)),
@@ -132,8 +126,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ),
                               ),
                               onChanged: (value) {
-                                BlocProvider.of<BookmarksBloc>(context)
-                                    .add(SearchBookmarksEvent(value));
+                                bloc.add(SearchBookmarksEvent(value));
                               },
                             ),
                           ),
@@ -166,9 +159,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                           setState(() {
                                             _bookmarks.remove(bookmark);
                                           });
-                                          BlocProvider.of<BookmarksBloc>(
-                                                  context)
-                                              .add(
+                                          bloc.add(
                                             DeleteBookmarkEvent(
                                               userId: user.userId,
                                               bookmark: bookmark,

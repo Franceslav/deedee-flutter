@@ -9,6 +9,7 @@ import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
+import 'package:deedee/ui/page/account/account_business_page.dart';
 import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
@@ -73,6 +74,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: StatsScreen, path: '/stats'),
     MaterialRoute(page: BookmarkQRScanner, path: '/qr-scan'),
     MaterialRoute(page: CustomerProfile, path: '/customer-profile'),
+    MaterialRoute(page: AccountBusinessPage, path: '/business'),
   ],
 )
 class $AppRouter {}
