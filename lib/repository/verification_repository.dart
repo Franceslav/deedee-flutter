@@ -1,10 +1,8 @@
-import 'dart:math';
 import 'package:deedee/injection.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
+
 import '../generated/deedee/api/model/verification.pb.dart';
-import '../generated/deedee/api/service/verification_service.pb.dart';
 import '../generated/deedee/api/service/verification_service.pbgrpc.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])

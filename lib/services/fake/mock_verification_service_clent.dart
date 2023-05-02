@@ -3,14 +3,14 @@ import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
-import '../../generated/deedee/api/model/verification.pb.dart';
+
 import '../../generated/deedee/api/service/verification_service.pbgrpc.dart';
 import '../../injection.dart';
 import 'fake_client.dart';
 
 @LazySingleton(as: VerificationServiceClient, env: [Environment.dev])
 class MockVerificationServiceClient implements VerificationServiceClient {
- VerificationServiceApi api = locator.get<VerificationServiceApi>();
+  VerificationServiceApi api = locator.get<VerificationServiceApi>();
 
   @override
   ClientCall<Q, R> $createCall<Q, R>(
@@ -81,8 +81,7 @@ class MockVerificationServiceClient implements VerificationServiceClient {
     VerificationRequest request,
   ) async {
     return VerificationResponse(
-      verifications:
-        api.getVerifications(request.verification),
+      verifications: api.getVerifications(request.verification),
     );
   }
 

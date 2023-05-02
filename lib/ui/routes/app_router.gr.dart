@@ -427,7 +427,6 @@ class AppRouter extends _i36.RootStackRouter {
         ),
         _i36.RouteConfig(
           RequestScreenRoute.name,
-          
           path: '/request-page',
         ),
         _i36.RouteConfig(
@@ -941,7 +940,6 @@ class RequestScreenRoute extends _i36.PageRouteInfo<RequestScreenRouteArgs> {
     required _i41.Int64 serviceRequestId,
   }) : super(
           RequestScreenRoute.name,
-          
           path: '/request-page',
           args: RequestScreenRouteArgs(
             key: key,

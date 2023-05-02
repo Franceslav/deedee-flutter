@@ -14,6 +14,7 @@ import '../../model/contact.dart';
 import '../../repository/gps_repository.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -88,16 +89,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserDocVerification(
       UserDocVerification event, Emitter<UserState> emit) async {
-    _onUserDocVerification(
-        UserDocVerification event, Emitter<UserState> emit) async {
-      try {
-        emit(UserState(state.user
-            .copyWith(docVerification: DocVerificationStatus.verified)));
-        final response =
-            await locator.get<GRCPRepository>().verifyUserIdentity(event.files);
-      } catch (error) {
-        print(error.toString());
-      }
+    try {
+      emit(UserState(state.user
+          .copyWith(docVerification: DocVerificationStatus.verified)));
+      final response =
+          await locator.get<GRCPRepository>().verifyUserIdentity(event.files);
+    } catch (error) {
+      print(error.toString());
     }
   }
 
@@ -110,8 +108,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserAvailablePlaces event,
     Emitter<UserState> emit,
   ) async {
-    List<Place> places =
-        await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
+    List<Place> places = [
+      Place(title: 'A'),
+      Place(title: 'B'),
+      Place(title: 'C'),
+    ];
+        // await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
     emit(
       UserState(
         state.user.copyWith(availablePlaces: places),
