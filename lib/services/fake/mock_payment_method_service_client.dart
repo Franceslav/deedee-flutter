@@ -1,5 +1,9 @@
+import 'package:deedee/generated/deedee/api/model/payment_method.pb.dart';
+import 'package:deedee/generated/deedee/api/model/payment_method.pbenum.dart';
+import 'package:deedee/generated/deedee/api/service/payment_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/services/fake/api/payment_method_service_api.dart';
 import 'package:deedee/services/fake/api/service_request_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
@@ -7,10 +11,11 @@ import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: ServiceRequestServiceClient, env: [Environment.dev])
-class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
-  ServiceRequestServiceApi api = locator.get<ServiceRequestServiceApi>();
+@LazySingleton(as: PaymentServiceClient, env: [Environment.dev])
+class MockPaymentMethodServiceClient implements PaymentServiceClient {
+  PaymentMethodServiceApi api = locator.get<PaymentMethodServiceApi>();
 
+  // ??
   @override
   ClientCall<Q, R> $createCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,
@@ -19,6 +24,7 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
     throw UnimplementedError();
   }
 
+  // ??
   @override
   ResponseStream<R> $createStreamingCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,
@@ -27,6 +33,7 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
     throw UnimplementedError();
   }
 
+  // ??
   @override
   ResponseFuture<R> $createUnaryCall<Q, R>(ClientMethod<Q, R> method, Q request,
       {CallOptions? options}) {
@@ -35,97 +42,87 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   @override
-  ResponseFuture<ServiceRequestResponse> accept(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestResponse>(_accept(request)));
+  ResponseFuture<PaymentMethodResponse> addPaymentMethod(
+    PaymentMethodRequest request, {
+    CallOptions? options,
+  }) {
+    return ResponseFuture(FakeClientCall<dynamic, PaymentMethodResponse>(
+        _addPaymentMethod(request)));
+    //throw UnimplementedError();
   }
 
-  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {
-    return ServiceRequestResponse(
-      serviceRequests: [
-        api.accept(
-          request.serviceRequest.createdBy,
-          request.serviceRequest.serviceRequestId,
-        ),
-      ],
-    );
-  }
-
-  @override
-  ResponseFuture<ServiceRequestResponse> change(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestResponse>(_change(request)));
-  }
-
-  Future<ServiceRequestResponse> _change(ServiceRequestRequest request) async {
-    return ServiceRequestResponse(
-      serviceRequests: [
-        api.change(request.serviceRequest.createdBy,
-            request.serviceRequest.serviceRequestId.toString(), '', 0),
-      ],
-    );
-  }
-
-  @override
-  ResponseFuture<ServiceRequestResponse> create(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestResponse>(_create(request)));
-  }
-
-  Future<ServiceRequestResponse> _create(ServiceRequestRequest request) async {
-    return ServiceRequestResponse(
-      serviceRequests: [
-        api.create(request.serviceRequest),
-      ],
-    );
-  }
-
-  @override
-  ResponseFuture<ServiceRequestResponse> delete(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestResponse>(_delete(request)));
-  }
-
-  Future<ServiceRequestResponse> _delete(ServiceRequestRequest request) async {
-    return ServiceRequestResponse(
-      serviceRequests: [
-        api.delete(
-          request.serviceRequest.createdFor,
-          request.serviceRequest.serviceRequestId,
+  Future<PaymentMethodResponse> _addPaymentMethod(
+      PaymentMethodRequest request) async {
+    return PaymentMethodResponse(
+      paymentMethods: [
+        api.add(
+          '', // because payment_method_service_api.dart doesn't have any other UserIDs
+          request.paymentMethod,
         )
       ],
     );
   }
 
   @override
-  ResponseFuture<ServiceRequestResponse> getAll(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestResponse>(_getAll(request)));
+  ResponseFuture<PaymentMethodResponse> deletePaymentMethod(
+    PaymentMethodRequest request, {
+    CallOptions? options,
+  }) {
+    return ResponseFuture(FakeClientCall<dynamic, PaymentMethodResponse>(
+        _deletePaymentMethod(request)));
   }
 
-  Future<ServiceRequestResponse> _getAll(ServiceRequestRequest request) async {
-    return ServiceRequestResponse(
-      serviceRequests:
-          api.getServiceRequests(request.serviceRequest.createdFor),
+  Future<PaymentMethodResponse> _deletePaymentMethod(
+      PaymentMethodRequest request) async {
+    return PaymentMethodResponse(
+      paymentMethods: [
+        api.delete(
+          '', // because payment_method_service_api.dart doesn't have any other UserIDs
+          request.paymentMethod.paymentMethodId,
+        )
+      ],
     );
   }
 
   @override
-  ResponseFuture<ServiceRequestResponse> decline(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    // TODO: implement decline
-    throw UnimplementedError();
+  ResponseFuture<PaymentMethodResponse> editPaymentMethod(
+    PaymentMethodRequest request, {
+    CallOptions? options,
+  }) {
+    return ResponseFuture(FakeClientCall<dynamic, PaymentMethodResponse>(
+        _editPaymentMethod(request)));
+  }
+
+  Future<PaymentMethodResponse> _editPaymentMethod(
+      PaymentMethodRequest request) async {
+    return PaymentMethodResponse(
+      paymentMethods: [
+        api.edit(
+          '', // Because payment_method_service_api.dart doesn't have any other UserIDs
+          request.paymentMethod.paymentMethodId,
+          title:
+              'An example of changing title (<mock_payment_method_service_client.dart>).',
+          // The type was not specified specifically (for testing)
+          // EXAMPLE: 'type: PaymentMethod_Type.CARD,'
+        )
+      ],
+    );
   }
 
   @override
-  ResponseFuture<ServiceRequestResponse> modify(ServiceRequestRequest request,
-      {CallOptions? options}) {
-    // TODO: implement modify
-    throw UnimplementedError();
+  ResponseFuture<PaymentMethodResponse> getAllPaymentMethods(
+    PaymentMethodRequest request, {
+    CallOptions? options,
+  }) {
+    return ResponseFuture(FakeClientCall<dynamic, PaymentMethodResponse>(
+        _getAllPaymentMethod(request)));
+  }
+
+  Future<PaymentMethodResponse> _getAllPaymentMethod(
+      PaymentMethodRequest request) async {
+    return PaymentMethodResponse(
+      // Because payment_method_service_api.dart doesn't have any other UserIDs
+      paymentMethods: api.get(''),
+    );
   }
 }

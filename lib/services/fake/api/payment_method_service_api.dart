@@ -8,7 +8,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
-class ServiceRequestServiceApi {
+class PaymentMethodServiceApi {
   late Map<String, List<PaymentMethod>> _serviceRequests;
 
   @PostConstruct(preResolve: true)
@@ -26,7 +26,7 @@ class ServiceRequestServiceApi {
       ..seconds = Int64.parseInt(
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
     _serviceRequests = {
-      "": [
+      '': [
         PaymentMethod(
           addedBy: Int64(0),
           createdAt: timestamp1,
@@ -81,16 +81,31 @@ class ServiceRequestServiceApi {
 
   PaymentMethod edit(
     String userID,
-    Int64 paymentMethodId,
-    PaymentMethod_Type type,
-    String title,
-  ) {
-    return _serviceRequests
-        .getOrElse(userID, () => [])
-        .firstWhere((value) => value.paymentMethodId == paymentMethodId)
-      ..status = PaymentMethod_Status.CHANGED
-      ..type = type
-      ..title = title;
+    Int64 paymentMethodId, {
+    PaymentMethod_Type? type,
+    String? title,
+  }) {
+    // if only the title was changed
+    if (type == null) {
+      if (title != null) {
+        return _serviceRequests
+            .getOrElse(userID, () => [])
+            .firstWhere((value) => value.paymentMethodId == paymentMethodId)
+          ..status = PaymentMethod_Status.CHANGED
+          ..title = title;
+      }
+    }
+    // if only the type was changed
+    else if (title == null) {
+      return _serviceRequests
+          .getOrElse(userID, () => [])
+          .firstWhere((value) => value.paymentMethodId == paymentMethodId)
+        ..status = PaymentMethod_Status.CHANGED
+        ..type = type;
+    }
+    // if nothing has changed
+    throw Exception(
+        'Both fields in the \'api.edit()\' method were <null>, so nothing has changed!');
   }
 
   PaymentMethod delete(
