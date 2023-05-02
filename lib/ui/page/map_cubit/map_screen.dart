@@ -134,120 +134,137 @@ class _MapScreenState extends State<MapScreen> {
             pushAndRemoveUntil(context, const WelcomeScreen(), false);
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            toolbarHeight: size.height * 0.07,
-            backgroundColor: Colors.transparent,
-            actions: [
-              Expanded(
-                child: BlocConsumer<SelectorBloc, SelectorState>(
-                  listener: (context, state) {
-                    if (state is FilterKeySelectedState) {
-                      selectedFilterKeys.contains(state.filterKey)
-                          ? selectedFilterKeys.remove(state.filterKey)
-                          : selectedFilterKeys.add(state.filterKey);
-                    }
-                  },
-                  builder: (context, state) {
-                    return SelectorAppBar(
-                      allItems: filterKeys,
-                      selectedItems: selectedFilterKeys,
-                      onTap: (FilterKey filterKey) =>
-                          selectorBloc.add(SelectFilterKeyEvent(filterKey)),
-                    );
-                  },
-                ),
+        child: WillPopScope(
+          onWillPop: () async {
+            var filterMap = _updateFilterMap(
+              widget.currentFilter.filterMap,
+              selectedFilterKeys,
+            );
+            context.router.replace(FilterPageRoute(
+              currentFilter: CompositeFilter(
+                compositeFilterId: widget.currentFilter.compositeFilterId,
+                topic: widget.currentFilter.topic,
+                filterMap: filterMap,
+                status: widget.currentFilter.status,
               ),
-            ],
-            iconTheme: IconThemeData(
-                color: isDarkMode(context) ? Colors.white : Colors.black),
-            elevation: 0.0,
-          ),
-          body: Stack(
-            children: [
-              FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  // swPanBoundary: LatLng(
-                  //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
-                  // nePanBoundary: LatLng(
-                  //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
-                  center: widget.tagDescriptionMap.isEmpty
-                      ? LatLng(geo.latitude, geo.longitude)
-                      : widget.tagDescriptionMap.keys.first,
-                  // bounds: LatLngBounds.fromPoints(_latLngList),
-                  zoom: MAP_ZOOM,
-                  onTap: (tapPosition, tapLatLon) {
-                    _panelController.close();
-                  },
+            ));
+            return true;
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              toolbarHeight: size.height * 0.07,
+              backgroundColor: Colors.transparent,
+              actions: [
+                Expanded(
+                  child: BlocConsumer<SelectorBloc, SelectorState>(
+                    listener: (context, state) {
+                      if (state is FilterKeySelectedState) {
+                        selectedFilterKeys.contains(state.filterKey)
+                            ? selectedFilterKeys.remove(state.filterKey)
+                            : selectedFilterKeys.add(state.filterKey);
+                      }
+                    },
+                    builder: (context, state) {
+                      return SelectorAppBar(
+                        allItems: filterKeys,
+                        selectedItems: selectedFilterKeys,
+                        onTap: (FilterKey filterKey) =>
+                            selectorBloc.add(SelectFilterKeyEvent(filterKey)),
+                      );
+                    },
+                  ),
                 ),
-                children: [
-                  TileLayer(
-                    minZoom: 2,
-                    maxZoom: 18,
-                    backgroundColor: Colors.black,
-                    subdomains: const ['a', 'b', 'c'],
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.dinobit.deedeeapp',
+              ],
+              iconTheme: IconThemeData(
+                  color: isDarkMode(context) ? Colors.white : Colors.black),
+              elevation: 0.0,
+            ),
+            body: Stack(
+              children: [
+                FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    // swPanBoundary: LatLng(
+                    //     geo.latitude - MAP_BOUNDS, geo.longitude - MAP_BOUNDS),
+                    // nePanBoundary: LatLng(
+                    //     geo.latitude + MAP_BOUNDS, geo.longitude + MAP_BOUNDS),
+                    center: widget.tagDescriptionMap.isEmpty
+                        ? LatLng(geo.latitude, geo.longitude)
+                        : widget.tagDescriptionMap.keys.first,
+                    // bounds: LatLngBounds.fromPoints(_latLngList),
+                    zoom: MAP_ZOOM,
+                    onTap: (tapPosition, tapLatLon) {
+                      _panelController.close();
+                    },
                   ),
-                  MarkerLayer(
-                    rotate: false,
-                    markers: _markers.map((e) => e.marker).toList(),
-                  ),
-                  MarkerClusterLayerWidget(
-                    options: MarkerClusterLayerOptions(
-                      maxClusterRadius: 190,
-                      disableClusteringAtZoom: 12,
-                      size: const Size(50, 50),
-                      // fitBoundsOptions: LatLngBounds.fromPoints(listOfPoints),
-                      markers: _markers.map((e) => e.marker).toList(),
-                      polygonOptions: const PolygonOptions(
-                          borderColor: Colors.blueAccent,
-                          color: Colors.black12,
-                          borderStrokeWidth: 3),
-                      builder: (context, markers) {
-                        return Container(
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                              color: Colors.orange, shape: BoxShape.circle),
-                          child: Text('${markers.length}'),
-                        );
-                      },
+                  children: [
+                    TileLayer(
+                      minZoom: 2,
+                      maxZoom: 18,
+                      backgroundColor: Colors.black,
+                      subdomains: const ['a', 'b', 'c'],
+                      urlTemplate:
+                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.dinobit.deedeeapp',
                     ),
-                  ),
-                ],
-              ),
-              MapSlidingPanel(
-                controller: _panelController,
-                selectedMessengerId: _selectedMessengerId,
-                selectedTagId: _selectedTagId,
-                openedFirstTime: openedFirstTime,
-              ),
-              Positioned(
-                top: 16,
-                left: 16,
-                child: GestureDetector(
-                  child: const Icon(Icons.close),
-                  onTap: () {
-                    var filterMap = _updateFilterMap(
-                      widget.currentFilter.filterMap,
-                      selectedFilterKeys,
-                    );
-                    context.router.popAndPush(FilterPageRoute(
-                      currentFilter: CompositeFilter(
-                        compositeFilterId:
-                            widget.currentFilter.compositeFilterId,
-                        topic: widget.currentFilter.topic,
-                        filterMap: filterMap,
-                        status: widget.currentFilter.status,
+                    MarkerLayer(
+                      rotate: false,
+                      markers: _markers.map((e) => e.marker).toList(),
+                    ),
+                    MarkerClusterLayerWidget(
+                      options: MarkerClusterLayerOptions(
+                        maxClusterRadius: 190,
+                        disableClusteringAtZoom: 12,
+                        size: const Size(50, 50),
+                        // fitBoundsOptions: LatLngBounds.fromPoints(listOfPoints),
+                        markers: _markers.map((e) => e.marker).toList(),
+                        polygonOptions: const PolygonOptions(
+                            borderColor: Colors.blueAccent,
+                            color: Colors.black12,
+                            borderStrokeWidth: 3),
+                        builder: (context, markers) {
+                          return Container(
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                                color: Colors.orange, shape: BoxShape.circle),
+                            child: Text('${markers.length}'),
+                          );
+                        },
                       ),
-                    ));
-                  },
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                MapSlidingPanel(
+                  controller: _panelController,
+                  selectedMessengerId: _selectedMessengerId,
+                  selectedTagId: _selectedTagId,
+                  openedFirstTime: openedFirstTime,
+                ),
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  child: GestureDetector(
+                    child: const Icon(Icons.close),
+                    onTap: () {
+                      var filterMap = _updateFilterMap(
+                        widget.currentFilter.filterMap,
+                        selectedFilterKeys,
+                      );
+                      context.router.replace(FilterPageRoute(
+                        currentFilter: CompositeFilter(
+                          compositeFilterId:
+                              widget.currentFilter.compositeFilterId,
+                          topic: widget.currentFilter.topic,
+                          filterMap: filterMap,
+                          status: widget.currentFilter.status,
+                        ),
+                      ));
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
