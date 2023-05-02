@@ -155,6 +155,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                           ),
                           MyRequestList(requests: _requests,
                             statuses: const [
+                              ServiceRequest_Status.DECLINED,
                               ServiceRequest_Status.DELETED,
                               ServiceRequest_Status.DONE,
                             ],
@@ -175,8 +176,8 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       UpdateRequestEvent(
                                         request: request,
                                         userId: userId,
-                                      )
-                                  )
+                                      ),
+                                  ),
                           ),
                         ],
                       ),

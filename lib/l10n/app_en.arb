@@ -183,6 +183,7 @@
   "seen": "Seen",
   "bookmarked": "Bookmarked",
   "accept": "Accept",
+  "decline": "Decline",
   "request": "Request",
   "addPayment": "Add  Payment",
   "paymentPageTitle": "Payment",

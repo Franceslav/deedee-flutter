@@ -22,7 +22,6 @@ import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/page/my_referrals/referral_screen.dart';
-import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/page/my_requests/my_requests_screen.dart';
 import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
@@ -67,8 +66,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
     MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
-    MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
-    MaterialRoute(page: RequestScreen, path: '/service-request-page'),
+    MaterialRoute(page: RequestScreen, path: '/request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
     MaterialRoute(page: CardScreen, path: '/card-page'),
     MaterialRoute(page: StatsScreen, path: '/stats'),

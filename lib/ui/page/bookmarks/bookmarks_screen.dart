@@ -40,7 +40,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = BookmarksBloc(locator<TagRepository>(), user.userId);
+    final bloc = BookmarksBloc(locator<TagRepository>(), user);
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.bookmarksTitle,

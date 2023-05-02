@@ -14,6 +14,7 @@ import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
 import 'package:deedee/ui/page/home/home_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,7 +58,7 @@ class _HomeState extends State<HomeScreen> {
                 if (state is HomePageRequestReceivedState) {
                   context.router.push(
                     RequestScreenRoute(
-                      serviceRequestId: int.parse(state.id!),
+                      serviceRequestId: Int64(int.parse(state.id!)),
                     ),
                   );
                 }

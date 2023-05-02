@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
@@ -14,9 +15,9 @@ part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   final TagRepository _tagRepository;
-  final String userId;
+  final User _user;
 
-  BookmarksBloc(this._tagRepository, this.userId) : super(InitialState()) {
+  BookmarksBloc(this._tagRepository, this._user) : super(InitialState()) {
     on<_BookmarksLoadedEvent>(_onBookmarksLoaded);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
@@ -30,20 +31,21 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
 
   void _initialize() async {
     try {
-      final bookmarks = await _tagRepository.getFavoriteTags(userId);
+      final bookmarks = await _tagRepository.getFavoriteTags(_user.email);
       add(_BookmarksLoadedEvent(tags: bookmarks));
     } catch (error) {
       stderr.writeln(error.toString());
     }
   }
 
-  void _onBookmarksLoaded(_BookmarksLoadedEvent event, Emitter<BookmarksState> emit) {
+  void _onBookmarksLoaded(
+      _BookmarksLoadedEvent event, Emitter<BookmarksState> emit) {
     emit(LoadedBookmarksState(event.tags));
   }
 
   void _loadBookmarks(BookmarksEvent _, Emitter<BookmarksState> emit) async {
     try {
-      final bookmarks = await _tagRepository.getFavoriteTags(userId);
+      final bookmarks = await _tagRepository.getFavoriteTags(_user.email);
       emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       emit(ErrorState(error.toString()));
@@ -75,25 +77,24 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
     Emitter<BookmarksState> emit,
   ) async {
     try {
-      final resultTag = await _tagRepository.addTagToFavorites(userId, event.tagId);
-      emit(
-          TagMarkerOpenedState(
-              resultTag.tagId,
-              isTagBookmarked: resultTag.status == Tag_Status.BOOKMARKED
-          )
-      );
+      final resultTag =
+          await _tagRepository.addTagToFavorites(_user.email, event.tagId);
+      emit(TagMarkerOpenedState(resultTag.tagId,
+          isTagBookmarked: resultTag.status == Tag_Status.BOOKMARKED));
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
   }
 
   Future<void> _onUndoAddBookmark(
-      UndoAddBookmarkEvent event,
-      Emitter<BookmarksState> emit,
-      ) async {
+    UndoAddBookmarkEvent event,
+    Emitter<BookmarksState> emit,
+  ) async {
     try {
-      final tag = await _tagRepository.removeTagFromFavorites(userId, event.tagId);
-      emit(TagMarkerOpenedState(tag.tagId, isTagBookmarked: tag.status == Tag_Status.BOOKMARKED));
+      final tag =
+          await _tagRepository.removeTagFromFavorites(_user.email, event.tagId);
+      emit(TagMarkerOpenedState(tag.tagId,
+          isTagBookmarked: tag.status == Tag_Status.BOOKMARKED));
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -107,13 +108,15 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
 
   void _onUserOpenedTagMarker(
       UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
-    final List<Tag> favouriteTags = await _tagRepository.getFavoriteTags(userId);
-    final tag = favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
+    final List<Tag> favouriteTags =
+        await _tagRepository.getFavoriteTags(_user.email);
+    final tag =
+        favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
     emit(TagMarkerOpenedState(event.tagId, isTagBookmarked: tag != null));
   }
 
-  void _onUserTappedBookmarksMenuItem(
-      UserTappedBookmarksMenuItemEvent event, Emitter<BookmarksState> emit) async {
+  void _onUserTappedBookmarksMenuItem(UserTappedBookmarksMenuItemEvent event,
+      Emitter<BookmarksState> emit) async {
     if (state is TagMarkerOpenedState) {
       _loadBookmarks(event, emit);
     }

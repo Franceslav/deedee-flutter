@@ -12,11 +12,24 @@ class ServiceRequestRepository {
   final ServiceRequestServiceClient _requestServiceClient =
       locator.get<ServiceRequestServiceClient>();
 
-  Future<ServiceRequest> accept(ServiceRequest serviceRequest) async {
+  Future<ServiceRequest> accept(ServiceRequest serviceRequest,String email) async {
     var response = await _requestServiceClient.accept(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
           serviceRequestId: serviceRequest.serviceRequestId,
+          createdBy: email
+        ),
+      ),
+    );
+    return response.serviceRequests.firstWhere((element) =>
+        element.serviceRequestId == serviceRequest.serviceRequestId);
+  }
+  Future<ServiceRequest> decline(ServiceRequest serviceRequest,String email) async {
+    var response = await _requestServiceClient.decline(
+      ServiceRequestRequest(
+        serviceRequest: ServiceRequest(
+          serviceRequestId: serviceRequest.serviceRequestId,
+          createdBy: email
         ),
       ),
     );
@@ -51,11 +64,12 @@ class ServiceRequestRepository {
     return response.serviceRequests.first;
   }
 
-  Future<ServiceRequest> delete(Int64 serviceRequestId) async {
+  Future<ServiceRequest> delete(Int64 serviceRequestId, String email) async {
     var response = await _requestServiceClient.delete(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
           serviceRequestId: serviceRequestId,
+          createdBy: email
         ),
       ),
     );
@@ -63,11 +77,11 @@ class ServiceRequestRepository {
         .firstWhere((element) => element.serviceRequestId == serviceRequestId);
   }
 
-  Future<List<ServiceRequest>> getAll(String userId) async {
+  Future<List<ServiceRequest>> getAll(String email) async {
     var response = await _requestServiceClient.getAll(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
-          createdFor: userId,
+          createdFor: email,
         ),
       ),
     );

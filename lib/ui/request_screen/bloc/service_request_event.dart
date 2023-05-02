@@ -5,7 +5,6 @@ abstract class ServicePushRequestEvent {}
 
 class ServiceRequestPriceChangeEvent extends ServicePushRequestEvent {
   final String price;
-
   ServiceRequestPriceChangeEvent({required this.price});
 }
 
@@ -25,4 +24,10 @@ class AcceptServiceRequestEvent extends ServicePushRequestEvent {
   final ServiceRequest serviceRequest;
 
   AcceptServiceRequestEvent({required this.serviceRequest});
+}
+
+class DeclineServiceRequestEvent extends ServicePushRequestEvent {
+  final ServiceRequest serviceRequest;
+
+  DeclineServiceRequestEvent({required this.serviceRequest});
 }

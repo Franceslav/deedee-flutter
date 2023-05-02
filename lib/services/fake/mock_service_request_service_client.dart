@@ -12,7 +12,6 @@ import 'package:injectable/injectable.dart';
 class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   ServiceRequestServiceApi api = locator.get<ServiceRequestServiceApi>();
 
-
   @override
   ClientCall<Q, R> $createCall<Q, R>(
       ClientMethod<Q, R> method, Stream<Q> requests,
@@ -48,8 +47,8 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
       serviceRequests: [
         api.accept(
           ServiceRequest(
-            serviceRequestId: request.serviceRequest.serviceRequestId,
-          ),
+              serviceRequestId: request.serviceRequest.serviceRequestId,
+              createdBy: request.serviceRequest.createdBy),
         ),
       ],
     );
@@ -100,6 +99,7 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
         api.delete(
           ServiceRequest(
             serviceRequestId: request.serviceRequest.serviceRequestId,
+            createdBy: request.serviceRequest.createdBy,
           ),
         )
       ],
@@ -123,8 +123,20 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   @override
   ResponseFuture<ServiceRequestResponse> decline(ServiceRequestRequest request,
       {CallOptions? options}) {
-    // TODO: implement decline
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, ServiceRequestResponse>(_decline(request)));
+  }
+
+  Future<ServiceRequestResponse> _decline(ServiceRequestRequest request) async {
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.decline(
+          ServiceRequest(
+              serviceRequestId: request.serviceRequest.serviceRequestId,
+              createdBy: request.serviceRequest.createdBy),
+        ),
+      ],
+    );
   }
 
   @override

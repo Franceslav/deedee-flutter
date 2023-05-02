@@ -14,7 +14,7 @@ class ServicePushRequestBloc
     extends Bloc<ServicePushRequestEvent, ServicePushRequestState> {
   final ServiceRequestRepository _serviceRequestRepository;
   final User _user;
-  final int _serviceRequestId;
+  final Int64 _serviceRequestId;
 
   late ServiceRequest _initialServiceRequest;
 
@@ -25,6 +25,7 @@ class ServicePushRequestBloc
   ) : super(RequestInitial()) {
     on<ServiceRequestPriceChangeEvent>(_onServiceRequestPriceChangeEvent);
     on<AcceptServiceRequestEvent>(_onAcceptServiceRequestEvent);
+    on<DeclineServiceRequestEvent>(_onDeclineServiceRequestEvent);
 
     _initialize();
   }
@@ -51,15 +52,23 @@ class ServicePushRequestBloc
 
   _onAcceptServiceRequestEvent(AcceptServiceRequestEvent event,
       Emitter<ServicePushRequestState> emit) async {
-    var sr = await _serviceRequestRepository.accept(event.serviceRequest);
+    var sr = await _serviceRequestRepository.accept(
+        event.serviceRequest, _user.email);
+    emit(AcceptServiceRequestState(errorMessage: ''));
+  }
+
+  _onDeclineServiceRequestEvent(DeclineServiceRequestEvent event,
+      Emitter<ServicePushRequestState> emit) async {
+    var sr = await _serviceRequestRepository.decline(
+        event.serviceRequest, _user.email);
     emit(AcceptServiceRequestState(errorMessage: ''));
   }
 
   _initialize() async {
     try {
-      _initialServiceRequest = (await _serviceRequestRepository
-              .getAll(_user.email))
-          .firstWhere((sr) => sr.serviceRequestId == Int64(_serviceRequestId));
+      _initialServiceRequest =
+          (await _serviceRequestRepository.getAll(_user.email))
+              .firstWhere((sr) => sr.serviceRequestId == _serviceRequestId);
       emit(ServiceRequestChangeState(
           serviceRequest: _initialServiceRequest, changed: false));
     } catch (error) {

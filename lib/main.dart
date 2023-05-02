@@ -54,7 +54,7 @@ void main() {
           BlocProvider(
             create: (BuildContext context) {
               final user = BlocProvider.of<UserBloc>(context).state.user;
-              return BookmarksBloc(locator.get<TagRepository>(), user.userId);
+              return BookmarksBloc(locator.get<TagRepository>(), user);
             },
           ),
           BlocProvider(

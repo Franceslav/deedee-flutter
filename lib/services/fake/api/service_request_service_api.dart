@@ -22,6 +22,7 @@ class ServiceRequestServiceApi {
     var timestamp4 = Timestamp()
       ..seconds = Int64.parseInt(
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+
     _serviceRequests = [
       ServiceRequest(
         serviceRequestId: Int64(1),
@@ -76,7 +77,7 @@ class ServiceRequestServiceApi {
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-        createdBy: '1',
+        createdBy: 'art.zavtur@gmail.com',
         createdFor: '',
         status: ServiceRequest_Status.PENDING,
         createdAt: timestamp1,
@@ -140,32 +141,35 @@ class ServiceRequestServiceApi {
   }
 
   ServiceRequest accept(ServiceRequest serviceRequest) {
-    return _serviceRequests.firstWhere(
-        (rq) => rq.serviceRequestId == serviceRequest.serviceRequestId)
+    return _serviceRequests.firstWhere((rq) =>
+        rq.serviceRequestId == serviceRequest.serviceRequestId &&
+        rq.createdBy == serviceRequest.createdBy)
       ..status = ServiceRequest_Status.ACCEPTED;
   }
 
+  ServiceRequest decline(ServiceRequest serviceRequest) {
+    return _serviceRequests.firstWhere((rq) =>
+        rq.serviceRequestId == serviceRequest.serviceRequestId &&
+        rq.createdBy == serviceRequest.createdBy)
+      ..status = ServiceRequest_Status.DECLINED;
+  }
+
   ServiceRequest delete(ServiceRequest serviceRequest) {
-    return _serviceRequests.firstWhere(
-        (rq) => rq.serviceRequestId == serviceRequest.serviceRequestId)
+    return _serviceRequests.firstWhere((rq) =>
+        rq.serviceRequestId == serviceRequest.serviceRequestId &&
+        rq.createdBy == serviceRequest.createdBy)
       ..status = ServiceRequest_Status.DELETED;
   }
 
-  ServiceRequest update(userId, ServiceRequest request) { //TODO:
-    return _serviceRequests
-        .firstWhere(
-          (rq) => rq.serviceRequestId == request.serviceRequestId,
-          orElse: () => request,
-        )
+  ServiceRequest update(userId, ServiceRequest request) {
+    //TODO:
+    return _serviceRequests.firstWhere(
+      (rq) => rq.serviceRequestId == request.serviceRequestId,
+      orElse: () => request,
+    )
       ..status = ServiceRequest_Status.CHANGED
       ..price = request.price
       ..description = request.description
       ..createdAt = request.createdAt;
-  }
-
-  ServiceRequest decline(userId, serviceRequestId) {
-    return _serviceRequests
-        .firstWhere((rq) => rq.serviceRequestId == serviceRequestId)
-      ..status = ServiceRequest_Status.DECLINED;
   }
 }

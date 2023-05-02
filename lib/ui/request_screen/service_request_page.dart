@@ -15,6 +15,7 @@ import 'package:deedee/ui/request_screen/request_price_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,7 +25,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
-  final int serviceRequestId;
+  final Int64 serviceRequestId;
 
   const RequestScreen({super.key, required this.serviceRequestId});
 
@@ -59,10 +60,11 @@ class _RequestScreenState extends State<RequestScreen> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final pushBloc = ServicePushRequestBloc(
+    final bloc = ServicePushRequestBloc(
         locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
+
     return BlocProvider(
-      create: (_) => pushBloc,
+      create: (context) => bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: locale.request,
@@ -70,7 +72,7 @@ class _RequestScreenState extends State<RequestScreen> {
           child: const Icon(Icons.menu),
         ),
         body: BlocConsumer<ServicePushRequestBloc, ServicePushRequestState>(
-            bloc: pushBloc,
+            bloc: bloc,
             listener: (context, state) {
               if (state is ServiceRequestErrorState) {
                 showSnackBar(context, state.errorMessage);
@@ -81,6 +83,14 @@ class _RequestScreenState extends State<RequestScreen> {
             },
             builder: (context, state) {
               if (state is ServiceRequestChangeState) {
+                final serviceRequest = ServiceRequest(
+                  createdBy: user.userId,
+                  serviceRequestId: state.serviceRequest.serviceRequestId,
+                  createdFor: state.serviceRequest.createdFor,
+                  createdAt: state.serviceRequest.createdAt,
+                  price: state.serviceRequest.price,
+                  description: state.serviceRequest.description,
+                );
                 return SafeArea(
                   child: Stack(
                     children: [
@@ -164,81 +174,68 @@ class _RequestScreenState extends State<RequestScreen> {
                                       child: OutlinedButtonWidget(
                                         text: locale.send,
                                         onPressed: () {
-                                          BlocProvider.of<
-                                                      ServicePushRequestBloc>(
-                                                  context)
-                                              .add(
+                                          bloc.add(
                                             AcceptServiceRequestEvent(
-                                              serviceRequest: ServiceRequest(
-                                                  createdBy: user.userId,
-                                                  serviceRequestId: state
-                                                      .serviceRequest
-                                                      .serviceRequestId,
-                                                  createdFor: state
-                                                      .serviceRequest
-                                                      .createdFor,
-                                                  createdAt: state
-                                                      .serviceRequest.createdAt,
-                                                  price: state
-                                                      .serviceRequest.price,
-                                                  description: state
-                                                      .serviceRequest
-                                                      .description,
-                                                  status: ServiceRequest_Status
-                                                      .CHANGED),
+                                              serviceRequest: serviceRequest
+                                                ..status = ServiceRequest_Status
+                                                    .CHANGED,
                                             ),
                                           );
                                           context.router.pop();
                                         },
                                       ),
                                     ),
-                                  if (!state.changed)
+                                  if (!state.changed &&
+                                      state.serviceRequest.status ==
+                                          ServiceRequest_Status.PENDING)
                                     Expanded(
                                       child: OutlinedButtonWidget(
                                         text: locale.accept,
                                         onPressed: () {
-                                          BlocProvider.of<
-                                              ServicePushRequestBloc>(
-                                              context)
-                                              .add(
+                                          context.router.pop();
+                                          bloc.add(
                                             AcceptServiceRequestEvent(
-                                              serviceRequest: ServiceRequest(
-                                                  createdBy: user.userId,
-                                                  serviceRequestId: state
-                                                      .serviceRequest
-                                                      .serviceRequestId,
-                                                  createdFor: state
-                                                      .serviceRequest
-                                                      .createdFor,
-                                                  createdAt: state
-                                                      .serviceRequest.createdAt,
-                                                  price: state
-                                                      .serviceRequest.price,
-                                                  description: state
-                                                      .serviceRequest
-                                                      .description,
-                                                  status: ServiceRequest_Status
-                                                      .CHANGED),
+                                              serviceRequest: serviceRequest
+                                                ..status = ServiceRequest_Status
+                                                    .ACCEPTED,
                                             ),
                                           );
-                                          context.router.pop();
                                         },
                                       ),
                                     ),
-                                  const SizedBox(width: 16),
+                                  if (state.serviceRequest.status ==
+                                      ServiceRequest_Status.PENDING)
+                                    const SizedBox(width: 16),
                                   Expanded(
                                     child: OutlinedButtonWidget(
-                                      text: locale.share,
+                                      text: locale.decline,
                                       onPressed: () {
-                                        Share.share(locator
-                                            .get<HttpService>()
-                                            .prepareRequestString(state
-                                                .serviceRequest.serviceRequestId
-                                                .toString()));
+                                        context.router.pop();
+                                        bloc.add(
+                                          DeclineServiceRequestEvent(
+                                            serviceRequest: serviceRequest
+                                              ..status = ServiceRequest_Status
+                                                  .DECLINED,
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),
                                 ],
+                              ),
+                              const SizedBox(height: 16),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: OutlinedButtonWidget(
+                                  text: locale.share,
+                                  onPressed: () {
+                                    Share.share(locator
+                                        .get<HttpService>()
+                                        .prepareRequestString(state
+                                            .serviceRequest.serviceRequestId
+                                            .toString()));
+                                  },
+                                ),
                               ),
                             ],
                           )),
@@ -251,7 +248,9 @@ class _RequestScreenState extends State<RequestScreen> {
                   ),
                 );
               } else {
-                return const Placeholder();
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
             }),
       ),

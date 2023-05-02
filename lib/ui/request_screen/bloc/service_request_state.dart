@@ -8,7 +8,8 @@ class RequestInitial extends ServicePushRequestState {}
 class ServiceRequestChangeState extends ServicePushRequestState {
   final ServiceRequest serviceRequest;
   final bool changed;
-  ServiceRequestChangeState({required this.serviceRequest, required this.changed});
+  ServiceRequestChangeState(
+      {required this.serviceRequest, required this.changed});
 }
 
 class ServiceRequestErrorState extends ServicePushRequestState {
@@ -23,6 +24,13 @@ class AcceptServiceRequestState extends ServicePushRequestState {
   final String errorMessage;
 
   AcceptServiceRequestState({
+    required this.errorMessage,
+  });
+}
+class DeclineServiceRequestState extends ServicePushRequestState {
+  final String errorMessage;
+
+  DeclineServiceRequestState({
     required this.errorMessage,
   });
 }
