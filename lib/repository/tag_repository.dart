@@ -59,27 +59,27 @@ class TagRepository {
     return response.tags.first;
   }
 
-  Future<List<Tag>> getFavoriteTags(String userId) async {
+  Future<List<Tag>> getFavoriteTags(String email) async {
     final response = await _tagServiceClient.getBookmarkedTags(TagRequest(
         tag: Tag(
             status: Tag_Status.BOOKMARKED,
-            compositeFilter: CompositeFilter(topic: Topic(userId: userId)))));
+            compositeFilter: CompositeFilter(topic: Topic(userId: email)))));
     return response.tags;
   }
 
-  Future<Tag> addTagToFavorites(String userId, Int64 tagId) async {
+  Future<Tag> addTagToFavorites(String email, Int64 tagId) async {
     final response = await _tagServiceClient.addTagToBookmarks(TagRequest(
         tag: Tag(
             tagId: tagId,
-            compositeFilter: CompositeFilter(topic: Topic(userId: userId)))));
+            compositeFilter: CompositeFilter(topic: Topic(userId: email)))));
     return response.tags.first;
   }
 
-  Future<Tag> removeTagFromFavorites(String userId, Int64 tagId) async {
+  Future<Tag> removeTagFromFavorites(String email, Int64 tagId) async {
     final response = await _tagServiceClient.removeTagFromFavorites(TagRequest(
         tag: Tag(
             tagId: tagId,
-            compositeFilter: CompositeFilter(topic: Topic(userId: userId)))));
+            compositeFilter: CompositeFilter(topic: Topic(userId: email)))));
     return response.tags.first;
   }
 }

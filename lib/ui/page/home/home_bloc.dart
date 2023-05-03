@@ -9,6 +9,7 @@ import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/services/shared.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';

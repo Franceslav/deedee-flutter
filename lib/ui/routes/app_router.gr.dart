@@ -12,50 +12,50 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i37;
+import 'package:fixnum/fixnum.dart' as _i41;
 import 'package:flutter/material.dart' as _i38;
 import 'package:latlong2/latlong.dart' as _i40;
 
 import '../../generated/deedee/api/model/composite_filter.pb.dart' as _i39;
-import '../../generated/deedee/api/model/service_request.pb.dart' as _i42;
-import '../account/personal_info/edit_pers_info.dart' as _i25;
-import '../account/personal_info/personal_information.dart' as _i26;
+import '../account/personal_info/edit_pers_info.dart' as _i26;
+import '../account/personal_info/personal_information.dart' as _i27;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
-import '../auth/login/login_screen.dart' as _i18;
+import '../auth/login/login_screen.dart' as _i19;
 import '../auth/onBoarding/on_boarding_screen.dart' as _i2;
-import '../auth/resetPasswordScreen/reset_password_screen.dart' as _i20;
-import '../auth/signUp/sign_up_screen.dart' as _i19;
+import '../auth/resetPasswordScreen/reset_password_screen.dart' as _i21;
+import '../auth/signUp/sign_up_screen.dart' as _i20;
 import '../auth/welcome/welcome_screen.dart' as _i3;
-import '../help/help_screen.dart' as _i17;
-import '../main_topic/enum/topic_screens_enum.dart' as _i41;
-import '../main_topic/main_topic_screen.dart' as _i21;
+import '../help/help_screen.dart' as _i18;
+import '../main_topic/enum/topic_screens_enum.dart' as _i42;
+import '../main_topic/main_topic_screen.dart' as _i22;
 import '../page/account/account_business_page.dart' as _i36;
-import '../page/account/account_language_screen.dart' as _i10;
+import '../page/account/account_language_screen.dart' as _i11;
 import '../page/account/account_screen.dart' as _i8;
-import '../page/account/account_verify_screen.dart' as _i9;
-import '../page/account/social_network_screen.dart' as _i27;
+import '../page/account/account_supplier_screen.dart' as _i9;
+import '../page/account/account_verify_screen.dart' as _i10;
+import '../page/account/social_network_screen.dart' as _i28;
 import '../page/add_card/add_card_screen.dart' as _i32;
-import '../page/bookmarks/bookmarks_screen.dart' as _i12;
+import '../page/bookmarks/bookmarks_screen.dart' as _i13;
 import '../page/bookmarks/qr_scanner/qr_scanner.dart' as _i34;
 import '../page/customer_profile/customer_profile_screen.dart' as _i35;
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart'
-    as _i13;
+    as _i14;
 import '../page/filter/filter_page.dart' as _i5;
 import '../page/home/home_screen.dart' as _i4;
 import '../page/map_cubit/map_screen.dart' as _i6;
-import '../page/my_referrals/referral_screen.dart' as _i14;
-import '../page/my_requests/my_request_detail.dart' as _i29;
-import '../page/my_requests/my_requests_screen.dart' as _i28;
+import '../page/my_referrals/referral_screen.dart' as _i15;
+import '../page/my_requests/my_requests_screen.dart' as _i29;
 import '../page/payment/payment_method_screen.dart' as _i31;
 import '../page/settings/connection_settings/connection_settings_screen.dart'
-    as _i16;
-import '../page/settings/settings_screen.dart' as _i15;
+    as _i17;
+import '../page/settings/settings_screen.dart' as _i16;
 import '../page/stats/stats_screen.dart' as _i33;
-import '../page/top_up/top_up_screen.dart' as _i11;
-import '../place_order/place_order_screen.dart' as _i24;
+import '../page/top_up/top_up_screen.dart' as _i12;
+import '../place_order/place_order_screen.dart' as _i25;
 import '../place_tag/map_set_location_screen.dart' as _i7;
-import '../request_screen/request_screen.dart' as _i30;
-import '../user_tag_details/user_tag_details_screen.dart' as _i23;
-import '../user_tags/user_tags_screen.dart' as _i22;
+import '../request_screen/service_request_page.dart' as _i30;
+import '../user_tag_details/user_tag_details_screen.dart' as _i24;
+import '../user_tags/user_tags_screen.dart' as _i23;
 
 class AppRouter extends _i37.RootStackRouter {
   AppRouter([_i38.GlobalKey<_i38.NavigatorState>? navigatorKey])
@@ -124,83 +124,93 @@ class AppRouter extends _i37.RootStackRouter {
         child: const _i8.AccountScreen(),
       );
     },
+    AccountSupplierScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<AccountSupplierScreenRouteArgs>();
+      return _i37.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i9.AccountSupplierScreen(
+          key: args.key,
+          selectedCreatorId: args.selectedCreatorId,
+        ),
+      );
+    },
     VerifyScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i9.VerifyScreen(),
+        child: _i10.VerifyScreen(),
       );
     },
     AccountLanguageScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i10.AccountLanguageScreen(),
+        child: const _i11.AccountLanguageScreen(),
       );
     },
     TopUpPageRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i11.TopUpPage(),
+        child: const _i12.TopUpPage(),
       );
     },
     BookmarksScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i12.BookmarksScreen(),
+        child: const _i13.BookmarksScreen(),
       );
     },
     FavoriteCompositeFiltersScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i13.FavoriteCompositeFiltersScreen(),
+        child: const _i14.FavoriteCompositeFiltersScreen(),
       );
     },
     ReferralScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.ReferralScreen(),
+        child: const _i15.ReferralScreen(),
       );
     },
     SettingsScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i15.SettingsScreen(),
+        child: const _i16.SettingsScreen(),
       );
     },
     ConnectionSettingsScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i16.ConnectionSettingsScreen(),
+        child: const _i17.ConnectionSettingsScreen(),
       );
     },
     HelpScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i17.HelpScreen(),
+        child: const _i18.HelpScreen(),
       );
     },
     LoginScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.LoginScreen(),
+        child: const _i19.LoginScreen(),
       );
     },
     SignUpScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i19.SignUpScreen(),
+        child: const _i20.SignUpScreen(),
       );
     },
     ResetPasswordScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i20.ResetPasswordScreen(),
+        child: const _i21.ResetPasswordScreen(),
       );
     },
     MainTopicScreenRoute.name: (routeData) {
       final args = routeData.argsAs<MainTopicScreenRouteArgs>();
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i21.MainTopicScreen(
+        child: _i22.MainTopicScreen(
           key: args.key,
           screenType: args.screenType,
         ),
@@ -209,7 +219,7 @@ class AppRouter extends _i37.RootStackRouter {
     UserTagsScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.UserTagsScreen(),
+        child: const _i23.UserTagsScreen(),
       );
     },
     UserTagDetailsScreenRoute.name: (routeData) {
@@ -221,7 +231,7 @@ class AppRouter extends _i37.RootStackRouter {
               ));
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i23.UserTagDetailsScreen(
+        child: _i24.UserTagDetailsScreen(
           key: args.key,
           userId: args.userId,
           tagId: args.tagId,
@@ -231,13 +241,13 @@ class AppRouter extends _i37.RootStackRouter {
     PlaceOrderScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i24.PlaceOrderScreen(),
+        child: const _i25.PlaceOrderScreen(),
       );
     },
     EditProfilePageRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i25.EditProfilePage(),
+        child: const _i26.EditProfilePage(),
       );
     },
     PersonalInfoPageRoute.name: (routeData) {
@@ -245,29 +255,19 @@ class AppRouter extends _i37.RootStackRouter {
           orElse: () => const PersonalInfoPageRouteArgs());
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i26.PersonalInfoPage(key: args.key),
+        child: _i27.PersonalInfoPage(key: args.key),
       );
     },
     SocialNetworkScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i27.SocialNetworkScreen(),
+        child: const _i28.SocialNetworkScreen(),
       );
     },
     MyRequestScreenRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i28.MyRequestScreen(),
-      );
-    },
-    MyRequestDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<MyRequestDetailRouteArgs>();
-      return _i37.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i29.MyRequestDetail(
-          key: args.key,
-          request: args.request,
-        ),
+        child: const _i29.MyRequestScreen(),
       );
     },
     RequestScreenRoute.name: (routeData) {
@@ -357,6 +357,10 @@ class AppRouter extends _i37.RootStackRouter {
           path: '/account',
         ),
         _i37.RouteConfig(
+          AccountSupplierScreenRoute.name,
+          path: '/account-executor/:selectedCreatorId',
+        ),
+        _i37.RouteConfig(
           VerifyScreenRoute.name,
           path: '/verify',
         ),
@@ -435,10 +439,6 @@ class AppRouter extends _i37.RootStackRouter {
         _i37.RouteConfig(
           MyRequestScreenRoute.name,
           path: '/my-request',
-        ),
-        _i37.RouteConfig(
-          MyRequestDetailRoute.name,
-          path: '/my-request-detail',
         ),
         _i37.RouteConfig(
           RequestScreenRoute.name,
@@ -640,7 +640,42 @@ class AccountScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.VerifyScreen]
+/// [_i9.AccountSupplierScreen]
+class AccountSupplierScreenRoute
+    extends _i37.PageRouteInfo<AccountSupplierScreenRouteArgs> {
+  AccountSupplierScreenRoute({
+    _i38.Key? key,
+    required _i41.Int64 selectedCreatorId,
+  }) : super(
+          AccountSupplierScreenRoute.name,
+          path: '/account-executor/:selectedCreatorId',
+          args: AccountSupplierScreenRouteArgs(
+            key: key,
+            selectedCreatorId: selectedCreatorId,
+          ),
+        );
+
+  static const String name = 'AccountSupplierScreenRoute';
+}
+
+class AccountSupplierScreenRouteArgs {
+  const AccountSupplierScreenRouteArgs({
+    this.key,
+    required this.selectedCreatorId,
+  });
+
+  final _i38.Key? key;
+
+  final _i41.Int64 selectedCreatorId;
+
+  @override
+  String toString() {
+    return 'AccountSupplierScreenRouteArgs{key: $key, selectedCreatorId: $selectedCreatorId}';
+  }
+}
+
+/// generated route for
+/// [_i10.VerifyScreen]
 class VerifyScreenRoute extends _i37.PageRouteInfo<void> {
   const VerifyScreenRoute()
       : super(
@@ -652,7 +687,7 @@ class VerifyScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.AccountLanguageScreen]
+/// [_i11.AccountLanguageScreen]
 class AccountLanguageScreenRoute extends _i37.PageRouteInfo<void> {
   const AccountLanguageScreenRoute()
       : super(
@@ -664,7 +699,7 @@ class AccountLanguageScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.TopUpPage]
+/// [_i12.TopUpPage]
 class TopUpPageRoute extends _i37.PageRouteInfo<void> {
   const TopUpPageRoute()
       : super(
@@ -676,7 +711,7 @@ class TopUpPageRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.BookmarksScreen]
+/// [_i13.BookmarksScreen]
 class BookmarksScreenRoute extends _i37.PageRouteInfo<void> {
   const BookmarksScreenRoute()
       : super(
@@ -688,7 +723,7 @@ class BookmarksScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.FavoriteCompositeFiltersScreen]
+/// [_i14.FavoriteCompositeFiltersScreen]
 class FavoriteCompositeFiltersScreenRoute extends _i37.PageRouteInfo<void> {
   const FavoriteCompositeFiltersScreenRoute()
       : super(
@@ -700,7 +735,7 @@ class FavoriteCompositeFiltersScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ReferralScreen]
+/// [_i15.ReferralScreen]
 class ReferralScreenRoute extends _i37.PageRouteInfo<void> {
   const ReferralScreenRoute()
       : super(
@@ -712,7 +747,7 @@ class ReferralScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.SettingsScreen]
+/// [_i16.SettingsScreen]
 class SettingsScreenRoute extends _i37.PageRouteInfo<void> {
   const SettingsScreenRoute()
       : super(
@@ -724,7 +759,7 @@ class SettingsScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.ConnectionSettingsScreen]
+/// [_i17.ConnectionSettingsScreen]
 class ConnectionSettingsScreenRoute extends _i37.PageRouteInfo<void> {
   const ConnectionSettingsScreenRoute()
       : super(
@@ -736,7 +771,7 @@ class ConnectionSettingsScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.HelpScreen]
+/// [_i18.HelpScreen]
 class HelpScreenRoute extends _i37.PageRouteInfo<void> {
   const HelpScreenRoute()
       : super(
@@ -748,7 +783,7 @@ class HelpScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.LoginScreen]
+/// [_i19.LoginScreen]
 class LoginScreenRoute extends _i37.PageRouteInfo<void> {
   const LoginScreenRoute()
       : super(
@@ -760,7 +795,7 @@ class LoginScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.SignUpScreen]
+/// [_i20.SignUpScreen]
 class SignUpScreenRoute extends _i37.PageRouteInfo<void> {
   const SignUpScreenRoute()
       : super(
@@ -772,7 +807,7 @@ class SignUpScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.ResetPasswordScreen]
+/// [_i21.ResetPasswordScreen]
 class ResetPasswordScreenRoute extends _i37.PageRouteInfo<void> {
   const ResetPasswordScreenRoute()
       : super(
@@ -784,12 +819,12 @@ class ResetPasswordScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.MainTopicScreen]
+/// [_i22.MainTopicScreen]
 class MainTopicScreenRoute
     extends _i37.PageRouteInfo<MainTopicScreenRouteArgs> {
   MainTopicScreenRoute({
     _i38.Key? key,
-    required _i41.ScreenType screenType,
+    required _i42.ScreenType screenType,
   }) : super(
           MainTopicScreenRoute.name,
           path: 'main-topic',
@@ -810,7 +845,7 @@ class MainTopicScreenRouteArgs {
 
   final _i38.Key? key;
 
-  final _i41.ScreenType screenType;
+  final _i42.ScreenType screenType;
 
   @override
   String toString() {
@@ -819,7 +854,7 @@ class MainTopicScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i22.UserTagsScreen]
+/// [_i23.UserTagsScreen]
 class UserTagsScreenRoute extends _i37.PageRouteInfo<void> {
   const UserTagsScreenRoute()
       : super(
@@ -831,7 +866,7 @@ class UserTagsScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.UserTagDetailsScreen]
+/// [_i24.UserTagDetailsScreen]
 class UserTagDetailsScreenRoute
     extends _i37.PageRouteInfo<UserTagDetailsScreenRouteArgs> {
   UserTagDetailsScreenRoute({
@@ -875,7 +910,7 @@ class UserTagDetailsScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i24.PlaceOrderScreen]
+/// [_i25.PlaceOrderScreen]
 class PlaceOrderScreenRoute extends _i37.PageRouteInfo<void> {
   const PlaceOrderScreenRoute()
       : super(
@@ -887,7 +922,7 @@ class PlaceOrderScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.EditProfilePage]
+/// [_i26.EditProfilePage]
 class EditProfilePageRoute extends _i37.PageRouteInfo<void> {
   const EditProfilePageRoute()
       : super(
@@ -899,7 +934,7 @@ class EditProfilePageRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i26.PersonalInfoPage]
+/// [_i27.PersonalInfoPage]
 class PersonalInfoPageRoute
     extends _i37.PageRouteInfo<PersonalInfoPageRouteArgs> {
   PersonalInfoPageRoute({_i38.Key? key})
@@ -924,7 +959,7 @@ class PersonalInfoPageRouteArgs {
 }
 
 /// generated route for
-/// [_i27.SocialNetworkScreen]
+/// [_i28.SocialNetworkScreen]
 class SocialNetworkScreenRoute extends _i37.PageRouteInfo<void> {
   const SocialNetworkScreenRoute()
       : super(
@@ -936,7 +971,7 @@ class SocialNetworkScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i28.MyRequestScreen]
+/// [_i29.MyRequestScreen]
 class MyRequestScreenRoute extends _i37.PageRouteInfo<void> {
   const MyRequestScreenRoute()
       : super(
@@ -948,46 +983,11 @@ class MyRequestScreenRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i29.MyRequestDetail]
-class MyRequestDetailRoute
-    extends _i37.PageRouteInfo<MyRequestDetailRouteArgs> {
-  MyRequestDetailRoute({
-    _i38.Key? key,
-    required _i42.ServiceRequest request,
-  }) : super(
-          MyRequestDetailRoute.name,
-          path: '/my-request-detail',
-          args: MyRequestDetailRouteArgs(
-            key: key,
-            request: request,
-          ),
-        );
-
-  static const String name = 'MyRequestDetailRoute';
-}
-
-class MyRequestDetailRouteArgs {
-  const MyRequestDetailRouteArgs({
-    this.key,
-    required this.request,
-  });
-
-  final _i38.Key? key;
-
-  final _i42.ServiceRequest request;
-
-  @override
-  String toString() {
-    return 'MyRequestDetailRouteArgs{key: $key, request: $request}';
-  }
-}
-
-/// generated route for
 /// [_i30.RequestScreen]
 class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
   RequestScreenRoute({
     _i38.Key? key,
-    required int serviceRequestId,
+    required _i41.Int64 serviceRequestId,
   }) : super(
           RequestScreenRoute.name,
           path: '/request-page',
@@ -1008,7 +1008,7 @@ class RequestScreenRouteArgs {
 
   final _i38.Key? key;
 
-  final int serviceRequestId;
+  final _i41.Int64 serviceRequestId;
 
   @override
   String toString() {

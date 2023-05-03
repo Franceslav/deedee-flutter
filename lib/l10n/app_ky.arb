@@ -184,6 +184,14 @@
   "clickMarkerViewApplication": "Колдонмону көрүү үчүн маркерди чыкылдатыңыз",
   "send": "Жөнөтүү",
   "customerProfile": "Кардар профили",
+   "notAuthorized":"Көрүүгө уруксатыңыз жок",
+     "executorProfile": "Аткаруучунун профили",
+  "executorTags": "Аткаруучунун теги:",
+  "reviews": "Сын-пикир:",
+  "writeReview": "Пикир жазуу",
+  "completedApplications": "Аткарылган өтүнмөлөр",
+  "rating": "Рейтинги",
+
   "notAuthorized": "Көрүүгө уруксатыңыз жок",
   "search": "Издөө",
   "notFound": "Табылган жок"

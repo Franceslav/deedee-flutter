@@ -17,6 +17,7 @@ class ServiceRequest_Status extends $pb.ProtobufEnum {
   static const ServiceRequest_Status IN_PROGRESS = ServiceRequest_Status._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'IN_PROGRESS');
   static const ServiceRequest_Status DONE = ServiceRequest_Status._(5, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'DONE');
   static const ServiceRequest_Status CHANGED = ServiceRequest_Status._(6, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'CHANGED');
+  static const ServiceRequest_Status DECLINED = ServiceRequest_Status._(7, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'DECLINED');
 
   static const $core.List<ServiceRequest_Status> values = <ServiceRequest_Status> [
     PENDING,
@@ -26,6 +27,7 @@ class ServiceRequest_Status extends $pb.ProtobufEnum {
     IN_PROGRESS,
     DONE,
     CHANGED,
+    DECLINED,
   ];
 
   static final $core.Map<$core.int, ServiceRequest_Status> _byValue = $pb.ProtobufEnum.initByValue(values);

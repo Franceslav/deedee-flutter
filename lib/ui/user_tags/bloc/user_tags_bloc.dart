@@ -46,7 +46,7 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
 
   _init() async {
     try {
-      final tags = await _tagRepository.getTags(_user.userId);
+      final tags = await _tagRepository.getTags(_user.email);
       emit(LoadedTagsState(tags: tags));
     } catch (error) {
       emit(ErrorState(

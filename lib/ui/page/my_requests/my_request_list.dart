@@ -78,7 +78,7 @@ class _MyRequestListState extends State<MyRequestList> {
                   child: DeeDeeRowInfoWidget(
                     icon: Image.asset('assets/images/bookmark_icon.png'),
                     mainText: Text(
-                      request.createdBy,
+                      request.status.name,
                       style: AppTextTheme.bodyLarge,
                     ),
                     secondaryText: Text(
@@ -86,8 +86,8 @@ class _MyRequestListState extends State<MyRequestList> {
                       style: AppTextTheme.labelMedium,
                     ),
                     onTap: () {
-                      context.router
-                          .push(MyRequestDetailRoute(request: request));
+                      context.router.push(RequestScreenRoute(
+                          serviceRequestId: request.serviceRequestId));
                     },
                   ),
                 ),

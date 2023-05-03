@@ -11,6 +11,7 @@ import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -135,16 +136,12 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                   tagsType: TagsType.actual,
                                   onDismissed: (tag, userId, index) =>
                                       deleteTag(tag, userId, index),
-                                  onTap: () => context.router.push(
-                                    RequestScreenRoute(serviceRequestId: 1),
-                                  ),
                                 ),
                                 UserTagsList(
                                   tags: _tags,
                                   tagsType: TagsType.archive,
                                   onDismissed: (tag, userId, index) =>
                                       deleteTag(tag, userId, index),
-                                  onTap: () {},
                                 )
                               ],
                             ),

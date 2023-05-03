@@ -24,11 +24,14 @@ class UserSetLastGeolocation extends UserEvent {
 
 class UserTogglePremium extends UserEvent {}
 
-class UserEmailVerification extends UserEvent {}
+class UserCreateVerification extends UserEvent {
+  final Verification verification;
+  UserCreateVerification(this.verification);
+}
 
 class UserDocVerification extends UserEvent {
-  FileChunk files;
-  UserDocVerification({required this.files});
+  //FileChunk files;
+  UserDocVerification();
 }
 
 class UserImagePicker extends UserEvent {

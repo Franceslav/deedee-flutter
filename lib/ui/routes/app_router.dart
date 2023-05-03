@@ -9,6 +9,7 @@ import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
+import 'package:deedee/ui/page/account/account_supplier_screen.dart';
 import 'package:deedee/ui/page/account/account_business_page.dart';
 import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
@@ -22,7 +23,6 @@ import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/page/my_referrals/referral_screen.dart';
-import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/page/my_requests/my_requests_screen.dart';
 import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
@@ -30,7 +30,7 @@ import 'package:deedee/ui/page/settings/settings_screen.dart';
 import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
-import 'package:deedee/ui/request_screen/request_screen.dart';
+import 'package:deedee/ui/request_screen/service_request_page.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
@@ -47,6 +47,9 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: MapScreen, path: '/map'),
     MaterialRoute(page: MapSetLocationScreen, path: '/map-set-location'),
     MaterialRoute(page: AccountScreen, path: '/account'),
+    MaterialRoute(
+        page: AccountSupplierScreen,
+        path: '/account-executor/:selectedCreatorId'),
     MaterialRoute(page: VerifyScreen, path: '/verify'),
     MaterialRoute(page: AccountLanguageScreen, path: '/account-language'),
     MaterialRoute(page: TopUpPage, path: '/account/top-up'),
@@ -67,7 +70,6 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
     MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
-    MaterialRoute(page: MyRequestDetail, path: '/my-request-detail'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
     MaterialRoute(page: CardScreen, path: '/card-page'),
