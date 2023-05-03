@@ -191,6 +191,12 @@
   "send": "ላክ",
   "customerProfile": "የደንበኛ መገለጫ",
   "notAuthorized":"ለማየት ፍቃድ የሎትም",
-  "search":"ፍለጋ",
+    "executorProfile": "Նկարչի պրոֆիլը",
+  "executorTags": "Tags կատարողի:",
+  "reviews": "Կարծիքներ:",
+  "writeReview": "Գրել կարծիք",
+  "completedApplications": "Կատարված հայտեր",
+  "rating": "Վարկանիշ",
+  "search": "ፍለጋ",
   "notFound":"አልተገኘም።"
 }

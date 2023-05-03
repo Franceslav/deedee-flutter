@@ -152,6 +152,13 @@
   "addCard": "Додати карту",
   "send": "Відправити",
   "customerProfile": "Профіль клієнта",
+   "notAuthorized":"Ви не авторизовані для перегляду",
+     "executorProfile": "Профіль виконавця",
+  "executorTags": "Теги виконавця:",
+  "reviews": "Відкликання:",
+  "writeReview": "Написати відгук",
+  "completedApplications": "Виконаних заявок",
+  "rating": "Рейтинг",
   "notAuthorized":"Ви не авторизовані для перегляду",
   "search":"Пошук",
   "notFound": "Не знайдено"

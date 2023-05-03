@@ -54,9 +54,9 @@ class _MapScreenState extends State<MapScreen> {
   BookmarksBloc? _bookmarksBloc;
 
   final List<TagMarker> _markers = [];
-
-  String _selectedMessengerId = '';
   Int64 _selectedTagId = Int64();
+  String _selectedMessengerId = '';
+  Int64 _selectedCreatorId = Int64();
   bool openedFirstTime = true;
 
   @override
@@ -77,6 +77,7 @@ class _MapScreenState extends State<MapScreen> {
                   openedFirstTime = false;
                   _selectedMessengerId = dto.messengerId;
                   _selectedTagId = dto.tagId;
+                  _selectedCreatorId = Int64(3);
                 });
 
                 BlocProvider.of<BookmarksBloc>(context)
@@ -91,6 +92,7 @@ class _MapScreenState extends State<MapScreen> {
               ),
             ),
           ),
+          creatorId: Int64(2),
         );
         _markers.add(
           tagMarker,

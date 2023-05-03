@@ -9,6 +9,7 @@ import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
+import 'package:deedee/ui/page/account/account_supplier_screen.dart';
 import 'package:deedee/ui/page/account/account_business_page.dart';
 import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
@@ -46,6 +47,9 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: MapScreen, path: '/map'),
     MaterialRoute(page: MapSetLocationScreen, path: '/map-set-location'),
     MaterialRoute(page: AccountScreen, path: '/account'),
+    MaterialRoute(
+        page: AccountSupplierScreen,
+        path: '/account-executor/:selectedCreatorId'),
     MaterialRoute(page: VerifyScreen, path: '/verify'),
     MaterialRoute(page: AccountLanguageScreen, path: '/account-language'),
     MaterialRoute(page: TopUpPage, path: '/account/top-up'),

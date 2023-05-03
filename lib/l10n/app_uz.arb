@@ -162,6 +162,13 @@
   "clickMarkerViewApplication": "Ilovani ko'rish uchun markerni bosing",
   "send": "Yuborish",
   "customerProfile": "Mijoz profili",
+   "notAuthorized":"Koʻrishga ruxsatingiz yoʻq",
+     "executorProfile": "Ijrochi profili",
+  "executorTags": "Ijrochining teglari:",
+  "reviews": "Sharhlar:",
+  "writeReview": "Sharh yozing",
+  "completedApplications": "Bajarilgan arizalar",
+  "rating": "Reyting",
   "notAuthorized":"Koʻrishga ruxsatingiz yoʻq",
   "search":"Qidirish",
   "notFound": "Topilmadi"

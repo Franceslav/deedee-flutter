@@ -184,6 +184,13 @@
   "clickMarkerViewApplication": "Kliknij znacznik, aby wyświetlić aplikację",
   "send": "Wysłać",
   "customerProfile": "Profil klienta",
+   "notAuthorized":"Nie masz uprawnień do przeglądania",
+     "executorProfile": "Profil wykonawcy",
+  "executorTags": "Tagi wykonawcy:",
+  "reviews": "Opinia:",
+  "writeReview": "Napisz recenzję",
+  "completedApplications": "Zrealizowanych zgłoszeń",
+  "rating": "Ranking",
   "notAuthorized":"Nie masz uprawnień do przeglądania",
   "search":"Szukaj",
   "notFound": "Nie znaleziono"

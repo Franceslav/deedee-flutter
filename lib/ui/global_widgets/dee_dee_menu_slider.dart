@@ -6,6 +6,7 @@ import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_p
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
