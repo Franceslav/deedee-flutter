@@ -84,6 +84,12 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                     icon: Image.asset('assets/images/uk.png')),
                 IconButton(
                     onPressed: () {
+                      context.read<AccountBloc>().changeLocal('hi');
+                    },
+                    iconSize: 50,
+                    icon: Image.asset('assets/images/hi.png')),
+                IconButton(
+                    onPressed: () {
                       context.read<AccountBloc>().changeLocal('pt');
                     },
                     iconSize: 50,
@@ -124,7 +130,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
                     },
                     iconSize: 50,
                     icon: Image.asset('assets/images/sv.png')),
-                    IconButton(
+                IconButton(
                     onPressed: () {
                       context.read<AccountBloc>().changeLocal('it');
                     },
