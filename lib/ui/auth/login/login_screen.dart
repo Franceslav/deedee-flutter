@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_bloc.dart';

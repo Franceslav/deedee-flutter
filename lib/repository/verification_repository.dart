@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 
 import '../generated/deedee/api/model/verification.pb.dart';
 import '../generated/deedee/api/service/verification_service.pbgrpc.dart';
+import 'package:grpc/service_api.dart' as $grpc;
+import 'package:fixnum/fixnum.dart' as $fixnum;
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class VerificationRepository {
@@ -62,5 +64,20 @@ class VerificationRepository {
     );
     return response.verifications.first;
   }
+
+ /* Future<bool> verifyUserEmail(String email) async {
+    final response = await _verificationServiceClient
+        .verifyEmail(VerifyEmailRequest()..email = email);
+    // return response.processed;
+    return true;
+  }
+
+  Future<bool> verifyUserIdentity(FileChunk files) async {
+    final response = await _verificationServiceClient
+        .verifyDocuments(VerifyDocumentsRequest()..files.addAll([files]));
+    // return response.processed;
+    return true;
+  }*/
+  
 }
 

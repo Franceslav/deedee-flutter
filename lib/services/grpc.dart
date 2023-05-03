@@ -1,8 +1,8 @@
 import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
-import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
@@ -20,28 +20,8 @@ class GRCPRepository {
       locator.get<AccountServiceClient>();
 
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
-  final VerificationServiceClient _verificationServiceClient =
+ final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
-
-  Future<bool> sendVerificationEmail(String email) async {
-    String? url = await locator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await locator.get<SharedUtils>().getPrefsPort();
-    String? ipAddress = await locator.get<SharedUtils>().getPublicIpAddress();
-    //TODO
-    if (url == null) {
-      return false;
-    }
-    final channel = ClientChannel(
-      url,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
-    final stub = VerificationServiceClient(channel);
-    final response = await stub.verifyEmail(VerifyEmailRequest()
-      ..email = email
-      ..ipAddress = ipAddress);
-    return response.processed;
-  }
 
   Future<List<UserReferral>> getUserReferrals(String email) async {
     String? url = await locator.get<SharedUtils>().getPrefsIpAddress();
@@ -113,19 +93,6 @@ class GRCPRepository {
     return true;
   }
 
-  Future<bool> verifyUserEmail(String email) async {
-    final response = await _verificationServiceClient
-        .verifyEmail(VerifyEmailRequest()..email = email);
-    // return response.processed;
-    return true;
-  }
-
-  Future<bool> verifyUserIdentity(FileChunk files) async {
-    final response = await _verificationServiceClient
-        .verifyDocuments(VerifyDocumentsRequest()..files.addAll([files]));
-    // return response.processed;
-    return true;
-  }
 
   Future<List<Tag>> getUserTags(String userId) async {
     final response = await _tagServiceClient.getTags(TagRequest()..tag = Tag());

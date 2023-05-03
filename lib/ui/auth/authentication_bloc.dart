@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
+import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
@@ -78,7 +78,11 @@ class AuthenticationBloc
       if (result != null && result is User) {
         user = result;
         //Optional: adding a checking method for new users on backend
-        locator.get<GRCPRepository>().sendVerificationEmail(user!.email);
+        locator
+            .get<VerificationServiceClient>()
+            .createVerification(VerificationRequest(
+              verification: Verification(status: Verification_Status.SENT),
+            ));
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
@@ -112,7 +116,11 @@ class AuthenticationBloc
           lastName: event.lastName);
       if (result != null && result is User) {
         user = result;
-        locator.get<GRCPRepository>().sendVerificationEmail(user!.email);
+        locator
+            .get<VerificationServiceClient>()
+            .createVerification(VerificationRequest(
+              verification: Verification(status: Verification_Status.SENT),
+            ));
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
