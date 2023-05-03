@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/helper.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
@@ -158,7 +157,6 @@ class FireStoreUtils {
               email: emailAddress, password: password);
       String profilePicUrl = '';
       if (image != null) {
-        updateProgress('Uploading image, Please wait...');
         profilePicUrl =
             await uploadUserImageToServer(image, result.user?.uid ?? '');
       }

@@ -4,7 +4,6 @@ import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/page/top_up/top_up_bloc.dart';
 import 'package:deedee/ui/page/top_up/top_up_event.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -50,7 +49,7 @@ class _TopUpPageState extends State<TopUpPage> {
                   listenWhen: (old, current) => old != current,
                   listener: (context, state) {
                     if (state is TopUpDoneState) {
-                      context.read<LoadingCubit>().hideLoading();
+                      hideProgress(context);
                       showSnackBar(
                           context,
                           AppLocalizations.of(context)!

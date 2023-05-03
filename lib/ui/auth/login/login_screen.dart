@@ -42,7 +42,7 @@ class _LoginScreen extends State<LoginScreen> {
             listeners: [
               BlocListener<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {
-                  context.read<LoadingCubit>().hideLoading();
+                  hideProgress(context);
                   if (state.authState == AuthState.authenticated) {
                     BlocProvider.of<UserBloc>(context)
                         .add(UserAuthenticated(state.user!));
@@ -59,10 +59,11 @@ class _LoginScreen extends State<LoginScreen> {
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is ValidLoginFields) {
-                    context.read<LoadingCubit>().showLoading(
+                    showProgress(
                         context,
                         AppLocalizations.of(context)!.loggingInPleaseWait,
-                        false);
+                        false
+                    );
                     context.read<AuthenticationBloc>().add(
                           LoginWithEmailAndPasswordEvent(
                             email: email!,
@@ -256,11 +257,11 @@ class _LoginScreen extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: () {
-                            context.read<LoadingCubit>().showLoading(
+                            showProgress(
                                 context,
-                                AppLocalizations.of(context)!
-                                    .loggingInPleaseWait,
-                                false);
+                                AppLocalizations.of(context)!.loggingInPleaseWait,
+                                true
+                            );
                             context.read<AuthenticationBloc>().add(
                                   LoginWithFacebookEvent(),
                                 );
@@ -287,11 +288,11 @@ class _LoginScreen extends State<LoginScreen> {
                                       ? apple.ButtonStyle.white
                                       : apple.ButtonStyle.black,
                                   onPressed: () {
-                                    context.read<LoadingCubit>().showLoading(
+                                    showProgress(
                                         context,
-                                        AppLocalizations.of(context)!
-                                            .loggingInPleaseWait,
-                                        false);
+                                        AppLocalizations.of(context)!.loggingInPleaseWait,
+                                        false
+                                    );
                                     context.read<AuthenticationBloc>().add(
                                           LoginWithAppleEvent(),
                                         );
