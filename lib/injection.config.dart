@@ -18,6 +18,43 @@ import 'generated/deedee/api/service/composite_filter_service.pbgrpc.dart'
 import 'generated/deedee/api/service/contact_service.pbgrpc.dart' as _i14;
 import 'generated/deedee/api/service/payment_service.pbgrpc.dart' as _i24;
 import 'generated/deedee/api/service/service_request_service.pbgrpc.dart'
+<<<<<<< HEAD
+    as _i24;
+import 'generated/deedee/api/service/tag_service.pbgrpc.dart' as _i29;
+import 'generated/deedee/api/service/token_service.pbgrpc.dart' as _i33;
+import 'generated/deedee/api/service/topic_service.pbgrpc.dart' as _i37;
+import 'generated/LocationService.pbgrpc.dart' as _i19;
+import 'generated/VerificationService.pbgrpc.dart' as _i39;
+import 'repository/card_repository.dart' as _i5;
+import 'repository/composite_filter_repository.dart' as _i6;
+import 'repository/contact_repository.dart' as _i10;
+import 'repository/gps_repository.dart' as _i14;
+import 'repository/service_request_repository.dart' as _i22;
+import 'repository/tag_repository.dart' as _i27;
+import 'repository/token_repository.dart' as _i31;
+import 'repository/topic_repository.dart' as _i35;
+import 'services/channel_service.dart' as _i17;
+import 'services/fake/api/composite_filter_service_api.dart' as _i7;
+import 'services/fake/api/contact_service_api.dart' as _i11;
+import 'services/fake/api/gps_repository.dart' as _i15;
+import 'services/fake/api/service_request_service_api.dart' as _i23;
+import 'services/fake/api/tag_service_api.dart' as _i28;
+import 'services/fake/api/token_service_api.dart' as _i32;
+import 'services/fake/api/topic_repository.dart' as _i36;
+import 'services/fake/mock_account_service_client.dart' as _i4;
+import 'services/fake/mock_contact_service_client.dart' as _i13;
+import 'services/fake/mock_filter_service_client.dart' as _i9;
+import 'services/fake/mock_location_service_client.dart' as _i20;
+import 'services/fake/mock_service_request_service_client.dart' as _i25;
+import 'services/fake/mock_tag_service_client.dart' as _i30;
+import 'services/fake/mock_token_service_client.dart' as _i34;
+import 'services/fake/mock_topic_service_client.dart' as _i38;
+import 'services/fake/mock_verification_service_clent.dart' as _i40;
+import 'services/grpc.dart' as _i16;
+import 'services/http_service.dart' as _i18;
+import 'services/push_notification_service.dart' as _i21;
+import 'services/shared.dart' as _i26;
+=======
     as _i30;
 import 'generated/deedee/api/service/supplier_service.pbgrpc.dart' as _i35;
 import 'generated/deedee/api/service/tag_service.pbgrpc.dart' as _i39;
@@ -64,6 +101,7 @@ import 'services/grpc.dart' as _i18;
 import 'services/http_service.dart' as _i20;
 import 'services/push_notification_service.dart' as _i26;
 import 'services/shared.dart' as _i32;
+>>>>>>> 95379c631e62dd9c9e77dd238a8f2d0c3367d6a9
 
 const String _dev = 'dev';
 const String _prod = 'prod';
