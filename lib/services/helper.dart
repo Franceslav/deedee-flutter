@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 String? validateName(String? value) {
   String pattern = r'(^[a-zA-Z ]*$)';
@@ -86,36 +85,48 @@ String? validateConfirmPassword(String? password, String? confirmPassword) {
   }
 }
 
-//helper method to show progress
-late ProgressDialog progressDialog;
+bool isDialogActive = false;
 
-showProgress(BuildContext context, String message, bool isDismissible) async {
-  progressDialog = ProgressDialog(context,
-      type: ProgressDialogType.Normal, isDismissible: isDismissible);
-  progressDialog.style(
-      message: message,
-      borderRadius: 10.0,
-      backgroundColor: const Color(COLOR_PRIMARY),
-      progressWidget: Container(
-        padding: const EdgeInsets.all(8.0),
-        child: const CircularProgressIndicator(
-          backgroundColor: Colors.white,
-          valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
+void showProgress(BuildContext context, String message, bool isDismissible) {
+  showDialog(
+      context: context,
+      barrierDismissible: isDismissible,
+      builder: (_) => Dialog(
+        backgroundColor: const Color(COLOR_PRIMARY),
+        elevation: 10.0,
+        insetAnimationCurve: Curves.easeInOut,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))
         ),
-      ),
-      elevation: 10.0,
-      insetAnimCurve: Curves.easeInOut,
-      messageTextStyle: const TextStyle(
-          color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.w600));
-  await progressDialog.show();
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: const CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
+                ),
+              ),
+              Text(message,
+                style: const TextStyle(
+                    color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.w600
+                ),
+              )
+            ],
+          ),
+        ),
+      )
+  );
+  isDialogActive = true;
 }
 
-updateProgress(String message) {
-  progressDialog.update(message: message);
-}
-
-hideProgress() async {
-  await progressDialog.hide();
+void hideProgress(BuildContext context) {
+  if (isDialogActive) {
+    Navigator.pop(context);
+    isDialogActive = false;
+  }
 }
 
 //helper method to show alert dialog

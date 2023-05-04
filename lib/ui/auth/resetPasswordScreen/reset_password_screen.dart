@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_cubit.dart';
-import 'package:deedee/ui/loading_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,14 +34,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               listenWhen: (old, current) => old != current,
               listener: (context, state) {
                 if (state is ResetPasswordDone) {
-                  context.read<LoadingCubit>().hideLoading();
+                  hideProgress(context);
                   showSnackBar(context,
                       'Reset password email has been sent, Please check your email.');
                   context.router.pop();
                 } else if (state is ValidResetPasswordField) {
-                  context
-                      .read<LoadingCubit>()
-                      .showLoading(context, 'Sending Email...', false);
+                  showProgress(context, 'Sending Email...', false);
                   context
                       .read<ResetPasswordCubit>()
                       .resetPassword(_emailAddress);
