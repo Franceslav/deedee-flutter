@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,7 +116,15 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                   children: widget._openedFirstTime
                       ? []
                       : [
-                          const AccountInfoWidget(),
+                          GestureDetector(
+                            onTap: () {
+                              context.router.navigate(
+                                  AccountSupplierScreenRoute(
+                                      selectedCreatorId:
+                                          widget._selectedTagId));
+                            },
+                            child: const AccountInfoWidget(),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 24),
                             child: Row(
