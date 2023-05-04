@@ -179,7 +179,16 @@ class CompositeFilterServiceApi {
             filterMap: _filterKeys,
             status: CompositeFilter_Status.FAVORITE,
             title: 'Test. Do not click'),
-      ]
+      ],
+      'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2' : [
+        CompositeFilter(
+            compositeFilterId: Int64(0),
+            userId: 'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2',
+            topic: Topic(title: 'Auto'),
+            filterMap: _filterKeys,
+            status: CompositeFilter_Status.FAVORITE,
+            title: 'Test'),
+      ],
     };
   }
 
