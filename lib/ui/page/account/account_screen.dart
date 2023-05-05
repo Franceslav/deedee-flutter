@@ -259,8 +259,8 @@ class _InfoWidget extends StatelessWidget {
           ),
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/instagram_logo.png'),
-            mainText: const Text(
-              'Добавить аккаунт',
+            mainText: Text(
+              locale.addAccountTitle,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: const Text(
