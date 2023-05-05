@@ -237,6 +237,58 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FloatingActionButton(
+                          heroTag: 'near_me',
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            _mapController.move(geo, 13.0);
+                          },
+                          child: const Icon(
+                            Icons.near_me,
+                            color: Color(COLOR_PRIMARY),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FloatingActionButton(
+                          heroTag: 'add',
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            setState(() {
+                              _mapController.move(_mapController.center,
+                                  _mapController.zoom + 1);
+                            });
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            color: Color(COLOR_PRIMARY),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FloatingActionButton(
+                          heroTag: 'remove',
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            setState(() {
+                              _mapController.move(_mapController.center,
+                                  _mapController.zoom - 1);
+                            });
+                          },
+                          child: const Icon(
+                            Icons.remove,
+                            color: Color(COLOR_PRIMARY),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 MapSlidingPanel(
                   controller: _panelController,
                   selectedMessengerId: _selectedMessengerId,

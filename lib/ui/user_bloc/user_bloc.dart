@@ -1,18 +1,16 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/VerificationService.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
+import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
-
 import '../../generated/LocationService.pb.dart';
 import '../../model/contact.dart';
 import '../../repository/gps_repository.dart';
-
 part 'user_event.dart';
 
 part 'user_state.dart';
@@ -23,7 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserGetBalance>(_onUserGetBalance);
     on<UserSwitchAccountType>(_onUserSwitchAccountType);
     on<UserTogglePremium>(_onUserTogglePremium);
-    on<UserEmailVerification>(_onUserEmailVerification);
+    on<UserCreateVerification>(_onUserCreateVerification);
     on<UserDocVerification>(_onUserDocVerification);
     on<UserSetLastGeolocation>(_onUserSetLastGeolocation);
     on<UserImagePicker>(_onUserImagePicker);
@@ -66,13 +64,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  _onUserEmailVerification(
-      UserEmailVerification event, Emitter<UserState> emit) async {
+  _onUserCreateVerification(
+      UserCreateVerification event, Emitter<UserState> emit) async {
     emit(UserState(state.user
         .copyWith(emailVerification: EmailVerificationStatus.verified)));
     try {
-      final response =
-          await locator.get<GRCPRepository>().verifyUserEmail(state.user.email);
+      final response = await locator
+          .get<VerificationServiceClient>()
+          .createVerification(VerificationRequest(
+            verification: Verification(status: Verification_Status.SENT),
+          ));
     } catch (error) {
       print(error.toString());
     }
@@ -92,8 +93,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     try {
       emit(UserState(state.user
           .copyWith(docVerification: DocVerificationStatus.verified)));
-      final response =
-          await locator.get<GRCPRepository>().verifyUserIdentity(event.files);
+      /* final response =
+            await locator.get<GRCPRepository>().verifyUserIdentity(event.files);*/
     } catch (error) {
       print(error.toString());
     }

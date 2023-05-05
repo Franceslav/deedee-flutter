@@ -11,7 +11,9 @@ class LoginWithEmailAndPasswordEvent extends AuthenticationEvent {
 
 class LoginWithFacebookEvent extends AuthenticationEvent {}
 
-class LoginWithAppleEvent extends AuthenticationEvent {}
+class LoginWithAppleEvent extends AuthenticationEvent {
+  LoginWithAppleEvent();
+}
 
 class LoginWithPhoneNumberEvent extends AuthenticationEvent {
   auth.PhoneAuthCredential credential;
