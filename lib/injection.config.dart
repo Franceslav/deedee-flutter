@@ -12,7 +12,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'generated/AccountService.pbgrpc.dart' as _i5;
+import 'generated/deedee/api/service/account_service.pbgrpc.dart' as _i5;
 import 'generated/deedee/api/service/composite_filter_service.pbgrpc.dart'
     as _i10;
 import 'generated/deedee/api/service/contact_service.pbgrpc.dart' as _i14;
@@ -30,6 +30,14 @@ import 'repository/account_repository.dart' as _i3;
 import 'repository/card_repository.dart' as _i7;
 import 'repository/composite_filter_repository.dart' as _i8;
 import 'repository/contact_repository.dart' as _i12;
+import 'repository/gps_repository.dart' as _i17;
+import 'repository/payment_method_repository.dart' as _i27;
+import 'repository/service_request_repository.dart' as _i28;
+import 'repository/supplier_repository.dart' as _i33;
+import 'repository/tag_repository.dart' as _i37;
+import 'repository/token_repository.dart' as _i41;
+import 'repository/topic_repository.dart' as _i45;
+import 'repository/verification_repository.dart' as _i49;
 import 'repository/gps_repository.dart' as _i16;
 import 'repository/payment_method_repository.dart' as _i32;
 import 'repository/referral_repository.dart' as _i27;

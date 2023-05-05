@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:deedee/generated/deedee/api/model/account.pb.dart';
 import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
+import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/repository/account_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,9 +39,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onUserGetBalance(UserGetBalance event, Emitter<UserState> emit) async {
     try {
-      final balance =
-          await locator.get<GRCPRepository>().getUserBalance(state.user.userId);
-      emit(UserState(state.user.copyWith(balance: balance)));
+      final balance = await locator.get<AccountServiceClient>().getAccounts(
+            AccountRequest(
+              account: Account(userId: state.user.userId),
+            )..account.balance.first,
+          );
+      emit(
+        UserState(
+          state.user.copyWith(
+              balance: double.parse(
+            balance.toString(),
+          )),
+        ),
+      );
     } catch (error) {
       print(error.toString());
     }
@@ -54,11 +67,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         UserState(state.user.copyWith(premiumStatus: PremiumStatus.isPremium)));
 
     try {
-      final response = await locator
-          .get<GRCPRepository>()
-          .toggleUserPremiumStatus(state.user.userId);
+      final response =
+          await locator.get<AccountRepository>().getAll(state.user.userId);
 
-      if (response) {}
+      // if (response) {}
     } catch (error) {
       print(error.toString());
     }
@@ -114,7 +126,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       Place(title: 'B'),
       Place(title: 'C'),
     ];
-        // await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
+    // await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
     emit(
       UserState(
         state.user.copyWith(availablePlaces: places),
