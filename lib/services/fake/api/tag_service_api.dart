@@ -7,7 +7,9 @@ import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
 class TagServiceApi {
@@ -113,11 +115,94 @@ class TagServiceApi {
         // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
         ..compositeFilter = CompositeFilter(
           compositeFilterId: Int64(1),
-          topic: Topic(topicId: 3, userId: '', title: 'Bookmark1'),
+          topic: Topic(
+              topicId: 2,
+              userId: '',
+              title: 'Children',
+              geolocation: Geolocation()),
           filterMap: {
-            'Bookmark11': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey5')],
-            ),
+            "Car Wash": FilterKeyList(filterKeys: [
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKey24Hour
+                ..selected = true,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyCovered
+                ..selected = true,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyElectricCharging
+                ..selected = true,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyValet,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyMotorCycle,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleParkingGarage
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyOverNight,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleCarWash
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeySelfService,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleCarWash
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyFullService,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleCarWash
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyTouchless,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleGasStation
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyDiesel,
+              FilterKey()
+                ..subtopicId = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterTitleGasStation
+                ..title = (await AppLocalizations.delegate
+                        .load(Locale(deviceLanguage)))
+                    .mockFilterKeyBenzene,
+            ]),
           },
         )
         ..geolocation = Geolocation(latitude: 8.91489, longitude: 40.5169)
