@@ -1,4 +1,3 @@
-
 import 'package:deedee/model/user.dart';
 
 abstract class TopUpEvent {}

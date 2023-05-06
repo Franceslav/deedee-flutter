@@ -1,6 +1,6 @@
-import 'package:deedee/generated/AccountService.pbgrpc.dart';
 import 'package:deedee/generated/LocationService.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
@@ -20,7 +20,7 @@ class GRCPRepository {
       locator.get<AccountServiceClient>();
 
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
- final VerificationServiceClient _verificationServiceClient =
+  final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
 
   Future<List<UserReferral>> getUserReferrals(String email) async {
@@ -35,18 +35,6 @@ class GRCPRepository {
     var response =
         await stub.getUserReferrals(GetUserReferralsRequest()..email = email);
     return response.userReferral;
-  }
-
-  Future<bool> topUpAccount(double amount) async {
-    final response =
-        await _accountServiceClient.topUp(TopUpRequest()..amount = amount);
-    return response.succeed;
-  }
-
-  Future<double> getUserBalance(String userId) async {
-    final response = await _accountServiceClient
-        .getBalance(GetBalanceRequest()..userId = userId);
-    return response.balance;
   }
 
   Future<List<Place>> getPlaces(GeoLocation geoLocation, double radius) async {
@@ -79,20 +67,6 @@ class GRCPRepository {
         await _tagServiceClient.addTagToBookmarks(TagRequest()..tag = Tag());
     return response.tags.first.status == Tag_Status.BOOKMARKED;
   }
-
-  Future<bool> getUserPremiumStatus(String userId) async {
-    final response = await _accountServiceClient
-        .getAccountStatus(AccountStatusRequest()..userId = userId);
-    return response.isPremium;
-  }
-
-  Future<bool> toggleUserPremiumStatus(String userId) async {
-    final response = await _accountServiceClient
-        .toggleAccountStatus(AccountStatusRequest()..userId = userId);
-    // return response.isPremium;
-    return true;
-  }
-
 
   Future<List<Tag>> getUserTags(String userId) async {
     final response = await _tagServiceClient.getTags(TagRequest()..tag = Tag());

@@ -95,8 +95,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                               controller: _buttonController,
                               children: [
                                 ButtonBarEntry(
-                                  child: Text(AppLocalizations.of(context)!
-                                      .actualTags),
+                                  child: Text(
+                                      AppLocalizations.of(context)!.actualTags),
                                   onTap: () {},
                                 ),
                                 ButtonBarEntry(
@@ -114,8 +114,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                             ),
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText:
-                                    AppLocalizations.of(context)!.search,
+                                hintText: AppLocalizations.of(context)!.search,
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)),
@@ -178,7 +177,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                     child: DeeDeeRowInfoWidget(
                                       icon: Image.asset(
                                           'assets/images/bookmark_icon.png'),
-                                      mainText: Text(
+                                      mainText: const Text(
                                         '' /*bookmark.messengerId*/, //TODO:
                                         style: AppTextTheme.bodyLarge,
                                       ),
@@ -199,8 +198,21 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                         context.router.push(
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
-                                            currentFilter:
-                                                CompositeFilter(), //TODO
+                                            currentFilter: CompositeFilter(
+                                              compositeFilterId:
+                                                  _bookmarks[index]
+                                                      .compositeFilter
+                                                      .compositeFilterId,
+                                              topic: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .topic,
+                                              filterMap: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .filterMap,
+                                              status: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .status,
+                                            ), //TODO
                                           ),
                                         );
                                       },

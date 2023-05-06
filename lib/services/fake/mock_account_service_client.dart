@@ -1,6 +1,4 @@
-import 'package:deedee/generated/AccountService.pbgrpc.dart';
-import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart'
-    as test_service;
+import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/account_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
@@ -10,8 +8,7 @@ import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: AccountServiceClient, env: [Environment.dev])
-class MockAccountServiceClient
-    implements AccountServiceClient, test_service.AccountServiceClient {
+class MockAccountServiceClient implements AccountServiceClient {
   AccountServiceApi api = locator.get<AccountServiceApi>();
 
   @override
@@ -38,65 +35,16 @@ class MockAccountServiceClient
   }
 
   @override
-  ResponseFuture<GetBalanceResponse> getBalance(GetBalanceRequest request,
+  ResponseFuture<AccountResponse> createAccount(AccountRequest request,
       {CallOptions? options}) {
     return ResponseFuture(
-        FakeClientCall<dynamic, GetBalanceResponse>(_getBalance(request)));
+        FakeClientCall<dynamic, AccountResponse>(_createAccount(request)));
   }
 
-  Future<GetBalanceResponse> _getBalance(GetBalanceRequest request) async {
-    return GetBalanceResponse()..balance = 268.56;
-  }
-
-  @override
-  ResponseFuture<TopUpResponse> topUp(TopUpRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-        FakeClientCall<dynamic, TopUpResponse>(_topUp(request)));
-  }
-
-  Future<TopUpResponse> _topUp(TopUpRequest request) async {
-    return TopUpResponse()..succeed = true;
-  }
-
-  @override
-  ResponseFuture<AccountStatusResponse> getAccountStatus(
-      AccountStatusRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, AccountStatusResponse>(
-        _getAccountStatus(request)));
-  }
-
-  Future<AccountStatusResponse> _getAccountStatus(
-      AccountStatusRequest request) async {
-    return AccountStatusResponse()..isPremium = true;
-  }
-
-  @override
-  ResponseFuture<AccountStatusResponse> toggleAccountStatus(
-      AccountStatusRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, AccountStatusResponse>(
-        _toggleAccountStatus(request)));
-  }
-
-  Future<AccountStatusResponse> _toggleAccountStatus(
-      AccountStatusRequest request) async {
-    return AccountStatusResponse()..isPremium = true;
-  }
-
-  @override
-  ResponseFuture<test_service.AccountResponse> createAccount(
-      test_service.AccountRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, test_service.AccountResponse>(
-        _createAccount(request)));
-  }
-
-  Future<test_service.AccountResponse> _createAccount(
-    test_service.AccountRequest request,
+  Future<AccountResponse> _createAccount(
+    AccountRequest request,
   ) async {
-    return test_service.AccountResponse(
+    return AccountResponse(
       accounts: [
         api.createAccount(request.account),
       ],
@@ -104,17 +52,16 @@ class MockAccountServiceClient
   }
 
   @override
-  ResponseFuture<test_service.AccountResponse> deleteAccount(
-      test_service.AccountRequest request,
+  ResponseFuture<AccountResponse> deleteAccount(AccountRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, test_service.AccountResponse>(
-        _deleteAccount(request)));
+    return ResponseFuture(
+        FakeClientCall<dynamic, AccountResponse>(_deleteAccount(request)));
   }
 
-  Future<test_service.AccountResponse> _deleteAccount(
-    test_service.AccountRequest request,
+  Future<AccountResponse> _deleteAccount(
+    AccountRequest request,
   ) async {
-    return test_service.AccountResponse(
+    return AccountResponse(
       accounts: [
         api.deleteAccount(
           request.account,
@@ -124,34 +71,32 @@ class MockAccountServiceClient
   }
 
   @override
-  ResponseFuture<test_service.AccountResponse> getAccounts(
-      test_service.AccountRequest request,
+  ResponseFuture<AccountResponse> getAccounts(AccountRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, test_service.AccountResponse>(
-        _getAccounts(request)));
+    return ResponseFuture(
+        FakeClientCall<dynamic, AccountResponse>(_getAccounts(request)));
   }
 
-  Future<test_service.AccountResponse> _getAccounts(
-    test_service.AccountRequest request,
+  Future<AccountResponse> _getAccounts(
+    AccountRequest request,
   ) async {
-    return test_service.AccountResponse()
+    return AccountResponse()
       ..accounts.addAll(
         api.getAccounts(request.account),
       );
   }
 
   @override
-  ResponseFuture<test_service.AccountResponse> modifyAccount(
-      test_service.AccountRequest request,
+  ResponseFuture<AccountResponse> modifyAccount(AccountRequest request,
       {CallOptions? options}) {
-    return ResponseFuture(FakeClientCall<dynamic, test_service.AccountResponse>(
-        _modifyAccount(request)));
+    return ResponseFuture(
+        FakeClientCall<dynamic, AccountResponse>(_modifyAccount(request)));
   }
 
-  Future<test_service.AccountResponse> _modifyAccount(
-    test_service.AccountRequest request,
+  Future<AccountResponse> _modifyAccount(
+    AccountRequest request,
   ) async {
-    return test_service.AccountResponse(
+    return AccountResponse(
       accounts: [
         api.modifyAccount(request.account),
       ],

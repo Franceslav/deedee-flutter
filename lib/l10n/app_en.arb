@@ -211,5 +211,6 @@
   "regToBecomeClient": "Register to become a costumer",
   "nameCompany": "Name company",
   "agreePP": "Agree to the Privacy Policy",
-  "connect": "Connect"
+  "connect": "Connect",
+  "addAccountTitle": "Add account"
 }
