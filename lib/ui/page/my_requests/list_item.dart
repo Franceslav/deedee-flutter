@@ -20,27 +20,12 @@ class ServiceRequestListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget acceptAction = SlidableAction(
-      onPressed: onAccept,
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(COLOR_PRIMARY),
-      icon: CommunityMaterialIcons.check,
-    );
-
-    final Widget deleteAction = SlidableAction(
-      onPressed: onDismissed,
-      backgroundColor: Colors.white,
-      foregroundColor: Theme.of(context).colorScheme.error,
-      icon: Icons.delete,
-    );
-
-    final List<Widget> actions = request.status == ServiceRequest_Status.ACCEPTED ? [deleteAction] : [acceptAction, deleteAction];
 
     return Slidable(
       endActionPane: ActionPane(
         extentRatio: 0.4,
         motion: const ScrollMotion(),
-        children: actions,
+        children: _buildActionsList(context),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -61,5 +46,37 @@ class ServiceRequestListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildActionsList(BuildContext context) {
+    final Widget acceptAction = SlidableAction(
+      onPressed: onAccept,
+      backgroundColor: Colors.white,
+      foregroundColor: const Color(COLOR_PRIMARY),
+      icon: CommunityMaterialIcons.check,
+    );
+
+    final Widget deleteAction = SlidableAction(
+      onPressed: onDismissed,
+      backgroundColor: Colors.white,
+      foregroundColor: Theme.of(context).colorScheme.error,
+      icon: Icons.delete,
+    );
+
+    switch(request.status) {
+      case ServiceRequest_Status.PENDING:
+        return [acceptAction, deleteAction];
+
+      case ServiceRequest_Status.ACCEPTED:
+        return [deleteAction];
+
+      case ServiceRequest_Status.DECLINED:
+      case ServiceRequest_Status.DELETED:
+      case ServiceRequest_Status.DONE:
+        return List.empty();
+
+      default:
+        return [acceptAction, deleteAction];
+    }
   }
 }
