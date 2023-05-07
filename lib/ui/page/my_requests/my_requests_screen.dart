@@ -130,6 +130,8 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                           MyRequestList(
                             requests: _requests,
                             statuses: const [
+                              ServiceRequest_Status.CHANGED,
+                              ServiceRequest_Status.MODIFIED,
                               ServiceRequest_Status.PENDING,
                               ServiceRequest_Status.ACCEPTED,
                             ],

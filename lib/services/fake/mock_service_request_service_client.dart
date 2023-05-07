@@ -42,13 +42,14 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
         FakeClientCall<dynamic, ServiceRequestResponse>(_accept(request)));
   }
 
-  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {
+  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {    //9
     return ServiceRequestResponse(
       serviceRequests: [
         api.accept(
           ServiceRequest(
               serviceRequestId: request.serviceRequest.serviceRequestId,
-              createdBy: request.serviceRequest.createdBy),
+              createdBy: request.serviceRequest.createdBy,
+              status:request.serviceRequest.status ),
         ),
       ],
     );

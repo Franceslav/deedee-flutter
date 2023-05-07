@@ -144,7 +144,7 @@ class ServiceRequestServiceApi {
     return _serviceRequests.firstWhere((rq) =>
         rq.serviceRequestId == serviceRequest.serviceRequestId &&
         rq.createdBy == serviceRequest.createdBy)
-      ..status = ServiceRequest_Status.ACCEPTED;
+      ..status = serviceRequest.status;
   }
 
   ServiceRequest decline(ServiceRequest serviceRequest) {

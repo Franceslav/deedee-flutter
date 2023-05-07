@@ -38,6 +38,7 @@ class ServicePushRequestBloc
         ..createdFor = _initialServiceRequest.createdFor
         ..description = _initialServiceRequest.description
         ..createdAt = _initialServiceRequest.createdAt
+        ..status = _initialServiceRequest.status
         ..price = event.price.toDouble();
 
       bool changed =

@@ -16,6 +16,7 @@ class ServiceRequestRepository {
     var response = await _requestServiceClient.accept(
       ServiceRequestRequest(
         serviceRequest: ServiceRequest(
+          status: serviceRequest.status,
           serviceRequestId: serviceRequest.serviceRequestId,
           createdBy: email
         ),

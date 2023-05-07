@@ -84,6 +84,7 @@ class _RequestScreenState extends State<RequestScreen> {
             builder: (context, state) {
               if (state is ServiceRequestChangeState) {
                 final serviceRequest = ServiceRequest(
+                  status: state.serviceRequest.status,
                   createdBy: user.userId,
                   serviceRequestId: state.serviceRequest.serviceRequestId,
                   createdFor: state.serviceRequest.createdFor,
@@ -169,7 +170,9 @@ class _RequestScreenState extends State<RequestScreen> {
                               const SizedBox(height: 16),
                               Row(
                                 children: [
-                                  if (state.changed)
+                                  if (state.changed&& 
+                                      state.serviceRequest.status ==
+                                          ServiceRequest_Status.PENDING) 
                                     Expanded(
                                       child: OutlinedButtonWidget(
                                         text: locale.send,
@@ -177,17 +180,15 @@ class _RequestScreenState extends State<RequestScreen> {
                                           bloc.add(
                                             AcceptServiceRequestEvent(
                                               serviceRequest: serviceRequest
-                                                ..status = ServiceRequest_Status
-                                                    .CHANGED,
+                                                ..status = ServiceRequest_Status.ACCEPTED,
                                             ),
                                           );
                                           context.router.pop();
                                         },
                                       ),
                                     ),
-                                  if (!state.changed &&
-                                      state.serviceRequest.status ==
-                                          ServiceRequest_Status.PENDING)
+                                    if (state.serviceRequest.status ==
+                                          ServiceRequest_Status.ACCEPTED)
                                     Expanded(
                                       child: OutlinedButtonWidget(
                                         text: locale.accept,
@@ -196,15 +197,14 @@ class _RequestScreenState extends State<RequestScreen> {
                                           bloc.add(
                                             AcceptServiceRequestEvent(
                                               serviceRequest: serviceRequest
-                                                ..status = ServiceRequest_Status
-                                                    .ACCEPTED,
+                                                ..status = ServiceRequest_Status.MODIFIED,
                                             ),
                                           );
-                                        },
+                                            },
                                       ),
                                     ),
                                   if (state.serviceRequest.status ==
-                                      ServiceRequest_Status.PENDING)
+                                      ServiceRequest_Status.DECLINED)
                                     const SizedBox(width: 16),
                                   Expanded(
                                     child: OutlinedButtonWidget(
