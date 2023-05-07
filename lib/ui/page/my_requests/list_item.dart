@@ -3,6 +3,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
+import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
@@ -20,27 +21,12 @@ class ServiceRequestListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget acceptAction = SlidableAction(
-      onPressed: onAccept,
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(COLOR_PRIMARY),
-      icon: CommunityMaterialIcons.check,
-    );
-
-    final Widget deleteAction = SlidableAction(
-      onPressed: onDismissed,
-      backgroundColor: Colors.white,
-      foregroundColor: Theme.of(context).colorScheme.error,
-      icon: Icons.delete,
-    );
-
-    final List<Widget> actions = request.status == ServiceRequest_Status.ACCEPTED ? [deleteAction] : [acceptAction, deleteAction];
 
     return Slidable(
       endActionPane: ActionPane(
         extentRatio: 0.4,
         motion: const ScrollMotion(),
-        children: actions,
+        children: _buildActionsList(context),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -55,11 +41,75 @@ class ServiceRequestListItem extends StatelessWidget {
             style: AppTextTheme.labelMedium,
           ),
           onTap: () {
-            context.router.push(RequestScreenRoute(
-                serviceRequestId: request.serviceRequestId));
+            switch(request.status) {
+              case ServiceRequest_Status.DONE:
+              case ServiceRequest_Status.DECLINED: {
+                showDialog(
+                    context: context,
+                    builder: (_) => Dialog(
+                      child: MyRequestDetail(request: request)
+                    )
+                );
+              }
+              break;
+
+              default: {
+                context.router.push(
+                  RequestScreenRoute(serviceRequestId: request.serviceRequestId)
+                );
+              }
+              break;
+            }
           },
         ),
       ),
+    );
+  }
+
+  List<Widget> _buildActionsList(BuildContext context) {
+    final Widget acceptAction = SlidableAction(
+      onPressed: onAccept,
+      backgroundColor: Colors.white,
+      foregroundColor: const Color(COLOR_PRIMARY),
+      icon: CommunityMaterialIcons.check,
+    );
+
+    final Widget deleteAction = SlidableAction(
+      onPressed: onDismissed,
+      backgroundColor: Colors.white,
+      foregroundColor: Theme.of(context).colorScheme.error,
+      icon: Icons.delete,
+    );
+
+    final Widget restoreAction = SlidableAction(
+      onPressed: _onRestoreActionPressed,
+      backgroundColor: Colors.white,
+      foregroundColor: const Color(COLOR_PRIMARY),
+      icon: CommunityMaterialIcons.restore,
+    );
+
+    switch(request.status) {
+      case ServiceRequest_Status.PENDING:
+        return [acceptAction, deleteAction];
+
+      case ServiceRequest_Status.ACCEPTED:
+        return [deleteAction];
+
+      case ServiceRequest_Status.DECLINED:
+        return [restoreAction];
+
+      case ServiceRequest_Status.DELETED:
+      case ServiceRequest_Status.DONE:
+        return List.empty();
+
+      default:
+        return [acceptAction, deleteAction];
+    }
+  }
+
+  void _onRestoreActionPressed(BuildContext context) {
+    context.router.push(
+        RequestScreenRoute(serviceRequestId: request.serviceRequestId)
     );
   }
 }
