@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/repository/composite_filter_repository.dart';
+import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
@@ -8,6 +12,10 @@ import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
+import 'package:deedee/ui/page/account/bloc/payment_method_slider_add_method_bloc.dart';
+import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
+import 'package:deedee/ui/page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
+import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
@@ -16,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -136,6 +145,8 @@ class _InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    final user = context.select((UserBloc bloc) => bloc.state.user);
+
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -175,54 +186,7 @@ class _InfoWidget extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 context: context,
                 builder: (context) {
-                  return Container(
-                    margin: const EdgeInsets.all(16.0),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(16.0)),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FractionallySizedBox(
-                          widthFactor: 0.25,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 12.0,
-                            ),
-                            child: Container(
-                              height: 5.0,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).dividerColor,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(2.5)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                    context.router
-                                        .navigate(const PaymentScreenRoute());
-                                  },
-                                  child: ListTile(
-                                    leading: const Icon(Icons.add_circle),
-                                    title: Text(locale.addPayment),
-                                  ),
-                                ),
-                              ]),
-                        ),
-                      ],
-                    ),
-                  );
+                  return const PaymentMethodListWidget();
                 },
               );
             },

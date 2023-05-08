@@ -40,7 +40,7 @@ class CardBloc extends Bloc<CardEvent, CardState> {
         cardHolderName: cardModel.cardHolderName,
         cvvCode: cardModel.cvvCode,
         color: Colors.deepPurple));
-
+    print(_repository.getCards); // dev
     _updateScreen(cardModel);
   }
 }

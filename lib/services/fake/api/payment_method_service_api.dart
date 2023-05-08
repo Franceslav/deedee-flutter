@@ -33,7 +33,7 @@ class PaymentMethodServiceApi {
           geolocation: Geolocation(latitude: 51.51, longitude: -0.1165888),
           paymentMethodId: Int64(1),
           status: PaymentMethod_Status.ADDED,
-          title: 'Title 1',
+          title: 'Visa',
           type: PaymentMethod_Type.CARD,
         ),
         PaymentMethod(
@@ -42,7 +42,7 @@ class PaymentMethodServiceApi {
           geolocation: Geolocation(latitude: 51.51, longitude: -0.1165888),
           paymentMethodId: Int64(1),
           status: PaymentMethod_Status.CHANGED,
-          title: 'Title 1.1',
+          title: 'MasterCard',
           type: PaymentMethod_Type.CARD,
         ),
         PaymentMethod(
@@ -51,7 +51,7 @@ class PaymentMethodServiceApi {
           geolocation: Geolocation(latitude: 51.521, longitude: -0.116),
           paymentMethodId: Int64(2),
           status: PaymentMethod_Status.ADDED,
-          title: 'Title 2',
+          title: 'MIR',
           type: PaymentMethod_Type.CARD,
         ),
         PaymentMethod(
@@ -60,8 +60,8 @@ class PaymentMethodServiceApi {
           geolocation: Geolocation(latitude: 51.521, longitude: -0.116),
           paymentMethodId: Int64(2),
           status: PaymentMethod_Status.DELETED,
-          title: 'Title 2',
-          type: PaymentMethod_Type.CARD,
+          title: 'Transfer',
+          type: PaymentMethod_Type.BANK_TRANSFER,
         ),
       ]
     };

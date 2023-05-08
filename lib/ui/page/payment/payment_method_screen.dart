@@ -19,7 +19,6 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-
   final PanelController _controller = PanelController();
 
   @override
@@ -34,14 +33,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
         body: Stack(
           children: <Widget>[
-            Container(
-              // TODO : implement Payment Screen
-              child: ElevatedButton(
-                child: Text('Card'),
-                onPressed: () {
-                  context.router.navigate(const CardScreenRoute());
-                },
-              ),
+            ElevatedButton(
+              child: const Text('Card'),
+              onPressed: () {
+                context.router.navigate(const CardScreenRoute());
+              },
             ),
             DeeDeeMenuSlider(
               context,
@@ -49,7 +45,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
               user: user,
             ),
           ],
-        )
-    );
+        ));
   }
 }
