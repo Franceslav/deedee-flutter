@@ -19,7 +19,7 @@ class ObservationServiceApi {
       ];
   }
 
-  Observation create(Observation observationArg) {
+  Observation createObservation(Observation observationArg) {
       Observation observation = Observation(
             observationId: observationArg.observationId,
             userId: observationArg.userId,
@@ -29,9 +29,9 @@ class ObservationServiceApi {
       return observation;
   }
 
-  List<Observation> read() =>_observations;
+  List<Observation> readObservations() =>_observations;
 
-  Observation update(Observation observationArg) {
+  Observation updateObservation(Observation observationArg) {
     Observation observation =_observations
         .firstWhere((o) => o.observationId == observationArg.observationId, 
           orElse: () => Observation(

@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
@@ -13,10 +14,18 @@ import 'package:injectable/injectable.dart';
 class TagServiceApi {
   late List<Tag> _fakeTags;
   late Map<String, List<Tag>> _tags;
+  late List<Observation> _observations;
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+    String deviceLanguage = Platform.localeName.substring(0, 2); 
+    _observations = [
+        Observation(
+          observationId: Int64(0),
+          userId: Int64(1),
+          geolocation: Geolocation(),
+        ),
+      ];
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
@@ -151,7 +160,7 @@ class TagServiceApi {
       "matveev.yakov@yahoo.com": _fakeTags,
     };
   }
-
+  // Tags CRUD
   List<Tag> getTags(String userId) {
     return _tags.getOrElse(userId, () => []).toList();
   }
@@ -182,5 +191,31 @@ class TagServiceApi {
         .getOrElse(userId, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.PLACED;
+  }
+
+  // Observation CRUD
+    Observation createObservation(Observation observationArg) {
+      Observation observation = Observation(
+            observationId: observationArg.observationId,
+            userId: observationArg.userId,
+            geolocation: observationArg.geolocation,
+          );
+      _observations.add(observation);
+      return observation;
+  }
+
+  List<Observation> readObservations() =>_observations;
+
+  Observation updateObservation(Observation observationArg) {
+    Observation observation =_observations
+        .firstWhere((o) => o.observationId == observationArg.observationId, 
+          orElse: () => Observation(
+            observationId: observationArg.observationId,
+            userId: observationArg.userId,
+            geolocation: observationArg.geolocation,
+          ));
+    observation.userId = observationArg.userId;
+    observation.geolocation = observationArg.geolocation; 
+    return observation;
   }
 }

@@ -2,7 +2,7 @@ import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/generated/deedee/api/service/observation_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/observation_service_api.dart';
+import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/src/client/call.dart';
@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ObservationServiceClient, env: [Environment.dev])
 class MockObservationServiceClient implements ObservationServiceClient {
-  ObservationServiceApi api = locator.get<ObservationServiceApi>();
+  TagServiceApi api = locator.get<TagServiceApi>();
 
   @override
   ClientCall<Q, R> $createCall<Q, R>(
@@ -51,7 +51,7 @@ class MockObservationServiceClient implements ObservationServiceClient {
   Future<ObservationResponse> _addObservation (ObservationRequest request) async {
     return ObservationResponse(
       observations: [
-        api.create(
+        api.createObservation(
           Observation(
             observationId: request.observation.observationId,
             userId: request.observation.userId,
@@ -75,7 +75,7 @@ class MockObservationServiceClient implements ObservationServiceClient {
 
   Future<ObservationResponse> _getObservations(
       ObservationRequest request) async {
-    var observations = api.read();
+    var observations = api.readObservations();
     return ObservationResponse()..observations.addAll(observations);
   }
 
@@ -95,7 +95,7 @@ class MockObservationServiceClient implements ObservationServiceClient {
 
     return ObservationResponse(
       observations: [
-        api.update(
+        api.updateObservation(
          Observation(
             observationId: request.observation.observationId,
             userId: request.observation.userId,
