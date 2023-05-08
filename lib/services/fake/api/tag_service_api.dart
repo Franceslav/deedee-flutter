@@ -158,6 +158,7 @@ class TagServiceApi {
       "ron.x.by.su@gmail.com": _fakeTags,
       "art.zavtur@gmail.com": _fakeTags,
       "matveev.yakov@yahoo.com": _fakeTags,
+      "evgeniivaniukov@gmail.com": _fakeTags,
     };
   }
   // Tags CRUD

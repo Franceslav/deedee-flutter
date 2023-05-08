@@ -18,6 +18,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../repository/tag_repository.dart';
+import '../../repository/observation_repository.dart';
 
 class UserTagsScreen extends StatefulWidget {
   const UserTagsScreen({super.key});
@@ -35,7 +36,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = UserTagsBloc(locator.get<TagRepository>(), user);
+    final bloc = UserTagsBloc(locator.get<TagRepository>(), locator.get<ObservationRepository>(), user);
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(

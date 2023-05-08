@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/repository/observation_repository.dart';
+import 'package:fixnum/fixnum.dart';
 
 import '../../../model/user.dart';
 
@@ -11,8 +13,9 @@ part 'user_tags_state.dart';
 class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   final TagRepository _tagRepository;
   final User _user;
+  final ObservationRepository _observationRepository;
 
-  UserTagsBloc(this._tagRepository, this._user) : super(InitialState()) {
+  UserTagsBloc(this._tagRepository, this._observationRepository, this._user) : super(InitialState()) {
     on<DeleteTagEvent>(_onDeleteTags);
     on<SearchUserTagsEvent>(_onSearchTags);
     _init();
@@ -47,6 +50,12 @@ class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {
   _init() async {
     try {
       final tags = await _tagRepository.getTags(_user.email);
+      _observationRepository.addObservation(
+        observationId: Int64(DateTime.now().microsecondsSinceEpoch),
+        userId: Int64(1),
+        latitude: 8.91489,
+        longitude: 38.5169,
+        );
       emit(LoadedTagsState(tags: tags));
     } catch (error) {
       emit(ErrorState(
