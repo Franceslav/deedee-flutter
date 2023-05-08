@@ -1,6 +1,4 @@
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
-import 'observation_repository.dart';
 import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
@@ -14,7 +12,6 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class TagRepository {
   final TagServiceClient _tagServiceClient = locator.get<TagServiceClient>();
-  final ObservationRepository _observationRepository = locator.get<ObservationRepository>();
 
   Future<Tag> placeTag(
       AccountType accountType,
@@ -41,17 +38,9 @@ class TagRepository {
   }
 
   Future<List<Tag>> getTags(String userId) async {
-    Observation observation = await _observationRepository.addObservation(
-      observationId: Int64(DateTime.now().microsecondsSinceEpoch), 
-      userId: Int64(0),
-      latitude: Geolocation().latitude,
-      longitude: Geolocation().longitude,
-      );
-
     final response = await _tagServiceClient.getTags(TagRequest(
         tag: Tag(
               compositeFilter: CompositeFilter(topic: Topic(userId: userId)),
-              observations: [observation],
         )
       )
      );
@@ -59,16 +48,9 @@ class TagRepository {
   }
 
   Future<List<Tag>> getTagsByName(String title) async {
-    Observation observation = await _observationRepository.addObservation(
-      observationId: Int64(DateTime.now().microsecondsSinceEpoch), 
-      userId: Int64(0),
-      latitude: Geolocation().latitude,
-      longitude: Geolocation().longitude,
-      );
     final response = await _tagServiceClient.getTags(TagRequest(
         tag: Tag(
               compositeFilter: CompositeFilter(topic: Topic(title: title)),
-              observations: [observation],
         )
       )
      );
@@ -84,16 +66,9 @@ class TagRepository {
   }
 
   Future<List<Tag>> getFavoriteTags(String email) async {
-    Observation observation = await _observationRepository.addObservation(
-      observationId: Int64(DateTime.now().microsecondsSinceEpoch), 
-      userId: Int64(0),
-      latitude: Geolocation().latitude,
-      longitude: Geolocation().longitude,
-      );
     final response = await _tagServiceClient.getTags(TagRequest(
         tag: Tag(
               compositeFilter: CompositeFilter(topic: Topic(title: email)),
-              observations: [observation],
         )
       )
      );
