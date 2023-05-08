@@ -36,7 +36,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = UserTagsBloc(locator.get<TagRepository>(), locator.get<ObservationRepository>(), user);
+    final bloc = UserTagsBloc(locator.get<TagRepository>(), user);
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(

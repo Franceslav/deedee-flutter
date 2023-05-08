@@ -6,6 +6,7 @@ import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/repository/observation_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -40,7 +41,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = BookmarksBloc(locator<TagRepository>(), user);
+    final bloc = BookmarksBloc(locator<TagRepository>(), locator<ObservationRepository>(), user);
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.bookmarksTitle,
