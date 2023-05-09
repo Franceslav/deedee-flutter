@@ -2,13 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/geolocation_service.pb.dart';
 import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/timestamp.pb.dart';
+import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/search_field/search_field.dart';
+import 'package:deedee/ui/search_field/search_spec.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,17 +26,124 @@ enum TagsType { actual, archive }
 
 class UserTagsList extends StatefulWidget {
   final TagsType tagsType;
-  final List<Tag> tags;
+  List<Tag> tags;
   final void Function(Tag tag, String userId, int index) onDismissed;
   final void Function()? onTap;
 
-  const UserTagsList({
+  UserTagsList({
     super.key,
     required this.tags,
     required this.tagsType,
     required this.onDismissed,
     required this.onTap,
-  });
+  }) {
+    tags = [
+      Tag(
+        tagId: Int64(1),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.CLIENT,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.BOOKMARKED,
+      ),
+      Tag(
+        tagId: Int64(2),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.CLIENT,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.BOOKMARKED,
+      ),
+      Tag(
+        tagId: Int64(3),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.CLIENT,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.PLACED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+      Tag(
+        tagId: Int64(4),
+        geolocation: Geolocation(latitude: 30, longitude: 20),
+        type: Tag_Type.SUPPLIER,
+        createdAt: Timestamp(seconds: Int64.ONE),
+        createdBy: Int64(3),
+        status: Tag_Status.CHANGED,
+      ),
+    ];
+  }
 
   @override
   State<UserTagsList> createState() => _UserTagsListState();
@@ -42,84 +155,113 @@ class _UserTagsListState extends State<UserTagsList> {
     final tags = sortTags();
     return tags.isEmpty
         ? Center(
-      child: Text(
-        AppLocalizations.of(context)!.noUserTags,
-        style: Theme.of(context).textTheme.headline1,
-      ),
-    )
-        : ListView.separated(
-      itemBuilder: ((context, index) {
-        final tag = tags[index];
-        return Slidable(
-          endActionPane: ActionPane(
-            extentRatio: 0.5,
-            motion: const ScrollMotion(),
+            child: Text(
+              AppLocalizations.of(context)!.noUserTags,
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          )
+        : Column(
             children: [
-              SlidableAction(
-                onPressed: ((context) {}),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.orange,
-                icon: CommunityMaterialIcons.star,
+              SearchField(
+                SearchSpec(
+                  searchValueBuilder: (i) => tags[i].status.name,
+                  initQuery: '',
+                  length: tags.length,
+                  itemBuilder: (context, i) {
+                    return ListTile(
+                      title: Text('${tags[i].tagId} ${tags[i].status.name}'),
+                    );
+                  },
+                  onSelected: (i) => showSnackBar(
+                    context,
+                    'selected item with index $i in passed list',
+                  ),
+                ),
               ),
-              SlidableAction(
-                onPressed: ((context) {}),
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(COLOR_PRIMARY),
-                icon: Icons.edit,
+              const Divider(
+                thickness: 0.5,
+                color: Colors.black,
+                height: 0,
               ),
-              SlidableAction(
-                onPressed: ((context) {
-                  final userId = BlocProvider.of<UserBloc>(context)
-                      .state
-                      .user
-                      .userId;
-                  widget.onDismissed(tag, userId, index);
-                }),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.red,
-                icon: Icons.delete,
+              Flexible(
+                child: ListView.separated(
+                  itemBuilder: ((context, index) {
+                    final tag = tags[index];
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        extentRatio: 0.5,
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: ((context) {}),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.orange,
+                            icon: CommunityMaterialIcons.star,
+                          ),
+                          SlidableAction(
+                            onPressed: ((context) {}),
+                            backgroundColor: Colors.white,
+                            foregroundColor: const Color(COLOR_PRIMARY),
+                            icon: Icons.edit,
+                          ),
+                          SlidableAction(
+                            onPressed: ((context) {
+                              final userId = BlocProvider.of<UserBloc>(context)
+                                  .state
+                                  .user
+                                  .userId;
+                              widget.onDismissed(tag, userId, index);
+                            }),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.red,
+                            icon: Icons.delete,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: DeeDeeRowInfoWidget(
+                          icon: Image.asset('assets/images/bookmark_icon.png'),
+                          // icon: const Icon(Icons.bookmark_border),
+                          mainText: Text(
+                            tag.compositeFilter.topic
+                                .title, // tag.compositeFilter.filterMap.values.first.filterKeys
+
+                            style: AppTextTheme.bodyLarge,
+                          ),
+                          secondaryText: Text(
+                            '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
+                            style: AppTextTheme.labelMedium,
+                          ),
+                          //     subtitle: Text(bookmark.geolocation.toString()),
+                          onTap: () {
+                            Map<LatLng, TagDTO> tagMap = {
+                              LatLng(tag.geolocation.latitude,
+                                      tag.geolocation.longitude):
+                                  TagDTO(
+                                      tag.tagId, '' /*tag.messengerId*/) //TODO
+                            };
+                            context.router.push(
+                              MapScreenRoute(
+                                tagDescriptionMap: tagMap,
+                                currentFilter:
+                                    CompositeFilter(filterMap: {}), //TODO:
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      // UserTagItem(tag: tag),
+                    );
+                  }),
+                  itemCount: tags.length,
+                  separatorBuilder: (context, index) {
+                    return const DeeDeeDeviderWidget();
+                  },
+                ),
               ),
             ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: DeeDeeRowInfoWidget(
-              icon: Image.asset('assets/images/bookmark_icon.png'),
-              // icon: const Icon(Icons.bookmark_border),
-              mainText: Text(
-                tag.compositeFilter.topic
-                    .title, // tag.compositeFilter.filterMap.values.first.filterKeys
-
-                style: AppTextTheme.bodyLarge,
-              ),
-              secondaryText: Text(
-                '${AppLocalizations.of(context)!.tagExpires}: ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.fromMillisecondsSinceEpoch(tag.createdAt.seconds.toInt() * 1000))}', //TODO:
-                style: AppTextTheme.labelMedium,
-              ),
-              //     subtitle: Text(bookmark.geolocation.toString()),
-              onTap: () {
-                Map<LatLng, TagDTO> tagMap = {
-                  LatLng(tag.geolocation.latitude,
-                      tag.geolocation.longitude):
-                  TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
-                };
-                context.router.push(
-                  MapScreenRoute(
-                    tagDescriptionMap: tagMap,
-                    currentFilter: CompositeFilter(filterMap: {}), //TODO:
-                  ),
-                );
-              },
-            ),
-          ),
-          // UserTagItem(tag: tag),
-        );
-      }),
-      itemCount: tags.length,
-      separatorBuilder: (context, index) {
-        return const DeeDeeDeviderWidget();
-      },
-    );
+          );
   }
 
   List<Tag> sortTags() {
@@ -127,14 +269,12 @@ class _UserTagsListState extends State<UserTagsList> {
       case TagsType.actual:
         return widget.tags
             .where((tag) =>
-        tag.status == Tag_Status.PLACED|| tag.status == Tag_Status.CHANGED
-        )
+                tag.status == Tag_Status.PLACED ||
+                tag.status == Tag_Status.CHANGED)
             .toList();
       case TagsType.archive:
         return widget.tags
-            .where((tag) =>
-        tag.status == Tag_Status.DELETED
-        )
+            .where((tag) => tag.status == Tag_Status.DELETED)
             .toList();
     }
   }
