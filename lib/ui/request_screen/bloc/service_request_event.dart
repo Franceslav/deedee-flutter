@@ -31,3 +31,5 @@ class DeclineServiceRequestEvent extends ServicePushRequestEvent {
 
   DeclineServiceRequestEvent({required this.serviceRequest});
 }
+
+class UserTappedRestoreBtnEvent extends ServicePushRequestEvent {}

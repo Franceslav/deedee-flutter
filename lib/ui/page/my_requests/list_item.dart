@@ -109,7 +109,10 @@ class ServiceRequestListItem extends StatelessWidget {
 
   void _onRestoreActionPressed(BuildContext context) {
     context.router.push(
-        RequestScreenRoute(serviceRequestId: request.serviceRequestId)
+        RequestScreenRoute(
+            serviceRequestId: request.serviceRequestId,
+            openedFromRestoreAction: true
+        )
     );
   }
 }

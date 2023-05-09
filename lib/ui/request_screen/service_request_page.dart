@@ -8,7 +8,6 @@ import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
-import 'package:deedee/ui/page/my_requests/bloc/my_request_bloc.dart';
 import 'package:deedee/ui/request_screen/bloc/service_request_bloc.dart';
 import 'package:deedee/ui/request_screen/request_expansion_tile.dart';
 import 'package:deedee/ui/request_screen/request_price_widget.dart';
@@ -26,8 +25,13 @@ import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
   final Int64 serviceRequestId;
+  final bool openedFromRestoreAction;
 
-  const RequestScreen({super.key, required this.serviceRequestId});
+  const RequestScreen({
+    super.key,
+    required this.serviceRequestId,
+    this.openedFromRestoreAction = false
+  });
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();
@@ -62,6 +66,9 @@ class _RequestScreenState extends State<RequestScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = ServicePushRequestBloc(
         locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
+    if (widget.openedFromRestoreAction) {
+      bloc.add(UserTappedRestoreBtnEvent());
+    }
 
     return BlocProvider(
       create: (context) => bloc,
