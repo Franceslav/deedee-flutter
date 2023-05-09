@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/repository/location_repository.dart';
 import 'package:deedee/ui/page/account/account_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,20 +12,17 @@ import 'package:uuid/uuid.dart';
 part 'account_state.dart';
 
 class AccountBloc extends Bloc<AccountEvent, AccountState> with ChangeNotifier {
-
-  AccountBloc._sharedInstance(
-      ): super(AccountInitial()) {
+  AccountBloc._sharedInstance() : super(AccountInitial()) {
     on<LoadPlacesEvent>((event, emit) async {
-      List<Place> places = await locator
-          .get<GRCPRepository>()
-          .getPlaces(event.geoLocation, event.radius);
+      List<Location> places =
+          await locator.get<LocationRepository>().getAllLocations();
       emit(AccountPlacesLoadState(places));
-    });}
+    });
+  }
 
   static final AccountBloc _shared = AccountBloc._sharedInstance();
 
-  factory AccountBloc() => _shared ;
-
+  factory AccountBloc() => _shared;
 
   final uuid = const Uuid();
 

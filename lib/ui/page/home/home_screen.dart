@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
@@ -30,7 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   List<Topic> _mainTopics = [];
-  Place? _selectedCity;
+  Location? _selectedCity;
   final PanelController _controller = PanelController();
   bool _isInit = true;
   bool _hideAppBarButton = true;

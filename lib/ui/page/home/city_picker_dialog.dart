@@ -1,13 +1,13 @@
-import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/page/home/city_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CityPickerDialog extends StatefulWidget {
-  final List<Place>? availableCities;
+  final List<Location>? availableCities;
   final User user;
-  final void Function(User user, Place city) onSave;
+  final void Function(User user, Location city) onSave;
 
   const CityPickerDialog({
     super.key,
@@ -21,9 +21,9 @@ class CityPickerDialog extends StatefulWidget {
 }
 
 class _CityPickerDialogState extends State<CityPickerDialog> {
-  Place? _selectedCity;
+  Location? _selectedCity;
 
-  void setCity(Place city) {
+  void setCity(Location city) {
     setState(() {
       _selectedCity = city;
     });

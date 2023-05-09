@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
@@ -77,7 +77,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
           userPosition.latitude, userPosition.longitude);
       emit(HomeScreenLoadedState(
         topics: topics,
-        selectedCity: Place(title: selectedCity),
+        selectedCity: Location(title: selectedCity),
       ));
     } catch (error) {
       emit(HomeScreenFailureState(errorMessage: error.toString()));
