@@ -51,6 +51,16 @@ class ServiceRequestListItem extends StatelessWidget {
                           Dialog(child: MyRequestDetail(request: request)));
                 }
                 break;
+              case ServiceRequest_Status.PENDING:
+                {
+                  context.router.push(
+                      RequestScreenRoute(
+                          serviceRequestId: request.serviceRequestId,
+                          readOnly: false
+                      )
+                  );
+                }
+                break;
 
               default:
                 {
