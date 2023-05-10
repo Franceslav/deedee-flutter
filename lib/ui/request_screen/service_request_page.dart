@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
-import 'package:deedee/ui/page/my_requests/bloc/my_request_bloc.dart';
 import 'package:deedee/ui/request_screen/bloc/service_request_bloc.dart';
 import 'package:deedee/ui/request_screen/request_expansion_tile.dart';
 import 'package:deedee/ui/request_screen/request_price_widget.dart';
@@ -29,11 +27,13 @@ import '../global_widgets/dee_dee_menu_slider.dart';
 class RequestScreen extends StatefulWidget {
   final bool readOnly;
   final Int64 serviceRequestId;
+  final bool openedFromRestoreAction;
 
   RequestScreen({
     Key? key,
     required this.readOnly,
     required this.serviceRequestId,
+    this.openedFromRestoreAction = false
   }) : super(key: key);
 
   @override
@@ -69,6 +69,9 @@ class _RequestScreenState extends State<RequestScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = ServicePushRequestBloc(
         locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
+    if (widget.openedFromRestoreAction) {
+      bloc.add(UserTappedRestoreBtnEvent());
+    }
 
     return BlocProvider(
       create: (context) => bloc,

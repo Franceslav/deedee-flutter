@@ -51,12 +51,25 @@ class ServiceRequestListItem extends StatelessWidget {
                           Dialog(child: MyRequestDetail(request: request)));
                 }
                 break;
+              case ServiceRequest_Status.PENDING:
+                {
+                  context.router.push(
+                      RequestScreenRoute(
+                          serviceRequestId: request.serviceRequestId,
+                          readOnly: false
+                      )
+                  );
+                }
+                break;
 
               default:
                 {
-                  context.router.push(RequestScreenRoute(
-                      serviceRequestId: request.serviceRequestId,
-                      readOnly: true));
+                  context.router.push(
+                      RequestScreenRoute(
+                          serviceRequestId: request.serviceRequestId,
+                          readOnly: true
+                      )
+                  );
                 }
                 break;
             }
@@ -108,7 +121,12 @@ class ServiceRequestListItem extends StatelessWidget {
   }
 
   void _onRestoreActionPressed(BuildContext context) {
-    context.router.push(RequestScreenRoute(
-        serviceRequestId: request.serviceRequestId, readOnly: false));
+    context.router.push(
+        RequestScreenRoute(
+          serviceRequestId: request.serviceRequestId,
+          readOnly: false,
+          openedFromRestoreAction: true
+        )
+    );
   }
 }

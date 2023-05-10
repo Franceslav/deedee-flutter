@@ -26,6 +26,7 @@ class ServicePushRequestBloc
     on<ServiceRequestPriceChangeEvent>(_onServiceRequestPriceChangeEvent);
     on<AcceptServiceRequestEvent>(_onAcceptServiceRequestEvent);
     on<DeclineServiceRequestEvent>(_onDeclineServiceRequestEvent);
+    on<UserTappedRestoreBtnEvent>(_onRestoreTapped);
 
     _initialize();
   }
@@ -75,5 +76,18 @@ class ServicePushRequestBloc
     } catch (error) {
       emit(ServiceRequestErrorState(errorMessage: error.toString()));
     }
+  }
+
+  void _onRestoreTapped(UserTappedRestoreBtnEvent event,
+      Emitter<ServicePushRequestState> emit) async {
+    final requests = await _serviceRequestRepository.getAll(_user.email);
+    _initialServiceRequest = requests.firstWhere(
+            (sr) => sr.serviceRequestId == _serviceRequestId
+    );
+    ServiceRequest changedRequest = _initialServiceRequest.clone();
+    changedRequest.status = ServiceRequest_Status.PENDING;
+    emit(
+        ServiceRequestChangeState(serviceRequest: changedRequest, changed: true)
+    );
   }
 }

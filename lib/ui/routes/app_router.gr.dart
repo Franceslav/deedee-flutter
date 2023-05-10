@@ -278,6 +278,7 @@ class AppRouter extends _i37.RootStackRouter {
           key: args.key,
           readOnly: args.readOnly,
           serviceRequestId: args.serviceRequestId,
+          openedFromRestoreAction: args.openedFromRestoreAction,
         ),
       );
     },
@@ -990,6 +991,7 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
     _i38.Key? key,
     required bool readOnly,
     required _i41.Int64 serviceRequestId,
+    bool openedFromRestoreAction = false,
   }) : super(
           RequestScreenRoute.name,
           path: '/request-page',
@@ -997,6 +999,7 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
             key: key,
             readOnly: readOnly,
             serviceRequestId: serviceRequestId,
+            openedFromRestoreAction: openedFromRestoreAction,
           ),
         );
 
@@ -1008,6 +1011,7 @@ class RequestScreenRouteArgs {
     this.key,
     required this.readOnly,
     required this.serviceRequestId,
+    this.openedFromRestoreAction = false,
   });
 
   final _i38.Key? key;
@@ -1016,9 +1020,11 @@ class RequestScreenRouteArgs {
 
   final _i41.Int64 serviceRequestId;
 
+  final bool openedFromRestoreAction;
+
   @override
   String toString() {
-    return 'RequestScreenRouteArgs{key: $key, readOnly: $readOnly, serviceRequestId: $serviceRequestId}';
+    return 'RequestScreenRouteArgs{key: $key, readOnly: $readOnly, serviceRequestId: $serviceRequestId, openedFromRestoreAction: $openedFromRestoreAction}';
   }
 }
 
