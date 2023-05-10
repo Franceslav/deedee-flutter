@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class RequestExpansionTile extends StatefulWidget {
   final List<String> data;
-  final void Function(String) onTap;
+  final void Function(String)? onTap;
 
   RequestExpansionTile({Key? key, required this.data, required this.onTap})
       : super(key: key);
@@ -70,12 +70,14 @@ class _RequestExpansionTileState extends State<RequestExpansionTile> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
-                            widget.onTap(widget.data[index]);
-                          },
+                          onTap: (widget.onTap == null)
+                              ? null
+                              : () {
+                                  setState(() {
+                                    selectedIndex = index;
+                                  });
+                                  widget.onTap!(widget.data[index]);
+                                },
                         ),
                       );
                     },

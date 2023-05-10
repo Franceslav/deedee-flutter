@@ -59,6 +59,7 @@ class _HomeState extends State<HomeScreen> {
                   context.router.push(
                     RequestScreenRoute(
                       serviceRequestId: Int64(int.parse(state.id!)),
+                      readOnly: false,
                     ),
                   );
                 }

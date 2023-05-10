@@ -276,6 +276,7 @@ class AppRouter extends _i37.RootStackRouter {
         routeData: routeData,
         child: _i30.RequestScreen(
           key: args.key,
+          readOnly: args.readOnly,
           serviceRequestId: args.serviceRequestId,
           openedFromRestoreAction: args.openedFromRestoreAction,
         ),
@@ -988,6 +989,7 @@ class MyRequestScreenRoute extends _i37.PageRouteInfo<void> {
 class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
   RequestScreenRoute({
     _i38.Key? key,
+    required bool readOnly,
     required _i41.Int64 serviceRequestId,
     bool openedFromRestoreAction = false,
   }) : super(
@@ -995,6 +997,7 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
           path: '/request-page',
           args: RequestScreenRouteArgs(
             key: key,
+            readOnly: readOnly,
             serviceRequestId: serviceRequestId,
             openedFromRestoreAction: openedFromRestoreAction,
           ),
@@ -1006,11 +1009,14 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
 class RequestScreenRouteArgs {
   const RequestScreenRouteArgs({
     this.key,
+    required this.readOnly,
     required this.serviceRequestId,
     this.openedFromRestoreAction = false,
   });
 
   final _i38.Key? key;
+
+  final bool readOnly;
 
   final _i41.Int64 serviceRequestId;
 
@@ -1018,7 +1024,7 @@ class RequestScreenRouteArgs {
 
   @override
   String toString() {
-    return 'RequestScreenRouteArgs{key: $key, serviceRequestId: $serviceRequestId, openedFromRestoreAction: $openedFromRestoreAction}';
+    return 'RequestScreenRouteArgs{key: $key, readOnly: $readOnly, serviceRequestId: $serviceRequestId, openedFromRestoreAction: $openedFromRestoreAction}';
   }
 }
 

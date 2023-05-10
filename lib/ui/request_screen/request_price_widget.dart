@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 class PriceWidget extends StatefulWidget {
   String price;
-  final void Function(String) onPressed;
+  final void Function(String)? onPressed;
 
   PriceWidget({Key? key, required this.price, required this.onPressed})
       : super(key: key);
@@ -43,7 +43,7 @@ class _PriceWidgetState extends State<PriceWidget> {
               setState(() {
                 change = false;
                 widget.price = controller.text;
-                widget.onPressed(widget.price);
+                widget.onPressed!(widget.price);
                 controller.text = '';
               });
             },
@@ -59,11 +59,13 @@ class _PriceWidgetState extends State<PriceWidget> {
         Text(widget.price.toString(), style: const TextStyle(fontSize: 42)),
         const SizedBox(width: 10),
         IconButton(
-            onPressed: () {
-              setState(() {
-                change = true;
-              });
-            },
+            onPressed: (widget.onPressed == null)
+                ? null
+                : () {
+                    setState(() {
+                      change = true;
+                    });
+                  },
             icon: const Icon(Icons.edit))
       ],
     );
