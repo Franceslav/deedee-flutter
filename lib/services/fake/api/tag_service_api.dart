@@ -232,7 +232,7 @@ class TagServiceApi {
     ];
     _tags = {
       "ron.x.by.su@gmail.com": _fakeTags,
-      "art.zavtur@gmail.com": _fakeTags,
+      "halina.plis123@gmail.com": _fakeTags,
       "matveev.yakov@yahoo.com": _fakeTags,
     };
   }
