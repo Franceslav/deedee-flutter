@@ -13,15 +13,15 @@ class ServiceRequestListItem extends StatelessWidget {
   final ServiceRequest request;
   final SlidableActionCallback onAccept;
   final SlidableActionCallback onDismissed;
-  const ServiceRequestListItem({
-    Key? key,
-    required this.request,
-    required this.onAccept,
-    required this.onDismissed}) : super(key: key);
+  const ServiceRequestListItem(
+      {Key? key,
+      required this.request,
+      required this.onAccept,
+      required this.onDismissed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Slidable(
       endActionPane: ActionPane(
         extentRatio: 0.4,
@@ -41,24 +41,24 @@ class ServiceRequestListItem extends StatelessWidget {
             style: AppTextTheme.labelMedium,
           ),
           onTap: () {
-            switch(request.status) {
+            switch (request.status) {
               case ServiceRequest_Status.DONE:
-              case ServiceRequest_Status.DECLINED: {
-                showDialog(
-                    context: context,
-                    builder: (_) => Dialog(
-                      child: MyRequestDetail(request: request)
-                    )
-                );
-              }
-              break;
+              case ServiceRequest_Status.DECLINED:
+                {
+                  showDialog(
+                      context: context,
+                      builder: (_) =>
+                          Dialog(child: MyRequestDetail(request: request)));
+                }
+                break;
 
-              default: {
-                context.router.push(
-                  RequestScreenRoute(serviceRequestId: request.serviceRequestId)
-                );
-              }
-              break;
+              default:
+                {
+                  context.router.push(RequestScreenRoute(
+                      serviceRequestId: request.serviceRequestId,
+                      readOnly: true));
+                }
+                break;
             }
           },
         ),
@@ -88,7 +88,7 @@ class ServiceRequestListItem extends StatelessWidget {
       icon: CommunityMaterialIcons.restore,
     );
 
-    switch(request.status) {
+    switch (request.status) {
       case ServiceRequest_Status.PENDING:
         return [acceptAction, deleteAction];
 
@@ -108,8 +108,7 @@ class ServiceRequestListItem extends StatelessWidget {
   }
 
   void _onRestoreActionPressed(BuildContext context) {
-    context.router.push(
-        RequestScreenRoute(serviceRequestId: request.serviceRequestId)
-    );
+    context.router.push(RequestScreenRoute(
+        serviceRequestId: request.serviceRequestId, readOnly: false));
   }
 }

@@ -276,6 +276,7 @@ class AppRouter extends _i37.RootStackRouter {
         routeData: routeData,
         child: _i30.RequestScreen(
           key: args.key,
+          readOnly: args.readOnly,
           serviceRequestId: args.serviceRequestId,
         ),
       );
@@ -987,12 +988,14 @@ class MyRequestScreenRoute extends _i37.PageRouteInfo<void> {
 class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
   RequestScreenRoute({
     _i38.Key? key,
+    required bool readOnly,
     required _i41.Int64 serviceRequestId,
   }) : super(
           RequestScreenRoute.name,
           path: '/request-page',
           args: RequestScreenRouteArgs(
             key: key,
+            readOnly: readOnly,
             serviceRequestId: serviceRequestId,
           ),
         );
@@ -1003,16 +1006,19 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
 class RequestScreenRouteArgs {
   const RequestScreenRouteArgs({
     this.key,
+    required this.readOnly,
     required this.serviceRequestId,
   });
 
   final _i38.Key? key;
 
+  final bool readOnly;
+
   final _i41.Int64 serviceRequestId;
 
   @override
   String toString() {
-    return 'RequestScreenRouteArgs{key: $key, serviceRequestId: $serviceRequestId}';
+    return 'RequestScreenRouteArgs{key: $key, readOnly: $readOnly, serviceRequestId: $serviceRequestId}';
   }
 }
 

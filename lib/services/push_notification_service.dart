@@ -79,6 +79,7 @@ class PushNotificationService {
               serviceRequestId: Int64(int.parse(
                 bigTextStyleInformation.summaryText!,
               )),
+              readOnly: false,
             ),
           );
         },
