@@ -230,10 +230,12 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.BOOKMARKED
     ];
+    _tags = {};
+  }
+
+  void setUserEmail(String userEmail) {
     _tags = {
-      "ron.x.by.su@gmail.com": _fakeTags,
-      "halina.plis123@gmail.com": _fakeTags,
-      "matveev.yakov@yahoo.com": _fakeTags,
+      userEmail: _fakeTags,
     };
   }
 
