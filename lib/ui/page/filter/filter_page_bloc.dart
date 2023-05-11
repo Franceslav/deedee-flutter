@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -10,7 +9,6 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 

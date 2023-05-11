@@ -15,20 +15,25 @@ import 'geolocation.pb.dart' as $0;
 class Observation extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Observation', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.statistic.model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'observationId', $pb.PbFieldType.OU6, protoName: 'observationId', defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.OU6, protoName: 'userId', defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$0.Geolocation>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $0.Geolocation.create)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', $pb.PbFieldType.OU6, protoName: 'tagId', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.OU6, protoName: 'userId', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$0.Geolocation>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $0.Geolocation.create)
     ..hasRequiredFields = false
   ;
 
   Observation._() : super();
   factory Observation({
     $fixnum.Int64? observationId,
+    $fixnum.Int64? tagId,
     $fixnum.Int64? userId,
     $0.Geolocation? geolocation,
   }) {
     final _result = create();
     if (observationId != null) {
       _result.observationId = observationId;
+    }
+    if (tagId != null) {
+      _result.tagId = tagId;
     }
     if (userId != null) {
       _result.userId = userId;
@@ -69,23 +74,32 @@ class Observation extends $pb.GeneratedMessage {
   void clearObservationId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get userId => $_getI64(1);
+  $fixnum.Int64 get tagId => $_getI64(1);
   @$pb.TagNumber(2)
-  set userId($fixnum.Int64 v) { $_setInt64(1, v); }
+  set tagId($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasUserId() => $_has(1);
+  $core.bool hasTagId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearUserId() => clearField(2);
+  void clearTagId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $0.Geolocation get geolocation => $_getN(2);
+  $fixnum.Int64 get userId => $_getI64(2);
   @$pb.TagNumber(3)
-  set geolocation($0.Geolocation v) { setField(3, v); }
+  set userId($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGeolocation() => $_has(2);
+  $core.bool hasUserId() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGeolocation() => clearField(3);
-  @$pb.TagNumber(3)
-  $0.Geolocation ensureGeolocation() => $_ensure(2);
+  void clearUserId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Geolocation get geolocation => $_getN(3);
+  @$pb.TagNumber(4)
+  set geolocation($0.Geolocation v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasGeolocation() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearGeolocation() => clearField(4);
+  @$pb.TagNumber(4)
+  $0.Geolocation ensureGeolocation() => $_ensure(3);
 }
 

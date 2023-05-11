@@ -13,10 +13,11 @@ const Observation$json = const {
   '1': 'Observation',
   '2': const [
     const {'1': 'observationId', '3': 1, '4': 1, '5': 4, '10': 'observationId'},
-    const {'1': 'userId', '3': 2, '4': 1, '5': 4, '10': 'userId'},
-    const {'1': 'geolocation', '3': 3, '4': 1, '5': 11, '6': '.deedee.api.geolocation.model.Geolocation', '10': 'geolocation'},
+    const {'1': 'tagId', '3': 2, '4': 1, '5': 4, '10': 'tagId'},
+    const {'1': 'userId', '3': 3, '4': 1, '5': 4, '10': 'userId'},
+    const {'1': 'geolocation', '3': 4, '4': 1, '5': 11, '6': '.deedee.api.geolocation.model.Geolocation', '10': 'geolocation'},
   ],
 };
 
 /// Descriptor for `Observation`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List observationDescriptor = $convert.base64Decode('CgtPYnNlcnZhdGlvbhIkCg1vYnNlcnZhdGlvbklkGAEgASgEUg1vYnNlcnZhdGlvbklkEhYKBnVzZXJJZBgCIAEoBFIGdXNlcklkEksKC2dlb2xvY2F0aW9uGAMgASgLMikuZGVlZGVlLmFwaS5nZW9sb2NhdGlvbi5tb2RlbC5HZW9sb2NhdGlvblILZ2VvbG9jYXRpb24=');
+final $typed_data.Uint8List observationDescriptor = $convert.base64Decode('CgtPYnNlcnZhdGlvbhIkCg1vYnNlcnZhdGlvbklkGAEgASgEUg1vYnNlcnZhdGlvbklkEhQKBXRhZ0lkGAIgASgEUgV0YWdJZBIWCgZ1c2VySWQYAyABKARSBnVzZXJJZBJLCgtnZW9sb2NhdGlvbhgEIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9u');

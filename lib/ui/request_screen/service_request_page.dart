@@ -1,4 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
+import 'package:fixnum/fixnum.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/service_request_repository.dart';
@@ -8,26 +16,26 @@ import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
-import 'package:deedee/ui/page/my_requests/bloc/my_request_bloc.dart';
 import 'package:deedee/ui/request_screen/bloc/service_request_bloc.dart';
 import 'package:deedee/ui/request_screen/request_expansion_tile.dart';
 import 'package:deedee/ui/request_screen/request_price_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
-  final Int64 serviceRequestId;
+  final bool readOnly;
+  final UUID serviceRequestId;
+  final bool openedFromRestoreAction;
 
-  const RequestScreen({super.key, required this.serviceRequestId});
+  RequestScreen({
+    Key? key,
+    required this.readOnly,
+    required this.serviceRequestId,
+    this.openedFromRestoreAction = false
+  }) : super(key: key);
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();
@@ -62,6 +70,9 @@ class _RequestScreenState extends State<RequestScreen> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = ServicePushRequestBloc(
         locator.get<ServiceRequestRepository>(), user, widget.serviceRequestId);
+    if (widget.openedFromRestoreAction) {
+      bloc.add(UserTappedRestoreBtnEvent());
+    }
 
     return BlocProvider(
       create: (context) => bloc,
@@ -84,6 +95,7 @@ class _RequestScreenState extends State<RequestScreen> {
             builder: (context, state) {
               if (state is ServiceRequestChangeState) {
                 final serviceRequest = ServiceRequest(
+                  status: state.serviceRequest.status,
                   createdBy: user.userId,
                   serviceRequestId: state.serviceRequest.serviceRequestId,
                   createdFor: state.serviceRequest.createdFor,
@@ -102,11 +114,14 @@ class _RequestScreenState extends State<RequestScreen> {
                               const SizedBox(height: 32),
                               PriceWidget(
                                 price: state.serviceRequest.price.toString(),
-                                onPressed: (value) {
-                                  context.read<ServicePushRequestBloc>().add(
-                                      ServiceRequestPriceChangeEvent(
-                                          price: value));
-                                },
+                                onPressed: (widget.readOnly == false)
+                                    ? (value) {
+                                        context
+                                            .read<ServicePushRequestBloc>()
+                                            .add(ServiceRequestPriceChangeEvent(
+                                                price: value));
+                                      }
+                                    : null,
                               ),
                               const SizedBox(height: 32),
                               DeeDeeRowInfoWidget(
@@ -120,10 +135,14 @@ class _RequestScreenState extends State<RequestScreen> {
                                   'Дополнительный текст',
                                   style: AppTextTheme.bodyMedium,
                                 ),
-                                onTap: () {
-                                  context.router.push(CustomerProfileRoute(
-                                      id: state.serviceRequest.createdFor));
-                                },
+                                onTap: (widget.readOnly == false)
+                                    ? () {
+                                        context.router.push(
+                                            CustomerProfileRoute(
+                                                id: state.serviceRequest
+                                                    .createdFor));
+                                      }
+                                    : null,
                               ),
                               const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 16),
@@ -139,11 +158,14 @@ class _RequestScreenState extends State<RequestScreen> {
                               const SizedBox(height: 6),
                               RequestExpansionTile(
                                 data: dateList,
-                                onTap: (value) {
-                                  context.read<ServicePushRequestBloc>().add(
-                                      ServiceRequestDateChangeEvent(
-                                          date: value));
-                                },
+                                onTap: (widget.readOnly == false)
+                                    ? (value) {
+                                        context
+                                            .read<ServicePushRequestBloc>()
+                                            .add(ServiceRequestDateChangeEvent(
+                                                date: value));
+                                      }
+                                    : null,
                               ),
                               const SizedBox(height: 16),
                               Text(locale.time,
@@ -151,11 +173,14 @@ class _RequestScreenState extends State<RequestScreen> {
                               const SizedBox(height: 6),
                               RequestExpansionTile(
                                 data: timeList,
-                                onTap: (value) {
-                                  context.read<ServicePushRequestBloc>().add(
-                                      ServiceRequestTimeChangeEvent(
-                                          time: value));
-                                },
+                                onTap: (widget.readOnly == false)
+                                    ? (value) {
+                                        context
+                                            .read<ServicePushRequestBloc>()
+                                            .add(ServiceRequestTimeChangeEvent(
+                                                time: value));
+                                      }
+                                    : null,
                               ),
                               const SizedBox(height: 16),
                               const Text('Описание',
@@ -169,56 +194,66 @@ class _RequestScreenState extends State<RequestScreen> {
                               const SizedBox(height: 16),
                               Row(
                                 children: [
-                                  if (state.changed)
-                                    Expanded(
-                                      child: OutlinedButtonWidget(
-                                        text: locale.send,
-                                        onPressed: () {
-                                          bloc.add(
-                                            AcceptServiceRequestEvent(
-                                              serviceRequest: serviceRequest
-                                                ..status = ServiceRequest_Status
-                                                    .CHANGED,
-                                            ),
-                                          );
-                                          context.router.pop();
-                                        },
-                                      ),
-                                    ),
-                                  if (!state.changed &&
+                                  if (state.changed &&
                                       state.serviceRequest.status ==
                                           ServiceRequest_Status.PENDING)
                                     Expanded(
                                       child: OutlinedButtonWidget(
-                                        text: locale.accept,
-                                        onPressed: () {
-                                          context.router.pop();
-                                          bloc.add(
-                                            AcceptServiceRequestEvent(
-                                              serviceRequest: serviceRequest
-                                                ..status = ServiceRequest_Status
-                                                    .ACCEPTED,
-                                            ),
-                                          );
-                                        },
+                                        text: locale.send,
+                                        onPressed: (widget.readOnly == false)
+                                            ? () {
+                                                bloc.add(
+                                                  AcceptServiceRequestEvent(
+                                                    serviceRequest: serviceRequest
+                                                      ..status =
+                                                          ServiceRequest_Status
+                                                              .ACCEPTED,
+                                                  ),
+                                                );
+                                                context.router.pop();
+                                              }
+                                            : null,
                                       ),
                                     ),
                                   if (state.serviceRequest.status ==
-                                      ServiceRequest_Status.PENDING)
+                                      ServiceRequest_Status.ACCEPTED)
+                                    Expanded(
+                                      child: OutlinedButtonWidget(
+                                        text: locale.accept,
+                                        onPressed: (widget.readOnly == false)
+                                            ? () {
+                                                context.router.pop();
+                                                bloc.add(
+                                                  AcceptServiceRequestEvent(
+                                                    serviceRequest: serviceRequest
+                                                      ..status =
+                                                          ServiceRequest_Status
+                                                              .MODIFIED,
+                                                  ),
+                                                );
+                                              }
+                                            : null,
+                                      ),
+                                    ),
+                                  if (state.serviceRequest.status ==
+                                      ServiceRequest_Status.DECLINED)
                                     const SizedBox(width: 16),
                                   Expanded(
                                     child: OutlinedButtonWidget(
                                       text: locale.decline,
-                                      onPressed: () {
-                                        context.router.pop();
-                                        bloc.add(
-                                          DeclineServiceRequestEvent(
-                                            serviceRequest: serviceRequest
-                                              ..status = ServiceRequest_Status
-                                                  .DECLINED,
-                                          ),
-                                        );
-                                      },
+                                      onPressed: (widget.readOnly == false)
+                                          ? () {
+                                              context.router.pop();
+                                              bloc.add(
+                                                DeclineServiceRequestEvent(
+                                                  serviceRequest: serviceRequest
+                                                    ..status =
+                                                        ServiceRequest_Status
+                                                            .DECLINED,
+                                                ),
+                                              );
+                                            }
+                                          : null,
                                     ),
                                   ),
                                 ],
@@ -228,13 +263,16 @@ class _RequestScreenState extends State<RequestScreen> {
                                 width: MediaQuery.of(context).size.width,
                                 child: OutlinedButtonWidget(
                                   text: locale.share,
-                                  onPressed: () {
-                                    Share.share(locator
-                                        .get<HttpService>()
-                                        .prepareRequestString(state
-                                            .serviceRequest.serviceRequestId
-                                            .toString()));
-                                  },
+                                  onPressed: (widget.readOnly == false)
+                                      ? () {
+                                          Share.share(locator
+                                              .get<HttpService>()
+                                              .prepareRequestString(state
+                                                  .serviceRequest
+                                                  .serviceRequestId
+                                                  .toString()));
+                                        }
+                                      : null,
                                 ),
                               ),
                             ],

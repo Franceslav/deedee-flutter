@@ -8,12 +8,12 @@ import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
 import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/page/my_referrals/referral_cubit.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tag_details/bloc/user_tag_details_bloc.dart';
-import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +51,9 @@ void main() {
           ),
           BlocProvider(
             create: (_) => UserBloc(),
+          ),
+          ProxyProvider<UserBloc, ReferralCubit>(
+            update: (_, userBloc, __) => ReferralCubit(userBloc.state.user),
           ),
           BlocProvider(
             create: (BuildContext context) {

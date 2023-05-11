@@ -1,11 +1,12 @@
-import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
-import 'package:deedee/ui/page/account/account_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../global_widgets/dee_dee_menu_slider.dart';
+import 'account_language_dropdown.dart';
 
 class AccountLanguageScreen extends StatefulWidget {
   const AccountLanguageScreen({super.key});
@@ -29,146 +30,8 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
       ),
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Wrap(
-              //  mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('en');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/en.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('ru');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/ru.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('pl');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/pl.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('ky');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/ky.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('es');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/es.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('ar');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/ar.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('am');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/am.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('uk');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/uk.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('hi');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/hi.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('pt');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/pt.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('he');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/he.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('fr');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/fr.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('da');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/da.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('kz');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/kz.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('th');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/tha.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('sv');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/sv.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('it');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/it.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('in');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/in.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('tu');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/tu.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('ko');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/ko.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('uz');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/uz.png')),
-                IconButton(
-                    onPressed: () {
-                      context.read<AccountBloc>().changeLocal('zh');
-                    },
-                    iconSize: 50,
-                    icon: Image.asset('assets/images/zh.png')),
-              ],
-            ),
-          ),
+          LanguagesExpansionTile(),
+
           DeeDeeMenuSlider(
             context,
             controller: _controller,

@@ -1,15 +1,13 @@
-import 'package:deedee/generated/LocationService.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/service/location_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/shared.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../generated/ReferralService.pbgrpc.dart';
 import '../model/order.dart' as order;
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
@@ -23,25 +21,9 @@ class GRCPRepository {
   final VerificationServiceClient _verificationServiceClient =
       locator.get<VerificationServiceClient>();
 
-  Future<List<UserReferral>> getUserReferrals(String email) async {
-    String? url = await locator.get<SharedUtils>().getPrefsIpAddress();
-    String? port = await locator.get<SharedUtils>().getPrefsPort();
-    final channel = ClientChannel(
-      url!,
-      port: int.parse(port!),
-      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-    );
-    final stub = ReferralServiceClient(channel);
-    var response =
-        await stub.getUserReferrals(GetUserReferralsRequest()..email = email);
-    return response.userReferral;
-  }
-
-  Future<List<Place>> getPlaces(GeoLocation geoLocation, double radius) async {
-    final response = await _locationServiceClient.getPlaces(GetPlacesRequest()
-      ..geoLocation = geoLocation
-      ..radius = radius);
-    return response.places;
+  Future<List<Location>> getAllLocations() async {
+    final response = await _locationServiceClient.getAllLocations(LocationRequest());
+    return response.locations;
   }
 
   Future<bool> bookmarkTag(String userId) async {

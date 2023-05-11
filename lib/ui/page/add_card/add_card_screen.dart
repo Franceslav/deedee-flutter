@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/deedee/api/service/payment_service.pb.dart';
+import 'package:deedee/repository/payment_method_repository.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
@@ -31,8 +33,7 @@ class _CardScreenState extends State<CardScreen> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     return BlocConsumer<CardBloc, CardState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         if (state is UpdateCardState) {
           final cardModel = state.cardModel;
@@ -130,6 +131,14 @@ class _CardScreenState extends State<CardScreen> {
                                       context.read<CardBloc>().add(
                                           SaveCardDataEvent(
                                               cardModel: cardModel));
+                                      PaymentMethodRequestRepository
+                                          paymentMethodRequestRepository =
+                                          PaymentMethodRequestRepository();
+                                      paymentMethodRequestRepository
+                                          .addPaymentMethod(
+                                        PaymentMethodRequest(),
+                                        cardModel,
+                                      );
                                       Navigator.pop(context);
                                     }
                                   : null,

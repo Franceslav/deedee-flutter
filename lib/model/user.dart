@@ -1,9 +1,9 @@
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../generated/LocationService.pb.dart';
 import 'contact.dart';
 
 enum AccountType {
@@ -83,7 +83,7 @@ class User extends Equatable {
   final double balance;
   final int availableTags;
   AccountType accountType;
-  final List<Place>? availablePlaces;
+  final List<Location>? availablePlaces;
   final List<String>? savedFilters;
   LatLng? lastUserGeoLocation;
 
@@ -172,7 +172,7 @@ class User extends Equatable {
     int? availableTags,
     AccountType? accountType,
     LatLng? lastGeoLocation,
-    List<Place>? availablePlaces,
+    List<Location>? availablePlaces,
     List<String>? savedFilters,
     List<Contact>? contacts,
   }) {

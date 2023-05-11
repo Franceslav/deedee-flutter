@@ -1,8 +1,10 @@
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
 class ServiceRequestServiceApi {
@@ -25,7 +27,7 @@ class ServiceRequestServiceApi {
 
     _serviceRequests = [
       ServiceRequest(
-        serviceRequestId: Int64(1),
+        serviceRequestId: UUID(value: "58a78535-0852-4125-8a58-43843e4706a3"),
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -37,7 +39,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(1),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(2),
+        serviceRequestId: UUID(value: "7616e064-338b-4ccc-bb36-45c4264e48ab"),
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -49,7 +51,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(2),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(3),
+        serviceRequestId: UUID(value: "97a7ef1d-c62f-4649-9efd-e605e98e5519"),
         // tag: Tag()..topicId = 'маникюр 3',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -61,7 +63,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(3),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(4),
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
         // tag: Tag()..topicId = 'маникюр 4',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -73,7 +75,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(4),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(1),
+        serviceRequestId: UUID(value: "58a78535-0852-4125-8a58-43843e4706a3"),
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -85,7 +87,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(1),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(2),
+        serviceRequestId: UUID(value: "7616e064-338b-4ccc-bb36-45c4264e48ab"),
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -97,7 +99,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(2),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(3),
+        serviceRequestId: UUID(value: "97a7ef1d-c62f-4649-9efd-e605e98e5519"),
         // tag: Tag()..topicId = 'маникюр 3',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -109,7 +111,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(3),
       ),
       ServiceRequest(
-        serviceRequestId: Int64(4),
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
         // tag: Tag()..topicId = 'маникюр 4',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -128,7 +130,8 @@ class ServiceRequestServiceApi {
   }
 
   ServiceRequest create(ServiceRequest request) {
-    request.serviceRequestId = Int64(DateTime.now().microsecondsSinceEpoch);
+    request.serviceRequestId =
+        UUID(value: const Uuid().v5(Uuid.NAMESPACE_URL, 'www.deedee.com'));
     _serviceRequests.add(request);
     return request;
   }
@@ -144,7 +147,7 @@ class ServiceRequestServiceApi {
     return _serviceRequests.firstWhere((rq) =>
         rq.serviceRequestId == serviceRequest.serviceRequestId &&
         rq.createdBy == serviceRequest.createdBy)
-      ..status = ServiceRequest_Status.ACCEPTED;
+      ..status = serviceRequest.status;
   }
 
   ServiceRequest decline(ServiceRequest serviceRequest) {

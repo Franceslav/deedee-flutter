@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/account.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
 import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
 import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/account_repository.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/repository/location_repository.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
-import '../../generated/LocationService.pb.dart';
 import '../../model/contact.dart';
 import '../../repository/gps_repository.dart';
 part 'user_event.dart';
@@ -121,12 +121,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserAvailablePlaces event,
     Emitter<UserState> emit,
   ) async {
-    List<Place> places = [
-      Place(title: 'A'),
-      Place(title: 'B'),
-      Place(title: 'C'),
-    ];
-    // await locator.get<GRCPRepository>().getPlaces(GeoLocation(), 0.0);
+    List<Location> places =
+        await locator.get<LocationRepository>().getAllLocations();
     emit(
       UserState(
         state.user.copyWith(availablePlaces: places),

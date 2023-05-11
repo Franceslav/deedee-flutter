@@ -6,6 +6,9 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../../../generated/deedee/api/model/uuid.pb.dart';
 
 part 'my_request_event.dart';
 
@@ -75,7 +78,8 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
       MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
     try {
       var serviceRequest = ServiceRequest(
-        serviceRequestId: Int64(DateTime.now().microsecondsSinceEpoch),
+        serviceRequestId:
+            UUID(value: const Uuid().v5(Uuid.NAMESPACE_URL, 'www.deedee.com')),
         createdFor: DateTime.now().toString(),
         createdBy: _user.email,
         description: DateTime.now().toString() * 4,

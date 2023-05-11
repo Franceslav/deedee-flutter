@@ -232,11 +232,12 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.BOOKMARKED
     ];
+    _tags = {};
+  }
+
+  void setUserEmail(String userEmail) {
     _tags = {
-      "ron.x.by.su@gmail.com": _fakeTags,
-      "art.zavtur@gmail.com": _fakeTags,
-      "matveev.yakov@yahoo.com": _fakeTags,
-      "evgeniivaniukov@gmail.com": _fakeTags,
+      userEmail: _fakeTags,
     };
   }
   // Tags CRUD
@@ -273,10 +274,12 @@ class TagServiceApi {
   }
 
     Observation addObservation(Observation observation) {
-      // _tags
-      //   .values.toSet()
-      //   .firstWhere((rq) => rq.tagId == observation.tagId)
-      //   .observations.add(observation);
+      List<Tag> tags = _tags.values as List<Tag>;
+      tags
+        .firstWhere((rq) => rq.tagId == observation.tagId)
+        .observations.add(observation);
+
+
       return observation;
   }
 }

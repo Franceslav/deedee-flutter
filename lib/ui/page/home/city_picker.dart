@@ -1,14 +1,14 @@
-import 'package:deedee/generated/LocationService.pb.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CityPicker extends StatefulWidget {
-  final Place? selectedCity;
-  final List<Place>? availableCities;
+  final Location? selectedCity;
+  final List<Location>? availableCities;
   final User? user;
-  final Function(Place place)? onChooseCity;
-  final void Function(User user, Place city)? onChangeCity;
+  final Function(Location place)? onChooseCity;
+  final void Function(User user, Location city)? onChangeCity;
 
   const CityPicker({
     super.key,
@@ -24,7 +24,7 @@ class CityPicker extends StatefulWidget {
 }
 
 class _CityPickerState extends State<CityPicker> {
-  Place? _selectedCity;
+  Location? _selectedCity;
 
   @override
   void initState() {
