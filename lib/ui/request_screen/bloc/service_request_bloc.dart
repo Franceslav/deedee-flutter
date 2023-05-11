@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
 
 part 'service_request_event.dart';
@@ -14,7 +14,7 @@ class ServicePushRequestBloc
     extends Bloc<ServicePushRequestEvent, ServicePushRequestState> {
   final ServiceRequestRepository _serviceRequestRepository;
   final User _user;
-  final Int64 _serviceRequestId;
+  final UUID _serviceRequestId;
 
   late ServiceRequest _initialServiceRequest;
 
@@ -81,13 +81,11 @@ class ServicePushRequestBloc
   void _onRestoreTapped(UserTappedRestoreBtnEvent event,
       Emitter<ServicePushRequestState> emit) async {
     final requests = await _serviceRequestRepository.getAll(_user.email);
-    _initialServiceRequest = requests.firstWhere(
-            (sr) => sr.serviceRequestId == _serviceRequestId
-    );
+    _initialServiceRequest =
+        requests.firstWhere((sr) => sr.serviceRequestId == _serviceRequestId);
     ServiceRequest changedRequest = _initialServiceRequest.clone();
     changedRequest.status = ServiceRequest_Status.PENDING;
-    emit(
-        ServiceRequestChangeState(serviceRequest: changedRequest, changed: true)
-    );
+    emit(ServiceRequestChangeState(
+        serviceRequest: changedRequest, changed: true));
   }
 }

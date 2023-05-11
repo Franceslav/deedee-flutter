@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ import '../global_widgets/dee_dee_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
   final bool readOnly;
-  final Int64 serviceRequestId;
+  final UUID serviceRequestId;
   final bool openedFromRestoreAction;
 
   RequestScreen({

@@ -17,6 +17,7 @@ import 'package:flutter/material.dart' as _i38;
 import 'package:latlong2/latlong.dart' as _i40;
 
 import '../../generated/deedee/api/model/composite_filter.pb.dart' as _i39;
+import '../../generated/deedee/api/model/uuid.pb.dart' as _i43;
 import '../account/personal_info/edit_pers_info.dart' as _i26;
 import '../account/personal_info/personal_information.dart' as _i27;
 import '../auth/launcherScreen/launcher_screen.dart' as _i1;
@@ -990,7 +991,7 @@ class RequestScreenRoute extends _i37.PageRouteInfo<RequestScreenRouteArgs> {
   RequestScreenRoute({
     _i38.Key? key,
     required bool readOnly,
-    required _i41.Int64 serviceRequestId,
+    required _i43.UUID serviceRequestId,
     bool openedFromRestoreAction = false,
   }) : super(
           RequestScreenRoute.name,
@@ -1018,7 +1019,7 @@ class RequestScreenRouteArgs {
 
   final bool readOnly;
 
-  final _i41.Int64 serviceRequestId;
+  final _i43.UUID serviceRequestId;
 
   final bool openedFromRestoreAction;
 

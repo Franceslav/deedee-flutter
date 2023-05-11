@@ -6,7 +6,7 @@ abstract class MapSlidingPanelState {}
 class MapSlidingPanelInitial extends MapSlidingPanelState {}
 
 class ServiceRequestCreatedState extends MapSlidingPanelState {
-  final Int64 serviceRequestId;
+  final UUID serviceRequestId;
 
   ServiceRequestCreatedState(this.serviceRequestId);
 }
