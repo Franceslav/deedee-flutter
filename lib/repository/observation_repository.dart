@@ -9,22 +9,12 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class ObservationRepository {
   final ObservationServiceClient _observationServiceClient = locator.get<ObservationServiceClient>();
-
-  Future<Observation> addObservation(
-    {required Int64 observationId, 
-    required Int64 userId, 
-    required double latitude, 
-    required double longitude}
-    ) async {
-    final response = await _observationServiceClient.addObservation(ObservationRequest(
-      observation: Observation(
-        observationId: observationId,
-        userId: userId,
-        geolocation: Geolocation()
-            ..latitude = latitude
-            ..longitude = longitude,
-      )
-    ));
+  
+  Future<Observation> addObservation(Observation observation) async {
+    final response = await _observationServiceClient.addObservation(
+      ObservationRequest(
+        observation: observation
+      ));
     return response.observations.first;
   }
 }

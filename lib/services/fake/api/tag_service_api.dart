@@ -19,13 +19,6 @@ class TagServiceApi {
   @PostConstruct(preResolve: true)
   Future<void> init() async {
     String deviceLanguage = Platform.localeName.substring(0, 2); 
-    _observations = [
-        Observation(
-          observationId: Int64(0),
-          userId: Int64(1),
-          geolocation: Geolocation(),
-        ),
-      ];
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
@@ -194,29 +187,8 @@ class TagServiceApi {
       ..status = Tag_Status.PLACED;
   }
 
-  // Observation CRUD
-    Observation createObservation(Observation observationArg) {
-      Observation observation = Observation(
-            observationId: observationArg.observationId,
-            userId: observationArg.userId,
-            geolocation: observationArg.geolocation,
-          );
-      _observations.add(observation);
+    Observation addObservation(Observation observation) {
+      _tags.
       return observation;
-  }
-
-  List<Observation> readObservations() =>_observations;
-
-  Observation updateObservation(Observation observationArg) {
-    Observation observation =_observations
-        .firstWhere((o) => o.observationId == observationArg.observationId, 
-          orElse: () => Observation(
-            observationId: observationArg.observationId,
-            userId: observationArg.userId,
-            geolocation: observationArg.geolocation,
-          ));
-    observation.userId = observationArg.userId;
-    observation.geolocation = observationArg.geolocation; 
-    return observation;
   }
 }

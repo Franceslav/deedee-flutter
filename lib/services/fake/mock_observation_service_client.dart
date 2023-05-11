@@ -51,57 +51,7 @@ class MockObservationServiceClient implements ObservationServiceClient {
   Future<ObservationResponse> _addObservation (ObservationRequest request) async {
     return ObservationResponse(
       observations: [
-        api.createObservation(
-          Observation(
-            observationId: request.observation.observationId,
-            userId: request.observation.userId,
-            geolocation: request.observation.geolocation,
-          )
-        ),
-      ]
-    );
-  }
-
-  @override
-  ResponseFuture<ObservationResponse> getObservations(
-      ObservationRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-      FakeClientCall<dynamic, ObservationResponse>(
-        _getObservations(request),
-      ),
-    );
-  }
-
-  Future<ObservationResponse> _getObservations(
-      ObservationRequest request) async {
-    var observations = api.readObservations();
-    return ObservationResponse()..observations.addAll(observations);
-  }
-
-  @override
-  ResponseFuture<ObservationResponse> updateObservation(
-      ObservationRequest request,
-      {CallOptions? options}) {
-    return ResponseFuture(
-      FakeClientCall<dynamic, ObservationResponse>(
-        _updateObservation(request),
-      ),
-    );
-  }
-
-  Future<ObservationResponse> _updateObservation(
-      ObservationRequest request) async {
-
-    return ObservationResponse(
-      observations: [
-        api.updateObservation(
-         Observation(
-            observationId: request.observation.observationId,
-            userId: request.observation.userId,
-            geolocation: request.observation.geolocation,
-          )
-        ),
+        api.addObservation(request.observation),
       ]
     );
   }

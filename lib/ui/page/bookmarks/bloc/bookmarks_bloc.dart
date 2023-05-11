@@ -98,7 +98,8 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       final tag =
           await _tagRepository.removeTagFromFavorites(_user.email, event.tagId);
       emit(TagMarkerOpenedState(tag.tagId,
-          isTagBookmarked: tag.status == Tag_Status.BOOKMARKED));
+          isTagBookmarked: tag.status == Tag_Status.BOOKMARKED)
+          );
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -111,25 +112,20 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   }
 
   void _onUserOpenedTagMarker(
-      UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
-      _observationRepository.addObservation(
-        observationId: Int64(DateTime.now().microsecondsSinceEpoch),
-        userId: Int64(1),
-        latitude: 8.91489,
-        longitude: 38.5169,
-        );
+    UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
+    // Adding an observation to the tag
+    Observation observation = Observation(
+      observationId: Int64(DateTime.now().microsecondsSinceEpoch),
+      userId: Int64(1),
+      geolocation: Geolocation()
+        ..latitude = 8.91489
+        ..longitude = 38.5169,      
+    );   
+    _observationRepository.addObservation(observation);
     final List<Tag> favouriteTags =
         await _tagRepository.getFavoriteTags(_user.email);
     final tag =
         favouriteTags.firstWhereOrNull((tag) => tag.tagId == event.tagId);
-    tag?.observations.add(Observation(
-        observationId: Int64(DateTime.now().microsecondsSinceEpoch),
-        userId: Int64(1),
-        geolocation: Geolocation()
-        ..latitude = 8.91489
-        ..longitude = 38.5169,
-      )
-    );
     emit(TagMarkerOpenedState(event.tagId, isTagBookmarked: tag != null));
   }
 
