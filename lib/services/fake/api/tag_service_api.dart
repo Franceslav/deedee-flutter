@@ -188,7 +188,10 @@ class TagServiceApi {
   }
 
     Observation addObservation(Observation observation) {
-      _tags.
+      // _tags
+      //   .values.toSet()
+      //   .firstWhere((rq) => rq.tagId == observation.tagId)
+      //   .observations.add(observation);
       return observation;
   }
 }
