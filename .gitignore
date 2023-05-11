@@ -32,7 +32,8 @@
 pubspec.lock
 # Web related
 lib/generated_plugin_registrant.dart
-
+lib/injection.config.dart
+lib/ui/routes/app_router.gr.dart
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 /firestore.json

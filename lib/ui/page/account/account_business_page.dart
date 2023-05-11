@@ -1,6 +1,8 @@
+import 'package:deedee/ui/page/account/business_bloc/business_bloc.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountBusinessPage extends StatelessWidget {
@@ -24,9 +26,7 @@ class AccountInfoBusinessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
-        //height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        //color: Colors.red,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -95,9 +95,11 @@ class BusinessRowInfoWidget extends StatefulWidget {
 
 class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
   bool isChecked = false;
+  bool isConnect = false;
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BusinessPageBloc();
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -110,89 +112,114 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
       return AppColors.fiolet;
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(13.0),
-      child: Column(
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.nameCompany,
-              labelText: AppLocalizations.of(context)!.nameCompany,
-            ),
-          ),
-          TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.homeChooseCity,
-              labelText: AppLocalizations.of(context)!.homeChooseCity,
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.contactInformation,
-              labelText: AppLocalizations.of(context)!.contactInformation,
-            ),
-          ),
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.phoneNumber,
-              labelText: AppLocalizations.of(context)!.phoneNumber,
-            ),
-          ),
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.emailAddressTitle,
-              labelText: AppLocalizations.of(context)!.emailAddressTitle,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(AppLocalizations.of(context)!.agreePP,
-                    style: AppTextTheme.bodyLarge, softWrap: true, maxLines: 2),
-              ),
-              Checkbox(
-                checkColor: AppColors.white,
-                fillColor: MaterialStateProperty.resolveWith(getColor),
-                value: isChecked,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isChecked = value ?? false;
-                  });
-                },
-              )
-            ],
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.17,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                    disabledBackgroundColor: AppColors.grey)
-                .copyWith(
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-            ),
-            onPressed:
-                // null,
-                isChecked ? () {} : null,
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.connect,
-                style: AppTextTheme.titleLarge.copyWith(
-                  color: AppColors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+    return BlocProvider<BusinessPageBloc>(
+      create: (_) => bloc,
+      child: BlocConsumer<BusinessPageBloc, BusinessState>(
+          bloc: bloc,
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state is BusinessPageState) {
+              isChecked = state.policyAccepted;
+              isConnect = state.buttonConnectBusiness;
+            }
+            return Padding(
+                padding: const EdgeInsets.all(13.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.nameCompany,
+                        labelText: AppLocalizations.of(context)!.nameCompany,
+                      ),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.homeChooseCity,
+                        labelText: AppLocalizations.of(context)!.homeChooseCity,
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText:
+                            AppLocalizations.of(context)!.contactInformation,
+                        labelText:
+                            AppLocalizations.of(context)!.contactInformation,
+                      ),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.phoneNumber,
+                        labelText: AppLocalizations.of(context)!.phoneNumber,
+                      ),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText:
+                            AppLocalizations.of(context)!.emailAddressTitle,
+                        labelText:
+                            AppLocalizations.of(context)!.emailAddressTitle,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            AppLocalizations.of(context)!.agreePP,
+                            style: AppTextTheme.bodyLarge,
+                            softWrap: true,
+                            maxLines: 2,
+                          ),
+                        ),
+                        Checkbox(
+                          checkColor: AppColors.white,
+                          fillColor:
+                              MaterialStateProperty.resolveWith(getColor),
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            bloc.add(
+                                PolicyCheckedEvent(isChecked = value ?? false));
+                          },
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.17,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                              disabledBackgroundColor: AppColors.grey)
+                          .copyWith(
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                      onPressed:
+                          state is BusinessPageState && state.policyAccepted
+                              ? () {
+                                  if (isChecked) {
+                                    state is BusinessConnectTapState &&
+                                        state.buttonConnectBusiness;
+                                  }
+                                }
+                              : null,
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.connect,
+                          style: AppTextTheme.titleLarge.copyWith(
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ));
+          }),
     );
   }
 }
