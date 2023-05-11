@@ -1,5 +1,6 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/repository/card_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
@@ -67,7 +68,7 @@ void main() {
             create: (_) => UserTagDetailsBloc(),
           ),
           BlocProvider(
-            create: (_) => CardBloc(),
+            create: (_) => CardBloc(locator.get<CardRepository>()),
           ),
         ],
         child: const MyApp(),
