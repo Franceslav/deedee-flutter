@@ -12,7 +12,7 @@ import 'dart:typed_data' as $typed_data;
 const ServiceRequest$json = const {
   '1': 'ServiceRequest',
   '2': const [
-    const {'1': 'serviceRequestId', '3': 1, '4': 1, '5': 4, '10': 'serviceRequestId'},
+    const {'1': 'serviceRequestId', '3': 1, '4': 1, '5': 11, '6': '.deedee.api.uuid.model.UUID', '10': 'serviceRequestId'},
     const {'1': 'createdFor', '3': 2, '4': 1, '5': 9, '10': 'createdFor'},
     const {'1': 'createdBy', '3': 3, '4': 1, '5': 9, '10': 'createdBy'},
     const {'1': 'description', '3': 4, '4': 1, '5': 9, '10': 'description'},
@@ -37,8 +37,9 @@ const ServiceRequest_Status$json = const {
     const {'1': 'DONE', '2': 5},
     const {'1': 'CHANGED', '2': 6},
     const {'1': 'DECLINED', '2': 7},
+    const {'1': 'REOPENED', '2': 8},
   ],
 };
 
 /// Descriptor for `ServiceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List serviceRequestDescriptor = $convert.base64Decode('Cg5TZXJ2aWNlUmVxdWVzdBIqChBzZXJ2aWNlUmVxdWVzdElkGAEgASgEUhBzZXJ2aWNlUmVxdWVzdElkEh4KCmNyZWF0ZWRGb3IYAiABKAlSCmNyZWF0ZWRGb3ISHAoJY3JlYXRlZEJ5GAMgASgJUgljcmVhdGVkQnkSIAoLZGVzY3JpcHRpb24YBCABKAlSC2Rlc2NyaXB0aW9uEjgKCWNyZWF0ZWRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBJLCgtnZW9sb2NhdGlvbhgGIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9uEhQKBXByaWNlGAcgASgBUgVwcmljZRJOCgZzdGF0dXMYCCABKA4yNi5kZWVkZWUuYXBpLnNlcnZpY2VyZXF1ZXN0Lm1vZGVsLlNlcnZpY2VSZXF1ZXN0LlN0YXR1c1IGc3RhdHVzEhQKBXRhZ0lkGAkgASgEUgV0YWdJZCJ0CgZTdGF0dXMSCwoHUEVORElORxAAEgwKCEFDQ0VQVEVEEAESDAoITU9ESUZJRUQQAhILCgdERUxFVEVEEAMSDwoLSU5fUFJPR1JFU1MQBBIICgRET05FEAUSCwoHQ0hBTkdFRBAGEgwKCERFQ0xJTkVEEAc=');
+final $typed_data.Uint8List serviceRequestDescriptor = $convert.base64Decode('Cg5TZXJ2aWNlUmVxdWVzdBJHChBzZXJ2aWNlUmVxdWVzdElkGAEgASgLMhsuZGVlZGVlLmFwaS51dWlkLm1vZGVsLlVVSURSEHNlcnZpY2VSZXF1ZXN0SWQSHgoKY3JlYXRlZEZvchgCIAEoCVIKY3JlYXRlZEZvchIcCgljcmVhdGVkQnkYAyABKAlSCWNyZWF0ZWRCeRIgCgtkZXNjcmlwdGlvbhgEIAEoCVILZGVzY3JpcHRpb24SOAoJY3JlYXRlZEF0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0EksKC2dlb2xvY2F0aW9uGAYgASgLMikuZGVlZGVlLmFwaS5nZW9sb2NhdGlvbi5tb2RlbC5HZW9sb2NhdGlvblILZ2VvbG9jYXRpb24SFAoFcHJpY2UYByABKAFSBXByaWNlEk4KBnN0YXR1cxgIIAEoDjI2LmRlZWRlZS5hcGkuc2VydmljZXJlcXVlc3QubW9kZWwuU2VydmljZVJlcXVlc3QuU3RhdHVzUgZzdGF0dXMSFAoFdGFnSWQYCSABKARSBXRhZ0lkIoIBCgZTdGF0dXMSCwoHUEVORElORxAAEgwKCEFDQ0VQVEVEEAESDAoITU9ESUZJRUQQAhILCgdERUxFVEVEEAMSDwoLSU5fUFJPR1JFU1MQBBIICgRET05FEAUSCwoHQ0hBTkdFRBAGEgwKCERFQ0xJTkVEEAcSDAoIUkVPUEVORUQQCA==');
