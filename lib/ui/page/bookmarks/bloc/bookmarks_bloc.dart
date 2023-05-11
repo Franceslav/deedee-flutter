@@ -114,12 +114,13 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   void _onUserOpenedTagMarker(
     UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
     // Adding an observation to the tag
+    var temp = await _tagRepository.getTags(_user.userId);
+    var selectedTag = temp.firstWhere((tag) => tag.tagId == event.tagId);
+    
     Observation observation = Observation(
       observationId: Int64(DateTime.now().microsecondsSinceEpoch),
       userId: Int64(1),
-      geolocation: Geolocation()
-        ..latitude = 8.91489
-        ..longitude = 38.5169,      
+      geolocation: selectedTag.geolocation,     
     );   
     _observationRepository.addObservation(observation);
     final List<Tag> favouriteTags =

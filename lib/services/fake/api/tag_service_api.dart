@@ -16,7 +16,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class TagServiceApi {
   late List<Tag> _fakeTags;
   late Map<String, List<Tag>> _tags;
-  late List<Observation> _observations;
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
@@ -276,10 +275,8 @@ class TagServiceApi {
     Observation addObservation(Observation observation) {
       List<Tag> tags = _tags.values as List<Tag>;
       tags
-        .firstWhere((rq) => rq.tagId == observation.tagId)
+        .firstWhere((tag) => tag.tagId == observation.tagId)
         .observations.add(observation);
-
-
       return observation;
   }
 }
