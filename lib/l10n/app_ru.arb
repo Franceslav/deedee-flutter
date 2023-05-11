@@ -185,5 +185,23 @@
   "clickMarkerViewApplication": "Нажмите на маркер, чтобы просмотреть заявку",
   "send": "Отправить",
   "customerProfile": "Профиль клиента",
-   "notAuthorized":"Вы не авторизованы для просмотра"
+   "notAuthorized":"Вы не авторизованы для просмотра",
+  "executorProfile": "Профиль исполнителя",
+  "executorTags": "Тэги исполнителя:",
+  "reviews": "Отзывы:",
+  "writeReview": "Написать отзыв",
+  "completedApplications": "Выполненых заявок",
+  "rating": "Рейтинг",
+  "search": "Поиск",
+  "notFound": "Не найдено",
+    "search":"Поиск",
+  "deeDeeForBusiness": "DeeDee для бизнеса",
+  "placeText": "Место для вашего текста",
+  "businessProfile": "Бизнесс аккаунт",
+  "regToBecomeClient": "Зарегистрируйтесь, чтобы стать клиентом",
+  "nameCompany": "Название компании",
+  "agreePP": "Соглашаюсь с политикой конфиденциальности",
+  "connect": "Подключить",
+  "addAccountTitle": "Добавить аккаунт"
 }
+

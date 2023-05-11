@@ -2,9 +2,10 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
-import 'package:deedee/model/user.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -34,21 +35,12 @@ class BookmarksScreen extends StatefulWidget {
 class _BookmarksScreenState extends State<BookmarksScreen> {
   final PanelController _controller = PanelController();
   List<Tag> _bookmarks = [];
-  late final User _user;
   final AnimatedButtonController _buttonController = AnimatedButtonController();
-
-  @override
-  void initState() {
-    super.initState();
-    _user = BlocProvider.of<UserBloc>(context).state.user;
-    BlocProvider.of<BookmarksBloc>(context)
-        .add(LoadBookmarksEvent(userId: _user.userId));
-  }
 
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-
+    final bloc = BookmarksBloc(locator<TagRepository>(), user);
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.bookmarksTitle,
@@ -58,6 +50,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
       body: Stack(
         children: <Widget>[
           BlocConsumer<BookmarksBloc, BookmarksState>(
+            bloc: bloc,
             listener: (context, state) {
               if (state is ErrorState) {
                 showSnackBar(context, state.errorMessage);
@@ -104,9 +97,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                 ButtonBarEntry(
                                   child: Text(
                                       AppLocalizations.of(context)!.actualTags),
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                 ),
                                 ButtonBarEntry(
                                   child: Text(AppLocalizations.of(context)!
@@ -116,13 +107,32 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                               ],
                             ),
                           ),
-                          const Divider(
-                            thickness: 0.5,
-                            color: Colors.black,
-                            height: 0,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
+                            ),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: AppLocalizations.of(context)!.search,
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 16,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                bloc.add(SearchBookmarksEvent(value));
+                              },
+                            ),
                           ),
                           Expanded(
                             child: ListView.separated(
+                              keyboardDismissBehavior:
+                                  ScrollViewKeyboardDismissBehavior.onDrag,
                               itemBuilder: ((context, index) {
                                 final bookmark = _bookmarks[index];
                                 return Slidable(
@@ -148,9 +158,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                           setState(() {
                                             _bookmarks.remove(bookmark);
                                           });
-                                          BlocProvider.of<BookmarksBloc>(
-                                                  context)
-                                              .add(
+                                          bloc.add(
                                             DeleteBookmarkEvent(
                                               userId: user.userId,
                                               bookmark: bookmark,
@@ -169,8 +177,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                     child: DeeDeeRowInfoWidget(
                                       icon: Image.asset(
                                           'assets/images/bookmark_icon.png'),
-                                      mainText: Text(
-                                        ''/*bookmark.messengerId*/, //TODO:
+                                      mainText: const Text(
+                                        '' /*bookmark.messengerId*/, //TODO:
                                         style: AppTextTheme.bodyLarge,
                                       ),
                                       secondaryText: Text(
@@ -185,13 +193,26 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                               bookmark.geolocation
                                                   .longitude): TagDTO(
                                               bookmark.tagId,
-                                              ''/*bookmark.messengerId*/)
+                                              '' /*bookmark.messengerId*/)
                                         };
                                         context.router.push(
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
-                                            currentFilter:
-                                                CompositeFilter(), //TODO
+                                            currentFilter: CompositeFilter(
+                                              compositeFilterId:
+                                                  _bookmarks[index]
+                                                      .compositeFilter
+                                                      .compositeFilterId,
+                                              topic: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .topic,
+                                              filterMap: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .filterMap,
+                                              status: _bookmarks[index]
+                                                  .compositeFilter
+                                                  .status,
+                                            ), //TODO
                                           ),
                                         );
                                       },

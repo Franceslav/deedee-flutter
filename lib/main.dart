@@ -3,18 +3,16 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/composite_filter_bloc/composite_filter_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
 import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:deedee/ui/page/my_referrals/referral_cubit.dart';
 import 'package:deedee/ui/place_tag/bloc/set_location_bloc.dart';
-import 'package:deedee/ui/request_screen/bloc/request_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/deedee_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tag_details/bloc/user_tag_details_bloc.dart';
-import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,17 +51,17 @@ void main() {
           BlocProvider(
             create: (_) => UserBloc(),
           ),
-          BlocProvider(
-            create: (_) => CompositeFilterBloc(),
+          ProxyProvider<UserBloc, ReferralCubit>(
+            update: (_, userBloc, __) => ReferralCubit(userBloc.state.user),
           ),
           BlocProvider(
-            create: (_) => BookmarksBloc(locator.get<TagRepository>()),
+            create: (BuildContext context) {
+              final user = BlocProvider.of<UserBloc>(context).state.user;
+              return BookmarksBloc(locator.get<TagRepository>(), user);
+            },
           ),
           BlocProvider(
             create: (_) => MainTopicsBloc(locator.get<TopicRepository>()),
-          ),
-          BlocProvider(
-            create: (_) => UserTagsBloc(locator.get<TagRepository>()),
           ),
           BlocProvider(
             create: (_) => UserTagDetailsBloc(),
@@ -114,6 +112,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       return MaterialApp(
         locale: context.watch<AccountBloc>().appLocal,
         supportedLocales: AppLocalizations.supportedLocales,
+        navigatorKey: navigatorKey,
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

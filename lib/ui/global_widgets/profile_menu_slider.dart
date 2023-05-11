@@ -31,15 +31,6 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 context.router.popAndPush(const HomeScreenRoute());
               }),
           GeneralSlidingPanelItem(
-              icon: Icons.published_with_changes_sharp,
-              text: 'Push',
-              onTap: () async {
-                final pushNotificationService =
-                    locator.get<PushNotificationService>();
-                await pushNotificationService.sendPushNotification();
-                print(await pushNotificationService.getToken());
-              }),
-          GeneralSlidingPanelItem(
               icon: Icons.list,
               text: AppLocalizations.of(context)!.userTagsTitle,
               onTap: () {
@@ -90,16 +81,8 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-                context.router.popAndPush(const SavedFiltersScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.star_border_purple500_sharp,
-              text: AppLocalizations.of(context)!.subscription,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const SubscribedFiltersPageRoute());
+                context.router
+                    .popAndPush(const FavoriteCompositeFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,

@@ -17,7 +17,7 @@ class HomeScreenLoadEvent extends HomeScreenEvent {
 
 class HomeScreenChangeEvent extends HomeScreenEvent {
   final User user;
-  final Place? city;
+  final Location? city;
 
   HomeScreenChangeEvent({
     required this.user,

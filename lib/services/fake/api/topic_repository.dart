@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/geolocation_service.pb.dart';
-import 'package:deedee/generated/topic_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/subtopic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class TopicServiceApi {

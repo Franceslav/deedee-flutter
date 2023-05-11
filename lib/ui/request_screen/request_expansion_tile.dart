@@ -1,13 +1,12 @@
 import 'package:deedee/constants.dart';
-import 'package:deedee/ui/request_screen/bloc/request_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RequestExpansionTile extends StatefulWidget {
   final List<String> data;
-  final void Function(String) onTap;
+  final void Function(String)? onTap;
 
-  RequestExpansionTile({Key? key, required this.data, required this.onTap}) : super(key: key);
+  RequestExpansionTile({Key? key, required this.data, required this.onTap})
+      : super(key: key);
 
   @override
   State<RequestExpansionTile> createState() => _RequestExpansionTileState();
@@ -35,15 +34,15 @@ class _RequestExpansionTileState extends State<RequestExpansionTile> {
         maintainState: true,
         trailing: isExpanded
             ? const Icon(
-          Icons.keyboard_arrow_up_sharp,
-          size: 34,
-          color: Colors.grey,
-        )
+                Icons.keyboard_arrow_up_sharp,
+                size: 34,
+                color: Colors.grey,
+              )
             : const Icon(
-          Icons.keyboard_arrow_down_sharp,
-          size: 34,
-          color: Colors.grey,
-        ),
+                Icons.keyboard_arrow_down_sharp,
+                size: 34,
+                color: Colors.grey,
+              ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -71,12 +70,14 @@ class _RequestExpansionTileState extends State<RequestExpansionTile> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          onTap: () {
-                             setState(() {
-                               selectedIndex = index;
-                             });
-                             widget.onTap(widget.data[index]);
-                            },
+                          onTap: (widget.onTap == null)
+                              ? null
+                              : () {
+                                  setState(() {
+                                    selectedIndex = index;
+                                  });
+                                  widget.onTap!(widget.data[index]);
+                                },
                         ),
                       );
                     },

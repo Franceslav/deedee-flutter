@@ -174,5 +174,13 @@
   "addCard": "إضافة بطاقة",
   "send": "يرسل",
   "customerProfile": "ملف الزائر",
-  "notAuthorized":"الخاص بك غير مصرح للمشاهدة"
+  "notAuthorized": "الخاص بك غير مصرح للمشاهدة",
+    "executorProfile": "ملف الفنان",
+  "executorTags": "علامات الفنان:",
+  "reviews": "التعليقات:",
+  "writeReview": "اكتب مراجعة",
+  "completedApplications": "الطلبات المكتملة",
+  "rating": "التقييم",
+  "search": "يبحث",
+  "notFound":"غير موجود"
 }

@@ -16,7 +16,7 @@ class HomeScreenFailureState extends HomeScreenState {
 }
 
 class HomeScreenLoadedState extends HomeScreenState {
-  final Place? selectedCity;
+  final Location? selectedCity;
   final List<Topic> topics;
 
   HomeScreenLoadedState({
@@ -33,4 +33,9 @@ class HomePageGPSReceivedState extends HomeScreenState {
   final Position position;
 
   HomePageGPSReceivedState(this.position);
+}
+
+class HomePageRequestReceivedState extends HomeScreenState {
+  final String? id;
+  HomePageRequestReceivedState(this.id);
 }

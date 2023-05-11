@@ -34,7 +34,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
       create: (context) => PlaceOrderBloc(),
       child: Scaffold(
         appBar: DeeDeeAppBar(
-          title: 'Контакты',
+          title: locale.contacts,
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),
@@ -43,10 +43,8 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
             BlocConsumer<PlaceOrderBloc, PlaceOrderState>(
               listener: (context, state) {
                 if (state is PlaceOrderRequest) {
-                  showSnackBar(
-                      context, locale.orderSent);
+                  showSnackBar(context, locale.orderSent);
                 }
-
               },
               buildWhen: (old, current) =>
                   current is PlaceOrderFailureState && old != current,
@@ -73,8 +71,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                                       Column(
                                         children: [
                                           Text(
-                                            locale
-                                                .contactInformation,
+                                            locale.contactInformation,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineLarge,

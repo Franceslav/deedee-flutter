@@ -5,10 +5,20 @@ abstract class MapSlidingPanelState {}
 
 class MapSlidingPanelInitial extends MapSlidingPanelState {}
 
-class MapSlidingPanelCreateRequestState extends MapSlidingPanelState {
-  final ServiceRequest request;
+class ServiceRequestCreatedState extends MapSlidingPanelState {
+  final Int64 serviceRequestId;
 
-  MapSlidingPanelCreateRequestState(this.request);
+  ServiceRequestCreatedState(this.serviceRequestId);
+}
+
+class MapSlidingPanelIsBookmarkedState extends MapSlidingPanelState {
+  final bool isBookmarked;
+  final String? snackbarNotification;
+
+  MapSlidingPanelIsBookmarkedState({
+    required this.isBookmarked,
+    this.snackbarNotification,
+  });
 }
 
 class ErrorState extends MapSlidingPanelState {

@@ -1,25 +1,30 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'filter_page_event.dart';
+
 part 'filter_page_state.dart';
 
 class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
   final TopicRepository _topicRepository;
-  final FilterRepository _filterRepository;
+  final CompositeFilterRepository _filterRepository;
   final User _user;
   final CompositeFilter _currentFilter;
   final TagRepository _tagRepository;
+  String deviceLanguage = Platform.localeName.substring(0, 2);
 
   List<String> _subtopics = [];
   List<String> _filterKeys = [];
@@ -86,7 +91,7 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
 
   _onPushFilters(event, emit) async {
     try {
-      List<Tag> tags = await _tagRepository.getTags(event.topic);
+      List<Tag> tags = await _tagRepository.getTagsByName(event.topic);
       emit(UserFiltersDoneState(tags));
     } catch (error) {
       ErrorState(error.toString());
@@ -104,7 +109,7 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
         .toList();
 
     for (var i = 0; i <= _subtopics.length - 1; i++) {
-      _filterKeys = (await _filterRepository.getFilterItems(_subtopics[i]))
+      _filterKeys = (await _filterRepository.getFilterKeys(_subtopics[i]))
           .map((fk) => fk.title)
           .toList();
       final filterKeyList = FilterKeyList(

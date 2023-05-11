@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/repository/filter_repository.dart';
+import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
@@ -24,6 +24,7 @@ import 'package:search_address_repository/search_address_repository.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../global_widgets/deedee_appbar.dart';
+import '../favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
 import 'filter_page_bloc.dart';
 
 class TagDTO {
@@ -50,62 +51,82 @@ class _FilterPageState extends State<FilterPage> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = FilterPageBloc(
       locator.get<TopicRepository>(),
-      locator.get<FilterRepository>(),
+      locator.get<CompositeFilterRepository>(),
       user,
       widget.currentFilter,
       locator.get<TagRepository>(),
     );
+    final compositeFilterBloc = CompositeFilterBloc(
+      locator.get<CompositeFilterRepository>(),
+      user,
+    );
+
     return BlocProvider<FilterPageBloc>(
       create: (_) => bloc,
-      child: Scaffold(
-        appBar: DeeDeeAppBar(
-          controller: _controller,
-          title: AppLocalizations.of(context)!.filterTagsPageTitle,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Row(
-              children: [
-                GestureDetector(
-                  child: const Icon(Icons.bookmark_border),
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const DialogWidget();
-                        });
-                  },
+      child: BlocConsumer<FilterPageBloc, FilterPageState>(
+        bloc: bloc,
+        listener: (context, state) {
+          if (state is UserFiltersDoneState) {
+            Map<LatLng, TagDTO> tagMap = {
+              for (var tag in state.tags)
+                LatLng(tag.geolocation.latitude, tag.geolocation.longitude):
+                    TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO:
+            };
+            context.router.popAndPush(
+              MapScreenRoute(
+                tagDescriptionMap: tagMap,
+                currentFilter: _compositeFilter,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is SubtopicListLoadedState) {
+            final allSubtopicsFilter = state.allSubtopicsFilter;
+            final selectedSubtopicsFilter = state.selectedSubtopicsFilter;
+
+            return Scaffold(
+              appBar: DeeDeeAppBar(
+                controller: _controller,
+                title: AppLocalizations.of(context)!.filterTagsPageTitle,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Row(
+                    children: [
+                      if (selectedSubtopicsFilter.values.isNotEmpty &&
+                          selectedSubtopicsFilter.values
+                              .every((element) => element.length >= 3))
+                        GestureDetector(
+                          child: const Icon(Icons.bookmark_border),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return DialogWidget(
+                                  compositeFilter: CompositeFilter(
+                                    compositeFilterId: Int64(),
+                                    topic: widget.currentFilter.topic,
+                                    filterMap: _filtersWithSelected(
+                                      allSubtopicsFilter: allSubtopicsFilter,
+                                      selectedSubtopicsFilter:
+                                          selectedSubtopicsFilter,
+                                    ),
+                                    status: widget.currentFilter.status,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      const SizedBox(width: 16),
+                      const Icon(Icons.menu),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 16),
-                const Icon(Icons.menu),
-              ],
-            ),
-          ),
-        ),
-        body: Stack(
-          children: [
-            BlocConsumer<FilterPageBloc, FilterPageState>(
-              bloc: bloc,
-              listener: (context, state) {
-                if (state is UserFiltersDoneState) {
-                  Map<LatLng, TagDTO> tagMap = {
-                    for (var tag in state.tags)
-                      LatLng(tag.geolocation.latitude,
-                              tag.geolocation.longitude):
-                          TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO:
-                  };
-                  context.router.popAndPush(
-                    MapScreenRoute(
-                      tagDescriptionMap: tagMap,
-                      currentFilter: _compositeFilter,
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is SubtopicListLoadedState) {
-                  final allSubtopicsFilter = state.allSubtopicsFilter;
-                  final selectedSubtopicsFilter = state.selectedSubtopicsFilter;
-                  return Padding(
+              ),
+              body: Stack(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 66),
                     child: Column(
                       children: [
@@ -194,18 +215,21 @@ class _FilterPageState extends State<FilterPage> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
                                   child: Row(
                                     children: [
+                                      const SizedBox(height: 8),
                                       Expanded(
                                         child: OutlinedButtonWidget(
-                                          text:  AppLocalizations.of(context)!.placeOrder,
+                                          text: AppLocalizations.of(context)!
+                                              .placeOrder,
                                           onPressed: () async {
                                             final data = await context.router.push(
-                                                MapSetLocationScreenRoute(
-                                                    userLocation:
-                                                    user.lastGeoLocation))
-                                            as AddressModel?;
+                                                    MapSetLocationScreenRoute(
+                                                        userLocation: user
+                                                            .lastGeoLocation))
+                                                as AddressModel?;
                                             if (data == null) {
                                               return;
                                             }
@@ -216,25 +240,31 @@ class _FilterPageState extends State<FilterPage> {
                                       const SizedBox(width: 16),
                                       Expanded(
                                         child: OutlinedButtonWidget(
-                                          text: AppLocalizations.of(context)!.seeTags,
+                                          text: AppLocalizations.of(context)!
+                                              .seeTags,
                                           onPressed: () {
                                             bloc.add(PushFiltersEvent(
-                                              topic: widget.currentFilter.topic.title,
+                                              topic: widget
+                                                  .currentFilter.topic.title,
                                               filterKeys:
-                                              selectedSubtopicsFilter.values.first,
+                                                  selectedSubtopicsFilter
+                                                      .values.first,
                                               accountType: user.accountType,
                                             ));
                                             var filterMap = _filtersWithSelected(
-                                                allSubtopicsFilter: allSubtopicsFilter,
+                                                allSubtopicsFilter:
+                                                    allSubtopicsFilter,
                                                 selectedSubtopicsFilter:
-                                                selectedSubtopicsFilter);
+                                                    selectedSubtopicsFilter);
 
                                             _compositeFilter = CompositeFilter(
                                               compositeFilterId: widget
-                                                  .currentFilter.compositeFilterId,
+                                                  .currentFilter
+                                                  .compositeFilterId,
                                               topic: widget.currentFilter.topic,
                                               filterMap: filterMap,
-                                              status: widget.currentFilter.status,
+                                              status:
+                                                  widget.currentFilter.status,
                                             );
                                           },
                                         ),
@@ -244,62 +274,65 @@ class _FilterPageState extends State<FilterPage> {
                                 ),
                               ],
                             ),
-                          )
+                          ),
                       ],
                     ),
-                  );
-                } else {
-                  return const Center(
+                  ),
+                  DeeDeeMenuSlider(
+                    context,
+                    controller: _controller,
+                    user: user,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Scaffold(
+              appBar: DeeDeeAppBar(
+                title: AppLocalizations.of(context)!.filterTagsPageTitle,
+                controller: _controller,
+                child: const Icon(Icons.menu),
+              ),
+              body: Stack(
+                children: [
+                  const Center(
                     child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-            DeeDeeMenuSlider(
-              context,
-              controller: _controller,
-              user: user,
-            ),
-          ],
-        ),
+                  ),
+                  DeeDeeMenuSlider(
+                    context,
+                    controller: _controller,
+                    user: user,
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }
-
-  Map<String, FilterKeyList> _filtersWithSelected(
-      {required Map<String, FilterKeyList> allSubtopicsFilter,
-      required Map<String, List<String>> selectedSubtopicsFilter}) {
-    var filtersWithSelected = allSubtopicsFilter;
-
-    for (var index = 0; index < filtersWithSelected.length; index++) {
-      var subtopic = filtersWithSelected.keys.toList()[index];
-      var selectedList = selectedSubtopicsFilter[subtopic];
-      if (selectedList != null) {
-        filtersWithSelected.update(subtopic, (value) {
-          for (var i = 0; i < selectedList.length; i++) {
-            if (value.filterKeys
-                .map((e) => e.title)
-                .contains(selectedList[i])) {
-              value.filterKeys
-                  .firstWhere((element) => element.title == selectedList[i])
-                  .selected = true;
-            }
-          }
-          return value;
-        });
-      }
-    }
-    return filtersWithSelected;
-  }
 }
 
-class CompositeFilterDTO {
-  final List<String> _filterKeys;
-  final List<String> _selectedFilterKeys;
+Map<String, FilterKeyList> _filtersWithSelected(
+    {required Map<String, FilterKeyList> allSubtopicsFilter,
+    required Map<String, List<String>> selectedSubtopicsFilter}) {
+  var filtersWithSelected = allSubtopicsFilter;
 
-  List<String> get selectedFilterKeys => _selectedFilterKeys;
-
-  List<String> get filterKeys => _filterKeys;
-
-  CompositeFilterDTO(this._filterKeys, this._selectedFilterKeys);
+  for (var index = 0; index < filtersWithSelected.length; index++) {
+    var subtopic = filtersWithSelected.keys.toList()[index];
+    var selectedList = selectedSubtopicsFilter[subtopic];
+    if (selectedList != null) {
+      filtersWithSelected.update(subtopic, (value) {
+        for (var i = 0; i < selectedList.length; i++) {
+          if (value.filterKeys.map((e) => e.title).contains(selectedList[i])) {
+            value.filterKeys
+                .firstWhere((element) => element.title == selectedList[i])
+                .selected = true;
+          }
+        }
+        return value;
+      });
+    }
+  }
+  return filtersWithSelected;
 }

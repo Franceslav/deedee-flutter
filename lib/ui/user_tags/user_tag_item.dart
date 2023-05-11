@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';

@@ -1,12 +1,14 @@
 import 'dart:convert';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
 class HttpService {
-
   onUploadImage(selectedImage) async {
     var request = http.MultipartRequest(
       'POST',
@@ -30,7 +32,11 @@ class HttpService {
   }
 
   Future<bool> sendPushNotificationRequest(
-      String title, String message, String token) async {
+    String title,
+    String message,
+    String token,
+    String tagId,
+  ) async {
     const postUrl = DEFAULT_PUSH_NOTIFICATION_URL;
 
     final data = {
@@ -38,7 +44,7 @@ class HttpService {
       "priority": "high",
       "data": {
         "click_action": "FLUTTER_NOTIFICATION_CLICK",
-        "id": "1",
+        "id": tagId,
         "status": "done"
       },
       "to": token
@@ -64,6 +70,43 @@ class HttpService {
     } catch (e) {
       print(e.toString());
       return false;
+    }
+  }
+
+  String prepareRequestString(String requestId) {
+    final url =
+        Uri.https('deedee.com', '/my-request', {'requestId': requestId});
+    return url.toString();
+  }
+
+  Future<String?> initDeepLinkListener() async {
+    String? id;
+    try {
+      String? initialLink = await getInitialLink();
+      if (initialLink != null) {
+        id = _handleDeepLink(initialLink);
+      } else {
+        return null;
+      }
+    } on Exception catch (e) {
+      print('Error: $e');
+    }
+
+    linkStream.listen((String? link) {
+      id = _handleDeepLink(link!);
+    });
+    return id;
+  }
+
+  String? _handleDeepLink(String link) {
+    final uri = Uri.parse(link);
+    final requestId = uri.queryParameters['requestId'];
+
+    if (requestId?.isNotEmpty ?? false) {
+      return requestId;
+    } else {
+      return null;
+      // TODO: Handle unknown request IDs or invalid deep links
     }
   }
 }

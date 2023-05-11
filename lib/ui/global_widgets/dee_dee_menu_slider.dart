@@ -1,14 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel.dart';
 import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
-import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,15 +30,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 }
 
                 context.router.popAndPush(const HomeScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.published_with_changes_sharp,
-              text: 'Push',
-              onTap: () async {
-                final pushNotificationService =
-                    locator.get<PushNotificationService>();
-                await pushNotificationService.sendPushNotification(context);
-                print(await pushNotificationService.getToken());
               }),
           GeneralSlidingPanelItem(
             icon: Icons.published_with_changes_sharp,
@@ -104,7 +93,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 if (context.router.current.isActive) {
                   controller.close();
                 }
-
                 context.router.navigate(const BookmarksScreenRoute());
               }),
           GeneralSlidingPanelItem(
@@ -115,17 +103,8 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                   controller.close();
                 }
 
-                context.router.navigate(const SavedFiltersScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.star_border_purple500_sharp,
-              text: AppLocalizations.of(context)!.subscription,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-
-                context.router.navigate(const SubscribedFiltersPageRoute());
+                context.router
+                    .navigate(const FavoriteCompositeFiltersScreenRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.link_sharp,
@@ -136,6 +115,15 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                 }
 
                 context.router.navigate(const ReferralScreenRoute());
+              }),
+          GeneralSlidingPanelItem(
+              icon: Icons.business_center,
+              text: AppLocalizations.of(context)!.businessProfile,
+              onTap: () {
+                if (context.router.current.isActive) {
+                  controller.close();
+                }
+                context.router.navigate(const AccountBusinessPageRoute());
               }),
           GeneralSlidingPanelItem(
               icon: Icons.settings,

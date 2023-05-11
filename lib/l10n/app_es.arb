@@ -184,5 +184,13 @@
   "addCard": "Agregar tarjeta",
   "send": "Enviar",
   "customerProfile": "Perfil de cliente",
-  "notAuthorized":"No estás autorizado para ver"
+  "notAuthorized":"No estás autorizado para ver",
+    "executorProfile": "Perfil del artista",
+  "executorTags": "Etiquetas del artista:",
+  "reviews": "Comentarios:",
+  "writeReview": "Escribe una opinión",
+  "completedApplications": "Solicitudes ejecutadas",
+  "rating": "Rating",
+  "search": "Buscar",
+  "notFound":"No encontrado"
 }

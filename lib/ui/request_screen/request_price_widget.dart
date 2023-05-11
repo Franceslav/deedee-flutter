@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PriceWidget extends StatefulWidget {
   String price;
-  final void Function(String) onPressed;
+  final void Function(String)? onPressed;
 
-  PriceWidget({Key? key, required this.price, required this.onPressed}) : super(key: key);
+  PriceWidget({Key? key, required this.price, required this.onPressed})
+      : super(key: key);
 
   @override
   State<PriceWidget> createState() => _PriceWidgetState();
@@ -24,9 +26,14 @@ class _PriceWidgetState extends State<PriceWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 120,
+          width: 240,
           height: 50,
           child: TextField(
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+            ],
+            style: TextStyle(fontSize: 42),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             controller: controller,
           ),
         ),
@@ -36,7 +43,7 @@ class _PriceWidgetState extends State<PriceWidget> {
               setState(() {
                 change = false;
                 widget.price = controller.text;
-                widget.onPressed(widget.price);
+                widget.onPressed!(widget.price);
                 controller.text = '';
               });
             },
@@ -52,11 +59,13 @@ class _PriceWidgetState extends State<PriceWidget> {
         Text(widget.price.toString(), style: const TextStyle(fontSize: 42)),
         const SizedBox(width: 10),
         IconButton(
-            onPressed: () {
-              setState(() {
-                change = true;
-              });
-            },
+            onPressed: (widget.onPressed == null)
+                ? null
+                : () {
+                    setState(() {
+                      change = true;
+                    });
+                  },
             icon: const Icon(Icons.edit))
       ],
     );

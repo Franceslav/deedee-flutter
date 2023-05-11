@@ -1,5 +1,5 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
-import 'package:deedee/generated/request_service_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
@@ -99,10 +99,27 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                         ],
                       ),
                     ),
-                    const Divider(
-                      thickness: 0.5,
-                      color: Colors.black,
-                      height: 0,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.search,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 16,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          BlocProvider.of<ServiceRequestBloc>(context)
+                              .add(SearchRequestEvent(value));
+                        },
+                      ),
                     ),
                     Expanded(
                       child: PageView(
@@ -113,13 +130,14 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                           MyRequestList(
                             requests: _requests,
                             statuses: const [
+                              ServiceRequest_Status.CHANGED,
+                              ServiceRequest_Status.MODIFIED,
                               ServiceRequest_Status.PENDING,
                               ServiceRequest_Status.ACCEPTED,
                             ],
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
                               request: request,
-                              userId: userId,
                               index: index,
                             )),
                             onAccept: (request, userId, index) {
@@ -137,16 +155,15 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       )
                                   )
                           ),
-                          MyRequestList(
-                            requests: _requests,
+                          MyRequestList(requests: _requests,
                             statuses: const [
+                              ServiceRequest_Status.DECLINED,
                               ServiceRequest_Status.DELETED,
                               ServiceRequest_Status.DONE,
                             ],
                             onDismissed: (request, userId, index) =>
                                 bloc.add(MyRequestDeleteEvent(
                               request: request,
-                              userId: userId,
                               index: index,
                             )),
                             onAccept: (request, userId, index) {
@@ -161,8 +178,8 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       UpdateRequestEvent(
                                         request: request,
                                         userId: userId,
-                                      )
-                                  )
+                                      ),
+                                  ),
                           ),
                         ],
                       ),

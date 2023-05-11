@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:deedee/generated/VerificationService.pbgrpc.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
@@ -11,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../../generated/deedee/api/model/verification.pb.dart';
 
 class VerifyScreen extends StatefulWidget {
   @override
@@ -63,7 +63,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          context.read<UserBloc>().add(UserEmailVerification());
+                          context.read<UserBloc>().add(UserCreateVerification(Verification()));
                         },
                         child:
                             Text(AppLocalizations.of(context)!.accountVerify),
@@ -97,7 +97,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           style: TextStyle(fontSize: 10),
                         ),
                       ),
-                      ElevatedButton(
+                      /*ElevatedButton(
                         onPressed: () {
                           showDialog(
                               context: context,
@@ -148,7 +148,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             ],
                           ),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),

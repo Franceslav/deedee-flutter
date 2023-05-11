@@ -185,5 +185,14 @@
   "clickMarkerViewApplication": "Clique no marcador para visualizar o aplicativo",
   "send": "Enviar",
   "customerProfile": "Perfil do cliente",
-   "notAuthorized":"Você não está autorizado a visualizar"
+   "notAuthorized":"Você não está autorizado a visualizar",
+     "executorProfile": "Perfil do artista",
+  "executorTags": "Tags artista:",
+  "reviews": "Revocação:",
+  "writeReview": "Escreva uma crítica",
+  "completedApplications": "Pedidos realizados",
+  "rating": "Classificação",
+  "notAuthorized":"Você não está autorizado a visualizar",
+  "search":"Procurar",
+  "notFound": "Não encontrado"
 }

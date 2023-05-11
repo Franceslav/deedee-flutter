@@ -1,6 +1,7 @@
-import 'package:deedee/generated/request_service_service.pbgrpc.dart';
+import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
+import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/service_request_repository.dart';
+import 'package:deedee/services/fake/api/service_request_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
@@ -41,12 +42,17 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
         FakeClientCall<dynamic, ServiceRequestResponse>(_accept(request)));
   }
 
-  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequest = api.accept(
-        request.userId,
-        request.serviceRequest.requestId,
-      );
+  Future<ServiceRequestResponse> _accept(ServiceRequestRequest request) async {    //9
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.accept(
+          ServiceRequest(
+              serviceRequestId: request.serviceRequest.serviceRequestId,
+              createdBy: request.serviceRequest.createdBy,
+              status:request.serviceRequest.status ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -57,9 +63,13 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _change(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequest =
-          api.change(request.userId, request.serviceRequest.requestId, '', 0);
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.change(
+          ServiceRequest(),
+        ),
+      ],
+    );
   }
 
   @override
@@ -70,8 +80,11 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _create(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequest = api.create(request.serviceRequest);
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.create(request.serviceRequest),
+      ],
+    );
   }
 
   @override
@@ -82,22 +95,55 @@ class MockServiceRequestServiceClient implements ServiceRequestServiceClient {
   }
 
   Future<ServiceRequestResponse> _delete(ServiceRequestRequest request) async {
-    return ServiceRequestResponse()
-      ..serviceRequest = api.delete(
-        request.userId,
-        request.serviceRequest.requestId,
-      );
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.delete(
+          ServiceRequest(
+            serviceRequestId: request.serviceRequest.serviceRequestId,
+            createdBy: request.serviceRequest.createdBy,
+          ),
+        )
+      ],
+    );
   }
 
   @override
-  ResponseFuture<ServiceRequestsResponse> getAll(ServiceRequestRequest request,
+  ResponseFuture<ServiceRequestResponse> getAll(ServiceRequestRequest request,
       {CallOptions? options}) {
     return ResponseFuture(
-        FakeClientCall<dynamic, ServiceRequestsResponse>(_getAll(request)));
+        FakeClientCall<dynamic, ServiceRequestResponse>(_getAll(request)));
   }
 
-  Future<ServiceRequestsResponse> _getAll(ServiceRequestRequest request) async {
-    return ServiceRequestsResponse()
-      ..serviceRequests.addAll(api.getServiceRequests(request.userId));
+  Future<ServiceRequestResponse> _getAll(ServiceRequestRequest request) async {
+    return ServiceRequestResponse(
+      serviceRequests:
+          api.getServiceRequests(request.serviceRequest.createdFor),
+    );
+  }
+
+  @override
+  ResponseFuture<ServiceRequestResponse> decline(ServiceRequestRequest request,
+      {CallOptions? options}) {
+    return ResponseFuture(
+        FakeClientCall<dynamic, ServiceRequestResponse>(_decline(request)));
+  }
+
+  Future<ServiceRequestResponse> _decline(ServiceRequestRequest request) async {
+    return ServiceRequestResponse(
+      serviceRequests: [
+        api.decline(
+          ServiceRequest(
+              serviceRequestId: request.serviceRequest.serviceRequestId,
+              createdBy: request.serviceRequest.createdBy),
+        ),
+      ],
+    );
+  }
+
+  @override
+  ResponseFuture<ServiceRequestResponse> modify(ServiceRequestRequest request,
+      {CallOptions? options}) {
+    // TODO: implement modify
+    throw UnimplementedError();
   }
 }

@@ -11,9 +11,6 @@ dependencies:
   firebase_auth: ^4.2.1
   firebase_auth_platform_interface: ^6.11.6
   cloud_firestore: ^4.3.0
-  progress_dialog:
-    git:
-      url: https://github.com/mostafaAbdelazim/progress_dialog.git
   # flutter_facebook_auth: ^5.0.6
   http: ^0.13.4
   image_picker: ^0.8.4+3
@@ -75,6 +72,9 @@ dependencies:
   intl: ^0.17.0
   flutter_credit_card: ^3.0.6
   qr_code_scanner: ^1.0.1
+  flutter_rating_bar: ^4.0.1
+  share_plus: ^6.3.2
+  uni_links: ^0.5.1
 
 
 dev_dependencies:

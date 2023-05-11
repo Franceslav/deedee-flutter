@@ -1,20 +1,11 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:ui';
+import 'dart:async';
 
-import 'package:deedee/generated/AccountService.pb.dart';
-import 'package:deedee/generated/filter_service.pb.dart';
-import 'package:deedee/generated/geolocation_service.pb.dart';
-import 'package:deedee/generated/tag_service.pb.dart';
-import 'package:deedee/generated/tag_service.pbgrpc.dart';
-import 'package:deedee/generated/timestamp.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/service/tag_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/services/fake/api/tag_repository.dart';
+import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:deedee/ui/page/account/account_bloc.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
@@ -24,6 +15,8 @@ import 'package:injectable/injectable.dart';
 class MockTagServiceClient implements TagServiceClient {
   TagServiceApi api = locator.get<TagServiceApi>();
   AccountBloc bloc = AccountBloc();
+  String retrieveUserIdFrom(TagRequest request) =>
+      request.tag.compositeFilter.topic.userId;
 
   @override
   ClientCall<Q, R> $createCall<Q, R>(
@@ -68,8 +61,11 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _addTagToBookmark(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.add(await api.addTagToFavorites(userId, request.tag.tagId));
-
+    return TagResponse(
+      tags: [
+        api.addTagToFavorites(userId, request.tag.tagId),
+      ],
+    );
   }
 
   @override
@@ -95,7 +91,7 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _getBookmarkTags(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.addAll(await api.getFavoriteTags(userId));
+    return TagResponse()..tags.addAll(api.getFavoriteTags(userId));
   }
 
   @override
@@ -112,13 +108,15 @@ class MockTagServiceClient implements TagServiceClient {
         FakeClientCall<dynamic, TagResponse>(_getTags(request)));
   }
 
-  String retrieveUserIdFrom(TagRequest request) =>
-      request.tag.compositeFilter.topic.userId;
-
-  Future<TagResponse> _getTags(TagRequest request) async {
+  Future<TagResponse> _getTags(TagRequest request) {
     final userId = retrieveUserIdFrom(request);
-    final tags = await api.getTags(userId);
-    return TagResponse(tags: tags);
+    final completer = Completer<TagResponse>();
+    completer.complete(
+      TagResponse(
+        tags: api.getTags(userId),
+      ),
+    );
+    return completer.future;
   }
 
   @override
@@ -130,7 +128,8 @@ class MockTagServiceClient implements TagServiceClient {
 
   Future<TagResponse> _removeTag(TagRequest request) async {
     final userId = retrieveUserIdFrom(request);
-    return TagResponse()..tags.add(await api.deleteTag(userId, request.tag.tagId));
+    return TagResponse()
+      ..tags.add(await api.deleteTag(userId, request.tag.tagId));
   }
 
   @override
@@ -152,6 +151,9 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagResponse> _removeTagFromFavorites(TagRequest request) async {
-    return TagResponse(tags: []);
+    final userId = retrieveUserIdFrom(request);
+    final responseTag =
+        await api.removeTagFromFavorites(userId, request.tag.tagId);
+    return TagResponse(tags: [responseTag]);
   }
 }

@@ -190,5 +190,13 @@
   "clickMarkerViewApplication": "አፕሊኬሽኑን ለማየት ምልክት ማድረጊያውን ጠቅ ያድርጉ",
   "send": "ላክ",
   "customerProfile": "የደንበኛ መገለጫ",
-  "notAuthorized":"ለማየት ፍቃድ የሎትም"
+  "notAuthorized":"ለማየት ፍቃድ የሎትም",
+    "executorProfile": "Նկարչի պրոֆիլը",
+  "executorTags": "Tags կատարողի:",
+  "reviews": "Կարծիքներ:",
+  "writeReview": "Գրել կարծիք",
+  "completedApplications": "Կատարված հայտեր",
+  "rating": "Վարկանիշ",
+  "search": "ፍለጋ",
+  "notFound":"አልተገኘም።"
 }

@@ -1,9 +1,11 @@
-import 'package:deedee/generated/LocationService.pb.dart';
-import 'package:deedee/generated/topic_service.pb.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/deedee/api/model/location.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/services/http_service.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
@@ -12,10 +14,12 @@ import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
 import 'package:deedee/ui/page/home/home_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   List<Topic> _mainTopics = [];
-  Place? _selectedCity;
+  Location? _selectedCity;
   final PanelController _controller = PanelController();
   bool _isInit = true;
   bool _hideAppBarButton = true;
@@ -39,6 +43,7 @@ class _HomeState extends State<HomeScreen> {
         locator.get<PushNotificationService>(),
         locator.get<GPSRepository>(),
         locator.get<TopicRepository>(),
+        httpService: locator.get<HttpService>(),
       )..add(HomeScreenInitLoadEvent()),
       child: Scaffold(
         appBar: DeeDeeAppBar(
@@ -50,6 +55,14 @@ class _HomeState extends State<HomeScreen> {
           children: [
             BlocConsumer<HomeBloc, HomeScreenState>(
               listener: (ctx, state) {
+                if (state is HomePageRequestReceivedState) {
+                  context.router.push(
+                    RequestScreenRoute(
+                      serviceRequestId: Int64(int.parse(state.id!)),
+                      readOnly: false,
+                    ),
+                  );
+                }
                 if (state is HomeScreenLoadedState) {
                   setState(() {
                     _hideAppBarButton = false;

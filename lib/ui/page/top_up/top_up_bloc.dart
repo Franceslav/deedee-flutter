@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:deedee/generated/deedee/api/model/account.pb.dart';
+import 'package:deedee/generated/deedee/api/model/balance.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/repository/account_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:deedee/ui/page/top_up/top_up_event.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +15,11 @@ class TopUpBloc extends Bloc<TopUpEvent, TopUpState> {
 
   TopUpBloc(this.user) : super(TopUpInitial()) {
     on<TopUpActionEvent>((event, emit) async {
-      bool succeed = await locator.get<GRCPRepository>().topUpAccount(event.amount);
+      final response = await locator
+          .get<AccountRepository>()
+          .create(Account()..balance.first.value = event.amount);
+      bool succeed = response.balance.first.value == event.amount;
+
       emit(TopUpDoneState(succeed));
     });
   }

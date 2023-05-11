@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -59,13 +61,6 @@ class PushNotificationService {
         const AndroidInitializationSettings('@mipmap/launcher_icon');
     var initializationSettings =
         InitializationSettings(android: androidInitialize);
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse:
-          (NotificationResponse notificationResponse) async {
-        context.router.push(RequestScreenRoute());
-      },
-    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
@@ -73,12 +68,27 @@ class PushNotificationService {
         htmlFormatBigText: true,
         contentTitle: message.notification!.title.toString(),
         htmlFormatContentTitle: true,
+        summaryText: message.data['id'],
+      );
+      await flutterLocalNotificationsPlugin.initialize(
+        initializationSettings,
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {
+          context.router.push(
+            RequestScreenRoute(
+              serviceRequestId: Int64(int.parse(
+                bigTextStyleInformation.summaryText!,
+              )),
+              readOnly: false,
+            ),
+          );
+        },
       );
 
       AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
-        '123',
-        '123',
+        PUSH_NOTIFICATION_CHANNEL_ID,
+        PUSH_NOTIFICATION_CHANNEL_NAME,
         importance: Importance.high,
         styleInformation: bigTextStyleInformation,
         priority: Priority.high,
@@ -104,9 +114,17 @@ class PushNotificationService {
     });
   }
 
-  Future<bool> sendPushNotification([BuildContext? context]) async {
-    await initInfo(context!);
-    return httpService.sendPushNotificationRequest("New Order Request",
-        "This is a test order. Please accept", await getToken());
+  Future<bool> sendPushNotification({
+    required BuildContext context,
+    required String serviceRequestId,
+    // required String token,// TODO
+  }) async {
+    await initInfo(context);
+    return httpService.sendPushNotificationRequest(
+      "New Order Request",
+      "This is a test order. Please accept",
+      await getToken(),
+      serviceRequestId,
+    );
   }
 }
