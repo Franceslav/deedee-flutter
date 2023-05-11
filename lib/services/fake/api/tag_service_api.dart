@@ -8,8 +8,8 @@ import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
 class TagServiceApi {
@@ -234,6 +234,7 @@ class TagServiceApi {
       "ron.x.by.su@gmail.com": _fakeTags,
       "halina.plis123@gmail.com": _fakeTags,
       "matveev.yakov@yahoo.com": _fakeTags,
+      "v.chaser@mail.ru": _fakeTags,
     };
   }
 
