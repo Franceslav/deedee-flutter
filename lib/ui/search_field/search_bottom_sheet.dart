@@ -46,11 +46,13 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final spec = widget.spec;
+
     return BlocProvider(
       create: (_) => SearchBloc(
-        initQuery: widget.spec.initQuery,
-        itemsLength: widget.spec.length,
-        searchValueBuilder: widget.spec.searchValueBuilder,
+        initQuery: spec.initQuery,
+        itemsLength: spec.length,
+        searchValueBuilder: spec.searchValueBuilder,
       ),
       child: BlocConsumer<SearchBloc, SearchState>(
         listener: (context, state) {
@@ -59,6 +61,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
               state.selectedIndex,
               state.query,
             ]);
+            spec.onSelected!(state.selectedIndex);
           }
         },
         builder: (context, SearchState state) {
@@ -81,14 +84,22 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
               child: ListView.separated(
                 controller: widget.controller,
                 itemCount: indexes.length,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (context, i) {
-                  return GestureDetector(
-                    child: widget.spec.itemBuilder(context, indexes[i]),
-                    onTap: () => context
-                        .read<SearchBloc>()
-                        .add(SearchEventSelected(indexes[i])),
-                  );
+                  var item = spec.itemBuilder(context, indexes[i]);
+
+                  if (spec.onSelected != null) {
+                    item = GestureDetector(
+                      child: item,
+                      onTap: () => context
+                          .read<SearchBloc>()
+                          .add(SearchEventSelected(indexes[i])),
+                    );
+                  }
+
+                  return item;
                 },
               ),
             ),

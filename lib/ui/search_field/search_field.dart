@@ -27,27 +27,30 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoSearchTextField(
-      controller: _controller,
-      focusNode: _textFocus,
-      onChanged: (query) async {
-        final result = await showSearchBottomSheet(
-          context,
-          spec: widget.spec.copyWith(initQuery: query),
-        );
-        _handleSearchBottomSheetResult(result);
-      },
-      onTap: () async {
-        _textFocus.unfocus();
-        final result = await showSearchBottomSheet(context, spec: widget.spec);
-        _handleSearchBottomSheetResult(result);
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CupertinoSearchTextField(
+        controller: _controller,
+        focusNode: _textFocus,
+        onChanged: (query) async {
+          final result = await showSearchBottomSheet(
+            context,
+            spec: widget.spec.copyWith(initQuery: query),
+          );
+          _refreshField(result);
+        },
+        onTap: () async {
+          _textFocus.unfocus();
+          final result =
+              await showSearchBottomSheet(context, spec: widget.spec);
+          _refreshField(result);
+        },
+      ),
     );
   }
 
-  void _handleSearchBottomSheetResult(result) {
+  void _refreshField(result) {
     if (result == null) return;
     _controller.text = result[1];
-    widget.spec.onSelected(result[0]);
   }
 }
