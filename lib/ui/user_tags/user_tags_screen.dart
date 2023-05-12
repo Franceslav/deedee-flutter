@@ -1,5 +1,4 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
@@ -30,7 +29,7 @@ class UserTagsScreen extends StatefulWidget {
 class _UserTagsScreenState extends State<UserTagsScreen> {
   final PanelController _controller = PanelController();
   final AnimatedButtonController _buttonController = AnimatedButtonController();
-  List<Tag> _tags = [];
+  final _tags = <Tag>[];
   final _pageController = PageController();
 
   @override
