@@ -13,6 +13,8 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../../../google/protobuf/timestamp.pb.dart' as $0;
 import 'composite_filter.pb.dart' as $1;
 import 'geolocation.pb.dart' as $2;
+import 'observation.pb.dart' as $3;
+
 import 'tag.pbenum.dart';
 
 export 'tag.pbenum.dart';
@@ -26,6 +28,7 @@ class Tag extends $pb.GeneratedMessage {
     ..aOM<$2.Geolocation>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $2.Geolocation.create)
     ..e<Tag_Type>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: Tag_Type.CLIENT, valueOf: Tag_Type.valueOf, enumValues: Tag_Type.values)
     ..e<Tag_Status>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: Tag_Status.BOOKMARKED, valueOf: Tag_Status.valueOf, enumValues: Tag_Status.values)
+    ..pc<$3.Observation>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'observations', $pb.PbFieldType.PM, subBuilder: $3.Observation.create)
     ..hasRequiredFields = false
   ;
 
@@ -38,6 +41,7 @@ class Tag extends $pb.GeneratedMessage {
     $2.Geolocation? geolocation,
     Tag_Type? type,
     Tag_Status? status,
+    $core.Iterable<$3.Observation>? observations,
   }) {
     final _result = create();
     if (tagId != null) {
@@ -60,6 +64,9 @@ class Tag extends $pb.GeneratedMessage {
     }
     if (status != null) {
       _result.status = status;
+    }
+    if (observations != null) {
+      _result.observations.addAll(observations);
     }
     return _result;
   }
@@ -152,5 +159,8 @@ class Tag extends $pb.GeneratedMessage {
   $core.bool hasStatus() => $_has(6);
   @$pb.TagNumber(7)
   void clearStatus() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.List<$3.Observation> get observations => $_getList(7);
 }
 

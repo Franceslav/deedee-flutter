@@ -62,7 +62,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
               : const SizedBox.shrink(),
           GeneralSlidingPanelItem(
               icon: Icons.account_box,
-              text: AppLocalizations.of(context)!.accountMoneyTitle,
+              text: AppLocalizations.of(context)!.profile,
               onTap: () {
                 if (context.router.current.isActive) {
                   controller.close();

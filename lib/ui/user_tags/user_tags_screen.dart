@@ -1,4 +1,6 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/helper.dart';
@@ -35,7 +37,6 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = UserTagsBloc(locator.get<TagRepository>(), user);
-
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
@@ -49,8 +50,8 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             BlocConsumer<UserTagsBloc, UserTagsState>(
               listener: (context, state) {
                 if (state is LoadedTagsState) {
-                  _tags = state.tags;
-                  _tags.first.status = Tag_Status.DELETED;
+                  _tags.addAll(state.tags.filter(
+                      (element) => element.status == Tag_Status.PLACED));
                 }
                 if (state is DeletedSuccessfulState) {
                   showSnackBar(
