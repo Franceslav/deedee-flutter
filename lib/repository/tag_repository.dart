@@ -40,14 +40,20 @@ class TagRepository {
   Future<List<Tag>> getTags(String userId) async {
     final response = await _tagServiceClient.getTags(TagRequest(
         tag: Tag(
-            compositeFilter: CompositeFilter(topic: Topic(userId: userId)))));
+              compositeFilter: CompositeFilter(topic: Topic(userId: userId)),
+        )
+      )
+     );
     return response.tags;
   }
 
   Future<List<Tag>> getTagsByName(String title) async {
     final response = await _tagServiceClient.getTags(TagRequest(
-        tag:
-            Tag(compositeFilter: CompositeFilter(topic: Topic(title: title)))));
+        tag: Tag(
+              compositeFilter: CompositeFilter(topic: Topic(title: title)),
+        )
+      )
+     );
     return response.tags;
   }
 
@@ -60,10 +66,12 @@ class TagRepository {
   }
 
   Future<List<Tag>> getFavoriteTags(String email) async {
-    final response = await _tagServiceClient.getBookmarkedTags(TagRequest(
+    final response = await _tagServiceClient.getTags(TagRequest(
         tag: Tag(
-            status: Tag_Status.BOOKMARKED,
-            compositeFilter: CompositeFilter(topic: Topic(userId: email)))));
+              compositeFilter: CompositeFilter(topic: Topic(title: email)),
+        )
+      )
+     );
     return response.tags;
   }
 

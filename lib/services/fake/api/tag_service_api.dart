@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
@@ -18,7 +19,7 @@ class TagServiceApi {
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    String deviceLanguage = Platform.localeName.substring(0, 2);
+    String deviceLanguage = Platform.localeName.substring(0, 2); 
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
@@ -238,7 +239,7 @@ class TagServiceApi {
       userEmail: _fakeTags,
     };
   }
-
+  // Tags CRUD
   List<Tag> getTags(String userId) {
     return _tags.getOrElse(userId, () => []).toList();
   }
@@ -269,5 +270,13 @@ class TagServiceApi {
         .getOrElse(userId, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.PLACED;
+  }
+
+    Observation addObservation(Observation observation) {
+      List<Tag> tags = _tags.values as List<Tag>;
+      tags
+        .firstWhere((tag) => tag.tagId == observation.tagId)
+        .observations.add(observation);
+      return observation;
   }
 }
