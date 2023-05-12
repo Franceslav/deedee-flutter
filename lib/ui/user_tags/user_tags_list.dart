@@ -3,7 +3,6 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
-import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
@@ -52,18 +51,12 @@ class _UserTagsListState extends State<UserTagsList> {
             children: [
               SearchField(
                 SearchSpec(
-                  searchValueBuilder: (i) => tags[i].status.name,
-                  initQuery: '',
+                  searchValueBuilder: (i) =>
+                      tags[i].compositeFilter.topic.title,
                   length: tags.length,
                   itemBuilder: (context, i) {
-                    return ListTile(
-                      title: Text('${tags[i].tagId} ${tags[i].status.name}'),
-                    );
+                    return _TagCardWidget(tag: tags[i]);
                   },
-                  onSelected: (i) => showSnackBar(
-                    context,
-                    'selected item with index $i in passed list',
-                  ),
                 ),
               ),
               const Divider(
