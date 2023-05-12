@@ -5,6 +5,8 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/search_field/search_field.dart';
+import 'package:deedee/ui/search_field/search_spec.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../repository/tag_repository.dart';
+import 'tag_card_widget.dart';
 
 class UserTagsScreen extends StatefulWidget {
   const UserTagsScreen({super.key});
@@ -32,6 +35,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final bloc = UserTagsBloc(locator.get<TagRepository>(), user);
+
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
@@ -46,6 +50,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
               listener: (context, state) {
                 if (state is LoadedTagsState) {
                   _tags = state.tags;
+                  _tags.first.status = Tag_Status.DELETED;
                 }
                 if (state is DeletedSuccessfulState) {
                   showSnackBar(
@@ -92,6 +97,25 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                 ),
                               ],
                             ),
+                          ),
+                          SearchField(
+                            SearchSpec(
+                              searchValueBuilder: (i) =>
+                                  _tags[i].compositeFilter.topic.title,
+                              length: _tags.length,
+                              itemBuilder: (context, i) {
+                                return TagCardWidget(
+                                  onDismissed: () =>
+                                      deleteTag(_tags[i], user.userId, i),
+                                  tag: _tags[i],
+                                );
+                              },
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 0.5,
+                            color: Colors.black,
+                            height: 0,
                           ),
                           Expanded(
                             child: PageView(

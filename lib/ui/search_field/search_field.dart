@@ -28,7 +28,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: CupertinoSearchTextField(
         controller: _controller,
         focusNode: _textFocus,
