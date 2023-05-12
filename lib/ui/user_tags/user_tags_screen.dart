@@ -1,23 +1,23 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/search_field/search_field.dart';
+import 'package:deedee/ui/search_field/search_spec.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:deedee/ui/user_tags/user_tags_list.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../repository/tag_repository.dart';
+import 'tag_card_widget.dart';
 
 class UserTagsScreen extends StatefulWidget {
   const UserTagsScreen({super.key});
@@ -29,7 +29,7 @@ class UserTagsScreen extends StatefulWidget {
 class _UserTagsScreenState extends State<UserTagsScreen> {
   final PanelController _controller = PanelController();
   final AnimatedButtonController _buttonController = AnimatedButtonController();
-  List<Tag> _tags = [];
+  final _tags = <Tag>[];
   final _pageController = PageController();
 
   @override
@@ -49,7 +49,8 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             BlocConsumer<UserTagsBloc, UserTagsState>(
               listener: (context, state) {
                 if (state is LoadedTagsState) {
-                  _tags = state.tags;
+                  _tags.addAll(state.tags.filter(
+                      (element) => element.status == Tag_Status.PLACED));
                 }
                 if (state is DeletedSuccessfulState) {
                   showSnackBar(
@@ -97,26 +98,17 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 16,
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.search,
-                                border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(40)),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 16,
-                                ),
-                              ),
-                              onChanged: (value) {
-                                BlocProvider.of<UserTagsBloc>(context)
-                                    .add(SearchUserTagsEvent(value));
+                          SearchField(
+                            SearchSpec(
+                              searchValueBuilder: (i) =>
+                                  _tags[i].compositeFilter.topic.title,
+                              length: _tags.length,
+                              itemBuilder: (context, i) {
+                                return TagCardWidget(
+                                  onDismissed: () =>
+                                      deleteTag(_tags[i], user.userId, i),
+                                  tag: _tags[i],
+                                );
                               },
                             ),
                           ),

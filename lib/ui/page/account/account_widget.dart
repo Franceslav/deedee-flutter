@@ -14,16 +14,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:deedee/services/helper.dart';
 
-class AccountInfoWidget extends StatefulWidget {
-  const AccountInfoWidget({
+class AccountWidget extends StatefulWidget {
+  const AccountWidget({
     super.key,
   });
 
   @override
-  State<AccountInfoWidget> createState() => _AccountInfoWidgetState();
+  State<AccountWidget> createState() => _AccountWidgetState();
 }
 
-class _AccountInfoWidgetState extends State<AccountInfoWidget> {
+class _AccountWidgetState extends State<AccountWidget> {
   List<Tag> _tags = [];
 
   @override
@@ -86,10 +86,8 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                       Expanded(
                         child: InkWell(
                             onTap: () {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!.notAuthorized,
-                              );
+                              context.router
+                                  .navigate(const UserTagsScreenRoute());
                             },
                             child:
                                 _infoColumn('${_tags.length}', locale.placed)),
@@ -103,20 +101,6 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                               );
                             },
                             child: _infoColumn('3', locale.seen)),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                            onTap: () {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!.notAuthorized,
-                              );
-                            },
-                            child: IconButton(
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (ctx) => const CalendarDialog()),
-                                icon: const Icon(Icons.calendar_month))),
                       ),
                     ],
                   ),
