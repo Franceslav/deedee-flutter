@@ -12,6 +12,7 @@ import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
+import 'package:deedee/ui/page/account/account_widget.dart';
 import 'package:deedee/ui/page/account/bloc/payment_method_slider_add_method_bloc.dart';
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
 import 'package:deedee/ui/page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
@@ -70,7 +71,7 @@ class _AccountState extends State<AccountScreen> {
                       accountType: accountType,
                     ),
                     const SizedBox(height: 34),
-                    const AccountInfoWidget(),
+                    const AccountWidget(),
                     const SizedBox(height: 32),
                     Row(
                       children: [

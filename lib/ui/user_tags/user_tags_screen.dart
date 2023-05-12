@@ -1,5 +1,6 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
@@ -49,7 +50,8 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             BlocConsumer<UserTagsBloc, UserTagsState>(
               listener: (context, state) {
                 if (state is LoadedTagsState) {
-                  _tags = state.tags;
+                  _tags.addAll(state.tags.filter(
+                      (element) => element.status == Tag_Status.PLACED));
                 }
                 if (state is DeletedSuccessfulState) {
                   showSnackBar(
