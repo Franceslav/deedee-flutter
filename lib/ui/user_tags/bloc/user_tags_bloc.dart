@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
-import 'package:fixnum/fixnum.dart';
 
 import '../../../model/user.dart';
 

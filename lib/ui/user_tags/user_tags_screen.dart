@@ -18,7 +18,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../repository/tag_repository.dart';
-import '../../repository/observation_repository.dart';
 
 class UserTagsScreen extends StatefulWidget {
   const UserTagsScreen({super.key});

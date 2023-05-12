@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
-import 'package:deedee/repository/observation_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
-import 'package:deedee/repository/observation_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
