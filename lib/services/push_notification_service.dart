@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
@@ -76,9 +77,8 @@ class PushNotificationService {
             (NotificationResponse notificationResponse) async {
           context.router.push(
             RequestScreenRoute(
-              serviceRequestId: Int64(int.parse(
-                bigTextStyleInformation.summaryText!,
-              )),
+              serviceRequestId:
+              UUID(value: bigTextStyleInformation.summaryText!),
               readOnly: false,
             ),
           );

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
@@ -13,13 +14,12 @@ import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
 import 'package:deedee/ui/page/home/home_bloc.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,7 +58,7 @@ class _HomeState extends State<HomeScreen> {
                 if (state is HomePageRequestReceivedState) {
                   context.router.push(
                     RequestScreenRoute(
-                      serviceRequestId: Int64(int.parse(state.id!)),
+                      serviceRequestId: UUID(value: state.id!),
                       readOnly: false,
                     ),
                   );
