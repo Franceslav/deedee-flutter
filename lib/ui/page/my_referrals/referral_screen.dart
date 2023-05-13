@@ -1,5 +1,6 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/referral.pb.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'referral_cubit.dart';
@@ -83,48 +85,39 @@ class _ReferralState extends State<ReferralScreen> {
                     constraints: const BoxConstraints(
                         maxWidth: double.infinity, maxHeight: double.infinity),
                     color: Colors.white,
-                    child: ListView.builder(
+                    child: ListView.separated(
                       itemCount: state.refs.length,
                       itemBuilder: (context, i) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: Colors.black,
-                            ),
-                            borderRadius:
-                                BorderRadius.circular(20.0), //<-- SEE HERE
-                          ),
-                          elevation: 12,
-                          color: Colors.indigo,
-                          shadowColor: Colors.blueAccent,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              ListTile(
-                                leading: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    state.refs[i].email +
-                                        (kDebugMode
-                                            ? ' ${state.refs[i].referralId}'
-                                            : ''),
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                trailing: kDebugMode
-                                    ? IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () => context
-                                            .read<ReferralCubit>()
-                                            .removeReferral(
-                                                state.refs[i].referralId),
-                                      )
-                                    : null,
-                              ),
-                            ],
+                        return Slidable(
+                          endActionPane: ActionPane(
+                              extentRatio: 0.2,
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: ((context) {
+                                    context
+                                        .read<ReferralCubit>()
+                                        .removeReferral(
+                                            state.refs[i].referralId);
+                                  }),
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: Colors.red,
+                                  icon: Icons.delete,
+                                )
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(
+                                title: Text(state.refs[i].email +
+                                    (kDebugMode
+                                        ? ' ${state.refs[i].referralId}'
+                                        : '')),
+                                trailing: const Icon(Icons.chevron_right)),
                           ),
                         );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const DeeDeeDeviderWidget();
                       },
                     ),
                   ),
