@@ -4,6 +4,8 @@
     "description": "The conventional newborn programmer greeting"
   },
   "accountMoneyTitle": "钱",
+  "accountsTitle": "帐目",
+  "noUserAccounts": "沒有賬戶",
   "clientToggle": "客户",
   "providerToggle": "执行人",
   "autoTag": "汽车",

@@ -4,6 +4,8 @@
   "placeOrder": "Faça a encomenda",
   "placeOrderPageTitle": "Aplicativo",
   "accountTitle": "Conta",
+  "accountsTitle": "Contas",
+  "noUserAccounts": "sem contas",
   "accountMoneyTitle": "conta pessoal",
   "accountTypeBuyTitle": "conta do comprador",
   "accountTypeSellTitle": "conta do vendedor",

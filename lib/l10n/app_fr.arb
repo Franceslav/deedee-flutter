@@ -4,6 +4,8 @@
     "description": "L'accueil conventionnel du programmeur nouveau-né"
   },
   "safe": "sûr",
+  "accountsTitle": "comptes",
+  "noUserAccounts": "Aucun compte",
   "placeOrder": "Passer la commande",
   "placeOrderPageTitle": "Commande",
   "accountTitle": "compte",

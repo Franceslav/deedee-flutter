@@ -1,5 +1,7 @@
 {
   "safe": "sikker",
+  "accountsTitle": "Regnskaber",
+  "noUserAccounts": "Ingen konti",
   "placeOrder": "Angiv bestilling",
   "placeOrderPageTitle": "PlaceOrderPageTitle",
   "accountTitle": "kontoTitel",

@@ -15,6 +15,7 @@ import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
 import 'package:deedee/ui/page/account/social_network_screen.dart';
+import 'package:deedee/ui/page/accounts_list/accounts_list_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
@@ -77,6 +78,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: BookmarkQRScanner, path: '/qr-scan'),
     MaterialRoute(page: CustomerProfile, path: '/customer-profile'),
     MaterialRoute(page: AccountBusinessPage, path: '/business'),
+    MaterialRoute(page: AccountsListScreen, path: '/accounts-list')
   ],
 )
 class $AppRouter {}

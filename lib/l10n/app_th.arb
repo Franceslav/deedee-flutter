@@ -3,6 +3,8 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "accountsTitle": "คะแนน",
+  "noUserAccounts": "ไม่มีบัญชี",
   "accountMoneyTitle": "บัญชีส่วนตัว",
   "clientToggle": "ลูกค้า",
   "providerToggle": "นักแสดง",

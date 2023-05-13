@@ -4,6 +4,8 @@
   "placeOrder": "Разместить заявку",
   "placeOrderPageTitle": "Заявка",
   "accountTitle": "учётка",
+  "accountsTitle": "учётки",
+  "noUserAccounts": "Нет учёток",
   "accountMoneyTitle": "личный счёт",
   "accountTypeBuyTitle": "учётка покупателя",
   "accountTypeSellTitle": "учётка продавца",

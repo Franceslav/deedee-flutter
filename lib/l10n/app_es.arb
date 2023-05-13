@@ -1,5 +1,7 @@
 {
   "safe": "asegurar",
+  "accountsTitle": "cuentas",
+  "noUserAccounts": "sin cuentas",
   "helloWorld": "Hola Mundo!",
   "placeOrder": "Realizar oferta",
   "placeOrderPageTitle": "Oferta",

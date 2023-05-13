@@ -3,6 +3,8 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "accountsTitle": "Акаунты",
+  "noUserAccounts": "Hемає облікових записів",
   "accountMoneyTitle": "Особистий рахунок",
   "clientToggle": "Замовник",
   "providerToggle": "Виконавець",

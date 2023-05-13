@@ -7,6 +7,8 @@
   "placeOrder": "Place order",
   "placeOrderPageTitle": "Order",
   "accountTitle": "account",
+  "accountsTitle": "accounts",
+  "noUserAccounts": "No Accounts",
   "accountMoneyTitle": "money",
   "clientToggle": "Client",
   "providerToggle": "Provider",

@@ -2,6 +2,8 @@
   "safe": "안전한",
   "placeOrder": "발주서",
   "placeOrderPageTitle": "주문",
+  "accountsTitle": "계정",
+  "noUserAccounts": "계정 없음",
   "accountTitle": "계좌",
   "accountMoneyTitle": "돈.",
   "clientToggle": "고객",

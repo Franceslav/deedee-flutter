@@ -2,6 +2,8 @@
   "safe": "сактоо",
   "helloWorld": "Салам дүйнө",
   "placeOrder": "Арыз берүү",
+  "accountsTitle": "эсептер",
+  "noUserAccounts": "Эсептер жок",
   "placeOrderPageTitle": "Арыз",
   "accountTitle": "бухгалтердик эсеп",
   "accountMoneyTitle": "жеке эсеп",

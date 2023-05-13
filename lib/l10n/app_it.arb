@@ -5,6 +5,8 @@
   },
   "safe": "sicuro",
   "placeOrder": "Effettua l'ordine",
+  "accountsTitle": "conti",
+  "noUserAccounts": "Nessun account",
   "placeOrderPageTitle": "Ordine",
   "accountTitle": "account",
   "accountMoneyTitle": "soldi",

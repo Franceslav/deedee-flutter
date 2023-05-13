@@ -4,6 +4,8 @@
      "description": "הברכה הקונבנציונלית של מתכנת יילוד"
    },
    "safe": "בטוח",
+   "accountsTitle": "חשבונות",
+   "noUserAccounts": "אין חשבונות",
    "placeOrder": "בצע הזמנה",
    "placeOrderPageTitle": "הזמנה",
    "accountTitle": "חשבון",

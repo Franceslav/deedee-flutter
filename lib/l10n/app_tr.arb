@@ -3,6 +3,8 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "accountsTitle": "Hesaplar",
+  "noUserAccounts": "Hesap yok",
   "accountMoneyTitle": "Kişisel hesap",
   "clientToggle": "Müşteri",
   "providerToggle": "sağlayıcı Geçişi",
@@ -33,7 +35,6 @@
   "facebookLoginTitle": "Facebook aracılığıyla giriş",
   "couldSignUpPleaseTryAgainTitle": "Kayıt başarısız oldu, lütfen tekrar deneyin.",
   "creatingNewAccountPleaseWaitTitle": "Yeni bir hesap oluşturuyoruz, lütfen bekleyin...",
-
   "createNewAccountTitle": "Yeni bir hesap oluştur",
   "firstNameTitle": "İsim",
   "lastNameTitle": "Soyadı",

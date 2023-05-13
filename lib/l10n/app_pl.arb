@@ -1,6 +1,8 @@
 {
   "safe": "zachować",
   "helloWorld": "witaj świecie",
+  "accountsTitle": "rachunki",
+  "noUserAccounts": "Brak kont",
   "placeOrder": "Złóż ofertę",
   "placeOrderPageTitle": "Oferta",
   "accountTitle": "konto",

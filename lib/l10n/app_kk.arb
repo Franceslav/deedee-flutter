@@ -3,6 +3,8 @@
   "helloWorld": "Сәлем Әлем",
   "placeOrder": "Өтінім жіберіңіз",
   "placeOrderPageTitle": "Қолдану",
+  "accountsTitle": "Есептік жазбалар",
+  "noUserAccounts": "Есептік жазбалар жоқ",
   "accountTitle": "бухгалтерлік есеп",
   "accountMoneyTitle": "жеке шот",
   "accountTypeBuyTitle": "сатып алушының шоты",

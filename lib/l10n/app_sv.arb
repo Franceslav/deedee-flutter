@@ -4,6 +4,8 @@
   "placeOrder":"Beställa",
   "placeOrderPageTitle": "Beställa",
   "accountTitle": "konto",
+  "accountsTitle": "konton",
+  "noUserAccounts": "Inget konto",
   "accountMoneyTitle":"pengar",
   "clientToggle": "Klient",
   "providerToggle": "Provider",

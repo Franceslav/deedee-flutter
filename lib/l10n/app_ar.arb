@@ -1,5 +1,7 @@
 {
   "safe": "يحفظ",
+  "accountsTitle": "الحسابات",
+  "noUserAccounts": "لا حسابات",
   "placeOrder": "محاولة مكان",
   "placeOrderPageTitle": "المناقصة",
   "accountTitle": "الحساب",
