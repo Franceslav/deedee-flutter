@@ -1,4 +1,12 @@
 {
+  "email": "электронная почта",
+  "myRequests": "мои запросы",
+  "mockFilterKeySuspension": "Приостановка",
+  "mockFilterKeyQuarrel": "Конфликт",
+  "mockFilterKeyEngine": "Двигатель",
+  "mockFilterKeyMuffler": "Глушитель",
+  "mockFilterKeyElectrical": "Электрический",
+  "decline": "отклонить",
   "safe": "сохранить",
   "helloWorld": "Привет, Мир",
   "placeOrder": "Разместить заявку",

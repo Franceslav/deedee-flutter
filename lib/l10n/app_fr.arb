@@ -1,4 +1,21 @@
 {
+    "decline":"déclin",
+    "executorProfile":"profilexécuteur",
+    "executorTags":"exécuteurTags",
+    "reviews":"Commentaires",
+    "writeReview":"Ecrire une critique",
+    "completedApplications":"Candidatures terminées",
+    "rating":"notation",
+    "search":"recherche",
+    "notFound":"pas trouvé",
+    "deeDeeForBusiness":"deeDeeForBusiness",
+    "placeText":"placeText",
+    "businessProfile":"profil d'entreprise",
+    "regToBecomeClient":"regToDevenirClient",
+    "nameCompany":"nomEntreprise",
+    "agreePP":"d'accordPP",
+    "connect":"connecter",
+    "addAccountTitle":"addAccountTitle",
   "helloWorld": "Bonjour Tout le Monde!",
   "@helloWorld": {
     "description": "L'accueil conventionnel du programmeur nouveau-né"
