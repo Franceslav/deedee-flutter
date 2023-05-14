@@ -1,35 +1,25 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
-import 'package:deedee/services/push_notification_service.dart';
-import 'package:deedee/ui/auth/authentication_bloc.dart';
-import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel.dart';
-import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
-import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../model/user.dart';
+import '../routes/app_router.gr.dart';
+import 'genaral_sliding_panel/general_sliding_panel.dart';
+import 'genaral_sliding_panel/general_sliding_panel_item.dart';
 
 class ProfileMenuSlider extends GeneralSlidingPanel {
   final User user;
+  final PanelController controller;
   final BuildContext context;
 
   ProfileMenuSlider(
     this.context, {
     super.key,
-    required super.controller,
+    required this.controller,
     required this.user,
-  }) : super(generalSlidingPanelItemList: [
-          GeneralSlidingPanelItem(
-              icon: Icons.home,
-              text: AppLocalizations.of(context)!.homeTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const HomeScreenRoute());
-              }),
+  }) : super(controller: controller, generalSlidingPanelItemList: [
           GeneralSlidingPanelItem(
               icon: Icons.list,
               text: AppLocalizations.of(context)!.userTagsTitle,
@@ -39,32 +29,18 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 }
                 context.router.popAndPush(const UserTagsScreenRoute());
               }),
-          GeneralSlidingPanelItem(
-              icon: Icons.account_box,
-              text: AppLocalizations.of(context)!.accountMoneyTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const AccountScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.rotate_left_rounded,
-              text:
-                  '${AppLocalizations.of(context)!.switchTo} ${user.accountType.switchAccountStringType(context)}',
-              onTap: () {
-                switch (user.accountType) {
-                  case AccountType.buy:
-                    BlocProvider.of<UserBloc>(context)
-                        .add(UserSwitchAccountType(AccountType.sell));
-                    break;
-                  case AccountType.sell:
-                    BlocProvider.of<UserBloc>(context)
-                        .add(UserSwitchAccountType(AccountType.buy));
-                    break;
-                }
-                controller.close();
-              }),
+          user.accountType == AccountType.buy
+              ? GeneralSlidingPanelItem(
+                  icon: CommunityMaterialIcons.order_alphabetical_descending,
+                  text: AppLocalizations.of(context)!.myRequests,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.pop();
+                    context.router.push(const MyRequestScreenRoute());
+                  })
+              : const SizedBox.shrink(),
           GeneralSlidingPanelItem(
               icon: Icons.bookmark,
               text: AppLocalizations.of(context)!.bookmarksTitle,
@@ -93,30 +69,37 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                 }
                 context.router.popAndPush(const ReferralScreenRoute());
               }),
-          GeneralSlidingPanelItem(
-              icon: Icons.settings,
-              text: AppLocalizations.of(context)!.settings,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const SettingsScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.help_outline,
-              text: AppLocalizations.of(context)!.helpTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const HelpScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.exit_to_app,
-              text: AppLocalizations.of(context)!.logout,
-              onTap: () {
-                context.read<AuthenticationBloc>().add(LogoutEvent());
-                context.router.popAndPush(const LoginScreenRoute());
-              }),
         ]);
+
+  @override
+  Widget build(BuildContext context) {
+    return SlidingUpPanel(
+      backdropEnabled: true,
+      minHeight: 0,
+      maxHeight: MediaQuery.of(context).size.height *
+          0.43, // this is the only difference from GeneralSlidingPanel build method
+      controller: controller,
+      header: Container(
+        margin: EdgeInsets.fromLTRB(
+            MediaQuery.of(context).size.width / 2 - 30, 10.0, 24.0, 0.0),
+        width: 60,
+        height: 7,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.black,
+        ),
+      ),
+      panel: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, left: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: generalSlidingPanelItemList,
+            ),
+          ),
+        ),
+      ),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+    );
+  }
 }
