@@ -96,6 +96,13 @@ class BusinessRowInfoWidget extends StatefulWidget {
 class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
   bool isChecked = false;
   bool isConnect = false;
+  final _formKey = GlobalKey<FormState>();
+  bool validateForm() {
+    if (_formKey.currentState == null) {
+      return false;
+    }
+    return _formKey.currentState!.validate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,102 +131,147 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
             }
             return Padding(
                 padding: const EdgeInsets.all(13.0),
-                child: Column(
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.nameCompany,
-                        labelText: AppLocalizations.of(context)!.nameCompany,
-                      ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.homeChooseCity,
-                        labelText: AppLocalizations.of(context)!.homeChooseCity,
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText:
-                            AppLocalizations.of(context)!.contactInformation,
-                        labelText:
-                            AppLocalizations.of(context)!.contactInformation,
-                      ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.phoneNumber,
-                        labelText: AppLocalizations.of(context)!.phoneNumber,
-                      ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText:
-                            AppLocalizations.of(context)!.emailAddressTitle,
-                        labelText:
-                            AppLocalizations.of(context)!.emailAddressTitle,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            AppLocalizations.of(context)!.agreePP,
-                            style: AppTextTheme.bodyLarge,
-                            softWrap: true,
-                            maxLines: 2,
-                          ),
-                        ),
-                        Checkbox(
-                          checkColor: AppColors.white,
-                          fillColor:
-                              MaterialStateProperty.resolveWith(getColor),
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            bloc.add(
-                                PolicyCheckedEvent(isChecked = value ?? false));
-                          },
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                              disabledBackgroundColor: AppColors.grey)
-                          .copyWith(
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value)  {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter name company';
+                          }
+                          return null;
+                        },
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.nameCompany,
+                          labelText: AppLocalizations.of(context)!.nameCompany,
                         ),
                       ),
-                      onPressed:
-                          state is BusinessPageState && state.policyAccepted
-                              ? () {
-                                  if (isChecked) {
-                                    state is BusinessConnectTapState &&
-                                        state.buttonConnectBusiness;
-                                  }
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your city';
+                          }
+                          return null;
+                        },
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText:
+                              AppLocalizations.of(context)!.homeChooseCity,
+                          labelText:
+                              AppLocalizations.of(context)!.homeChooseCity,
+                        ),
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter contact information';
+                          }
+                          return null;
+                        },
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText:
+                              AppLocalizations.of(context)!.contactInformation,
+                          labelText:
+                              AppLocalizations.of(context)!.contactInformation,
+                        ),
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter phone number';
+                          }
+                          return null;
+                        },
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.phoneNumber,
+                          labelText: AppLocalizations.of(context)!.phoneNumber,
+                        ),
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your Email';
+                          }
+                          return null;
+                        },
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          hintText:
+                              AppLocalizations.of(context)!.emailAddressTitle,
+                          labelText:
+                              AppLocalizations.of(context)!.emailAddressTitle,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              AppLocalizations.of(context)!.agreePP,
+                              style: AppTextTheme.bodyLarge,
+                              softWrap: true,
+                              maxLines: 2,
+                            ),
+                          ),
+                          Checkbox(
+                            checkColor: AppColors.white,
+                            fillColor:
+                                MaterialStateProperty.resolveWith(getColor),
+                            value: validateForm(),
+                            onChanged: (bool? value) {
+                              bloc.add(PolicyCheckedEvent(
+                                  isChecked = value ?? false));
+                            },
+                          )
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.13,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                                disabledBackgroundColor: AppColors.grey)
+                            .copyWith(
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                        ),
+                        onPressed:
+                        validateForm() && state is BusinessPageState &&
+                                state.policyAccepted
+                            ? () {
+                                if (isChecked) {
+                                  state is BusinessConnectTapState &&
+                                      state.buttonConnectBusiness;
                                 }
-                              : null,
-                      child: Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.connect,
-                          style: AppTextTheme.titleLarge.copyWith(
-                            color: AppColors.white,
+                              }
+                            : null,
+                        child: Center(
+                          child: Text(
+                            AppLocalizations.of(context)!.connect,
+                            style: AppTextTheme.titleLarge.copyWith(
+                              color: AppColors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ));
           }),
     );
   }
+
 }
+
+
