@@ -1,9 +1,12 @@
 {
+  "addAccountTitle":"खाता शीर्षक जोड़ें",
   "helloWorld": "हैलो वर्ल्ड!",
   "@helloWorld": {
     "description": "पारंपरिक नवजात प्रोग्रामर अभिवादन"
   },
   "safe": "सुरक्षित",
+  "accountsTitle": "खाते",
+  "noUserAccounts": "कोई खाता नहीं",
   "placeOrder": "आदेश देना",
   "placeOrderPageTitle": "आदेश",
   "accountTitle": "खाता",

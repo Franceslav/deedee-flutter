@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pbenum.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/generated/deedee/api/service/service_request_service.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';

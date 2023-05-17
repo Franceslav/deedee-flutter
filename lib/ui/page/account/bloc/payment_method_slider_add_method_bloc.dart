@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/service/payment_service.pb.dart';
 import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/repository/payment_method_repository.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:meta/meta.dart';
 
 part 'payment_method_slider_add_method_event.dart';
@@ -17,7 +18,16 @@ class PaymentMethodSliderBloc
   }
 
   _addPaymentMethod(PaymentMethodSliderEvent event, emit) async {
-    emit();
+    emit(_paymentMethodRequestRepository.addPaymentMethod(
+      PaymentMethodRequest(),
+      CreditCardModel(
+        emit.cardHolderName,
+        emit.cardNumber,
+        emit.cvvCode,
+        emit.expiryDate,
+        emit.isCvvFocused,
+      ),
+    ));
   }
 
   _initialize() async {

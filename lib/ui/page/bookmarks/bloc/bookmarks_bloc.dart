@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/repository/observation_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:get/get.dart';
@@ -15,9 +18,10 @@ part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   final TagRepository _tagRepository;
+  final ObservationRepository _observationRepository;
   final User _user;
 
-  BookmarksBloc(this._tagRepository, this._user) : super(InitialState()) {
+  BookmarksBloc(this._tagRepository, this._observationRepository, this._user) : super(InitialState()) {
     on<_BookmarksLoadedEvent>(_onBookmarksLoaded);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
@@ -94,7 +98,8 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
       final tag =
           await _tagRepository.removeTagFromFavorites(_user.email, event.tagId);
       emit(TagMarkerOpenedState(tag.tagId,
-          isTagBookmarked: tag.status == Tag_Status.BOOKMARKED));
+          isTagBookmarked: tag.status == Tag_Status.BOOKMARKED)
+          );
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -107,7 +112,17 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   }
 
   void _onUserOpenedTagMarker(
-      UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
+    UserOpenedTagMarkerEvent event, Emitter<BookmarksState> emit) async {
+    // Adding an observation to the tag
+    var temp = await _tagRepository.getTags(_user.userId);
+    var selectedTag = temp.firstWhere((tag) => tag.tagId == event.tagId);
+    
+    Observation observation = Observation(
+      observationId: Int64(DateTime.now().microsecondsSinceEpoch),
+      userId: Int64(1),
+      geolocation: selectedTag.geolocation,     
+    );   
+    _observationRepository.addObservation(observation);
     final List<Tag> favouriteTags =
         await _tagRepository.getFavoriteTags(_user.email);
     final tag =

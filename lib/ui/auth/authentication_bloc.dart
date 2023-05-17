@@ -6,7 +6,7 @@ import 'package:deedee/generated/deedee/api/service/verification_service.pbgrpc.
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
-import 'package:deedee/services/grpc.dart';
+import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
 part 'authentication_event.dart';
@@ -31,6 +31,8 @@ class AuthenticationBloc
           emit(const AuthenticationState.unauthenticated());
         } else {
           emit(AuthenticationState.authenticated(user!));
+          locator.get<TagServiceApi>()
+              .setUserEmail(user!.email);
         }
       }
     });

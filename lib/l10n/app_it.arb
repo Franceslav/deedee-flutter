@@ -1,10 +1,20 @@
 {
+   "decline":"declino",
+    "executorProfile":"executorProfile",
+    "executorTags":"executorTags",
+    "reviews":"recensioni",
+    "writeReview":"scrivere una recensione",
+    "completedApplications":"completatoApplicazioni",
+    "rating":"valutazione",
+    "addAccountTitle":"aggiungi il titolo dell'account",
   "helloWorld": "Ciao Mondo!",
   "@helloWorld": {
   "description": "Il saluto convenzionale dei programmatori appena nati"
   },
   "safe": "sicuro",
   "placeOrder": "Effettua l'ordine",
+  "accountsTitle": "conti",
+  "noUserAccounts": "Nessun account",
   "placeOrderPageTitle": "Ordine",
   "accountTitle": "account",
   "accountMoneyTitle": "soldi",

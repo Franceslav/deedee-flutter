@@ -46,7 +46,7 @@ class _FavoriteCompositeFiltersScreenState
       create: (context) => bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
-          title: AppLocalizations.of(context)!.safe,
+          title: AppLocalizations.of(context)!.save,
           controller: _controller,
           child: const ProfilePhotoWithBadge(),
         ),

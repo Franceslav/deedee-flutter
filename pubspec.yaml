@@ -3,7 +3,7 @@ description: DeeDee App
 version: 1.0.0+1
 publish_to: 'none'
 environment:
-  sdk: ">=2.17.4 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   shared_preferences: 2.0.15
@@ -28,7 +28,7 @@ dependencies:
   location: 4.4.0
   geolocator: ^9.0.2
   flutter_map: ^3.1.0
-  flutter_map_marker_cluster: ^1.0.1
+  flutter_map_marker_cluster: ^1.1.0
   settings_ui: 2.0.2
   masked_text_field: 1.0.1
   event_bloc: ^4.2.0
@@ -44,7 +44,7 @@ dependencies:
     path: packages/search_address_repository
   auto_route: ^5.0.4
   auto_route_generator: ^5.0.3
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.0.0
   sleek_circular_slider: ^2.0.1
 
   sliding_up_panel: ^2.0.0+1
@@ -60,7 +60,7 @@ dependencies:
   community_material_icon: ^5.9.55
   badges: ^3.0.2
 
-  file_picker: ^5.2.5
+  file_picker: ^5.3.0
   dio: ^5.0.0
   http_mock_adapter: ^0.4.2
   animated_button_bar: ^1.0.0
@@ -68,8 +68,8 @@ dependencies:
   overlay_support: ^2.1.0
   firebase_messaging: ^14.2.6
   firebase_analytics: ^10.1.5
-  flutter_local_notifications: ^13.0.0
-  intl: ^0.17.0  
+  flutter_local_notifications: ^14.0.0+2
+  intl: ^0.18.0
   flutter_credit_card: ^3.0.6
   qr_code_scanner: ^1.0.1
   flutter_rating_bar: ^4.0.1
@@ -85,7 +85,7 @@ dev_dependencies:
   test: ^1.22.0
   flutter_lints: ^2.0.1
   injectable_generator:
-  build_runner:
+  build_runner: ^2.4.2
   flutter_launcher_icons: "^0.12.0"
   bloc_test: ^9.0.3
 

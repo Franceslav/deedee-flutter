@@ -2,7 +2,7 @@ import 'package:deedee/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class DeeDeeAppBar extends StatelessWidget with PreferredSizeWidget {
+class DeeDeeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
   final String title;

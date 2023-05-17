@@ -11,8 +11,7 @@ part 'card_state.dart';
 
 class CardBloc extends Bloc<CardEvent, CardState> {
   final _repository = CardRepository();
-
-  CardBloc() : super(CardInitial()) {
+  CardBloc(CardRepository cardRepository) : super(CardInitial()) {
     on<CardModelChangedEvent>(_onCardModelChanged);
     on<SaveCardDataEvent>(_onSaveCardData);
     initState();
@@ -40,7 +39,6 @@ class CardBloc extends Bloc<CardEvent, CardState> {
         cardHolderName: cardModel.cardHolderName,
         cvvCode: cardModel.cvvCode,
         color: Colors.deepPurple));
-    print(_repository.getCards); // dev
     _updateScreen(cardModel);
   }
 }

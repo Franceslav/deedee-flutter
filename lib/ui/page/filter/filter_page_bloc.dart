@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -10,7 +9,6 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
@@ -89,10 +87,16 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
     );
   }
 
-  _onPushFilters(event, emit) async {
+  _onPushFilters(PushFiltersEvent event, emit) async {
     try {
-      List<Tag> tags = await _tagRepository.getTagsByName(event.topic);
-      emit(UserFiltersDoneState(tags));
+      List<Tag> tagsOnMap = [];
+      List<Tag> tags = await _tagRepository.getTags(_user.email);
+      tagsOnMap.addAll(tags.filter((element) =>
+          element.compositeFilter.topic.title == event.topic &&
+          element.compositeFilter.filterMap.containsKey(event.subtopic.first) &&
+          _filterKeys.containsAll(event.filterKeys)));
+
+      emit(UserFiltersDoneState(tagsOnMap));
     } catch (error) {
       ErrorState(error.toString());
     }

@@ -4,6 +4,8 @@
     "description": "Sapaan programmer yang baru lahir secara konvensional"
   },
   "accountMoneyTitle": "Akun Pribadi",
+  "accountsTitle": "Akun",
+  "noUserAccounts": "Tidak ada akun",
   "clientToggle": "Klien",
   "providerToggle": "Pemberi Layanan",
   "autoTag": "Otomatis",

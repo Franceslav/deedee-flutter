@@ -212,7 +212,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                         .replace(const HomeScreenRoute());
                                   },
                             gradientButton: true,
-                            title: AppLocalizations.of(context)!.safe,
+                            title: AppLocalizations.of(context)!.save,
                           )
                         ],
                       ),

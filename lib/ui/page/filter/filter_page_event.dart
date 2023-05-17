@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'filter_page_bloc.dart';
 
 @immutable
@@ -25,12 +26,12 @@ class SelectLocationEvent extends FilterPageEvent {
 
 class PushFiltersEvent extends FilterPageEvent {
   final String topic;
+  final List<String> subtopic;
   final List<String> filterKeys;
-  final AccountType accountType;
 
   PushFiltersEvent({
     required this.topic,
+    required this.subtopic,
     required this.filterKeys,
-    required this.accountType,
   });
 }

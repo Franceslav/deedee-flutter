@@ -60,7 +60,7 @@ class _CityPickerDialogState extends State<CityPickerDialog> {
                             widget.onSave(widget.user, _selectedCity!);
                           }
                         : null,
-                    child: Text(AppLocalizations.of(context)!.safe),
+                    child: Text(AppLocalizations.of(context)!.save),
                   )
                 ],
               ),

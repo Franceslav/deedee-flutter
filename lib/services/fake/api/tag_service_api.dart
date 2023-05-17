@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
@@ -80,7 +81,7 @@ class TagServiceApi {
             ),
           },
         )
-        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..geolocation = Geolocation(latitude: 9.2, longitude: 46.5169)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
@@ -94,14 +95,19 @@ class TagServiceApi {
         // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
         ..compositeFilter = CompositeFilter(
           compositeFilterId: Int64(1),
-          topic: Topic(topicId: 3, userId: '', title: 'OneOneOneOne'),
+          topic: Topic(topicId: 3, userId: '', title: 'Children'),
           filterMap: {
-            'TwoTwoTwoTwoTwoTwo': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey4')],
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(
+                  title: '24 Hour',
+                  selected: true,
+                )
+              ],
             ),
           },
         )
-        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..geolocation = Geolocation(latitude: 9.91489, longitude: 40.5169)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
@@ -230,13 +236,16 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.BOOKMARKED
     ];
+    _tags = {};
+  }
+
+  void setUserEmail(String userEmail) {
     _tags = {
-      "ron.x.by.su@gmail.com": _fakeTags,
-      "art.zavtur@gmail.com": _fakeTags,
-      "matveev.yakov@yahoo.com": _fakeTags,
+      userEmail: _fakeTags,
     };
   }
 
+  // Tags CRUD
   List<Tag> getTags(String userId) {
     return _tags.getOrElse(userId, () => []).toList();
   }
@@ -267,5 +276,14 @@ class TagServiceApi {
         .getOrElse(userId, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.PLACED;
+  }
+
+  Observation addObservation(Observation observation) {
+    List<Tag> tags = _tags.values as List<Tag>;
+    tags
+        .firstWhere((tag) => tag.tagId == observation.tagId)
+        .observations
+        .add(observation);
+    return observation;
   }
 }

@@ -12,6 +12,7 @@ import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
+import 'package:deedee/ui/page/account/account_widget.dart';
 import 'package:deedee/ui/page/account/bloc/payment_method_slider_add_method_bloc.dart';
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
 import 'package:deedee/ui/page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
@@ -70,7 +71,7 @@ class _AccountState extends State<AccountScreen> {
                       accountType: accountType,
                     ),
                     const SizedBox(height: 34),
-                    const AccountInfoWidget(),
+                    const AccountWidget(),
                     const SizedBox(height: 32),
                     Row(
                       children: [
@@ -189,6 +190,25 @@ class _InfoWidget extends StatelessWidget {
                   return const PaymentMethodListWidget();
                 },
               );
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: DeeDeeDeviderWidget(),
+          ),
+          DeeDeeRowInfoWidget(
+            icon: Image.asset('assets/images/balance_icon.png'),
+            mainText: Text(
+              locale.accountsTitle,
+              style: AppTextTheme.bodyLarge,
+            ),
+            secondaryText: const Text(
+              'View the list of accounts',
+              style: AppTextTheme.bodyMedium,
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              context.router.push(const AccountsListScreenRoute());
             },
           ),
           const Padding(
