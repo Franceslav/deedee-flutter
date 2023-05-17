@@ -19,7 +19,7 @@ class TagServiceApi {
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    String deviceLanguage = Platform.localeName.substring(0, 2); 
+    String deviceLanguage = Platform.localeName.substring(0, 2);
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
@@ -81,7 +81,7 @@ class TagServiceApi {
             ),
           },
         )
-        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..geolocation = Geolocation(latitude: 9.2, longitude: 46.5169)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
@@ -95,14 +95,19 @@ class TagServiceApi {
         // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
         ..compositeFilter = CompositeFilter(
           compositeFilterId: Int64(1),
-          topic: Topic(topicId: 3, userId: '', title: 'OneOneOneOne'),
+          topic: Topic(topicId: 3, userId: '', title: 'Children'),
           filterMap: {
-            'TwoTwoTwoTwoTwoTwo': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey4')],
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(
+                  title: '24 Hour',
+                  selected: true,
+                )
+              ],
             ),
           },
         )
-        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..geolocation = Geolocation(latitude: 9.91489, longitude: 40.5169)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
@@ -239,6 +244,7 @@ class TagServiceApi {
       userEmail: _fakeTags,
     };
   }
+
   // Tags CRUD
   List<Tag> getTags(String userId) {
     return _tags.getOrElse(userId, () => []).toList();
@@ -272,11 +278,12 @@ class TagServiceApi {
       ..status = Tag_Status.PLACED;
   }
 
-    Observation addObservation(Observation observation) {
-      List<Tag> tags = _tags.values as List<Tag>;
-      tags
+  Observation addObservation(Observation observation) {
+    List<Tag> tags = _tags.values as List<Tag>;
+    tags
         .firstWhere((tag) => tag.tagId == observation.tagId)
-        .observations.add(observation);
-      return observation;
+        .observations
+        .add(observation);
+    return observation;
   }
 }

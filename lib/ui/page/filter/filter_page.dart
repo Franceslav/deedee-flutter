@@ -46,6 +46,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   final PanelController _controller = PanelController();
   late CompositeFilter _compositeFilter;
+  String subtopicForTags = '';
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
@@ -127,150 +128,94 @@ class _FilterPageState extends State<FilterPage> {
               body: Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 16, bottom: 66),
+                    padding: const EdgeInsets.only(top: 16),
                     child: Column(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Column(
-                              children: [
-                                if (allSubtopicsFilter.isNotEmpty)
-                                  Column(
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .chooseTopic,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1,
-                                      ),
-                                      SubtopicList(
-                                        selectedSubtopics:
-                                            selectedSubtopicsFilter.keys
-                                                .toList(),
-                                        subtopics:
-                                            allSubtopicsFilter.keys.toList(),
-                                      ),
-                                    ],
+                        if (allSubtopicsFilter.isNotEmpty)
+                          Text(
+                            AppLocalizations.of(context)!.chooseTopic,
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        SubtopicList(
+                          selectedSubtopics:
+                              selectedSubtopicsFilter.keys.toList(),
+                          subtopics: allSubtopicsFilter.keys.toList(),
+                        ),
+                        if (selectedSubtopicsFilter.isNotEmpty)
+                          Text(
+                            AppLocalizations.of(context)!.chooseFilterKeys,
+                            style: Theme.of(context).textTheme.displayLarge,
+                          ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: selectedSubtopicsFilter.length,
+                            itemBuilder: (context, index) {
+                              final subtopic =
+                                  selectedSubtopicsFilter.keys.toList()[index];
+                              subtopicForTags = subtopic;
+                              return Column(
+                                children: [
+                                  SubtopicFilterKeyList(
+                                    subtopic: subtopic,
+                                    filterKeys: allSubtopicsFilter[subtopic]!
+                                        .filterKeys
+                                        .map((e) => e.title)
+                                        .toList(),
+                                    selectedFilterKeys: selectedSubtopicsFilter
+                                        .getOrElse(subtopic, () => []),
                                   ),
-                                if (selectedSubtopicsFilter.isNotEmpty)
-                                  Column(
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .chooseFilterKeys,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayLarge,
-                                      ),
-                                      SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.4,
-                                        child: ListView.builder(
-                                          itemCount:
-                                              selectedSubtopicsFilter.length,
-                                          itemBuilder: (context, index) {
-                                            final subtopic =
-                                                selectedSubtopicsFilter.keys
-                                                    .toList()[index];
-                                            return Column(
-                                              children: [
-                                                SubtopicFilterKeyList(
-                                                  subtopic: subtopic,
-                                                  filterKeys:
-                                                      allSubtopicsFilter[
-                                                              subtopic]!
-                                                          .filterKeys
-                                                          .map((e) => e.title)
-                                                          .toList(),
-                                                  selectedFilterKeys:
-                                                      selectedSubtopicsFilter
-                                                          .getOrElse(subtopic,
-                                                              () => []),
-                                                ),
-                                                const DeeDeeDeviderWidget(),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                              ],
-                            ),
-                          ],
+                                  const DeeDeeDeviderWidget(),
+                                ],
+                              );
+                            },
+                          ),
                         ),
                         if (selectedSubtopicsFilter.values.isNotEmpty &&
                             selectedSubtopicsFilter.values
                                 .every((element) => element.length >= 3))
-                          Expanded(
-                            child: Column(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Expanded(
-                                  child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: SizedBox(),
-                                  ),
+                                OutlinedButtonWidget(
+                                  text:
+                                      AppLocalizations.of(context)!.placeOrder,
+                                  onPressed: () async {
+                                    final data = await context.router.push(
+                                            MapSetLocationScreenRoute(
+                                                userLocation:
+                                                    user.lastGeoLocation))
+                                        as AddressModel?;
+                                    if (data == null) {
+                                      return;
+                                    }
+                                    bloc.add(SelectLocationEvent(data));
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Row(
-                                    children: [
-                                      const SizedBox(height: 8),
-                                      Expanded(
-                                        child: OutlinedButtonWidget(
-                                          text: AppLocalizations.of(context)!
-                                              .placeOrder,
-                                          onPressed: () async {
-                                            final data = await context.router.push(
-                                                    MapSetLocationScreenRoute(
-                                                        userLocation: user
-                                                            .lastGeoLocation))
-                                                as AddressModel?;
-                                            if (data == null) {
-                                              return;
-                                            }
-                                            bloc.add(SelectLocationEvent(data));
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      Expanded(
-                                        child: OutlinedButtonWidget(
-                                          text: AppLocalizations.of(context)!
-                                              .seeTags,
-                                          onPressed: () {
-                                            bloc.add(PushFiltersEvent(
-                                              topic: widget
-                                                  .currentFilter.topic.title,
-                                              filterKeys:
-                                                  selectedSubtopicsFilter
-                                                      .values.first,
-                                              accountType: user.accountType,
-                                            ));
-                                            var filterMap = _filtersWithSelected(
-                                                allSubtopicsFilter:
-                                                    allSubtopicsFilter,
-                                                selectedSubtopicsFilter:
-                                                    selectedSubtopicsFilter);
+                                OutlinedButtonWidget(
+                                  text: AppLocalizations.of(context)!.seeTags,
+                                  onPressed: () {
+                                    bloc.add(PushFiltersEvent(
+                                      topic: widget.currentFilter.topic.title,
+                                      filterKeys:
+                                          selectedSubtopicsFilter.values.first,
+                                      subtopic: [subtopicForTags],
+                                    ));
+                                    var filterMap = _filtersWithSelected(
+                                        allSubtopicsFilter: allSubtopicsFilter,
+                                        selectedSubtopicsFilter:
+                                            selectedSubtopicsFilter);
 
-                                            _compositeFilter = CompositeFilter(
-                                              compositeFilterId: widget
-                                                  .currentFilter
-                                                  .compositeFilterId,
-                                              topic: widget.currentFilter.topic,
-                                              filterMap: filterMap,
-                                              status:
-                                                  widget.currentFilter.status,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    _compositeFilter = CompositeFilter(
+                                      compositeFilterId: widget
+                                          .currentFilter.compositeFilterId,
+                                      topic: widget.currentFilter.topic,
+                                      filterMap: filterMap,
+                                      status: widget.currentFilter.status,
+                                    );
+                                  },
                                 ),
                               ],
                             ),
