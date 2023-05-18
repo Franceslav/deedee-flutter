@@ -232,12 +232,18 @@ bool isDarkMode(BuildContext context) {
   }
 }
 
-InputDecoration getInputDecoration(
-    {required String hint, required bool darkMode, required Color errorColor}) {
+InputDecoration getInputDecoration({
+  required String hint,
+  required bool darkMode,
+  required Color errorColor,
+  bool isPasswordField = false,
+  Widget? iconButton,
+}) {
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     fillColor: darkMode ? Colors.black54 : Colors.white,
     hintText: hint,
+    suffixIcon: isPasswordField ? iconButton : null,
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
         borderSide: const BorderSide(color: Color(COLOR_PRIMARY), width: 2.0)),
