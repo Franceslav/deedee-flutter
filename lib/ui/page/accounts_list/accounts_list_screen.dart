@@ -51,7 +51,7 @@ class _AccountsListScreenState extends State<AccountsListScreen> {
       create: (context) => bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
-            title: locale.accountsTitle,
+            title: locale.accountTitle,
             controller: _controller,
             child: const ProfilePhotoWithBadge()),
         body: BlocConsumer<AccountsListBloc, AccountsListState>(

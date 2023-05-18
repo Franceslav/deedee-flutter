@@ -199,7 +199,7 @@ class _InfoWidget extends StatelessWidget {
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/balance_icon.png'),
             mainText: Text(
-              locale.accountsTitle,
+              locale.accountTitle,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: const Text(
