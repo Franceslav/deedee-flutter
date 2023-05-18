@@ -1,4 +1,9 @@
 {
+  "de": [
+    "accountsTitle",
+    "noUserAccounts"
+  ],
+
   "id": [
     "safe",
     "placeOrder",

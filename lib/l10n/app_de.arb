@@ -36,7 +36,7 @@
   "filterTags": "tags filtern",
   "filterTagsPageTitle": "filter",
   "filteringTagsHistTitle": "filterung von Tags",
-  "tagPlacedCheckTheMap": "tag platziert, überprüfe die Karte"
+  "tagPlacedCheckTheMap": "tag platziert, überprüfe die Karte",
   "placingTag": "tag wird platziert...",
   "instagramTitle": "instagram",
   "signInTitle": "anmelden",
@@ -66,7 +66,7 @@
   "chooseFilterKeys": "wähle mindestens 3 stichwörter aus",
   "userNotVerifiedMessage": "du bist nicht verifiziert. Überprüfe deinen E-Mail-Eingang oder starte die anwendung neu.",
   "balanceTitle": "kontostand",
-  "availableTagsTitle": "verfügbare Tags"
+  "availableTagsTitle": "verfügbare Tags",
   "bookmarksTitle": "Meine Favoriten",
   "noBookamarks": "Du hast keine Lesezeichen",
   "bookmarkDeletedMessage": "Lesezeichen wurde gelöscht",
@@ -133,7 +133,7 @@
   "saveAndSubscribe": "Speichern und abonnieren",
   "myRequests": "Meine Anfragen",
   "switchLanguage": "Sprache wechseln",
-  "onServiceSince": "Im Dien
+  "onServiceSince": "Im Dien",
   "tags": "Tags",
   "views": "Aufrufe",
   "editProfile": "Profil bearbeiten",
@@ -201,7 +201,7 @@
   "executorTags": "Ausführer-Tags:",
   "reviews": "Bewertungen:",
   "writeReview": "Eine Bewertung schreiben",
-  "completedApplications": "Abgesch
+  "completedApplications": "Abgesch",
   "rating": "Bewertung",
   "search": "Suchen",
   "notFound": "Nicht gefunden",
