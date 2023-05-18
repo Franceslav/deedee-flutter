@@ -1,13 +1,14 @@
-import 'package:deedee/ui/global_widgets/genaral_sliding_panel/general_sliding_panel_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class GeneralSlidingPanel extends StatelessWidget {
   final List<Widget> generalSlidingPanelItemList;
   final PanelController _controller;
+  final double maxHeight;
 
   const GeneralSlidingPanel({
     super.key,
+    required this.maxHeight,
     required PanelController controller,
     required this.generalSlidingPanelItemList,
   }) : _controller = controller;
@@ -17,7 +18,7 @@ class GeneralSlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       backdropEnabled: true,
       minHeight: 0,
-      maxHeight: MediaQuery.of(context).size.height * 0.73,
+      maxHeight: maxHeight,
       controller: _controller,
       header: Container(
         margin: EdgeInsets.fromLTRB(
