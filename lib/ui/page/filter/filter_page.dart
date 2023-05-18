@@ -175,47 +175,54 @@ class _FilterPageState extends State<FilterPage> {
                             selectedSubtopicsFilter.values
                                 .every((element) => element.length >= 3))
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                OutlinedButtonWidget(
-                                  text:
-                                      AppLocalizations.of(context)!.placeOrder,
-                                  onPressed: () async {
-                                    final data = await context.router.push(
-                                            MapSetLocationScreenRoute(
-                                                userLocation:
-                                                    user.lastGeoLocation))
-                                        as AddressModel?;
-                                    if (data == null) {
-                                      return;
-                                    }
-                                    bloc.add(SelectLocationEvent(data));
-                                  },
+                                Expanded(
+                                  child: OutlinedButtonWidget(
+                                    text: AppLocalizations.of(context)!
+                                        .placeOrder,
+                                    onPressed: () async {
+                                      final data = await context.router.push(
+                                              MapSetLocationScreenRoute(
+                                                  userLocation:
+                                                      user.lastGeoLocation))
+                                          as AddressModel?;
+                                      if (data == null) {
+                                        return;
+                                      }
+                                      bloc.add(SelectLocationEvent(data));
+                                    },
+                                  ),
                                 ),
-                                OutlinedButtonWidget(
-                                  text: AppLocalizations.of(context)!.seeTags,
-                                  onPressed: () {
-                                    bloc.add(PushFiltersEvent(
-                                      topic: widget.currentFilter.topic.title,
-                                      filterKeys:
-                                          selectedSubtopicsFilter.values.first,
-                                      subtopic: [subtopicForTags],
-                                    ));
-                                    var filterMap = _filtersWithSelected(
-                                        allSubtopicsFilter: allSubtopicsFilter,
-                                        selectedSubtopicsFilter:
-                                            selectedSubtopicsFilter);
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: OutlinedButtonWidget(
+                                    text: AppLocalizations.of(context)!.seeTags,
+                                    onPressed: () {
+                                      bloc.add(PushFiltersEvent(
+                                        topic: widget.currentFilter.topic.title,
+                                        filterKeys: selectedSubtopicsFilter
+                                            .values.first,
+                                        subtopic: [subtopicForTags],
+                                      ));
+                                      var filterMap = _filtersWithSelected(
+                                          allSubtopicsFilter:
+                                              allSubtopicsFilter,
+                                          selectedSubtopicsFilter:
+                                              selectedSubtopicsFilter);
 
-                                    _compositeFilter = CompositeFilter(
-                                      compositeFilterId: widget
-                                          .currentFilter.compositeFilterId,
-                                      topic: widget.currentFilter.topic,
-                                      filterMap: filterMap,
-                                      status: widget.currentFilter.status,
-                                    );
-                                  },
+                                      _compositeFilter = CompositeFilter(
+                                        compositeFilterId: widget
+                                            .currentFilter.compositeFilterId,
+                                        topic: widget.currentFilter.topic,
+                                        filterMap: filterMap,
+                                        status: widget.currentFilter.status,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
