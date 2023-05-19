@@ -111,12 +111,14 @@ void showProgress(BuildContext context, String message, bool isDismissible) {
                       valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
                     ),
                   ),
-                  Text(
-                    message,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 19.0,
-                        fontWeight: FontWeight.w600),
+                  Flexible(
+                    child: Text(
+                      message,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.w600),
+                    ),
                   )
                 ],
               ),
