@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,12 +29,12 @@ class RequestScreen extends StatefulWidget {
   final UUID serviceRequestId;
   final bool openedFromRestoreAction;
 
-  RequestScreen({
-    Key? key,
-    required this.readOnly,
-    required this.serviceRequestId,
-    this.openedFromRestoreAction = false
-  }) : super(key: key);
+  RequestScreen(
+      {Key? key,
+      required this.readOnly,
+      required this.serviceRequestId,
+      this.openedFromRestoreAction = false})
+      : super(key: key);
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();
@@ -107,176 +106,184 @@ class _RequestScreenState extends State<RequestScreen> {
                   child: Stack(
                     children: [
                       SingleChildScrollView(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 32),
-                              PriceWidget(
-                                price: state.serviceRequest.price.toString(),
-                                onPressed: (widget.readOnly == false)
-                                    ? (value) {
-                                        context
-                                            .read<ServicePushRequestBloc>()
-                                            .add(ServiceRequestPriceChangeEvent(
-                                                price: value));
-                                      }
-                                    : null,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 32),
+                            PriceWidget(
+                              price: state.serviceRequest.price.toString(),
+                              onPressed: (widget.readOnly == false)
+                                  ? (value) {
+                                      context
+                                          .read<ServicePushRequestBloc>()
+                                          .add(ServiceRequestPriceChangeEvent(
+                                              price: value));
+                                    }
+                                  : null,
+                            ),
+                            const SizedBox(height: 32),
+                            DeeDeeRowInfoWidget(
+                              icon:
+                                  Image.asset('assets/images/header_icon.png'),
+                              mainText: const Text(
+                                'Заголовок',
+                                style: AppTextTheme.bodyLarge,
                               ),
-                              const SizedBox(height: 32),
-                              DeeDeeRowInfoWidget(
-                                icon: Image.asset(
-                                    'assets/images/header_icon.png'),
-                                mainText: const Text(
-                                  'Заголовок',
-                                  style: AppTextTheme.bodyLarge,
-                                ),
-                                secondaryText: const Text(
-                                  'Дополнительный текст',
-                                  style: AppTextTheme.bodyMedium,
-                                ),
-                                onTap: (widget.readOnly == false)
-                                    ? () {
-                                        context.router.push(
-                                            CustomerProfileRoute(
-                                                id: state.serviceRequest
-                                                    .createdFor));
-                                      }
-                                    : null,
+                              secondaryText: const Text(
+                                'Дополнительный текст',
+                                style: AppTextTheme.bodyMedium,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16),
-                                child: DeeDeeDeviderWidget(),
-                              ),
-                              const Text('Описание',
-                                  style: AppTextTheme.titleMedium),
-                              const Text('Lorem ipsum',
-                                  style: AppTextTheme.labelMedium),
-                              const SizedBox(height: 48),
-                              Text(locale.date,
-                                  style: AppTextTheme.titleMedium),
-                              const SizedBox(height: 6),
-                              RequestExpansionTile(
-                                data: dateList,
-                                onTap: (widget.readOnly == false)
-                                    ? (value) {
-                                        context
-                                            .read<ServicePushRequestBloc>()
-                                            .add(ServiceRequestDateChangeEvent(
-                                                date: value));
-                                      }
-                                    : null,
-                              ),
-                              const SizedBox(height: 16),
-                              Text(locale.time,
-                                  style: AppTextTheme.titleMedium),
-                              const SizedBox(height: 6),
-                              RequestExpansionTile(
-                                data: timeList,
-                                onTap: (widget.readOnly == false)
-                                    ? (value) {
-                                        context
-                                            .read<ServicePushRequestBloc>()
-                                            .add(ServiceRequestTimeChangeEvent(
-                                                time: value));
-                                      }
-                                    : null,
-                              ),
-                              const SizedBox(height: 16),
-                              const Text('Описание',
-                                  style: AppTextTheme.titleMedium),
-                              const SizedBox(height: 12),
-                              const Text('Описание',
-                                  style: AppTextTheme.titleMedium),
-                              const SizedBox(height: 12),
-                              const Text('Описание',
-                                  style: AppTextTheme.titleMedium),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  if (state.changed &&
-                                      state.serviceRequest.status ==
-                                          ServiceRequest_Status.PENDING)
-                                    Expanded(
-                                      child: OutlinedButtonWidget(
-                                        text: locale.send,
-                                        onPressed: (widget.readOnly == false)
-                                            ? () {
-                                                bloc.add(
-                                                  AcceptServiceRequestEvent(
-                                                    serviceRequest: serviceRequest
-                                                      ..status =
-                                                          ServiceRequest_Status
-                                                              .ACCEPTED,
-                                                  ),
-                                                );
-                                                context.router.pop();
-                                              }
-                                            : null,
+                              onTap: (widget.readOnly == false)
+                                  ? () {
+                                      context.router.push(CustomerProfileRoute(
+                                          id: state.serviceRequest.createdFor));
+                                    }
+                                  : null,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              child: DeeDeeDeviderWidget(),
+                            ),
+                            const Text('Описание',
+                                style: AppTextTheme.titleMedium),
+                            const Text('Lorem ipsum',
+                                style: AppTextTheme.labelMedium),
+                            const SizedBox(height: 48),
+                            Text(locale.date, style: AppTextTheme.titleMedium),
+                            const SizedBox(height: 6),
+                            RequestExpansionTile(
+                              data: dateList,
+                              onTap: (widget.readOnly == false)
+                                  ? (value) {
+                                      context
+                                          .read<ServicePushRequestBloc>()
+                                          .add(ServiceRequestDateChangeEvent(
+                                              date: value));
+                                    }
+                                  : null,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(locale.time, style: AppTextTheme.titleMedium),
+                            const SizedBox(height: 6),
+                            RequestExpansionTile(
+                              data: timeList,
+                              onTap: (widget.readOnly == false)
+                                  ? (value) {
+                                      context
+                                          .read<ServicePushRequestBloc>()
+                                          .add(ServiceRequestTimeChangeEvent(
+                                              time: value));
+                                    }
+                                  : null,
+                            ),
+                            const SizedBox(height: 16),
+                            const Text('Описание',
+                                style: AppTextTheme.titleMedium),
+                            const SizedBox(height: 12),
+                            const Text('Описание',
+                                style: AppTextTheme.titleMedium),
+                            const SizedBox(height: 12),
+                            const Text('Описание',
+                                style: AppTextTheme.titleMedium),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  // width: MediaQuery.of(context).size.width / 2,
+                                  child: Row(
+                                    children: [
+                                      if (state.changed &&
+                                          state.serviceRequest.status ==
+                                              ServiceRequest_Status.PENDING)
+                                        Expanded(
+                                          child: OutlinedButtonWidget(
+                                            text: locale.send,
+                                            onPressed:
+                                                (widget.readOnly == false)
+                                                    ? () {
+                                                        bloc.add(
+                                                          AcceptServiceRequestEvent(
+                                                            serviceRequest:
+                                                                serviceRequest
+                                                                  ..status =
+                                                                      ServiceRequest_Status
+                                                                          .ACCEPTED,
+                                                          ),
+                                                        );
+                                                        context.router.pop();
+                                                      }
+                                                    : null,
+                                          ),
+                                        ),
+                                      if (state.serviceRequest.status ==
+                                          ServiceRequest_Status.ACCEPTED)
+                                        Expanded(
+                                          child: OutlinedButtonWidget(
+                                            text: locale.accept,
+                                            onPressed:
+                                                (widget.readOnly == false)
+                                                    ? () {
+                                                        context.router.pop();
+                                                        bloc.add(
+                                                          AcceptServiceRequestEvent(
+                                                            serviceRequest:
+                                                                serviceRequest
+                                                                  ..status =
+                                                                      ServiceRequest_Status
+                                                                          .MODIFIED,
+                                                          ),
+                                                        );
+                                                      }
+                                                    : null,
+                                          ),
+                                        ),
+                                      if (state.serviceRequest.status ==
+                                          ServiceRequest_Status.DECLINED)
+                                        const SizedBox(width: 16),
+                                      Expanded(
+                                        child: OutlinedButtonWidget(
+                                          text: locale.decline,
+                                          onPressed: (widget.readOnly == false)
+                                              ? () {
+                                                  context.router.pop();
+                                                  bloc.add(
+                                                    DeclineServiceRequestEvent(
+                                                      serviceRequest: serviceRequest
+                                                        ..status =
+                                                            ServiceRequest_Status
+                                                                .DECLINED,
+                                                    ),
+                                                  );
+                                                }
+                                              : null,
+                                        ),
                                       ),
-                                    ),
-                                  if (state.serviceRequest.status ==
-                                      ServiceRequest_Status.ACCEPTED)
-                                    Expanded(
-                                      child: OutlinedButtonWidget(
-                                        text: locale.accept,
-                                        onPressed: (widget.readOnly == false)
-                                            ? () {
-                                                context.router.pop();
-                                                bloc.add(
-                                                  AcceptServiceRequestEvent(
-                                                    serviceRequest: serviceRequest
-                                                      ..status =
-                                                          ServiceRequest_Status
-                                                              .MODIFIED,
-                                                  ),
-                                                );
-                                              }
-                                            : null,
-                                      ),
-                                    ),
-                                  if (state.serviceRequest.status ==
-                                      ServiceRequest_Status.DECLINED)
-                                    const SizedBox(width: 16),
-                                  Expanded(
-                                    child: OutlinedButtonWidget(
-                                      text: locale.decline,
-                                      onPressed: (widget.readOnly == false)
-                                          ? () {
-                                              context.router.pop();
-                                              bloc.add(
-                                                DeclineServiceRequestEvent(
-                                                  serviceRequest: serviceRequest
-                                                    ..status =
-                                                        ServiceRequest_Status
-                                                            .DECLINED,
-                                                ),
-                                              );
-                                            }
-                                          : null,
-                                    ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: OutlinedButtonWidget(
-                                  text: locale.share,
-                                  onPressed: (widget.readOnly == false)
-                                      ? () {
-                                          Share.share(locator
-                                              .get<HttpService>()
-                                              .prepareRequestString(state
-                                                  .serviceRequest
-                                                  .serviceRequestId
-                                                  .toString()));
-                                        }
-                                      : null,
                                 ),
-                              ),
-                            ],
-                          )),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  // width: MediaQuery.of(context).size.width / 2,
+                                  child: OutlinedButtonWidget(
+                                    text: locale.share,
+                                    onPressed: (widget.readOnly == false)
+                                        ? () {
+                                            Share.share(locator
+                                                .get<HttpService>()
+                                                .prepareRequestString(state
+                                                    .serviceRequest
+                                                    .serviceRequestId
+                                                    .toString()));
+                                          }
+                                        : null,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       DeeDeeMenuSlider(
                         context,
                         controller: _controller,
