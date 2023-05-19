@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -7,7 +6,6 @@ import 'package:fixnum/fixnum.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../generated/deedee/api/model/composite_filter.pb.dart';
-import '../../../../generated/deedee/api/model/topic.pb.dart';
 import '../../../../model/user.dart';
 
 part 'composite_filter_event.dart';

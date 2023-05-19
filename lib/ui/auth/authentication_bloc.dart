@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
@@ -9,6 +10,7 @@ import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
+
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 

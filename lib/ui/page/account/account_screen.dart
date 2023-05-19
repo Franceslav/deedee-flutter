@@ -17,6 +17,7 @@ import 'package:deedee/ui/page/account/bloc/payment_method_slider_add_method_blo
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
 import 'package:deedee/ui/page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
 import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
+import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
@@ -25,7 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class AccountScreen extends StatefulWidget {

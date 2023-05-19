@@ -1,8 +1,7 @@
 import 'package:dartx/dartx.dart';
-import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../generated/deedee/api/model/verification.pb.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])

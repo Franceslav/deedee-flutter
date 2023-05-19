@@ -1,8 +1,8 @@
 import 'package:deedee/generated/deedee/api/service/supplier_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/supplier_service_api.dart';
-import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/call.dart';
+import 'package:grpc/src/client/common.dart';
 import 'package:grpc/src/client/method.dart';
 import 'package:injectable/injectable.dart';
 

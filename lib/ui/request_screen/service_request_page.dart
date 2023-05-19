@@ -1,12 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
@@ -21,6 +15,11 @@ import 'package:deedee/ui/request_screen/request_price_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../global_widgets/dee_dee_menu_slider.dart';
 

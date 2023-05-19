@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/account.pb.dart';
-import 'package:deedee/generated/deedee/api/model/balance.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/account_repository.dart';
-import 'package:deedee/services/grpc.dart';
 import 'package:deedee/ui/page/top_up/top_up_event.dart';
 import 'package:flutter/material.dart';
 

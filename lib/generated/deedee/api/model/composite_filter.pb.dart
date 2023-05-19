@@ -10,9 +10,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'topic.pb.dart' as $0;
-
 import 'composite_filter.pbenum.dart';
+import 'topic.pb.dart' as $0;
 
 export 'composite_filter.pbenum.dart';
 

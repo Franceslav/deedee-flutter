@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
 part 'filter_page_event.dart';
-
 part 'filter_page_state.dart';
 
 class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {

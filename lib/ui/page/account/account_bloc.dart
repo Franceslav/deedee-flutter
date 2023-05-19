@@ -6,7 +6,6 @@ import 'package:deedee/repository/location_repository.dart';
 import 'package:deedee/ui/page/account/account_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 part 'account_state.dart';

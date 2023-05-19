@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../filter_page_bloc.dart';
 
 class SubtopicList extends StatefulWidget {

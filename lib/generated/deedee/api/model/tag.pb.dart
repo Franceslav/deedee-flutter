@@ -14,7 +14,6 @@ import '../../../google/protobuf/timestamp.pb.dart' as $0;
 import 'composite_filter.pb.dart' as $1;
 import 'geolocation.pb.dart' as $2;
 import 'observation.pb.dart' as $3;
-
 import 'tag.pbenum.dart';
 
 export 'tag.pbenum.dart';

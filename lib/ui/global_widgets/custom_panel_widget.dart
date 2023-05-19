@@ -4,7 +4,6 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 
 import '../page/account/account_info_widget.dart';
-import '../page/map_cubit/map_screen.dart';
 
 class CustomPanelWidget extends StatefulWidget {
   final String selectedMessengerId;

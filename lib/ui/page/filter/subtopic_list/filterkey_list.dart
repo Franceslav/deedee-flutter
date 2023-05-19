@@ -1,6 +1,5 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'filterkey_chip.dart';
 

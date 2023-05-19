@@ -1,5 +1,3 @@
-import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/generated/deedee/api/service/composite_filter_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/composite_filter_service_api.dart';

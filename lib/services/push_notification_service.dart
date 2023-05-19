@@ -6,7 +6,6 @@ import 'package:deedee/services/http_service.dart';
 import 'package:deedee/ui/messages/message.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -78,7 +77,7 @@ class PushNotificationService {
           context.router.push(
             RequestScreenRoute(
               serviceRequestId:
-              UUID(value: bigTextStyleInformation.summaryText!),
+                  UUID(value: bigTextStyleInformation.summaryText!),
               readOnly: false,
             ),
           );

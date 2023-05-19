@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 
 import '../../user_bloc/user_bloc.dart';
 

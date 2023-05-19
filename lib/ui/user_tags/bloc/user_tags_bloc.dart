@@ -5,7 +5,6 @@ import 'package:deedee/repository/tag_repository.dart';
 import '../../../model/user.dart';
 
 part 'user_tags_event.dart';
-
 part 'user_tags_state.dart';
 
 class UserTagsBloc extends Bloc<UserTagsEvent, UserTagsState> {

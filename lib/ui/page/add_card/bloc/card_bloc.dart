@@ -3,10 +3,8 @@ import 'package:deedee/repository/card_repository.dart';
 import 'package:deedee/ui/page/add_card/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:meta/meta.dart';
 
 part 'card_event.dart';
-
 part 'card_state.dart';
 
 class CardBloc extends Bloc<CardEvent, CardState> {

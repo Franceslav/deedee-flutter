@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/account.pb.dart';
 import 'package:deedee/generated/deedee/api/model/location.pb.dart';
@@ -12,10 +13,11 @@ import 'package:deedee/repository/location_repository.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+
 import '../../model/contact.dart';
 import '../../repository/gps_repository.dart';
-part 'user_event.dart';
 
+part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {

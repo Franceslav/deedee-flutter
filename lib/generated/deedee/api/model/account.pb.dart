@@ -10,9 +10,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'balance.pb.dart' as $0;
-
 import 'account.pbenum.dart';
+import 'balance.pb.dart' as $0;
 
 export 'account.pbenum.dart';
 

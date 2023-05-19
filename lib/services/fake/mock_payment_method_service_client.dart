@@ -1,10 +1,6 @@
-import 'package:deedee/generated/deedee/api/model/payment_method.pb.dart';
-import 'package:deedee/generated/deedee/api/model/payment_method.pbenum.dart';
 import 'package:deedee/generated/deedee/api/service/payment_service.pbgrpc.dart';
-import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/fake/api/payment_method_service_api.dart';
-import 'package:deedee/services/fake/api/service_request_service_api.dart';
 import 'package:deedee/services/fake/fake_client.dart';
 import 'package:grpc/src/client/call.dart';
 import 'package:grpc/src/client/common.dart';

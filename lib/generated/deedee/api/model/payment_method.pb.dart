@@ -12,7 +12,6 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../google/protobuf/timestamp.pb.dart' as $0;
 import 'geolocation.pb.dart' as $1;
-
 import 'payment_method.pbenum.dart';
 
 export 'payment_method.pbenum.dart';

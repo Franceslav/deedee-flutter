@@ -1,6 +1,7 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -22,18 +23,47 @@ class MyRequestScreen extends StatefulWidget {
 }
 
 class _MyRequestScreenState extends State<MyRequestScreen> {
-  final PanelController _controller = PanelController();
-  final AnimatedButtonController _buttonController = AnimatedButtonController();
-  List<ServiceRequest> _requests = [];
-  final PageController _pageController = PageController();
+  late final PanelController _controller;
+  late final AnimatedButtonController _buttonController;
+  late final PageController _pageController;
+
+  late final User _user;
+  late final ServiceRequestBloc _bloc;
+
+  void setPage(int indexPage) {
+    _pageController.animateToPage(
+      indexPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.bounceIn,
+    );
+  }
+
+  @override
+  void initState() {
+    _controller = PanelController();
+    _buttonController = AnimatedButtonController();
+    _pageController = PageController();
+    _user = BlocProvider.of<UserBloc>(context).state.user;
+    _bloc = ServiceRequestBloc(locator.get<ServiceRequestRepository>(), _user);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  bool _listenCondition(MyRequestState previous, MyRequestState current) =>
+      (previous.errorMessage != current.errorMessage &&
+          current.errorMessage.isNotEmpty) ||
+      (previous.snackBarMessage != current.snackBarMessage &&
+          current.snackBarMessage.isNotEmpty);
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select((UserBloc bloc) => bloc.state.user);
-    var bloc =
-        ServiceRequestBloc(locator.get<ServiceRequestRepository>(), user);
     return BlocProvider<ServiceRequestBloc>(
-      create: (context) => bloc,
+      create: (context) => _bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.myRequests,
@@ -42,36 +72,20 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
         ),
         floatingActionButton: IconButton(
           onPressed: () {
-            bloc.add(MyRequestCreateEvent());
+            _bloc.add(MyRequestCreateEvent());
           },
           icon: const Icon(Icons.add),
         ),
         body: Stack(
           children: [
             BlocConsumer<ServiceRequestBloc, MyRequestState>(
+              listenWhen: _listenCondition,
               listener: (context, state) {
-                if (state is MyRequestLoadState) {
-                  _requests = state.requests;
-                }
-                if (state is MyRequestCreateState) {
-                  _requests.add(state.request);
-                }
-                if (state is DeletedSuccessfulState) {
-                  showSnackBar(context, 'request declined');
-                }
-                if (state is AcceptSuccessfulState) {
-                  showSnackBar(context, 'request accepted');
-                }
-                if (state is DeletedErrorState) {
-                  _requests.insert(state.index, state.request);
-                  showSnackBar(context, 'request was not declined');
-                }
-                if (state is AcceptedErrorState) {
-                  _requests.insert(state.index, state.request);
-                  showSnackBar(context, 'request was not accepted');
-                }
-                if (state is ErrorState) {
+                if (state.errorMessage.isNotEmpty) {
                   showSnackBar(context, state.errorMessage);
+                }
+                if (state.snackBarMessage.isNotEmpty) {
+                  showSnackBar(context, state.snackBarMessage);
                 }
               },
               builder: (context, state) {
@@ -116,73 +130,73 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                           ),
                         ),
                         onChanged: (value) {
-                          BlocProvider.of<ServiceRequestBloc>(context)
-                              .add(SearchRequestEvent(value));
+                          _bloc.add(SearchRequestEvent(value));
                         },
                       ),
                     ),
                     Expanded(
-                      child: PageView(
-                        controller: _pageController,
-                        onPageChanged: (value) =>
-                            _buttonController.setIndex(value),
-                        children: [
-                          MyRequestList(
-                            requests: _requests,
-                            statuses: const [
-                              ServiceRequest_Status.CHANGED,
-                              ServiceRequest_Status.MODIFIED,
-                              ServiceRequest_Status.PENDING,
-                              ServiceRequest_Status.ACCEPTED,
-                            ],
-                            onDismissed: (request, userId, index) =>
-                                bloc.add(MyRequestDeleteEvent(
-                              request: request,
-                              index: index,
-                            )),
-                            onAccept: (request, userId, index) {
-                              bloc.add(MyRequestAcceptEvent(
-                                userId: userId,
-                                request: request,
-                                index: index,
-                              ));
-                            },
-                              onChanged: (request, userId) =>
-                                  BlocProvider.of<ServiceRequestBloc>(context).add(
-                                      UpdateRequestEvent(
-                                        request: request,
+                      child: state.isLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : PageView(
+                              controller: _pageController,
+                              onPageChanged: (value) =>
+                                  _buttonController.setIndex(value),
+                              children: [
+                                MyRequestList(
+                                    requests: state.searchText.trim().isEmpty
+                                        ? state.requests
+                                        : state.requestsSearch,
+                                    statuses: const [
+                                      ServiceRequest_Status.PENDING,
+                                      ServiceRequest_Status.ACCEPTED,
+                                    ],
+                                    onDismissed: (request, userId, index) =>
+                                        _bloc.add(MyRequestDeleteEvent(
+                                          request: request,
+                                          index: index,
+                                        )),
+                                    onAccept: (request, userId, index) {
+                                      _bloc.add(MyRequestAcceptEvent(
                                         userId: userId,
-                                      )
-                                  )
-                          ),
-                          MyRequestList(requests: _requests,
-                            statuses: const [
-                              ServiceRequest_Status.DECLINED,
-                              ServiceRequest_Status.DELETED,
-                              ServiceRequest_Status.DONE,
-                            ],
-                            onDismissed: (request, userId, index) =>
-                                bloc.add(MyRequestDeleteEvent(
-                              request: request,
-                              index: index,
-                            )),
-                            onAccept: (request, userId, index) {
-                              bloc.add(MyRequestAcceptEvent(
-                                userId: userId,
-                                request: request,
-                                index: index,
-                              ));
-                            },
-                              onChanged: (request, userId) =>
-                                  BlocProvider.of<ServiceRequestBloc>(context).add(
-                                      UpdateRequestEvent(
                                         request: request,
-                                        userId: userId,
-                                      ),
+                                        index: index,
+                                      ));
+                                    },
+                                    onChanged: (request, userId) =>
+                                        _bloc.add(UpdateRequestEvent(
+                                          request: request,
+                                          userId: userId,
+                                        ))),
+                                MyRequestList(
+                                  requests: state.searchText.trim().isEmpty
+                                      ? state.requests
+                                      : state.requestsSearch,
+                                  statuses: const [
+                                    ServiceRequest_Status.DECLINED,
+                                    ServiceRequest_Status.DELETED,
+                                    ServiceRequest_Status.DONE,
+                                  ],
+                                  onDismissed: (request, userId, index) =>
+                                      _bloc.add(MyRequestDeleteEvent(
+                                    request: request,
+                                    index: index,
+                                  )),
+                                  onAccept: (request, userId, index) {
+                                    _bloc.add(MyRequestAcceptEvent(
+                                      userId: userId,
+                                      request: request,
+                                      index: index,
+                                    ));
+                                  },
+                                  onChanged: (request, userId) => _bloc.add(
+                                    UpdateRequestEvent(
+                                      request: request,
+                                      userId: userId,
+                                    ),
                                   ),
-                          ),
-                        ],
-                      ),
+                                ),
+                              ],
+                            ),
                     ),
                   ],
                 );
@@ -191,25 +205,11 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
             DeeDeeMenuSlider(
               context,
               controller: _controller,
-              user: user,
+              user: _user,
             ),
           ],
         ),
       ),
     );
-  }
-
-  void setPage(int indexPage) {
-    _pageController.animateToPage(
-      indexPage,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.bounceIn,
-    );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 }

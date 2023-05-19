@@ -1,7 +1,6 @@
-import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])

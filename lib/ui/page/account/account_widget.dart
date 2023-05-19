@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -12,7 +13,6 @@ import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:deedee/services/helper.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({

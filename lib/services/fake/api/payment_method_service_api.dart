@@ -1,8 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/payment_method.pb.dart';
-import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
-import 'package:deedee/generated/deedee/api/service/payment_service.pbgrpc.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';

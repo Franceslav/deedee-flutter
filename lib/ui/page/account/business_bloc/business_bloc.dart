@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 
 part 'business_event.dart';
-
 part 'business_state.dart';
 
 class BusinessPageBloc extends Bloc<BusinessEvent, BusinessState> {

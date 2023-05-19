@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/service/payment_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/card_repository.dart';
@@ -12,8 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import 'bloc/card_bloc.dart';
 
 class CardScreen extends StatefulWidget {

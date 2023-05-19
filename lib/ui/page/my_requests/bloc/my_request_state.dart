@@ -1,50 +1,38 @@
 part of 'my_request_bloc.dart';
 
 @immutable
-abstract class MyRequestState {}
-
-class MyRequestInitial extends MyRequestState {}
-
-class MyRequestLoadState extends MyRequestState {
+class MyRequestState {
+  final bool isLoading;
   final List<ServiceRequest> requests;
-
-  MyRequestLoadState(this.requests);
-}
-
-class MyRequestCreateState extends MyRequestState {
-  final ServiceRequest request;
-
-  MyRequestCreateState(this.request);
-}
-
-class AcceptSuccessfulState extends MyRequestState {}
-
-class DeletedSuccessfulState extends MyRequestState {}
-
-class DeletedErrorState extends MyRequestState {
-  final ServiceRequest request;
-  final int index;
-
-  DeletedErrorState({
-    required this.request,
-    required this.index,
-  });
-}
-
-class AcceptedErrorState extends MyRequestState {
-  final ServiceRequest request;
-  final int index;
-
-  AcceptedErrorState({
-    required this.request,
-    required this.index,
-  });
-}
-
-class ErrorState extends MyRequestState {
+  final List<ServiceRequest> requestsSearch;
   final String errorMessage;
+  final String snackBarMessage;
+  final String searchText;
 
-  ErrorState({
-    required this.errorMessage,
+  const MyRequestState({
+    this.isLoading = false,
+    this.requests = const [],
+    this.requestsSearch = const [],
+    this.errorMessage = '',
+    this.snackBarMessage = '',
+    this.searchText = '',
   });
+
+  MyRequestState copyWith({
+    bool? isLoading,
+    List<ServiceRequest>? requests,
+    List<ServiceRequest>? requestsSearch,
+    String? errorMessage,
+    String? snackBarMessage,
+    String? searchText,
+  }) {
+    return MyRequestState(
+      isLoading: isLoading ?? this.isLoading,
+      requests: requests ?? this.requests,
+      requestsSearch: requestsSearch ?? this.requestsSearch,
+      errorMessage: errorMessage ?? this.errorMessage,
+      snackBarMessage: snackBarMessage ?? this.snackBarMessage,
+      searchText: searchText ?? this.searchText,
+    );
+  }
 }

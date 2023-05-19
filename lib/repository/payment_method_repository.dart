@@ -1,11 +1,6 @@
-import 'dart:math';
-
 import 'package:deedee/generated/deedee/api/model/payment_method.pb.dart';
-import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/generated/deedee/api/service/payment_service.pbgrpc.dart';
-import 'package:deedee/generated/deedee/api/service/service_request_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';

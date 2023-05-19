@@ -1,9 +1,8 @@
+import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/account.pb.dart';
 import 'package:deedee/generated/deedee/api/model/balance.pb.dart';
-
-import 'package:injectable/injectable.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:dartx/dartx.dart';
+import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class AccountServiceApi {

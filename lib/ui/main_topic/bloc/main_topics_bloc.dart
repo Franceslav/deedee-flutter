@@ -4,7 +4,6 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:latlong2/latlong.dart';
 
 part 'main_topics_event.dart';
-
 part 'main_topics_state.dart';
 
 class MainTopicsBloc extends Bloc<MainTopicsEvent, MainTopicsState> {

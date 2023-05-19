@@ -1,7 +1,5 @@
-import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartx/dartx.dart';
-
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -14,7 +12,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../../constants.dart';
 import '../../../injection.dart';
 import '../../../services/helper.dart';
 import '../../global_widgets/dee_dee_devider_widget.dart';

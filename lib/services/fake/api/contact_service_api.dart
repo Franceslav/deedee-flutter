@@ -1,6 +1,5 @@
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/contact.pb.dart';
-import 'package:deedee/generated/deedee/api/service/contact_service.pbgrpc.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 

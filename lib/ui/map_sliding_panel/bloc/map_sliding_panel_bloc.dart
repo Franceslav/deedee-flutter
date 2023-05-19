@@ -1,22 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
-import 'package:deedee/generated/deedee/api/model/service_request.pbenum.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
-import 'package:deedee/generated/deedee/api/service/service_request_service.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../../injection.dart';
 import '../../../model/user.dart';
 import '../../../repository/service_request_repository.dart';
-import '../../../services/push_notification_service.dart';
 
 part 'map_sliding_panel_event.dart';
-
 part 'map_sliding_panel_state.dart';
 
 class MapSlidingPanelBloc

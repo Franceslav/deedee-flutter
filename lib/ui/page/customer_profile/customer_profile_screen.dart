@@ -1,8 +1,8 @@
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class CustomerProfile extends StatefulWidget {
   final String id;

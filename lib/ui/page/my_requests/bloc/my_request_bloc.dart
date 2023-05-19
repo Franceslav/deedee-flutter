@@ -1,14 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
-import 'package:deedee/generated/deedee/api/service/service_request_service.pb.dart';
+import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
-
-import '../../../../generated/deedee/api/model/uuid.pb.dart';
 
 part 'my_request_event.dart';
 
@@ -19,64 +16,87 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   final User _user;
 
   ServiceRequestBloc(this._serviceRequestRepository, this._user)
-      : super(MyRequestInitial()) {
+      : super(const MyRequestState()) {
     on<MyRequestCreateEvent>(_onCreateRequest);
     on<MyRequestAcceptEvent>(_onAcceptRequest);
     on<MyRequestDeleteEvent>(_onDeleteRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     on<SearchRequestEvent>(_onSearchRequest);
-    initialize();
+
+    on<UpdateEvent>(_onUpdateEvent);
+    add(UpdateEvent());
   }
 
-  initialize() async {
+  Future<void> _onUpdateEvent(
+      UpdateEvent event, Emitter<MyRequestState> emit) async {
     try {
+      emit(state.copyWith(isLoading: true));
       final requests = await _serviceRequestRepository.getAll(_user.email);
-      emit(MyRequestLoadState(requests));
+      emit(state.copyWith(
+        requests: requests,
+        isLoading: false,
+      ));
     } catch (error) {
-      emit(ErrorState(
+      emit(state.copyWith(
         errorMessage: error.toString(),
+        isLoading: false,
       ));
     }
   }
 
-  _onAcceptRequest(
+  Future<void> _onAcceptRequest(
       MyRequestAcceptEvent event, Emitter<MyRequestState> emit) async {
     try {
+      debugPrint('MyRequestBloc: ACCEPTING...');
       var serverRequest = ServiceRequest()
         ..serviceRequestId = event.request.serviceRequestId;
       final response =
           await _serviceRequestRepository.accept(serverRequest, _user.email);
       if (response.status == ServiceRequest_Status.ACCEPTED) {
-        emit(AcceptSuccessfulState());
+        final newRequestList =
+            await _serviceRequestRepository.getAll(_user.email);
+        emit(state.copyWith(
+          requests: newRequestList,
+          snackBarMessage: 'request accepted',
+          isLoading: false,
+        ));
+        debugPrint('MyRequestBLOC: DONE');
       } else if (event.index != null) {
-        emit(AcceptedErrorState(
-          request: event.request,
-          index: event.index!,
+        emit(state.copyWith(
+          isLoading: false,
+          snackBarMessage: 'request was not accepted',
         ));
       }
     } catch (error) {
-      emit(ErrorState(
+      emit(state.copyWith(
         errorMessage: error.toString(),
+        isLoading: false,
       ));
     }
   }
 
-  _onUpdateRequest(
+  Future<void> _onUpdateRequest(
       UpdateRequestEvent event, Emitter<MyRequestState> emit) async {
     try {
-      _serviceRequestRepository.change(event.request, event.request);
-      final requests = await _serviceRequestRepository.getAll(_user.email);
-      emit(MyRequestLoadState(requests));
+      emit(state.copyWith(isLoading: true));
+      await _serviceRequestRepository.change(event.request, event.request);
+      final newRequests = await _serviceRequestRepository.getAll(_user.email);
+      emit(state.copyWith(
+        requests: newRequests,
+        isLoading: false,
+      ));
     } catch (error) {
-      emit(ErrorState(
+      emit(state.copyWith(
         errorMessage: error.toString(),
+        isLoading: false,
       ));
     }
   }
 
-  _onCreateRequest(
+  Future<void> _onCreateRequest(
       MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
     try {
+      emit(state.copyWith(isLoading: true));
       var serviceRequest = ServiceRequest(
         serviceRequestId:
             UUID(value: const Uuid().v5(Uuid.NAMESPACE_URL, 'www.deedee.com')),
@@ -91,37 +111,54 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
         serviceRequest = event.request!..createdFor = _user.email;
       }
       final response = await _serviceRequestRepository.create(serviceRequest);
-      emit(MyRequestCreateState(response));
+      final newRequestList = List<ServiceRequest>.from(state.requests);
+      newRequestList.add(response);
+      emit(state.copyWith(
+        requests: newRequestList,
+        isLoading: false,
+      ));
     } catch (error) {
-      emit(ErrorState(
+      emit(state.copyWith(
         errorMessage: error.toString(),
+        isLoading: false,
       ));
     }
   }
 
-  _onDeleteRequest(
+  Future<void> _onDeleteRequest(
       MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
     try {
+      emit(state.copyWith(isLoading: true));
       final response = await _serviceRequestRepository.delete(
           event.request.serviceRequestId, _user.email);
       if (response.status == ServiceRequest_Status.DELETED) {
-        emit(DeletedSuccessfulState());
+        final newRequestList =
+            await _serviceRequestRepository.getAll(_user.email);
+        emit(state.copyWith(
+          requests: newRequestList,
+          snackBarMessage: 'request declined',
+          isLoading: false,
+        ));
       } else {
-        emit(DeletedErrorState(
-          request: event.request,
-          index: event.index,
+        emit(state.copyWith(
+          isLoading: false,
+          snackBarMessage: 'request was not declined',
         ));
       }
     } catch (error) {
-      emit(ErrorState(
+      emit(state.copyWith(
         errorMessage: error.toString(),
+        isLoading: false,
       ));
     }
   }
 
-  _onSearchRequest(
-      SearchRequestEvent event, Emitter<MyRequestState> emit) async {
-    final request = await _serviceRequestRepository.getAll(event.name);
-    emit(MyRequestLoadState(request));
+  void _onSearchRequest(
+      SearchRequestEvent event, Emitter<MyRequestState> emit) {
+    emit(state.copyWith(searchText: event.name));
+    final requestsList = List<ServiceRequest>.from(state.requests
+        .where((element) => element.description.contains(event.name)));
+    emit(state.copyWith(requestsSearch: requestsList));
   }
+
 }

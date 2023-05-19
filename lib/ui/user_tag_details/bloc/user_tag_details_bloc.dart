@@ -1,12 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
-import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:fixnum/fixnum.dart';
 
 part 'user_tag_details_event.dart';
-
 part 'user_tag_details_state.dart';
 
 class UserTagDetailsBloc

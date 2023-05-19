@@ -1,8 +1,8 @@
 import 'package:deedee/constants.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/card_repository.dart';
-import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/observation_repository.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';

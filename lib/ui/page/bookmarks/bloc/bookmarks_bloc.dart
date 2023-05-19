@@ -1,19 +1,18 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
-import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
-import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/observation_repository.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/grpc.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 part 'bookmarks_event.dart';
-
 part 'bookmarks_state.dart';
 
 class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {

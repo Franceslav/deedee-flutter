@@ -3,6 +3,8 @@ part of 'my_request_bloc.dart';
 @immutable
 abstract class MyRequestEvent {}
 
+class UpdateEvent extends MyRequestEvent {}
+
 class MyRequestCreateEvent extends MyRequestEvent {
   final ServiceRequest? request;
 

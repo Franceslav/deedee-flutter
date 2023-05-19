@@ -7,7 +7,6 @@ import 'package:deedee/repository/service_request_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'service_request_event.dart';
-
 part 'service_request_state.dart';
 
 class ServicePushRequestBloc
@@ -56,14 +55,18 @@ class ServicePushRequestBloc
       Emitter<ServicePushRequestState> emit) async {
     var sr = await _serviceRequestRepository.accept(
         event.serviceRequest, _user.email);
-    emit(AcceptServiceRequestState(errorMessage: ''));
+    if (sr.status == ServiceRequest_Status.ACCEPTED) {
+      emit(AcceptServiceRequestState(errorMessage: ''));
+    }
   }
 
   _onDeclineServiceRequestEvent(DeclineServiceRequestEvent event,
       Emitter<ServicePushRequestState> emit) async {
     var sr = await _serviceRequestRepository.decline(
         event.serviceRequest, _user.email);
-    emit(AcceptServiceRequestState(errorMessage: ''));
+    if (sr.status == ServiceRequest_Status.DECLINED) {
+      emit(AcceptServiceRequestState(errorMessage: ''));
+    }
   }
 
   _initialize() async {

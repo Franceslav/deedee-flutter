@@ -4,8 +4,6 @@ import 'package:injectable/injectable.dart';
 
 import '../generated/deedee/api/model/verification.pb.dart';
 import '../generated/deedee/api/service/verification_service.pbgrpc.dart';
-import 'package:grpc/service_api.dart' as $grpc;
-import 'package:fixnum/fixnum.dart' as $fixnum;
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
 class VerificationRepository {

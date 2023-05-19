@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:auto_route/auto_route.dart';
+
 import 'package:deedee/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:uni_links/uni_links.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
 class HttpService {

@@ -11,7 +11,6 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'contact.pb.dart' as $0;
-
 import 'profile.pbenum.dart';
 
 export 'profile.pbenum.dart';

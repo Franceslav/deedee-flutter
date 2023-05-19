@@ -1,12 +1,9 @@
 import 'dart:math';
 
-import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/geolocation.pb.dart';
 import 'package:deedee/generated/deedee/api/model/supplier.pb.dart';
-import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])

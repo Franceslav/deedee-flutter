@@ -1,7 +1,6 @@
 import 'package:deedee/generated/deedee/api/model/account.pb.dart';
 import 'package:deedee/generated/deedee/api/service/account_service.pbgrpc.dart';
 import 'package:deedee/injection.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod, Environment.test])
