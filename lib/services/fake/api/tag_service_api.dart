@@ -34,7 +34,42 @@ class TagServiceApi {
           topic: Topic(topicId: 1, userId: '', title: 'One'),
           filterMap: {
             'Two': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey1')],
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = Int64(1)
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+        // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'One'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
             ),
           },
         )
@@ -55,7 +90,14 @@ class TagServiceApi {
           topic: Topic(topicId: 2, userId: '', title: 'OneOne'),
           filterMap: {
             'TwoTwo': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey2')],
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
             ),
           },
         )
@@ -76,7 +118,14 @@ class TagServiceApi {
           topic: Topic(topicId: 3, userId: '', title: 'OneOneOne'),
           filterMap: {
             'TwoTwoTwo': FilterKeyList(
-              filterKeys: [FilterKey(title: 'filterKey3')],
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
             ),
           },
         )
@@ -94,14 +143,44 @@ class TagServiceApi {
         // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
         ..compositeFilter = CompositeFilter(
           compositeFilterId: Int64(1),
-          topic: Topic(topicId: 3, userId: '', title: 'Children'),
+          topic: Topic(topicId: 2, userId: '', title: 'Children'),
+          filterMap: {
+            'Car Washh  ': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(7)
+        ..createdBy = Int64(1)
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+        // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Auto'),
           filterMap: {
             'Car Wash': FilterKeyList(
               filterKeys: [
-                FilterKey(
-                  title: '24 Hour',
-                  selected: true,
-                )
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
               ],
             ),
           },

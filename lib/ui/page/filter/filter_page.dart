@@ -73,6 +73,14 @@ class _FilterPageState extends State<FilterPage> {
             };
             context.router.popAndPush(
               MapScreenRoute(
+                backTapRoute: FilterPageRoute(
+                  currentFilter: CompositeFilter(
+                    compositeFilterId: _compositeFilter.compositeFilterId,
+                    topic: _compositeFilter.topic,
+                    filterMap: _compositeFilter.filterMap,
+                    status: _compositeFilter.status,
+                  ),
+                ),
                 tagDescriptionMap: tagMap,
                 currentFilter: _compositeFilter,
               ),

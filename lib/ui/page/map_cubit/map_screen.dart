@@ -29,11 +29,13 @@ import '../../user_bloc/user_bloc.dart';
 class MapScreen extends StatefulWidget {
   final Map<LatLng, TagDTO> tagDescriptionMap;
   final CompositeFilter currentFilter;
+  final PageRouteInfo backTapRoute;
 
   const MapScreen({
     Key? key,
     required this.tagDescriptionMap,
     required this.currentFilter,
+    required this.backTapRoute,
   }) : super(key: key);
 
   @override
@@ -142,14 +144,9 @@ class _MapScreenState extends State<MapScreen> {
               widget.currentFilter.filterMap,
               selectedFilterKeys,
             );
-            context.router.replace(FilterPageRoute(
-              currentFilter: CompositeFilter(
-                compositeFilterId: widget.currentFilter.compositeFilterId,
-                topic: widget.currentFilter.topic,
-                filterMap: filterMap,
-                status: widget.currentFilter.status,
-              ),
-            ));
+            context.router.replace(
+              widget.backTapRoute,
+            );
             return true;
           },
           child: Scaffold(
@@ -305,15 +302,9 @@ class _MapScreenState extends State<MapScreen> {
                         widget.currentFilter.filterMap,
                         selectedFilterKeys,
                       );
-                      context.router.replace(FilterPageRoute(
-                        currentFilter: CompositeFilter(
-                          compositeFilterId:
-                              widget.currentFilter.compositeFilterId,
-                          topic: widget.currentFilter.topic,
-                          filterMap: filterMap,
-                          status: widget.currentFilter.status,
-                        ),
-                      ));
+                      context.router.replace(
+                        widget.backTapRoute,
+                      );
                     },
                   ),
                 ),

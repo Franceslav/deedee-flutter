@@ -199,6 +199,23 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                         context.router.push(
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
+                                            backTapRoute: FilterPageRoute(
+                                              currentFilter:CompositeFilter(
+                                                compositeFilterId:
+                                                _bookmarks[index]
+                                                    .compositeFilter
+                                                    .compositeFilterId,
+                                                topic: _bookmarks[index]
+                                                    .compositeFilter
+                                                    .topic,
+                                                filterMap: _bookmarks[index]
+                                                    .compositeFilter
+                                                    .filterMap,
+                                                status: _bookmarks[index]
+                                                    .compositeFilter
+                                                    .status,
+                                              ),
+                                            ),
                                             currentFilter: CompositeFilter(
                                               compositeFilterId:
                                                   _bookmarks[index]

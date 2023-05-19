@@ -169,35 +169,36 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                             ),
                             Flexible(
                               child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: CupertinoSearchTextField(
-                                    controller: _searchController,
-                                    onTap: () async {
-                                      final LatLng? selectedLocation =
-                                          await showModalBottomSheet(
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(25),
-                                          ),
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: CupertinoSearchTextField(
+                                  controller: _searchController,
+                                  onTap: () async {
+                                    final LatLng? selectedLocation =
+                                        await showModalBottomSheet(
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(25),
                                         ),
-                                        context: context,
-                                        isScrollControlled: true,
-                                        builder: (context) =>
-                                            const FractionallySizedBox(
-                                          heightFactor: 0.9,
-                                          child: SearchAddressScreen(),
-                                        ),
-                                      );
-                                      if (selectedLocation == null) {
-                                        return;
-                                      }
-                                      _moveToPosition(selectedLocation);
-                                    },
-                                  )),
+                                      ),
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (context) =>
+                                          const FractionallySizedBox(
+                                        heightFactor: 0.9,
+                                        child: SearchAddressScreen(),
+                                      ),
+                                    );
+                                    if (selectedLocation == null) {
+                                      return;
+                                    }
+                                    _moveToPosition(selectedLocation);
+                                  },
+                                ),
+                              ),
                             ),
                           ],
                         ),

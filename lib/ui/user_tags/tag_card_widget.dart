@@ -3,10 +3,13 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
+import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -21,7 +24,6 @@ class TagCardWidget extends StatelessWidget {
   });
 
   final Tag tag;
-
   final void Function() onDismissed;
 
   @override
@@ -34,7 +36,6 @@ class TagCardWidget extends StatelessWidget {
         mainText: Text(
           tag.compositeFilter.topic.title,
           // tag.compositeFilter.filterMap.values.first.filterKeys
-
           style: AppTextTheme.bodyLarge,
         ),
         secondaryText: Text(
@@ -42,21 +43,41 @@ class TagCardWidget extends StatelessWidget {
           style: AppTextTheme.labelMedium,
         ),
         //     subtitle: Text(bookmark.geolocation.toString()),
-        onTap: () {
+        onTap: () async {
           Map<LatLng, TagDTO> tagMap = {
             LatLng(tag.geolocation.latitude, tag.geolocation.longitude):
                 TagDTO(tag.tagId, '' /*tag.messengerId*/) //TODO
           };
+          var compositeFilter = CompositeFilter(
+            compositeFilterId: Int64(0),
+            topic: Topic(topicId: 2, userId: '', title: 'Children'),
+            filterMap: {
+              "Car Wash": FilterKeyList(filterKeys: [
+                FilterKey()
+                  ..subtopicId = '3'
+                  ..title = '24 Hour',
+                FilterKey()
+                  ..subtopicId = '2'
+                  ..title = 'Covered'
+                  ..selected = true,
+                FilterKey()
+                  ..subtopicId = '1'
+                  ..title = 'Valet'
+              ])
+            },
+            status: CompositeFilter_Status.FAVORITE,
+          );
+          print('Tags $compositeFilter');
           context.router.push(
             MapScreenRoute(
+              backTapRoute: const UserTagsScreenRoute(),
               tagDescriptionMap: tagMap,
-              currentFilter: CompositeFilter(filterMap: {}), //TODO:
+              currentFilter: tag.compositeFilter, //TODO:
             ),
           );
         },
       ),
     );
-
     if (tag.status != Tag_Status.DELETED) {
       widget = Slidable(
         endActionPane: ActionPane(
@@ -93,7 +114,6 @@ class TagCardWidget extends StatelessWidget {
         child: widget,
       );
     }
-
     return widget;
   }
 }
