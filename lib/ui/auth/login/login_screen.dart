@@ -4,6 +4,7 @@ import 'package:deedee/generated/deedee/api/model/verification.pb.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/login/login_bloc.dart';
+import 'package:deedee/ui/auth/login/password_visibility/bloc/password_visibility_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -25,9 +26,11 @@ class _LoginScreen extends State<LoginScreen> {
   final GlobalKey<FormState> _key = GlobalKey();
   AutovalidateMode _validate = AutovalidateMode.disabled;
   String? email, password;
+  late bool _obscureText;
 
   @override
   Widget build(BuildContext context) {
+    _obscureText = PasswordVisibilityBloc().showPassword;
     return BlocProvider<LoginBloc>(
       create: (context) => LoginBloc(),
       child: Builder(builder: (context) {
@@ -62,8 +65,7 @@ class _LoginScreen extends State<LoginScreen> {
                     showProgress(
                         context,
                         AppLocalizations.of(context)!.loggingInPleaseWait,
-                        false
-                    );
+                        false);
                     context.read<AuthenticationBloc>().add(
                           LoginWithEmailAndPasswordEvent(
                             email: email!,
@@ -119,23 +121,68 @@ class _LoginScreen extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.only(
                             top: 32.0, right: 24.0, left: 24.0),
-                        child: TextFormField(
-                            textAlignVertical: TextAlignVertical.center,
-                            obscureText: true,
-                            validator: validatePassword,
-                            onSaved: (String? val) {
-                              password = val;
+                        child: BlocProvider(
+                          create: (context) => PasswordVisibilityBloc(),
+                          child: BlocConsumer<PasswordVisibilityBloc,
+                              PasswordVisibilityState>(
+                            listener: (context, state) {
+                              if (state is PasswordShownState) {
+                                _obscureText = !_obscureText;
+                              }
                             },
-                            onFieldSubmitted: (password) => context
-                                .read<LoginBloc>()
-                                .add(ValidateLoginFieldsEvent(_key)),
-                            textInputAction: TextInputAction.done,
-                            style: const TextStyle(fontSize: 18.0),
-                            cursorColor: const Color(COLOR_PRIMARY),
-                            decoration: getInputDecoration(
-                                hint: AppLocalizations.of(context)!.password,
-                                darkMode: isDarkMode(context),
-                                errorColor: Theme.of(context).errorColor)),
+                            builder: (context, state) {
+                              return TextFormField(
+                                textAlignVertical: TextAlignVertical.center,
+                                obscureText: !_obscureText,
+                                validator: validatePassword,
+                                onSaved: (String? val) {
+                                  password = val;
+                                },
+                                onFieldSubmitted: (password) => context
+                                    .read<LoginBloc>()
+                                    .add(ValidateLoginFieldsEvent(_key)),
+                                textInputAction: TextInputAction.done,
+                                style: const TextStyle(fontSize: 18.0),
+                                cursorColor: const Color(COLOR_PRIMARY),
+                                decoration: getInputDecoration(
+                                    iconButton: BlocBuilder<
+                                        PasswordVisibilityBloc,
+                                        PasswordVisibilityState>(
+                                      builder: (context, state) {
+                                        if (_obscureText) {
+                                          return IconButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<
+                                                        PasswordVisibilityBloc>()
+                                                    .add(
+                                                        TogglePasswordShownEvent(
+                                                            _obscureText));
+                                              },
+                                              icon:
+                                                  const Icon(Icons.visibility));
+                                        }
+                                        return IconButton(
+                                            onPressed: () {
+                                              context
+                                                  .read<
+                                                      PasswordVisibilityBloc>()
+                                                  .add(TogglePasswordShownEvent(
+                                                      _obscureText));
+                                            },
+                                            icon: const Icon(
+                                                Icons.visibility_off));
+                                      },
+                                    ),
+                                    isPasswordField: true,
+                                    hint:
+                                        AppLocalizations.of(context)!.password,
+                                    darkMode: isDarkMode(context),
+                                    errorColor: Theme.of(context).errorColor),
+                              );
+                            },
+                          ),
+                        ),
                       ),
 
                       /// forgot password text, navigates user to ResetPasswordScreen
@@ -259,9 +306,9 @@ class _LoginScreen extends State<LoginScreen> {
                           onPressed: () {
                             showProgress(
                                 context,
-                                AppLocalizations.of(context)!.loggingInPleaseWait,
-                                true
-                            );
+                                AppLocalizations.of(context)!
+                                    .loggingInPleaseWait,
+                                true);
                             context.read<AuthenticationBloc>().add(
                                   LoginWithFacebookEvent(),
                                 );
@@ -290,9 +337,9 @@ class _LoginScreen extends State<LoginScreen> {
                                   onPressed: () {
                                     showProgress(
                                         context,
-                                        AppLocalizations.of(context)!.loggingInPleaseWait,
-                                        false
-                                    );
+                                        AppLocalizations.of(context)!
+                                            .loggingInPleaseWait,
+                                        false);
                                     context.read<AuthenticationBloc>().add(
                                           LoginWithAppleEvent(),
                                         );

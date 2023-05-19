@@ -164,7 +164,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    context.router.popAndPush(PersonalInfoPageRoute());
+                    context.router.push(PersonalInfoPageRoute());
                   },
                   child: Text(
                     locale.personalInfoSettings,

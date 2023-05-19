@@ -19,87 +19,59 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
     super.key,
     required this.controller,
     required this.user,
-  }) : super(controller: controller, generalSlidingPanelItemList: [
-          GeneralSlidingPanelItem(
-              icon: Icons.list,
-              text: AppLocalizations.of(context)!.userTagsTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const UserTagsScreenRoute());
-              }),
-          user.accountType == AccountType.buy
-              ? GeneralSlidingPanelItem(
-                  icon: CommunityMaterialIcons.order_alphabetical_descending,
-                  text: AppLocalizations.of(context)!.myRequests,
+  }) : super(
+            maxHeight: MediaQuery.of(context).size.height * 0.45,
+            controller: controller,
+            generalSlidingPanelItemList: [
+              GeneralSlidingPanelItem(
+                  icon: Icons.list,
+                  text: AppLocalizations.of(context)!.userTagsTitle,
                   onTap: () {
                     if (context.router.current.isActive) {
                       controller.close();
                     }
-                    context.router.pop();
-                    context.router.push(const MyRequestScreenRoute());
-                  })
-              : const SizedBox.shrink(),
-          GeneralSlidingPanelItem(
-              icon: Icons.bookmark,
-              text: AppLocalizations.of(context)!.bookmarksTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const BookmarksScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.filter_alt,
-              text: AppLocalizations.of(context)!.myFilters,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router
-                    .popAndPush(const FavoriteCompositeFiltersScreenRoute());
-              }),
-          GeneralSlidingPanelItem(
-              icon: Icons.link_sharp,
-              text: AppLocalizations.of(context)!.accountReferralTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-                context.router.popAndPush(const ReferralScreenRoute());
-              }),
-        ]);
-
-  @override
-  Widget build(BuildContext context) {
-    return SlidingUpPanel(
-      backdropEnabled: true,
-      minHeight: 0,
-      maxHeight: MediaQuery.of(context).size.height *
-          0.43, // this is the only difference from GeneralSlidingPanel build method
-      controller: controller,
-      header: Container(
-        margin: EdgeInsets.fromLTRB(
-            MediaQuery.of(context).size.width / 2 - 30, 10.0, 24.0, 0.0),
-        width: 60,
-        height: 7,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.black,
-        ),
-      ),
-      panel: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: generalSlidingPanelItemList,
-            ),
-          ),
-        ),
-      ),
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
-    );
-  }
+                    context.router.popAndPush(const UserTagsScreenRoute());
+                  }),
+              user.accountType == AccountType.buy
+                  ? GeneralSlidingPanelItem(
+                      icon:
+                          CommunityMaterialIcons.order_alphabetical_descending,
+                      text: AppLocalizations.of(context)!.myRequests,
+                      onTap: () {
+                        if (context.router.current.isActive) {
+                          controller.close();
+                        }
+                        context.router.pop();
+                        context.router.push(const MyRequestScreenRoute());
+                      })
+                  : const SizedBox.shrink(),
+              GeneralSlidingPanelItem(
+                  icon: Icons.bookmark,
+                  text: AppLocalizations.of(context)!.bookmarksTitle,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.popAndPush(const BookmarksScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.filter_alt,
+                  text: AppLocalizations.of(context)!.myFilters,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.popAndPush(
+                        const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.link_sharp,
+                  text: AppLocalizations.of(context)!.accountReferralTitle,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.popAndPush(const ReferralScreenRoute());
+                  }),
+            ]);
 }
