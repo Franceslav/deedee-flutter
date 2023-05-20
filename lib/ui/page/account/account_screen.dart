@@ -106,17 +106,6 @@ class _AccountState extends State<AccountScreen> {
                       },
                     ),
                     const SizedBox(height: 0),
-                    _TextButtonWidget(
-                      text: locale.switchAccount,
-                      textColor: AppColors.blue,
-                      onPressed: () {},
-                    ),
-                    const SizedBox(height: 8),
-                    _TextButtonWidget(
-                      text: locale.logout,
-                      textColor: AppColors.red,
-                      onPressed: () {},
-                    ),
                   ],
                 ),
               ),
