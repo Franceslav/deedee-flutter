@@ -38,7 +38,7 @@ class ObservationServiceApi {
     profile.username = profileArg.username;
     return profile;
   }
-  Profile delete(Profile profileArg) {
+  Profile removeProfile(Profile profileArg) {
     return _profiles
         .firstWhere((profile) => profile.profileId == profileArg.profileId)
       ..status = Profile_Status.DELETED;
