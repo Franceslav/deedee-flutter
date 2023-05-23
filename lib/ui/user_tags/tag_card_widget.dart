@@ -4,7 +4,6 @@ import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
-import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -22,16 +21,32 @@ class TagCardWidget extends StatelessWidget {
     required this.tag,
     required this.onDismissed,
   });
-
   final Tag tag;
   final void Function() onDismissed;
-
+  ImageIcon getIcon(Tag tag) {
+    switch (tag.compositeFilter.topic.title) {
+      case 'Children':
+        return const ImageIcon(AssetImage('assets/images/topic_children.png'));
+      case 'Auto':
+        return const ImageIcon(AssetImage('assets/images/topic_auto.png'));
+      case 'Beauty':
+        return const ImageIcon(AssetImage('assets/images/topic_beauty.png'));
+      case 'Cleaning':
+        return const ImageIcon(AssetImage('assets/images/topic_cleaning.png'));
+      case 'Overhaul':
+        return const ImageIcon(AssetImage('assets/images/topic_overhaul.png'));
+      case 'Workers':
+        return const ImageIcon(AssetImage('assets/images/topic_workers.png'));
+      default:
+        return const ImageIcon(AssetImage('assets/images/topic_children.png'));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     Widget widget = Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       child: DeeDeeRowInfoWidget(
-        icon: Image.asset('assets/images/bookmark_icon.png'),
+        icon: getIcon(tag),
         // icon: const Icon(Icons.bookmark_border),
         mainText: Text(
           tag.compositeFilter.topic.title,

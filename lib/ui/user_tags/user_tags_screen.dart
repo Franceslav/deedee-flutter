@@ -77,7 +77,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                     : Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.only(top: 8.0),
                             child: AnimatedButtonBar(
                               invertedSelection: true,
                               radius: 25,
@@ -112,11 +112,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               },
                             ),
                           ),
-                          const Divider(
-                            thickness: 0.5,
-                            color: Colors.black,
-                            height: 0,
-                          ),
+
                           Expanded(
                             child: PageView(
                               controller: _pageController,

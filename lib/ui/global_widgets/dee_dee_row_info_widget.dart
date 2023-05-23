@@ -39,9 +39,14 @@ class DeeDeeRowInfoWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              Text('45'),
+              const SizedBox(
+                width: 8,
+              ),
+              Text('6'),
               const Icon(
-                Icons.chevron_right,
-                size: 34,
+                Icons.arrow_upward,
+                size: 23,
                 color: Colors.grey,
               ),
             ],
