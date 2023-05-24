@@ -216,5 +216,6 @@
   "customerProfile": "โปรไฟล์ลูกค้า",
   "notAuthorized":"คุณไม่ได้รับอนุญาตให้ดู",
   "search":"ค้นหา",
-  "notFound": "ไม่พบ"
+  "notFound": "ไม่พบ",
+  "requestService":"ขอบริการ"
 }

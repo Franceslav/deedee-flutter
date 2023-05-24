@@ -191,7 +191,7 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                                 ),
                               );
                             },
-                            text: 'Fake Request',
+                            text: (AppLocalizations.of(context)!.requestService),
                           ),
                         ],
                       ),

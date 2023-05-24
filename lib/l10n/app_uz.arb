@@ -213,5 +213,6 @@
   "rating": "Reyting",
   "notAuthorized":"Koʻrishga ruxsatingiz yoʻq",
   "search":"Qidirish",
-  "notFound": "Topilmadi"
+  "notFound": "Topilmadi",
+  "requestService": "Xizmatni so'rash"
 }

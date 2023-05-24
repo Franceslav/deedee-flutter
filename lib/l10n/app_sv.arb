@@ -211,5 +211,6 @@
   "regToBecomeClient": "Registrera dig för att bli kund",
   "nameCompany": "Namn företag",
   "agreePP": "Godkänn integritetspolicyn",
-  "connect": "Ansluta"
+  "connect": "Ansluta",
+  "requestService":"طلب الخدمة"
 }

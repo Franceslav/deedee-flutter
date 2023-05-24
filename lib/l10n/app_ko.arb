@@ -211,5 +211,6 @@
   "completedApplications": "완료된 응용 프로그램",
   "rating": "등급",
   "search":"찾다",
-  "notFound":"찾을 수 없음"
+  "notFound":"찾을 수 없음",
+  "requestService": "서비스 요청"
 }

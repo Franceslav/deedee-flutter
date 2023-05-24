@@ -212,5 +212,8 @@
   "nameCompany": "Firmenname",
   "agreePP": "Zustimmen zur Datenschutzrichtlinie",
   "connect": "Verbinden",
-  "addAccountTitle": "Konto hinzufügen"
+  "addAccountTitle": "Konto hinzufügen",
+  "requestService": "Service anfordern",
+  "accountsTitle" : "Konten Titel",
+  "noUserAccounts" : "noUserAccounts"
 }

@@ -214,5 +214,6 @@
   "regToBecomeClient": "Registrati per diventare un cliente",
   "nameCompany": "Nome dell'azienda",
   "agreePP": "Accetto la politica sulla privacy",
-  "connect": "Connetti"
+  "connect": "Connetti",
+  "requestService": "Richiedi servizio"
 }

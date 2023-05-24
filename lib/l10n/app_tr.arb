@@ -217,5 +217,6 @@
   "rating": "Değerlendirme",
   "notAuthorized":"Görüntüleme yetkiniz yok",
   "search":"Aramak",
-  "notFound": "Bulunamadı"
+  "notFound": "Bulunamadı",
+  "requestService": "Hizmet İste"
 }

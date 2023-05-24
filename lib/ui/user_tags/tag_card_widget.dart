@@ -15,6 +15,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../global_widgets/dee_dee_row_info_my_tag_widget.dart';
+
 class TagCardWidget extends StatelessWidget {
   const TagCardWidget({
     super.key,
@@ -45,7 +47,7 @@ class TagCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget widget = Padding(
       padding: const EdgeInsets.all(8),
-      child: DeeDeeRowInfoWidget(
+      child: DeeDeeRowInfoMyTagWidget(
         icon: getIcon(tag),
         // icon: const Icon(Icons.bookmark_border),
         mainText: Text(

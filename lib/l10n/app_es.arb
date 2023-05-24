@@ -211,5 +211,6 @@
   "completedApplications": "Solicitudes ejecutadas",
   "rating": "Rating",
   "search": "Buscar",
-  "notFound":"No encontrado"
+  "notFound":"No encontrado",
+  "requestService": "Solicitar servicio"
 }

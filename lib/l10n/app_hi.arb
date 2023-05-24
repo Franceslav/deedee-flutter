@@ -214,5 +214,6 @@
   "regToBecomeClient": "ग्राहक बनने के लिए पंजीकरण करें",
   "nameCompany": "नाम कंपनी",
   "agreePP": "गोपनीयता नीति से सहमत हैं",
-  "connect": "जोड़ना"
+  "connect": "जोड़ना",
+  "requestService": "अनुरोध सेवा"
 }

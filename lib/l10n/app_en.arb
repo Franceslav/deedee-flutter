@@ -214,5 +214,6 @@
   "nameCompany": "Name company",
   "agreePP": "Agree to the Privacy Policy",
   "connect": "Connect",
-  "addAccountTitle": "Add account"
+  "addAccountTitle": "Add account",
+  "requestService": "Request service"
 }

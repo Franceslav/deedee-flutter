@@ -212,5 +212,8 @@
   "nameCompany": "Tên công ty",
   "agreePP": "Đồng ý với Chính sách bảo mật",
   "connect": "Kết nối",
-  "addAccountTitle": "Thêm tài khoản"
+  "addAccountTitle": "Thêm tài khoản",
+  "requestService": "Yêu cầu dịch vụ",
+  "accountsTitle": "tài khoảnTiêu đề",
+  "noUserAccounts": "không có tài khoản người dùng"
 }

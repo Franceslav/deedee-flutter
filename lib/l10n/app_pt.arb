@@ -212,5 +212,6 @@
   "rating": "Classificação",
   "notAuthorized":"Você não está autorizado a visualizar",
   "search":"Procurar",
-  "notFound": "Não encontrado"
+  "notFound": "Não encontrado",
+  "requestService": "Solicitar serviço"
 }

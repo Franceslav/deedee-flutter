@@ -211,5 +211,6 @@
   "completedApplications": "الطلبات المكتملة",
   "rating": "التقييم",
   "search": "يبحث",
-  "notFound":"غير موجود"
+  "notFound":"غير موجود",
+  "requestService":"طلب الخدمة"
 }

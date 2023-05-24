@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DeeDeeRowInfoWidget extends StatelessWidget {
+class DeeDeeRowInfoMyTagWidget extends StatelessWidget {
   final Text mainText;
   final Text secondaryText;
   final Widget icon;
 
   final void Function()? onTap;
-  const DeeDeeRowInfoWidget({
+  const DeeDeeRowInfoMyTagWidget({
     Key? key,
     required this.mainText,
     required this.secondaryText,
@@ -39,10 +39,16 @@ class DeeDeeRowInfoWidget extends StatelessWidget {
                   ],
                 ),
               ),
-            const Icon(
-              Icons.chevron_right,
-              size: 34,
-            ),
+              const Text('45'),
+              const SizedBox(
+                width: 8,
+              ),
+              const Text('6'),
+              const Icon(
+                Icons.arrow_upward,
+                size: 23,
+                color: Colors.grey,
+              ),
             ],
           ),
         ),

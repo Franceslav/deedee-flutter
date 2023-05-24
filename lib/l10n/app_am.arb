@@ -213,5 +213,6 @@
   "completedApplications": "Կատարված հայտեր",
   "rating": "Վարկանիշ",
   "search": "ፍለጋ",
-  "notFound":"አልተገኘም።"
+  "notFound":"አልተገኘም።",
+  "requestService": "Հարցման ծառայություն"
 }

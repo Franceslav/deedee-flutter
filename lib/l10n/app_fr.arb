@@ -214,5 +214,6 @@
   "addCard": "Ajouter une carte",
   "send": "Envoyer",
   "customerProfile": "Customer Profile",
-  "notAuthorized":"Vous n'êtes pas autorisé à voir"
+  "notAuthorized":"Vous n'êtes pas autorisé à voir",
+  "requestService": "Demander un service"
 }

@@ -164,5 +164,6 @@
   "notAuthorized":"Anda tidak diizinkan untuk melihat",
   "search":"Cari",
   "notFound": "Tidak Ditemukan",
-  "addAccountTitle": "Tambahkan akun"
+  "addAccountTitle": "Tambahkan akun",
+  "requestService": "Layanan Permintaan"
 }

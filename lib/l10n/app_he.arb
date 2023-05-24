@@ -216,5 +216,6 @@
    "expiredDate": "תאריך תפוגה",
    "addCard": "הוסף כרטיס",
    "customerProfile": "פרופיל לקוח",
-   "notAuthorized": "אינך מורשה לצפות"
+   "notAuthorized": "אינך מורשה לצפות",
+   "requestService":"בקש שירות"
 }

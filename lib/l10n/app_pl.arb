@@ -212,5 +212,6 @@
   "rating": "Ranking",
   "notAuthorized":"Nie masz uprawnień do przeglądania",
   "search":"Szukaj",
-  "notFound": "Nie znaleziono"
+  "notFound": "Nie znaleziono",
+  "requestService": "Poproś o usługę"
 }

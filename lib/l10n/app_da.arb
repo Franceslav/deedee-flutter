@@ -211,5 +211,6 @@
   "customerProfile": "Kundeprofil",
   "notAuthorized": "Ikke autoriseret",
   "search": "Søg",
-  "notFound": "Ikke fundet"
+  "notFound": "Ikke fundet",
+  "requestService": "Anmod om service"
 }

@@ -1,9 +1,4 @@
 {
-  "de": [
-    "accountsTitle",
-    "noUserAccounts"
-  ],
-
   "id": [
     "safe",
     "placeOrder",
@@ -58,10 +53,5 @@
     "nameCompany",
     "agreePP",
     "connect"
-  ],
-
-  "vi": [
-    "accountsTitle",
-    "noUserAccounts"
   ]
 }
