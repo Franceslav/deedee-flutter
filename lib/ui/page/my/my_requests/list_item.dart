@@ -3,7 +3,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/service_request.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
-import 'package:deedee/ui/page/my_requests/my_request_detail.dart';
+import 'package:deedee/ui/page/my/my_requests/my_request_detail.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';

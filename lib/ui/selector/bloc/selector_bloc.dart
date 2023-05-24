@@ -30,7 +30,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     on<SelectFilterKeyEvent>(_onSelectFilterKey);
     on<PushFiltersEvent>(_onPushFilters);
     on<SaveFiltersEvent>(_onSaveFilters);
-    on<PushTagEvent>(_onPushTag);
+    on<PlaceTagEvent>(_onPlaceTag);
     on<SelectLocationEvent>(_onSelectLocation);
 
     on<DurationSelectedEvent>(_userChoseDuration);
@@ -41,6 +41,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
 
   initialize() async {
     try {
+      /* Bad state: No element*/
       final response = await _topicRepository.getSubTopics(
         _user.userId,
         0, //FIXME:
@@ -102,7 +103,7 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     }
   }
 
-  _onPushTag(PushTagEvent event, Emitter<SelectorState> emit) async {
+  _onPlaceTag(PlaceTagEvent event, Emitter<SelectorState> emit) async {
     emit(LoadingSelectorState());
     try {
       await _tagRepository.placeTag(

@@ -26,7 +26,8 @@ class TopicRepository {
 
   Future<List<Subtopic>> getSubTopics(
       userId, int topicId, double latitude, double longitude) async {
-    var response = await _topicServiceClient.getSubtopics(
+    var response = /* Bad state: No element*/
+        await _topicServiceClient.getSubtopics(
       SubtopicRequest()
         ..subtopic = Subtopic(
           topicId: topicId,

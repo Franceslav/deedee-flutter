@@ -56,9 +56,6 @@ class AuthenticationBloc
           emit(const AuthenticationState.unauthenticated(
               message: 'Login failed, Please try again.'));
         }
-      } else {
-        emit(const AuthenticationState.unauthenticated(
-            message: 'Auth failed, Please try again.'));
       }
     });
     /*

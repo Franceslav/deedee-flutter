@@ -68,7 +68,7 @@ class ServiceRequestServiceApi {
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
         createdBy: 'ron.x.by.su@gmail.com',
-        createdFor: '',
+        createdFor: 'ron.x.by.su@gmail.com',
         createdAt: timestamp4,
         status: ServiceRequest_Status.DONE,
         price: 100,
@@ -79,8 +79,8 @@ class ServiceRequestServiceApi {
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-        createdBy: 'art.zavtur@gmail.com',
-        createdFor: '',
+        createdBy: 'ron.x.by.su@gmail.com',
+        createdFor: 'ron.x.by.su@gmail.com',
         status: ServiceRequest_Status.PENDING,
         createdAt: timestamp1,
         price: 100,
@@ -92,7 +92,7 @@ class ServiceRequestServiceApi {
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
         createdBy: 'matveev.yakov@yahoo.com',
-        createdFor: '',
+        createdFor: 'ron.x.by.su@gmail.com',
         createdAt: timestamp2,
         status: ServiceRequest_Status.PENDING,
         price: 100,
@@ -104,7 +104,7 @@ class ServiceRequestServiceApi {
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
         createdBy: 'matveev.yakov@yahoo.com',
-        createdFor: '',
+        createdFor: 'ron.x.by.su@gmail.com',
         createdAt: timestamp3,
         status: ServiceRequest_Status.DELETED,
         price: 100,
@@ -115,8 +115,8 @@ class ServiceRequestServiceApi {
         // tag: Tag()..topicId = 'маникюр 4',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
-        createdBy: '4',
-        createdFor: '',
+        createdBy: 'temitylive@gmail.com',
+        createdFor: 'ron.x.by.su@gmail.com',
         createdAt: timestamp4,
         status: ServiceRequest_Status.DONE,
         price: 100,
@@ -126,7 +126,7 @@ class ServiceRequestServiceApi {
   }
 
   List<ServiceRequest> getServiceRequests(String userId) {
-    return _serviceRequests.filter((sr) => sr.createdBy == userId).toList();
+    return _serviceRequests.filter((sr) => sr.createdFor == userId).toList();
   }
 
   ServiceRequest create(ServiceRequest request) {

@@ -43,7 +43,7 @@ class MockTopicServiceClient implements TopicServiceClient {
 
   Future<SubtopicResponse> _getSubtopics(SubtopicRequest request) async {
     return SubtopicResponse()
-      ..subtopics.addAll(await api.getSubTopics(
+      ..subtopics.addAll(/* Bad state: No element*/ await api.getSubTopics(
           request.subtopic.userId, request.subtopic.topicId, 0, 0));
   }
 

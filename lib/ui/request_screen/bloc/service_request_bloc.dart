@@ -5,8 +5,10 @@ import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/service_request_repository.dart';
 import 'package:meta/meta.dart';
+import 'package:protobuf/protobuf.dart';
 
 part 'service_request_event.dart';
+
 part 'service_request_state.dart';
 
 class ServicePushRequestBloc
@@ -73,7 +75,8 @@ class ServicePushRequestBloc
     try {
       _initialServiceRequest =
           (await _serviceRequestRepository.getAll(_user.email))
-              .firstWhere((sr) => sr.serviceRequestId == _serviceRequestId);
+              // .firstWhere((sr) => sr.serviceRequestId == _serviceRequestId);
+      .first;
       emit(ServiceRequestChangeState(
           serviceRequest: _initialServiceRequest, changed: false));
     } catch (error) {
@@ -86,7 +89,8 @@ class ServicePushRequestBloc
     final requests = await _serviceRequestRepository.getAll(_user.email);
     _initialServiceRequest =
         requests.firstWhere((sr) => sr.serviceRequestId == _serviceRequestId);
-    ServiceRequest changedRequest = _initialServiceRequest.clone();
+    ServiceRequest changedRequest =
+        _initialServiceRequest.deepCopy(); // clone is deprecated
     changedRequest.status = ServiceRequest_Status.PENDING;
     emit(ServiceRequestChangeState(
         serviceRequest: changedRequest, changed: true));

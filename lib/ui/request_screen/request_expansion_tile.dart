@@ -5,7 +5,7 @@ class RequestExpansionTile extends StatefulWidget {
   final List<String> data;
   final void Function(String)? onTap;
 
-  RequestExpansionTile({Key? key, required this.data, required this.onTap})
+  const RequestExpansionTile({Key? key, required this.data, required this.onTap})
       : super(key: key);
 
   @override
@@ -19,6 +19,7 @@ class _RequestExpansionTileState extends State<RequestExpansionTile> {
 
   @override
   void initState() {
+    super.initState();
     selectedValue = widget.data.first;
   }
 

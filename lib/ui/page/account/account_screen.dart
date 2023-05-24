@@ -1,23 +1,14 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
-import 'package:deedee/repository/composite_filter_repository.dart';
-import 'package:deedee/repository/tag_repository.dart';
-import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
-import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
 import 'package:deedee/ui/page/account/account_widget.dart';
-import 'package:deedee/ui/page/account/bloc/payment_method_slider_add_method_bloc.dart';
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
-import 'package:deedee/ui/page/favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
-import 'package:deedee/ui/page/filter/filter_page_bloc.dart';
-import 'package:deedee/ui/place_tag/dialog_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/theme/colors.dart';
@@ -157,6 +148,29 @@ class _InfoWidget extends StatelessWidget {
                   },
                 )
               : const SizedBox(),
+          // locale.accountTitle,
+          premiumStatus == PremiumStatus.notPremium
+              ? DeeDeeRowInfoWidget(
+                  mainText: Text(
+                    locale.premium,
+                    style: AppTextTheme.bodyLarge,
+                  ),
+                  icon: Image.asset('assets/images/premium_0_icon.png'),
+                  secondaryText: Text(
+                    locale.activated,
+                    style: AppTextTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const AccountPopover();
+                      },
+                    );
+                  },
+                )
+              : const SizedBox(),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: DeeDeeDeviderWidget(),
@@ -188,7 +202,7 @@ class _InfoWidget extends StatelessWidget {
           DeeDeeRowInfoWidget(
             icon: Image.asset('assets/images/balance_icon.png'),
             mainText: Text(
-              locale.accountTitle,
+              locale.accountsTitle,
               style: AppTextTheme.bodyLarge,
             ),
             secondaryText: const Text(
@@ -204,28 +218,6 @@ class _InfoWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: DeeDeeDeviderWidget(),
           ),
-          premiumStatus == PremiumStatus.notPremium
-              ? DeeDeeRowInfoWidget(
-                  mainText: Text(
-                    locale.premium,
-                    style: AppTextTheme.bodyLarge,
-                  ),
-                  secondaryText: Text(
-                    locale.activated,
-                    style: AppTextTheme.bodyMedium,
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return const AccountPopover();
-                      },
-                    );
-                  },
-                  icon: Image.asset('assets/images/premium_0_icon.png'),
-                )
-              : const SizedBox(),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: DeeDeeDeviderWidget(),

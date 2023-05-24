@@ -68,8 +68,9 @@ class PushNotificationService {
         htmlFormatBigText: true,
         contentTitle: message.notification!.title.toString(),
         htmlFormatContentTitle: true,
-        summaryText: message.data['id'],
+        summaryText: message.data['id']!,
       );
+      //print(bigTextStyleInformation.summaryText!);
       await flutterLocalNotificationsPlugin.initialize(
         initializationSettings,
         onDidReceiveNotificationResponse:

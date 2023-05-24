@@ -47,6 +47,7 @@ class TopicServiceApi {
 
   Future<List<Subtopic>> getSubTopics(
       userId, topicId, latitude, longitude) async {
+    /* Bad state: No element */
     var subtopics = _subtopics.getOrElse(
         _subtopics.keys.firstWhere((t) => t.topicId == topicId), () => []);
     return subtopics;

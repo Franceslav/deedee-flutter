@@ -84,4 +84,16 @@ class ServiceRequestRepository {
     );
     return response.serviceRequests;
   }
+
+  Future<List<ServiceRequest>> getByServiceRequestId(String userId, UUID serviceRequestId) async {
+    var response = await _requestServiceClient.getAll(
+      ServiceRequestRequest(
+        serviceRequest: ServiceRequest(
+          serviceRequestId: serviceRequestId,
+          createdFor: userId,
+        ),
+      ),
+    );
+    return response.serviceRequests;
+  }
 }

@@ -67,7 +67,8 @@ class MapSlidingPanelBloc
       Tag? response;
       String? snackbarNotification;
       if (_selectedTag.status == Tag_Status.BOOKMARKED) {
-        response = await _tagRepository.removeTagFromFavorites(_user.email, _selectedTagId);
+        response = await _tagRepository.removeTagFromFavorites(
+            _user.email, _selectedTagId);
         snackbarNotification = 'removed from favorites';
       } else {
         response = await _tagRepository.addTagToFavorites(
@@ -91,8 +92,10 @@ class MapSlidingPanelBloc
     try {
       final tags = await _tagRepository.getTags(_user.email);
       _selectedTag = tags.firstWhere((tag) => tag.tagId == _selectedTagId);
-      emit(MapSlidingPanelIsBookmarkedState(
-          isBookmarked: _selectedTag.status == Tag_Status.BOOKMARKED));
+      emit(
+        MapSlidingPanelIsBookmarkedState(
+            isBookmarked: _selectedTag.status == Tag_Status.BOOKMARKED),
+      );
     } catch (e) {}
   }
 }

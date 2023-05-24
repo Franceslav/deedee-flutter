@@ -32,8 +32,8 @@ class _PriceWidgetState extends State<PriceWidget> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
             ],
-            style: TextStyle(fontSize: 42),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            style: const TextStyle(fontSize: 42),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             controller: controller,
           ),
         ),

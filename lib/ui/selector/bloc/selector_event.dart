@@ -65,14 +65,14 @@ class SaveFiltersEvent extends SelectorEvent {
   });
 }
 
-class PushTagEvent extends SelectorEvent {
+class PlaceTagEvent extends SelectorEvent {
   final AccountType accountType;
   final String topic;
   final String messengerId;
   final LatLng location;
   final List<String> filterKeys;
 
-  PushTagEvent({
+  PlaceTagEvent({
     required this.accountType,
     required this.topic,
     required this.messengerId,
