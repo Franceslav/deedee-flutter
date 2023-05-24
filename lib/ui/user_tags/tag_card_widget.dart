@@ -84,7 +84,7 @@ class TagCardWidget extends StatelessWidget {
           );
           print('Tags $compositeFilter');
           context.router.push(
-            MapScreenRoute(
+            MapScreenMyTagsRoute(
               backTapRoute: const UserTagsScreenRoute(),
               tagDescriptionMap: tagMap,
               currentFilter: tag.compositeFilter, //TODO:

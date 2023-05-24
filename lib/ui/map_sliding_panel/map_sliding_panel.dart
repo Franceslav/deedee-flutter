@@ -68,9 +68,9 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
         listener: (context, state) {
           if (state is ServiceRequestCreatedState) {
             locator.get<PushNotificationService>().sendPushNotification(
-                  context: context,
-                  serviceRequestId: state.serviceRequestId.toString(),
-                );
+              context: context,
+              serviceRequestId: state.serviceRequestId.toString(),
+            );
           }
           if (state is MapSlidingPanelIsBookmarkedState &&
               state.snackbarNotification != null) {
@@ -115,88 +115,88 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                   children: widget._openedFirstTime
                       ? []
                       : [
-                          GestureDetector(
-                            onTap: () {
-                              context.router.navigate(
-                                  AccountSupplierScreenRoute(
-                                      selectedCreatorId:
-                                          widget._selectedTagId));
+                    GestureDetector(
+                      onTap: () {
+                        context.router.navigate(
+                            AccountSupplierScreenRoute(
+                                selectedCreatorId:
+                                widget._selectedTagId));
+                      },
+                      child: const AccountInfoWidget(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                            //TODO implement data
+                            onPressed: () {},
+                            style: bottomStyle,
+                            child: Image.asset(
+                                'assets/images/telegram_logo.png'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                SocialService.launchInstagram(
+                                    widget._selectedMessengerId),
+                            style: bottomStyle,
+                            child: Image.asset(
+                                'assets/images/instagram_logo.png'),
+                          ),
+                          TextButton(
+                            //TODO implement data
+                            onPressed: () {},
+                            style: bottomStyle,
+                            child: Image.asset(
+                                'assets/images/phone_icon.png'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              bloc.add(
+                                  MapSlidingPanelChangeBookmarkEvent());
                             },
-                            child: const AccountInfoWidget(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextButton(
-                                  //TODO implement data
-                                  onPressed: () {},
-                                  style: bottomStyle,
-                                  child: Image.asset(
-                                      'assets/images/telegram_logo.png'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      SocialService.launchInstagram(
-                                          widget._selectedMessengerId),
-                                  style: bottomStyle,
-                                  child: Image.asset(
-                                      'assets/images/instagram_logo.png'),
-                                ),
-                                TextButton(
-                                  //TODO implement data
-                                  onPressed: () {},
-                                  style: bottomStyle,
-                                  child: Image.asset(
-                                      'assets/images/phone_icon.png'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    bloc.add(
-                                        MapSlidingPanelChangeBookmarkEvent());
-                                  },
-                                  style: bottomStyle,
-                                  child: _isBookmarked
-                                      ? Image.asset(
-                                          'assets/images/favorite_icon_filled.png')
-                                      : Image.asset(
-                                          'assets/images/favorite_icon.png'),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              //TODO implement data
-                              children: [
-                                const Text(
-                                  'Адрес',
-                                  style: AppTextTheme.bodyMedium,
-                                ),
-                                const SizedBox(height: 2),
-                                const Text(
-                                  'ул.Калиновского д.235/4',
-                                  style: AppTextTheme.bodyLarge,
-                                ),
-                                const SizedBox(height: 12),
-                                const SizedBox(height: 2),
-                                OutlinedButtonWidget(
-                                  onPressed: () {
-                                    bloc.add(
-                                      MapSlidingPanelRequestCreate(
-                                        widget._selectedTagId,
-                                      ),
-                                    );
-                                  },
-                                  text: 'Fake Request',
-                                ),
-                              ],
-                            ),
+                            style: bottomStyle,
+                            child: _isBookmarked
+                                ? Image.asset(
+                                'assets/images/favorite_icon_filled.png')
+                                : Image.asset(
+                                'assets/images/favorite_icon.png'),
                           )
                         ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //TODO implement data
+                        children: [
+                          const Text(
+                            'Адрес',
+                            style: AppTextTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: 2),
+                          const Text(
+                            'ул.Калиновского д.235/4',
+                            style: AppTextTheme.bodyLarge,
+                          ),
+                          const SizedBox(height: 12),
+                          const SizedBox(height: 2),
+                          OutlinedButtonWidget(
+                            onPressed: () {
+                              bloc.add(
+                                MapSlidingPanelRequestCreate(
+                                  widget._selectedTagId,
+                                ),
+                              );
+                            },
+                            text: 'Fake Request',
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -224,7 +224,7 @@ class _CustomCollapsedWidget extends StatelessWidget {
       ),
       child: Center(
           child:
-              Text(AppLocalizations.of(context)!.clickMarkerViewApplication)),
+          Text(AppLocalizations.of(context)!.clickMarkerViewApplication)),
     );
   }
 }

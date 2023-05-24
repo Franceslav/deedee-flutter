@@ -39,7 +39,9 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                  height: 64, width: 64, child: ProfilePhotoWithBadge()),
+                  height: 64, width: 64, child: Icon( Icons.topic),
+             // ProfilePhotoWithBadge()
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
@@ -115,7 +117,7 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                                 onPressed: () => showDialog(
                                     context: context,
                                     builder: (ctx) => const CalendarDialog()),
-                                icon: const Icon(Icons.calendar_month))),
+                                icon: const Icon(Icons.edit))),
                       ),
                     ],
                   ),

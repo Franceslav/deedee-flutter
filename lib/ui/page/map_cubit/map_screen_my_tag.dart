@@ -21,17 +21,16 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../../map_sliding_panel/map_sliding_panel.dart';
 import '../../map_sliding_panel/map_sliding_panel_my_tag.dart';
 import '../../routes/app_router.gr.dart';
 import '../../user_bloc/user_bloc.dart';
 
-class MapScreen extends StatefulWidget {
+class MapScreenMyTags extends StatefulWidget {
   final Map<LatLng, TagDTO> tagDescriptionMap;
   final CompositeFilter currentFilter;
   final PageRouteInfo backTapRoute;
 
-  const MapScreen({
+  const MapScreenMyTags ({
     Key? key,
     required this.tagDescriptionMap,
     required this.currentFilter,
@@ -39,10 +38,10 @@ class MapScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _MapScreenMyTagsState createState() => _MapScreenMyTagsState();
 }
 
-class DeeDeeSliderController extends PanelController {
+class DeeDeeSliderMyTagsController extends PanelController {
   late Marker selectedMarker;
 
   set setSelectedMarker(selectedMarker) {
@@ -50,9 +49,9 @@ class DeeDeeSliderController extends PanelController {
   }
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenMyTagsState extends State<MapScreenMyTags> {
   final MapController _mapController = MapController();
-  final DeeDeeSliderController _panelController = DeeDeeSliderController();
+  final DeeDeeSliderMyTagsController _panelController = DeeDeeSliderMyTagsController();
   BookmarksBloc? _bookmarksBloc;
 
   final List<TagMarker> _markers = [];
@@ -65,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     _bookmarksBloc = BlocProvider.of<BookmarksBloc>(context);
     widget.tagDescriptionMap.forEach(
-      (point, dto) {
+          (point, dto) {
         TagMarker tagMarker = TagMarker(
           tagId: dto.tagId,
           tagMessengerId: dto.messengerId,
@@ -105,7 +104,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   final FitBoundsOptions _fitBoundsOptions =
-      const FitBoundsOptions(padding: EdgeInsets.all(8.0));
+  const FitBoundsOptions(padding: EdgeInsets.all(8.0));
 
   @override
   void dispose() {
@@ -119,7 +118,7 @@ class _MapScreenState extends State<MapScreen> {
 
     var filterKeys = _allFilterKeys(widget.currentFilter.filterMap);
     var selectedFilterKeys =
-        _selectedFilterKeys(widget.currentFilter.filterMap);
+    _selectedFilterKeys(widget.currentFilter.filterMap);
 
     LatLng geo = user.lastGeoLocation;
     Size size = MediaQuery.of(context).size;
@@ -150,35 +149,6 @@ class _MapScreenState extends State<MapScreen> {
             return true;
           },
           child: Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              toolbarHeight: size.height * 0.07,
-              backgroundColor: Colors.transparent,
-              actions: [
-                Expanded(
-                  child: BlocConsumer<SelectorBloc, SelectorState>(
-                    listener: (context, state) {
-                      if (state is FilterKeySelectedState) {
-                        selectedFilterKeys.contains(state.filterKey)
-                            ? selectedFilterKeys.remove(state.filterKey)
-                            : selectedFilterKeys.add(state.filterKey);
-                      }
-                    },
-                    builder: (context, state) {
-                      return SelectorAppBar(
-                        allItems: filterKeys,
-                        selectedItems: selectedFilterKeys,
-                        onTap: (FilterKey filterKey) =>
-                            selectorBloc.add(SelectFilterKeyEvent(filterKey)),
-                      );
-                    },
-                  ),
-                ),
-              ],
-              iconTheme: IconThemeData(
-                  color: isDarkMode(context) ? Colors.white : Colors.black),
-              elevation: 0.0,
-            ),
             body: Stack(
               children: [
                 FlutterMap(
@@ -204,7 +174,7 @@ class _MapScreenState extends State<MapScreen> {
                       backgroundColor: Colors.black,
                       subdomains: const ['a', 'b', 'c'],
                       urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                       userAgentPackageName: 'com.dinobit.deedeeapp',
                     ),
                     MarkerLayer(
@@ -286,11 +256,14 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                   ),
                 ),
-               MapSlidingPanel(
+               MapSlidingPanelMyTag(
                   controller: _panelController,
                   selectedMessengerId: _selectedMessengerId,
                   selectedTagId: _selectedTagId,
                   openedFirstTime: openedFirstTime,
+                  filterKeys: filterKeys,
+                  selectedFilterKeys: selectedFilterKeys,
+                  currentFilter: widget.currentFilter,
                 ),
                 Positioned(
                   top: 16,
@@ -346,9 +319,9 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Map<String, FilterKeyList> _updateFilterMap(
-    Map<String, FilterKeyList> widgetFilterMap,
-    List<FilterKey> selectedFilterKeys,
-  ) {
+      Map<String, FilterKeyList> widgetFilterMap,
+      List<FilterKey> selectedFilterKeys,
+      ) {
     var selectedFilterMap = <String, FilterKeyList>{};
     for (var filter in selectedFilterKeys) {
       if (selectedFilterMap.containsKey(filter.subtopicId)) {
@@ -359,7 +332,7 @@ class _MapScreenState extends State<MapScreen> {
       } else {
         selectedFilterMap.addAll({
           filter.subtopicId:
-              FilterKeyList(filterKeys: [filter..selected = true])
+          FilterKeyList(filterKeys: [filter..selected = true])
         });
       }
     }

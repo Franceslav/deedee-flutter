@@ -34,7 +34,7 @@ import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/service_request_page.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
-
+import 'package:deedee/ui/page/map_cubit/map_screen_my_tag.dart';
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
 import '../page/stats/stats_screen.dart';
 
@@ -78,7 +78,8 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: BookmarkQRScanner, path: '/qr-scan'),
     MaterialRoute(page: CustomerProfile, path: '/customer-profile'),
     MaterialRoute(page: AccountBusinessPage, path: '/business'),
-    MaterialRoute(page: AccountsListScreen, path: '/accounts-list')
+    MaterialRoute(page: AccountsListScreen, path: '/accounts-list'),
+    MaterialRoute(page: MapScreenMyTags, path: '/map-tags')
   ],
 )
 class $AppRouter {}
