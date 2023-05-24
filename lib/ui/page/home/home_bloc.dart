@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/profile.pb.dart';
+import 'package:deedee/generated/deedee/api/service/profile_service.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
+import 'package:deedee/repository/profile_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/services/shared.dart';
 import 'package:flutter/material.dart';
@@ -23,15 +26,18 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final GPSRepository _gpsRepository;
   final TopicRepository _topicRepository;
   final HttpService? _httpService;
+  final ProfileRepository _profileRepository;
 
   HomeBloc(
       this._pushNotificationService,
       this._gpsRepository,
       this._topicRepository,
+      this._profileRepository,
       {HttpService? httpService}
       ) : _httpService = httpService , super(HomeScreenInitialState()) {
     on<HomeScreenInitLoadEvent>(_onInitLoadEvent);
     on<HomeScreenChangeEvent>(_onChange);
+    on<SaveEditDataEvent>(_onSave);
     on<GPSEvent>((event, emit) {
       Future<Position?> fp = _gpsRepository.getGPSPosition();
       fp.then((value) {
@@ -50,7 +56,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 
   _onInitLoadEvent(
-      HomeScreenInitLoadEvent event, Emitter<HomeScreenState> emit) async {
+    HomeScreenInitLoadEvent event, Emitter<HomeScreenState> emit) async {
     final userPosition = await _gpsRepository.getGPSPosition();
     _pushNotificationService.requestPermission();
     final selectedCity = await locator.get<SharedUtils>().getUserPlace();
@@ -96,6 +102,17 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         topics: topics,
         selectedCity: event.city,
       ));
+    } catch (error) {
+      emit(HomeScreenFailureState(errorMessage: error.toString()));
+    }
+  }
+
+  _onSave(SaveEditDataEvent event, Emitter<HomeScreenState> emit) async {
+    try {
+      await _profileRepository.editProfile(
+        event.profile,
+      );
+      emit(EditScreenDataChangedState());
     } catch (error) {
       emit(HomeScreenFailureState(errorMessage: error.toString()));
     }

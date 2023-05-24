@@ -4,13 +4,19 @@ import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.test])
-class ObservationServiceApi {
+class ProfileServiceApi {
   late List<Profile> _profiles;
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
     _profiles = [
-
+      Profile(
+        profileId: Int64(0),
+        referredBy: '',
+        username: '',
+        contacts: [],
+        status: Profile_Status.ACTIVE,
+      )
     ];
   }
 
@@ -32,10 +38,11 @@ class ObservationServiceApi {
     return profile;
   }
 
-  Profile updateProfile(Profile profileArg) {
+  Profile editProfile(Profile profileArg) {
     Profile profile = _profiles
       .firstWhere((profile) => profile.profileId == profileArg.profileId);
     profile.username = profileArg.username;
+    print(profile);
     return profile;
   }
   Profile removeProfile(Profile profileArg) {

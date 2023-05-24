@@ -5,6 +5,7 @@ import 'package:deedee/generated/deedee/api/model/uuid.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
+import 'package:deedee/repository/profile_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/services/http_service.dart';
 import 'package:deedee/services/push_notification_service.dart';
@@ -43,6 +44,7 @@ class _HomeState extends State<HomeScreen> {
         locator.get<PushNotificationService>(),
         locator.get<GPSRepository>(),
         locator.get<TopicRepository>(),
+        locator.get<ProfileRepository>(),
         httpService: locator.get<HttpService>(),
       )..add(HomeScreenInitLoadEvent()),
       child: Scaffold(
