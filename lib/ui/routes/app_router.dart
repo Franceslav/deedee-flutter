@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/ui/account/personal_info/edit_pers_info.dart';
+import 'package:deedee/ui/account/edit_personal_info/edit_pers_info.dart';
 import 'package:deedee/ui/account/personal_info/personal_information.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
