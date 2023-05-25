@@ -11,7 +11,7 @@ class ReferralServiceApi {
       Referral()
         ..referralId = Int64(1)
         ..email = "referral1@email.ru"
-        ..referredBy = "user@email.ru",
+        ..referredBy = "mybclym@gmail.com",
       Referral()
         ..referralId = Int64(2)
         ..email = "referral2@email.ru"
@@ -26,7 +26,8 @@ class ReferralServiceApi {
 
   Int64 get _maxId => _refs.keys.max() ?? Int64(1);
 
-  List<Referral> getReferral(Referral filter) {
+  Future<List<Referral>> getReferral(Referral filter) async{
+    await Future.delayed(Duration(seconds: 1));
     final ids = _filterReferrals(filter);
     return [for (final id in ids) _refs[id]!.deepCopy()];
   }

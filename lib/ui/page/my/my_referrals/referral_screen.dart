@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/referral.pb.dart';
@@ -26,7 +28,7 @@ class ReferralScreen extends StatefulWidget {
 
 class _ReferralState extends State<ReferralScreen> {
   final PanelController _controller = PanelController();
-  final AnimatedButtonController _buttonController = AnimatedButtonController();
+  AnimatedButtonController _buttonController = AnimatedButtonController();
   final PageController _pageController = PageController();
   late List<Referral> _refs;
 
@@ -55,66 +57,74 @@ class _ReferralState extends State<ReferralScreen> {
           BlocBuilder<ReferralCubit, ReferralState>(
             builder: (context, state) {
               if (state is ReferralStateLoading) {
-                return const CircularProgressIndicator.adaptive(
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(
                     backgroundColor: Colors.white,
-                    valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)));
-              }
-              _refs = state.refs;
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: AnimatedButtonBar(
-                      invertedSelection: true,
-                      radius: 25,
-                      backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
-                      controller: _buttonController,
-                      children: [
-                        ButtonBarEntry(
-                          child: Text(AppLocalizations.of(context)!.actualTags),
-                          onTap: () => setPage(0),
-                        ),
-                        ButtonBarEntry(
-                          child:
-                              Text(AppLocalizations.of(context)!.archiveTags),
-                          onTap: () => setPage(1),
-                        ),
-                      ],
+                    valueColor: AlwaysStoppedAnimation(
+                      Color(COLOR_PRIMARY),
                     ),
                   ),
-                  SearchField(
-                    SearchSpec(
-                        searchValueBuilder: (i) => _refs[i].email,
-                        length: _refs.length,
-                        itemBuilder: (context, i) {
-                          return ReferralTile(referral: _refs[i]);
-                        }),
-                  ),
-                  const Divider(
-                    thickness: 0.5,
-                    color: Colors.black,
-                    height: 0,
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: PageView(
-                      controller: _pageController,
-                      onPageChanged: (value) =>
-                          _buttonController.setIndex(value),
-                      children: [
-                        ReferralListWidget(
+                );
+              } else {
+                _refs = state.refs;
+                _buttonController = AnimatedButtonController();
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: AnimatedButtonBar(
+                        invertedSelection: true,
+                        radius: 25,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        controller: _buttonController,
+                        children: [
+                          ButtonBarEntry(
+                            child:
+                                Text(AppLocalizations.of(context)!.actualTags),
+                            onTap: () => setPage(0),
+                          ),
+                          ButtonBarEntry(
+                            child:
+                                Text(AppLocalizations.of(context)!.archiveTags),
+                            onTap: () => setPage(1),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SearchField(
+                      SearchSpec(
+                          searchValueBuilder: (i) => _refs[i].email,
+                          length: _refs.length,
+                          itemBuilder: (context, i) {
+                            return ReferralTile(referral: _refs[i]);
+                          }),
+                    ),
+                    const Divider(
+                      thickness: 0.5,
+                      color: Colors.black,
+                      height: 0,
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (value) =>
+                            _buttonController.setIndex(value),
+                        children: [
+                          ReferralListWidget(
+                              referrals: _refs,
+                              refType: Referral_Status.VERIFIED),
+                          ReferralListWidget(
                             referrals: _refs,
-                            refType: Referral_Status.VERIFIED),
-                        ReferralListWidget(
-                          referrals: _refs,
-                          refType: Referral_Status.DELETED,
-                        )
-                      ],
+                            refType: Referral_Status.DELETED,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
+              }
             },
           ),
           DeeDeeMenuSlider(
@@ -137,6 +147,7 @@ class _ReferralState extends State<ReferralScreen> {
 
   @override
   void dispose() {
+    _buttonController.dispose();
     _pageController.dispose();
     super.dispose();
   }

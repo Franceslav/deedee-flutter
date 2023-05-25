@@ -65,7 +65,8 @@ class MockReferralServiceClient implements ReferralServiceClient {
   }
 
   Future<ReferralResponse> _getReferrals(ReferralRequest request) async {
-    return ReferralResponse(referrals: _api.getReferral(request.referral));
+    return ReferralResponse(
+        referrals: await _api.getReferral(request.referral));
   }
 
   @override
