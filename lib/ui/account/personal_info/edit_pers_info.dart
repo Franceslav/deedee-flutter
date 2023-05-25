@@ -81,7 +81,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   onPressed: () {
                     context.read<HomeBloc>().add(SaveEditDataEvent(
-                            profile: Profile(
+                          profile: Profile(
                           profileId: Int64(0),
                           username: _UsernameController.text,
                         )));
