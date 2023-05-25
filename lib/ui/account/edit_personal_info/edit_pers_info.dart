@@ -16,10 +16,11 @@ import '../../../services/helper.dart';
 import '../../../services/push_notification_service.dart';
 import '../../global_widgets/profile_photo_with_badge.dart';
 import '../../page/home/city_picker.dart';
-import '../../page/home/home_bloc.dart';
+
 import '../../routes/app_router.gr.dart';
 import '../../theme/app_text_theme.dart';
 import '../../user_bloc/user_bloc.dart';
+import 'bloc/edit_pers_info_bloc.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -55,12 +56,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final user = context.select((UserBloc bloc) => bloc.state.user);
 
     return BlocProvider(
-        create: (_) => HomeBloc(
+        create: (_) => EditPersInfoBloc(
               locator.get<PushNotificationService>(),
               locator.get<GPSRepository>(),
               locator.get<TopicRepository>(),
               locator.get<ProfileRepository>(),
-            )..add(HomeScreenInitLoadEvent()),
+            )..add(EditPersInfoScreenInitLoadEvent(
+                  profile: Profile(
+                profileId: Int64(0),
+              ))),
         child: Builder(builder: (context) {
           return Scaffold(
             appBar: AppBar(
@@ -80,8 +84,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     Icons.done,
                   ),
                   onPressed: () {
-                    context.read<HomeBloc>().add(SaveEditDataEvent(
-                          profile: Profile(
+                    context.read<EditPersInfoBloc>().add(SaveEditDataEvent(
+                            profile: Profile(
                           profileId: Int64(0),
                           username: _UsernameController.text,
                         )));
@@ -121,19 +125,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             controller: _WebsiteController),
                         TextEditingField(
                             labelText: locale.bio, controller: _BioController),
-                        BlocConsumer<HomeBloc, HomeScreenState>(
+                        BlocConsumer<EditPersInfoBloc, EditPersInfoScreenState>(
                           listener: (ctx, state) {
-                            if (state is HomeScreenLoadedState) {
+                            if (state is EditPersInfoScreenLoadingState) {
+                              _UsernameController.text = state.profile.username;
+                            }
+                            if (state is EditPersInfpScreenDataChangedState) {
+                              _UsernameController.text = state.profile.username;
+                            }
+                            if (state is EditPersInfoScreenLoadedState) {
                               if (state.selectedCity != null) {
                                 _selectedCity = state.selectedCity;
                               }
                               _mainTopics = state.topics;
                               _selectedCity = state.selectedCity;
                             }
-                            if (state is HomeScreenFailureState) {
+                            if (state is EditPersInfoScreenFailureState) {
                               showSnackBar(context, state.errorMessage);
                             }
-                            if (state is HomeScreenLoadingState) {
+                            if (state is EditPersInfoScreenLoadingState) {
                               if (_isInit) {
                                 BlocProvider.of<UserBloc>(context)
                                     .add(UserGetGPSPosition());
@@ -144,13 +154,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             }
                           },
                           builder: (context, state) {
-                            if (state is HomeScreenLoadedState) {
+                            if (state is EditPersInfoScreenLoadedState) {
                               return BlocListener<UserBloc, UserState>(
                                 listener: (context, state) {
                                   if (user.accountType !=
                                       state.user.accountType) {
-                                    BlocProvider.of<HomeBloc>(context).add(
-                                        HomeScreenChangeEvent(
+                                    BlocProvider.of<EditPersInfoBloc>(context)
+                                        .add(EditPersInfoScreenChangeEvent(
                                             user: state.user,
                                             city: _selectedCity));
                                   }
@@ -161,10 +171,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       selectedCity: _selectedCity,
                                       availableCities: user.availablePlaces,
                                       user: user,
-                                      onChangeCity: (user, city) =>
-                                          BlocProvider.of<HomeBloc>(context)
-                                              .add(HomeScreenChangeEvent(
-                                                  user: user, city: city)),
+                                      onChangeCity: (user, city) => BlocProvider
+                                              .of<EditPersInfoBloc>(context)
+                                          .add(EditPersInfoScreenChangeEvent(
+                                              user: user, city: city)),
                                     ),
                                   ],
                                 ),

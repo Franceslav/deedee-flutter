@@ -3,39 +3,43 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
+import 'package:deedee/generated/deedee/api/model/profile.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/gps_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
+import 'package:deedee/repository/profile_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/services/shared.dart';
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../../services/http_service.dart';
+import '../../../../services/http_service.dart';
 
-part 'home_event.dart';
-part 'home_state.dart';
+part 'edit_pers_info_event.dart';
+part 'edit_pers_info_state.dart';
 
-class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
+class EditPersInfoBloc extends Bloc<EditPersInfoScreenEvent, EditPersInfoScreenState> {
   final PushNotificationService _pushNotificationService;
   final GPSRepository _gpsRepository;
   final TopicRepository _topicRepository;
   final HttpService? _httpService;
+  final ProfileRepository _profileRepository;
 
-  HomeBloc(
+  EditPersInfoBloc(
       this._pushNotificationService,
       this._gpsRepository,
       this._topicRepository,
+      this._profileRepository,
       {HttpService? httpService}
-      ) : _httpService = httpService , super(HomeScreenInitialState()) {
-    on<HomeScreenInitLoadEvent>(_onInitLoadEvent);
-    on<HomeScreenChangeEvent>(_onChange);
+      ) : _httpService = httpService , super(EditPersInfoScreenInitialState()) {
+    on<EditPersInfoScreenInitLoadEvent>(_onInitLoadEvent);
+    on<EditPersInfoScreenChangeEvent>(_onChange);
+    on<SaveEditDataEvent>(_onSave);
     on<GPSEvent>((event, emit) {
       Future<Position?> fp = _gpsRepository.getGPSPosition();
       fp.then((value) {
-        emit(HomePageGPSReceivedState(value!));
+        emit(EditPersInfoPageGPSReceivedState(value!));
       });
     });
     _init();
@@ -44,23 +48,26 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     if(_httpService != null) {
       final requestId = await _httpService!.initDeepLinkListener();
       if(requestId != null) {
-        emit(HomePageRequestReceivedState(requestId));
+        emit(EditPersInfoPageRequestReceivedState(requestId));
       }
     }
   }
 
   _onInitLoadEvent(
-    HomeScreenInitLoadEvent event, Emitter<HomeScreenState> emit) async {
+    EditPersInfoScreenInitLoadEvent event, Emitter<EditPersInfoScreenState> emit) async {
     final userPosition = await _gpsRepository.getGPSPosition();
     _pushNotificationService.requestPermission();
     final selectedCity = await locator.get<SharedUtils>().getUserPlace();
+    final profile =  await _profileRepository.getProfile(
+        event.profile,
+      );
 
-    emit(HomeScreenLoadingState());
+    emit(EditPersInfoScreenLoadingState(profile: profile));
 
     try {
       if (userPosition == null) {
         List<Topic> topics = await _topicRepository.getTopics(0, 0);
-        emit(HomeScreenLoadedState(
+        emit(EditPersInfoScreenLoadedState(
           topics: topics,
           selectedCity: null,
         ));
@@ -68,36 +75,48 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       }
 
       if (selectedCity == null) {
-        emit(HomeScreenFirstLaunchState());
+        emit(EditPersInfoScreenFirstLaunchState());
         return;
       }
 
       List<Topic> topics = await _topicRepository.getTopics(
           userPosition.latitude, userPosition.longitude);
-      emit(HomeScreenLoadedState(
+      emit(EditPersInfoScreenLoadedState(
         topics: topics,
         selectedCity: Location(title: selectedCity),
       ));
     } catch (error) {
-      emit(HomeScreenFailureState(errorMessage: error.toString()));
+      emit(EditPersInfoScreenFailureState(errorMessage: error.toString()));
     }
   }
 
-  _onChange(HomeScreenChangeEvent event, Emitter<HomeScreenState> emit) async {
+  _onChange(EditPersInfoScreenChangeEvent event, Emitter<EditPersInfoScreenState> emit) async {
     if (event.city != null) {
       locator.get<SharedUtils>().saveUserPlace(event.city!.title);
     }
 
-    emit(HomeScreenLoadingState());
+    // emit(EditPersInfoScreenLoadingState());
     try {
       //get LatLng from Place object
       List<Topic> topics =  await _topicRepository.getTopics(0, 0);
-      emit(HomeScreenLoadedState(
+      emit(EditPersInfoScreenLoadedState(
         topics: topics,
         selectedCity: event.city,
       ));
     } catch (error) {
-      emit(HomeScreenFailureState(errorMessage: error.toString()));
+      emit(EditPersInfoScreenFailureState(errorMessage: error.toString()));
+    }
+  }
+
+  _onSave(SaveEditDataEvent event, Emitter<EditPersInfoScreenState> emit) async {
+    try {
+      await _profileRepository.editProfile(
+        event.profile,
+      );
+      emit(EditPersInfpScreenDataChangedState(profile: event.profile));
+    } catch (error) {
+      emit(EditPersInfoScreenFailureState(errorMessage: error.toString()));
     }
   }
 }
+

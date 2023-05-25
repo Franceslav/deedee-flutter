@@ -27,10 +27,3 @@ class HomeScreenChangeEvent extends HomeScreenEvent {
 
 class GPSEvent extends HomeScreenEvent {}
 
-class SaveEditDataEvent extends HomeScreenEvent {
-  final Profile profile;
-
-  SaveEditDataEvent({
-    required this.profile,
-  });
-}
