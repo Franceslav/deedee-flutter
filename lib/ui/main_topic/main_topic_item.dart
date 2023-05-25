@@ -1,17 +1,21 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
-import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../generated/deedee/api/model/composite_filter.pb.dart';
+import '../../generated/deedee/api/model/topic.pb.dart';
+import '../../injection.dart';
+import '../../repository/tag_repository.dart';
+import '../routes/app_router.gr.dart';
+import '../user_bloc/user_bloc.dart';
+import 'bloc/tags_count_bloc.dart';
 import 'enum/topic_screens_enum.dart';
 
 class MainTopicItem extends StatelessWidget {
   final Topic topic;
   final double width;
   final ScreenType screenType;
-
   const MainTopicItem({
     super.key,
     required this.topic,
@@ -69,19 +73,27 @@ class MainTopicItem extends StatelessWidget {
                 width: width * 0.28,
                 height: width * 0.28,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    topic.title,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                  Text(
-                    '${topic.topicId} ${AppLocalizations.of(context)!.offersTitle}', //TODO:
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ],
-              ),
+              BlocBuilder<TagsCountBloc, TagsCountState>(
+                bloc: TagsCountBloc(
+                  tagRepository: locator.get<TagRepository>(),
+                  user: BlocProvider.of<UserBloc>(context).state.user,
+                )..add(LoadingTagsCount(topic.topicId)),
+                builder: (context, state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        topic.title,
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
+                      Text(
+                        '${state.tagsCount} ${AppLocalizations.of(context)!.offersTitle}',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
+                  );
+                },
+              )
             ],
           ),
         ),
