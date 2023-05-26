@@ -11,28 +11,9 @@ class EditPersInfoScreenInitLoadEvent extends EditPersInfoScreenEvent {
   });
 }
 
-class EditPersInfoScreenLoadEvent extends EditPersInfoScreenEvent {
-  final User user;
-  final LatLng userLocation;
+class EditPersInfoScreenLoadEvent extends EditPersInfoScreenEvent {}
 
-  EditPersInfoScreenLoadEvent({
-    required this.user,
-    required this.userLocation,
-  });
-}
-
-class EditPersInfoScreenChangeEvent extends EditPersInfoScreenEvent {
-  final User user;
-  final Location? city;
-
-  EditPersInfoScreenChangeEvent({
-    required this.user,
-    required this.city,
-  });
-}
-
-class GPSEvent extends EditPersInfoScreenEvent {}
-
+class EditPersInfoScreenChangeEvent extends EditPersInfoScreenEvent {}
 class SaveEditDataEvent extends EditPersInfoScreenEvent {
   final Profile profile;
 

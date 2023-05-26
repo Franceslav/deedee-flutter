@@ -1,25 +1,14 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/generated/deedee/api/model/location.pb.dart';
 import 'package:deedee/generated/deedee/api/model/profile.pb.dart';
-import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../../../injection.dart';
-import '../../../repository/gps_repository.dart';
-import '../../../repository/topic_repository.dart';
 import '../../../repository/profile_repository.dart';
-import '../../../services/helper.dart';
-import '../../../services/push_notification_service.dart';
 import '../../global_widgets/profile_photo_with_badge.dart';
-import '../../page/home/city_picker.dart';
-
 import '../../routes/app_router.gr.dart';
 import '../../theme/app_text_theme.dart';
-import '../../user_bloc/user_bloc.dart';
 import 'bloc/edit_pers_info_bloc.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -35,69 +24,66 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
 
-  List<Topic> _mainTopics = [];
-  Location? _selectedCity;
-  final PanelController _controller = PanelController();
-  bool _isInit = true;
-
   @override
   void initState() {
     _namecontroller = TextEditingController(text: 'my name ');
     _UsernameController = TextEditingController(text: 'username');
     _WebsiteController = TextEditingController(text: 'web.com');
     _BioController = TextEditingController(text: 'my bio is empty');
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    final user = context.select((UserBloc bloc) => bloc.state.user);
-
     return BlocProvider(
         create: (_) => EditPersInfoBloc(
-              locator.get<PushNotificationService>(),
-              locator.get<GPSRepository>(),
-              locator.get<TopicRepository>(),
               locator.get<ProfileRepository>(),
             )..add(EditPersInfoScreenInitLoadEvent(
                   profile: Profile(
                 profileId: Int64(0),
               ))),
-        child: Builder(builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.close,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              title: Text(locale.editProfile),
-              actions: [
-                IconButton(
+        child: BlocConsumer<EditPersInfoBloc, EditPersInfoScreenState>(
+          listener: (ctx, state) {
+            if (state is EditPersInfoScreenLoadingState) {
+              _UsernameController.text = state.profile.username;
+            }
+            if (state is EditPersInfpScreenDataChangedState) {
+              _UsernameController.text = state.profile.username;
+            }
+          },
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: IconButton(
                   icon: const Icon(
-                    Icons.done,
+                    Icons.close,
                   ),
                   onPressed: () {
-                    context.read<EditPersInfoBloc>().add(SaveEditDataEvent(
-                            profile: Profile(
-                          profileId: Int64(0),
-                          username: _UsernameController.text,
-                        )));
+                    Navigator.pop(context);
                   },
                 ),
-                const SizedBox(
-                  width: 10,
-                )
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: Container(
+                title: Text(locale.editProfile),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.done,
+                    ),
+                    onPressed: () {
+                      context.read<EditPersInfoBloc>().add(SaveEditDataEvent(
+                              profile: Profile(
+                            profileId: Int64(0),
+                            username: _UsernameController.text,
+                          )));
+                    },
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  )
+                ],
+              ),
+              body: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,9 +91,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ProfilePhotoWithBadge(),
-
-                        SizedBox(
+                        const ProfilePhotoWithBadge(),
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -124,73 +109,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             labelText: locale.website,
                             controller: _WebsiteController),
                         TextEditingField(
-                            labelText: locale.bio, controller: _BioController),
-                        BlocConsumer<EditPersInfoBloc, EditPersInfoScreenState>(
-                          listener: (ctx, state) {
-                            if (state is EditPersInfoScreenLoadingState) {
-                              _UsernameController.text = state.profile.username;
-                            }
-                            if (state is EditPersInfpScreenDataChangedState) {
-                              _UsernameController.text = state.profile.username;
-                            }
-                            if (state is EditPersInfoScreenLoadedState) {
-                              if (state.selectedCity != null) {
-                                _selectedCity = state.selectedCity;
-                              }
-                              _mainTopics = state.topics;
-                              _selectedCity = state.selectedCity;
-                            }
-                            if (state is EditPersInfoScreenFailureState) {
-                              showSnackBar(context, state.errorMessage);
-                            }
-                            if (state is EditPersInfoScreenLoadingState) {
-                              if (_isInit) {
-                                BlocProvider.of<UserBloc>(context)
-                                    .add(UserGetGPSPosition());
-                                BlocProvider.of<UserBloc>(context)
-                                    .add(UserAvailablePlaces());
-                                _isInit = false;
-                              }
-                            }
-                          },
-                          builder: (context, state) {
-                            if (state is EditPersInfoScreenLoadedState) {
-                              return BlocListener<UserBloc, UserState>(
-                                listener: (context, state) {
-                                  if (user.accountType !=
-                                      state.user.accountType) {
-                                    BlocProvider.of<EditPersInfoBloc>(context)
-                                        .add(EditPersInfoScreenChangeEvent(
-                                            user: state.user,
-                                            city: _selectedCity));
-                                  }
-                                },
-                                child: Column(
-                                  children: [
-                                    CityPicker(
-                                      selectedCity: _selectedCity,
-                                      availableCities: user.availablePlaces,
-                                      user: user,
-                                      onChangeCity: (user, city) => BlocProvider
-                                              .of<EditPersInfoBloc>(context)
-                                          .add(EditPersInfoScreenChangeEvent(
-                                              user: user, city: city)),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                        ),
-
-                        // ),
+                            labelText: locale.bio,
+                            controller: _BioController),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
                         context.router.push(PersonalInfoPageRoute());
@@ -198,16 +121,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: Text(
                         locale.personalInfoSettings,
                         textAlign: TextAlign.start,
-                        style:
-                            AppTextTheme.bodyLarge.copyWith(color: Colors.blue),
+                        style: AppTextTheme.bodyLarge
+                            .copyWith(color: Colors.blue),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          );
-        }));
+            );
+          },
+        ));
   }
 }
 
