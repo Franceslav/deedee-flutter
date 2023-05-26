@@ -9,11 +9,13 @@ import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
+@LazySingleton(env: [Environment.dev, Environment.test, Environment.prod])
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   User? user;
