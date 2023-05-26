@@ -126,7 +126,7 @@ class ServiceRequestServiceApi {
   }
 
   List<ServiceRequest> getServiceRequests(String userId) {
-    return _serviceRequests.filter((sr) => sr.createdFor == userId).toList();
+    return _serviceRequests.filter((sr) => sr.createdBy == userId).toList();
   }
 
   ServiceRequest create(ServiceRequest request) {
