@@ -6,30 +6,18 @@ abstract class EditPersInfoScreenState {}
 
 class EditPersInfoScreenInitialState extends EditPersInfoScreenState {}
 
-class EditPersInfoScreenLoadingState extends EditPersInfoScreenState {
+class EditPersInfoScreenLoadedState extends EditPersInfoScreenState {
   final Profile profile;
-
-  EditPersInfoScreenLoadingState({
-    required this.profile
-  }); 
+ 
+  EditPersInfoScreenLoadedState({
+    required this.profile,
+  });
 }
-
-class EditPersInfoScreenFirstLaunchState extends EditPersInfoScreenState {}
 
 class EditPersInfoScreenFailureState extends EditPersInfoScreenState {
   final String errorMessage;
 
   EditPersInfoScreenFailureState({required this.errorMessage});
-}
-
-class EditPersInfoScreenLoadedState extends EditPersInfoScreenState {
-  final Location? selectedCity;
-  final List<Topic> topics;
-
-  EditPersInfoScreenLoadedState({
-    required this.topics,
-    required this.selectedCity,
-  });
 }
 
 class EditPersInfoScreenAccountTypeChangedState extends EditPersInfoScreenState {}

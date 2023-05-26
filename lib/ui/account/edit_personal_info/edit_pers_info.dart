@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../injection.dart';
+import '../../../model/user.dart';
 import '../../../repository/profile_repository.dart';
 import '../../global_widgets/profile_photo_with_badge.dart';
 import '../../routes/app_router.gr.dart';
 import '../../theme/app_text_theme.dart';
 import 'bloc/edit_pers_info_bloc.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -24,8 +26,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
 
-  
-
   @override
   void initState() {
     _namecontroller = TextEditingController(text: 'my name ');
@@ -37,17 +37,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    User user = context.select((UserBloc bloc) => bloc.state.user);
     final locale = AppLocalizations.of(context)!;
     return BlocProvider(
         create: (_) => EditPersInfoBloc(
+              user,
               locator.get<ProfileRepository>(),
-            )..add(EditPersInfoScreenInitLoadEvent(
-                  profile: Profile(
-                profileId: Int64(0),
-              ))),
+            ),
         child: BlocConsumer<EditPersInfoBloc, EditPersInfoScreenState>(
           listener: (ctx, state) {
-            if (state is EditPersInfoScreenLoadingState) {
+            if (state is EditPersInfoScreenLoadedState) {
               _UsernameController.text = state.profile.username;
             }
             if (state is EditPersInfpScreenDataChangedState) {
@@ -75,10 +74,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     onPressed: () {
                       bloc.add(SaveEditDataEvent(
-                              profile: Profile(
-                            profileId: Int64(0),
-                            username: _UsernameController.text,
-                          )));
+                        user: user,
+                        username: _UsernameController.text,
+                      ));
                     },
                   ),
                   const SizedBox(
@@ -112,8 +110,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             labelText: locale.website,
                             controller: _WebsiteController),
                         TextEditingField(
-                            labelText: locale.bio,
-                            controller: _BioController),
+                            labelText: locale.bio, controller: _BioController),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -124,8 +121,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: Text(
                         locale.personalInfoSettings,
                         textAlign: TextAlign.start,
-                        style: AppTextTheme.bodyLarge
-                            .copyWith(color: Colors.blue),
+                        style:
+                            AppTextTheme.bodyLarge.copyWith(color: Colors.blue),
                       ),
                     ),
                   ],

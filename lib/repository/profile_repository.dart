@@ -17,19 +17,23 @@ class ProfileRepository {
       ));
   }
   
-  Future<Profile> getProfile(Profile profile, {CallOptions? options}) async {
+  Future<Profile> getProfile(String userId, {CallOptions? options}) async {
     ProfileResponse response = await _profileServiceClient.getProfile(
       ProfileRequest(
-        profile: profile,
+        profile: Profile(
+          userId: userId),
       ));
     return response.profile;
   }
   
-  Future<void> editProfile(Profile profile, {CallOptions? options}) async {
-    await _profileServiceClient.editProfile(
+  Future<Profile> editProfile(String email, String username, {CallOptions? options}) async {
+    ProfileResponse response = await _profileServiceClient.editProfile(
       ProfileRequest(
-        profile: profile,
+        profile: Profile(
+          userId: email,
+          username: username),
       ));
+    return response.profile;
   }
   Future<Profile> removeProfile(Profile profile, {CallOptions? options}) async {
     ProfileResponse response = await _profileServiceClient.removeProfile(

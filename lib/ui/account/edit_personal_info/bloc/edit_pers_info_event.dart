@@ -1,6 +1,6 @@
 part of 'edit_pers_info_bloc.dart';
 
-// @immutable
+//@immutable
 abstract class EditPersInfoScreenEvent {}
 
 class EditPersInfoScreenInitLoadEvent extends EditPersInfoScreenEvent {
@@ -15,9 +15,11 @@ class EditPersInfoScreenLoadEvent extends EditPersInfoScreenEvent {}
 
 class EditPersInfoScreenChangeEvent extends EditPersInfoScreenEvent {}
 class SaveEditDataEvent extends EditPersInfoScreenEvent {
-  final Profile profile;
+  final User user;
+  final String username;
 
   SaveEditDataEvent({
-    required this.profile,
+    required this.user,
+    required this.username,
   });
 }

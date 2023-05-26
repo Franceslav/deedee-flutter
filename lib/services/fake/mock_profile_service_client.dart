@@ -65,7 +65,7 @@ class MockProfileServiceClient implements ProfileServiceClient {
     return ProfileResponse(
         profile: api.getProfile(
           Profile(
-            profileId: request.profile.profileId,
+            userId: request.profile.userId,
           )
         )
     );
@@ -87,7 +87,7 @@ class MockProfileServiceClient implements ProfileServiceClient {
       return ProfileResponse(
         profile: api.editProfile(
           Profile(
-            profileId: request.profile.profileId,
+            userId: request.profile.userId,
             username: request.profile.username,
           )
         )
@@ -109,7 +109,7 @@ class MockProfileServiceClient implements ProfileServiceClient {
     return ProfileResponse(
       profile: api.removeProfile(
         Profile(
-          profileId: request.profile.profileId,
+         userId: request.profile.userId,
         )
       )
     );
