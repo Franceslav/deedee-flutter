@@ -24,6 +24,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
 
+  
+
   @override
   void initState() {
     _namecontroller = TextEditingController(text: 'my name ');
@@ -36,6 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    var bloc = context.read<EditPersInfoBloc>();
     return BlocProvider(
         create: (_) => EditPersInfoBloc(
               locator.get<ProfileRepository>(),
@@ -71,7 +74,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Icons.done,
                     ),
                     onPressed: () {
-                      context.read<EditPersInfoBloc>().add(SaveEditDataEvent(
+                      bloc.add(SaveEditDataEvent(
                               profile: Profile(
                             profileId: Int64(0),
                             username: _UsernameController.text,
