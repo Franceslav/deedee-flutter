@@ -32,20 +32,7 @@ class EditPersInfoScreenLoadedState extends EditPersInfoScreenState {
   });
 }
 
-class EditPersInfoScreenCityChangedState extends EditPersInfoScreenState {}
-
 class EditPersInfoScreenAccountTypeChangedState extends EditPersInfoScreenState {}
-
-class EditPersInfoPageGPSReceivedState extends EditPersInfoScreenState {
-  final Position position;
-
-  EditPersInfoPageGPSReceivedState(this.position);
-}
-
-class EditPersInfoPageRequestReceivedState extends EditPersInfoScreenState {
-  final String? id;
-  EditPersInfoPageRequestReceivedState(this.id);
-}
 
 class EditPersInfpScreenDataChangedState extends EditPersInfoScreenState {
   final Profile profile;
