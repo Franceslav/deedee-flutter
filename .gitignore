@@ -39,7 +39,7 @@ lib/ui/routes/app_router.gr.dart
 /firestore.json
 .vscode/settings.json
 
-ios
+ios/Runner.xcodeproj/project.pbxproj
 /.actions-runner/
 .vscode/launch.json
 
