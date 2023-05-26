@@ -38,7 +38,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    var bloc = context.read<EditPersInfoBloc>();
     return BlocProvider(
         create: (_) => EditPersInfoBloc(
               locator.get<ProfileRepository>(),
@@ -56,6 +55,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             }
           },
           builder: (context, state) {
+            var bloc = context.read<EditPersInfoBloc>();
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,

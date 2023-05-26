@@ -42,7 +42,6 @@ class ProfileServiceApi {
     Profile profile = _profiles
       .firstWhere((profile) => profile.profileId == profileArg.profileId);
     profile.username = profileArg.username;
-    print(profile);
     return profile;
   }
   Profile removeProfile(Profile profileArg) {

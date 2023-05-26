@@ -17,13 +17,12 @@ class EditPersInfoBloc
   EditPersInfoBloc(
     this._profileRepository,
   ) : super(EditPersInfoScreenInitialState()) {
-    on<EditPersInfoScreenInitLoadEvent>(_onInitLoadEvent);
-    on<EditPersInfoScreenChangeEvent>(_onChange);
-    on<SaveEditDataEvent>(_onSave);
     _init();
   }
   _init() async {
-    emit(EditPersInfoScreenInitialState());
+    on<EditPersInfoScreenInitLoadEvent>(_onInitLoadEvent);
+    on<EditPersInfoScreenChangeEvent>(_onChange);
+    on<SaveEditDataEvent>(_onSave);
   }
 
   _onInitLoadEvent(EditPersInfoScreenInitLoadEvent event,
