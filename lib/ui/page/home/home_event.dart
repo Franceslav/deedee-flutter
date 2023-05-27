@@ -26,3 +26,4 @@ class HomeScreenChangeEvent extends HomeScreenEvent {
 }
 
 class GPSEvent extends HomeScreenEvent {}
+

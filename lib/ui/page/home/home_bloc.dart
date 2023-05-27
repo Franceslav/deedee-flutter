@@ -50,7 +50,7 @@ class HomeBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 
   _onInitLoadEvent(
-      HomeScreenInitLoadEvent event, Emitter<HomeScreenState> emit) async {
+    HomeScreenInitLoadEvent event, Emitter<HomeScreenState> emit) async {
     final userPosition = await _gpsRepository.getGPSPosition();
     _pushNotificationService.requestPermission();
     final selectedCity = await locator.get<SharedUtils>().getUserPlace();

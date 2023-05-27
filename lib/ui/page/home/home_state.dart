@@ -39,3 +39,5 @@ class HomePageRequestReceivedState extends HomeScreenState {
   final String? id;
   HomePageRequestReceivedState(this.id);
 }
+
+class EditScreenDataChangedState extends HomeScreenState {}
