@@ -26,6 +26,7 @@
     "agreePP":"موافق",
     "connect":"يتصل",
     "addAccountTitle":"أضف عنوان الحساب",
+  "qrScanner" : "qr الماسح الضوئي",
   "safe": "يحفظ",
   "accountsTitle": "الحسابات",
   "noUserAccounts": "لا حسابات",

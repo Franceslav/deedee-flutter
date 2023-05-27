@@ -1,6 +1,6 @@
 {
    "helloWorld": "Salom Dunyo",
-    "myRequests": "Mening so'rovlarim",
+    "myRequests": "mening so'rovlarim",
     "selectStartTime": "Boshlanish vaqtini tanlang",
     "selectDuration": "Davomiylikni tanlang",
     "confirmSelection": "Tanlovni tasdiqlang",
@@ -142,7 +142,7 @@
   "archiveTags": "arxiv",
   "tagExpires": "tugatiladigan muddati",
   "noUserTags": "teglar yo'q",
-  "myFilters": "Mening filtrlarim",
+  "myFilters": "mening filtrlarim",
   "homeChooseCity": "Shaharingizni tanlang",
   "orderSent": "Buyurtmangiz yuborildi",
   "contactInformation": "Bog'lanish ma'lumotlari",
@@ -161,7 +161,7 @@
   "verifyYourAccount": "Hisobingizni tasdiqlang",
   "premium": "Premium",
   "activated": "faollashtirilgan",
-  "profile": "Profil",
+  "profile": "profil",
   "switchAccount": "Hisobni almashtirish",
   "selectDate": "Sanani tanlang",
   "selectTime": "Vaqtni tanlang",
@@ -214,5 +214,6 @@
   "notAuthorized":"Koʻrishga ruxsatingiz yoʻq",
   "search":"Qidirish",
   "notFound": "Topilmadi",
-  "requestService": "Xizmatni so'rash"
+  "requestService": "Xizmatni so'rash",
+  "qrScanner" : "qr skaner"
 }

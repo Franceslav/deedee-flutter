@@ -11,6 +11,7 @@
   "beginning": "시작",
   "finish": "마치다",
   "duration": "지속",
+  "qrScanner" : "qr 스캐너",
   "mockFilterKeySuspension": "모의 필터 키 서스펜션",
   "mockFilterKeyQuarrel": "모의 필터 키 싸움",
   "mockFilterKeyEngine": "모의 필터 키 엔진",

@@ -127,6 +127,7 @@
   "applicationActivity": "ใบสมัครของคุณใช้ได้จนถึง",
   "applicationDays": "เลือกจำนวนการใช้งานต่อวัน",
   "placeRequest": "โพสต์แถลงการณ์",
+  "qrScanner" : "qr เครื่องสแกน",
   "upgradePremium": "สิ่งนี้สามารถเปลี่ยนแปลงได้ในพรีเมี่ยม",
   "upgradeToPremium": "ไปพรีเมี่ยม",
   "resume": "ดำเนินการต่อทั้งหมดเหมือนกัน",

@@ -1,5 +1,6 @@
 {
    "safe": "安全的",
+   "qrScanner" : "qr 掃描器",
     "placeOrder": "下订单",
     "placeOrderPageTitle": "订",
     "accountTitle": "帐户名称",

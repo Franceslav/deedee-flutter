@@ -104,7 +104,7 @@
   "applicationBegin": "Выберете дату начала заявки",
   "applicationStart": "Заявка начнется с ",
   "homeChooseCity": "Выберите свой город",
-  "myFilters": "Мои фильтры",
+  "myFilters": "мои фильтры",
   "subscription": "подписки",
   "userTagsTitle": "мои теги",
   "tagRemovedMessage": "тег удален",
@@ -129,7 +129,7 @@
   "verifyYourAccount": "Подтвердите свой аккаунт",
   "premium": "Премиум",
   "activated": "Активирован",
-  "profile": "Профиль",
+  "profile": "профиль",
   "switchAccount": "Переключить аккаунт",
   "selectDate": "Выберете дату",
   "selectTime": "Выберете время",
@@ -207,12 +207,13 @@
     "search":"Поиск",
   "deeDeeForBusiness": "DeeDee для бизнеса",
   "placeText": "Место для вашего текста",
-  "businessProfile": "Бизнесс аккаунт",
+  "businessProfile": "бизнесс аккаунт",
   "regToBecomeClient": "Зарегистрируйтесь, чтобы стать клиентом",
   "nameCompany": "Название компании",
   "agreePP": "Соглашаюсь с политикой конфиденциальности",
   "connect": "Подключить",
   "addAccountTitle": "Добавить аккаунт",
+  "qrScanner" : "qr сканер",
   "requestService": "Запрос на сервис"
 }
 

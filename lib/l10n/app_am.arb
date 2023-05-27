@@ -1,4 +1,5 @@
 { 
+  "qrScanner" : "qr ስካነር",
   "helloWorld": "ሰላም ልዑል",
   "myRequests": "የእኔ ጥያቄዎች",
   "hoursLabel": "የሰዓት መለያ",

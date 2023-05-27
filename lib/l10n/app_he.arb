@@ -28,6 +28,7 @@
      "description": "הברכה הקונבנציונלית של מתכנת יילוד"
    },
    "safe": "בטוח",
+   "qrScanner" : "qr סוֹרֵק",
    "accountsTitle": "חשבונות",
    "noUserAccounts": "אין חשבונות",
    "placeOrder": "בצע הזמנה",

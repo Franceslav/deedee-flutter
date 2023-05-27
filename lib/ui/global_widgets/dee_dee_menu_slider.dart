@@ -20,24 +20,25 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
     required super.controller,
     required this.user,
   }) : super(
-            maxHeight: MediaQuery.of(context).size.height * 0.65,
-            generalSlidingPanelItemList: [
-              GeneralSlidingPanelItem(
-                  icon: Icons.home,
-                  text: AppLocalizations.of(context)!.homeTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.popAndPush(const HomeScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                icon: Icons.published_with_changes_sharp,
-                text: 'QR Scanner',
-                onTap: () async {
-                  context.router.navigate(const BookmarkQRScannerRoute());
-                },
-              ),
+    maxHeight: MediaQuery.of(context).size.height * 0.65,
+    generalSlidingPanelItemList: [
+          GeneralSlidingPanelItem(
+            icon: Icons.published_with_changes_sharp,
+            text: AppLocalizations.of(context)!.qrScanner,
+            onTap: () async {
+              context.router.navigate(const BookmarkQRScannerRoute());
+            },
+          ),
+          GeneralSlidingPanelItem(
+              icon: Icons.list,
+              text: AppLocalizations.of(context)!.userTagsTitle,
+              onTap: () {
+                if (context.router.current.isActive) {
+                  controller.close();
+                }
+
+                context.router.navigate(const UserTagsScreenRoute());
+              }),
               GeneralSlidingPanelItem(
                   icon: Icons.account_box,
                   text: AppLocalizations.of(context)!.profile,
