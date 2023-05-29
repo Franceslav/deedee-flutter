@@ -75,7 +75,7 @@ class ServiceRequestServiceApi {
         tagId: Int64(4),
       ),
       ServiceRequest(
-        serviceRequestId: UUID(value: "58a78535-0852-4125-8a58-43843e4706a3"),
+        serviceRequestId: UUID(value: "58a78535-0852-4125-8a58-43843e4706a4"),
         // tag: Tag()..topicId = 'маникюр 2',
         description:
             'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
@@ -126,7 +126,7 @@ class ServiceRequestServiceApi {
   }
 
   List<ServiceRequest> getServiceRequests(String userId) {
-    return _serviceRequests.filter((sr) => sr.createdFor == userId).toList();
+    return _serviceRequests.filter((sr) => sr.createdBy == userId).toList();
   }
 
   ServiceRequest create(ServiceRequest request) {
