@@ -49,7 +49,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(1)
+        ..tagId = Int64(2)
         ..createdBy = Int64(1)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -77,7 +77,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(2)
+        ..tagId = Int64(3)
         ..createdBy = Int64(1)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -105,7 +105,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(3)
+        ..tagId = Int64(4)
         ..createdBy = Int64(1)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -133,7 +133,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(4)
+        ..tagId = Int64(5)
         ..createdBy = Int64(1)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -161,7 +161,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(7)
+        ..tagId = Int64(6)
         ..createdBy = Int64(1)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -189,7 +189,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(5)
+        ..tagId = Int64(7)
         ..createdBy = Int64(5)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
@@ -255,7 +255,7 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.BOOKMARKED,
       Tag()
-        ..tagId = Int64(6)
+        ..tagId = Int64(8)
         ..createdBy = Int64(6)
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(

@@ -106,7 +106,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               itemBuilder: (context, i) {
                                 return TagCardWidget(
                                   onDismissed: () =>
-                                      deleteTag(_tags[i], user.userId, i),
+                                      deleteTag(bloc, _tags[i], i),
                                   tag: _tags[i],
                                 );
                               },
@@ -123,13 +123,13 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                                   tags: _tags,
                                   tagsType: TagsType.actual,
                                   onDismissed: (tag, userId, index) =>
-                                      deleteTag(tag, userId, index),
+                                      deleteTag(bloc, tag, index),
                                 ),
                                 UserTagsList(
                                   tags: _tags,
                                   tagsType: TagsType.archive,
                                   onDismissed: (tag, userId, index) =>
-                                      deleteTag(tag, userId, index),
+                                      deleteTag(bloc, tag, index),
                                 )
                               ],
                             ),
@@ -157,9 +157,9 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
     );
   }
 
-  void deleteTag(Tag tag, String userId, int index) {
-    BlocProvider.of<UserTagsBloc>(context)
-        .add(DeleteTagEvent(tag: tag, userId: userId, index: index));
+  void deleteTag(UserTagsBloc bloc, Tag tag, int index) {
+    final user = BlocProvider.of<UserBloc>(context).state.user;
+    bloc.add(DeleteTagEvent(tag: tag, userId: user.email, index: index));
   }
 
   @override
