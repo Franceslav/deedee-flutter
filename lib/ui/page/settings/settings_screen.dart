@@ -45,8 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           title: const Text('IP Address / Port'),
                           leading: const Icon(Icons.settings_ethernet),
                           onPressed: (BuildContext context) {
-                            context.router
-                                .replace(const ConnectionSettingsScreenRoute());
+                            context.router.push(const ConnectionSettingsScreenRoute());
                           },
                         ),
                       ],
