@@ -73,5 +73,14 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     }
                     context.router.popAndPush(const ReferralScreenRoute());
                   }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.business_center,
+                  text: AppLocalizations.of(context)!.businessProfile,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.navigate(const AccountBusinessPageRoute());
+                  }),
             ]);
 }

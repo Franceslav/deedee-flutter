@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/page/account/account_language_dropdown.dart';
 import 'package:deedee/ui/page/settings/settings_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
@@ -61,6 +62,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ],
                     ),
+                    SettingsSection(
+                      title: const Text('Language'),
+                      tiles: [
+                        SettingsTile(
+                          title: LanguagesExpansionTile(),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 DeeDeeMenuSlider(

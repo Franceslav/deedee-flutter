@@ -113,12 +113,8 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
   late Language selectedValue;
 
   @override
-  void initState() {
-    selectedValue = widget.data.first;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    selectedIndex = getLangIndex(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -129,7 +125,7 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
           // backgroundColor: Colors.blueAccent,
           title: Text(
             widget.data[selectedIndex].language,
-            style: TextStyle(fontSize: 19),
+            style: const TextStyle(fontSize: 19),
           ),
           expandedCrossAxisAlignment: CrossAxisAlignment.end,
           textColor: Colors.black,
@@ -173,7 +169,7 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
                           return ListTile(
                             title: Text(
                               widget.data[index].language,
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             tileColor: const Color(TILE_COLOR),
                             leading: CircleAvatar(
@@ -192,12 +188,10 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
                             ),
                             onTap: () {
                               setState(() {
-                                selectedIndex = index;
                                 context
                                     .read<AccountBloc>()
                                     .changeLocal(widget.data[index].langLabel);
                               });
-                              //     widget.onTap(widget.data[index]);
                             },
                           );
                         },
@@ -211,5 +205,19 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
         ),
       ),
     );
+  }
+
+  int getLangIndex(BuildContext context) {
+    try {
+      Locale locale = context.read<AccountBloc>().appLocal ??
+          Localizations.localeOf(context);
+      return widget.data.indexOf(
+        widget.data.firstWhere(
+          (element) => element.langLabel == locale.languageCode,
+        ),
+      );
+    } catch (e) {
+      return 0;
+    }
   }
 }
