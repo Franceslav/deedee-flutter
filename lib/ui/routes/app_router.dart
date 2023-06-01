@@ -23,18 +23,20 @@ import 'package:deedee/ui/page/customer_profile/customer_profile_screen.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
+import 'package:deedee/ui/page/map_cubit/map_screen_my_tag.dart';
 import 'package:deedee/ui/page/my/my_referrals/referral_screen.dart';
 import 'package:deedee/ui/page/my/my_requests/my_requests_screen.dart';
 import 'package:deedee/ui/page/payment/payment_method_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/page/settings/settings_screen.dart';
+import 'package:deedee/ui/page/settings/upload_settings/upload_settings_screen.dart';
 import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/service_request_page.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
-import 'package:deedee/ui/page/map_cubit/map_screen_my_tag.dart';
+
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
 import '../page/stats/stats_screen.dart';
 
@@ -59,6 +61,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: ReferralScreen, path: '/referral'),
     MaterialRoute(page: SettingsScreen, path: '/settings'),
     MaterialRoute(page: ConnectionSettingsScreen, path: '/connection-settings'),
+    MaterialRoute(page: UploadSettingsScreen, path: '/upload-settings'),
     MaterialRoute(page: HelpScreen, path: '/help'),
     MaterialRoute(page: LoginScreen, path: '/login'),
     MaterialRoute(page: SignUpScreen, path: '/sign-up'),

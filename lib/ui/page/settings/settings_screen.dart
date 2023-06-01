@@ -49,6 +49,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             context.router.push(const ConnectionSettingsScreenRoute());
                           },
                         ),
+                        SettingsTile(
+                          title: const Text('Photo upload host'),
+                          leading: const Icon(Icons.upload_sharp),
+                          onPressed: (BuildContext context) {
+                            context.router
+                                .replace(const UploadSettingsScreenRoute());
+                          },
+                        ),
                       ],
                     ),
                     SettingsSection(

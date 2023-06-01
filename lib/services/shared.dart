@@ -5,6 +5,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(env: [Environment.dev, Environment.prod])
 class SharedUtils {
+  static const _keyPhotoUploadServiceIpAddress = "key_photo_upload_service_ip_address";
+  static const _keyPhotoUploadServicePort = "key_photo_upload_service_port";
+  static const _defaultPhotoServiceIpAddress = "127.0.0.1";
+  static const _defaultPhotoServicePort = "1234";
+
+  late SharedPreferences _sharedPreferences;
+
+  @PostConstruct()
+  Future<void> init() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (getUploadPhotoServiceIpAddress() == null) {
+      saveUploadPhotoServiceIpAddress(_defaultPhotoServiceIpAddress);
+    }
+    if (getUploadPhotoServicePort() == null) {
+      saveUploadPhotoServicePort(_defaultPhotoServicePort);
+    }
+  }
+
   Future<String?> getPrefsIpAddress() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('ipAddress');
@@ -53,5 +71,19 @@ class SharedUtils {
   Future<String?> getUserPlace() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('place');
+  }
+
+  String? getUploadPhotoServiceIpAddress() =>
+      _sharedPreferences.getString(_keyPhotoUploadServiceIpAddress);
+
+  String? getUploadPhotoServicePort() =>
+      _sharedPreferences.getString(_keyPhotoUploadServicePort);
+
+  void saveUploadPhotoServiceIpAddress(String photoUploadIpAddress) {
+    _sharedPreferences.setString(_keyPhotoUploadServiceIpAddress, photoUploadIpAddress);
+  }
+
+  void saveUploadPhotoServicePort(String photoUploadPort) {
+    _sharedPreferences.setString(_keyPhotoUploadServicePort, photoUploadPort);
   }
 }
