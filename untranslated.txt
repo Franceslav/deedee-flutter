@@ -1,8 +1,4 @@
 {
-  "de": [
-    "qrScanner"
-  ],
-
   "id": [
     "safe",
     "placeOrder",
@@ -52,6 +48,7 @@
     "addPayment",
     "deeDeeForBusiness",
     "placeText",
+    "businessProfile",
     "regToBecomeClient",
     "nameCompany",
     "agreePP",
