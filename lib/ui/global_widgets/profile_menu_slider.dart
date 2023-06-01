@@ -46,7 +46,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       })
                   : const SizedBox.shrink(),
               GeneralSlidingPanelItem(
-                  icon: Icons.bookmark,
+                  icon: Icons.favorite,
                   text: AppLocalizations.of(context)!.bookmarksTitle,
                   onTap: () {
                     if (context.router.current.isActive) {

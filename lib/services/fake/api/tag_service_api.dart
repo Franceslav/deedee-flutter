@@ -286,34 +286,34 @@ class TagServiceApi {
   }
 
   // Tags CRUD
-  List<Tag> getTags(String userId) {
-    return _tags.getOrElse(userId, () => []).toList();
+  List<Tag> getTags(String email) {
+    return _tags.getOrElse(email, () => []).toList();
   }
 
-  List<Tag> getFavoriteTags(String userId) {
+  List<Tag> getFavoriteTags(String email) {
     return _tags
-        .getOrElse(userId, () => [])
+        .getOrElse(email, () => [])
         .filter((element) => element.status == Tag_Status.BOOKMARKED)
         .toList();
   }
 
-  Future<Tag> deleteTag(String userId, Int64 tagId) async {
+  Future<Tag> deleteTag(String email, Int64 tagId) async {
     return _tags
-        .getOrElse(userId, () => [])
+        .getOrElse(email, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.DELETED;
   }
 
-  Tag addTagToFavorites(String userId, Int64 tagId) {
+  Tag addTagToFavorites(String email, Int64 tagId) {
     return _tags
-        .getOrElse(userId, () => [])
+        .getOrElse(email, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.BOOKMARKED;
   }
 
-  Future<Tag> removeTagFromFavorites(String userId, Int64 tagId) async {
+  Future<Tag> removeTagFromFavorites(String email, Int64 tagId) async {
     return _tags
-        .getOrElse(userId, () => [])
+        .getOrElse(email, () => [])
         .firstWhere((rq) => rq.tagId == tagId)
       ..status = Tag_Status.PLACED;
   }
