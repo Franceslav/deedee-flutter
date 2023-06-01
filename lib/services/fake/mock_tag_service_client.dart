@@ -98,7 +98,19 @@ class MockTagServiceClient implements TagServiceClient {
   ResponseFuture<TagResponse> getFavoriteTags(TagRequest request,
       {CallOptions? options}) {
     // TODO: implement getFavoriteTags
-    throw UnimplementedError();
+    return ResponseFuture(
+        FakeClientCall<dynamic, TagResponse>(_getFavoriteTags(request)));
+  }
+
+  Future<TagResponse> _getFavoriteTags(TagRequest request) {
+    final userId = retrieveUserIdFrom(request);
+    final completer = Completer<TagResponse>();
+    completer.complete(
+      TagResponse(
+        tags: api.getFavoriteTags(userId),
+      ),
+    );
+    return completer.future;
   }
 
   @override

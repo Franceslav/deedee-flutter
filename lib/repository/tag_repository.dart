@@ -66,9 +66,9 @@ class TagRepository {
   }
 
   Future<List<Tag>> getFavoriteTags(String email) async {
-    final response = await _tagServiceClient.getTags(TagRequest(
+    final response = await _tagServiceClient.getFavoriteTags(TagRequest(
         tag: Tag(
-              compositeFilter: CompositeFilter(topic: Topic(title: email)),
+              compositeFilter: CompositeFilter(topic: Topic(userId: email)),
         )
       )
      );

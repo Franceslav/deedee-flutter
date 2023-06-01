@@ -21,7 +21,6 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   final User _user;
 
   BookmarksBloc(this._tagRepository, this._observationRepository, this._user) : super(InitialState()) {
-    on<_BookmarksLoadedEvent>(_onBookmarksLoaded);
     on<DeleteBookmarkEvent>(_onDeleteBookmark);
     on<AddBookmarkEvent>(_onAddBookmark);
     on<UndoAddBookmarkEvent>(_onUndoAddBookmark);
@@ -35,15 +34,10 @@ class BookmarksBloc extends Bloc<BookmarksEvent, BookmarksState> {
   void _initialize() async {
     try {
       final bookmarks = await _tagRepository.getFavoriteTags(_user.email);
-      add(_BookmarksLoadedEvent(tags: bookmarks));
+      emit(LoadedBookmarksState(bookmarks));
     } catch (error) {
       stderr.writeln(error.toString());
     }
-  }
-
-  void _onBookmarksLoaded(
-      _BookmarksLoadedEvent event, Emitter<BookmarksState> emit) {
-    emit(LoadedBookmarksState(event.tags));
   }
 
   void _loadBookmarks(BookmarksEvent _, Emitter<BookmarksState> emit) async {
