@@ -30,7 +30,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     if (context.router.current.isActive) {
                       controller.close();
                     }
-                    context.router.popAndPush(const UserTagsScreenRoute());
+                    context.router.push(const UserTagsScreenRoute());
                   }),
               user.accountType == AccountType.buy
                   ? GeneralSlidingPanelItem(
@@ -41,7 +41,6 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                         if (context.router.current.isActive) {
                           controller.close();
                         }
-                        context.router.pop();
                         context.router.push(const MyRequestScreenRoute());
                       })
                   : const SizedBox.shrink(),
@@ -52,7 +51,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     if (context.router.current.isActive) {
                       controller.close();
                     }
-                    context.router.popAndPush(const BookmarksScreenRoute());
+                    context.router.push(const BookmarksScreenRoute());
                   }),
               GeneralSlidingPanelItem(
                   icon: Icons.filter_alt,
@@ -61,7 +60,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     if (context.router.current.isActive) {
                       controller.close();
                     }
-                    context.router.popAndPush(
+                    context.router.push(
                         const FavoriteCompositeFiltersScreenRoute());
                   }),
               GeneralSlidingPanelItem(
@@ -71,7 +70,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     if (context.router.current.isActive) {
                       controller.close();
                     }
-                    context.router.popAndPush(const ReferralScreenRoute());
+                    context.router.push(const ReferralScreenRoute());
                   }),
               GeneralSlidingPanelItem(
                   icon: Icons.business_center,
