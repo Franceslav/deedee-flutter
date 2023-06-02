@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../model/user.dart';
 import '../auth/authentication_bloc.dart';
 import '../routes/app_router.gr.dart';
-import '../user_bloc/user_bloc.dart';
 import 'genaral_sliding_panel/general_sliding_panel.dart';
 import 'genaral_sliding_panel/general_sliding_panel_item.dart';
 
@@ -20,25 +19,15 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
     required super.controller,
     required this.user,
   }) : super(
-    maxHeight: MediaQuery.of(context).size.height * 0.65,
-    generalSlidingPanelItemList: [
-          GeneralSlidingPanelItem(
-            icon: Icons.published_with_changes_sharp,
-            text: AppLocalizations.of(context)!.qrScanner,
-            onTap: () async {
-              context.router.navigate(const BookmarkQRScannerRoute());
-            },
-          ),
-          GeneralSlidingPanelItem(
-              icon: Icons.list,
-              text: AppLocalizations.of(context)!.userTagsTitle,
-              onTap: () {
-                if (context.router.current.isActive) {
-                  controller.close();
-                }
-
-                context.router.navigate(const UserTagsScreenRoute());
-              }),
+            maxHeight: MediaQuery.of(context).size.height * 0.4,
+            generalSlidingPanelItemList: [
+              GeneralSlidingPanelItem(
+                icon: Icons.published_with_changes_sharp,
+                text: AppLocalizations.of(context)!.qrScanner,
+                onTap: () async {
+                  context.router.navigate(const BookmarkQRScannerRoute());
+                },
+              ),
               GeneralSlidingPanelItem(
                   icon: Icons.account_box,
                   text: AppLocalizations.of(context)!.profile,
@@ -47,31 +36,6 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router.navigate(const AccountScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.rotate_left_rounded,
-                  text:
-                      '${AppLocalizations.of(context)!.switchTo} ${user.accountType.switchAccountStringType(context)}',
-                  onTap: () {
-                    switch (user.accountType) {
-                      case AccountType.buy:
-                        BlocProvider.of<UserBloc>(context)
-                            .add(UserSwitchAccountType(AccountType.sell));
-                        break;
-                      case AccountType.sell:
-                        BlocProvider.of<UserBloc>(context)
-                            .add(UserSwitchAccountType(AccountType.buy));
-                        break;
-                    }
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.business_center,
-                  text: AppLocalizations.of(context)!.businessProfile,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const AccountBusinessPageRoute());
                   }),
               GeneralSlidingPanelItem(
                   icon: Icons.settings,

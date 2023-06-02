@@ -46,7 +46,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       })
                   : const SizedBox.shrink(),
               GeneralSlidingPanelItem(
-                  icon: Icons.bookmark,
+                  icon: Icons.favorite,
                   text: AppLocalizations.of(context)!.bookmarksTitle,
                   onTap: () {
                     if (context.router.current.isActive) {
@@ -72,6 +72,15 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router.popAndPush(const ReferralScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.business_center,
+                  text: AppLocalizations.of(context)!.businessProfile,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.navigate(const AccountBusinessPageRoute());
                   }),
             ]);
 }

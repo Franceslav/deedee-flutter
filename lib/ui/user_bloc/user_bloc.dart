@@ -100,6 +100,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (image == null) return;
     final imageTemp = File(image.path);
     await session.onUploadImage(imageTemp);
+    session.onUploadImageToHostUserSpecified(imageTemp);
   }
 
   _onUserDocVerification(

@@ -11,7 +11,6 @@ import 'package:deedee/ui/page/account/account_widget.dart';
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
-import 'package:deedee/ui/theme/colors.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,13 +88,6 @@ class _AccountState extends State<AccountScreen> {
                       premiumStatus: user.premiumStatus,
                     ),
                     const SizedBox(height: 20),
-                    _TextButtonWidget(
-                      text: locale.switchLanguage,
-                      textColor: AppColors.blue,
-                      onPressed: () {
-                        context.router.push(const AccountLanguageScreenRoute());
-                      },
-                    ),
                     const SizedBox(height: 0),
                   ],
                 ),

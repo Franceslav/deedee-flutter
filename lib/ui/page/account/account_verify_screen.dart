@@ -98,7 +98,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           style: TextStyle(fontSize: 10),
                         ),
                       ),
-                      /*ElevatedButton(
+                      ElevatedButton(
                         onPressed: () {
                           showDialog(
                               context: context,
@@ -135,8 +135,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               });
                           //TODO: [DEEMOB-76]
                           context
-                              .read<UserBloc>()
-                              .add(UserDocVerification(files: FileChunk()));
+                              .read<UserBloc>();
+                              //.add(UserDocVerification(files: FileChunk()));
                         },
                         child: SizedBox(
                           width: 80,
@@ -149,7 +149,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             ],
                           ),
                         ),
-                      ),*/
+                      ),
                     ],
                   ),
                 ),

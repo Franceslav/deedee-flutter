@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:deedee/constants.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/injection.dart';
+import 'package:deedee/services/shared.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:uni_links/uni_links.dart';
@@ -13,6 +14,32 @@ class HttpService {
       'POST',
       Uri.parse(
           "https://a44ae70e-0768-4737-9545-7b3aca98ebf8.mock.pstmn.io/post"),
+    );
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        selectedImage.readAsBytes().asStream(),
+        selectedImage.lengthSync(),
+        filename: selectedImage.path.split('/').last,
+      ),
+    );
+    request.headers.addAll(headers);
+    print("request: " + request.toString());
+    var res = await request.send();
+    http.Response response = await http.Response.fromStream(res);
+    print(response.statusCode);
+  }
+
+  void onUploadImageToHostUserSpecified(selectedImage) async {
+    final prefs = locator.get<SharedUtils>();
+    final ip = prefs.getUploadPhotoServiceIpAddress();
+    final port = prefs.getUploadPhotoServicePort();
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse(
+          "https://$ip:$port/post"),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
