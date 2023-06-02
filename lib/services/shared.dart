@@ -12,7 +12,7 @@ class SharedUtils {
 
   late SharedPreferences _sharedPreferences;
 
-  @PostConstruct()
+/*  @PostConstruct()
   Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     if (getUploadPhotoServiceIpAddress() == null) {
@@ -21,7 +21,7 @@ class SharedUtils {
     if (getUploadPhotoServicePort() == null) {
       saveUploadPhotoServicePort(_defaultPhotoServicePort);
     }
-  }
+  }*/
 
   Future<String?> getPrefsIpAddress() async {
     final prefs = await SharedPreferences.getInstance();

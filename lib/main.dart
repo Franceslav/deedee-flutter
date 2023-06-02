@@ -73,20 +73,20 @@ void main() {
             create: (_) => CardBloc(locator.get<CardRepository>()),
           ),
         ],
-        child: const MyApp(),
+        child: const DeeDeeApp(),
       ),
     ),
   ]));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class DeeDeeApp extends StatefulWidget {
+  const DeeDeeApp({Key? key}) : super(key: key);
 
   @override
-  MyAppState createState() => MyAppState();
+  DeeDeeAppState createState() => DeeDeeAppState();
 }
 
-class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class DeeDeeAppState extends State<DeeDeeApp> with WidgetsBindingObserver {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
