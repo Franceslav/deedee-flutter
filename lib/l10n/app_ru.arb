@@ -214,6 +214,11 @@
   "connect": "Подключить",
   "addAccountTitle": "Добавить аккаунт",
   "qrScanner" : "qr сканер",
-  "requestService": "Запрос на сервис"
+  "requestService": "Запрос на сервис",
+  "requiredField": "Обязательное поле.",
+  "nameContainLettersAndSymbols": "Имя должно содержать только буквы: a-z, A-Z, а-я, А-Я и символ &.",
+  "mobilePhoneNumber": "Требуется номер мобильного телефона.",
+  "numberContainOnlyDigits": "Номер мобильного телефона должен содержать только цифры",
+  "validEmail": "Введите действующий адрес электронной почты."
 }
 

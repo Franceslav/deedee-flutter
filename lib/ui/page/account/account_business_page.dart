@@ -97,11 +97,13 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
   bool isChecked = false;
   bool isConnect = false;
   final _formKey = GlobalKey<FormState>();
+
   bool validateForm() {
     if (_formKey.currentState == null) {
       return false;
     }
-    return _formKey.currentState!.validate();
+    bool isFormValid = _formKey.currentState!.validate();
+    return isFormValid;
   }
 
   @override
@@ -133,15 +135,14 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                 padding: const EdgeInsets.all(13.0),
                 child: Form(
                   key: _formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
                   child: Column(
                     children: [
                       TextFormField(
-                        validator: (value)  {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter name company';
-                          }
-                          return null;
+                        onChanged: (value) {
+                          bloc.add(ChangeFormEvent(value));
                         },
+                        validator: validateName,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.nameCompany,
@@ -149,12 +150,10 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                         ),
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your city';
-                          }
-                          return null;
+                        onChanged: (value) {
+                          bloc.add(ChangeFormEvent(value));
                         },
+                        validator: validateName,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
@@ -165,12 +164,10 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                         ),
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter contact information';
-                          }
-                          return null;
+                        onChanged: (value) {
+                          bloc.add(ChangeFormEvent(value));
                         },
+                        validator: validateName,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText:
@@ -180,12 +177,10 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                         ),
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter phone number';
-                          }
-                          return null;
+                        onChanged: (value) {
+                          bloc.add(ChangeFormEvent(value));
                         },
+                        validator: validateMobile,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
@@ -194,12 +189,10 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                         ),
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your Email';
-                          }
-                          return null;
+                        onChanged: (value) {
+                          bloc.add(ChangeFormEvent(value));
                         },
+                        validator: validateEmail,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -224,7 +217,7 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                             checkColor: AppColors.white,
                             fillColor:
                                 MaterialStateProperty.resolveWith(getColor),
-                            value: validateForm(),
+                            value: isChecked && validateForm(),
                             onChanged: (bool? value) {
                               bloc.add(PolicyCheckedEvent(
                                   isChecked = value ?? false));
@@ -232,7 +225,6 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                           )
                         ],
                       ),
-
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.13,
                       ),
@@ -246,14 +238,13 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
                             ),
                           ),
                         ),
-                        onPressed:
-                        validateForm() && state is BusinessPageState &&
-                                state.policyAccepted
+                        onPressed: validateForm() &&
+                                state is BusinessPageState &&
+                                state.policyAccepted &&
+                                isChecked
                             ? () {
-                                if (isChecked) {
-                                  state is BusinessConnectTapState &&
-                                      state.buttonConnectBusiness;
-                                }
+                                state is BusinessConnectTapState &&
+                                    state.buttonConnectBusiness;
                               }
                             : null,
                         child: Center(
@@ -271,7 +262,37 @@ class _BusinessRowInfoWidgetState extends State<BusinessRowInfoWidget> {
           }),
     );
   }
+  String? validateName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)!.requiredField;
+    }
+    String pattern = r'(^[a-zA-Z&а-яА-Я]*$)';
+    RegExp regExp = RegExp(pattern);
+    if (!regExp.hasMatch(value.trim())) {
+      return AppLocalizations.of(context)!.nameContainLettersAndSymbols;
+    }
+    return null;
+  }
 
+  String? validateMobile(String? value) {
+    String pattern = r'(^\+?[0-9]*$)';
+    RegExp regExp = RegExp(pattern);
+    if (value?.trim().isEmpty ?? true) {
+      return AppLocalizations.of(context)!.mobilePhoneNumber;
+    } else if (!regExp.hasMatch(value?.trim() ?? '')) {
+      return AppLocalizations.of(context)!.numberContainOnlyDigits;
+    }
+    return null;
+  }
+
+  String? validateEmail(String? value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value ?? '')) {
+      return AppLocalizations.of(context)!.validEmail;
+    } else {
+      return null;
+    }
+  }
 }
-
-

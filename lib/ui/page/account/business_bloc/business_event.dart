@@ -13,3 +13,8 @@ class ButtonConnectEvent extends BusinessEvent{
   final bool buttonConnectBusiness;
   ButtonConnectEvent(this.policyAccepted, this.buttonConnectBusiness);
 }
+
+class ChangeFormEvent extends BusinessEvent{
+  final String formValue;
+  ChangeFormEvent(this.formValue);
+}

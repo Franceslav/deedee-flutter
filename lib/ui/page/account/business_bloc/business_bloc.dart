@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 
 part 'business_event.dart';
+
 part 'business_state.dart';
 
 class BusinessPageBloc extends Bloc<BusinessEvent, BusinessState> {
@@ -11,7 +12,7 @@ class BusinessPageBloc extends Bloc<BusinessEvent, BusinessState> {
   BusinessPageBloc() : super(BusinessStateInitialState()) {
     on<PolicyCheckedEvent>(_policyAccepted);
     on<ButtonConnectEvent>(_buttonConnectBusiness);
-    // on<PolicyCheckedEvent>(_activeConnect);
+    on<ChangeFormEvent>(_formValue);
   }
 
   _policyAccepted(PolicyCheckedEvent event, emit) {
@@ -21,13 +22,22 @@ class BusinessPageBloc extends Bloc<BusinessEvent, BusinessState> {
 
   _buttonConnectBusiness(ButtonConnectEvent event, emit) {
     final buttonConnectBusiness = event.buttonConnectBusiness;
-    if (policyAccepted = false) {
+    if (policyAccepted) {
       emit(
         BusinessConnectTapState(buttonConnectBusiness),
       );
-    } else{
-      emit (BusinessConnectTapState(!buttonConnectBusiness),);
+    } else {
+      emit(
+        BusinessConnectTapState(!buttonConnectBusiness),
+      );
+    }
+  }
 
+  _formValue(ChangeFormEvent event, emit) {
+    {
+      if (event.formValue.isEmpty) {
+        emit(BusinessPageState(false, false));
+      }
     }
   }
 }
