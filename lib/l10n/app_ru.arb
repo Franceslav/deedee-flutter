@@ -1,4 +1,10 @@
 {
+  "useFingerprint" : "Использовать отпечаток пальца",
+  "connectionSettings" : "Связь",
+  "settingIpAddressPort" : "IP-адрес / порт",
+  "scanYourFingerprint" : "Отсканируйте свой отпечаток пальца (или лицо) для аутентификации",
+  "oopsBiometric" : "Ой! Требуется биометрическая аутентификация!",
+  "cancelFingerPrint" : "Нет, спасибо",
   "email": "электронная почта",
   "myRequests": "мои запросы",
   "mockFilterKeySuspension": "Приостановка",

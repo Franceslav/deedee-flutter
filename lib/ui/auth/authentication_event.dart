@@ -9,6 +9,21 @@ class LoginWithEmailAndPasswordEvent extends AuthenticationEvent {
   LoginWithEmailAndPasswordEvent({required this.email, required this.password});
 }
 
+class LoginWithBiometricEvent extends AuthenticationEvent {
+  String email;
+  String password;
+  String localizedReason;
+  String signInTitle;
+  String cancelButton;
+
+  LoginWithBiometricEvent(
+      {required this.email,
+      required this.password,
+      required this.localizedReason,
+      required this.signInTitle,
+      required this.cancelButton});
+}
+
 class LoginWithFacebookEvent extends AuthenticationEvent {}
 
 class LoginWithAppleEvent extends AuthenticationEvent {

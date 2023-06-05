@@ -5,6 +5,7 @@ import 'package:deedee/repository/observation_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
+import 'package:deedee/ui/auth/biometric/biometric_prefs.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
@@ -24,12 +25,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:search_address_repository/search_address_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ui/page/account/account_bloc.dart';
 
-void main() {
+Future<void> main() async {
   configureDependencies('dev');
   WidgetsFlutterBinding.ensureInitialized();
+  await BiometricPrefs().init();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   // locator.get<SharedUtils>().clearAll();

@@ -8,19 +8,25 @@ import 'package:deedee/injection.dart';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/fake/api/tag_service_api.dart';
+import 'package:deedee/ui/auth/biometric/biometric_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:injectable/injectable.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_android/local_auth_android.dart';
+import 'package:local_auth_ios/types/auth_messages_ios.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-@LazySingleton(env: [Environment.dev, Environment.test, Environment.prod])
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   User? user;
   late SharedPreferences prefs;
-  late bool finishedOnBoarding;
+  late bool finishedOnBoarding, authenticated;
+  late LocalAuthentication authLocal;
+  late String userEmail, userPassword;
+  bool biometric = BiometricPrefs().userBiometric;
 
   AuthenticationBloc({this.user})
       : super(const AuthenticationState.unauthenticated()) {
@@ -35,8 +41,7 @@ class AuthenticationBloc
           emit(const AuthenticationState.unauthenticated());
         } else {
           emit(AuthenticationState.authenticated(user!));
-          locator.get<TagServiceApi>()
-              .setUserEmail(user!.email);
+          locator.get<TagServiceApi>().setUserEmail(user!.email);
         }
       }
     });
@@ -51,6 +56,8 @@ class AuthenticationBloc
             event.email, event.password);
         if (result != null && result is User) {
           user = result;
+          BiometricPrefs().userEmail = event.email;
+          BiometricPrefs().userPassword = event.password;
           emit(AuthenticationState.authenticated(user!));
         } else if (result != null && result is String) {
           emit(AuthenticationState.unauthenticated(message: result));
@@ -76,6 +83,45 @@ class AuthenticationBloc
       }
     });
     */
+    on<LoginWithBiometricEvent>((event, emit) async {
+      if (biometric) {
+        try {
+          authLocal = LocalAuthentication();
+          authenticated = await authLocal.authenticate(
+              localizedReason: event.localizedReason,
+              options: const AuthenticationOptions(
+                stickyAuth: true,
+              ),
+              authMessages: [
+                AndroidAuthMessages(
+                  signInTitle: event.signInTitle,
+                  cancelButton: event.cancelButton,
+                ),
+                IOSAuthMessages(
+                  cancelButton: event.cancelButton,
+                ),
+              ]);
+          if (authenticated) {
+            userEmail = BiometricPrefs().userEmail;
+            userPassword = BiometricPrefs().userPassword;
+            dynamic result = await FireStoreUtils.loginWithEmailAndPassword(
+                userEmail, userPassword);
+            if (result != null && result is User) {
+              user = result;
+              emit(AuthenticationState.authenticated(user!));
+            } else if (result != null && result is String) {
+              emit(AuthenticationState.unauthenticated(message: result));
+            } else {
+              emit(const AuthenticationState.unauthenticated(
+                  message: 'Login failed, Please try again.'));
+            }
+          }
+        } on PlatformException catch (error) {
+          emit(AuthenticationState.unauthenticated(message: error.toString()));
+        }
+      }
+    });
+
     on<LoginWithAppleEvent>((event, emit) async {
       dynamic result = await FireStoreUtils.loginWithApple();
       if (result != null && result is User) {
@@ -124,6 +170,8 @@ class AuthenticationBloc
             .createVerification(VerificationRequest(
               verification: Verification(status: Verification_Status.SENT),
             ));
+        BiometricPrefs().userEmail = event.emailAddress;
+        BiometricPrefs().userPassword = event.password;
         emit(AuthenticationState.authenticated(user!));
       } else if (result != null && result is String) {
         emit(AuthenticationState.unauthenticated(message: result));

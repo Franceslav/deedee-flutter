@@ -3,6 +3,7 @@
   "@helloWorld": {
     "description": "Die herkömmliche Begrüßung für neugeborene Programmierer"
   },
+  "qrScanner": "qr scanner",
   "safe": "sicher",
   "placeOrder": "Bestellung aufgeben",
   "placeOrderPageTitle": "Bestellung",

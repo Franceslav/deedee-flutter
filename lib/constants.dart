@@ -28,8 +28,8 @@ const DEFAULT_PUSH_NOTIFICATION_URL = 'https://fcm.googleapis.com/fcm/send';
 const DEFAULT_ENCODING = 'utf-8';
 const DEFAULT_CONTENT_TYPE = 'application/json';
 const CHIPS_COLOR_WHITE = 0XFFFFFFFF;
-const CHIPS_SHADOW_COLOR=0XFFC1BABA;
-const APPBAR_SHADOW_COLOR=0XFFC6C6D7;
+const CHIPS_SHADOW_COLOR = 0XFFC1BABA;
+const APPBAR_SHADOW_COLOR = 0XFFC6C6D7;
 const TILE_COLOR = 0XFFF2F2F2;
 const DEFAULT_ZOOM = 13.0;
 const DEFAULT_ZOOM_STEP = 1.0;
@@ -38,3 +38,7 @@ const PUSH_NOTIFICATION_CHANNEL_ID = 'deedee';
 const PUSH_NOTIFICATION_CHANNEL_NAME = 'deedee';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+const BIOMETRIC_ON = 'biometric-on';
+const USER_EMAIL = "user-email";
+const USER_PASSWORD = "user-password";

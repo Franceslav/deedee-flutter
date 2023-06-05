@@ -3,6 +3,12 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "useFingerprint" : "Use fingerprint",
+  "connectionSettings" : "Connection",
+  "settingIpAddressPort" : "IP Address / Port",
+  "scanYourFingerprint" : "Scan your fingerprint (or face or whatever) to authenticate",
+  "oopsBiometric" : "Oops! Biometric authentication required!",
+  "cancelFingerPrint" : "No thanks",
   "qrScanner" : "qr scanner",
   "safe": "safe",
   "placeOrder": "Place order",

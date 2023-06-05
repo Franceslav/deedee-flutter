@@ -4,6 +4,8 @@
 	<dict>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>This app needs access to location when open.</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>This app allows you to log in with biometric!</string>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
