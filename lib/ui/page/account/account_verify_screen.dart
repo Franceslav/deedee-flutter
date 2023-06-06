@@ -64,7 +64,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          context.read<UserBloc>().add(UserCreateVerification(Verification()));
+                          context
+                              .read<UserBloc>()
+                              .add(UserCreateVerification(Verification()));
                         },
                         child:
                             Text(AppLocalizations.of(context)!.accountVerify),
@@ -134,20 +136,16 @@ class _VerifyScreenState extends State<VerifyScreen> {
                                 );
                               });
                           //TODO: [DEEMOB-76]
-                          context
-                              .read<UserBloc>();
-                              //.add(UserDocVerification(files: FileChunk()));
+                          context.read<UserBloc>().add(UserDocVerification());
                         },
-                        child: SizedBox(
-                          width: 80,
-                          child: Row(
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.accountVerify,
-                              ),
-                              const Icon(Icons.attach_file)
-                            ],
-                          ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.accountVerify,
+                            ),
+                            const Icon(Icons.attach_file)
+                          ],
                         ),
                       ),
                     ],

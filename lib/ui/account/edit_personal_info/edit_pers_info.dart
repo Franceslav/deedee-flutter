@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/profile.pb.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,6 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ],
               ),
               body: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,6 +127,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             AppTextTheme.bodyLarge.copyWith(color: Colors.blue),
                       ),
                     ),
+                    const SizedBox(height: 10),
+                    DeeDeeRowInfoWidget(
+                      icon: Image.asset('assets/images/instagram_logo.png'),
+                      mainText: Text(
+                        locale.contacts,
+                        style: AppTextTheme.bodyLarge,
+                      ),
+                      secondaryText: const Text(
+                        '',
+                        style: AppTextTheme.bodyMedium,
+                      ),
+                      onTap: () {
+                        context.router.push(const SocialNetworkScreenRoute());
+                      },
+                    )
                   ],
                 ),
               ),

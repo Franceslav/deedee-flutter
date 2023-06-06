@@ -20,7 +20,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
     required this.controller,
     required this.user,
   }) : super(
-            maxHeight: MediaQuery.of(context).size.height * 0.45,
+            maxHeight: MediaQuery.of(context).size.height * 0.5,
             controller: controller,
             generalSlidingPanelItemList: [
               GeneralSlidingPanelItem(
@@ -80,6 +80,15 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router.navigate(const AccountBusinessPageRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.recent_actors,
+                  text: AppLocalizations.of(context)!.accountsTitle,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.push(const AccountsListScreenRoute());
                   }),
             ]);
 }

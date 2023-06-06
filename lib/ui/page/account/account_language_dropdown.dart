@@ -118,11 +118,10 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        elevation: 16.0,
+        elevation: 1.0,
         color: const Color(TILE_COLOR),
         margin: EdgeInsets.zero,
         child: ExpansionTile(
-          // backgroundColor: Colors.blueAccent,
           title: Text(
             widget.data[selectedIndex].language,
             style: const TextStyle(fontSize: 19),

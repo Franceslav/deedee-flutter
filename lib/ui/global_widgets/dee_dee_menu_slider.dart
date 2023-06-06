@@ -22,7 +22,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
             maxHeight: MediaQuery.of(context).size.height * 0.4,
             generalSlidingPanelItemList: [
               GeneralSlidingPanelItem(
-                icon: Icons.published_with_changes_sharp,
+                icon: Icons.qr_code_scanner,
                 text: AppLocalizations.of(context)!.qrScanner,
                 onTap: () async {
                   context.router.navigate(const BookmarkQRScannerRoute());

@@ -2,7 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/model/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../services/helper.dart';
 import '../user_bloc/user_bloc.dart';
@@ -13,6 +13,7 @@ class ProfilePhotoWithBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
+
     if (user.profilePictureURL == '') {
       return _addBadge(
         user,
@@ -36,40 +37,49 @@ class ProfilePhotoWithBadge extends StatelessWidget {
   }
 
   Widget _addBadge(User user, Widget child) {
-    return badges.Badge(
-      badgeContent: ((user.emailVerification ==
-                      EmailVerificationStatus.unverified &&
-                  user.docVerification == DocVerificationStatus.unverified) ||
-              (user.emailVerification == EmailVerificationStatus.verified &&
-                  user.docVerification == DocVerificationStatus.unverified) ||
-              (user.emailVerification == EmailVerificationStatus.unverified &&
-                  user.docVerification == DocVerificationStatus.verified))
-          ? const Icon(
-              CommunityMaterialIcons.help_circle,
-              color: Colors.grey,
+    final emailVerified =
+        user.emailVerification == EmailVerificationStatus.verified;
+    final docsVerified = user.docVerification == DocVerificationStatus.verified;
+    final premiumStatus = user.premiumStatus == PremiumStatus.isPremium;
+
+    const badgeStyle = badges.BadgeStyle(
+      badgeColor: Colors.transparent,
+      elevation: 0,
+      padding: EdgeInsets.zero,
+    );
+
+    return Builder(
+      builder: (context) {
+        return switch ((emailVerified, docsVerified, premiumStatus)) {
+          (true, true, true) => badges.Badge(
+              badgeContent: const Icon(
+                CommunityMaterialIcons.star_circle,
+                color: Colors.amber,
+              ),
+              badgeStyle: badgeStyle,
+              position: badges.BadgePosition.custom(end: 0, bottom: 0),
+              child: child,
+            ),
+          (true, true, false) => badges.Badge(
+              badgeContent: const Icon(
+                CommunityMaterialIcons.check_circle,
+                color: Colors.green,
+              ),
+              badgeStyle: badgeStyle,
+              position: badges.BadgePosition.custom(end: 0, bottom: 0),
+              child: child,
+            ),
+          (_, _, _) => badges.Badge(
+              badgeContent: const Icon(
+                CommunityMaterialIcons.help_circle,
+                color: Colors.grey,
+              ),
+              badgeStyle: badgeStyle,
+              position: badges.BadgePosition.custom(end: 0, bottom: 0),
+              child: child,
             )
-          : user.emailVerification == EmailVerificationStatus.verified &&
-                  user.docVerification == DocVerificationStatus.verified &&
-                  user.premiumStatus == PremiumStatus.notPremium
-              ? const Icon(
-                  CommunityMaterialIcons.check_circle,
-                  color: Colors.grey,
-                )
-              : user.emailVerification == EmailVerificationStatus.verified &&
-                      user.docVerification == DocVerificationStatus.verified &&
-                      user.premiumStatus == PremiumStatus.isPremium
-                  ? const Icon(
-                      CommunityMaterialIcons.star_circle_outline,
-                      color: Colors.amber,
-                    )
-                  : null,
-      badgeStyle: const badges.BadgeStyle(
-        badgeColor: Colors.transparent,
-        elevation: 0,
-        padding: EdgeInsets.zero,
-      ),
-      position: badges.BadgePosition.custom(end: 0, bottom: 0),
-      child: child,
+        };
+      },
     );
   }
 }

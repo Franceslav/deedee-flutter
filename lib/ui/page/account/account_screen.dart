@@ -191,43 +191,6 @@ class _InfoWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: DeeDeeDeviderWidget(),
           ),
-          DeeDeeRowInfoWidget(
-            icon: Image.asset('assets/images/balance_icon.png'),
-            mainText: Text(
-              locale.accountsTitle,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: const Text(
-              'View the list of accounts',
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              context.router.push(const AccountsListScreenRoute());
-            },
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: DeeDeeDeviderWidget(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: DeeDeeDeviderWidget(),
-          ),
-          DeeDeeRowInfoWidget(
-            icon: Image.asset('assets/images/instagram_logo.png'),
-            mainText: Text(
-              locale.addAccountTitle,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: const Text(
-              '',
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              context.router.push(const SocialNetworkScreenRoute());
-            },
-          )
         ],
       ),
     );

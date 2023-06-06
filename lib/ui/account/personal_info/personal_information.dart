@@ -41,7 +41,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               InfoButton(
@@ -102,7 +102,7 @@ class InfoButton extends StatelessWidget {
                       controller,
                       style: AppTextTheme.labelMedium,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
                     Text(data, style: AppTextTheme.bodyLarge),
@@ -112,7 +112,7 @@ class InfoButton extends StatelessWidget {
             ],
           ),
         ),
-        DeeDeeDeviderWidget(),
+        const DeeDeeDeviderWidget(),
       ],
     );
   }
