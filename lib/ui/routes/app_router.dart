@@ -19,6 +19,7 @@ import 'package:deedee/ui/page/accounts_list/accounts_list_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
+import 'package:deedee/ui/page/chart_page/line_chart.dart';
 import 'package:deedee/ui/page/customer_profile/customer_profile_screen.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/home/home_screen.dart';
@@ -82,7 +83,8 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: CustomerProfile, path: '/customer-profile'),
     MaterialRoute(page: AccountBusinessPage, path: '/business'),
     MaterialRoute(page: AccountsListScreen, path: '/accounts-list'),
-    MaterialRoute(page: MapScreenMyTags, path: '/map-tags')
+    MaterialRoute(page: MapScreenMyTags, path: '/map-tags'),
+    MaterialRoute(page: LineChartPage, path: '/line-chart')
   ],
 )
 class $AppRouter {}

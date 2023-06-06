@@ -4,7 +4,6 @@ import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/helper.dart';
-import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
@@ -24,7 +23,7 @@ class AccountWidget extends StatefulWidget {
 }
 
 class _AccountWidgetState extends State<AccountWidget> {
-  List<Tag> _tags = [];
+  final List<Tag> _tags = [];
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +101,16 @@ class _AccountWidgetState extends State<AccountWidget> {
                             },
                             child: _infoColumn('3', locale.seen)),
                       ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            context.router.navigate(
+                              const LineChartPageRoute(),
+                            );
+                          },
+                          child: _chartColumn(locale.chart),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -122,6 +131,21 @@ class _AccountWidgetState extends State<AccountWidget> {
           style: AppTextTheme.titleMedium,
         ),
         const SizedBox(height: 8),
+        Text(
+          quantity,
+          style: AppTextTheme.titleNormal,
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+
+  Column _chartColumn(String quantity) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Icon(Icons.area_chart),
+        const SizedBox(height: 3),
         Text(
           quantity,
           style: AppTextTheme.titleNormal,

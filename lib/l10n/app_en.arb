@@ -227,5 +227,6 @@
   "nameContainLettersAndSymbols": "The name must contain only letters:a-z, A-Z, а-я, А-Я and symbols &.",
   "mobilePhoneNumber": "Mobile phone number is required.",
   "numberContainOnlyDigits": "Mobile phone number must contain only digits.",
-  "validEmail": "Enter Valid Email."
+  "validEmail": "Enter Valid Email.",
+  "chart": "Chart"
 }
