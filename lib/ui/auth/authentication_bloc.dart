@@ -59,6 +59,7 @@ class AuthenticationBloc
           BiometricPrefs().userEmail = event.email;
           BiometricPrefs().userPassword = event.password;
           emit(AuthenticationState.authenticated(user!));
+          locator.get<TagServiceApi>().setUserEmail(user!.email);
         } else if (result != null && result is String) {
           emit(AuthenticationState.unauthenticated(message: result));
         } else {

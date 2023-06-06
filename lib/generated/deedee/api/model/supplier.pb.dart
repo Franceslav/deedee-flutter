@@ -12,6 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../google/protobuf/timestamp.pb.dart' as $0;
 import 'geolocation.pb.dart' as $1;
+
 import 'supplier.pbenum.dart';
 
 export 'supplier.pbenum.dart';
@@ -19,7 +20,7 @@ export 'supplier.pbenum.dart';
 class Supplier extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Supplier', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.supplier.model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'supplierId', $pb.PbFieldType.OU6, protoName: 'supplierId', defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdBy', $pb.PbFieldType.OU6, protoName: 'createdBy', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdBy', protoName: 'createdBy')
     ..aOM<$0.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $0.Timestamp.create)
     ..aOM<$1.Geolocation>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $1.Geolocation.create)
     ..e<Supplier_Status>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: Supplier_Status.ACTIVE, valueOf: Supplier_Status.valueOf, enumValues: Supplier_Status.values)
@@ -29,7 +30,7 @@ class Supplier extends $pb.GeneratedMessage {
   Supplier._() : super();
   factory Supplier({
     $fixnum.Int64? supplierId,
-    $fixnum.Int64? createdBy,
+    $core.String? createdBy,
     $0.Timestamp? createdAt,
     $1.Geolocation? geolocation,
     Supplier_Status? status,
@@ -83,9 +84,9 @@ class Supplier extends $pb.GeneratedMessage {
   void clearSupplierId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get createdBy => $_getI64(1);
+  $core.String get createdBy => $_getSZ(1);
   @$pb.TagNumber(2)
-  set createdBy($fixnum.Int64 v) { $_setInt64(1, v); }
+  set createdBy($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedBy() => $_has(1);
   @$pb.TagNumber(2)

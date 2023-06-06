@@ -1,5 +1,4 @@
 ///
-import 'dart:convert' as $convert;
 //  Generated code. Do not modify.
 //  source: deedee/api/model/tag.proto
 //
@@ -7,13 +6,14 @@ import 'dart:convert' as $convert;
 // ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
+import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
 @$core.Deprecated('Use tagDescriptor instead')
 const Tag$json = const {
   '1': 'Tag',
   '2': const [
     const {'1': 'tagId', '3': 1, '4': 1, '5': 4, '10': 'tagId'},
-    const {'1': 'createdBy', '3': 2, '4': 1, '5': 4, '10': 'createdBy'},
+    const {'1': 'createdBy', '3': 2, '4': 1, '5': 9, '10': 'createdBy'},
     const {'1': 'createdAt', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'compositeFilter', '3': 4, '4': 1, '5': 11, '6': '.deedee.api.compositefilter.model.CompositeFilter', '10': 'compositeFilter'},
     const {'1': 'geolocation', '3': 5, '4': 1, '5': 11, '6': '.deedee.api.geolocation.model.Geolocation', '10': 'geolocation'},
@@ -46,4 +46,4 @@ const Tag_Status$json = const {
 };
 
 /// Descriptor for `Tag`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKARSBXRhZ0lkEhwKCWNyZWF0ZWRCeRgCIAEoBFIJY3JlYXRlZEJ5EjgKCWNyZWF0ZWRBdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBJbCg9jb21wb3NpdGVGaWx0ZXIYBCABKAsyMS5kZWVkZWUuYXBpLmNvbXBvc2l0ZWZpbHRlci5tb2RlbC5Db21wb3NpdGVGaWx0ZXJSD2NvbXBvc2l0ZUZpbHRlchJLCgtnZW9sb2NhdGlvbhgFIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9uEjIKBHR5cGUYBiABKA4yHi5kZWVkZWUuYXBpLnRhZy5tb2RlbC5UYWcuVHlwZVIEdHlwZRI4CgZzdGF0dXMYByABKA4yIC5kZWVkZWUuYXBpLnRhZy5tb2RlbC5UYWcuU3RhdHVzUgZzdGF0dXMSSwoMb2JzZXJ2YXRpb25zGAggAygLMicuZGVlZGVlLmFwaS5zdGF0aXN0aWMubW9kZWwuT2JzZXJ2YXRpb25SDG9ic2VydmF0aW9ucyIgCgRUeXBlEgoKBkNMSUVOVBAAEgwKCFNVUFBMSUVSEAEiTgoGU3RhdHVzEg4KCkJPT0tNQVJLRUQQABIOCgpTVUJTQ1JJQkVEEAESCgoGUExBQ0VEEAISCwoHQ0hBTkdFRBADEgsKB0RFTEVURUQQBA==');
+final $typed_data.Uint8List tagDescriptor = $convert.base64Decode('CgNUYWcSFAoFdGFnSWQYASABKARSBXRhZ0lkEhwKCWNyZWF0ZWRCeRgCIAEoCVIJY3JlYXRlZEJ5EjgKCWNyZWF0ZWRBdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBJbCg9jb21wb3NpdGVGaWx0ZXIYBCABKAsyMS5kZWVkZWUuYXBpLmNvbXBvc2l0ZWZpbHRlci5tb2RlbC5Db21wb3NpdGVGaWx0ZXJSD2NvbXBvc2l0ZUZpbHRlchJLCgtnZW9sb2NhdGlvbhgFIAEoCzIpLmRlZWRlZS5hcGkuZ2VvbG9jYXRpb24ubW9kZWwuR2VvbG9jYXRpb25SC2dlb2xvY2F0aW9uEjIKBHR5cGUYBiABKA4yHi5kZWVkZWUuYXBpLnRhZy5tb2RlbC5UYWcuVHlwZVIEdHlwZRI4CgZzdGF0dXMYByABKA4yIC5kZWVkZWUuYXBpLnRhZy5tb2RlbC5UYWcuU3RhdHVzUgZzdGF0dXMSSwoMb2JzZXJ2YXRpb25zGAggAygLMicuZGVlZGVlLmFwaS5zdGF0aXN0aWMubW9kZWwuT2JzZXJ2YXRpb25SDG9ic2VydmF0aW9ucyIgCgRUeXBlEgoKBkNMSUVOVBAAEgwKCFNVUFBMSUVSEAEiTgoGU3RhdHVzEg4KCkJPT0tNQVJLRUQQABIOCgpTVUJTQ1JJQkVEEAESCgoGUExBQ0VEEAISCwoHQ0hBTkdFRBADEgsKB0RFTEVURUQQBA==');

@@ -49,7 +49,17 @@ class MockTagServiceClient implements TagServiceClient {
   }
 
   Future<TagResponse> _placeTag(TagRequest request) async {
-    return TagResponse(tags: [Tag()]);
+    final userId = retrieveUserIdFrom(request);
+    print(request.tag.compositeFilter.filterMap.keys.first);
+    return TagResponse()
+      ..tags.addAll(api.placeTags(
+          request.tag.createdBy,
+          userId,
+          request.tag.compositeFilter.topic.title,
+          request.tag.compositeFilter.filterMap,
+          request.tag.geolocation.latitude,
+          request.tag.geolocation.longitude,
+          request.tag.compositeFilter.topic.topicId));
   }
 
   @override

@@ -14,6 +14,7 @@ import '../../../google/protobuf/timestamp.pb.dart' as $0;
 import 'composite_filter.pb.dart' as $1;
 import 'geolocation.pb.dart' as $2;
 import 'observation.pb.dart' as $3;
+
 import 'tag.pbenum.dart';
 
 export 'tag.pbenum.dart';
@@ -21,7 +22,7 @@ export 'tag.pbenum.dart';
 class Tag extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Tag', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.tag.model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', $pb.PbFieldType.OU6, protoName: 'tagId', defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdBy', $pb.PbFieldType.OU6, protoName: 'createdBy', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdBy', protoName: 'createdBy')
     ..aOM<$0.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $0.Timestamp.create)
     ..aOM<$1.CompositeFilter>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'compositeFilter', protoName: 'compositeFilter', subBuilder: $1.CompositeFilter.create)
     ..aOM<$2.Geolocation>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $2.Geolocation.create)
@@ -34,7 +35,7 @@ class Tag extends $pb.GeneratedMessage {
   Tag._() : super();
   factory Tag({
     $fixnum.Int64? tagId,
-    $fixnum.Int64? createdBy,
+    $core.String? createdBy,
     $0.Timestamp? createdAt,
     $1.CompositeFilter? compositeFilter,
     $2.Geolocation? geolocation,
@@ -100,9 +101,9 @@ class Tag extends $pb.GeneratedMessage {
   void clearTagId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get createdBy => $_getI64(1);
+  $core.String get createdBy => $_getSZ(1);
   @$pb.TagNumber(2)
-  set createdBy($fixnum.Int64 v) { $_setInt64(1, v); }
+  set createdBy($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedBy() => $_has(1);
   @$pb.TagNumber(2)

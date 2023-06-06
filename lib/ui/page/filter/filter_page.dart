@@ -191,11 +191,23 @@ class _FilterPageState extends State<FilterPage> {
                                     text: AppLocalizations.of(context)!
                                         .placeOrder,
                                     onPressed: () async {
+                                      var filterMap = _filtersWithSelected(
+                                          allSubtopicsFilter:
+                                              allSubtopicsFilter,
+                                          selectedSubtopicsFilter:
+                                              selectedSubtopicsFilter);
+                                      print(filterMap);
                                       final data = await context.router.push(
-                                              MapSetLocationScreenRoute(
-                                                  userLocation:
-                                                      user.lastGeoLocation))
-                                          as AddressModel?;
+                                          MapSetLocationScreenRoute(
+                                              userLocation:
+                                                  user.lastGeoLocation,
+                                              filterMap: filterMap,
+                                              topic: widget
+                                                  .currentFilter.topic.title,
+                                              topicId: widget
+                                                  .currentFilter
+                                                  .topic
+                                                  .topicId)) as AddressModel?;
                                       if (data == null) {
                                         return;
                                       }

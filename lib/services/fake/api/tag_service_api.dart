@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:dartx/dartx.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:injectable/injectable.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../generated/deedee/api/model/composite_filter.pb.dart';
 import '../../../generated/deedee/api/model/geolocation.pb.dart';
@@ -22,7 +25,7 @@ class TagServiceApi {
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
-        ..createdBy = Int64(1)
+        ..createdBy = 'matveev.yakov@yahoo.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -49,8 +52,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(2)
-        ..createdBy = Int64(1)
+        ..tagId = Int64(1)
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -77,8 +80,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(3)
-        ..createdBy = Int64(1)
+        ..tagId = Int64(2)
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -105,8 +108,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(4)
-        ..createdBy = Int64(1)
+        ..tagId = Int64(3)
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
@@ -133,8 +136,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(5)
-        ..createdBy = Int64(1)
+        ..tagId = Int64(4)
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
@@ -161,8 +164,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(6)
-        ..createdBy = Int64(1)
+        ..tagId = Int64(7)
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
@@ -189,8 +192,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
-        ..tagId = Int64(7)
-        ..createdBy = Int64(5)
+        ..tagId = Int64(5)
+        ..createdBy = 'matveev.yakov@yahoo.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
@@ -255,8 +258,8 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.BOOKMARKED,
       Tag()
-        ..tagId = Int64(8)
-        ..createdBy = Int64(6)
+        ..tagId = Int64(6)
+        ..createdBy = 'matveev.yakov@yahoo.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 3000000)
@@ -264,7 +267,7 @@ class TagServiceApi {
                     .toString()))
         // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
         ..compositeFilter = CompositeFilter(
-          compositeFilterId: Int64(1),
+          // compositeFilterId: Int64(1),
           topic: Topic(topicId: 3, userId: '', title: 'Bookmark2'),
           filterMap: {
             'Bookmark22': FilterKeyList(
@@ -288,6 +291,38 @@ class TagServiceApi {
   // Tags CRUD
   List<Tag> getTags(String email) {
     return _tags.getOrElse(email, () => []).toList();
+  }
+
+  List<Tag> placeTags(
+      String userEmail,
+      String userId,
+      String topicTitle,
+      Map<String, FilterKeyList> filterMap,
+      double latitude,
+      double longitude,
+      int topicId) {
+    _fakeTags.add(
+      Tag()
+        ..tagId = _fakeTags.last.tagId + Int64(1)
+        ..createdBy = userEmail
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000)
+                    .round()
+                    .toString()))
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1), // что за параметр?
+          topic: Topic(
+              topicId: topicId,
+              userId: '',
+              title: topicTitle), // пустой user id убрать?
+          filterMap: filterMap,
+        )
+        ..geolocation = Geolocation(latitude: latitude, longitude: longitude)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+    );
+    return _tags.getOrElse(userId, () => []).toList();
   }
 
   List<Tag> getFavoriteTags(String email) {

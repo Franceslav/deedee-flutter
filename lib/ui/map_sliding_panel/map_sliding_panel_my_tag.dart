@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
+import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
 import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
@@ -36,8 +37,11 @@ class MapSlidingPanelMyTag extends StatefulWidget {
     required String selectedMessengerId,
     required Int64 selectedTagId,
     required bool openedFirstTime,
-   s, required this.filterKeys, required this.selectedFilterKeys, required this.currentFilter,
-})  : _panelController = controller,
+    s,
+    required this.filterKeys,
+    required this.selectedFilterKeys,
+    required this.currentFilter,
+  })  : _panelController = controller,
         _selectedTagId = selectedTagId,
         _openedFirstTime = openedFirstTime;
 
@@ -87,7 +91,7 @@ class _MapSlidingPanelMyTagState extends State<MapSlidingPanelMyTag> {
               state.snackbarNotification != null) {
             showSnackBar(context, state.snackbarNotification!);
           }
-         /* if (state is ErrorState) {
+          /* if (state is ErrorState) {
             showSnackBar(context, state.errorMessage);
           }*/
         },
@@ -139,42 +143,53 @@ class _MapSlidingPanelMyTagState extends State<MapSlidingPanelMyTag> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 24),
-                                child: BlocConsumer<SelectorBloc, SelectorState>(
-                                  listener: (context, state) {
-                                    if (state is FilterKeySelectedState) {
-                                    widget.selectedFilterKeys.contains(state.filterKey)
-                                          ?  widget.selectedFilterKeys.remove(state.filterKey)
-                                          :  widget.selectedFilterKeys.add(state.filterKey);
-                                    }
-                                  },
-                                  builder: (context, state) {
-                                    return SelectorAppBar(
-                                      allItems: widget.filterKeys,
-                                      selectedItems: widget.selectedFilterKeys,
-                                      onTap: (FilterKey filterKey) =>
-                                          selectorBloc.add(SelectFilterKeyEvent(filterKey)),
-                                    );
-                                  },
-                                ),
+                            child: BlocConsumer<SelectorBloc, SelectorState>(
+                              listener: (context, state) {
+                                if (state is FilterKeySelectedState) {
+                                  widget.selectedFilterKeys
+                                          .contains(state.filterKey)
+                                      ? widget.selectedFilterKeys
+                                          .remove(state.filterKey)
+                                      : widget.selectedFilterKeys
+                                          .add(state.filterKey);
+                                }
+                              },
+                              builder: (context, state) {
+                                return SelectorAppBar(
+                                  allItems: widget.filterKeys,
+                                  selectedItems: widget.selectedFilterKeys,
+                                  onTap: (FilterKey filterKey) => selectorBloc
+                                      .add(SelectFilterKeyEvent(filterKey)),
+                                );
+                              },
+                            ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               //TODO implement data
                               children: [
-                                Text(
+                                const Text(
                                   'Адрес',
                                   style: AppTextTheme.bodyMedium,
                                 ),
-                                SizedBox(height: 2),
-                                Text(
+                                const SizedBox(height: 2),
+                                const Text(
                                   'ул.Калиновского д.235/4',
                                   style: AppTextTheme.bodyLarge,
                                 ),
-                                SizedBox(height: 12),
+                                const SizedBox(height: 12),
+                                OutlinedButtonWidget(
+                                    text: 'Fake Request',
+                                    onPressed: () {
+                                      bloc.add(
+                                        MapSlidingPanelRequestCreate(
+                                          widget._selectedTagId,
+                                        ),
+                                      );
+                                    }),
                                 SizedBox(height: 2),
-
                               ],
                             ),
                           )

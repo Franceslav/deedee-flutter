@@ -107,12 +107,14 @@ class SelectorBloc extends Bloc<SelectorEvent, SelectorState> {
     emit(LoadingSelectorState());
     try {
       await _tagRepository.placeTag(
-        event.accountType,
-        event.topic,
-        event.messengerId,
-        event.location.latitude,
-        event.location.longitude,
-        event.filterKeys,
+        'sdas',
+        _user.userId, 'sda', {}, 0.5, 0.5, 2,
+        // event.accountType,
+        // event.topic,
+        // event.messengerId,
+        // event.location.latitude,
+        // event.location.longitude,
+        // event.filterKeys,
       );
       emit(UserTagPlacedState());
     } catch (error) {

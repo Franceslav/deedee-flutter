@@ -70,8 +70,9 @@ class _AccountWidgetState extends State<AccountWidget> {
           BlocConsumer<UserTagsBloc, UserTagsState>(
             listener: (context, state) {
               if (state is LoadedTagsState) {
-                _tags.addAll(state.tags
-                    .filter((element) => element.status == Tag_Status.PLACED));
+                _tags.addAll(state.tags.filter((element) =>
+                    element.status == Tag_Status.PLACED &&
+                    element.createdBy == user.email));
               }
             },
             builder: (context, state) {

@@ -1,4 +1,6 @@
+import 'package:deedee/injection.dart';
 import 'package:deedee/model/order.dart';
+import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
@@ -6,6 +8,7 @@ import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/place_order/bloc/place_order_bloc.dart';
 import 'package:deedee/ui/place_order/order_text_form_fields.dart';
 import 'package:deedee/ui/place_order/place_order_popover.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,9 +30,9 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     final locale = AppLocalizations.of(context)!;
-
+    final user = context.select((UserBloc bloc) => bloc.state.user);
     return BlocProvider<PlaceOrderBloc>(
-      create: (context) => PlaceOrderBloc(),
+      create: (context) => PlaceOrderBloc(locator.get<TagRepository>(), user),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: locale.contacts,

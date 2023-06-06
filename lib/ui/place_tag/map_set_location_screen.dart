@@ -1,7 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/constants.dart';
-import 'package:deedee/ui/place_tag/search_address_screen.dart';
-import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,15 +9,27 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:search_address_repository/search_address_repository.dart';
 
+import 'package:deedee/constants.dart';
+import 'package:deedee/generated/deedee/api/model/location.pbjson.dart';
+import 'package:deedee/generated/deedee/api/service/location_service.pbjson.dart';
+import 'package:deedee/ui/place_tag/search_address_screen.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
+
 import 'bloc/set_location_bloc.dart';
 
 class MapSetLocationScreen extends StatefulWidget {
   final LatLng userLocation;
+  final String topic;
+  final Map<String, FilterKeyList> filterMap;
+  final int topicId;
 
   const MapSetLocationScreen({
-    super.key,
+    Key? key,
     required this.userLocation,
-  });
+    required this.topic,
+    required this.filterMap,
+    required this.topicId,
+  }) : super(key: key);
 
   @override
   State<MapSetLocationScreen> createState() => _MapSetLocationState();
@@ -226,8 +237,11 @@ class _MapSetLocationState extends State<MapSetLocationScreen> {
                                     heroTag: 'check',
                                     backgroundColor: const Color(COLOR_PRIMARY),
                                     onPressed: () {
-                                      context.router
-                                          .push(const PlaceOrderScreenRoute());
+                                      context.router.push(PlaceOrderScreenRoute(
+                                          userLocation: _mapController.center,
+                                          filterMap: widget.filterMap,
+                                          topic: widget.topic,
+                                          topicId: widget.topicId));
                                     },
                                     child: const Icon(
                                       Icons.check,

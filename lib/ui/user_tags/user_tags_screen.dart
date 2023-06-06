@@ -49,8 +49,9 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
             BlocConsumer<UserTagsBloc, UserTagsState>(
               listener: (context, state) {
                 if (state is LoadedTagsState) {
-                  _tags.addAll(state.tags.filter(
-                      (element) => element.status == Tag_Status.PLACED));
+                  _tags.addAll(state.tags.filter((element) =>
+                      element.status == Tag_Status.PLACED &&
+                      element.createdBy == user.email));
                 }
                 if (state is DeletedSuccessfulState) {
                   showSnackBar(
@@ -112,7 +113,6 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                               },
                             ),
                           ),
-
                           Expanded(
                             child: PageView(
                               controller: _pageController,

@@ -15,7 +15,7 @@ class SupplierServiceApi {
     _suppliers = [
       Supplier()
         ..supplierId = Int64(1)
-        ..createdBy = Int64.parseInt('1') // юзер
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -25,7 +25,7 @@ class SupplierServiceApi {
         ..status = Supplier_Status.ACTIVE,
       Supplier()
         ..supplierId = Int64(2)
-        ..createdBy = Int64.parseInt('2')
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
@@ -35,7 +35,7 @@ class SupplierServiceApi {
         ..status = Supplier_Status.ACTIVE,
       Supplier()
         ..supplierId = Int64(3)
-        ..createdBy = Int64.parseInt('3')
+        ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(
                 (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)

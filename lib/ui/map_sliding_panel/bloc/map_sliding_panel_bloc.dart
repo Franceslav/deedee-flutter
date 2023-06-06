@@ -42,7 +42,7 @@ class MapSlidingPanelBloc
           .firstWhere((t) => t.tagId == event.selectedTagId);
       var serviceRequest = ServiceRequest(
         createdBy: _user.email,
-        createdFor: tag.createdBy.toString(),
+        createdFor: tag.createdBy,
         createdAt: Timestamp(),
         description: DateTime.now().toString() * 4,
         status: ServiceRequest_Status.PENDING,

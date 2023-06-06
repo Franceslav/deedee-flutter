@@ -1,11 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
-import 'package:deedee/model/order.dart';
-import 'package:deedee/ui/deedee_button/deedee_button.dart';
-import 'package:deedee/ui/place_order/place_order_popover.dart';
+import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import 'package:deedee/injection.dart';
+import 'package:deedee/model/order.dart';
+import 'package:deedee/repository/tag_repository.dart';
+import 'package:deedee/ui/deedee_button/deedee_button.dart';
+import 'package:deedee/ui/place_order/place_order_popover.dart';
 
 import '../../services/helper.dart';
 import '../global_widgets/dee_dee_menu_slider.dart';
@@ -18,7 +24,18 @@ import 'convenient_time_picker.dart';
 import 'order_text_form_fields.dart';
 
 class PlaceOrderScreen extends StatefulWidget {
-  const PlaceOrderScreen({super.key});
+  final String topic;
+  final Map<String, FilterKeyList> filterMap;
+  final int topicId;
+  final LatLng userLocation;
+
+  const PlaceOrderScreen({
+    Key? key,
+    required this.topic,
+    required this.filterMap,
+    required this.topicId,
+    required this.userLocation,
+  }) : super(key: key);
 
   @override
   State<PlaceOrderScreen> createState() => _PlaceOrderScreenState();
@@ -34,14 +51,27 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-
     return BlocProvider<PlaceOrderBloc>(
-      create: (context) => PlaceOrderBloc(),
+      create: (context) => PlaceOrderBloc(locator.get<TagRepository>(), user),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.placeOrderPageTitle,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: Builder(builder: (context) {
+            return IconButton(
+              onPressed: () {
+                context.read<PlaceOrderBloc>().add(PlaceOrderRequestEvent(
+                      userId: user.userId,
+                      order: order,
+                      location: widget.userLocation,
+                      filterMap: widget.filterMap,
+                      topic: widget.topic,
+                      topicId: widget.topicId,
+                    ));
+              },
+              icon: const Icon(Icons.flutter_dash),
+            );
+          }),
         ),
         body: Stack(
           children: [
@@ -202,14 +232,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             onPressed: _contactFieldList.isEmpty
                                 ? null
                                 : () {
-                                    context
-                                        .read<PlaceOrderBloc>()
-                                        .add(PlaceOrderRequestEvent(
-                                          userId: user.userId,
-                                          order: order,
-                                        ));
-                                    context.router
-                                        .replace(const HomeScreenRoute());
+                                    // context
+                                    //     .read<PlaceOrderBloc>()
+                                    //     .add(PlaceOrderRequestEvent(
+                                    //       userId: user.userId,
+                                    //       order: order,
+                                    //     ));
+                                    // context.router
+                                    //     .replace(const HomeScreenRoute());
                                   },
                             gradientButton: true,
                             title: AppLocalizations.of(context)!.save,

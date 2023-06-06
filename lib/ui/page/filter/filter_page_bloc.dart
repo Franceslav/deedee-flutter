@@ -92,8 +92,9 @@ class FilterPageBloc extends Bloc<FilterPageEvent, FilterPageState> {
       List<Tag> tags = await _tagRepository.getTags(_user.email);
       tagsOnMap.addAll(tags.filter((element) =>
           element.compositeFilter.topic.title == event.topic &&
-          element.compositeFilter.filterMap.containsKey(event.subtopic.first) &&
-          _filterKeys.containsAll(event.filterKeys)));
+          element.compositeFilter.filterMap.containsKey(event.subtopic.first)));
+      // &&
+      // _filterKeys.containsAll(event.filterKeys)));
 
       emit(UserFiltersDoneState(tagsOnMap));
     } catch (error) {
