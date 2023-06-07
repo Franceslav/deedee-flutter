@@ -11,6 +11,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'geolocation.pb.dart' as $0;
+import '../../../google/protobuf/timestamp.pb.dart' as $1;
 
 class Observation extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Observation', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'deedee.api.statistic.model'), createEmptyInstance: create)
@@ -18,6 +19,7 @@ class Observation extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tagId', $pb.PbFieldType.OU6, protoName: 'tagId', defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.OU6, protoName: 'userId', defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$0.Geolocation>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geolocation', subBuilder: $0.Geolocation.create)
+    ..aOM<$1.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -27,6 +29,7 @@ class Observation extends $pb.GeneratedMessage {
     $fixnum.Int64? tagId,
     $fixnum.Int64? userId,
     $0.Geolocation? geolocation,
+    $1.Timestamp? timestamp,
   }) {
     final _result = create();
     if (observationId != null) {
@@ -40,6 +43,9 @@ class Observation extends $pb.GeneratedMessage {
     }
     if (geolocation != null) {
       _result.geolocation = geolocation;
+    }
+    if (timestamp != null) {
+      _result.timestamp = timestamp;
     }
     return _result;
   }
@@ -101,5 +107,16 @@ class Observation extends $pb.GeneratedMessage {
   void clearGeolocation() => clearField(4);
   @$pb.TagNumber(4)
   $0.Geolocation ensureGeolocation() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get timestamp => $_getN(4);
+  @$pb.TagNumber(5)
+  set timestamp($1.Timestamp v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTimestamp() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimestamp() => clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureTimestamp() => $_ensure(4);
 }
 
