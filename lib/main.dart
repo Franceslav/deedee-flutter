@@ -6,6 +6,7 @@ import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/biometric/biometric_prefs.dart';
+import 'package:deedee/ui/auth/biometric/bloc/biometric_bloc.dart';
 import 'package:deedee/ui/loading_cubit.dart';
 import 'package:deedee/ui/main_topic/bloc/main_topics_bloc.dart';
 import 'package:deedee/ui/page/add_card/bloc/card_bloc.dart';
@@ -42,6 +43,7 @@ Future<void> main() async {
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => AuthenticationBloc()),
+        RepositoryProvider(create: (_) => BiometricBloc()),
         RepositoryProvider(create: (_) => LoadingCubit()),
         RepositoryProvider(create: (_) => SearchAddressRepository()),
       ],

@@ -19,3 +19,7 @@ class BiometricFailure extends BiometricState {
     required this.error,
   });
 }
+
+class BiometricTriesExceededState extends BiometricState {
+  BiometricTriesExceededState();
+}

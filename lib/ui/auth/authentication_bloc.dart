@@ -10,6 +10,7 @@ import 'package:deedee/services/authenticate.dart';
 import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:deedee/ui/auth/biometric/biometric_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -85,41 +86,44 @@ class AuthenticationBloc
     });
     */
     on<LoginWithBiometricEvent>((event, emit) async {
-      if (biometric) {
-        try {
-          authLocal = LocalAuthentication();
-          authenticated = await authLocal.authenticate(
-              localizedReason: event.localizedReason,
-              options: const AuthenticationOptions(
-                stickyAuth: true,
+      try {
+        authLocal = LocalAuthentication();
+        authenticated = await authLocal.authenticate(
+            localizedReason: event.localizedReason,
+            options: const AuthenticationOptions(
+              useErrorDialogs: true,
+              biometricOnly: true,
+            ),
+            authMessages: [
+              AndroidAuthMessages(
+                signInTitle: event.signInTitle,
+                cancelButton: event.cancelButton,
               ),
-              authMessages: [
-                AndroidAuthMessages(
-                  signInTitle: event.signInTitle,
-                  cancelButton: event.cancelButton,
-                ),
-                IOSAuthMessages(
-                  cancelButton: event.cancelButton,
-                ),
-              ]);
-          if (authenticated) {
-            userEmail = BiometricPrefs().userEmail;
-            userPassword = BiometricPrefs().userPassword;
-            dynamic result = await FireStoreUtils.loginWithEmailAndPassword(
-                userEmail, userPassword);
-            if (result != null && result is User) {
-              user = result;
-              emit(AuthenticationState.authenticated(user!));
-            } else if (result != null && result is String) {
-              emit(AuthenticationState.unauthenticated(message: result));
-            } else {
-              emit(const AuthenticationState.unauthenticated(
-                  message: 'Login failed, Please try again.'));
-            }
+              IOSAuthMessages(
+                cancelButton: event.cancelButton,
+              ),
+            ]);
+        if (authenticated) {
+          userEmail = BiometricPrefs().userEmail;
+          userPassword = BiometricPrefs().userPassword;
+          dynamic result = await FireStoreUtils.loginWithEmailAndPassword(
+              userEmail, userPassword);
+          if (result != null && result is User) {
+            user = result;
+            emit(AuthenticationState.authenticated(user!));
+          } else if (result != null && result is String) {
+            emit(AuthenticationState.unauthenticated(message: result));
+          } else {
+            emit(const AuthenticationState.unauthenticated(
+                message: 'Login failed, Please try again.'));
           }
-        } on PlatformException catch (error) {
-          emit(AuthenticationState.unauthenticated(message: error.toString()));
         }
+      } on PlatformException catch (error) {
+        if (error.code == auth_error.lockedOut ||
+            error.code == auth_error.permanentlyLockedOut) {
+          authLocal.stopAuthentication();
+        }
+        emit(AuthenticationState.unauthenticated(message: error.toString()));
       }
     });
 

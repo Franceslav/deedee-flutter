@@ -18,6 +18,13 @@ class BiometricPrefs {
   String get userPassword => _BiometricPrefs.getString(USER_PASSWORD) ?? "";
   bool get userBiometric => _BiometricPrefs.getBool(BIOMETRIC_ON) ?? false;
 
+  int get userBiometricTries =>
+      _BiometricPrefs.getInt(USER_BIOMETRIC_TRIES) ?? 1;
+
+  set userBiometricTries(int value) {
+    _BiometricPrefs.setInt(USER_BIOMETRIC_TRIES, value);
+  }
+
   set userEmail(String value) {
     _BiometricPrefs.setString(USER_EMAIL, value);
   }

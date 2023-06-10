@@ -10,3 +10,10 @@ class ToggleBiometric extends BiometricEvent {
     required this.biometric,
   });
 }
+
+class BiometricTriesEvent extends BiometricEvent {
+  final int tries;
+  BiometricTriesEvent({
+    required this.tries,
+  });
+}

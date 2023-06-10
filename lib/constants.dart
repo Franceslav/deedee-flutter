@@ -42,3 +42,5 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 const BIOMETRIC_ON = 'biometric-on';
 const USER_EMAIL = "user-email";
 const USER_PASSWORD = "user-password";
+const USER_BIOMETRIC_TRIES = "user-biometric-tries";
+
