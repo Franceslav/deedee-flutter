@@ -1,9 +1,131 @@
 {
+  "am": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "ar": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "da": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
   "de": [
-    "qrScanner"
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "es": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "fr": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "he": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "hi": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
   ],
 
   "id": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
     "safe",
     "placeOrder",
     "placeOrderPageTitle",
@@ -55,6 +177,207 @@
     "regToBecomeClient",
     "nameCompany",
     "agreePP",
-    "connect"
+    "connect",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "it": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "kk": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "ko": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "ky": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "pl": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "pt": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "sv": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "th": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "tr": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "uk": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "uz": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "vi": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
+  ],
+
+  "zh": [
+    "useFingerprint",
+    "connectionSettings",
+    "settingIpAddressPort",
+    "scanYourFingerprint",
+    "oopsBiometric",
+    "cancelFingerPrint",
+    "requiredField",
+    "nameContainLettersAndSymbols",
+    "mobilePhoneNumber",
+    "numberContainOnlyDigits",
+    "validEmail",
+    "chart"
   ]
 }

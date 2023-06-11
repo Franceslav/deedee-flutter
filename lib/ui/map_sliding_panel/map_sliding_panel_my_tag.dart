@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/map_sliding_panel/bloc/map_sliding_panel_bloc.dart';
-import 'package:deedee/ui/page/map_cubit/map_screen.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 import '../../generated/deedee/api/model/composite_filter.pb.dart';
 import '../../injection.dart';
 import '../../repository/composite_filter_repository.dart';
@@ -30,6 +31,7 @@ class MapSlidingPanelMyTag extends StatefulWidget {
   final List<FilterKey> filterKeys;
   final List<FilterKey> selectedFilterKeys;
   final CompositeFilter currentFilter;
+  final Tag tag;
 
   const MapSlidingPanelMyTag({
     super.key,
@@ -41,6 +43,7 @@ class MapSlidingPanelMyTag extends StatefulWidget {
     required this.filterKeys,
     required this.selectedFilterKeys,
     required this.currentFilter,
+    required this.tag,
   })  : _panelController = controller,
         _selectedTagId = selectedTagId,
         _openedFirstTime = openedFirstTime;
@@ -139,6 +142,7 @@ class _MapSlidingPanelMyTagState extends State<MapSlidingPanelMyTag> {
                             },
                             child: TagInfoWidget(
                               currentFilter: widget.currentFilter,
+                              tag: Tag(),
                             ),
                           ),
                           Padding(

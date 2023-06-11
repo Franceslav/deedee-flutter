@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/constants.dart';
 import 'package:deedee/generated/deedee/api/model/composite_filter.pb.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/composite_filter_repository.dart';
 import 'package:deedee/repository/tag_repository.dart';
@@ -26,13 +27,15 @@ import '../../routes/app_router.gr.dart';
 import '../../user_bloc/user_bloc.dart';
 
 class MapScreenMyTags extends StatefulWidget {
+  final Tag tag;
   final Map<LatLng, TagDTO> tagDescriptionMap;
   final CompositeFilter currentFilter;
   final PageRouteInfo backTapRoute;
 
-  const MapScreenMyTags ({
+   MapScreenMyTags ({
     Key? key,
     required this.tagDescriptionMap,
+    required this.tag,
     required this.currentFilter,
     required this.backTapRoute,
   }) : super(key: key);
@@ -257,6 +260,7 @@ class _MapScreenMyTagsState extends State<MapScreenMyTags> {
                   ),
                 ),
                MapSlidingPanelMyTag(
+                  tag: widget.tag,
                   controller: _panelController,
                   selectedMessengerId: _selectedMessengerId,
                   selectedTagId: _selectedTagId,

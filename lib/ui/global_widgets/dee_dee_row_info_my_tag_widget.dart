@@ -1,19 +1,28 @@
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:flutter/material.dart';
 
-class DeeDeeRowInfoMyTagWidget extends StatelessWidget {
+class DeeDeeRowInfoMyTagWidget extends StatefulWidget {
+  final Tag tag;
   final Text mainText;
   final Text secondaryText;
   final Widget icon;
-
   final void Function()? onTap;
+
   const DeeDeeRowInfoMyTagWidget({
     Key? key,
+    required this.tag,
     required this.mainText,
     required this.secondaryText,
     required this.icon,
     required this.onTap,
   }) : super(key: key);
 
+  @override
+  State<DeeDeeRowInfoMyTagWidget> createState() =>
+      _DeeDeeRowInfoMyTagWidgetState();
+}
+
+class _DeeDeeRowInfoMyTagWidgetState extends State<DeeDeeRowInfoMyTagWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,11 +31,11 @@ class DeeDeeRowInfoMyTagWidget extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: const Color(0xFFF8F4FE),
           borderRadius: BorderRadius.circular(8),
-          onTap: onTap,
+          onTap: widget.onTap,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              icon,
+              widget.icon,
               const SizedBox(
                 width: 8,
               ),
@@ -34,16 +43,19 @@ class DeeDeeRowInfoMyTagWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    mainText,
-                    secondaryText,
+                    widget.mainText,
+                    widget.secondaryText,
                   ],
                 ),
               ),
-              const Text('45'),
               const SizedBox(
                 width: 8,
               ),
-              const Text('6'),
+              Text('${widget.tag.observations.length}'),
+              const SizedBox(
+                width: 8,
+              ),
+              const Text('5'),
               const Icon(
                 Icons.arrow_upward,
                 size: 23,
