@@ -99,6 +99,7 @@ class LanguagesExpansionTile extends StatefulWidget {
         langLabel: 'uz'),
   ];
 
+
   LanguagesExpansionTile({
     Key? key,
   }) : super(key: key);
@@ -112,6 +113,7 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
   bool isExpanded = false;
   late Language selectedValue;
 
+
   @override
   Widget build(BuildContext context) {
     selectedIndex = getLangIndex(context);
@@ -122,6 +124,7 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
         color: const Color(TILE_COLOR),
         margin: EdgeInsets.zero,
         child: ExpansionTile(
+          // key: UniqueKey(),
           title: Text(
             widget.data[selectedIndex].language,
             style: const TextStyle(fontSize: 19),
