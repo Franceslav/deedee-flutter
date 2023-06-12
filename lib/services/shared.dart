@@ -10,7 +10,7 @@ class SharedUtils {
   static const _defaultPhotoServiceIpAddress = "127.0.0.1";
   static const _defaultPhotoServicePort = "1234";
 
-  late SharedPreferences _sharedPreferences;
+  SharedPreferences? _sharedPreferences;
 
 /*  @PostConstruct()
   Future<void> init() async {
@@ -74,16 +74,16 @@ class SharedUtils {
   }
 
   String? getUploadPhotoServiceIpAddress() =>
-      _sharedPreferences.getString(_keyPhotoUploadServiceIpAddress);
+      _sharedPreferences?.getString(_keyPhotoUploadServiceIpAddress);
 
   String? getUploadPhotoServicePort() =>
-      _sharedPreferences.getString(_keyPhotoUploadServicePort);
+      _sharedPreferences?.getString(_keyPhotoUploadServicePort);
 
   void saveUploadPhotoServiceIpAddress(String photoUploadIpAddress) {
-    _sharedPreferences.setString(_keyPhotoUploadServiceIpAddress, photoUploadIpAddress);
+    _sharedPreferences?.setString(_keyPhotoUploadServiceIpAddress, photoUploadIpAddress);
   }
 
   void saveUploadPhotoServicePort(String photoUploadPort) {
-    _sharedPreferences.setString(_keyPhotoUploadServicePort, photoUploadPort);
+    _sharedPreferences?.setString(_keyPhotoUploadServicePort, photoUploadPort);
   }
 }

@@ -62,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     leading:
                                         const Icon(Icons.settings_ethernet),
                                     onPressed: (BuildContext context) {
-                                      context.router.replace(
+                                      context.router.push(
                                           const ConnectionSettingsScreenRoute());
                                     },
                                   ),
@@ -70,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     title: const Text('Photo upload host'),
                                     leading: const Icon(Icons.upload_sharp),
                                     onPressed: (BuildContext context) {
-                                      context.router.replace(
+                                      context.router.push(
                                           const UploadSettingsScreenRoute());
                                     },
                                   ),
