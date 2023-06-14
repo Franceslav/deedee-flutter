@@ -124,7 +124,6 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
         color: const Color(TILE_COLOR),
         margin: EdgeInsets.zero,
         child: ExpansionTile(
-          // key: GlobalKey(),
           title: Text(
             widget.data[selectedIndex].language,
             style: const TextStyle(fontSize: 19),
