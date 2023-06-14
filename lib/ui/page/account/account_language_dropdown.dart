@@ -124,7 +124,6 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
         color: const Color(TILE_COLOR),
         margin: EdgeInsets.zero,
         child: ExpansionTile(
-          // key: UniqueKey(),
           title: Text(
             widget.data[selectedIndex].language,
             style: const TextStyle(fontSize: 19),
@@ -190,6 +189,7 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
                             ),
                             onTap: () {
                               setState(() {
+                                ExpansionTileController.of(context).collapse();
                                 context
                                     .read<AccountBloc>()
                                     .changeLocal(widget.data[index].langLabel);
