@@ -1,10 +1,16 @@
-import 'dart:math';
-
+import 'package:deedee/injection.dart';
+import 'package:deedee/ui/page/account/account_bloc.dart';
+import 'package:deedee/ui/page/chart_page/search_request_interactor.dart';
 import 'package:deedee/ui/theme/colors.dart';
-import 'package:flutter/material.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../repository/service_request_repository.dart';
 
 class LineChartPage extends StatefulWidget {
   const LineChartPage({super.key});
@@ -20,6 +26,8 @@ class _LineChartPageState extends State<LineChartPage> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp
     ]);
   }
 
@@ -37,85 +45,154 @@ class _LineChartPageState extends State<LineChartPage> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    final user = context.select((UserBloc bloc) => bloc.state.user);
+    final serviceRequestInteractor = ServiceRequestInteractor(
+      user.email,
+      locator.get<ServiceRequestRepository>(),
+    );
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(locale.chart),
-          backgroundColor: AppColors.fiolet,
-        ),
-        body: LineChartWidget());
+      appBar: AppBar(
+        title: Text(locale.chart),
+        backgroundColor: AppColors.fiolet,
+      ),
+      body:
+          // Center(),
+          FutureBuilder(
+        future: serviceRequestInteractor.serviceRequestsByDates,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return LineChartWidget(requests: snapshot.data!);
+          } else if (snapshot.hasError) {
+            return const Text('Sorry, something went wrong');
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
+      ),
+    );
   }
 }
 
-class DataItem {
-  int x;
-  int y1;
-
-  DataItem({
-    required this.x,
-    required this.y1,
-  });
-}
-
 class LineChartWidget extends StatelessWidget {
-  LineChartWidget({Key? key}) : super(key: key);
+  const LineChartWidget({required this.requests, Key? key}) : super(key: key);
 
-  final List<DataItem> _myData = List.generate(
-    30,
-    (index) => DataItem(
-      x: index, // должны быть дни недели
-      y1: Random().nextInt(50), // статистика просмотров
-    ),
-  );
+  final Map<DateTime, int> requests;
 
   @override
   Widget build(BuildContext context) {
+    final locale =
+        context.read<AccountBloc>().appLocal ?? Localizations.localeOf(context);
+
     return Padding(
       padding: const EdgeInsets.all(30),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
+        child: Container(
+          margin: const EdgeInsets.only(top: 40),
+          width: 1800,
           height: MediaQuery.of(context).size.height,
           child: BarChart(
             BarChartData(
-              maxY: 70,
-                borderData: FlBorderData(
-                    border: const Border(
-                  top: BorderSide.none,
-                  right: BorderSide.none,
-                  left: BorderSide(width: 1),
-                  bottom: BorderSide(width: 1),
-                )),
-                groupsSpace: 10,
-                barGroups: [
-                  BarChartGroupData(x: 1, barRods: [
-                    BarChartRodData(toY: 35, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 2, barRods: [
-                    BarChartRodData(toY: 29, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 3, barRods: [
-                    BarChartRodData(toY: 24, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 4, barRods: [
-                    BarChartRodData(toY: 32, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 5, barRods: [
-                    BarChartRodData(toY: 33, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 6, barRods: [
-                    BarChartRodData(toY: 37, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 7, barRods: [
-                    BarChartRodData(toY: 39, width: 15, color: Colors.amber),
-                  ]),
-                  BarChartGroupData(x: 8, barRods: [
-                    BarChartRodData(toY: 31, width: 15, color: Colors.amber),
-                  ])]
-                    .toList()),
+
+                //   ----------------------
+
+                titlesData: titlesData(locale.toString()),
+                barTouchData: barTouchData,
+                borderData: borderData,
+                gridData: FlGridData(show: false),
+                alignment: BarChartAlignment.center,
+                groupsSpace: 30,
+                barGroups: barGroups),
           ),
         ),
       ),
     );
+  }
+
+// --------------------------
+
+  BarTouchData get barTouchData => BarTouchData(
+        enabled: false,
+        touchTooltipData: BarTouchTooltipData(
+          tooltipBgColor: Colors.transparent,
+          tooltipPadding: const EdgeInsets.all(5),
+          tooltipMargin: 1,
+          getTooltipItem: (
+            BarChartGroupData group,
+            int groupIndex,
+            BarChartRodData rod,
+            int rodIndex,
+          ) {
+            return BarTooltipItem(
+              rod.toY.round().toString(),
+              const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            );
+          },
+        ),
+      );
+
+  FlTitlesData titlesData(String locale) {
+    return FlTitlesData(
+      show: true,
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 60,
+          getTitlesWidget: (double value, TitleMeta meta) {
+            const style = TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            );
+            String text = DateFormat.MMM(locale)
+                .format(requests.keys.toList()[value.toInt()]);
+
+            return SideTitleWidget(
+              axisSide: meta.axisSide,
+              child: Text(
+                text,
+                style: style,
+              ),
+            );
+          },
+        ),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      topTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+    );
+  }
+
+  FlBorderData get borderData => FlBorderData(
+        show: false,
+      );
+
+  List<BarChartGroupData> get barGroups {
+    return [
+      for (int i = 0; i < requests.entries.length; i++)
+        BarChartGroupData(
+          barsSpace: 30,
+          x: i,
+          barRods: [
+            BarChartRodData(
+              toY: requests.values.toList()[i].toDouble(),
+              width: 30,
+              color: AppColors.fiolet,
+            )
+          ],
+          showingTooltipIndicators: [0],
+        )
+    ];
   }
 }

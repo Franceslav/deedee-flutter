@@ -14,16 +14,16 @@ class ServiceRequestServiceApi {
   Future<void> init() async {
     var timestamp1 = Timestamp()
       ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+          (DateTime(2022,12).millisecondsSinceEpoch / 1000).round().toString());
     var timestamp2 = Timestamp()
       ..seconds = Int64.parseInt(
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
     var timestamp3 = Timestamp()
       ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+           (DateTime(2023,3).millisecondsSinceEpoch / 1000).round().toString());
     var timestamp4 = Timestamp()
       ..seconds = Int64.parseInt(
-          (DateTime.now().millisecondsSinceEpoch / 1000).round().toString());
+           (DateTime(2023,5).millisecondsSinceEpoch / 1000).round().toString());
 
     _serviceRequests = [
       ServiceRequest(
@@ -118,6 +118,54 @@ class ServiceRequestServiceApi {
         createdBy: 'temitylive@gmail.com',
         createdFor: 'ron.x.by.su@gmail.com',
         createdAt: timestamp4,
+        status: ServiceRequest_Status.DONE,
+        price: 100,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'маникюр 4',
+        description:
+            'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+        createdBy: 'mybclym@gmail.com',
+        createdFor: 'mybclym@gmail.com',
+        createdAt: timestamp4,
+        status: ServiceRequest_Status.DONE,
+        price: 100,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'маникюр 4',
+        description:
+            'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+        createdBy: 'mybclym@gmail.com',
+        createdFor: 'mybclym@gmail.com',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.DONE,
+        price: 100,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'маникюр 4',
+        description:
+            'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+        createdBy: 'mybclym@gmail.com',
+        createdFor: 'mybclym@gmail.com',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.DONE,
+        price: 100,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'маникюр 4',
+        description:
+            'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ',
+        createdBy: 'mybclym@gmail.com',
+        createdFor: 'mybclym@gmail.com',
+        createdAt: timestamp3,
         status: ServiceRequest_Status.DONE,
         price: 100,
         tagId: Int64(4),
