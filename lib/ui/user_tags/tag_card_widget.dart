@@ -93,7 +93,7 @@ class TagCardWidget extends StatelessWidget {
                   },
                   status: CompositeFilter_Status.FAVORITE,
                 );
-                context.router.push(
+                context.router.popAndPush(
                   MapScreenMyTagsRoute(
                     tag: tag,
                     backTapRoute: const UserTagsScreenRoute(),

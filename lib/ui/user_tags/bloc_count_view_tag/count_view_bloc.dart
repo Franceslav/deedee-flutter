@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:deedee/generated/deedee/api/model/observation.pb.dart';
+import 'package:deedee/generated/google/protobuf/timestamp.pb.dart';
 import 'package:deedee/services/fake/api/tag_service_api.dart';
 import 'package:fixnum/fixnum.dart';
 import '../../../generated/deedee/api/model/tag.pb.dart';
@@ -20,6 +21,7 @@ class CountViewBloc extends Bloc<CountVewEvent, CountViewState> {
       observationId: Int64(DateTime.now().microsecondsSinceEpoch),
       userId: Int64(1),
       geolocation: event.tag.geolocation,
+      timestamp: Timestamp(seconds: Int64(DateTime.now().millisecondsSinceEpoch)),
     );
     event.tag.observations.add(observation);
   }

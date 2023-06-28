@@ -25,6 +25,14 @@ class DeeDeeRowInfoMyTagWidget extends StatefulWidget {
 class _DeeDeeRowInfoMyTagWidgetState extends State<DeeDeeRowInfoMyTagWidget> {
   @override
   Widget build(BuildContext context) {
+    var totalObservations = widget.tag.observations.length;
+    var observationsToday = widget.tag.observations.where((observation) {
+      var observationDate = DateTime.fromMillisecondsSinceEpoch(
+          observation.timestamp.seconds.toInt());
+      return observationDate.day == DateTime.now().day &&
+          observationDate.month == DateTime.now().month &&
+          observationDate.year == DateTime.now().year;
+    }).length;
     return Column(
       children: [
         InkWell(
@@ -51,11 +59,11 @@ class _DeeDeeRowInfoMyTagWidgetState extends State<DeeDeeRowInfoMyTagWidget> {
               const SizedBox(
                 width: 8,
               ),
-              Text('${widget.tag.observations.length}'),
+              Text('$totalObservations'),
               const SizedBox(
                 width: 8,
               ),
-              const Text('5'),
+              Text('$observationsToday'),
               const Icon(
                 Icons.arrow_upward,
                 size: 23,

@@ -270,7 +270,7 @@ class _MapScreenMyTagsState extends State<MapScreenMyTags> {
                   currentFilter: widget.currentFilter,
                 ),
                 Positioned(
-                  top: 16,
+                  top: 50,
                   left: 16,
                   child: GestureDetector(
                     child: const Icon(Icons.close),
