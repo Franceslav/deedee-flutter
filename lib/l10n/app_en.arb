@@ -152,6 +152,7 @@
   "providerPersonalInfo": "Provide your personal info, even if the account is for something like a business   or pet. It wont be a part of your public profile",
   "secureAccountText": "To keep your account secure, don't   enter an email or phone number that belongs to someone else",
   "name": "Name",
+  "editProfileLastnameHint": "Last name",
   "username": "Username",
   "website": "Website",
   "bio": "Bio",

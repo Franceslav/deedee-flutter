@@ -115,6 +115,7 @@
   "providerPersonalInfo": "Berikan informasi pribadi, bahkan jika profil dibuat untuk bisnis. Ini tidak akan menjadi bagian dari halaman publik.",
   "secureAccountText": "Untuk keamanan akun Anda, jangan memberikan email atau nomor telepon kepada orang asing.",
   "name": "Nama",
+  "editProfileLastnameHint": "Nama belakang",
   "username": "Nama Pengguna",
   "website": "Situs Web",
   "bio": "Bio",

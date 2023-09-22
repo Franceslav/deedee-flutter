@@ -23,6 +23,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _namecontroller;
+  late TextEditingController _lastnamecontroller;
   late TextEditingController _UsernameController;
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
@@ -30,6 +31,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void initState() {
     _namecontroller = TextEditingController(text: 'my name ');
+    _lastnamecontroller = TextEditingController(text: 'my last name ');
     _UsernameController = TextEditingController(text: 'username');
     _WebsiteController = TextEditingController(text: 'web.com');
     _BioController = TextEditingController(text: 'my bio is empty');
@@ -105,6 +107,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         TextEditingField(
                             labelText: locale.name,
                             controller: _namecontroller),
+                        TextEditingField(
+                            labelText: locale.editProfileLastnameHint,
+                            controller: _lastnamecontroller),
                         TextEditingField(
                             labelText: locale.username,
                             controller: _UsernameController),

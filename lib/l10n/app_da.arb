@@ -158,6 +158,7 @@
   "providerPersonalInfo": "Udbyderpersonlige oplysninger",
   "secureAccountText": "SikkerAccountText",
   "name": "Navn",
+  "editProfileLastnameHint": "Efternavn",
   "username": "Brugernavn",
   "website": "Internet side",
   "bio": "Bio",

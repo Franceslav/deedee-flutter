@@ -151,6 +151,7 @@
   "providerPersonalInfo":"Ange din personliga information, även om kontot är för något som ett företag eller ett husdjur. Det kommer inte att vara en del av din offentliga profil",
   "secureAccountText": "För att hålla ditt konto säkert, skriv inte in en e-postadress eller ett telefonnummer som tillhör någon annan",
   "name": "Namn",
+  "editProfileLastnameHint": "Efternamn",
   "username": "Användarnamn",
   "website": "Hemsida",
   "bio": "Bio",
