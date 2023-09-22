@@ -166,8 +166,8 @@
   "editPictureOrAvatar": "Upravit profilovou fotku nebo avatar",
   "personalInformation": "Osobní informace",
   "personalInfoSettings": "Nastavení osobních údajů",
-  "providerPersonalInfo": "Uveďte své osobní údaje, i když je účet určen pro něco jako firmu nebo domácího mazlíčka. Tyto informace nebudou součástí vašeho veřejného profilu,"
-  "secureAccountText": "Aby byl váš účet zabezpečený, nezadávejte e-mailovou adresu nebo telefonní číslo, které patří někomu jinému,"
+  "providerPersonalInfo": "Uveďte své osobní údaje, i když je účet určen pro něco jako firmu nebo domácího mazlíčka. Tyto informace nebudou součástí vašeho veřejného profilu",
+  "secureAccountText": "Aby byl váš účet zabezpečený, nezadávejte e-mailovou adresu nebo telefonní číslo, které patří někomu jinému",
   "name": "Jméno",
   "username": "Uživatelské jméno",
   "web": "Web",

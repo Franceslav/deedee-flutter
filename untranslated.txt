@@ -29,6 +29,12 @@
     "chart"
   ],
 
+  "cs": [
+    "subscription",
+    "website",
+    "chart"
+  ],
+
   "da": [
     "useFingerprint",
     "connectionSettings",
