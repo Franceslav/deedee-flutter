@@ -157,6 +157,7 @@
   "providerPersonalInfo": "Podaj swoje dane osobowe, nawet jeśli konto jest przeznaczone dla firmy lub zwierzaka. Nie będzie częścią Twojego profilu publicznego",
   "secureAccountText": "Aby zapewnić bezpieczeństwo konta, nie podawaj adresu e-mail ani numeru telefonu należącego do innej osoby",
   "name": "Nazwa",
+  "lastname": "Nazwisko",
   "username": "Nazwa użytkownika",
   "website": "Strona internetowa",
   "bio": "Bio",

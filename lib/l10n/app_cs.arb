@@ -169,6 +169,7 @@
   "providerPersonalInfo": "Uveďte své osobní údaje, i když je účet určen pro něco jako firmu nebo domácího mazlíčka. Tyto informace nebudou součástí vašeho veřejného profilu",
   "secureAccountText": "Aby byl váš účet zabezpečený, nezadávejte e-mailovou adresu nebo telefonní číslo, které patří někomu jinému",
   "name": "Jméno",
+  "lastname": "příjmení",
   "username": "Uživatelské jméno",
   "web": "Web",
   "bio": "Bio",

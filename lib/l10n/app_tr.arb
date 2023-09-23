@@ -168,6 +168,7 @@
   "providerPersonalInfo": "Hesap bir işletme veya evcil hayvan gibi bir şey için olsa bile kişisel bilgilerinizi sağlayın. Bu, herkese açık profilinizin bir parçası olmayacaktır",
   "secureAccountText": "Hesabınızı güvende tutmak için başkasına ait bir e-posta veya telefon numarası girmeyin",
   "name": "İsim",
+  "lastname": "Soyadı",
   "username": "Kullanıcı adı",
   "website": "İnternet sitesi",
   "bio": "biyo",

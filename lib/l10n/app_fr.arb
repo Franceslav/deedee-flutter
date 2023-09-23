@@ -163,6 +163,7 @@
   "providerPersonalInfo": "Fournissez vos informations personnelles, même si le compte est pour quelque chose comme une entreprise ou un animal de compagnie. Cela ne fera pas partie de votre profil public",
   "secureAccountText": "Pour sécuriser votre compte, n'entrez pas d'adresse e-mail ou de numéro de téléphone appartenant à quelqu'un d'autre",
   "name": "Nom",
+  "lastname": "nom de famille",
   "username": "Nom d'utilisateur",
   "website": "Site Internet",
   "bio": "Bio",

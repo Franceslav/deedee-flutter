@@ -143,6 +143,7 @@
   "providerPersonalInfo": "Cung cấp thông tin cá nhân của bạn, ngay cả khi tài khoản dành cho thứ gì đó như doanh nghiệp hoặc thú cưng. Nó sẽ không phải là một phần của hồ sơ công khai của bạn",
   "secureAccountText": "Để giữ an toàn cho tài khoản của bạn, đừng nhập email hoặc số điện thoại của người khác",
   "name": "Tên",
+  "lastname": "Họ",
   "username": "Tên tài khoản",
   "website": "Trang mạng",
   "bio": "Tiểu sử",
