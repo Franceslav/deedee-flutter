@@ -38,6 +38,10 @@ class LanguagesExpansionTile extends StatefulWidget {
         flagImagePath: 'assets/images/en.png',
         langLabel: 'en'),
     Language(
+        language: 'Finnish',
+        flagImagePath: 'assets/images/fi.png',
+        langLabel: 'fi'),
+    Language(
         language: 'French',
         flagImagePath: 'assets/images/fr.png',
         langLabel: 'fr'),
