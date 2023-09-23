@@ -166,7 +166,7 @@
    "personalInfoSettings": "הגדרות מידע אישי",
    "providerPersonalInfo": "ספק את המידע האישי שלך, גם אם החשבון הוא עבור משהו כמו עסק או חיית מחמד. זה לא יהיה חלק מהפרופיל הציבורי שלך",
    "secureAccountText": "כדי לשמור על אבטחת החשבון שלך, אל תזין דוא",
-   "editProfileLastnameHint": "שֵׁם מִשׁפָּחָה",
+   "lastname": "שֵׁם מִשׁפָּחָה",
    "username": "שם משתמש",
    "website": "אתר",
    "bio": "ביו",

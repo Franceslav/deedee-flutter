@@ -154,7 +154,7 @@
   "providerPersonalInfo": "Fornisci le tue informazioni personali, anche se l'account è per qualcosa come un'attività commerciale o un animale domestico. Non faranno parte del tuo profilo pubblico",
   "secureAccountText": "Per mantenere sicuro il tuo account, non inserire una email o un numero di telefono che appartiene a qualcun altro",
   "name": "Nome",
-  "editProfileLastnameHint": "Cognome",
+  "lastname": "Cognome",
   "username": "Nome utente",
   "website": "Sito web",
   "bio": "Biografia",

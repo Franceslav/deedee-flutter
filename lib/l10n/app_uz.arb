@@ -181,7 +181,7 @@
   "providerPersonalInfo": "Shaxsiy ma'lumotlaringizni taqdim eting, hatto hisob biznes yoki uy hayvonlari kabi biror narsaga tegishli bo'lsa ham. U umumiy profilingizning bir qismi bo'lmaydi",
   "secureAccountText": "Hisobingizni xavfsiz saqlash uchun boshqa birovga tegishli elektron pochta yoki telefon raqamini kiritmang",
   "name": "Ism",
-  "editProfileLastnameHint": "Familiya",
+  "lastname": "Familiya",
   "username": "Foydalanuvchi nomi",
   "website": "Veb-sayt",
   "bio": "Bio",

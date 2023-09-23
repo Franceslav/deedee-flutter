@@ -154,7 +154,7 @@
   "providerPersonalInfo": " ለንግድ ወይም ለ ቤት እንስሳዎት ቢሆንም የእርስዎን የግል መረጃ ያቅርቡ። ይህ መረጃ የይፋዊ መገለጫዎ አካል አይሆንም።",
   "secureAccountText": "የመለያዎን ደህንነት ለመጠበቅ የሌላ ሰው የሆነ ኢሜይል ወይም ስልክ ቁጥር አያስገቡ",
   "name": "ስም ",
-  "editProfileLastnameHint": "የአያት ስም",
+  "lastname": "የአያት ስም",
   "username": "የተጠቃሚ ስም",
   "website": "ድህረ-ገፅ",
   "bio": "ባዮ",

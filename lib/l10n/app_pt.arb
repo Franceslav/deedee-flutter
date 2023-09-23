@@ -157,7 +157,7 @@
   "providerPersonalInfo": "Forneça suas informações pessoais, mesmo que a conta seja para algo como uma empresa ou um animal de estimação. Não fará parte do seu perfil público.я",
   "secureAccountText": "Para proteger sua conta, não insira um endereço de e-mail ou número de telefone que pertença a outra pessoa",
   "name": "Nome",
-  "editProfileLastnameHint": "Sobrenome",
+  "lastname": "Sobrenome",
   "username": "Nome de usuário",
   "website": "Local na rede Internet",
   "bio": "biografia",

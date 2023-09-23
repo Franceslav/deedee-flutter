@@ -144,7 +144,7 @@
   "providerPersonalInfo": "Gib deine persönlichen Informationen an, auch wenn das Konto für etwas wie ein Unternehmen oder ein Haustier ist. Sie werden nicht Teil deines öffentlichen Profils sein.",
   "secureAccountText": "Um dein Konto sicher zu halten, gib keine E-Mail-Adresse oder Telefonnummer ein, die jemand anderem gehört.",
   "name": "Name",
-  "editProfileLastnameHint": "Nachname",
+  "lastname": "Nachname",
   "username": "Benutzername",
   "website": "Website",
   "bio": "Biografie",

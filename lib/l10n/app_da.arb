@@ -158,7 +158,7 @@
   "providerPersonalInfo": "Udbyderpersonlige oplysninger",
   "secureAccountText": "SikkerAccountText",
   "name": "Navn",
-  "editProfileLastnameHint": "Efternavn",
+  "lastname": "Efternavn",
   "username": "Brugernavn",
   "website": "Internet side",
   "bio": "Bio",
