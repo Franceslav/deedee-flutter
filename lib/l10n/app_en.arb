@@ -77,7 +77,7 @@
   "balanceTitle": "balance",
   "availableTagsTitle": "available tags",
   "bookmarksTitle": "my favorites",
-  "noBookamarks": "you do not have bookmarks",
+  "noBookmarks": "you do not have bookmarks",
   "bookmarkDeletedMessage": "bookmark was deleted",
   "bookmarkNotDeletedMessage": "bookmark was not deleted. something went wrong",
   "accountPremium": "DeeDee Premium",

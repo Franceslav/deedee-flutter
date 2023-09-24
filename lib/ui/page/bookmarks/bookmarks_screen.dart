@@ -80,7 +80,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                 : _bookmarks.isEmpty
                     ? Center(
                         child: Text(
-                          AppLocalizations.of(context)!.noBookamarks,
+                          AppLocalizations.of(context)!.noBookmarks,
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
                       )
