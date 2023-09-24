@@ -106,11 +106,10 @@ class LanguagesExpansionTile extends StatefulWidget {
         flagImagePath: 'assets/images/cs.png',
         langLabel: 'cs'),
     Language(
-        language: 'Romanian',
-        flagImagePath: 'assets/images/ro.png',
-        langLabel: 'ro'),
+        language: 'Norwegian',
+        flagImagePath: 'assets/images/nn.png',
+        langLabel: 'nb')
   ];
-
 
   LanguagesExpansionTile({
     Key? key,
@@ -124,7 +123,6 @@ class _LanguagesExpansionTileState extends State<LanguagesExpansionTile> {
   var selectedIndex = 0;
   bool isExpanded = false;
   late Language selectedValue;
-
 
   @override
   Widget build(BuildContext context) {
