@@ -94,13 +94,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       ),
                       Expanded(
                         child: InkWell(
-                            onTap: () {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!.notAuthorized,
-                              );
-                            },
-                            child: _infoColumn('3', locale.seen)),
+                            onTap: () {}, child: _infoColumn('4', locale.seen)),
                       ),
                       Expanded(
                         child: InkWell(

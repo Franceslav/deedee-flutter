@@ -342,7 +342,6 @@
 
   "nb": [
     "noBookmarks",
-    "lastname",
     "editProfileNameHint",
     "editProfileLastnameHint",
     "editProfileUsernameHint",
