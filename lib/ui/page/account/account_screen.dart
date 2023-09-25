@@ -15,6 +15,7 @@ import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
 
@@ -77,7 +78,9 @@ class _AccountState extends State<AccountScreen> {
                         Expanded(
                           child: OutlinedButtonWidget(
                             text: locale.share,
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Share.share(Uri.https('deedee.com', user.userId).toString());
+                            },
                           ),
                         ),
                       ],
