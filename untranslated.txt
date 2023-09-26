@@ -135,6 +135,30 @@
     "chart"
   ],
 
+  "el": [
+    "noBookmarks",
+    "resume",
+    "subscription",
+    "date",
+    "text",
+    "views",
+    "lastname",
+    "editProfileNameHint",
+    "editProfileLastnameHint",
+    "editProfileUsernameHint",
+    "editProfileWebsiteHint",
+    "editProfileBioHint",
+    "contacts",
+    "mockFilterTitleAutoRepairShop",
+    "mockFilterKeyOilChange",
+    "mockFilterKeySuspensionRepair",
+    "mockFilterKeyEngineRepair",
+    "mockFilterKeyWheelRepair",
+    "mockFilterKeyElectricsRepair",
+    "mockFilterKeyPainting",
+    "mockFilterKeyTransmissionRepair"
+  ],
+
   "es": [
     "useFingerprint",
     "connectionSettings",
