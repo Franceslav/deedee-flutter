@@ -56,7 +56,7 @@ class _AccountState extends State<AccountSupplierScreen> {
         appBar: DeeDeeAppBar(
           title: locale.executorProfile,
           controller: _controller,
-          child: const Icon(Icons.menu),
+          child: const ProfilePhotoWithBadge(),
         ),
         body: BlocConsumer<SupplierBloc, SupplierState>(
           bloc: bloc,

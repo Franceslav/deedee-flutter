@@ -9,6 +9,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/request_screen/bloc/service_request_bloc.dart';
 import 'package:deedee/ui/request_screen/request_expansion_tile.dart';
 import 'package:deedee/ui/request_screen/request_price_widget.dart';
@@ -78,7 +79,7 @@ class _RequestScreenState extends State<RequestScreen> {
         appBar: DeeDeeAppBar(
           title: locale.request,
           controller: _controller,
-          child: const Icon(Icons.menu),
+          child: const ProfilePhotoWithBadge(),
         ),
         body: BlocConsumer<ServicePushRequestBloc, ServicePushRequestState>(
             bloc: bloc,

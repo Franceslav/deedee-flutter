@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:deedee/model/user.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
       appBar: DeeDeeAppBar(
         title: locale.accountVerify,
         controller: _controller,
-        child: const Icon(Icons.menu),
+        child: const ProfilePhotoWithBadge(),
       ),
       body: Stack(
         children: [

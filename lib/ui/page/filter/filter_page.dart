@@ -8,6 +8,7 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/filterkey_list.dart';
 import 'package:deedee/ui/page/filter/subtopic_list/subtopic_list.dart';
 import 'package:deedee/ui/place_tag/dialog_widget.dart';
@@ -126,7 +127,7 @@ class _FilterPageState extends State<FilterPage> {
                           },
                         ),
                       const SizedBox(width: 16),
-                      const Icon(Icons.menu),
+                      const ProfilePhotoWithBadge(),
                     ],
                   ),
                 ),
@@ -261,7 +262,7 @@ class _FilterPageState extends State<FilterPage> {
               appBar: DeeDeeAppBar(
                 title: AppLocalizations.of(context)!.filterTagsPageTitle,
                 controller: _controller,
-                child: const Icon(Icons.menu),
+                child: const ProfilePhotoWithBadge(),
               ),
               body: Stack(
                 children: [

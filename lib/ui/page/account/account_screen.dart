@@ -6,6 +6,7 @@ import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_popover.dart';
 import 'package:deedee/ui/page/account/account_widget.dart';
 import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';

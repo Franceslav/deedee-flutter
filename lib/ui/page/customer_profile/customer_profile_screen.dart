@@ -1,4 +1,5 @@
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,7 +23,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
       appBar: DeeDeeAppBar(
         title: locale.customerProfile,
         controller: _controller,
-        child: const Icon(Icons.menu),
+        child: const ProfilePhotoWithBadge(),
       ),
       body: const SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16),
