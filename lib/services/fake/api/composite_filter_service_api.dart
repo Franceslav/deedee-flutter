@@ -80,7 +80,36 @@ class CompositeFilterServiceApi {
           ..title = currentAppLocalization.mockFilterKey24Hour,
         FilterKey()
           ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
-          ..title = currentAppLocalization.mockFilterKeyCovered,
+          ..title = currentAppLocalization.mockFilterKeyElectricCharging,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyElectrical,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyOverNight,
+      ]),
+      "Auto repair shop": FilterKeyList(filterKeys: [
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyOilChange,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeySuspensionRepair,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyEngineRepair,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyWheelRepair,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyElectricsRepair,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyPainting,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
+          ..title = currentAppLocalization.mockFilterKeyTransmissionRepair,
       ])
     };
     _filterKeys.update('Gas station', (value) {
