@@ -397,6 +397,26 @@
     "chart"
   ],
 
+  "ka": [
+    "noBookmarks",
+    "subscription",
+    "editProfileNameHint",
+    "editProfileLastnameHint",
+    "editProfileUsernameHint",
+    "editProfileWebsiteHint",
+    "editProfileBioHint",
+    "website",
+    "mockFilterTitleAutoRepairShop",
+    "mockFilterKeyOilChange",
+    "mockFilterKeySuspensionRepair",
+    "mockFilterKeyEngineRepair",
+    "mockFilterKeyWheelRepair",
+    "mockFilterKeyElectricsRepair",
+    "mockFilterKeyPainting",
+    "mockFilterKeyTransmissionRepair",
+    "chart"
+  ],
+
   "kk": [
     "useFingerprint",
     "connectionSettings",
