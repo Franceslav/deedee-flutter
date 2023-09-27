@@ -1,7 +1,7 @@
 {
 	"helloWorld": "Salam Dünya!",
 	"@helloWorld": {
-		"description": Adi yeni doğulmuş proqramçı təbriki
+		"description": "Adi yeni doğulmuş proqramçı təbriki"
 	},
 	"useFingerprint": "Barmaq izindən istifadə edin",
 	"connectionSettings": "Əlaqə",
@@ -228,5 +228,5 @@
 	"mobilePhoneNumber": "Mobil telefon nömrəsi tələb olunur.",
 	"numberContainOnlyDigits": "Mobil telefon nömrəsi yalnız rəqəmlərdən ibarət olmalıdır.",
 	"validEmail": "Etibarlı E-poçtu daxil edin.",
-	"chart": "Qrafik",
+	"chart": "Qrafik"
 }
