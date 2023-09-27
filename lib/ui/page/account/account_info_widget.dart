@@ -39,8 +39,8 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                  height: 64, width: 64, child: Icon( Icons.topic),
-             // ProfilePhotoWithBadge()
+                height: 64, width: 64, child: Icon(Icons.topic),
+                // ProfilePhotoWithBadge()
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -86,24 +86,13 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                     children: [
                       Expanded(
                         child: InkWell(
-                            onTap: () {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!.notAuthorized,
-                              );
-                            },
+                            onTap: () {},
                             child:
                                 _infoColumn('${_tags.length}', locale.placed)),
                       ),
                       Expanded(
                         child: InkWell(
-                            onTap: () {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!.notAuthorized,
-                              );
-                            },
-                            child: _infoColumn('3', locale.seen)),
+                            onTap: () {}, child: _infoColumn('3', locale.seen)),
                       ),
                       Expanded(
                         child: InkWell(
