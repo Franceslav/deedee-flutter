@@ -37,6 +37,7 @@ class TopicServiceApi {
       _topics[1]: [
         Subtopic(topicId: 1, subtopicId: 1, title: "Car Wash"),
         Subtopic(topicId: 1, subtopicId: 1, title: "Gas station"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Auto repair shop"),
       ],
     };
   }

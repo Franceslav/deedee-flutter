@@ -10,6 +10,7 @@ import 'package:deedee/services/http_service.dart';
 import 'package:deedee/services/push_notification_service.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
 import 'package:deedee/ui/main_topic/main_topic_grid.dart';
 import 'package:deedee/ui/page/home/city_picker_dialog.dart';
@@ -49,7 +50,7 @@ class _HomeState extends State<HomeScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
           controller: _controller,
-          child: _hideAppBarButton ? null : const Icon(Icons.menu),
+          child: _hideAppBarButton ? null : const ProfilePhotoWithBadge(),
         ),
         body: Stack(
           children: [
