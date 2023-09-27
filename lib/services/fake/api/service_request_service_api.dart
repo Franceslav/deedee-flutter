@@ -170,6 +170,55 @@ class ServiceRequestServiceApi {
         price: 100,
         tagId: Int64(4),
       ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'мойка 5',
+        description:
+        'описание описание описание описание описание описание описание описание описание',
+        createdBy: 'glshnkv@yandex.ru',
+        createdFor: '',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.PENDING,
+        price: 200,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'мойка 5',
+        description:
+        'описание описание описание описание описание описание описание описание описание',
+        createdBy: 'glshnkv@yandex.ru',
+        createdFor: '',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.PENDING,
+        price: 250,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'мойка 5',
+        description:
+        'описание описание описание описание описание описание описание описание описание',
+        createdBy: 'glshnkv@yandex.ru',
+        createdFor: 'ron.x.by.su@gmail.com',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.PENDING,
+        price: 200,
+        tagId: Int64(4),
+      ),
+      ServiceRequest(
+        serviceRequestId: UUID(value: "69b0be58-1e2e-4c3d-877e-2717a43b3492"),
+        // tag: Tag()..topicId = 'мойка 5',
+        description:
+        'описание описание описание описание описание описание описание описание описание',
+        createdBy: 'glshnkv@yandex.ru',
+        createdFor: '',
+        createdAt: timestamp3,
+        status: ServiceRequest_Status.DONE,
+        price: 300,
+        tagId: Int64(4),
+      ),
+
     ];
   }
 
