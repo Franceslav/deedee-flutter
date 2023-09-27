@@ -117,6 +117,10 @@ class LanguagesExpansionTile extends StatefulWidget {
         language: 'Georgian',
         flagImagePath: 'assets/images/gr.png',
         langLabel: 'ka'),
+    Language(
+        language: 'Azerbaijan',
+        flagImagePath: 'assets/images/az.png',
+        langLabel: 'az'),
   ];
 
   LanguagesExpansionTile({
