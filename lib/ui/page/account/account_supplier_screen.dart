@@ -7,6 +7,7 @@ import 'package:deedee/repository/supplier_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
 import 'package:deedee/ui/page/account/bloc/supplier_bloc.dart';
+import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -214,10 +215,15 @@ class _RatingAndCountApplication extends StatelessWidget {
                     style: AppTextTheme.titleMedium,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.008),
-                  Text(
-                    AppLocalizations.of(context)!.completedApplications,
-                    style: AppTextTheme.titleNormal,
-                    textAlign: TextAlign.center,
+                  GestureDetector(
+                    onTap: () {
+                      context.router.push(const CompletedApplicationsPageRoute());
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.completedApplications,
+                      style: AppTextTheme.titleNormal,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Text(AppLocalizations.of(context)!.rating),
