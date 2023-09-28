@@ -125,7 +125,7 @@ class CompletedApplicationsListItem extends StatelessWidget {
         RequestScreenRoute(
           serviceRequestId: request.serviceRequestId,
           readOnly: false,
-          openedFromRestoreAction: false
+          openedFromRestoreAction: true
         )
     );
   }
