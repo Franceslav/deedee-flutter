@@ -11,12 +11,12 @@ class ServiceRequestCreatedState extends MapSlidingPanelState {
   ServiceRequestCreatedState(this.serviceRequestId);
 }
 
-class MapSlidingPanelIsBookmarkedState extends MapSlidingPanelState {
-  final bool isBookmarked;
+class MapSlidingPanelIsFavoriteState extends MapSlidingPanelState {
+  final bool isFavorite;
   final String? snackbarNotification;
 
-  MapSlidingPanelIsBookmarkedState({
-    required this.isBookmarked,
+  MapSlidingPanelIsFavoriteState({
+    required this.isFavorite,
     this.snackbarNotification,
   });
 }

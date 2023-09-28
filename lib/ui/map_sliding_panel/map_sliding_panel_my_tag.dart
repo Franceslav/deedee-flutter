@@ -90,7 +90,7 @@ class _MapSlidingPanelMyTagState extends State<MapSlidingPanelMyTag> {
                   serviceRequestId: state.serviceRequestId.toString(),
                 );
           }
-          if (state is MapSlidingPanelIsBookmarkedState &&
+          if (state is MapSlidingPanelIsFavoriteState &&
               state.snackbarNotification != null) {
             showSnackBar(context, state.snackbarNotification!);
           }
@@ -99,9 +99,9 @@ class _MapSlidingPanelMyTagState extends State<MapSlidingPanelMyTag> {
           }*/
         },
         builder: (context, state) {
-          if (state is MapSlidingPanelIsBookmarkedState &&
+          if (state is MapSlidingPanelIsFavoriteState &&
               widget._selectedTagId != Int64(0)) {
-            _isBookmarked = state.isBookmarked;
+            _isBookmarked = state.isFavorite;
           }
           return SlidingUpPanel(
             renderPanelSheet: true,

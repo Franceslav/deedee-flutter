@@ -40,7 +40,7 @@ class MapSlidingPanel extends StatefulWidget {
 }
 
 class _MapSlidingPanelState extends State<MapSlidingPanel> {
-  var _isBookmarked = false;
+  var _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
               serviceRequestId: state.serviceRequestId.toString(),
             );
           }
-          if (state is MapSlidingPanelIsBookmarkedState &&
+          if (state is MapSlidingPanelIsFavoriteState &&
               state.snackbarNotification != null) {
             showSnackBar(context, state.snackbarNotification!);
           }
@@ -80,9 +80,9 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
           }
         },
         builder: (context, state) {
-          if (state is MapSlidingPanelIsBookmarkedState &&
+          if (state is MapSlidingPanelIsFavoriteState &&
               widget._selectedTagId != Int64(0)) {
-            _isBookmarked = state.isBookmarked;
+            _isFavorite = state.isFavorite;
           }
           return SlidingUpPanel(
             renderPanelSheet: true,
@@ -156,7 +156,7 @@ class _MapSlidingPanelState extends State<MapSlidingPanel> {
                                   MapSlidingPanelChangeBookmarkEvent());
                             },
                             style: bottomStyle,
-                            child: _isBookmarked
+                            child: _isFavorite
                                 ? Image.asset(
                                 'assets/images/favorite_icon_filled.png')
                                 : Image.asset(

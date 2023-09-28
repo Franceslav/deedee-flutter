@@ -78,8 +78,8 @@ class MapSlidingPanelBloc
         snackbarNotification = 'added to favorites';
       }
       emit(
-        MapSlidingPanelIsBookmarkedState(
-          isBookmarked: response.status == Tag_Status.BOOKMARKED,
+        MapSlidingPanelIsFavoriteState(
+          isFavorite: response.status == Tag_Status.BOOKMARKED,
           snackbarNotification: snackbarNotification,
         ),
       );
@@ -93,8 +93,8 @@ class MapSlidingPanelBloc
       final tags = await _tagRepository.getTags(_user.email);
       _selectedTag = tags.firstWhere((tag) => tag.tagId == _selectedTagId);
       emit(
-        MapSlidingPanelIsBookmarkedState(
-            isBookmarked: _selectedTag.status == Tag_Status.BOOKMARKED),
+        MapSlidingPanelIsFavoriteState(
+            isFavorite: _selectedTag.status == Tag_Status.BOOKMARKED),
       );
     } catch (e) {}
   }

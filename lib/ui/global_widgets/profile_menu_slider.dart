@@ -46,7 +46,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                   : const SizedBox.shrink(),
               GeneralSlidingPanelItem(
                   icon: Icons.favorite,
-                  text: AppLocalizations.of(context)!.bookmarksTitle,
+                  text: AppLocalizations.of(context)!.profileMenuFavoriteTitle,
                   onTap: () {
                     if (context.router.current.isActive) {
                       controller.close();

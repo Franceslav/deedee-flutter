@@ -44,7 +44,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
     final bloc = BookmarksBloc(locator<TagRepository>(), locator<ObservationRepository>(), user);
     return Scaffold(
       appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.bookmarksTitle,
+        title: AppLocalizations.of(context)!.profileMenuFavoriteTitle,
         controller: _controller,
         child: const ProfilePhotoWithBadge(),
       ),
@@ -80,7 +80,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                 : _bookmarks.isEmpty
                     ? Center(
                         child: Text(
-                          AppLocalizations.of(context)!.noBookmarks,
+                          AppLocalizations.of(context)!.noFavorites,
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
                       )
