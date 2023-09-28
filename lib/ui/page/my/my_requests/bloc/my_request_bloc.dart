@@ -11,15 +11,15 @@ part 'my_request_event.dart';
 
 part 'my_request_state.dart';
 
-class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
+class ServiceRequestBloc extends Bloc<MyRequestEvent, ServiceRequestState> {
   final ServiceRequestRepository _serviceRequestRepository;
   final User _user;
 
   ServiceRequestBloc(this._serviceRequestRepository, this._user)
-      : super(const MyRequestState()) {
-    on<MyRequestCreateEvent>(_onCreateRequest);
-    on<MyRequestAcceptEvent>(_onAcceptRequest);
-    on<MyRequestDeleteEvent>(_onDeleteRequest);
+      : super(const ServiceRequestState()) {
+    on<ServiceRequestCreateEvent>(_onCreateRequest);
+    on<ServiceRequestAcceptEvent>(_onAcceptRequest);
+    on<ServiceRequestDeleteEvent>(_onDeleteRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     on<SearchRequestEvent>(_onSearchRequest);
 
@@ -28,7 +28,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   Future<void> _onUpdateEvent(
-      UpdateEvent event, Emitter<MyRequestState> emit) async {
+      UpdateEvent event, Emitter<ServiceRequestState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
       final requests = await _serviceRequestRepository.getAll(_user.email);
@@ -45,7 +45,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   Future<void> _onAcceptRequest(
-      MyRequestAcceptEvent event, Emitter<MyRequestState> emit) async {
+      ServiceRequestAcceptEvent event, Emitter<ServiceRequestState> emit) async {
     try {
       debugPrint('MyRequestBloc: ACCEPTING...');
       var serverRequest = ServiceRequest()
@@ -76,7 +76,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   Future<void> _onUpdateRequest(
-      UpdateRequestEvent event, Emitter<MyRequestState> emit) async {
+      UpdateRequestEvent event, Emitter<ServiceRequestState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
       await _serviceRequestRepository.change(event.request, event.request);
@@ -94,7 +94,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   Future<void> _onCreateRequest(
-      MyRequestCreateEvent event, Emitter<MyRequestState> emit) async {
+      ServiceRequestCreateEvent event, Emitter<ServiceRequestState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
       var serviceRequest = ServiceRequest(
@@ -126,7 +126,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   Future<void> _onDeleteRequest(
-      MyRequestDeleteEvent event, Emitter<MyRequestState> emit) async {
+      ServiceRequestDeleteEvent event, Emitter<ServiceRequestState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
       final response = await _serviceRequestRepository.delete(
@@ -154,7 +154,7 @@ class ServiceRequestBloc extends Bloc<MyRequestEvent, MyRequestState> {
   }
 
   void _onSearchRequest(
-      SearchRequestEvent event, Emitter<MyRequestState> emit) {
+      SearchRequestEvent event, Emitter<ServiceRequestState> emit) {
     emit(state.copyWith(searchText: event.name));
     final requestsList = List<ServiceRequest>.from(state.requests
         .where((element) => element.description.contains(event.name)));

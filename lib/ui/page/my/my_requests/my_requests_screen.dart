@@ -54,7 +54,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
     super.dispose();
   }
 
-  bool _listenCondition(MyRequestState previous, MyRequestState current) =>
+  bool _listenCondition(ServiceRequestState previous, ServiceRequestState current) =>
       (previous.errorMessage != current.errorMessage &&
           current.errorMessage.isNotEmpty) ||
       (previous.snackBarMessage != current.snackBarMessage &&
@@ -72,13 +72,13 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
         ),
         floatingActionButton: IconButton(
           onPressed: () {
-            _bloc.add(MyRequestCreateEvent());
+            _bloc.add(ServiceRequestCreateEvent());
           },
           icon: const Icon(Icons.add),
         ),
         body: Stack(
           children: [
-            BlocConsumer<ServiceRequestBloc, MyRequestState>(
+            BlocConsumer<ServiceRequestBloc, ServiceRequestState>(
               listenWhen: _listenCondition,
               listener: (context, state) {
                 if (state.errorMessage.isNotEmpty) {
@@ -142,7 +142,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                               onPageChanged: (value) =>
                                   _buttonController.setIndex(value),
                               children: [
-                                MyRequestList(
+                                ServiceRequestList(
                                     requests: state.searchText.trim().isEmpty
                                         ? state.requests
                                         : state.requestsSearch,
@@ -151,12 +151,12 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       ServiceRequest_Status.ACCEPTED,
                                     ],
                                     onDismissed: (request, userId, index) =>
-                                        _bloc.add(MyRequestDeleteEvent(
+                                        _bloc.add(ServiceRequestDeleteEvent(
                                           request: request,
                                           index: index,
                                         )),
                                     onAccept: (request, userId, index) {
-                                      _bloc.add(MyRequestAcceptEvent(
+                                      _bloc.add(ServiceRequestAcceptEvent(
                                         userId: userId,
                                         request: request,
                                         index: index,
@@ -167,7 +167,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                           request: request,
                                           userId: userId,
                                         ))),
-                                MyRequestList(
+                                ServiceRequestList(
                                   requests: state.searchText.trim().isEmpty
                                       ? state.requests
                                       : state.requestsSearch,
@@ -177,12 +177,12 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                     ServiceRequest_Status.DONE,
                                   ],
                                   onDismissed: (request, userId, index) =>
-                                      _bloc.add(MyRequestDeleteEvent(
+                                      _bloc.add(ServiceRequestDeleteEvent(
                                     request: request,
                                     index: index,
                                   )),
                                   onAccept: (request, userId, index) {
-                                    _bloc.add(MyRequestAcceptEvent(
+                                    _bloc.add(ServiceRequestAcceptEvent(
                                       userId: userId,
                                       request: request,
                                       index: index,

@@ -18,8 +18,8 @@ class CompletedApplicationsBloc extends Bloc<CompletedApplicationsEvent, Complet
   CompletedApplicationsBloc(this._serviceRequestRepository, this._user)
       : super(const CompletedApplicationsState()) {
     on<ServiceRequestCreateEvent>(_onCreateRequest);
-    on<MyRequestAcceptEvent>(_onAcceptRequest);
-    on<MyRequestDeleteEvent>(_onDeleteRequest);
+    on<ServiceRequestAcceptEvent>(_onAcceptRequest);
+    on<ServiceRequestDeleteEvent>(_onDeleteRequest);
     on<UpdateRequestEvent>(_onUpdateRequest);
     on<SearchRequestEvent>(_onSearchRequest);
 
@@ -45,7 +45,7 @@ class CompletedApplicationsBloc extends Bloc<CompletedApplicationsEvent, Complet
   }
 
   Future<void> _onAcceptRequest(
-      MyRequestAcceptEvent event, Emitter<CompletedApplicationsState> emit) async {
+      ServiceRequestAcceptEvent event, Emitter<CompletedApplicationsState> emit) async {
     try {
       debugPrint('MyRequestBloc: ACCEPTING...');
       var serverRequest = ServiceRequest()
@@ -126,7 +126,7 @@ class CompletedApplicationsBloc extends Bloc<CompletedApplicationsEvent, Complet
   }
 
   Future<void> _onDeleteRequest(
-      MyRequestDeleteEvent event, Emitter<CompletedApplicationsState> emit) async {
+      ServiceRequestDeleteEvent event, Emitter<CompletedApplicationsState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
       final response = await _serviceRequestRepository.delete(

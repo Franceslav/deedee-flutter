@@ -13,22 +13,22 @@ class ServiceRequestCreateEvent extends CompletedApplicationsEvent {
   });
 }
 
-class MyRequestDeleteEvent extends CompletedApplicationsEvent {
+class ServiceRequestDeleteEvent extends CompletedApplicationsEvent {
   final ServiceRequest request;
   final int index;
 
-  MyRequestDeleteEvent({
+  ServiceRequestDeleteEvent({
     required this.request,
     required this.index,
   });
 }
 
-class MyRequestAcceptEvent extends CompletedApplicationsEvent {
+class ServiceRequestAcceptEvent extends CompletedApplicationsEvent {
   final String userId;
   final ServiceRequest request;
   final int? index;
 
-  MyRequestAcceptEvent({
+  ServiceRequestAcceptEvent({
     required this.userId,
     required this.request,
     this.index,
