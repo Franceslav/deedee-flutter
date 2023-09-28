@@ -5,10 +5,10 @@ abstract class CompletedApplicationsEvent {}
 
 class UpdateEvent extends CompletedApplicationsEvent {}
 
-class MyRequestCreateEvent extends CompletedApplicationsEvent {
+class ServiceRequestCreateEvent extends CompletedApplicationsEvent {
   final ServiceRequest? request;
 
-  MyRequestCreateEvent({
+  ServiceRequestCreateEvent({
     this.request,
   });
 }
