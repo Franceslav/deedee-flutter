@@ -277,7 +277,149 @@ class TagServiceApi {
         )
         ..geolocation = Geolocation(latitude: 8.91489, longitude: 39.5169)
         ..type = Tag_Type.CLIENT
-        ..status = Tag_Status.BOOKMARKED
+        ..status = Tag_Status.BOOKMARKED,
+      Tag()
+        ..tagId = Int64(7)
+        ..createdBy = 'vierumary@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Children'),
+          filterMap: {
+            'Valet': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(8)
+        ..createdBy = 'vierumary@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Children'),
+          filterMap: {
+            '24 Hour': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(9)
+        ..createdBy = 'vierumary@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Auto'),
+          filterMap: {
+            'Motor Cycle': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+                FilterKey(title: 'Motor Cycle', selected: true),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(11)
+        ..createdBy = 'vierumary@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Auto'),
+          filterMap: {
+            'Car Washh': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(12)
+        ..createdBy = 'vierumary@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 - 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Auto'),
+          filterMap: {
+            'Car Washh': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: false),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+
     ];
     _tags = {};
   }
