@@ -68,62 +68,69 @@ class _ReferralState extends State<ReferralScreen> {
               } else {
                 _refs = state.refs;
                 _buttonController = AnimatedButtonController();
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: AnimatedButtonBar(
-                        invertedSelection: true,
-                        radius: 25,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        controller: _buttonController,
+                return _refs.isEmpty
+                    ? Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.noReferrals,
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                      )
+                    : Column(
                         children: [
-                          ButtonBarEntry(
-                            child:
-                                Text(AppLocalizations.of(context)!.actualTags),
-                            onTap: () => setPage(0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: AnimatedButtonBar(
+                              invertedSelection: true,
+                              radius: 25,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              controller: _buttonController,
+                              children: [
+                                ButtonBarEntry(
+                                  child: Text(
+                                      AppLocalizations.of(context)!.actualTags),
+                                  onTap: () => setPage(0),
+                                ),
+                                ButtonBarEntry(
+                                  child: Text(AppLocalizations.of(context)!
+                                      .archiveTags),
+                                  onTap: () => setPage(1),
+                                ),
+                              ],
+                            ),
                           ),
-                          ButtonBarEntry(
-                            child:
-                                Text(AppLocalizations.of(context)!.archiveTags),
-                            onTap: () => setPage(1),
+                          SearchField(
+                            SearchSpec(
+                                searchValueBuilder: (i) => _refs[i].email,
+                                length: _refs.length,
+                                itemBuilder: (context, i) {
+                                  return ReferralTile(referral: _refs[i]);
+                                }),
+                          ),
+                          const Divider(
+                            thickness: 0.5,
+                            color: Colors.black,
+                            height: 0,
+                          ),
+                          Expanded(
+                            flex: 7,
+                            child: PageView(
+                              controller: _pageController,
+                              onPageChanged: (value) =>
+                                  _buttonController.setIndex(value),
+                              children: [
+                                ReferralListWidget(
+                                    referrals: _refs,
+                                    refType: Referral_Status.VERIFIED),
+                                ReferralListWidget(
+                                  referrals: _refs,
+                                  refType: Referral_Status.DELETED,
+                                )
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    SearchField(
-                      SearchSpec(
-                          searchValueBuilder: (i) => _refs[i].email,
-                          length: _refs.length,
-                          itemBuilder: (context, i) {
-                            return ReferralTile(referral: _refs[i]);
-                          }),
-                    ),
-                    const Divider(
-                      thickness: 0.5,
-                      color: Colors.black,
-                      height: 0,
-                    ),
-                    Expanded(
-                      flex: 7,
-                      child: PageView(
-                        controller: _pageController,
-                        onPageChanged: (value) =>
-                            _buttonController.setIndex(value),
-                        children: [
-                          ReferralListWidget(
-                              referrals: _refs,
-                              refType: Referral_Status.VERIFIED),
-                          ReferralListWidget(
-                            referrals: _refs,
-                            refType: Referral_Status.DELETED,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                );
+                      );
               }
             },
           ),
