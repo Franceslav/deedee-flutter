@@ -88,7 +88,7 @@ class _RequestScreenState extends State<RequestScreen> {
                 showSnackBar(context, state.errorMessage);
               }
               if (state is AcceptServiceRequestState) {
-                context.router.replace(const MyRequestScreenRoute());
+                context.router.topMostRouter();
               }
             },
             builder: (context, state) {

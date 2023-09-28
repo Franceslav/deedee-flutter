@@ -1,7 +1,7 @@
 part of 'my_request_bloc.dart';
 
 @immutable
-class ServiceRequestState {
+class MyRequestState {
   final bool isLoading;
   final List<ServiceRequest> requests;
   final List<ServiceRequest> requestsSearch;
@@ -9,7 +9,7 @@ class ServiceRequestState {
   final String snackBarMessage;
   final String searchText;
 
-  const ServiceRequestState({
+  const MyRequestState({
     this.isLoading = false,
     this.requests = const [],
     this.requestsSearch = const [],
@@ -18,7 +18,7 @@ class ServiceRequestState {
     this.searchText = '',
   });
 
-  ServiceRequestState copyWith({
+  MyRequestState copyWith({
     bool? isLoading,
     List<ServiceRequest>? requests,
     List<ServiceRequest>? requestsSearch,
@@ -26,7 +26,7 @@ class ServiceRequestState {
     String? snackBarMessage,
     String? searchText,
   }) {
-    return ServiceRequestState(
+    return MyRequestState(
       isLoading: isLoading ?? this.isLoading,
       requests: requests ?? this.requests,
       requestsSearch: requestsSearch ?? this.requestsSearch,

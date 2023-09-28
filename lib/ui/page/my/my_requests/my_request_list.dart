@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'list_item.dart';
 
-class ServiceRequestList extends StatefulWidget {
+class MyRequestList extends StatefulWidget {
   final List<ServiceRequest_Status> statuses;
   final List<ServiceRequest> requests;
   final void Function(ServiceRequest request, String userId) onChanged;
@@ -16,7 +16,7 @@ class ServiceRequestList extends StatefulWidget {
   final void Function(ServiceRequest request, String userId, int index)
       onAccept;
 
-  const ServiceRequestList({
+  const MyRequestList({
     super.key,
     required this.requests,
     required this.statuses,
@@ -26,10 +26,10 @@ class ServiceRequestList extends StatefulWidget {
   });
 
   @override
-  State<ServiceRequestList> createState() => _ServiceRequestListState();
+  State<MyRequestList> createState() => _MyRequestListState();
 }
 
-class _ServiceRequestListState extends State<ServiceRequestList> {
+class _MyRequestListState extends State<MyRequestList> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);

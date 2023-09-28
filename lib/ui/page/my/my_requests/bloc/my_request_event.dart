@@ -5,30 +5,30 @@ abstract class MyRequestEvent {}
 
 class UpdateEvent extends MyRequestEvent {}
 
-class ServiceRequestCreateEvent extends MyRequestEvent {
+class MyRequestCreateEvent extends MyRequestEvent {
   final ServiceRequest? request;
 
-  ServiceRequestCreateEvent({
+  MyRequestCreateEvent({
     this.request,
   });
 }
 
-class ServiceRequestDeleteEvent extends MyRequestEvent {
+class MyRequestDeleteEvent extends MyRequestEvent {
   final ServiceRequest request;
   final int index;
 
-  ServiceRequestDeleteEvent({
+  MyRequestDeleteEvent({
     required this.request,
     required this.index,
   });
 }
 
-class ServiceRequestAcceptEvent extends MyRequestEvent {
+class MyRequestAcceptEvent extends MyRequestEvent {
   final String userId;
   final ServiceRequest request;
   final int? index;
 
-  ServiceRequestAcceptEvent({
+  MyRequestAcceptEvent({
     required this.userId,
     required this.request,
     this.index,

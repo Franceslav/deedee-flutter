@@ -47,7 +47,7 @@ class CompletedApplicationsBloc extends Bloc<CompletedApplicationsEvent, Complet
   Future<void> _onAcceptRequest(
       ServiceRequestAcceptEvent event, Emitter<CompletedApplicationsState> emit) async {
     try {
-      debugPrint('MyRequestBloc: ACCEPTING...');
+      debugPrint('CompletedApplicationsBloc: ACCEPTING...');
       var serverRequest = ServiceRequest()
         ..serviceRequestId = event.request.serviceRequestId;
       final response =
@@ -60,7 +60,7 @@ class CompletedApplicationsBloc extends Bloc<CompletedApplicationsEvent, Complet
           snackBarMessage: 'request accepted',
           isLoading: false,
         ));
-        debugPrint('MyRequestBLOC: DONE');
+        debugPrint('CompletedApplicationsBLOC: DONE');
       } else if (event.index != null) {
         emit(state.copyWith(
           isLoading: false,

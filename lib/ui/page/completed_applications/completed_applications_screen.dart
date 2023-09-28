@@ -7,8 +7,9 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/page/my/my_requests/bloc/my_request_bloc.dart';
-import 'package:deedee/ui/page/my/my_requests/my_request_list.dart';
+import 'package:deedee/ui/page/completed_applications/bloc/completed_applications_bloc.dart';
+import 'package:deedee/ui/page/completed_applications/completed_applications_list.dart';
+
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
   late final PageController _pageController;
 
   late final User _user;
-  late final ServiceRequestBloc _bloc;
+  late final CompletedApplicationsBloc _bloc;
 
   void setPage(int indexPage) {
     _pageController.animateToPage(
@@ -44,7 +45,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
     _buttonController = AnimatedButtonController();
     _pageController = PageController();
     _user = BlocProvider.of<UserBloc>(context).state.user;
-    _bloc = ServiceRequestBloc(locator.get<ServiceRequestRepository>(), _user);
+    _bloc = CompletedApplicationsBloc(locator.get<ServiceRequestRepository>(), _user);
     super.initState();
   }
 
@@ -54,7 +55,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
     super.dispose();
   }
 
-  bool _listenCondition(ServiceRequestState previous, ServiceRequestState current) =>
+  bool _listenCondition(CompletedApplicationsState previous, CompletedApplicationsState current) =>
       (previous.errorMessage != current.errorMessage &&
           current.errorMessage.isNotEmpty) ||
       (previous.snackBarMessage != current.snackBarMessage &&
@@ -62,7 +63,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ServiceRequestBloc>(
+    return BlocProvider<CompletedApplicationsBloc>(
       create: (context) => _bloc,
       child: Scaffold(
         appBar: DeeDeeAppBar(
@@ -78,7 +79,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
         ),
         body: Stack(
           children: [
-            BlocConsumer<ServiceRequestBloc, ServiceRequestState>(
+            BlocConsumer<CompletedApplicationsBloc, CompletedApplicationsState>(
               listenWhen: _listenCondition,
               listener: (context, state) {
                 if (state.errorMessage.isNotEmpty) {
@@ -142,7 +143,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
                               onPageChanged: (value) =>
                                   _buttonController.setIndex(value),
                               children: [
-                                ServiceRequestList(
+                                CompletedApplicationsList(
                                     requests: state.searchText.trim().isEmpty
                                         ? state.requests
                                         : state.requestsSearch,
@@ -167,7 +168,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
                                           request: request,
                                           userId: userId,
                                         ))),
-                                ServiceRequestList(
+                                CompletedApplicationsList(
                                   requests: state.searchText.trim().isEmpty
                                       ? state.requests
                                       : state.requestsSearch,
