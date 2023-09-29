@@ -1,5 +1,6 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dartx/dartx.dart';
+import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
@@ -14,18 +15,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../../generated/deedee/api/model/tag.pb.dart';
-import '../../repository/tag_repository.dart';
+import '../../../repository/tag_repository.dart';
+
 import 'tag_card_widget.dart';
 
-class UserTagsScreen extends StatefulWidget {
-  const UserTagsScreen({super.key});
+class ServisProviderScreen extends StatefulWidget {
+  const ServisProviderScreen({super.key});
 
   @override
-  State<UserTagsScreen> createState() => _UserTagsScreenState();
+  State<ServisProviderScreen> createState() => _ServisProviderScreenState();
 }
 
-class _UserTagsScreenState extends State<UserTagsScreen> {
+class _ServisProviderScreenState extends State<ServisProviderScreen> {
   final PanelController _controller = PanelController();
   final AnimatedButtonController _buttonController = AnimatedButtonController();
   final _tags = <Tag>[];

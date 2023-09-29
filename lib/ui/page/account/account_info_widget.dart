@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dartx/dartx.dart';
 import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
@@ -86,7 +87,10 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                     children: [
                       Expanded(
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              context.router
+                                  .navigate(const ServisProviderScreenRoute());
+                            },
                             child:
                                 _infoColumn('${_tags.length}', locale.placed)),
                       ),

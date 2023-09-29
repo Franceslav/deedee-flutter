@@ -13,8 +13,8 @@ class ProfileServiceApi {
       Profile(
         profileId: Int64(0),
         referredBy: '',
-        userId: 'evgeniivaniukov@gmail.com',
-        username: 'evgen',
+        userId: 'mister@mail.ru',
+        username: 'Igor',
         contacts: [],
         status: Profile_Status.ACTIVE,
       )
@@ -33,19 +33,20 @@ class ProfileServiceApi {
     _profiles.add(profile);
     return profile;
   }
-  
+
   Profile getProfile(Profile profileArg) {
-    Profile profile = _profiles
-      .firstWhere((profile) => profile.userId == profileArg.userId);
+    Profile profile =
+        _profiles.firstWhere((profile) => profile.userId == profileArg.userId);
     return profile;
   }
 
   Profile editProfile(Profile profileArg) {
-    Profile profile = _profiles
-      .firstWhere((profile) => profile.userId == profileArg.userId);
+    Profile profile =
+        _profiles.firstWhere((profile) => profile.userId == profileArg.userId);
     profile.username = profileArg.username;
     return profile;
   }
+
   Profile removeProfile(Profile profileArg) {
     return _profiles
         .firstWhere((profile) => profile.userId == profileArg.userId)

@@ -192,6 +192,34 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
+        ..tagId = Int64(6)
+        ..createdBy = 'mister@mail.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+        // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Overhaul'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 13.754, longitude: 100.501)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
         ..tagId = Int64(5)
         ..createdBy = 'matveev.yakov@yahoo.com'
         ..createdAt = Timestamp(

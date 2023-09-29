@@ -40,6 +40,7 @@ import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
+import '../page/servis_provider_tags/servis_provider_tags_screen.dart';
 import '../page/stats/stats_screen.dart';
 
 @MaterialAutoRouter(
@@ -70,6 +71,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: ResetPasswordScreen, path: 'reset-password'),
     MaterialRoute(page: MainTopicScreen, path: 'main-topic'),
     MaterialRoute(page: UserTagsScreen, path: ''),
+    MaterialRoute(page: ServisProviderScreen, path: 'provider-tag'),
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
