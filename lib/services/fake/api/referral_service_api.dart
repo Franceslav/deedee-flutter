@@ -20,6 +20,18 @@ class ReferralServiceApi {
         ..referralId = Int64(3)
         ..email = "referral3@email.ru"
         ..referredBy = "user@email.ru",
+      Referral()
+        ..referralId = Int64(4)
+        ..email = "referral4@email.ru"
+        ..referredBy = "mybclym@gmail.com",
+      Referral()
+        ..referralId = Int64(5)
+        ..email = "referral5@email.ru"
+        ..referredBy = "mybclym@gmail.com",
+      Referral()
+        ..referralId = Int64(6)
+        ..email = "referral6@email.ru"
+        ..referredBy = "mybclym@gmail.com",
     ];
     return {for (final ref in refs) ref.referralId: ref};
   }();
