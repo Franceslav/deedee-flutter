@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deedee/model/user.dart';
+import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
@@ -155,7 +156,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
             ],
           ),
-          ProfileMenuSlider(
+          DeeDeeMenuSlider(
             context,
             controller: _controller,
             user: user,

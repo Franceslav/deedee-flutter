@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:deedee/ui/page/account/account_popover.dart';
+import 'package:deedee/ui/page/account/utils/payment_method_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,6 +48,39 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
                     }
                     context.router.navigate(const SettingsScreenRoute());
                   }),
+              GeneralSlidingPanelItem(
+                icon: Icons.verified,
+                text: AppLocalizations.of(context)!.verification,
+                onTap: () async {
+                  context.router.navigate(const VerifyScreenRoute());
+                },
+              ),
+              GeneralSlidingPanelItem(
+                icon: Icons.workspace_premium,
+                text: AppLocalizations.of(context)!.premium,
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return const AccountPopover();
+                    },
+                  );
+                },
+              ),
+              GeneralSlidingPanelItem(
+                icon: Icons.account_balance,
+                text: AppLocalizations.of(context)!.balanceTitle,
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return const PaymentMethodListWidget();
+                    },
+                  );
+                },
+              ),
               GeneralSlidingPanelItem(
                   icon: Icons.help_outline,
                   text: AppLocalizations.of(context)!.helpTitle,
