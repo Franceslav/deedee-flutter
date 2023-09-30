@@ -87,10 +87,6 @@ class _AccountState extends State<AccountScreen> {
                       ],
                     ),
                     const SizedBox(height: 48),
-                    _InfoWidget(
-                      emailVerification: user.emailVerification,
-                      premiumStatus: user.premiumStatus,
-                    ),
                     const SizedBox(height: 20),
                     const SizedBox(height: 0),
                   ],
@@ -104,98 +100,6 @@ class _AccountState extends State<AccountScreen> {
             ],
           );
         },
-      ),
-    );
-  }
-}
-
-class _InfoWidget extends StatelessWidget {
-  final PremiumStatus premiumStatus;
-  final EmailVerificationStatus emailVerification;
-
-  const _InfoWidget({
-    super.key,
-    required this.premiumStatus,
-    required this.emailVerification,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context)!;
-    final user = context.select((UserBloc bloc) => bloc.state.user);
-
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        children: [
-          emailVerification == EmailVerificationStatus.unverified
-              ? DeeDeeRowInfoWidget(
-                  icon: Image.asset('assets/images/verify_0_icon.png'),
-                  mainText: Text(
-                    locale.verification,
-                    style: AppTextTheme.bodyLarge,
-                  ),
-                  secondaryText: Text(
-                    locale.verifyYourAccount,
-                    style: AppTextTheme.bodyMedium,
-                  ),
-                  onTap: () {
-                    context.router.push(const VerifyScreenRoute());
-                  },
-                )
-              : const SizedBox(),
-          // locale.accountTitle,
-          premiumStatus == PremiumStatus.notPremium
-              ? DeeDeeRowInfoWidget(
-                  mainText: Text(
-                    locale.premium,
-                    style: AppTextTheme.bodyLarge,
-                  ),
-                  icon: Image.asset('assets/images/premium_0_icon.png'),
-                  secondaryText: Text(
-                    locale.activated,
-                    style: AppTextTheme.bodyMedium,
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return const AccountPopover();
-                      },
-                    );
-                  },
-                )
-              : const SizedBox(),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: DeeDeeDeviderWidget(),
-          ),
-          DeeDeeRowInfoWidget(
-            icon: Image.asset('assets/images/balance_icon.png'),
-            mainText: Text(
-              locale.balanceTitle,
-              style: AppTextTheme.bodyLarge,
-            ),
-            secondaryText: const Text(
-              '\$0.00',
-              style: AppTextTheme.bodyMedium,
-            ),
-            onTap: () {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (context) {
-                  return const PaymentMethodListWidget();
-                },
-              );
-            },
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: DeeDeeDeviderWidget(),
-          ),
-        ],
       ),
     );
   }

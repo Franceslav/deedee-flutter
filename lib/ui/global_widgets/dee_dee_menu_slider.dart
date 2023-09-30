@@ -14,17 +14,17 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
   final BuildContext context;
 
   DeeDeeMenuSlider(
-    this.context, {
-    super.key,
-    required super.controller,
-    required this.user,
-  }) : super(
-            maxHeight: MediaQuery.of(context).size.height * 0.4,
-            generalSlidingPanelItemList: [
-              GeneralSlidingPanelItem(
-                icon: Icons.qr_code_scanner,
-                text: AppLocalizations.of(context)!.qrScanner,
-                onTap: () async {},
-              ),
-            ]);
+      this.context, {
+        super.key,
+        required super.controller,
+        required this.user,
+      }) : super(
+      maxHeight: MediaQuery.of(context).size.height * 0.4,
+      generalSlidingPanelItemList: [
+        GeneralSlidingPanelItem(
+          icon: Icons.qr_code_scanner,
+          text: AppLocalizations.of(context)!.qrScanner,
+          onTap: () async {},
+        ),
+      ]);
 }
