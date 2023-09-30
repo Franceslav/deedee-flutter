@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../global_widgets/deedee_appbar.dart';
+import '../global_widgets/profile_menu_slider.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -166,7 +167,7 @@ class _HelpState extends State<HelpScreen> {
                 ],
               ),
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _panelController,
               user: user,

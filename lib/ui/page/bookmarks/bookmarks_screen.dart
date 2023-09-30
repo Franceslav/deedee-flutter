@@ -24,6 +24,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
 import 'bloc/bookmarks_bloc.dart';
 
 class BookmarksScreen extends StatefulWidget {
@@ -41,7 +42,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = BookmarksBloc(locator<TagRepository>(), locator<ObservationRepository>(), user);
+    final bloc = BookmarksBloc(
+        locator<TagRepository>(), locator<ObservationRepository>(), user);
     return Scaffold(
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.profileMenuFavoriteTitle,
@@ -200,11 +202,11 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                                           MapScreenRoute(
                                             tagDescriptionMap: tagMap,
                                             backTapRoute: FilterPageRoute(
-                                              currentFilter:CompositeFilter(
+                                              currentFilter: CompositeFilter(
                                                 compositeFilterId:
-                                                _bookmarks[index]
-                                                    .compositeFilter
-                                                    .compositeFilterId,
+                                                    _bookmarks[index]
+                                                        .compositeFilter
+                                                        .compositeFilterId,
                                                 topic: _bookmarks[index]
                                                     .compositeFilter
                                                     .topic,
@@ -249,7 +251,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                         ],
                       ),
           ),
-          DeeDeeMenuSlider(
+          ProfileMenuSlider(
             context,
             controller: _controller,
             user: user,

@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../global_widgets/profile_menu_slider.dart';
+
 class MainTopicScreen extends StatefulWidget {
   const MainTopicScreen({super.key, required this.screenType});
 
@@ -41,7 +43,7 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
               ],
             ),
           ),
-          DeeDeeMenuSlider(
+          ProfileMenuSlider(
             context,
             controller: _controller,
             user: context.select((UserBloc bloc) => bloc.state.user),

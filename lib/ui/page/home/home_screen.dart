@@ -22,6 +22,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -130,7 +132,7 @@ class _HomeState extends State<HomeScreen> {
                 );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,

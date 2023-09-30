@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../global_widgets/profile_menu_slider.dart';
 import 'referral_cubit.dart';
 
 class ReferralScreen extends StatefulWidget {
@@ -134,7 +135,7 @@ class _ReferralState extends State<ReferralScreen> {
               }
             },
           ),
-          DeeDeeMenuSlider(
+          ProfileMenuSlider(
             context,
             controller: _controller,
             user: user,

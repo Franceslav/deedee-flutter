@@ -6,6 +6,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -37,6 +38,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -62,6 +64,7 @@
   ],
 
   "az": [
+    "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
     "profileMenuFavoriteTitle",
@@ -83,6 +86,7 @@
   ],
 
   "cs": [
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -111,6 +115,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -142,6 +147,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -167,6 +173,7 @@
   ],
 
   "el": [
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -199,6 +206,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -224,6 +232,7 @@
   ],
 
   "fi": [
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -238,6 +247,7 @@
   ],
 
   "fil": [
+    "qrScannerTitle",
     "noReferrals",
     "profileMenuFavoriteTitle",
     "noFavorites"
@@ -250,6 +260,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -281,6 +292,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -312,6 +324,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -343,6 +356,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "safe",
     "placeOrder",
     "placeOrderPageTitle",
@@ -426,6 +440,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -451,6 +466,7 @@
   ],
 
   "ka": [
+    "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
     "profileMenuFavoriteTitle",
@@ -480,6 +496,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -511,6 +528,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -542,6 +560,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -567,6 +586,7 @@
   ],
 
   "nb": [
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -592,6 +612,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -623,6 +644,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -648,6 +670,7 @@
   ],
 
   "ro": [
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -671,6 +694,7 @@
   ],
 
   "ru": [
+    "qrScannerTitle",
     "noBookmarks",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
@@ -689,6 +713,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -720,6 +745,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -751,6 +777,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -782,6 +809,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -813,6 +841,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -844,6 +873,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
@@ -875,6 +905,7 @@
     "scanYourFingerprint",
     "oopsBiometric",
     "cancelFingerPrint",
+    "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",

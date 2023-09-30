@@ -16,6 +16,7 @@ import 'package:deedee/ui/place_order/place_order_popover.dart';
 import '../../services/helper.dart';
 import '../global_widgets/dee_dee_menu_slider.dart';
 import '../global_widgets/deedee_appbar.dart';
+import '../global_widgets/profile_menu_slider.dart';
 import '../global_widgets/profile_photo_with_badge.dart';
 import '../routes/app_router.gr.dart';
 import '../user_bloc/user_bloc.dart';
@@ -251,7 +252,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                 );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,

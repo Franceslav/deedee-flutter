@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../global_widgets/profile_menu_slider.dart';
+
 class MyRequestScreen extends StatefulWidget {
   const MyRequestScreen({super.key});
 
@@ -202,7 +204,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                 );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: _user,

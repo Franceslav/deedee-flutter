@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:deedee/model/user.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/helper.dart';
+import '../routes/app_router.gr.dart';
 import '../user_bloc/user_bloc.dart';
 
 class ProfilePhotoWithBadge extends StatelessWidget {
@@ -17,13 +19,18 @@ class ProfilePhotoWithBadge extends StatelessWidget {
     if (user.profilePictureURL == '') {
       return _addBadge(
         user,
-        CircleAvatar(
-          radius: 35,
-          backgroundColor: Colors.grey.shade400,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/placeholder.jpg',
-              fit: BoxFit.cover,
+        InkWell(
+          onTap: () {
+            context.router.navigate(const AccountScreenRoute());
+          },
+          child: CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.grey.shade400,
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/placeholder.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

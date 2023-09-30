@@ -23,6 +23,7 @@ import 'package:search_address_repository/search_address_repository.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../global_widgets/deedee_appbar.dart';
+import '../../global_widgets/profile_menu_slider.dart';
 import '../favorite_composite_filters/composite_filter_bloc/composite_filter_bloc.dart';
 import 'filter_page_bloc.dart';
 
@@ -249,7 +250,7 @@ class _FilterPageState extends State<FilterPage> {
                       ],
                     ),
                   ),
-                  DeeDeeMenuSlider(
+                  ProfileMenuSlider(
                     context,
                     controller: _controller,
                     user: user,
@@ -269,7 +270,7 @@ class _FilterPageState extends State<FilterPage> {
                   const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  DeeDeeMenuSlider(
+                  ProfileMenuSlider(
                     context,
                     controller: _controller,
                     user: user,

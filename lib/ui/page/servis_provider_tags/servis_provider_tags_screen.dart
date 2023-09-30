@@ -17,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../repository/tag_repository.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
 import 'tag_card_widget.dart';
 
 class ServisProviderScreen extends StatefulWidget {
@@ -138,7 +139,7 @@ class _ServisProviderScreenState extends State<ServisProviderScreen> {
                       );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,
