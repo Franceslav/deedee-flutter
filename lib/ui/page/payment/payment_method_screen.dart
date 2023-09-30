@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
 import '../../user_bloc/user_bloc.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 context.router.navigate(const CardScreenRoute());
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,

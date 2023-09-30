@@ -24,43 +24,7 @@ class DeeDeeMenuSlider extends GeneralSlidingPanel {
               GeneralSlidingPanelItem(
                 icon: Icons.qr_code_scanner,
                 text: AppLocalizations.of(context)!.qrScanner,
-                onTap: () async {
-                  context.router.navigate(const BookmarkQRScannerRoute());
-                },
+                onTap: () async {},
               ),
-              GeneralSlidingPanelItem(
-                  icon: Icons.account_box,
-                  text: AppLocalizations.of(context)!.profile,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const AccountScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.settings,
-                  text: AppLocalizations.of(context)!.settings,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const SettingsScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.help_outline,
-                  text: AppLocalizations.of(context)!.helpTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const HelpScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.exit_to_app,
-                  text: AppLocalizations.of(context)!.logout,
-                  onTap: () {
-                    context.read<AuthenticationBloc>().add(LogoutEvent());
-                    context.router.replace(const LoginScreenRoute());
-                  }),
             ]);
 }

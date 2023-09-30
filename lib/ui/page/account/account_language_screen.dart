@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../global_widgets/dee_dee_menu_slider.dart';
+import '../../global_widgets/profile_menu_slider.dart';
 import 'account_language_dropdown.dart';
 
 class AccountLanguageScreen extends StatefulWidget {
@@ -32,8 +33,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
       body: Stack(
         children: [
           LanguagesExpansionTile(),
-
-          DeeDeeMenuSlider(
+          ProfileMenuSlider(
             context,
             controller: _controller,
             user: user,

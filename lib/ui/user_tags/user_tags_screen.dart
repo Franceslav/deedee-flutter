@@ -16,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../generated/deedee/api/model/tag.pb.dart';
 import '../../repository/tag_repository.dart';
+import '../global_widgets/profile_menu_slider.dart';
 import 'tag_card_widget.dart';
 
 class UserTagsScreen extends StatefulWidget {
@@ -137,7 +138,7 @@ class _UserTagsScreenState extends State<UserTagsScreen> {
                       );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,

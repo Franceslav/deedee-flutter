@@ -10,6 +10,7 @@
   "oopsBiometric" : "Oops! Biometric authentication required!",
   "cancelFingerPrint" : "No thanks",
   "qrScanner" : "qr scanner",
+  "qrScannerTitle" : "Qr scanner",
   "safe": "safe",
   "placeOrder": "Place order",
   "placeOrderPageTitle": "Order",

@@ -23,6 +23,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../global_widgets/dee_dee_menu_slider.dart';
+import '../global_widgets/profile_menu_slider.dart';
 
 class RequestScreen extends StatefulWidget {
   final bool readOnly;
@@ -284,7 +285,7 @@ class _RequestScreenState extends State<RequestScreen> {
                           ],
                         ),
                       ),
-                      DeeDeeMenuSlider(
+                      ProfileMenuSlider(
                         context,
                         controller: _controller,
                         user: user,

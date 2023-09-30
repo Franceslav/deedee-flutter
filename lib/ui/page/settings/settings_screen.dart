@@ -15,6 +15,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../auth/biometric/biometric_prefs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -52,6 +54,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           SettingsList(
                             sections: [
+                              SettingsSection(
+                                title: Text(
+                                    AppLocalizations.of(context)!.qrScanner),
+                                tiles: [
+                                  SettingsTile(
+                                    title: Text(AppLocalizations.of(context)!
+                                        .qrScanner),
+                                    leading: const Icon(Icons.qr_code_scanner),
+                                    onPressed: (BuildContext context) {
+                                      context.router
+                                          .push(const BookmarkQRScannerRoute());
+                                    },
+                                  ),
+                                ],
+                              ),
                               SettingsSection(
                                 title: Text(AppLocalizations.of(context)!
                                     .connectionSettings),
@@ -102,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               )
                             ],
                           ),
-                          DeeDeeMenuSlider(
+                          ProfileMenuSlider(
                             context,
                             controller: _controller,
                             user: user,

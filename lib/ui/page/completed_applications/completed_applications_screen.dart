@@ -16,11 +16,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../global_widgets/profile_menu_slider.dart';
+
 class CompletedApplicationsPage extends StatefulWidget {
   const CompletedApplicationsPage({super.key});
 
   @override
-  State<CompletedApplicationsPage> createState() => _CompletedApplicationsPageState();
+  State<CompletedApplicationsPage> createState() =>
+      _CompletedApplicationsPageState();
 }
 
 class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
@@ -45,7 +48,8 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
     _buttonController = AnimatedButtonController();
     _pageController = PageController();
     _user = BlocProvider.of<UserBloc>(context).state.user;
-    _bloc = CompletedApplicationsBloc(locator.get<ServiceRequestRepository>(), _user);
+    _bloc = CompletedApplicationsBloc(
+        locator.get<ServiceRequestRepository>(), _user);
     super.initState();
   }
 
@@ -55,7 +59,8 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
     super.dispose();
   }
 
-  bool _listenCondition(CompletedApplicationsState previous, CompletedApplicationsState current) =>
+  bool _listenCondition(CompletedApplicationsState previous,
+          CompletedApplicationsState current) =>
       (previous.errorMessage != current.errorMessage &&
           current.errorMessage.isNotEmpty) ||
       (previous.snackBarMessage != current.snackBarMessage &&
@@ -203,7 +208,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
                 );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: _user,

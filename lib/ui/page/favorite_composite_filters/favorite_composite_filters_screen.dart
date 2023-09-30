@@ -16,6 +16,7 @@ import '../../../injection.dart';
 import '../../../services/helper.dart';
 import '../../global_widgets/dee_dee_devider_widget.dart';
 import '../../global_widgets/dee_dee_row_info_widget.dart';
+import '../../global_widgets/profile_menu_slider.dart';
 import '../../routes/app_router.gr.dart';
 import '../../theme/app_text_theme.dart';
 import 'composite_filter_bloc/composite_filter_bloc.dart';
@@ -139,7 +140,7 @@ class _FavoriteCompositeFiltersScreenState
                       );
               },
             ),
-            DeeDeeMenuSlider(
+            ProfileMenuSlider(
               context,
               controller: _controller,
               user: user,
