@@ -85,14 +85,16 @@ class LineChartWidget extends StatelessWidget {
         context.read<AccountBloc>().appLocal ?? Localizations.localeOf(context);
 
     return Padding(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.all(5),
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        //scrollDirection: Axis.vertical,
         child: Container(
           margin: const EdgeInsets.only(top: 40),
-          width: 1800,
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: BarChart(
+          child: RotatedBox (
+            quarterTurns: 1,
+            child: BarChart(
             BarChartData(
 
                 //   ----------------------
@@ -101,9 +103,10 @@ class LineChartWidget extends StatelessWidget {
                 barTouchData: barTouchData,
                 borderData: borderData,
                 gridData: FlGridData(show: false),
-                alignment: BarChartAlignment.center,
+                alignment: BarChartAlignment.start,
                 groupsSpace: 30,
                 barGroups: barGroups),
+          ),
           ),
         ),
       ),
@@ -115,6 +118,8 @@ class LineChartWidget extends StatelessWidget {
   BarTouchData get barTouchData => BarTouchData(
         enabled: false,
         touchTooltipData: BarTouchTooltipData(
+          fitInsideHorizontally: true,
+          //tooltipHorizontalAlignment:FLHorizontalAlignment.center,
           tooltipBgColor: Colors.transparent,
           tooltipPadding: const EdgeInsets.all(5),
           tooltipMargin: 1,
@@ -141,6 +146,7 @@ class LineChartWidget extends StatelessWidget {
       show: true,
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
+          //rotateAngle: 90,
           showTitles: true,
           reservedSize: 60,
           getTitlesWidget: (double value, TitleMeta meta) {
@@ -153,13 +159,20 @@ class LineChartWidget extends StatelessWidget {
                 .format(requests.keys.toList()[value.toInt()]);
 
             return SideTitleWidget(
+
               axisSide: meta.axisSide,
-              child: Text(
+              child: RotatedBox(
+                quarterTurns: -1,
+                child:
+              Text(
+                textAlign: TextAlign.start,
                 text,
                 style: style,
               ),
+              ),
             );
           },
+
         ),
       ),
       leftTitles: AxisTitles(
@@ -189,7 +202,8 @@ class LineChartWidget extends StatelessWidget {
               toY: requests.values.toList()[i].toDouble(),
               width: 30,
               color: AppColors.fiolet,
-            )
+    ),
+
           ],
           showingTooltipIndicators: [0],
         )
