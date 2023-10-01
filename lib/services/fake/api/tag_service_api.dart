@@ -136,6 +136,34 @@ class TagServiceApi {
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
       Tag()
+        ..tagId = Int64(3)
+        ..createdBy = 'ron.x.by.su@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 3, userId: '', title: 'Beauty'),
+          filterMap: {
+            'TwoTwoTwo': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 9.2, longitude: 46.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
         ..tagId = Int64(4)
         ..createdBy = 'ron.x.by.su@gmail.com'
         ..createdAt = Timestamp(
@@ -447,6 +475,141 @@ class TagServiceApi {
         ..geolocation = Geolocation(latitude: 8.91489, longitude: 38.5169)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'frantslariinov@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: "STATOIL"),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: currentAppLocalization.mockFilterKeyShell, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyTATNEFT, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyLukoil, selected: false),
+                FilterKey(title: currentAppLocalization.mockFilterKeyORLEN, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyElectrical, selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'frantslariinov@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: "Shell"),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: currentAppLocalization.mockFilterKeyElectrical, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyTATNEFT, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyLukoil, selected: false),
+                FilterKey(title: currentAppLocalization.mockFilterKeyORLEN, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeySTATOIL, selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'frantslariinov@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: "TATNEFT"),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: currentAppLocalization.mockFilterKeyShell, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyElectrical, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyLukoil, selected: false),
+                FilterKey(title: currentAppLocalization.mockFilterKeyORLEN, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeySTATOIL, selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'frantslariinov@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: "Lukoil"),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: currentAppLocalization.mockFilterKeyShell, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyTATNEFT, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyElectrical, selected: false),
+                FilterKey(title: currentAppLocalization.mockFilterKeyORLEN, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeySTATOIL, selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'frantslariinov@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: "ORLEN"),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: currentAppLocalization.mockFilterKeyShell, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyTATNEFT, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeyLukoil, selected: false),
+                FilterKey(title: currentAppLocalization.mockFilterKeyElectrical, selected: true),
+                FilterKey(title: currentAppLocalization.mockFilterKeySTATOIL, selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
 
     ];
     _tags = {};
@@ -458,7 +621,7 @@ class TagServiceApi {
     };
   }
 
-  // Tags CRUD
+  // Tags CRUDs
   List<Tag> getTags(String email) {
     return _tags.getOrElse(email, () => []).toList();
   }
