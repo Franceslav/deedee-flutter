@@ -125,6 +125,10 @@ class LanguagesExpansionTile extends StatefulWidget {
         language: 'Filipino',
         flagImagePath: 'assets/images/fil.png',
         langLabel: 'fil'),
+    Language(
+        language: 'Persian',
+        flagImagePath: 'assets/images/fa.png',
+        langLabel: 'fa'),
   ];
 
   LanguagesExpansionTile({
