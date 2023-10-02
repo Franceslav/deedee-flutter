@@ -127,6 +127,15 @@ class CompositeFilterServiceApi {
           ..title = currentAppLocalization.mockFilterKeyTransmissionRepair,
       ]),
       "Roadsidecafe": FilterKeyList(filterKeys: [
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleCarWash
+          ..title = currentAppLocalization.mockFilterKeyFullService,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleParkingGarage
+          ..title = currentAppLocalization.mockFilterKeyOverNight,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleParkingGarage
+          ..title = currentAppLocalization.mockFilterKeyElectricCharging,
 
       ]),
       "Emergency Evacuation Stations": FilterKeyList(filterKeys: [
@@ -142,25 +151,31 @@ class CompositeFilterServiceApi {
       value.filterKeys[2].selected = true;
       return value;
     });
+    _filterKeys.update('Roadsidecafe', (value) {
+      value.filterKeys[0].selected = true;
+      value.filterKeys[1].selected = true;
+      value.filterKeys[2].selected = true;
+      return value;
+    });
     _compositeFilters = {
-      '': [
+
+      'buEDlPEYiVe8tuhLwN2287AqI9D3': [
         CompositeFilter(
             compositeFilterId: Int64(0),
-            userId: '',
-            topic: Topic(title: 'Auto', topicId: 1),
-            filterMap: _filterKeys,
-            status: CompositeFilter_Status.FAVORITE,
-            title: 'Test. Do not click'),
-      ],
-      'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2': [
-        CompositeFilter(
-            compositeFilterId: Int64(0),
-            userId: 'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2',
+            userId: 'buEDlPEYiVe8tuhLwN2287AqI9D3',
             topic: Topic(title: 'Auto', topicId: 1),
             filterMap: _filterKeys,
             status: CompositeFilter_Status.FAVORITE,
             title: 'Test'),
+        CompositeFilter(
+            compositeFilterId: Int64(0),
+            userId: 'buEDlPEYiVe8tuhLwN2287AqI9D3',
+            topic: Topic(title: 'Auto', topicId: 1),
+            filterMap: _filterKeys,
+            status: CompositeFilter_Status.FAVORITE,
+            title: 'Test2'),
       ],
+
     };
   }
 
