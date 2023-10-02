@@ -125,7 +125,16 @@ class CompositeFilterServiceApi {
         FilterKey()
           ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
           ..title = currentAppLocalization.mockFilterKeyTransmissionRepair,
-      ])
+      ]),
+      "Roadsidecafe": FilterKeyList(filterKeys: [
+
+      ]),
+      "Emergency Evacuation Stations": FilterKeyList(filterKeys: [
+
+      ]),
+      "Rest Areas": FilterKeyList(filterKeys: [
+
+      ]),
     };
     _filterKeys.update('Gas station', (value) {
       value.filterKeys[0].selected = true;
