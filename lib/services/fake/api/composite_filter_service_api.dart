@@ -151,13 +151,16 @@ class CompositeFilterServiceApi {
       value.filterKeys[2].selected = true;
       return value;
     });
-    _filterKeys.update('Roadsidecafe', (value) {
-      value.filterKeys[0].selected = true;
-      value.filterKeys[1].selected = true;
-      value.filterKeys[2].selected = true;
-      return value;
-    });
     _compositeFilters = {
+      'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2': [
+      CompositeFilter(
+          compositeFilterId: Int64(0),
+          userId: 'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2',
+          topic: Topic(title: 'Auto', topicId: 1),
+          filterMap: _filterKeys,
+          status: CompositeFilter_Status.FAVORITE,
+          title: 'Test'),
+      ],
 
       'buEDlPEYiVe8tuhLwN2287AqI9D3': [
         CompositeFilter(
