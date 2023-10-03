@@ -100,30 +100,53 @@ class LineChartWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(20),
-      child:
-          //scrollDirection: Axis.vertical,
+      child: SingleChildScrollView(
+        //scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: RotatedBox(
+                quarterTurns: 0,
+                child: BarChart(
+                  BarChartData(
 
-          SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.only(top: 40),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: RotatedBox(
-            quarterTurns: 0,
-            child: BarChart(
-              BarChartData(
+                      //   ----------------------
 
-                  //   ----------------------
-
-                  titlesData: titlesData(locale.toString()),
-                  barTouchData: barTouchData,
-                  borderData: borderData,
-                  gridData: FlGridData(show: false),
-                  alignment: BarChartAlignment.spaceBetween,
-                  groupsSpace: 20,
-                  barGroups: barGroups),
+                      titlesData: titlesData(locale.toString()),
+                      barTouchData: barTouchData,
+                      borderData: borderData,
+                      gridData: FlGridData(show: false),
+                      alignment: BarChartAlignment.spaceBetween,
+                      groupsSpace: 20,
+                      barGroups: barGroups),
+                ),
+              ),
             ),
-          ),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: RotatedBox(
+                quarterTurns: 0,
+                child: BarChart(
+                  BarChartData(
+
+                      //   ----------------------
+
+                      titlesData: titlesData(locale.toString()),
+                      barTouchData: barTouchData,
+                      borderData: borderData,
+                      gridData: FlGridData(show: false),
+                      alignment: BarChartAlignment.spaceBetween,
+                      groupsSpace: 20,
+                      barGroups: barGroups),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
