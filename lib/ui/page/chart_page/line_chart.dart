@@ -9,8 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../repository/service_request_repository.dart';
+import '../../global_widgets/deedee_appbar.dart';
+import '../../global_widgets/profile_menu_slider.dart';
 
 class LineChartPage extends StatefulWidget {
   const LineChartPage({super.key});
@@ -44,6 +47,7 @@ class _LineChartPageState extends State<LineChartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final PanelController _controller = PanelController();
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
     final serviceRequestInteractor = ServiceRequestInteractor(
@@ -52,23 +56,33 @@ class _LineChartPageState extends State<LineChartPage> {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(locale.chart),
-        backgroundColor: AppColors.fiolet,
+      appBar: DeeDeeAppBar(
+        title: locale.chart,
+        controller: _controller,
+        child: const Icon(Icons.menu),
       ),
       body:
           // Center(),
+          Stack(
+        children: [
           FutureBuilder(
-        future: serviceRequestInteractor.serviceRequestsByDates,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return LineChartWidget(requests: snapshot.data!);
-          } else if (snapshot.hasError) {
-            return const Text('Sorry, something went wrong');
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
+            future: serviceRequestInteractor.serviceRequestsByDates,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return LineChartWidget(requests: snapshot.data!);
+              } else if (snapshot.hasError) {
+                return const Text('Sorry, something went wrong');
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
+          ProfileMenuSlider(
+            context,
+            controller: _controller,
+            user: user,
+          ),
+        ],
       ),
     );
   }
@@ -85,29 +99,54 @@ class LineChartWidget extends StatelessWidget {
         context.read<AccountBloc>().appLocal ?? Localizations.localeOf(context);
 
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         //scrollDirection: Axis.vertical,
-        child: Container(
-          margin: const EdgeInsets.only(top: 40),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: RotatedBox (
-            quarterTurns: 1,
-            child: BarChart(
-            BarChartData(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: RotatedBox(
+                quarterTurns: 0,
+                child: BarChart(
+                  BarChartData(
 
-                //   ----------------------
+                      //   ----------------------
 
-                titlesData: titlesData(locale.toString()),
-                barTouchData: barTouchData,
-                borderData: borderData,
-                gridData: FlGridData(show: false),
-                alignment: BarChartAlignment.start,
-                groupsSpace: 30,
-                barGroups: barGroups),
-          ),
-          ),
+                      titlesData: titlesData(locale.toString()),
+                      barTouchData: barTouchData,
+                      borderData: borderData,
+                      gridData: FlGridData(show: false),
+                      alignment: BarChartAlignment.spaceBetween,
+                      groupsSpace: 20,
+                      barGroups: barGroups),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: RotatedBox(
+                quarterTurns: 0,
+                child: BarChart(
+                  BarChartData(
+
+                      //   ----------------------
+
+                      titlesData: titlesData(locale.toString()),
+                      barTouchData: barTouchData,
+                      borderData: borderData,
+                      gridData: FlGridData(show: false),
+                      alignment: BarChartAlignment.spaceBetween,
+                      groupsSpace: 20,
+                      barGroups: barGroups),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -159,20 +198,17 @@ class LineChartWidget extends StatelessWidget {
                 .format(requests.keys.toList()[value.toInt()]);
 
             return SideTitleWidget(
-
               axisSide: meta.axisSide,
               child: RotatedBox(
                 quarterTurns: -1,
-                child:
-              Text(
-                textAlign: TextAlign.start,
-                text,
-                style: style,
-              ),
+                child: Text(
+                  textAlign: TextAlign.start,
+                  text,
+                  style: style,
+                ),
               ),
             );
           },
-
         ),
       ),
       leftTitles: AxisTitles(
@@ -195,15 +231,14 @@ class LineChartWidget extends StatelessWidget {
     return [
       for (int i = 0; i < requests.entries.length; i++)
         BarChartGroupData(
-          barsSpace: 30,
+          barsSpace: 10,
           x: i,
           barRods: [
             BarChartRodData(
-              toY: requests.values.toList()[i].toDouble(),
-              width: 30,
-              color: AppColors.fiolet,
-    ),
-
+                toY: requests.values.toList()[i].toDouble(),
+                width: 20,
+                color: AppColors.fiolet,
+                borderRadius: BorderRadius.circular(4)),
           ],
           showingTooltipIndicators: [0],
         )

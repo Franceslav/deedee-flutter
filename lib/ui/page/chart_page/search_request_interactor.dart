@@ -27,9 +27,10 @@ class ServiceRequestInteractor {
       }
     }
     return {
+      DateTime(2022, 11): 8,
       DateTime(2022, 9): 45,
       DateTime(2022, 10): 3,
-      DateTime(2023, 2): 15,
+      DateTime(2023, 2): 50,
       DateTime(2023, 4): 3,
       DateTime(2023, 5): 17,
     };

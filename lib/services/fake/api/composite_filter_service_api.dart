@@ -87,6 +87,21 @@ class CompositeFilterServiceApi {
         FilterKey()
           ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
           ..title = currentAppLocalization.mockFilterKeyOverNight,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyShell,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyTATNEFT,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyLukoil,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeyORLEN,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleGasStation
+          ..title = currentAppLocalization.mockFilterKeySTATOIL,
       ]),
       "Auto repair shop": FilterKeyList(filterKeys: [
         FilterKey()
