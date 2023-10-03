@@ -169,9 +169,9 @@ class CompositeFilterServiceApi {
             topic: Topic(title: 'Auto', topicId: 1),
             filterMap: _filterKeys,
             status: CompositeFilter_Status.FAVORITE,
-            title: 'Test'),
+            title: 'Test1'),
         CompositeFilter(
-            compositeFilterId: Int64(0),
+            compositeFilterId: Int64(1),
             userId: 'buEDlPEYiVe8tuhLwN2287AqI9D3',
             topic: Topic(title: 'Auto', topicId: 1),
             filterMap: _filterKeys,
