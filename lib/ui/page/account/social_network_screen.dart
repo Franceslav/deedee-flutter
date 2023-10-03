@@ -115,7 +115,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                             ),
                           ),
                           DeeDeeButton(
-                            onPressed: _contactFieldList.isEmpty ? null : () {},
+                            onPressed: () {},
                             gradientButton: true,
                             title: locale.save,
                           )

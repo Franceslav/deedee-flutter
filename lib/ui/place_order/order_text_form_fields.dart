@@ -1,3 +1,4 @@
+import 'package:deedee/services/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,8 +35,7 @@ class _OrderTextFormFieldState extends State<OrderTextFormField> {
         const SizedBox(height: 16),
         if (type == ContactType.email)
           Text(
-                       AppLocalizations.of(context)!.email,
-
+            AppLocalizations.of(context)!.email,
             style: Theme.of(context).textTheme.displayLarge,
           ),
         if (type == ContactType.phone)
@@ -54,6 +54,7 @@ class _OrderTextFormFieldState extends State<OrderTextFormField> {
             style: Theme.of(context).textTheme.displayLarge,
           ),
         TextFormField(
+          keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.next,
           controller: _controller,
           decoration: const InputDecoration(
@@ -66,9 +67,20 @@ class _OrderTextFormFieldState extends State<OrderTextFormField> {
               ),
             ),
           ),
-          onChanged: widget.onChanged,
+          validator: validateMobile,
         ),
       ],
     );
+  }
+
+  String? validateMobile(String? value) {
+    String pattern = r'(^\+?[0-9]*$)';
+    RegExp regExp = RegExp(pattern);
+    if (value?.trim().isEmpty ?? true) {
+      return AppLocalizations.of(context)!.mobilePhoneNumber;
+    } else if (!regExp.hasMatch(value?.trim() ?? '')) {
+      return AppLocalizations.of(context)!.numberContainOnlyDigits;
+    }
+    return null;
   }
 }
