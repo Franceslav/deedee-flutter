@@ -231,6 +231,10 @@
     "chart"
   ],
 
+  "fa": [
+    "qrScannerTitle"
+  ],
+
   "fi": [
     "qrScannerTitle",
     "bookmarksTitle",
