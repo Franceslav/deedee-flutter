@@ -95,8 +95,13 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                                 _infoColumn('${_tags.length}', locale.placed)),
                       ),
                       Expanded(
+                        // TODO
                         child: InkWell(
-                            onTap: () {}, child: _infoColumn('3', locale.seen)),
+                            onTap: () {
+                              context.router
+                                  .navigate(const ServisProviderSeenScreenRoute());
+                            },
+                            child: _infoColumn('3', locale.seen)),
                       ),
                       Expanded(
                         child: InkWell(
