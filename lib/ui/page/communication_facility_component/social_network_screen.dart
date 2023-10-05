@@ -5,6 +5,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/page/communication_facility_component/bloc/communication_facility_component_bloc.dart';
 import 'package:deedee/ui/place_order/bloc/place_order_bloc.dart';
 import 'package:deedee/ui/place_order/order_text_form_fields.dart';
 import 'package:deedee/ui/place_order/place_order_popover.dart';
@@ -31,8 +32,8 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
     final _formKey = GlobalKey<FormState>();
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    return BlocProvider<PlaceOrderBloc>(
-      create: (context) => PlaceOrderBloc(locator.get<TagRepository>(), user),
+    return BlocProvider<CommunicationFacilityComponentBloc>(
+      create: (context) => CommunicationFacilityComponentBloc(),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: locale.contacts,
@@ -41,10 +42,11 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
         ),
         body: Stack(
           children: [
-            BlocConsumer<PlaceOrderBloc, PlaceOrderState>(
+            BlocConsumer<CommunicationFacilityComponentBloc,
+                CommunicationFacilityComponentState>(
               listener: (context, state) {
-                if (state is PlaceOrderRequest) {
-                  showSnackBar(context, locale.orderSent);
+                if (state is AddCommunicationFacilityComponentState) {
+                  showSnackBar(context, state.communicationFacility);
                 }
               },
               buildWhen: (old, current) =>
