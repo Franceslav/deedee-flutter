@@ -24,6 +24,8 @@ import 'package:deedee/ui/main_topic/main_topic_item.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 
+import '../user_feedback_page/user_feedback_page.dart';
+
 class AccountSupplierScreen extends StatefulWidget {
   final Int64 selectedCreatorId;
 
@@ -110,8 +112,14 @@ class _AccountState extends State<AccountSupplierScreen> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01),
-                      Text(locale.reviews),
-                      const _Feedbacks(),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                          ),
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const UserFeedbackPage())),
+                          child: Text(locale.reviews)),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.015),
                       Text(locale.writeReview),
@@ -128,28 +136,6 @@ class _AccountState extends State<AccountSupplierScreen> {
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class _Feedbacks extends StatelessWidget {
-  const _Feedbacks({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.35,
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Card(
-            color: Colors.grey[200],
-            child: ListTile(title: Text('Отзыв ${index + 1}')),
-          );
-        },
       ),
     );
   }
@@ -217,7 +203,8 @@ class _RatingAndCountApplication extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                   GestureDetector(
                     onTap: () {
-                      context.router.push(const CompletedApplicationsPageRoute());
+                      context.router
+                          .push(const CompletedApplicationsPageRoute());
                     },
                     child: Text(
                       AppLocalizations.of(context)!.completedApplications,
