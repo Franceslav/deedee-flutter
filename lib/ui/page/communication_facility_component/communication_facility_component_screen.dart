@@ -5,6 +5,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/deedee_button/deedee_button.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/page/communication_facility_component/bloc/communication_facility_component_bloc.dart';
 import 'package:deedee/ui/place_order/bloc/place_order_bloc.dart';
 import 'package:deedee/ui/place_order/order_text_form_fields.dart';
 import 'package:deedee/ui/place_order/place_order_popover.dart';
@@ -14,14 +15,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class SocialNetworkScreen extends StatefulWidget {
-  const SocialNetworkScreen({Key? key}) : super(key: key);
+class CommunicationFacilityComponentScreen extends StatefulWidget {
+  const CommunicationFacilityComponentScreen({Key? key}) : super(key: key);
 
   @override
-  State<SocialNetworkScreen> createState() => _SocialNetworkScreenState();
+  State<CommunicationFacilityComponentScreen> createState() => _CommunicationFacilityComponentScreenState();
 }
 
-class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
+class _CommunicationFacilityComponentScreenState extends State<CommunicationFacilityComponentScreen> {
   final List<Widget> _contactFieldList = [];
   final PanelController _controller = PanelController();
   final order = Order();
@@ -31,8 +32,8 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
     final _formKey = GlobalKey<FormState>();
     final locale = AppLocalizations.of(context)!;
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    return BlocProvider<PlaceOrderBloc>(
-      create: (context) => PlaceOrderBloc(locator.get<TagRepository>(), user),
+    return BlocProvider<CommunicationFacilityComponentBloc>(
+      create: (context) => CommunicationFacilityComponentBloc(),
       child: Scaffold(
         appBar: DeeDeeAppBar(
           title: locale.contacts,
@@ -41,14 +42,15 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
         ),
         body: Stack(
           children: [
-            BlocConsumer<PlaceOrderBloc, PlaceOrderState>(
+            BlocConsumer<CommunicationFacilityComponentBloc,
+                CommunicationFacilityComponentState>(
               listener: (context, state) {
-                if (state is PlaceOrderRequest) {
-                  showSnackBar(context, locale.orderSent);
+                if (state is AddCommunicationFacilityComponentState) {
+                  showSnackBar(context, state.communicationFacility);
                 }
               },
               buildWhen: (old, current) =>
-                  current is PlaceOrderFailureState && old != current,
+              current is PlaceOrderFailureState && old != current,
               builder: (context, state) {
                 return Form(
                   key: _formKey,
@@ -67,7 +69,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
                                         children: [
@@ -85,9 +87,9 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                                             context: context,
                                             backgroundColor: Colors.transparent,
                                             builder: (context) =>
-                                                const PlaceOrderPopover(),
+                                            const PlaceOrderPopover(),
                                           ).then(
-                                            (value) {
+                                                (value) {
                                               setState(() {
                                                 _contactFieldList.add(
                                                   OrderTextFormField(
