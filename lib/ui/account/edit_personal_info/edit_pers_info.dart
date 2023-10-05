@@ -149,7 +149,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         style: AppTextTheme.bodyMedium,
                       ),
                       onTap: () {
-                        context.router.push(const SocialNetworkScreenRoute());
+                        context.router.push(const CommunicationFacilityComponentScreenRoute());
                       },
                     )
                   ],

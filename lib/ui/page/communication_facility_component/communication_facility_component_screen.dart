@@ -15,14 +15,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class SocialNetworkScreen extends StatefulWidget {
-  const SocialNetworkScreen({Key? key}) : super(key: key);
+class CommunicationFacilityComponentScreen extends StatefulWidget {
+  const CommunicationFacilityComponentScreen({Key? key}) : super(key: key);
 
   @override
-  State<SocialNetworkScreen> createState() => _SocialNetworkScreenState();
+  State<CommunicationFacilityComponentScreen> createState() => _CommunicationFacilityComponentScreenState();
 }
 
-class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
+class _CommunicationFacilityComponentScreenState extends State<CommunicationFacilityComponentScreen> {
   final List<Widget> _contactFieldList = [];
   final PanelController _controller = PanelController();
   final order = Order();
@@ -50,7 +50,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                 }
               },
               buildWhen: (old, current) =>
-                  current is PlaceOrderFailureState && old != current,
+              current is PlaceOrderFailureState && old != current,
               builder: (context, state) {
                 return Form(
                   key: _formKey,
@@ -69,7 +69,7 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
                                         children: [
@@ -87,9 +87,9 @@ class _SocialNetworkScreenState extends State<SocialNetworkScreen> {
                                             context: context,
                                             backgroundColor: Colors.transparent,
                                             builder: (context) =>
-                                                const PlaceOrderPopover(),
+                                            const PlaceOrderPopover(),
                                           ).then(
-                                            (value) {
+                                                (value) {
                                               setState(() {
                                                 _contactFieldList.add(
                                                   OrderTextFormField(
