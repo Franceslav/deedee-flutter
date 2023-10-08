@@ -1,5 +1,8 @@
 {
   "am": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -37,6 +40,9 @@
   ],
 
   "ar": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -74,6 +80,9 @@
   ],
 
   "az": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
@@ -101,6 +110,9 @@
   ],
 
   "cs": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -129,6 +141,9 @@
   ],
 
   "da": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -166,6 +181,9 @@
   ],
 
   "de": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -203,6 +221,9 @@
   ],
 
   "el": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -235,6 +256,9 @@
   ],
 
   "es": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -272,6 +296,9 @@
   ],
 
   "fa": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "mockFilterKeyShell",
     "mockFilterKeyTATNEFT",
@@ -281,6 +308,9 @@
   ],
 
   "fi": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -301,6 +331,9 @@
   ],
 
   "fil": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noReferrals",
     "profileMenuFavoriteTitle",
@@ -313,6 +346,9 @@
   ],
 
   "fr": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -350,6 +386,9 @@
   ],
 
   "he": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -387,6 +426,9 @@
   ],
 
   "hi": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -424,6 +466,9 @@
   ],
 
   "id": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -513,6 +558,9 @@
   ],
 
   "it": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -550,6 +598,9 @@
   ],
 
   "ka": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
@@ -579,6 +630,9 @@
   ],
 
   "kk": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -616,6 +670,9 @@
   ],
 
   "ko": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -653,6 +710,9 @@
   ],
 
   "ky": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -690,6 +750,9 @@
   ],
 
   "nb": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -715,6 +778,9 @@
   ],
 
   "pl": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -752,6 +818,9 @@
   ],
 
   "pt": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -789,6 +858,9 @@
   ],
 
   "ro": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -831,6 +903,9 @@
   ],
 
   "sv": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -868,6 +943,9 @@
   ],
 
   "th": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -905,6 +983,9 @@
   ],
 
   "tr": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -942,6 +1023,9 @@
   ],
 
   "uk": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -979,6 +1063,9 @@
   ],
 
   "uz": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1016,6 +1103,9 @@
   ],
 
   "vi": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1053,6 +1143,9 @@
   ],
 
   "zh": [
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
