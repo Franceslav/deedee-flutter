@@ -3,11 +3,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/supplier.pb.dart';
 import 'package:deedee/generated/deedee/api/model/topic.pb.dart';
 import 'package:deedee/injection.dart';
+import 'package:deedee/model/user.dart';
 import 'package:deedee/repository/supplier_repository.dart';
 import 'package:deedee/repository/topic_repository.dart';
+import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/outlined_button_widget.dart';
+import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
+import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
+import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
+import 'package:deedee/ui/main_topic/main_topic_item.dart';
 import 'package:deedee/ui/page/account/bloc/supplier_bloc.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/theme/app_text_theme.dart';
+import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,14 +23,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
-import 'package:deedee/model/user.dart';
-import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
-import 'package:deedee/ui/global_widgets/profile_menu_slider.dart';
-import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
-import 'package:deedee/ui/main_topic/enum/topic_screens_enum.dart';
-import 'package:deedee/ui/main_topic/main_topic_item.dart';
-import 'package:deedee/ui/theme/app_text_theme.dart';
-import 'package:deedee/ui/user_bloc/user_bloc.dart';
 
 import '../user_feedback_page/user_feedback_page.dart';
 
@@ -94,7 +94,12 @@ class _AccountState extends State<AccountSupplierScreen> {
                           height: MediaQuery.of(context).size.height * 0.015),
                       Row(
                         children: [
-                          Text('${locale.executorTags} $_supplier'),
+                          InkWell(
+                            onTap: () {
+                              context.router.navigate(const ServiceProviderTagsScreenRoute());
+                            },
+                            child: Text('${locale.executorTags} $_supplier'),
+                          ),
                         ],
                       ),
                       SizedBox(

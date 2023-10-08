@@ -33,7 +33,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "ar": [
@@ -70,7 +71,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "az": [
@@ -97,7 +99,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "cs": [
@@ -125,7 +128,8 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "da": [
@@ -162,7 +166,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "de": [
@@ -199,7 +204,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "el": [
@@ -231,7 +237,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "es": [
@@ -268,7 +275,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "fa": [
@@ -277,7 +285,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "fi": [
@@ -297,7 +306,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "fil": [
@@ -309,7 +319,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "fr": [
@@ -346,7 +357,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "he": [
@@ -383,7 +395,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "hi": [
@@ -420,7 +433,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "id": [
@@ -509,7 +523,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "it": [
@@ -546,7 +561,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "ka": [
@@ -575,7 +591,8 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "kk": [
@@ -612,7 +629,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "ko": [
@@ -649,7 +667,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "ky": [
@@ -686,7 +705,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "nb": [
@@ -711,7 +731,8 @@
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
-    "mockFilterKeySTATOIL"
+    "mockFilterKeySTATOIL",
+    "tagsOfUserTitle"
   ],
 
   "pl": [
@@ -748,7 +769,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "pt": [
@@ -785,7 +807,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "ro": [
@@ -814,7 +837,8 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "seen"
+    "seen",
+    "tagsOfUserTitle"
   ],
 
   "ru": [
@@ -864,7 +888,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "th": [
@@ -901,7 +926,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "tr": [
@@ -938,7 +964,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "uk": [
@@ -975,7 +1002,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "uz": [
@@ -1012,7 +1040,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "vi": [
@@ -1049,7 +1078,8 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ],
 
   "zh": [
@@ -1086,6 +1116,7 @@
     "mobilePhoneNumber",
     "numberContainOnlyDigits",
     "validEmail",
-    "chart"
+    "chart",
+    "tagsOfUserTitle"
   ]
 }
