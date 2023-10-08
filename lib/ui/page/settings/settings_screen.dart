@@ -34,67 +34,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    return Scaffold(
-        appBar: DeeDeeAppBar(
-          title: AppLocalizations.of(context)!.settings,
-          controller: _controller,
-          child: const Icon(Icons.menu),
-        ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(children: [
-                const SizedBox(height: 20),
-                TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: AppColors.lightgrey,
-                    prefixIcon: Image.asset('assets/images/search_icon.png'),
-                    hintText: AppLocalizations.of(context)!.search,
-                    hintStyle: const TextStyle(color: AppColors.grey),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 10,
-                    ),
+    return BlocProvider<SettingsCubit>(
+        create: (context) => SettingsCubit(),
+        child: Builder(builder: (context) {
+          return Scaffold(
+              appBar: DeeDeeAppBar(
+                title: AppLocalizations.of(context)!.settings,
+                controller: _controller,
+                child: const Icon(Icons.menu),
+              ),
+              body: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(children: [
+                      const SizedBox(height: 20),
+                      TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.lightgrey,
+                          prefixIcon:
+                              Image.asset('assets/images/search_icon.png'),
+                          hintText: AppLocalizations.of(context)!.search,
+                          hintStyle: const TextStyle(color: AppColors.grey),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      ListTile(
+                        title: Text(AppLocalizations.of(context)!.notification),
+                        trailing:
+                            Image.asset('assets/images/chevron_right_icon.png'),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        title: Text(AppLocalizations.of(context)!.addAccount),
+                        trailing:
+                            Image.asset('assets/images/chevron_right_icon.png'),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        title: Text(AppLocalizations.of(context)!.logout,
+                            style: TextStyle(color: AppColors.red)),
+                        onTap: () {
+                          context.read<AuthenticationBloc>().add(LogoutEvent());
+                          context.router.replace(const LoginScreenRoute());
+                        },
+                      ),
+                      ListTile(
+                        title: Text(AppLocalizations.of(context)!.deleteAccount,
+                            style: TextStyle(color: AppColors.grey)),
+                        onTap: () {},
+                      ),
+                    ]),
                   ),
-                ),
-                const SizedBox(height: 15),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.notification),
-                  trailing: Image.asset('assets/images/chevron_right_icon.png'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.addAccount),
-                  trailing: Image.asset('assets/images/chevron_right_icon.png'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.logout,
-                      style: TextStyle(color: AppColors.red)),
-                  onTap: () {
-                    context.read<AuthenticationBloc>().add(LogoutEvent());
-                    context.router.replace(const LoginScreenRoute());
-                  },
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.deleteAccount,
-                      style: TextStyle(color: AppColors.grey)),
-                  onTap: () {},
-                ),
-              ]),
-            ),
-            ProfileMenuSlider(
-              context,
-              controller: _controller,
-              user: user,
-            ),
-          ],
-        ));
+                  ProfileMenuSlider(
+                    context,
+                    controller: _controller,
+                    user: user,
+                  ),
+                ],
+              ));
+        }));
   }
 }
