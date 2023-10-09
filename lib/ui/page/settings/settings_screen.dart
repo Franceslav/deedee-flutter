@@ -61,12 +61,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: AppColors.lightgrey,
-                                  prefixIcon:
-                                  Image.asset('assets/images/search_icon.png'),
-                                  hintText: AppLocalizations.of(context)!.search,
-                                  hintStyle: const TextStyle(color: AppColors.grey),
+                                  prefixIcon: Image.asset(
+                                      'assets/images/search_icon.png'),
+                                  hintText:
+                                      AppLocalizations.of(context)!.search,
+                                  hintStyle:
+                                      const TextStyle(color: AppColors.grey),
                                   border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide.none,
                                   ),
                                   contentPadding: const EdgeInsets.symmetric(
@@ -77,27 +80,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               const SizedBox(height: 15),
                               ListTile(
-                                title: Text(AppLocalizations.of(context)!.notification),
-                                trailing:
-                                Image.asset('assets/images/chevron_right_icon.png'),
+                                title: Text(
+                                    AppLocalizations.of(context)!.notification),
+                                trailing: Image.asset(
+                                    'assets/images/chevron_right_icon.png'),
                                 onTap: () {},
                               ),
                               ListTile(
-                                title: Text(AppLocalizations.of(context)!.addAccount),
-                                trailing:
-                                Image.asset('assets/images/chevron_right_icon.png'),
+                                title: Text(
+                                    AppLocalizations.of(context)!.addAccount),
+                                trailing: Image.asset(
+                                    'assets/images/chevron_right_icon.png'),
                                 onTap: () {},
                               ),
                               ListTile(
-                                title: Text(AppLocalizations.of(context)!.logout,
-                                    style: TextStyle(color: AppColors.red)),
+                                title: Text(AppLocalizations.of(context)!
+                                    .useFingerprint),
+                                trailing: Image.asset(
+                                    'assets/images/chevron_right_icon.png'),
                                 onTap: () {
-                                  context.read<AuthenticationBloc>().add(LogoutEvent());
-                                  context.router.replace(const LoginScreenRoute());
+                                  context.read<BiometricBloc>().add(
+                                      ToggleBiometric(biometric: biometric));
                                 },
                               ),
                               ListTile(
-                                title: Text(AppLocalizations.of(context)!.deleteAccount,
+                                title: Text(
+                                    AppLocalizations.of(context)!.logout,
+                                    style: TextStyle(color: AppColors.red)),
+                                onTap: () {
+                                  context
+                                      .read<AuthenticationBloc>()
+                                      .add(LogoutEvent());
+                                  context.router
+                                      .replace(const LoginScreenRoute());
+                                },
+                              ),
+                              ListTile(
+                                title: Text(
+                                    AppLocalizations.of(context)!.deleteAccount,
                                     style: TextStyle(color: AppColors.grey)),
                                 onTap: () {},
                               ),
