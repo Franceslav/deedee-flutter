@@ -15,7 +15,6 @@ import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_supplier_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
 import 'package:deedee/ui/page/account/service_provider_tags/service_provider_tags_screen.dart';
-import 'package:deedee/ui/page/account/social_network_screen.dart';
 import 'package:deedee/ui/page/communication_facility_component/communication_facility_component_screen.dart';
 import 'package:deedee/ui/page/accounts_list/accounts_list_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
