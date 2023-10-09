@@ -24,7 +24,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
     required this.controller,
     required this.user,
   }) : super(
-            maxHeight: MediaQuery.of(context).size.height * 0.9,
+            maxHeight: MediaQuery.of(context).size.height * 0.5,
             controller: controller,
             generalSlidingPanelItemList: [
               GeneralSlidingPanelItem(
@@ -77,15 +77,6 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     context.router.push(const ReferralScreenRoute());
                   }),
               GeneralSlidingPanelItem(
-                  icon: Icons.business_center,
-                  text: AppLocalizations.of(context)!.businessProfile,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const AccountBusinessPageRoute());
-                  }),
-              GeneralSlidingPanelItem(
                   icon: Icons.recent_actors,
                   text: AppLocalizations.of(context)!.accountsTitle,
                   onTap: () {
@@ -102,55 +93,6 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router.navigate(const SettingsScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                icon: Icons.verified,
-                text: AppLocalizations.of(context)!.verification,
-                onTap: () async {
-                  context.router.navigate(const VerifyScreenRoute());
-                },
-              ),
-              GeneralSlidingPanelItem(
-                icon: Icons.workspace_premium,
-                text: AppLocalizations.of(context)!.premium,
-                onTap: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return const AccountPopover();
-                    },
-                  );
-                },
-              ),
-              GeneralSlidingPanelItem(
-                icon: Icons.account_balance,
-                text: AppLocalizations.of(context)!.balanceTitle,
-                onTap: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return const PaymentMethodListWidget();
-                    },
-                  );
-                },
-              ),
-              GeneralSlidingPanelItem(
-                  icon: Icons.help_outline,
-                  text: AppLocalizations.of(context)!.helpTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.navigate(const HelpScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.exit_to_app,
-                  text: AppLocalizations.of(context)!.logout,
-                  onTap: () {
-                    context.read<AuthenticationBloc>().add(LogoutEvent());
-                    context.router.replace(const LoginScreenRoute());
                   }),
             ]);
 }

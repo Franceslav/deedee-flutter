@@ -254,5 +254,6 @@
   "mobilePhoneNumber": "Mobile phone number is required.",
   "numberContainOnlyDigits": "Mobile phone number must contain only digits.",
   "validEmail": "Enter Valid Email.",
-  "chart": "Chart"
+  "chart": "Chart",
+  "tagsOfUserTitle": "Tags of {user}"
 }
