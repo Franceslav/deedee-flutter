@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/edit_personal_info/edit_pers_info.dart';
-import 'package:deedee/ui/account/personal_info/personal_information.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
 import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
@@ -78,7 +77,6 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
-    MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
     MaterialRoute(page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),

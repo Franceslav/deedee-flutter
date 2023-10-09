@@ -27,6 +27,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _UsernameController;
   late TextEditingController _WebsiteController;
   late TextEditingController _BioController;
+  late TextEditingController _EmailAddressController;
+  late TextEditingController _PhoneNumberController;
+  late TextEditingController _BirthdayController;
 
   @override
   void initState() {
@@ -35,6 +38,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _UsernameController = TextEditingController();
     _WebsiteController = TextEditingController();
     _BioController = TextEditingController();
+    _EmailAddressController = TextEditingController();
+    _PhoneNumberController = TextEditingController();
+    _BirthdayController = TextEditingController();
     super.initState();
   }
 
@@ -123,20 +129,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         TextEditingField(
                             labelText: locale.bio, controller: _BioController,
                             hintText: locale.editProfileBioHint),
+                        TextEditingField(
+                            labelText: locale.email, controller: _EmailAddressController,
+                            hintText: locale.editProfileEmailAddressHint,
+                            validator: validateEmail),
+                        TextEditingField(
+                            labelText: locale.phoneNumber, controller: _PhoneNumberController,
+                            hintText: locale.editProfilePhoneNumberHint,
+                            validator: validateMobile),
+                        TextEditingField(
+                            labelText: locale.birthday, controller: _BirthdayController,
+                            hintText: locale.editProfileBirthdayHint,
+                            validator: validateBirthday),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    TextButton(
-                      onPressed: () {
-                        context.router.push(PersonalInfoPageRoute());
-                      },
-                      child: Text(
-                        locale.personalInfoSettings,
-                        textAlign: TextAlign.start,
-                        style:
-                            AppTextTheme.bodyLarge.copyWith(color: Colors.blue),
-                      ),
-                    ),
                     const SizedBox(height: 10),
                     DeeDeeRowInfoWidget(
                       icon: Image.asset('assets/images/instagram_logo.png'),
@@ -159,29 +166,83 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
         ));
   }
+
+  String? validateMobile(String? value, BuildContext context) {
+    String pattern = r'(^\+?[0-9]*$)';
+    RegExp regExp = RegExp(pattern);
+    if (value?.trim().isEmpty ?? true) {
+      return AppLocalizations.of(context)!.mobilePhoneNumber;
+    } else if (!regExp.hasMatch(value?.trim() ?? '')) {
+      return AppLocalizations.of(context)!.numberContainOnlyDigits;
+    }
+    return null;
+  }
+
+  String? validateBirthday(String? value, BuildContext context) {
+    String pattern = r'(^\d{4}\.\d{2}\.\d{2}$)';
+    RegExp regExp = RegExp(pattern);
+    if (!regExp.hasMatch(value?.trim() ?? '')) {
+      return AppLocalizations.of(context)!.numberContainOnlyDigits;
+    }
+    return null;
+  }
+
+  String? validateEmail(String? value, BuildContext context) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value ?? '')) {
+      return AppLocalizations.of(context)!.validEmail;
+    } else {
+      return null;
+    }
+  }
 }
 
-class TextEditingField extends StatelessWidget {
-  TextEditingField(
-      {Key? key, required this.labelText, required this.controller, required this.hintText})
-      : super(key: key);
+
+class TextEditingField extends StatefulWidget {
   final String labelText;
   late TextEditingController controller;
   final String hintText;
+  String? Function(String?, BuildContext)? validator;
+
+  TextEditingField(
+  {super.key, required this.labelText, required this.controller, required this.hintText, this.validator});
+
+  @override
+  State<TextEditingField> createState() => _TextEditingFieldState();
+}
+
+class _TextEditingFieldState extends State<TextEditingField> {
+  String? Function(String?)? makeValidatorWithContext(String? Function(String?, BuildContext)? validationFunction) {
+
+    if (validationFunction == null) {
+      return null;
+    }
+
+    String? validator(String? str) {
+      return validationFunction(str, context);
+    }
+
+  return validator;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
           style: AppTextTheme.bodyLarge,
           cursorColor: Colors.grey,
-          controller: controller,
+          validator: makeValidatorWithContext(widget.validator),
+          controller: widget.controller,
           decoration: InputDecoration(
-              hintText: hintText,
+              hintText: widget.hintText,
               focusColor: Colors.grey,
               hoverColor: Colors.grey,
-              labelText: labelText,
+              labelText: widget.labelText,
               labelStyle: AppTextTheme.labelLarge)),
 
     );
