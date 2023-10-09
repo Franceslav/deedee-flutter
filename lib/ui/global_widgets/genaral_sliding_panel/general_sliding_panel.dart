@@ -18,7 +18,7 @@ class GeneralSlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       backdropEnabled: true,
       minHeight: 0,
-      maxHeight: maxHeight,
+      maxHeight: 550,
       controller: _controller,
       header: Container(
         margin: EdgeInsets.fromLTRB(
@@ -27,12 +27,12 @@ class GeneralSlidingPanel extends StatelessWidget {
         height: 7,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black,
+          color: Colors.grey,
         ),
       ),
       panel: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 10),
+          padding: const EdgeInsets.only(top: 20, left: 10, bottom: 44),
           child: SingleChildScrollView(
             child: Column(
               children: generalSlidingPanelItemList,

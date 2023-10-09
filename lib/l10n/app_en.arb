@@ -38,7 +38,7 @@
   "switchTo": "switch to",
   "homeTitle": "home",
   "logout": "logout",
-  "settings": "settings",
+  "settings": "Settings",
   "seeMap": "see map",
   "seeTags": "see tags",
   "toSee": "to see",
@@ -255,5 +255,9 @@
   "numberContainOnlyDigits": "Mobile phone number must contain only digits.",
   "validEmail": "Enter Valid Email.",
   "chart": "Chart",
-  "tagsOfUserTitle": "Tags of {user}"
+  "tagsOfUserTitle": "Tags of {user}",
+  "profileInfo": "Profile info",
+  "orders": "Orders",
+  "statistic": "Statistic"
+
 }

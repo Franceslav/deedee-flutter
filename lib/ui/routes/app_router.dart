@@ -36,6 +36,7 @@ import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/service_request_page.dart';
+import 'package:deedee/ui/service_request_tags_screen/service_request_user_tags_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
@@ -90,6 +91,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: MapScreenMyTags, path: '/map-tags'),
     MaterialRoute(page: LineChartPage, path: '/line-chart'),
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
+    MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags')
   ],
 )

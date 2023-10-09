@@ -241,5 +241,8 @@
   "numberContainOnlyDigits": "Номер мобильного телефона должен содержать только цифры",
   "validEmail": "Введите действующий адрес электронной почты.",
   "chart": "Диаграмма",
-  "tagsOfUserTitle": "Теги {user}"
+  "tagsOfUserTitle": " Теги {user}",
+  "profileInfo": "Информация профиля",
+    "orders": "Заказы",
+    "statistic": "Статистика"
 }

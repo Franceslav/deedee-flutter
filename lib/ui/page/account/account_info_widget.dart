@@ -7,6 +7,7 @@ import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/global_widgets/calendar_dialog.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/service_request_tags_screen/service_request_user_tags_screen.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:deedee/ui/user_tags/bloc/user_tags_bloc.dart';
@@ -89,7 +90,7 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                         child: InkWell(
                             onTap: () {
                               context.router
-                                  .navigate(const ServisProviderScreenRoute());
+                                  .navigate(const ServiceRequestUserTagsScreen() as PageRouteInfo);
                             },
                             child:
                                 _infoColumn('${_tags.length}', locale.placed)),

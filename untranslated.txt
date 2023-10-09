@@ -37,7 +37,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ar": [
@@ -78,7 +81,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "az": [
@@ -109,7 +115,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "cs": [
@@ -141,7 +150,10 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "da": [
@@ -182,7 +194,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "de": [
@@ -223,7 +238,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "el": [
@@ -259,7 +277,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "es": [
@@ -300,7 +321,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fa": [
@@ -313,7 +337,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fi": [
@@ -337,7 +364,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fil": [
@@ -353,7 +383,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fr": [
@@ -394,7 +427,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "he": [
@@ -435,7 +471,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "hi": [
@@ -476,7 +515,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "id": [
@@ -569,7 +611,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "it": [
@@ -610,7 +655,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ka": [
@@ -643,7 +691,10 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "kk": [
@@ -684,7 +735,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ko": [
@@ -725,7 +779,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ky": [
@@ -766,7 +823,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "nb": [
@@ -795,7 +855,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "pl": [
@@ -836,7 +899,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "pt": [
@@ -877,7 +943,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ro": [
@@ -910,7 +979,10 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "seen",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ru": [
@@ -967,7 +1039,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "th": [
@@ -1008,7 +1083,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "tr": [
@@ -1049,7 +1127,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "uk": [
@@ -1090,7 +1171,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "uz": [
@@ -1131,7 +1215,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "vi": [
@@ -1172,7 +1259,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "zh": [
@@ -1213,6 +1303,9 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ]
 }

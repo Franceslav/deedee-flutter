@@ -17,14 +17,17 @@ class GeneralSlidingPanelItem extends StatelessWidget {
     return ListTile(
       title: Text(
         text,
-        style: const TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black,),
       ),
       leading: Transform.rotate(
         angle: 0,
         child: Icon(
           icon,
           color: Colors.black,
+          size: 24,
+
         ),
+
       ),
       onTap: onTap,
     );
