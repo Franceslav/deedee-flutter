@@ -1,4 +1,8 @@
 {
+  "deleteAccount" : "Удалить аккаунт",
+  "additionalSettings" : "Дополнительно",
+  "addAccount" : "Добавить аккаунт",
+  "notification" : "Уведомления",
   "useFingerprint" : "Использовать отпечаток пальца",
   "connectionSettings" : "Связь",
   "settingIpAddressPort" : "IP-адрес / порт",

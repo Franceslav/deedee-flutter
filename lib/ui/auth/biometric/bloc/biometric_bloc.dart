@@ -27,7 +27,7 @@ class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
       auth = LocalAuthentication();
       canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
       availableBiometrics = await auth.getAvailableBiometrics();
-      biometric = event.biometric;
+      biometric = event.isBiometricEnabled;
       if (canAuthenticateWithBiometrics) {
         BiometricPrefs().userBiometric = biometric;
         emit(BiometricOn(biometric: biometric));

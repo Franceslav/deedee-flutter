@@ -30,6 +30,7 @@ import 'package:deedee/ui/page/map_cubit/map_screen_my_tag.dart';
 import 'package:deedee/ui/page/my/my_referrals/referral_screen.dart';
 import 'package:deedee/ui/page/my/my_requests/my_requests_screen.dart';
 import 'package:deedee/ui/page/payment/payment_method_screen.dart';
+import 'package:deedee/ui/page/settings/additional/additional_screen.dart';
 import 'package:deedee/ui/page/settings/connection_settings/connection_settings_screen.dart';
 import 'package:deedee/ui/page/settings/settings_screen.dart';
 import 'package:deedee/ui/page/settings/upload_settings/upload_settings_screen.dart';
@@ -101,6 +102,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
     MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
+    MaterialRoute(page: AdditionalScreen, path: '/additional')
   ],
 )
 class $AppRouter {}

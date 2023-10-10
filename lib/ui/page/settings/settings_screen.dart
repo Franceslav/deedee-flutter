@@ -5,6 +5,7 @@ import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_language_dropdown.dart';
 import 'package:deedee/ui/page/settings/settings_cubit.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
+import 'package:deedee/ui/theme/colors.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final PanelController _controller = PanelController();
   final GlobalKey<FormState> _key = GlobalKey();
-  bool biometric = BiometricPrefs().userBiometric;
+  bool isBiometricEnabled = BiometricPrefs().userBiometric;
 
   @override
   Widget build(BuildContext context) {
@@ -39,175 +40,197 @@ class _SettingsScreenState extends State<SettingsScreen> {
               appBar: DeeDeeAppBar(
                 title: AppLocalizations.of(context)!.settings,
                 controller: _controller,
-                child: const ProfilePhotoWithBadge(),
+                child: const Icon(Icons.menu),
               ),
               body: BlocProvider(
                   create: (context) => BiometricBloc(),
                   child: BlocConsumer<BiometricBloc, BiometricState>(
                     listener: (context, state) {
                       if (state is BiometricOn) {
-                        biometric = !biometric;
+                        isBiometricEnabled = !isBiometricEnabled;
                       }
                     },
                     builder: (context, state) {
                       return Stack(
                         children: [
-                          SettingsList(
-                            sections: [
-                              SettingsSection(
-                                title: Text(
-                                    AppLocalizations.of(context)!.qrScanner),
-                                tiles: [
-                                  SettingsTile(
-                                    title: Text(AppLocalizations.of(context)!
-                                        .qrScanner),
-                                    leading: const Icon(Icons.qr_code_scanner),
-                                    onPressed: (BuildContext context) {
-                                      context.router
-                                          .push(const BookmarkQRScannerRoute());
-                                    },
-                                  ),
-                                ],
-                              ),
-                              SettingsSection(
-                                title: Text(AppLocalizations.of(context)!
-                                    .connectionSettings),
-                                tiles: [
-                                  SettingsTile(
-                                    title: Text(AppLocalizations.of(context)!
-                                        .settingIpAddressPort),
-                                    leading:
-                                        const Icon(Icons.settings_ethernet),
-                                    onPressed: (BuildContext context) {
-                                      context.router.push(
-                                          const ConnectionSettingsScreenRoute());
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    title: const Text('Photo upload host'),
-                                    leading: const Icon(Icons.upload_sharp),
-                                    onPressed: (BuildContext context) {
-                                      context.router.push(
-                                          const UploadSettingsScreenRoute());
-                                    },
-                                  ),
-                                ],
-                              ),
-                              SettingsSection(
-                                title: const Text('Security'),
-                                tiles: [
-                                  SettingsTile.switchTile(
-                                    title: Text(AppLocalizations.of(context)!
-                                        .useFingerprint),
-                                    leading: const Icon(Icons.fingerprint),
-                                    onToggle: (biometric) {
-                                      context.read<BiometricBloc>().add(
-                                          ToggleBiometric(
-                                              biometric: biometric));
-                                    },
-                                    initialValue: biometric,
-                                  ),
-                                ],
-                              ),
-                              SettingsSection(
-                                title: const Text('Language'),
-                                tiles: [
-                                  SettingsTile(
-                                    title: LanguagesExpansionTile(),
-                                  ),
-                                ],
-                              ),
-                              SettingsSection(
-                                title: const Text('Settings Menu'),
-                                tiles: [
-                                  SettingsTile(
-                                    leading: const Icon(
-                                      Icons.business_center,
+                          ListView(
+                              padding: const EdgeInsets.all(16.0),
+                              children: [
+                                const SizedBox(height: 20),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: AppColors.lightgrey,
+                                    prefixIcon: Image.asset(
+                                        'assets/images/search_icon.png'),
+                                    hintText:
+                                        AppLocalizations.of(context)!.search,
+                                    hintStyle:
+                                        const TextStyle(color: AppColors.grey),
+                                    border: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide.none,
                                     ),
-                                    title: Text(AppLocalizations.of(context)!
-                                        .businessProfile),
-                                    onPressed: (BuildContext context) {
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                      horizontal: 10,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 15),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .additionalSettings),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    context.router
+                                        .push(const AdditionalScreenRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!.qrScanner),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    context.router
+                                        .push(const BookmarkQRScannerRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text('Photo upload host'),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    context.router.push(
+                                        const UploadSettingsScreenRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .businessProfile),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    if (context.router.current.isActive) {
+                                      _controller.close();
+                                    }
+                                    context.router.navigate(
+                                        const AccountBusinessPageRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .verification),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    context.router
+                                        .navigate(const VerifyScreenRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!.premium),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return const AccountPopover();
+                                      },
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .balanceTitle),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return const PaymentMethodListWidget();
+                                      },
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!.helpTitle),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    {
                                       if (context.router.current.isActive) {
                                         _controller.close();
                                       }
-                                      context.router.navigate(
-                                          const AccountBusinessPageRoute());
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    leading: const Icon(
-                                      Icons.verified,
-                                    ),
-                                    title: Text(AppLocalizations.of(context)!
-                                        .verification),
-                                    onPressed: (BuildContext context) async {
                                       context.router
-                                          .navigate(const VerifyScreenRoute());
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    leading: const Icon(
-                                      Icons.workspace_premium,
-                                    ),
-                                    title: Text(
-                                        AppLocalizations.of(context)!.premium),
-                                    onPressed: (BuildContext context) {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return const AccountPopover();
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    leading: const Icon(
-                                      Icons.account_balance,
-                                    ),
-                                    title: Text(AppLocalizations.of(context)!
-                                        .balanceTitle),
-                                    onPressed: (BuildContext context) {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return const PaymentMethodListWidget();
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    leading: const Icon(Icons.help_outline),
-                                    title: Text(AppLocalizations.of(context)!
-                                        .helpTitle),
-                                    onPressed: (BuildContext context) {
-                                      {
-                                        if (context.router.current.isActive) {
-                                          _controller.close();
-                                        }
-                                        context.router
-                                            .navigate(const HelpScreenRoute());
-                                      }
-                                      ;
-                                    },
-                                  ),
-                                  SettingsTile(
-                                    leading: const Icon(Icons.exit_to_app),
-                                    title: Text(
-                                        AppLocalizations.of(context)!.logout),
-                                    onPressed: (BuildContext context) {
-                                      context
-                                          .read<AuthenticationBloc>()
-                                          .add(LogoutEvent());
-                                      context.router
-                                          .replace(const LoginScreenRoute());
-                                    },
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                                          .navigate(const HelpScreenRoute());
+                                    }
+                                    ;
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .notification),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {},
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!.addAccount),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {},
+                                ),
+                                ListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .settingIpAddressPort),
+                                  trailing: Image.asset(
+                                      'assets/images/chevron_right_icon.png'),
+                                  onTap: () {
+                                    context.router.push(
+                                        const ConnectionSettingsScreenRoute());
+                                  },
+                                ),
+                                SwitchListTile(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .useFingerprint),
+                                  value: isBiometricEnabled,
+                                  onChanged: (value) {
+                                    context.read<BiometricBloc>().add(
+                                        ToggleBiometric(
+                                            isBiometricEnabled: value));
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!.logout,
+                                      style: TextStyle(color: AppColors.red)),
+                                  onTap: () {
+                                    context
+                                        .read<AuthenticationBloc>()
+                                        .add(LogoutEvent());
+                                    context.router
+                                        .replace(const LoginScreenRoute());
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                      AppLocalizations.of(context)!
+                                          .deleteAccount,
+                                      style: TextStyle(color: AppColors.grey)),
+                                  onTap: () {},
+                                ),
+                              ]),
                           ProfileMenuSlider(
                             context,
                             controller: _controller,

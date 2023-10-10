@@ -1,5 +1,9 @@
 {
   "am": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -44,6 +48,10 @@
   ],
 
   "ar": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -88,6 +96,10 @@
   ],
 
   "az": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
@@ -122,6 +134,10 @@
   ],
 
   "cs": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -157,6 +173,10 @@
   ],
 
   "da": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -201,6 +221,10 @@
   ],
 
   "de": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -245,6 +269,10 @@
   ],
 
   "el": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -284,6 +312,10 @@
   ],
 
   "es": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -328,6 +360,10 @@
   ],
 
   "fa": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "editProfileEmailAddressHint",
     "editProfilePhoneNumberHint",
@@ -344,6 +380,10 @@
   ],
 
   "fi": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -371,6 +411,10 @@
   ],
 
   "fil": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noReferrals",
     "profileMenuFavoriteTitle",
@@ -390,6 +434,10 @@
   ],
 
   "fr": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -434,6 +482,10 @@
   ],
 
   "he": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -478,6 +530,10 @@
   ],
 
   "hi": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -522,6 +578,10 @@
   ],
 
   "id": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -618,6 +678,10 @@
   ],
 
   "it": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -662,6 +726,10 @@
   ],
 
   "ka": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "noBookmarks",
     "noReferrals",
@@ -698,6 +766,10 @@
   ],
 
   "kk": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -742,6 +814,10 @@
   ],
 
   "ko": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -786,6 +862,10 @@
   ],
 
   "ky": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -830,6 +910,10 @@
   ],
 
   "nb": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -862,6 +946,10 @@
   ],
 
   "pl": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -906,6 +994,10 @@
   ],
 
   "pt": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -950,6 +1042,10 @@
   ],
 
   "ro": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "qrScannerTitle",
     "bookmarksTitle",
     "noBookmarks",
@@ -1002,6 +1098,10 @@
   ],
 
   "sv": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1046,6 +1146,10 @@
   ],
 
   "th": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1090,6 +1194,10 @@
   ],
 
   "tr": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1134,6 +1242,10 @@
   ],
 
   "uk": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1178,6 +1290,10 @@
   ],
 
   "uz": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1222,6 +1338,10 @@
   ],
 
   "vi": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
@@ -1266,6 +1386,10 @@
   ],
 
   "zh": [
+    "additionalSettings",
+    "deleteAccount",
+    "addAccount",
+    "notification",
     "useFingerprint",
     "connectionSettings",
     "settingIpAddressPort",
