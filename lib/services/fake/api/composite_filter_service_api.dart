@@ -125,7 +125,25 @@ class CompositeFilterServiceApi {
         FilterKey()
           ..subtopicId = currentAppLocalization.mockFilterTitleAutoRepairShop
           ..title = currentAppLocalization.mockFilterKeyTransmissionRepair,
-      ])
+      ]),
+      "Roadsidecafe": FilterKeyList(filterKeys: [
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleCarWash
+          ..title = currentAppLocalization.mockFilterKeyFullService,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleParkingGarage
+          ..title = currentAppLocalization.mockFilterKeyOverNight,
+        FilterKey()
+          ..subtopicId = currentAppLocalization.mockFilterTitleParkingGarage
+          ..title = currentAppLocalization.mockFilterKeyElectricCharging,
+
+      ]),
+      "Emergency Evacuation Stations": FilterKeyList(filterKeys: [
+
+      ]),
+      "Rest Areas": FilterKeyList(filterKeys: [
+
+      ]),
     };
     _filterKeys.update('Gas station', (value) {
       value.filterKeys[0].selected = true;
@@ -134,24 +152,33 @@ class CompositeFilterServiceApi {
       return value;
     });
     _compositeFilters = {
-      '': [
-        CompositeFilter(
-            compositeFilterId: Int64(0),
-            userId: '',
-            topic: Topic(title: 'Auto', topicId: 1),
-            filterMap: _filterKeys,
-            status: CompositeFilter_Status.FAVORITE,
-            title: 'Test. Do not click'),
-      ],
       'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2': [
+      CompositeFilter(
+          compositeFilterId: Int64(0),
+          userId: 'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2',
+          topic: Topic(title: 'Auto', topicId: 1),
+          filterMap: _filterKeys,
+          status: CompositeFilter_Status.FAVORITE,
+          title: 'Test'),
+      ],
+
+      'buEDlPEYiVe8tuhLwN2287AqI9D3': [
         CompositeFilter(
             compositeFilterId: Int64(0),
-            userId: 'dnMzQqeXxAQ8N1LBVnF9Oe50ucs2',
+            userId: 'buEDlPEYiVe8tuhLwN2287AqI9D3',
             topic: Topic(title: 'Auto', topicId: 1),
             filterMap: _filterKeys,
             status: CompositeFilter_Status.FAVORITE,
-            title: 'Test'),
+            title: 'Test1'),
+        CompositeFilter(
+            compositeFilterId: Int64(1),
+            userId: 'buEDlPEYiVe8tuhLwN2287AqI9D3',
+            topic: Topic(title: 'Auto', topicId: 1),
+            filterMap: _filterKeys,
+            status: CompositeFilter_Status.FAVORITE,
+            title: 'Test2'),
       ],
+
     };
   }
 

@@ -33,11 +33,16 @@ class TopicServiceApi {
         Subtopic(topicId: 1, subtopicId: 1, title: "Car Wash"),
         Subtopic(topicId: 1, subtopicId: 1, title: "Parking Garage"),
         Subtopic(topicId: 1, subtopicId: 1, title: "Gas station"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Roadsidecafe"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Emergency Evacuation Stations"),
+        Subtopic(topicId: 1, subtopicId: 1, title: "Rest Areas"),
+
       ],
       _topics[1]: [
         Subtopic(topicId: 1, subtopicId: 1, title: "Car Wash"),
         Subtopic(topicId: 1, subtopicId: 1, title: "Gas station"),
         Subtopic(topicId: 1, subtopicId: 1, title: "Auto repair shop"),
+
       ],
     };
   }
