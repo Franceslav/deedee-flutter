@@ -1,5 +1,6 @@
 {
   "am": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -41,6 +42,7 @@
   ],
 
   "ar": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -82,6 +84,7 @@
   ],
 
   "az": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -113,6 +116,7 @@
   ],
 
   "cs": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -145,6 +149,7 @@
   ],
 
   "da": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -186,6 +191,7 @@
   ],
 
   "de": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -227,6 +233,7 @@
   ],
 
   "el": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -263,6 +270,7 @@
   ],
 
   "es": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -304,6 +312,7 @@
   ],
 
   "fa": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -317,6 +326,7 @@
   ],
 
   "fi": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -341,6 +351,7 @@
   ],
 
   "fil": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -357,6 +368,7 @@
   ],
 
   "fr": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -398,6 +410,7 @@
   ],
 
   "he": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -439,6 +452,7 @@
   ],
 
   "hi": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -480,6 +494,7 @@
   ],
 
   "id": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -573,6 +588,7 @@
   ],
 
   "it": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -614,6 +630,7 @@
   ],
 
   "ka": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -647,6 +664,7 @@
   ],
 
   "kk": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -688,6 +706,7 @@
   ],
 
   "ko": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -729,6 +748,7 @@
   ],
 
   "ky": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -770,6 +790,7 @@
   ],
 
   "nb": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -799,6 +820,7 @@
   ],
 
   "pl": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -840,6 +862,7 @@
   ],
 
   "pt": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -881,6 +904,7 @@
   ],
 
   "ro": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -927,6 +951,7 @@
   ],
 
   "sv": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -968,6 +993,7 @@
   ],
 
   "th": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -1009,6 +1035,7 @@
   ],
 
   "tr": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -1050,6 +1077,7 @@
   ],
 
   "uk": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -1091,6 +1119,7 @@
   ],
 
   "uz": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -1132,6 +1161,7 @@
   ],
 
   "vi": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",
@@ -1173,6 +1203,7 @@
   ],
 
   "zh": [
+    "additionalSettings",
     "deleteAccount",
     "addAccount",
     "notification",

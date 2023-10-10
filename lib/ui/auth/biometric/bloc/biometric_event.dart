@@ -5,9 +5,9 @@ part of 'biometric_bloc.dart';
 abstract class BiometricEvent {}
 
 class ToggleBiometric extends BiometricEvent {
-  final bool biometric;
+  final bool isBiometricEnabled;
   ToggleBiometric({
-    required this.biometric,
+    required this.isBiometricEnabled,
   });
 }
 

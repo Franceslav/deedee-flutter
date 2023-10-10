@@ -3,6 +3,7 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "additionalSettings" : "Additional",
   "deleteAccount" : "Delete account",
   "addAccount" : "Add account",
   "notification" : "Notification",
@@ -12,8 +13,8 @@
   "scanYourFingerprint" : "Scan your fingerprint (or face or whatever) to authenticate",
   "oopsBiometric" : "Oops! Biometric authentication required!",
   "cancelFingerPrint" : "No thanks",
-  "qrScanner" : "qr scanner",
-  "qrScannerTitle" : "Qr scanner",
+  "qrScanner" : "QR scanner",
+  "qrScannerTitle" : "QR scanner",
   "safe": "safe",
   "placeOrder": "Place order",
   "placeOrderPageTitle": "Order",
