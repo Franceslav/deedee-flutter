@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/edit_personal_info/edit_pers_info.dart';
-import 'package:deedee/ui/account/personal_info/personal_information.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
 import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
@@ -14,7 +13,8 @@ import 'package:deedee/ui/page/account/account_language_screen.dart';
 import 'package:deedee/ui/page/account/account_screen.dart';
 import 'package:deedee/ui/page/account/account_supplier_screen.dart';
 import 'package:deedee/ui/page/account/account_verify_screen.dart';
-import 'package:deedee/ui/page/account/social_network_screen.dart';
+import 'package:deedee/ui/page/account/service_provider_tags/service_provider_tags_screen.dart';
+import 'package:deedee/ui/page/communication_facility_component/communication_facility_component_screen.dart';
 import 'package:deedee/ui/page/accounts_list/accounts_list_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
@@ -36,15 +36,18 @@ import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/service_request_page.dart';
+import 'package:deedee/ui/service_request_tags_screen/service_request_user_tags_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
+import '../page/servis_provider_seen/servis_provider_seen_screen.dart';
 import '../page/servis_provider_tags/servis_provider_tags_screen.dart';
 import '../page/stats/stats_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
+    MaterialRoute(page: ServisProviderSeenScreen, path: '/provider-seen'),
     MaterialRoute(page: LauncherScreen, initial: true),
     MaterialRoute(page: OnBoardingScreen, path: '/boarding'),
     MaterialRoute(page: WelcomeScreen, path: '/welcome'),
@@ -75,8 +78,7 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
-    MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
-    MaterialRoute(page: SocialNetworkScreen, path: '/social-page'),
+    MaterialRoute(page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
     MaterialRoute(page: PaymentScreen, path: '/payment-page'),
@@ -88,7 +90,9 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: AccountsListScreen, path: '/accounts-list'),
     MaterialRoute(page: MapScreenMyTags, path: '/map-tags'),
     MaterialRoute(page: LineChartPage, path: '/line-chart'),
-    MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications')
+    MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
+    MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
+    MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags')
   ],
 )
 class $AppRouter {}

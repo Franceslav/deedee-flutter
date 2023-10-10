@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/auth/biometric/bloc/biometric_bloc.dart';
-import 'package:deedee/ui/global_widgets/dee_dee_menu_slider.dart';
 import 'package:deedee/ui/global_widgets/deedee_appbar.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/page/account/account_language_dropdown.dart';
@@ -12,10 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../../auth/authentication_bloc.dart';
 import '../../auth/biometric/biometric_prefs.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../global_widgets/profile_menu_slider.dart';
+import '../account/account_popover.dart';
+import '../account/utils/payment_method_list_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -114,6 +114,95 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 tiles: [
                                   SettingsTile(
                                     title: LanguagesExpansionTile(),
+                                  ),
+                                ],
+                              ),
+                              SettingsSection(
+                                title: const Text('Settings Menu'),
+                                tiles: [
+                                  SettingsTile(
+                                    leading: const Icon(
+                                      Icons.business_center,
+                                    ),
+                                    title: Text(AppLocalizations.of(context)!
+                                        .businessProfile),
+                                    onPressed: (BuildContext context) {
+                                      if (context.router.current.isActive) {
+                                        _controller.close();
+                                      }
+                                      context.router.navigate(
+                                          const AccountBusinessPageRoute());
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    leading: const Icon(
+                                      Icons.verified,
+                                    ),
+                                    title: Text(AppLocalizations.of(context)!
+                                        .verification),
+                                    onPressed: (BuildContext context) async {
+                                      context.router
+                                          .navigate(const VerifyScreenRoute());
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    leading: const Icon(
+                                      Icons.workspace_premium,
+                                    ),
+                                    title: Text(
+                                        AppLocalizations.of(context)!.premium),
+                                    onPressed: (BuildContext context) {
+                                      showModalBottomSheet(
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return const AccountPopover();
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    leading: const Icon(
+                                      Icons.account_balance,
+                                    ),
+                                    title: Text(AppLocalizations.of(context)!
+                                        .balanceTitle),
+                                    onPressed: (BuildContext context) {
+                                      showModalBottomSheet(
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return const PaymentMethodListWidget();
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    leading: const Icon(Icons.help_outline),
+                                    title: Text(AppLocalizations.of(context)!
+                                        .helpTitle),
+                                    onPressed: (BuildContext context) {
+                                      {
+                                        if (context.router.current.isActive) {
+                                          _controller.close();
+                                        }
+                                        context.router
+                                            .navigate(const HelpScreenRoute());
+                                      }
+                                      ;
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    leading: const Icon(Icons.exit_to_app),
+                                    title: Text(
+                                        AppLocalizations.of(context)!.logout),
+                                    onPressed: (BuildContext context) {
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .add(LogoutEvent());
+                                      context.router
+                                          .replace(const LoginScreenRoute());
+                                    },
                                   ),
                                 ],
                               )
