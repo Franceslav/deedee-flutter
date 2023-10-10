@@ -24,67 +24,9 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
     required this.controller,
     required this.user,
   }) : super(
-            maxHeight: MediaQuery.of(context).size.height * 0.5,
+            maxHeight: MediaQuery.of(context).size.height * 0.9,
             controller: controller,
             generalSlidingPanelItemList: [
-              GeneralSlidingPanelItem(
-                  icon: Icons.list,
-                  text: AppLocalizations.of(context)!.userTagsTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.push(const UserTagsScreenRoute());
-                  }),
-              user.accountType == AccountType.buy
-                  ? GeneralSlidingPanelItem(
-                      icon:
-                          CommunityMaterialIcons.order_alphabetical_descending,
-                      text: AppLocalizations.of(context)!.myRequests,
-                      onTap: () {
-                        if (context.router.current.isActive) {
-                          controller.close();
-                        }
-                        context.router.push(const MyRequestScreenRoute());
-                      })
-                  : const SizedBox.shrink(),
-              GeneralSlidingPanelItem(
-                  icon: Icons.favorite,
-                  text: AppLocalizations.of(context)!.profileMenuFavoriteTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.push(const BookmarksScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.filter_alt,
-                  text: AppLocalizations.of(context)!.myFilters,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router
-                        .push(const FavoriteCompositeFiltersScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.link_sharp,
-                  text: AppLocalizations.of(context)!.accountReferralTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.push(const ReferralScreenRoute());
-                  }),
-              GeneralSlidingPanelItem(
-                  icon: Icons.recent_actors,
-                  text: AppLocalizations.of(context)!.accountsTitle,
-                  onTap: () {
-                    if (context.router.current.isActive) {
-                      controller.close();
-                    }
-                    context.router.push(const AccountsListScreenRoute());
-                  }),
               GeneralSlidingPanelItem(
                   icon: Icons.settings,
                   text: AppLocalizations.of(context)!.settings,
@@ -93,6 +35,74 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router.navigate(const SettingsScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.person_outline,
+                  text: AppLocalizations.of(context)!.profileInfo,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.navigate(const SettingsScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.favorite_border,
+                  text: AppLocalizations.of(context)!.profileMenuFavoriteTitle,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.filter_alt,
+                  text: AppLocalizations.of(context)!.myFilters,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.push(const ReferralScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.timeline_outlined,
+                  text: AppLocalizations.of(context)!.statistic,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.article,
+                  text: AppLocalizations.of(context)!.reviews,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.shopping_cart_outlined,
+                  text: AppLocalizations.of(context)!.orders,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.check,
+                  text: AppLocalizations.of(context)!.verification,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const FavoriteCompositeFiltersScreenRoute());
                   }),
             ]);
 }

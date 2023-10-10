@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/ui/account/edit_personal_info/edit_pers_info.dart';
-import 'package:deedee/ui/account/personal_info/personal_information.dart';
 import 'package:deedee/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:deedee/ui/auth/login/login_screen.dart';
 import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_screen.dart';
 import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
+import 'package:deedee/ui/global_widgets/appointment_tooltip.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/page/account/account_business_page.dart';
@@ -38,6 +38,7 @@ import 'package:deedee/ui/page/top_up/top_up_screen.dart';
 import 'package:deedee/ui/place_order/place_order_screen.dart';
 import 'package:deedee/ui/place_tag/map_set_location_screen.dart';
 import 'package:deedee/ui/request_screen/service_request_page.dart';
+import 'package:deedee/ui/service_request_tags_screen/service_request_user_tags_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
 
@@ -80,6 +81,8 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
     MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
+    MaterialRoute(
+        page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
@@ -93,9 +96,13 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: MapScreenMyTags, path: '/map-tags'),
     MaterialRoute(page: LineChartPage, path: '/line-chart'),
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
+    MaterialRoute(
+        page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
+    MaterialRoute(page: AppointmentTooltipWidget, path: '/appointment-widget'),
+    MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
+    MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
     MaterialRoute(page: AdditionalScreen, path: '/additional')
-
   ],
 )
 class $AppRouter {}

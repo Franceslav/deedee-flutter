@@ -19,6 +19,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -38,7 +41,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ar": [
@@ -61,6 +67,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -80,7 +89,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "az": [
@@ -99,6 +111,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -112,7 +127,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "cs": [
@@ -130,6 +148,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "website",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
@@ -145,7 +166,10 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "da": [
@@ -168,6 +192,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -187,7 +214,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "de": [
@@ -210,6 +240,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -229,7 +262,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "el": [
@@ -252,6 +288,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "contacts",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
@@ -266,7 +305,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "es": [
@@ -289,6 +331,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -308,7 +353,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fa": [
@@ -317,12 +365,18 @@
     "addAccount",
     "notification",
     "qrScannerTitle",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterKeyShell",
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fi": [
@@ -334,6 +388,9 @@
     "bookmarksTitle",
     "noBookmarks",
     "noReferrals",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -347,7 +404,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fil": [
@@ -359,12 +419,18 @@
     "noReferrals",
     "profileMenuFavoriteTitle",
     "noFavorites",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterKeyShell",
     "mockFilterKeyTATNEFT",
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "fr": [
@@ -387,6 +453,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -406,7 +475,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "he": [
@@ -429,6 +501,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -448,7 +523,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "hi": [
@@ -471,6 +549,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -490,7 +571,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "id": [
@@ -547,6 +631,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "reset",
     "mockFilterKeySuspension",
     "mockFilterKeyQuarrel",
@@ -584,7 +671,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "it": [
@@ -607,6 +697,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -626,7 +719,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ka": [
@@ -645,6 +741,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "website",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
@@ -660,7 +759,10 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "kk": [
@@ -683,6 +785,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -702,7 +807,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ko": [
@@ -725,6 +833,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -744,7 +855,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ky": [
@@ -767,6 +881,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -786,7 +903,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "nb": [
@@ -803,6 +923,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -816,7 +939,10 @@
     "mockFilterKeyLukoil",
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "pl": [
@@ -839,6 +965,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -858,7 +987,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "pt": [
@@ -881,6 +1013,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -900,7 +1035,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ro": [
@@ -920,6 +1058,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -934,12 +1075,18 @@
     "mockFilterKeyORLEN",
     "mockFilterKeySTATOIL",
     "seen",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "ru": [
     "qrScannerTitle",
     "noBookmarks",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -970,6 +1117,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -989,7 +1139,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "th": [
@@ -1012,6 +1165,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1031,7 +1187,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "tr": [
@@ -1054,6 +1213,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1073,7 +1235,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "uk": [
@@ -1096,6 +1261,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1115,7 +1283,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "uz": [
@@ -1138,6 +1309,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1157,7 +1331,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "vi": [
@@ -1180,6 +1357,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1199,7 +1379,10 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ],
 
   "zh": [
@@ -1222,6 +1405,9 @@
     "editProfileUsernameHint",
     "editProfileWebsiteHint",
     "editProfileBioHint",
+    "editProfileEmailAddressHint",
+    "editProfilePhoneNumberHint",
+    "editProfileBirthdayHint",
     "mockFilterTitleAutoRepairShop",
     "mockFilterKeyOilChange",
     "mockFilterKeySuspensionRepair",
@@ -1241,6 +1427,9 @@
     "numberContainOnlyDigits",
     "validEmail",
     "chart",
-    "tagsOfUserTitle"
+    "tagsOfUserTitle",
+    "profileInfo",
+    "orders",
+    "statistic"
   ]
 }
