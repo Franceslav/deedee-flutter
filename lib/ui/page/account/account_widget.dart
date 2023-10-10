@@ -4,6 +4,7 @@ import 'package:deedee/generated/deedee/api/model/tag.pb.dart';
 import 'package:deedee/injection.dart';
 import 'package:deedee/repository/tag_repository.dart';
 import 'package:deedee/services/helper.dart';
+import 'package:deedee/ui/global_widgets/appointment_tooltip.dart';
 import 'package:deedee/ui/global_widgets/profile_photo_with_badge.dart';
 import 'package:deedee/ui/routes/app_router.gr.dart';
 import 'package:deedee/ui/theme/app_text_theme.dart';

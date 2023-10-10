@@ -6,6 +6,7 @@ import 'package:deedee/ui/auth/onBoarding/on_boarding_screen.dart';
 import 'package:deedee/ui/auth/resetPasswordScreen/reset_password_screen.dart';
 import 'package:deedee/ui/auth/signUp/sign_up_screen.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
+import 'package:deedee/ui/global_widgets/appointment_tooltip.dart';
 import 'package:deedee/ui/help/help_screen.dart';
 import 'package:deedee/ui/main_topic/main_topic_screen.dart';
 import 'package:deedee/ui/page/account/account_business_page.dart';
@@ -78,6 +79,9 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
+    MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
+    MaterialRoute(
+        page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: MyRequestScreen, path: '/my-request'),
     MaterialRoute(page: RequestScreen, path: '/request-page'),
@@ -91,8 +95,12 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: MapScreenMyTags, path: '/map-tags'),
     MaterialRoute(page: LineChartPage, path: '/line-chart'),
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
+    MaterialRoute(
+        page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
+    MaterialRoute(page: AppointmentTooltipWidget, path: '/appointment-widget'),
+    MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
     MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
-    MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags')
+    MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
   ],
 )
 class $AppRouter {}
