@@ -80,7 +80,6 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: UserTagDetailsScreen, path: ':userId/:tagId'),
     MaterialRoute(page: PlaceOrderScreen, path: '/place-order'),
     MaterialRoute(page: EditProfilePage, path: '/edit-profile-page'),
-    MaterialRoute(page: PersonalInfoPage, path: '/personal-info'),
     MaterialRoute(
         page: CommunicationFacilityComponentScreen, path: '/social-page'),
     MaterialRoute(page: CommunicationFacilityComponentScreen, path: '/social-page'),
