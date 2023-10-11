@@ -807,6 +807,146 @@ class TagServiceApi {
         ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
         ..type = Tag_Type.CLIENT
         ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'rshmalts@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Auto'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'rshmalts@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Beauty'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'rshmalts@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Auto'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: false),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'rshmalts@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Children'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
+        ..createdBy = 'rshmalts@gmail.com'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Auto'),
+          filterMap: {
+            'Two': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: true),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 50.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
     ];
     _tags = {};
   }
