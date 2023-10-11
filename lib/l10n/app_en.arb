@@ -114,6 +114,7 @@
   "applicationBegin": "Select the start date of the application",
   "applicationStart": "The application will start with",
   "subscription": "subscription",
+  "appointmentOffers": "Appointment",
   "userTagsTitle": "my tags",
   "tagRemovedMessage": "tag was removed",
   "tagNotRemovedMessage": "tag was not removed. something went wrong",

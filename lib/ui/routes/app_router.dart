@@ -41,7 +41,7 @@ import 'package:deedee/ui/request_screen/service_request_page.dart';
 import 'package:deedee/ui/service_request_tags_screen/service_request_user_tags_screen.dart';
 import 'package:deedee/ui/user_tag_details/user_tag_details_screen.dart';
 import 'package:deedee/ui/user_tags/user_tags_screen.dart';
-
+import 'package:deedee/ui/page/account/appointment_offers/appointment_offers.dart';
 import '../page/favorite_composite_filters/favorite_composite_filters_screen.dart';
 import '../page/servis_provider_seen/servis_provider_seen_screen.dart';
 import '../page/servis_provider_tags/servis_provider_tags_screen.dart';
@@ -49,6 +49,7 @@ import '../page/stats/stats_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
+    MaterialRoute(page: AppointmentOffersScreen, path: '/appointment'),
     MaterialRoute(page: ServisProviderSeenScreen, path: '/provider-seen'),
     MaterialRoute(page: LauncherScreen, initial: true),
     MaterialRoute(page: OnBoardingScreen, path: '/boarding'),
