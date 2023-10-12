@@ -46,6 +46,7 @@ import '../page/favorite_composite_filters/favorite_composite_filters_screen.dar
 import '../page/servis_provider_seen/servis_provider_seen_screen.dart';
 import '../page/servis_provider_tags/servis_provider_tags_screen.dart';
 import '../page/stats/stats_screen.dart';
+import '../page/my/my_referrals/referals_profile.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -102,7 +103,8 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
     MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
-    MaterialRoute(page: AdditionalScreen, path: '/additional')
+    MaterialRoute(page: AdditionalScreen, path: '/additional'),
+    MaterialRoute(page: ReferalsProfile, path: '/ref')
   ],
 )
 class $AppRouter {}
