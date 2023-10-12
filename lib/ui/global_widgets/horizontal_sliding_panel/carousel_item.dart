@@ -11,11 +11,9 @@ class CarouselItem extends StatefulWidget {
 
 class CarouselItemState extends State<CarouselItem> {
   int dataId;
-
   CarouselItemState(this.dataId);
 
 
-  CarouselItemState(this.dataId);
 
   setTitle() {
     switch (dataId) {
@@ -99,56 +97,6 @@ class CarouselItemState extends State<CarouselItem> {
                   ],
                 ),
               ],
-
-  bool isPressed = false;
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-
-      decoration: BoxDecoration(color: isPressed ? Color(0xFF855CD2) : Color(0xFFF9F4FE),
-          borderRadius: BorderRadius.circular(20)),
-      constraints: BoxConstraints(),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        elevation: 5,
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor:  Color(0xFFF9F4FE),
-          onTap: () {          //TODO
-            setState(() {
-              isPressed = !isPressed;
-              print(isPressed.toString());
-            });
-          }
-          ,
-          child: Center(
-            child: Container(
-              width: 80,
-              child: Column(
-
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    _getImagePath(dataId),
-                    width: 110 * 0.28,
-                    height: 110 * 0.28,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        setTitle(),
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
         ),

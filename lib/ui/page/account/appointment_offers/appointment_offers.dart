@@ -25,11 +25,6 @@ class _AppointmentOffersScreenState extends State<AppointmentOffersScreen> {
         elevation: 1,
         shadowColor: const Color(APPBAR_SHADOW_COLOR),
         title: Text(locale.appointmentOffers),
-
-      appBar: DeeDeeAppBar(
-        title: locale.appointmentOffers,
-        controller: _controller,
-        child: const Icon(Icons.menu),
       ),
       body: BlocConsumer<UserBloc, UserState>(
           bloc: bloc,
