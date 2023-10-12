@@ -104,7 +104,7 @@ import '../page/my/my_referrals/referals_profile.dart';
     MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
     MaterialRoute(page: AdditionalScreen, path: '/additional'),
-    MaterialRoute(page: ReferalsProfile, path: '/ref')
+    MaterialRoute(page: ReferalProfilePage, path: '/referral-profile')
   ],
 )
 class $AppRouter {}

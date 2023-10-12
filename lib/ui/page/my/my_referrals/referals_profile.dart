@@ -21,14 +21,14 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../global_widgets/profile_menu_slider.dart';
 import 'referral_cubit.dart';
 
-class ReferalsProfile extends StatefulWidget {
-  const ReferalsProfile({super.key});
+class ReferalProfilePage extends StatefulWidget {
+  const ReferalProfilePage({super.key});
 
   @override
   State createState() => _ReferralState();
 }
 
-class _ReferralState extends State<ReferalsProfile> {
+class _ReferralState extends State<ReferalProfilePage> {
   final PanelController _controller = PanelController();
   AnimatedButtonController _buttonController = AnimatedButtonController();
   final PageController _pageController = PageController();

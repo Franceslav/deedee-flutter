@@ -96,7 +96,7 @@ class _AccountState extends State<AccountSupplierScreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              context.router.navigate(const ReferalsProfileRoute());
+                              context.router.navigate(const ReferalProfilePageRoute());
                             },
                             child: Text('${locale.executorTags} $_supplier'),
                           ),
