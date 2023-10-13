@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../calendar/calendar_page.dart';
+
 class AccountInfoWidget extends StatefulWidget {
   const AccountInfoWidget({
     super.key,
@@ -89,8 +91,9 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                       Expanded(
                         child: InkWell(
                             onTap: () {
-                              context.router
-                                  .navigate(const ServiceRequestUserTagsScreen() as PageRouteInfo);
+                              context.router.navigate(
+                                  const ServiceRequestUserTagsScreen()
+                                      as PageRouteInfo);
                             },
                             child:
                                 _infoColumn('${_tags.length}', locale.placed)),
@@ -99,8 +102,8 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                         // TODO
                         child: InkWell(
                             onTap: () {
-                              context.router
-                                  .navigate(const ServisProviderSeenScreenRoute());
+                              context.router.navigate(
+                                  const ServisProviderSeenScreenRoute());
                             },
                             child: _infoColumn('3', locale.seen)),
                       ),
@@ -115,7 +118,7 @@ class _AccountInfoWidgetState extends State<AccountInfoWidget> {
                             child: IconButton(
                                 onPressed: () => showDialog(
                                     context: context,
-                                    builder: (ctx) => const CalendarDialog()),
+                                    builder: (ctx) => const CalendarPage()),
                                 icon: const Icon(Icons.edit))),
                       ),
                     ],
