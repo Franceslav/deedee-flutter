@@ -25,6 +25,118 @@ class TagServiceApi {
     _fakeTags = [
       Tag()
         ..tagId = Int64(1)
+        ..createdBy = 'glshnkv@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 1, userId: '', title: 'Overhaul'),
+          filterMap: {
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.51, longitude: -0.1165888)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(2)
+        ..createdBy = 'glshnkv@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 1000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 2, userId: '', title: 'Cleaning'),
+          filterMap: {
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 51.521, longitude: -0.116)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(3)
+        ..createdBy = 'glshnkv@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(1),
+          topic: Topic(topicId: 3, userId: '', title: 'Beauty'),
+          filterMap: {
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 9.2, longitude: 46.5169)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(2)
+        ..createdBy = 'glshnkv@yandex.ru'
+        ..createdAt = Timestamp(
+            seconds: Int64.parseInt(
+                (DateTime.now().millisecondsSinceEpoch / 1000 + 2000000)
+                    .round()
+                    .toString()))
+      // ..createdBy = Int64.parseInt((DateTime.now().isTomorrow).toString())
+        ..compositeFilter = CompositeFilter(
+          compositeFilterId: Int64(2),
+          topic: Topic(topicId: 3, userId: '', title: 'Beauty'),
+          filterMap: {
+            'Car Wash': FilterKeyList(
+              filterKeys: [
+                FilterKey(title: '24 Hour', selected: true),
+                FilterKey(title: 'Covered', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'ElectricCharging', selected: true),
+                FilterKey(title: 'Valet', selected: false),
+                FilterKey(title: 'Suspension', selected: false),
+              ],
+            ),
+          },
+        )
+        ..geolocation = Geolocation(latitude: 9.2001, longitude: 46.5168)
+        ..type = Tag_Type.CLIENT
+        ..status = Tag_Status.PLACED,
+      Tag()
+        ..tagId = Int64(1)
         ..createdBy = 'matveev.yakov@yahoo.com'
         ..createdAt = Timestamp(
             seconds: Int64.parseInt(

@@ -8,6 +8,7 @@ import 'package:deedee/repository/topic_repository.dart';
 import 'package:deedee/services/helper.dart';
 import 'package:deedee/ui/auth/authentication_bloc.dart';
 import 'package:deedee/ui/auth/welcome/welcome_screen.dart';
+import 'package:deedee/ui/executors_panel/executors_panel_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
 import 'package:deedee/ui/page/map_cubit/tag_marker/tag_marker.dart';
@@ -286,12 +287,11 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                   ),
                 ),
-               MapSlidingPanel(
+                ExecutorsPanelScreen(
                   controller: _panelController,
-                  selectedMessengerId: _selectedMessengerId,
                   selectedTagId: _selectedTagId,
-                  openedFirstTime: openedFirstTime,
                 ),
+
                 Positioned(
                   top: 16,
                   left: 16,
