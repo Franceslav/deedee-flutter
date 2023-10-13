@@ -49,8 +49,10 @@ android/gradle/wrapper/gradle-wrapper.properties
 #script generated file
 untranslated.txt
 
-#script generated file
-untranslated.txt
-
-#script generated file
-untranslated.txt
+/lib/database/database.g.dart
+/lib/database/dao/topic_dao.g.dart
+/lib/database/dao/subtopic_dao.g.dart
+/lib/database/dao/filterkey_dao.g.dart
+/lib/database/dao/geolocation_dao.g.dart
+/drift_schemas/drift_schema_v1.json
+/test/generated_migrations/
