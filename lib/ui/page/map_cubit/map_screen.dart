@@ -289,7 +289,8 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 ExecutorsPanelScreen(
                   controller: _panelController,
-                  selectedTagId: _selectedTagId,
+                  tagMarkers: _markers,
+
                 ),
 
                 Positioned(

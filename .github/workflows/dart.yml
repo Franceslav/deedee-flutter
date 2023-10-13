@@ -1,4 +1,9 @@
-name: deedee CI
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: DeeDee CI
 
 on:
   push:
@@ -8,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: dinobitsoft-build-runner
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Build application
+      - name: Build application 
         run: dart run build_runner build --delete-conflicting-outputs
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
@@ -36,5 +41,5 @@ jobs:
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
-      # - name: Run tests
+     # - name: Run tests
       #  run: dart test

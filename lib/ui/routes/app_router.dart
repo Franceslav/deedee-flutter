@@ -20,7 +20,7 @@ import 'package:deedee/ui/page/accounts_list/accounts_list_screen.dart';
 import 'package:deedee/ui/page/add_card/add_card_screen.dart';
 import 'package:deedee/ui/page/bookmarks/bookmarks_screen.dart';
 import 'package:deedee/ui/page/bookmarks/qr_scanner/qr_scanner.dart';
-import 'package:deedee/ui/page/chart_page/line_chart.dart';
+import 'package:deedee/ui/page/chart_page/line_chart_page.dart';
 import 'package:deedee/ui/page/completed_applications/completed_applications_screen.dart';
 import 'package:deedee/ui/page/customer_profile/customer_profile_screen.dart';
 import 'package:deedee/ui/page/filter/filter_page.dart';
@@ -46,6 +46,7 @@ import '../page/favorite_composite_filters/favorite_composite_filters_screen.dar
 import '../page/servis_provider_seen/servis_provider_seen_screen.dart';
 import '../page/servis_provider_tags/servis_provider_tags_screen.dart';
 import '../page/stats/stats_screen.dart';
+import '../page/my/my_referrals/referals_profile.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -102,7 +103,8 @@ import '../page/stats/stats_screen.dart';
     MaterialRoute(page: CompletedApplicationsPage, path: '/completed-applications'),
     MaterialRoute(page: ServiceRequestUserTagsScreen, path: '/service-provider-tag'),
     MaterialRoute(page: ServiceProviderTagsScreen, path: '/service-provider-tags'),
-    MaterialRoute(page: AdditionalScreen, path: '/additional')
+    MaterialRoute(page: AdditionalScreen, path: '/additional'),
+    MaterialRoute(page: ReferalProfilePage, path: '/referral-profile')
   ],
 )
 class $AppRouter {}

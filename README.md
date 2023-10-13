@@ -27,3 +27,5 @@ Save the data, press "SAVE POINT" then press "SET LOCATION"
 ![](doc/img/thirdStep.png)
 
 * * *
+
+[![Flutter CI](https://github.com/dinobitsoft/deedee-flutter/actions/workflows/main.yml/badge.svg?branch=main&event=pull_request)](https://github.com/dinobitsoft/deedee-flutter/actions/workflows/main.yml)

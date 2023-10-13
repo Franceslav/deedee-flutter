@@ -11,8 +11,6 @@ class CarouselItem extends StatefulWidget {
 
 class CarouselItemState extends State<CarouselItem> {
   int dataId;
-
-
   CarouselItemState(this.dataId);
 
 
@@ -60,52 +58,45 @@ class CarouselItemState extends State<CarouselItem> {
   bool isPressed = false;
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-
-      decoration: BoxDecoration(color: isPressed ? Color(0xFF855CD2) : Color(0xFFF9F4FE),
-          borderRadius: BorderRadius.circular(20)),
-      constraints: BoxConstraints(),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        elevation: 5,
-        clipBehavior: Clip.hardEdge,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 5,
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: isPressed ? Color(0xFF855CD2) : Color(0xFFF9F4FE),
+                width: 1.5),
+            borderRadius: BorderRadius.circular(16)),
+        constraints: BoxConstraints(),
         child: InkWell(
           splashColor: Colors.transparent,
-          highlightColor:  Color(0xFFF9F4FE),
-          onTap: () {          //TODO
+          highlightColor: Color(0xFFF9F4FE),
+          onTap: () {
+            //TODO
             setState(() {
               isPressed = !isPressed;
-              print(isPressed.toString());
             });
-          }
-          ,
-          child: Center(
-            child: Container(
-              width: 80,
-              child: Column(
-
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    _getImagePath(dataId),
-                    width: 110 * 0.28,
-                    height: 110 * 0.28,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        setTitle(),
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            width: 80,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(_getImagePath(dataId), width: 30, height: 30),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      setTitle(),
+                      style: TextStyle(fontSize: 12),
+                      // style: Theme.of(context).textTheme.displayLarge,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

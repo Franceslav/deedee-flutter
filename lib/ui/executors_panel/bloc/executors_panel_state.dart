@@ -7,4 +7,5 @@ class ExecutorsPanelInitial extends ExecutorsPanelState {}
 class ExecutorsPanelLoadingState extends ExecutorsPanelState {}
 
 class ExecutorsPanelLoadedState extends ExecutorsPanelState {
+
 }
