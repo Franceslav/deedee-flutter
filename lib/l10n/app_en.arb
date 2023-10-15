@@ -84,7 +84,7 @@
   "bookmarksTitle": "my favorites",
   "noBookmarks": "you do not have bookmarks",
   "noReferrals": "you do not have referrals",
-  "profileMenuFavoriteTitle": "my favorites",
+  "profileMenuFavoriteTitle": "Favorites",
   "noFavorites": "you do not have favorites",
   "bookmarkDeletedMessage": "bookmark was deleted",
   "bookmarkNotDeletedMessage": "bookmark was not deleted. something went wrong",
@@ -122,7 +122,7 @@
   "archiveTags": "archive",
   "tagExpires": "expires",
   "noUserTags": "no tags",
-  "myFilters": "my filters",
+  "myFilters": "Filters",
   "homeChooseCity": "Choose your city",
   "orderSent": "Your order has been sent",
   "contactInformation": "Contact Information",
@@ -149,7 +149,7 @@
   "edit": "Edit",
   "share": "Share",
   "saveAndSubscribe": "Save and subscribe",
-  "myRequests": "my requests",
+  "myRequests": "Requests",
   "switchLanguage": "Switch language",
   "onServiceSince": "On service since ",
   "tags": "Tags",
@@ -263,6 +263,7 @@
   "tagsOfUserTitle": "Tags of {user}",
   "profileInfo": "Profile info",
   "orders": "Orders",
-  "statistic": "Statistic"
+  "statistic": "Statistic",
+  "referrals": "Referrals"
 
 }

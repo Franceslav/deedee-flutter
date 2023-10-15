@@ -24,24 +24,17 @@ class ProfilePhotoWithBadge extends StatelessWidget {
           onTap: () {
             context.router.navigate(const AccountScreenRoute());
           },
-          child: ProfilePicture(
-            radius: 52,
-            fontsize: 36,
-            name: AccountBusinessPageRoute.name,
+          child: CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.grey.shade400,
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/placeholder.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          // child: CircleAvatar(
-
-          //   radius: 35,
-          //   backgroundColor: Colors.grey.shade400,
-          //   child: ClipOval(
-          //     child: Image.asset(
-          //       'assets/images/placeholder.jpg',
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
-        ),
-      );
+          ),);
     } else {
       return _addBadge(
         user,
