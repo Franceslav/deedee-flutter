@@ -5,6 +5,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../../../injection.dart';
 import '../../../model/user.dart';
 import '../../../repository/profile_repository.dart';
@@ -13,6 +14,7 @@ import '../../routes/app_router.gr.dart';
 import '../../theme/app_text_theme.dart';
 import 'bloc/edit_pers_info_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _EmailAddressController;
   late TextEditingController _PhoneNumberController;
   late TextEditingController _BirthdayController;
+  bool editable = false;
 
   @override
   void initState() {
@@ -48,6 +51,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     User user = context.select((UserBloc bloc) => bloc.state.user);
     final locale = AppLocalizations.of(context)!;
+
     return BlocProvider(
         create: (_) => EditPersInfoBloc(
               user,
@@ -77,26 +81,38 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 title: Text(locale.editProfile),
                 actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.done,
-                    ),
-                    onPressed: () {
-                      bloc.add(SaveEditDataEvent(
-                        user: user,
-                        username: _UsernameController.text,
-                      ));
-                    },
-                  ),
+                  editable == false
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              editable = !editable;
+                            });
+                          },
+                        )
+                      : IconButton(
+                          icon: const Icon(
+                            Icons.done,
+                          ),
+                          onPressed: () {
+                            bloc.add(
+                              SaveEditDataEvent(
+                                user: user,
+                                username: _UsernameController.text,
+                              ),
+                            );
+                          },
+                        ),
                   const SizedBox(
                     width: 10,
                   )
                 ],
               ),
               body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                // padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
@@ -104,61 +120,95 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       children: [
                         const ProfilePhotoWithBadge(),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Text(
                           locale.editPictureOrAvatar,
                           style: AppTextTheme.bodyLarge,
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         TextEditingField(
-                            labelText: locale.name,
-                            controller: _namecontroller,
-                            hintText: locale.editProfileNameHint),
+                          editable: editable,
+                          labelText: locale.name,
+                          controller: _namecontroller,
+                          hintText:
+                              user.firstName == '' || user.firstName.isEmpty
+                                  ? locale.editProfileNameHint
+                                  : user.firstName,
+                        ),
                         TextEditingField(
+                            editable: editable,
                             labelText: locale.lastname,
                             controller: _lastnamecontroller,
-                            hintText: locale.editProfileLastnameHint),
+                            hintText:
+                                user.lastName == '' || user.lastName.isEmpty
+                                    ? locale.editProfileLastnameHint
+                                    : user.lastName),
                         TextEditingField(
+                            editable: editable,
                             labelText: locale.username,
                             controller: _UsernameController,
                             hintText: locale.editProfileUsernameHint),
                         TextEditingField(
+                            editable: editable,
                             labelText: locale.website,
                             controller: _WebsiteController,
                             hintText: locale.editProfileWebsiteHint),
                         TextEditingField(
-                            labelText: locale.bio, controller: _BioController,
+                            editable: editable,
+                            labelText: locale.bio,
+                            controller: _BioController,
                             hintText: locale.editProfileBioHint),
                         TextEditingField(
-                            labelText: locale.email, controller: _EmailAddressController,
-                            hintText: locale.editProfileEmailAddressHint,
+                            editable: editable,
+                            labelText: locale.email,
+                            controller: _EmailAddressController,
+                            hintText: user.email == '' || user.email.isEmpty
+                                ? locale.editProfileEmailAddressHint
+                                : user.email,
                             validator: validateEmail),
                         TextEditingField(
-                            labelText: locale.phoneNumber, controller: _PhoneNumberController,
+                            editable: editable,
+                            labelText: locale.phoneNumber,
+                            controller: _PhoneNumberController,
                             hintText: locale.editProfilePhoneNumberHint,
                             validator: validateMobile),
                         TextEditingField(
-                            labelText: locale.birthday, controller: _BirthdayController,
+                            editable: editable,
+                            labelText: locale.birthday,
+                            controller: _BirthdayController,
                             hintText: locale.editProfileBirthdayHint,
                             validator: validateBirthday),
                       ],
                     ),
                     const SizedBox(height: 10),
                     const SizedBox(height: 10),
-                    DeeDeeRowInfoWidget(
-                      icon: Image.asset('assets/images/instagram_logo.png'),
-                      mainText: Text(
-                        locale.contacts,
-                        style: AppTextTheme.bodyLarge,
+                    Center(
+                      child: IconButton(
+                        icon: SvgPicture.asset(
+                            'assets/images/svg_images/share.svg'),
+                        onPressed: () {},
                       ),
-                      secondaryText: const Text(
-                        '',
-                        style: AppTextTheme.bodyMedium,
-                      ),
-                      onTap: () {
-                        context.router.push(const CommunicationFacilityComponentScreenRoute());
-                      },
-                    )
+                    ),
+                    const SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    // DeeDeeRowInfoWidget(
+                    //   icon: Image.asset('assets/images/instagram_logo.png'),
+                    //   mainText: Text(
+                    //     locale.contacts,
+                    //     style: AppTextTheme.bodyLarge,
+                    //   ),
+                    //   secondaryText: const Text(
+                    //     '',
+                    //     style: AppTextTheme.bodyMedium,
+                    //   ),
+                    //   onTap: () {
+                    //     context.router.push(
+                    //         const CommunicationFacilityComponentScreenRoute());
+                    //   },
+                    // )
                   ],
                 ),
               ),
@@ -199,23 +249,28 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 }
 
-
 class TextEditingField extends StatefulWidget {
   final String labelText;
   late TextEditingController controller;
   final String hintText;
   String? Function(String?, BuildContext)? validator;
+  bool? editable = false;
 
   TextEditingField(
-  {super.key, required this.labelText, required this.controller, required this.hintText, this.validator});
+      {super.key,
+      required this.labelText,
+      required this.controller,
+      required this.hintText,
+      this.validator,
+      required this.editable});
 
   @override
   State<TextEditingField> createState() => _TextEditingFieldState();
 }
 
 class _TextEditingFieldState extends State<TextEditingField> {
-  String? Function(String?)? makeValidatorWithContext(String? Function(String?, BuildContext)? validationFunction) {
-
+  String? Function(String?)? makeValidatorWithContext(
+      String? Function(String?, BuildContext)? validationFunction) {
     if (validationFunction == null) {
       return null;
     }
@@ -224,27 +279,65 @@ class _TextEditingFieldState extends State<TextEditingField> {
       return validationFunction(str, context);
     }
 
-  return validator;
+    return validator;
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-          style: AppTextTheme.bodyLarge,
-          cursorColor: Colors.grey,
-          validator: makeValidatorWithContext(widget.validator),
-          controller: widget.controller,
-          decoration: InputDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.labelText,
+            style: const TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            style: AppTextTheme.titleMedium,
+            cursorColor: Colors.grey,
+            validator: makeValidatorWithContext(widget.validator),
+            controller: widget.controller,
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
+              isCollapsed: true,
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      color: Color.fromRGBO(242, 242, 242, 1))),
+              fillColor: const Color.fromRGBO(242, 242, 242, 1),
+              filled: true,
+              border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    width: 358,
+                    color: Color.fromRGBO(242, 242, 242, 1),
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
               hintText: widget.hintText,
+              enabled: widget.editable == false ? false : true,
+              hintStyle: TextStyle(
+                color: widget.editable == false
+                    ? const Color.fromRGBO(140, 140, 154, 1)
+                    : Colors.black,
+                fontSize: 16,
+              ),
               focusColor: Colors.grey,
               hoverColor: Colors.grey,
-              labelText: widget.labelText,
-              labelStyle: AppTextTheme.labelLarge)),
-
+              // labelText: widget.labelText,
+              // labelStyle: AppTextTheme.labelLarge,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

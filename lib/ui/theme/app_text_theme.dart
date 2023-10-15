@@ -24,9 +24,9 @@ abstract class AppTextTheme {
   static const bodyLarge = TextStyle(
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w400,
-    fontSize: 16,
+    fontSize: 12,
     letterSpacing: 0.5,
-    color: Color(0xFF1A1A1B),
+    color: Color.fromRGBO(140, 140, 154, 1),
   );
   static const bodyMedium = TextStyle(
     fontFamily: 'Roboto',

@@ -6,6 +6,8 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
+  flutter_svg: ^2.0.7
+  flutter_profile_picture: ^2.0.0
   shared_preferences: 2.0.15
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.1
@@ -108,6 +110,7 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
+    - assets/images/svg_images/
     - assets/images/
   fonts:
     - family: Roboto
