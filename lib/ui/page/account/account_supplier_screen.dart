@@ -59,7 +59,7 @@ class _AccountState extends State<AccountSupplierScreen> {
         appBar: DeeDeeAppBar(
           title: locale.executorProfile,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 52, fontSize: 36,),
         ),
         body: BlocConsumer<SupplierBloc, SupplierState>(
           bloc: bloc,
@@ -262,7 +262,7 @@ class _PersonalInformation extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 64, width: 64, child: ProfilePhotoWithBadge()),
+         SizedBox(height: 64, width: 64, child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 52, fontSize: 36,),),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(

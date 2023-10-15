@@ -35,7 +35,7 @@ class _ServisProviderSeenScreenState extends State<ServisProviderSeenScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.seen,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       body: ListView.separated(
         separatorBuilder: (context, index) => Divider(

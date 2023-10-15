@@ -52,7 +52,7 @@ class _CardScreenState extends State<CardScreen> {
               appBar: DeeDeeAppBar(
                 title: locale.addCard,
                 controller: _controller,
-                child: const ProfilePhotoWithBadge(),
+                child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
               ),
               body: SafeArea(
                 child: Padding(

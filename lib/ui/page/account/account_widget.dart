@@ -41,8 +41,15 @@ class _AccountWidgetState extends State<AccountWidget> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                  height: 64, width: 64, child: ProfilePhotoWithBadge()),
+              SizedBox(
+                height: 64,
+                width: 64,
+                child: ProfilePhotoWithBadge(
+                  canChangePhoto: false,
+                  radius: 52,
+                  fontSize: 36,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(

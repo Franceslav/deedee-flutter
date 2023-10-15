@@ -43,7 +43,7 @@ class _HelpState extends State<HelpScreen> {
         appBar: DeeDeeAppBar(
           controller: _panelController,
           title: AppLocalizations.of(context)!.helpTitle,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: [

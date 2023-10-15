@@ -28,7 +28,7 @@ class _MainTopicScreenState extends State<MainTopicScreen> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.topics,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       body: Stack(
         children: [

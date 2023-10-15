@@ -74,7 +74,7 @@ class _CompletedApplicationsPageState extends State<CompletedApplicationsPage> {
         appBar: DeeDeeAppBar(
           title: '${_user.fullName()}',
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         floatingActionButton: IconButton(
           onPressed: () {

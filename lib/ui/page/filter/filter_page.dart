@@ -128,7 +128,7 @@ class _FilterPageState extends State<FilterPage> {
                           },
                         ),
                       const SizedBox(width: 16),
-                      const ProfilePhotoWithBadge(),
+                      ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
                     ],
                   ),
                 ),
@@ -263,7 +263,7 @@ class _FilterPageState extends State<FilterPage> {
               appBar: DeeDeeAppBar(
                 title: AppLocalizations.of(context)!.filterTagsPageTitle,
                 controller: _controller,
-                child: const ProfilePhotoWithBadge(),
+                child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
               ),
               body: Stack(
                 children: [

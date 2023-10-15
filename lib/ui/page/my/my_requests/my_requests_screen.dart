@@ -70,7 +70,7 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.myRequests,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         floatingActionButton: IconButton(
           onPressed: () {

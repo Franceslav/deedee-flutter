@@ -41,7 +41,7 @@ class _ReferralState extends State<ReferalProfilePage> {
       appBar: DeeDeeAppBar(
         title: AppLocalizations.of(context)!.homeTitle,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       floatingActionButton: kDebugMode
           ? FloatingActionButton(

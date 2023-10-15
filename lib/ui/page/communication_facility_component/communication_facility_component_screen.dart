@@ -38,7 +38,7 @@ class _CommunicationFacilityComponentScreenState extends State<CommunicationFaci
         appBar: DeeDeeAppBar(
           title: locale.contacts,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: [

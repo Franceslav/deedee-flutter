@@ -53,7 +53,7 @@ class _AccountsListScreenState extends State<AccountsListScreen> {
         appBar: DeeDeeAppBar(
             title: locale.accountTitle,
             controller: _controller,
-            child: const ProfilePhotoWithBadge()),
+            child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),),
         body: BlocConsumer<AccountsListBloc, AccountsListState>(
           bloc: bloc,
           listener: (context, state) {

@@ -22,7 +22,8 @@ class ServiceProviderTagsScreen extends StatefulWidget {
   const ServiceProviderTagsScreen({super.key});
 
   @override
-  State<ServiceProviderTagsScreen> createState() => _ServiceProviderTagsScreenState();
+  State<ServiceProviderTagsScreen> createState() =>
+      _ServiceProviderTagsScreenState();
 }
 
 class _ServiceProviderTagsScreenState extends State<ServiceProviderTagsScreen> {
@@ -34,117 +35,124 @@ class _ServiceProviderTagsScreenState extends State<ServiceProviderTagsScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserBloc bloc) => bloc.state.user);
-    final bloc = UserTagsBloc(locator.get<TagRepository>(), user); // TODO: ServiceProviderTagsBloc
+    final bloc = UserTagsBloc(
+        locator.get<TagRepository>(), user); // TODO: ServiceProviderTagsBloc
     return BlocProvider(
-        create: (context) => bloc,
-        child: Scaffold(
+      create: (context) => bloc,
+      child: Scaffold(
         appBar: DeeDeeAppBar(
-        title: AppLocalizations.of(context)!.tagsOfUserTitle(user.fullName()),
-    controller: _controller,
-    child: const ProfilePhotoWithBadge(),
-    ),
-    body: Stack(
-    children: [
-      BlocConsumer<UserTagsBloc, UserTagsState>(
-        listener: (context, state) {
-          if (state is LoadedTagsState) {
-            _tags.addAll(state.tags.filter((element) =>
-            element.status == Tag_Status.PLACED &&
-                element.createdBy == user.email));
-          }
-          if (state is DeletedSuccessfulState) {
-            showSnackBar(
-              context,
-              AppLocalizations.of(context)!.tagRemovedMessage,
-            );
-          }
-          if (state is DeletedErrorState) {
-            _tags.insert(state.index, state.tag);
-            showSnackBar(
-              context,
-              AppLocalizations.of(context)!.tagNotRemovedMessage,
-            );
-          }
-          if (state is ErrorState) {
-            showSnackBar(context, state.errorMessage);
-          }
-        },
-        builder: (context, state) {
-          return state is InitialState
-              ? const Center(
-            child: CircularProgressIndicator(),
-          )
-              : Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: AnimatedButtonBar(
-                  invertedSelection: true,
-                  radius: 25,
-                  backgroundColor:
-                  Theme.of(context).scaffoldBackgroundColor,
-                  controller: _buttonController,
-                  children: [
-                    ButtonBarEntry(
-                      child: Text(
-                          AppLocalizations.of(context)!.actualTags),
-                      onTap: () => setPage(0),
-                    ),
-                    ButtonBarEntry(
-                      child: Text(AppLocalizations.of(context)!
-                          .archiveTags),
-                      onTap: () => setPage(1),
-                    ),
-                  ],
-                ),
-              ),
-              SearchField(
-                SearchSpec(
-                  searchValueBuilder: (i) =>
-                  _tags[i].compositeFilter.topic.title,
-                  length: _tags.length,
-                  itemBuilder: (context, i) {
-                    return TagCardWidget(
-                      onDismissed: () =>
-                          deleteTag(bloc, _tags[i], i),
-                      tag: _tags[i],
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (value) =>
-                      _buttonController.setIndex(value),
-                  children: [
-                    UserTagsList( // TODO: ServiceProviderTagsList
-                      tags: _tags,
-                      tagsType: TagsType.actual,
-                      onDismissed: (tag, userId, index) =>
-                          deleteTag(bloc, tag, index),
-                    ),
-                    UserTagsList( // TODO: ServiceProviderTagsList
-                      tags: _tags,
-                      tagsType: TagsType.archive,
-                      onDismissed: (tag, userId, index) =>
-                          deleteTag(bloc, tag, index),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-      DeeDeeMenuSlider(
-        context,
-        controller: _controller,
-        user: user,
-      ),
-    ],
-    ),
+          title: AppLocalizations.of(context)!.tagsOfUserTitle(user.fullName()),
+          controller: _controller,
+          child: ProfilePhotoWithBadge(
+            canChangePhoto: false,
+            radius: 20,
+            fontSize: 20,
+          ),
         ),
+        body: Stack(
+          children: [
+            BlocConsumer<UserTagsBloc, UserTagsState>(
+              listener: (context, state) {
+                if (state is LoadedTagsState) {
+                  _tags.addAll(state.tags.filter((element) =>
+                      element.status == Tag_Status.PLACED &&
+                      element.createdBy == user.email));
+                }
+                if (state is DeletedSuccessfulState) {
+                  showSnackBar(
+                    context,
+                    AppLocalizations.of(context)!.tagRemovedMessage,
+                  );
+                }
+                if (state is DeletedErrorState) {
+                  _tags.insert(state.index, state.tag);
+                  showSnackBar(
+                    context,
+                    AppLocalizations.of(context)!.tagNotRemovedMessage,
+                  );
+                }
+                if (state is ErrorState) {
+                  showSnackBar(context, state.errorMessage);
+                }
+              },
+              builder: (context, state) {
+                return state is InitialState
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: AnimatedButtonBar(
+                              invertedSelection: true,
+                              radius: 25,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              controller: _buttonController,
+                              children: [
+                                ButtonBarEntry(
+                                  child: Text(
+                                      AppLocalizations.of(context)!.actualTags),
+                                  onTap: () => setPage(0),
+                                ),
+                                ButtonBarEntry(
+                                  child: Text(AppLocalizations.of(context)!
+                                      .archiveTags),
+                                  onTap: () => setPage(1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SearchField(
+                            SearchSpec(
+                              searchValueBuilder: (i) =>
+                                  _tags[i].compositeFilter.topic.title,
+                              length: _tags.length,
+                              itemBuilder: (context, i) {
+                                return TagCardWidget(
+                                  onDismissed: () =>
+                                      deleteTag(bloc, _tags[i], i),
+                                  tag: _tags[i],
+                                );
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: PageView(
+                              controller: _pageController,
+                              onPageChanged: (value) =>
+                                  _buttonController.setIndex(value),
+                              children: [
+                                UserTagsList(
+                                  // TODO: ServiceProviderTagsList
+                                  tags: _tags,
+                                  tagsType: TagsType.actual,
+                                  onDismissed: (tag, userId, index) =>
+                                      deleteTag(bloc, tag, index),
+                                ),
+                                UserTagsList(
+                                  // TODO: ServiceProviderTagsList
+                                  tags: _tags,
+                                  tagsType: TagsType.archive,
+                                  onDismissed: (tag, userId, index) =>
+                                      deleteTag(bloc, tag, index),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+              },
+            ),
+            DeeDeeMenuSlider(
+              context,
+              controller: _controller,
+              user: user,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -156,7 +164,8 @@ class _ServiceProviderTagsScreenState extends State<ServiceProviderTagsScreen> {
     );
   }
 
-  void deleteTag(UserTagsBloc bloc, Tag tag, int index) { // TODO: ServiceProviderTagsBloc
+  void deleteTag(UserTagsBloc bloc, Tag tag, int index) {
+    // TODO: ServiceProviderTagsBloc
     final user = BlocProvider.of<UserBloc>(context).state.user;
     bloc.add(DeleteTagEvent(tag: tag, userId: user.email, index: index));
   }

@@ -11,7 +11,14 @@ import '../routes/app_router.gr.dart';
 import '../user_bloc/user_bloc.dart';
 
 class ProfilePhotoWithBadge extends StatelessWidget {
-  const ProfilePhotoWithBadge({super.key});
+  ProfilePhotoWithBadge(
+      {super.key,
+      required this.canChangePhoto,
+      required this.radius,
+      required this.fontSize});
+  final bool canChangePhoto;
+  final double radius;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +26,17 @@ class ProfilePhotoWithBadge extends StatelessWidget {
 
     if (user.profilePictureURL == '') {
       return _addBadge(
-        user,
-        InkWell(
-          onTap: () {
-            context.router.navigate(const AccountScreenRoute());
-          },
-          child: CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.grey.shade400,
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/placeholder.jpg',
-                fit: BoxFit.cover,
-              ),
+          user,
+          InkWell(
+            onTap: () {
+              context.router.navigate(const AccountScreenRoute());
+            },
+            child: ProfilePicture(
+              radius: radius,
+              fontsize: fontSize,
+              name: user.firstName,
             ),
-          ),
-          ),);
+          ));
     } else {
       return _addBadge(
         user,
@@ -80,18 +82,20 @@ class ProfilePhotoWithBadge extends StatelessWidget {
               child: child,
             ),
           (_, _, _) => badges.Badge(
-              badgeContent: CircleAvatar(
-                backgroundColor: Color.fromRGBO(113, 113, 132, 1),
-                radius: 18,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 16.5,
-                  child: SvgPicture.asset(
-                    'assets/images/svg_images/camera.svg',
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-              ),
+              badgeContent: canChangePhoto
+                  ? CircleAvatar(
+                      backgroundColor: Color.fromRGBO(113, 113, 132, 1),
+                      radius: 18,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 16.5,
+                        child: SvgPicture.asset(
+                          'assets/images/svg_images/camera.svg',
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
               badgeStyle: badgeStyle,
               position: badges.BadgePosition.custom(end: 0, bottom: 0),
               child: child,

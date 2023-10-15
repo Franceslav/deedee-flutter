@@ -80,7 +80,7 @@ class _RequestScreenState extends State<RequestScreen> {
         appBar: DeeDeeAppBar(
           title: locale.request,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: BlocConsumer<ServicePushRequestBloc, ServicePushRequestState>(
             bloc: bloc,

@@ -23,7 +23,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
       appBar: DeeDeeAppBar(
         title: locale.customerProfile,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       body: const SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16),

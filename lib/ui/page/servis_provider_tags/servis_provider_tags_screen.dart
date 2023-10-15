@@ -43,7 +43,7 @@ class _ServisProviderScreenState extends State<ServisProviderScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.userTagsTitle,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: [

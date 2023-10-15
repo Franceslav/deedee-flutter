@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/model/user.dart';
+import 'package:deedee/ui/account/edit_personal_info/edit_pers_info.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_devider_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_toggle_button.dart';
@@ -19,6 +20,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../utils/utils.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -79,9 +82,7 @@ class _AccountState extends State<AccountScreen> {
                         Expanded(
                           child: OutlinedButtonWidget(
                             text: locale.share,
-                            onPressed: () async {
-                              await Share.share(Uri.https('deedee.com', user.userId).toString());
-                            },
+                            onPressed: () => shareFunction(user),
                           ),
                         ),
                       ],

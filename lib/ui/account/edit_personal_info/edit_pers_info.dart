@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:deedee/generated/deedee/api/model/profile.pb.dart';
 import 'package:deedee/ui/global_widgets/dee_dee_row_info_widget.dart';
+import 'package:deedee/utils/utils.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../injection.dart';
 import '../../../model/user.dart';
 import '../../../repository/profile_repository.dart';
@@ -15,6 +17,8 @@ import '../../theme/app_text_theme.dart';
 import 'bloc/edit_pers_info_bloc.dart';
 import 'package:deedee/ui/user_bloc/user_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -118,7 +122,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const ProfilePhotoWithBadge(),
+                         ProfilePhotoWithBadge(canChangePhoto: true, radius: 52, fontSize: 36,),
                         const SizedBox(
                           height: 20,
                         ),
@@ -189,7 +193,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: IconButton(
                         icon: SvgPicture.asset(
                             'assets/images/svg_images/share.svg'),
-                        onPressed: () {},
+                        onPressed: () => shareFunction(user),
+                        
                       ),
                     ),
                     const SizedBox(height: 10),
