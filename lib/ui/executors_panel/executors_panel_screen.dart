@@ -70,37 +70,68 @@ class _ExecutorsPanelScreenState extends State<ExecutorsPanelScreen> {
           ),
         ),
         panel: ListView.separated(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 20),
           itemCount: widget._tagMarkers.length,
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: ListTile(
-                leading: const SizedBox(
-                    height: 64, width: 64, child: ProfilePhotoWithBadge()),
-                title: Text(
-                  user.fullName(),
-                  style: AppTextTheme.bodyMedium
-                      .copyWith(color: const Color(0xFF1A1A1B)),
+            return GestureDetector(
+              onTap: () {
+                context.router.navigate(
+                  AccountSupplierScreenRoute(
+                    selectedCreatorId: Int64(0), // TODO: fix later
+                  ),
+                );
+              },
+              child: Container(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ProfilePhotoWithBadge(
+                        canChangePhoto: false,
+                        radius: 30,
+                        fontSize: 25,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user.fullName(),
+                                style: AppTextTheme.bodyMedium
+                                    .copyWith(color: const Color(0xFF1A1A1B)),
+                              ),
+                              OnBoardedDateIndicatorWidget(date: '2023'),
+                              const SizedBox(height: 2),
+                              RatingIndicatorWidget(),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Expanded(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                DistanceIndicatorWidget(
+                                  distence: '6',
+                                  distenceUnit: 'km',
+                                ),
+                                const SizedBox(height: 10,),
+                                ContactFacilityWidget(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                subtitle: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    OnBoardedDateIndicatorWidget(date: '2023'),
-                    SizedBox(height: 2),
-                    RatingIndicatorWidget(),
-                  ],
-                ),
-                visualDensity: VisualDensity.compact,
-                dense: true,
-                isThreeLine: true,
-                onTap: () {
-                  context.router.navigate(
-                    AccountSupplierScreenRoute(
-                      selectedCreatorId: Int64(0), // TODO: fix later
-                    ),
-                  );
-                },
               ),
             );
           },
