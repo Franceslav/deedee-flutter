@@ -43,7 +43,7 @@ class _TopUpPageState extends State<TopUpPage> {
             appBar: DeeDeeAppBar(
               title: AppLocalizations.of(context)!.accountTopUp,
               controller: _controller,
-              child: const ProfilePhotoWithBadge(),
+              child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
             ),
             body: Stack(
               children: [

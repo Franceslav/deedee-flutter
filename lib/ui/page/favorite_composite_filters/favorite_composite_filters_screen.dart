@@ -46,7 +46,7 @@ class _FavoriteCompositeFiltersScreenState
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.save,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: [

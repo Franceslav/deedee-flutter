@@ -28,7 +28,7 @@ class _AccountLanguageScreenState extends State<AccountLanguageScreen> {
       appBar: DeeDeeAppBar(
         title: locale.profile,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child:  ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       body: Stack(
         children: [

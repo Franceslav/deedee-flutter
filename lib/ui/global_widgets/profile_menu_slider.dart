@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -41,6 +42,18 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     }
                     context.router.navigate(const SettingsScreenRoute());
                   }),
+              user.accountType == AccountType.buy
+                  ? GeneralSlidingPanelItem(
+                      icon:
+                          CommunityMaterialIcons.order_alphabetical_descending,
+                      text: AppLocalizations.of(context)!.myRequests,
+                      onTap: () {
+                        if (context.router.current.isActive) {
+                          controller.close();
+                        }
+                        context.router.push(const MyRequestScreenRoute());
+                      })
+                  : const SizedBox.shrink(),
               GeneralSlidingPanelItem(
                   icon: Icons.person_outline,
                   text: AppLocalizations.of(context)!.profileInfo,
@@ -61,6 +74,16 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                         .push(const FavoriteCompositeFiltersScreenRoute());
                   }),
               GeneralSlidingPanelItem(
+                  icon: Icons.tag,
+                  text: AppLocalizations.of(context)!.tags,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const ServiceRequestUserTagsScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
                   icon: Icons.filter_alt,
                   text: AppLocalizations.of(context)!.myFilters,
                   onTap: () {
@@ -70,6 +93,15 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     context.router.push(const ReferralScreenRoute());
                   }),
               GeneralSlidingPanelItem(
+                  icon: Icons.request_quote,
+                  text: AppLocalizations.of(context)!.myRequests,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router.push(const MyRequestScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
                   icon: Icons.timeline_outlined,
                   text: AppLocalizations.of(context)!.statistic,
                   onTap: () {
@@ -77,7 +109,7 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                       controller.close();
                     }
                     context.router
-                        .push(const FavoriteCompositeFiltersScreenRoute());
+                        .push(const StatsScreenRoute());
                   }),
               GeneralSlidingPanelItem(
                   icon: Icons.article,
@@ -88,6 +120,16 @@ class ProfileMenuSlider extends GeneralSlidingPanel {
                     }
                     context.router
                         .push(const FavoriteCompositeFiltersScreenRoute());
+                  }),
+              GeneralSlidingPanelItem(
+                  icon: Icons.insert_link,
+                  text: AppLocalizations.of(context)!.referrals,
+                  onTap: () {
+                    if (context.router.current.isActive) {
+                      controller.close();
+                    }
+                    context.router
+                        .push(const ReferralScreenRoute());
                   }),
               GeneralSlidingPanelItem(
                   icon: Icons.shopping_cart_outlined,

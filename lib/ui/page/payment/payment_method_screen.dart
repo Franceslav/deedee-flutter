@@ -30,7 +30,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.paymentPageTitle,
           controller: _controller,
-          child: const ProfilePhotoWithBadge(),
+          child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: <Widget>[

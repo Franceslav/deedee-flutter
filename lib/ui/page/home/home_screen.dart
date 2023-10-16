@@ -53,7 +53,9 @@ class _HomeState extends State<HomeScreen> {
         appBar: DeeDeeAppBar(
           title: AppLocalizations.of(context)!.homeTitle,
           controller: _controller,
-          child: _hideAppBarButton ? null : const ProfilePhotoWithBadge(),
+          child: _hideAppBarButton
+              ? null
+              : ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
         ),
         body: Stack(
           children: [

@@ -32,7 +32,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
       appBar: DeeDeeAppBar(
         title: locale.accountVerify,
         controller: _controller,
-        child: const ProfilePhotoWithBadge(),
+        child: ProfilePhotoWithBadge(canChangePhoto: false, radius: 20, fontSize: 20,),
       ),
       body: Stack(
         children: [
